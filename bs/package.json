@@ -1,18 +1,22 @@
 {
   "name": "tablecloth-bucklescript",
   "version": "0.0.1",
-  "scripts": {
-    "clean": "bsb -clean-world",
-    "build": "bsb -make-world",
-    "watch": "bsb -make-world -w"
-  },
+  "repository": "https://github.com/darklang/tablecloth",
+  "private": false,
+  "author": "Paul Biggar <paul@darklang.com>",
   "keywords": [
     "BuckleScript"
   ],
-  "author": "Paul Biggar <paul@darklang.com>",
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "^4.0.18"
+    "bs-platform": "^4.0.18",
+    "@glennsl/bs-jest": "^0.4.5"
   },
-  "repository": "https://github.com/darklang/tablecloth"
+  "dependencies": {},
+  "scripts": {
+    "clean": "bsb -clean-world",
+    "build": "bsb -make-world",
+    "watch": "bsb -make-world -w",
+    "test": "jest"
+  }
 }

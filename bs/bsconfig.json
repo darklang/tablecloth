@@ -1,18 +1,26 @@
 {
-  "name": "bucklescript",
-  "version": "0.1.0",
-  "sources": {
-    "dir" : "src",
-    "subdirs" : true
-  },
+  "name": "tablecloth-bucklescript",
+  "version": "0.0.1",
+  "sources": [
+    {
+      "dir" : "src",
+      "subdirs" : false
+    },
+    {
+      "dir": "__tests__",
+      "type": "dev"
+    }
+  ],
   "package-specs": {
     "module": "commonjs",
     "in-source": true
   },
   "suffix": ".bs.js",
-  "bs-dependencies": [
-      // add your bs-dependencies here 
+  "bs-dependencies": [],
+  "bs-dev-dependencies": [
+    "@glennsl/bs-jest"
   ],
+  "bsc-flags": ["-bs-g", "-bs-super-errors", "-warn-error", "@A", "-w", "-4-9-30-40-41-42-102"],
   "warnings": {
     "error" : "+101"
   },
