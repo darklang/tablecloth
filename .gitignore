@@ -7,3 +7,4 @@ bs/node_modules
 bs/lib
 /bs/.merlin
 /bs/__tests__/tablecloth_test.bs.js
+test-native/_build
