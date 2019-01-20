@@ -9,3 +9,4 @@
 /integration-test/native/_build
 /integration-test/bs/node_modules
 /integration-test/bs/lib/
+/bs/.bsb.lock
