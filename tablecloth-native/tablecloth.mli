@@ -1,4 +1,3 @@
-module String
-  type t
-  val length : t -> int
+module String : sig
+  val length : string -> int
 end
