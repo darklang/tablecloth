@@ -3,3 +3,7 @@
 native/_build
 /native/.merlin
 bs/node_modules
+/bs/src/tablecloth.bs.js
+bs/lib
+/bs/.merlin
+/bs/__tests__/tablecloth_test.bs.js
