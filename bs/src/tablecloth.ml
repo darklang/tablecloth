@@ -13,17 +13,25 @@ module List = struct
 
   let floatSum (l : float list) : float = Belt.List.reduce l 0.0 ( +. )
 
+  let float_sum = floatSum
+
   let map ~(f : 'a -> 'b) (l : 'a list) : 'b list = Belt.List.map l f
 
   let indexedMap ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list =
-    Belt.List.mapWithIndex l f
+    List.mapi f l
 
+
+  let indexed_map = indexedMap
+
+  let mapi = indexedMap
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Belt.List.mapReverse2 a b f |> Belt.List.reverse
 
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
+
+  let get_by = getBy
 
   let elemIndex ~(value : 'a) (l : 'a list) : int option =
     let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
@@ -34,6 +42,8 @@ module List = struct
     |> Js.Array.findIndex (( = ) value)
     |> toOption ~sentinel:(-1)
 
+
+  let elem_index = elemIndex
 
   let rec last (l : 'a list) : 'a option =
     match l with [] -> None | [a] -> Some a | _ :: tail -> last tail
@@ -64,9 +74,13 @@ module List = struct
     uniqueHelp f Belt.Set.String.empty l []
 
 
+  let unique_by = uniqueBy
+
   let find ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
 
   let getAt ~(index : int) (l : 'a list) : 'a option = Belt.List.get l index
+
+  let get_at = getAt
 
   let any ~(f : 'a -> bool) (l : 'a list) : bool = List.exists f l
 
@@ -83,6 +97,8 @@ module List = struct
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
     Belt.List.keepMap l f
 
+
+  let filter_map = filterMap
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Belt.List.keep l f
 
@@ -117,6 +133,8 @@ module List = struct
     findIndexHelp 0 ~predicate:f l
 
 
+  let find_index = findIndex
+
   let take ~(count : int) (l : 'a list) : 'a list =
     Belt.List.take l count |. Belt.Option.getWithDefault []
 
@@ -130,6 +148,8 @@ module List = struct
       match tail with x :: xs -> head @ (f x :: xs) | _ -> list
 
 
+  let update_at = updateAt
+
   let length (l : 'a list) : int = List.length l
 
   let reverse (l : 'a list) : 'a list = List.rev l
@@ -142,7 +162,11 @@ module List = struct
         if f x then dropWhile ~f xs else list
 
 
+  let drop_while = dropWhile
+
   let isEmpty (l : 'a list) : bool = l = []
+
+  let is_empty = isEmpty
 
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 
@@ -156,6 +180,8 @@ module List = struct
     in
     takeWhileMemo [] l
 
+
+  let take_while = takeWhile
 
   let all ~(f : 'a -> bool) (l : 'a list) : bool = Belt.List.every l f
 
@@ -174,6 +200,8 @@ module List = struct
       match tail with None -> l | Some t -> append head t
 
 
+  let remove_at = removeAt
+
   let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
     let minBy x (y, fy) =
       let fx = f x in
@@ -187,6 +215,8 @@ module List = struct
     | _ ->
         None
 
+
+  let minimum_by = minimumBy
 
   let maximumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
     let maxBy x (y, fy) =
@@ -202,6 +232,8 @@ module List = struct
         None
 
 
+  let maximum_by = maximumBy
+
   let maximum ~(list : 'comparable list) : 'comparable option =
     match list with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
 
@@ -212,6 +244,8 @@ module List = struct
         let b' = f b in
         if a' = b' then 0 else if a' < b' then -1 else 1 )
 
+
+  let sort_by = sortBy
 
   let span ~(f : 'a -> bool) (xs : 'a list) : 'a list * 'a list =
     (takeWhile ~f xs, dropWhile ~f xs)
@@ -226,18 +260,26 @@ module List = struct
         (x :: ys) :: groupWhile ~f zs
 
 
+  let group_while = groupWhile
+
   let splitAt ~(index : int) (xs : 'a list) : 'a list * 'a list =
     (take ~count:index xs, drop ~count:index xs)
 
+
+  let split_at = splitAt
 
   let insertAt ~(index : int) ~(value : 'a) (xs : 'a list) : 'a list =
     take ~count:index xs @ (value :: drop ~count:index xs)
 
 
+  let insert_at = insertAt
+
   let splitWhen ~(f : 'a -> bool) (list : 'a list) : ('a list * 'a list) option
       =
     findIndex ~f list |. Belt.Option.map (fun index -> splitAt ~index list)
 
+
+  let split_when = splitWhen
 
   let intersperse (sep : 'a) (xs : 'a list) : 'a list =
     match xs with
@@ -258,23 +300,9 @@ module List = struct
     Belt.List.sort l f
 
 
-  let fromArray (arr : 'a Js.Array.t) : 'a list = Belt.List.fromArray arr
+  let sort_with = sortWith
 
   let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
-
-  let for_all2_exn (l1 : 'a list) (l2 : 'b list) (f : 'a -> 'b -> bool) : bool
-      =
-    let n1 = length l1 in
-    let n2 = length l2 in
-    if n1 <> n2
-    then
-      raise
-        (Invalid_argument
-           (Printf.sprintf "length mismatch in for_all2_exn: %d <> %d " n1 n2))
-    else List.for_all2 f l1 l2
-
-
-  let mapi = List.mapi
 end
 
 module Result = struct
@@ -283,6 +311,8 @@ module Result = struct
   let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Belt.Result.getWithDefault r default
 
+
+  let with_default = withDefault
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) :
       ('err, 'c) t =
@@ -309,20 +339,17 @@ module Result = struct
     match r with Ok v -> Some v | _ -> None
 
 
-  let pp
-      (_ : Format.formatter -> 'err -> unit)
-      (_ : Format.formatter -> 'ok -> unit)
-      (_ : Format.formatter)
-      (_ : ('err, 'ok) t) =
-    ()
+  let to_option = toOption
 end
 
 module Option = struct
   type 'a t = 'a option
 
-  let andThen (f : 'a -> 'b option) (o : 'a option) : 'b option =
+  let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x
 
+
+  let and_then = andThen
 
   let or_ (ma : 'a option) (mb : 'a option) : 'a option =
     match ma with None -> mb | Some _ -> ma
@@ -332,15 +359,21 @@ module Option = struct
     match mb with None -> ma | Some _ -> mb
 
 
-  let map (f : 'a -> 'b) (o : 'a option) : 'b option = Belt.Option.map o f
+  let or_else = orElse
 
-  let withDefault (a : 'a) (o : 'a option) : 'a =
-    Belt.Option.getWithDefault o a
+  let map ~(f : 'a -> 'b) (o : 'a option) : 'b option = Belt.Option.map o f
 
+  let withDefault ~(default : 'a) (o : 'a option) : 'a =
+    Belt.Option.getWithDefault o default
+
+
+  let with_default = withDefault
 
   let foldrValues (item : 'a option) (list : 'a list) : 'a list =
     match item with None -> list | Some v -> v :: list
 
+
+  let foldr_values = foldrValues
 
   let values (l : 'a option list) : 'a list =
     List.foldr ~f:foldrValues ~init:[] l
@@ -350,17 +383,27 @@ module Option = struct
     match o with None -> [] | Some o -> [o]
 
 
+  let to_list = toList
+
   let isSome = Belt.Option.isSome
+
+  let is_some = isSome
 end
 
 module Char = struct
   let toCode (c : char) : int = Char.code c
 
+  let to_code = toCode
+
   let fromCode (i : int) : char = Char.chr i
+
+  let from_code = fromCode
 end
 
 module Tuple2 = struct
   let mapSecond (f : 'b -> 'c) ((a, b) : 'a * 'b) : 'a * 'c = (a, f b)
+
+  let map_second = mapSecond
 
   let second ((_, b) : 'a * 'b) : 'b = b
 
@@ -376,9 +419,13 @@ module String = struct
     try Ok (int_of_string s) with e -> Error (Printexc.to_string e)
 
 
+  let to_int = toInt
+
   let toFloat (s : string) : (string, float) Result.t =
     try Ok (float_of_string s) with e -> Error (Printexc.to_string e)
 
+
+  let to_float = toFloat
 
   let uncons (s : string) : (char * string) option =
     match s with
@@ -388,29 +435,41 @@ module String = struct
         Some (s.[0], String.sub s 1 (String.length s - 1))
 
 
-  let dropLeft (from : int) (s : string) : string = Js.String.substr ~from s
+  let dropLeft ~(count : int) (s : string) : string =
+    Js.String.substr ~from:count s
 
-  let dropRight (num : int) (s : string) : string =
-    if num < 1 then s else Js.String.slice ~from:0 ~to_:(-num) s
 
+  let drop_left = dropLeft
+
+  let dropRight ~(count : int) (s : string) : string =
+    if count < 1 then s else Js.String.slice ~from:0 ~to_:(-count) s
+
+
+  let drop_right = dropRight
 
   let split ~(on : string) (s : string) : string list =
     Js.String.split on s |> Belt.List.fromArray
 
 
-  let join (sep : string) (l : string list) : string = String.concat sep l
+  let join ~(sep : string) (l : string list) : string = String.concat sep l
 
-  let endsWith (needle : string) (haystack : string) =
-    Js.String.endsWith needle haystack
+  let endsWith ~(suffix : string) (s : string) = Js.String.endsWith suffix s
+
+  let ends_with = endsWith
+
+  let startsWith ~(prefix : string) (s : string) =
+    Js.String.startsWith prefix s
 
 
-  let startsWith (needle : string) (haystack : string) =
-    Js.String.startsWith needle haystack
-
+  let starts_with = startsWith
 
   let toLower (s : string) : string = String.lowercase s
 
+  let to_lower = toLower
+
   let toUpper (s : string) : string = String.uppercase s
+
+  let to_upper = toUpper
 
   let uncapitalize (s : string) : string = String.uncapitalize s
 
@@ -418,11 +477,13 @@ module String = struct
 
   let isCapitalized (s : string) : bool = s = String.capitalize s
 
-  let contains (needle : string) (haystack : string) : bool =
-    Js.String.includes needle haystack
+  let is_capitalized = isCapitalized
+
+  let contains ~(substring : string) (s : string) : bool =
+    Js.String.includes substring s
 
 
-  let repeat (count : int) (s : string) : string = Js.String.repeat count s
+  let repeat ~(count : int) (s : string) : string = Js.String.repeat count s
 
   let fromList (l : char list) : string =
     l
@@ -431,24 +492,35 @@ module String = struct
     |> String.concat ""
 
 
+  let from_list = fromList
+
   let toList (s : string) : char list =
     s |> Js.String.castToArrayLike |> Js.Array.from |> Belt.List.fromArray
 
 
+  let to_list = toList
+
   let fromInt (i : int) : string = Printf.sprintf "%d" i
+
+  let from_int = fromInt
 
   let concat = String.concat ""
 
   let fromChar (c : char) : string = c |> Char.toCode |> Js.String.fromCharCode
 
-  let slice from to_ str = Js.String.slice ~from ~to_ str
+  let from_char = fromChar
+
+  let slice ~from ~to_ str = Js.String.slice ~from ~to_ str
 
   let trim = Js.String.trim
 
-  let insertAt (newStr : string) (pos : int) (origStr : string) : string =
-    Js.String.slice ~from:0 ~to_:pos origStr
-    ^ newStr
-    ^ Js.String.sliceToEnd ~from:pos origStr
+  let insertAt ~(insert : string) ~(index : int) (s : string) : string =
+    Js.String.slice ~from:0 ~to_:index s
+    ^ insert
+    ^ Js.String.sliceToEnd ~from:index s
+
+
+  let insert_at = insertAt
 end
 
 module IntSet = struct
@@ -460,15 +532,23 @@ module IntSet = struct
 
   let fromList (l : value list) : t = l |> Belt.List.toArray |> Set.fromArray
 
-  let member (i : value) (set : t) : bool = Set.has set i
+  let from_list = fromList
+
+  let member ~(value : value) (set : t) : bool = Set.has set value
 
   let diff (set1 : t) (set2 : t) : t = Set.diff set1 set2
 
   let isEmpty (s : t) : bool = Set.isEmpty s
 
+  let is_empty = isEmpty
+
   let toList (s : t) : value list = Set.toList s
 
+  let to_list = toList
+
   let ofList (s : value list) : t = s |> Array.of_list |> Set.fromArray
+
+  let of_list = ofList
 
   let add = Set.add
 
@@ -486,15 +566,23 @@ module StrSet = struct
 
   let fromList (l : value list) : t = l |> Belt.List.toArray |> Set.fromArray
 
-  let member (i : value) (set : t) : bool = Set.has set i
+  let from_list = fromList
+
+  let member ~(value : value) (set : t) : bool = Set.has set value
 
   let diff (set1 : t) (set2 : t) : t = Set.diff set1 set2
 
   let isEmpty (s : t) : bool = Set.isEmpty s
 
+  let is_empty = isEmpty
+
   let toList (s : t) : value list = Set.toList s
 
+  let to_list = toList
+
   let ofList (s : value list) : t = s |> Array.of_list |> Set.fromArray
+
+  let of_list = ofList
 
   let add = Set.add
 
@@ -512,26 +600,30 @@ module StrDict = struct
 
   let toList = Map.toList
 
+  let to_list = toList
+
   let empty = Map.empty
 
   let fromList (l : ('key * 'value) list) : 'value t =
     l |> Belt.List.toArray |> Map.fromArray
 
 
-  let get (k : key) (v : 'value t) : 'value option = Map.get v k
+  let from_list = fromList
 
-  let insert (k : key) (v : 'value) (dict : 'value t) : 'value t =
-    Map.set dict k v
+  let get ~(key : key) (dict : 'value t) : 'value option = Map.get dict key
+
+  let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
+    Map.set dict key value
 
 
   let keys m : key list = Map.keysToArray m |> Belt.List.fromArray
 
-  let update (k : key) (f : 'v option -> 'v option) (dict : 'value t) :
+  let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
       'value t =
-    Map.update dict k f
+    Map.update dict key f
 
 
-  let map = Map.map
+  let map dict ~f = Map.map dict f
 end
 
 module IntDict = struct
@@ -543,11 +635,15 @@ module IntDict = struct
 
   let toList = Map.toList
 
+  let to_list = toList
+
   let empty = Map.empty
 
   let fromList (l : ('key * 'value) list) : 'value t =
     l |> Belt.List.toArray |> Map.fromArray
 
+
+  let from_list = fromList
 
   let get ~(key : key) (dict : 'value t) : 'value option = Map.get dict key
 
@@ -562,5 +658,5 @@ module IntDict = struct
 
   let keys m : key list = Map.keysToArray m |> Belt.List.fromArray
 
-  let map = Map.map
+  let map dict ~f = Map.map dict f
 end
