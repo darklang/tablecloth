@@ -280,7 +280,7 @@ end
 module Result = struct
   type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
 
-  let withDefault (default : 'ok) (r : ('err, 'ok) t) : 'ok =
+  let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Belt.Result.getWithDefault r default
 
 
@@ -315,19 +315,6 @@ module Result = struct
       (_ : Format.formatter)
       (_ : ('err, 'ok) t) =
     ()
-end
-
-module Regex = struct
-  let regex s : Js.Re.t = Js.Re.fromStringWithFlags ~flags:"g" s
-
-  let contains ~(re : Js.Re.t) (s : string) : bool = Js.Re.test s re
-
-  let replace (re : string) (repl : string) (str : string) =
-    Js.String.replaceByRe (regex re) repl str
-
-
-  let matches (re : Js.Re.t) (s : string) : Js.Re.result option =
-    Js.Re.exec s re
 end
 
 module Option = struct
@@ -576,12 +563,4 @@ module IntDict = struct
   let keys m : key list = Map.keysToArray m |> Belt.List.fromArray
 
   let map = Map.map
-
-  let fromStrDict ~(default : key) (d : 'value StrDict.t) : 'value t =
-    d
-    |> StrDict.toList
-    |> List.map ~f:(fun (k, v) ->
-           (k |> String.toInt |> Result.withDefault default, v) )
-    |> Belt.List.toArray
-    |> Map.fromArray
 end
