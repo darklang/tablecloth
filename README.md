@@ -97,7 +97,7 @@ OCaml. It wraps existing standard libraries on those platforms, and so is fast
 and memory efficient. It is based off Elm standard library, which is extremely
 well designed and ergonomic.
 
-Tablecloth provides separate libraries for OCaml native, \*js\_of\_ocaml, and
+Tablecloth provides separate libraries for OCaml native, js\_of\_ocaml, and
 Bucklescript. The libraries have the same API, but different implementations,
 and are installed as different packages.
 
@@ -111,12 +111,13 @@ The APIs:
 - are backed by Belt and the `Js` library for Bucklescript/ReasonML,
 - use labelled arguments so that can be used with both pipefirst and pipelast,
 
-We also have design goals that are not yet achieved in the current version. the APIs:
+We also have design goals that are not yet achieved in the current version. The APIs:
 - should have efficient algorithms tuned for the platform,
 - should support PPX derivers,
-- should do not throw any exceptions,
+- should not throw any exceptions,
 - should be well documented, with well-known and consistent edge-case behaviour,
-- should be well tested.
+- should be well tested,
+- should have a js\_of\_ocaml optimized version.
 
 
 ## Contributing
@@ -155,17 +156,16 @@ Here are some ways to contribute:
   Maybe, Array, Dict, Set, Tuple, or Basics, or from any of the Extras
   libraries.
 
-If you'd like to contribute but don't know where to start, contact us on
-[Twitter](https://twitter.com/paulbiggar) or by
+If you'd like to contribute but don't know where to start, [open an
+issue](https://github.com/darklang/tablecloth/issues/new) with your thoughts,
+or contact us on [Twitter](https://twitter.com/paulbiggar) or by
 [email](mailto:paul.biggar@gmail.com).
 
 ## License
 
-Tablecloth uses the
-[MIT](./LICENSE) license. Some
-functions are based on Elm/core
-([BSD](https://github.com/elm/core/blob/1.0.0/LICENSE)), and from the \*.Extra
-packages in elm-community, which use a
+Tablecloth uses the [MIT](./LICENSE) license. Some functions are based on
+Elm/core ([BSD](https://github.com/elm/core/blob/1.0.0/LICENSE)), and from the
+\*.Extra packages in elm-community, which use a
 [BSD](https://github.com/elm-community/string-extra/blob/master/LICENSE)
 license.
 
