@@ -92,9 +92,6 @@ different:
 
 ### Tablecloth's solution
 
-**As Tablecloth is very early software, this describes the eventual solution.
-Entries with a `*` will not be solved on first release)**
-
 Tablecloth solves this by providing an identical API for Bucklescript and
 OCaml. It wraps existing standard libraries on those platforms, and so is fast
 and memory efficient. It is based off Elm standard library, which is extremely
@@ -113,11 +110,13 @@ The APIs:
   OCaml
 - are backed by Belt and the `Js` library for Bucklescript/ReasonML,
 - use labelled arguments so that can be used with both pipefirst and pipelast,
-- \*have efficient algorithms tuned for the platform,
-- \*support PPX derivers,
-- \*do not throw any exceptions,
-- \*are well documented, with well-known and consistent edge-case behaviour,
-- \*are well tested.
+
+We also have design goals that are not yet achieved in the current version. the APIs:
+- should have efficient algorithms tuned for the platform,
+- should support PPX derivers,
+- should do not throw any exceptions,
+- should be well documented, with well-known and consistent edge-case behaviour,
+- should be well tested.
 
 
 ## Contributing
