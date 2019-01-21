@@ -8,7 +8,6 @@ pushd native
 dune build
 
 echo -e "\n\e[31mRunning tablecloth-native tests\e[0m"
-cd ../test-native
 dune runtest -f
 popd
 
