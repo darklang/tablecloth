@@ -1,1 +1,1 @@
-../tablecloth.mli
+../../tablecloth.mli
