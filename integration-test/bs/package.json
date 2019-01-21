@@ -15,6 +15,6 @@
     "bs-platform": "^4.0.18"
   },
   "dependencies": {
-    "tablecloth-bucklescript": "0.0.1"
+    "tablecloth-bucklescript": "0.0.2"
   }
 }
