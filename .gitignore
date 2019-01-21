@@ -10,3 +10,4 @@
 /integration-test/bs/node_modules
 /integration-test/bs/lib/
 /bs/.bsb.lock
+/test-native/test-native.xml
