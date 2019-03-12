@@ -151,7 +151,7 @@ module List : sig
 end
 
 module Result : sig
-  type ('err, 'ok) t
+  type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
 
   val withDefault : default:'ok -> ('err, 'ok) t -> 'ok
 
@@ -326,9 +326,9 @@ module String : sig
 end
 
 module IntSet : sig
-  type t
+  type t = Belt.Set.Int.t
 
-  type value
+  type value = int
 
   val fromList : value list -> t
 
@@ -366,7 +366,7 @@ module IntSet : sig
 end
 
 module StrSet : sig
-  type t
+  type t = Belt.Set.String.t
 
   type value = string
 
@@ -406,9 +406,9 @@ module StrSet : sig
 end
 
 module StrDict : sig
-  type key = string
+  type key = Belt.Map.String.key
 
-  type 'value t
+  type 'value t = 'value Belt.Map.String.t
 
   val toList : 'a t -> (key * 'a) list
 
@@ -451,9 +451,9 @@ module StrDict : sig
 end
 
 module IntDict : sig
-  type key = int
+  type key = Belt.Map.Int.key
 
-  type 'value t
+  type 'value t = 'value Belt.Map.Int.t
 
   val toList : 'a t -> (key * 'a) list
 
@@ -496,9 +496,9 @@ module IntDict : sig
 end
 
 module Regex : sig
-  type t
+  type t = Js.Re.t
 
-  type result
+  type result = Js.Re.result
 
   val regex : string -> t
 

@@ -608,9 +608,9 @@ module StrSet = struct
 end
 
 module IntSet = struct
-  module Set = Belt.Set.String
+  module Set = Belt.Set.Int
 
-  let __pp_value = Format.pp_print_string
+  let __pp_value = Format.pp_print_int
 
   type t = Set.t
 

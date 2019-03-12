@@ -151,7 +151,7 @@ module List : sig
 end
 
 module Result : sig
-  type ('err, 'ok) t
+  type ('err, 'ok) t = ('ok, 'err) Base.Result.t
 
   val withDefault : default:'ok -> ('err, 'ok) t -> 'ok
 
@@ -326,9 +326,9 @@ module String : sig
 end
 
 module IntSet : sig
-  type t
+  type t = Base.Set.M(Base.Int).t
 
-  type value
+  type value = int
 
   val fromList : value list -> t
 
@@ -366,7 +366,7 @@ module IntSet : sig
 end
 
 module StrSet : sig
-  type t
+  type t = Base.Set.M(Base.String).t
 
   type value = string
 
@@ -408,7 +408,7 @@ end
 module StrDict : sig
   type key = string
 
-  type 'value t
+  type 'value t = 'value Base.Map.M(Base.String).t
 
   val toList : 'a t -> (key * 'a) list
 
@@ -449,7 +449,7 @@ end
 module IntDict : sig
   type key = int
 
-  type 'value t
+  type 'value t = 'value Base.Map.M(Base.Int).t
 
   val toList : 'a t -> (key * 'a) list
 
