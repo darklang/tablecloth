@@ -1,6 +1,6 @@
 {
   "name": "tablecloth-bucklescript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "https://github.com/darklang/tablecloth",
   "private": false,
   "author": "Paul Biggar <paul@darklang.com>",
