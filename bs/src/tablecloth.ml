@@ -234,7 +234,7 @@ module List = struct
 
   let maximum_by = maximumBy
 
-  let maximum ~(list : 'comparable list) : 'comparable option =
+  let maximum (list : 'comparable list) : 'comparable option =
     match list with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
 
 
@@ -303,6 +303,12 @@ module List = struct
   let sort_with = sortWith
 
   let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
+
+  let elemIndex ~(value : 'a) (l : 'a list) : int option =
+    l
+    |> Array.of_list
+    |> Js.Array.findIndex (( = ) value)
+    |> function -1 -> None | other -> Some other
 end
 
 module Result = struct
@@ -340,6 +346,28 @@ module Result = struct
 
 
   let to_option = toOption
+
+  let andThen ~(f : 'ok -> ('err, 'value) t) (r : ('err, 'ok) t) :
+      ('err, 'value) t =
+    Belt.Result.flatMap r f
+
+
+  let and_then = andThen
+
+  let pp
+      (errf : Format.formatter -> 'err -> unit)
+      (okf : Format.formatter -> 'ok -> unit)
+      (fmt : Format.formatter)
+      (r : ('err, 'ok) t) =
+    match r with
+    | Ok ok ->
+        Format.pp_print_string fmt "<ok: " ;
+        okf fmt ok ;
+        Format.pp_print_string fmt ">"
+    | Error err ->
+        Format.pp_print_string fmt "<ok: " ;
+        errf fmt err ;
+        Format.pp_print_string fmt ">"
 end
 
 module Option = struct
@@ -388,6 +416,12 @@ module Option = struct
   let isSome = Belt.Option.isSome
 
   let is_some = isSome
+
+  let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
+    if value = sentinel then None else Some value
+
+
+  let to_option = toOption
 end
 
 module Char = struct
@@ -523,43 +557,11 @@ module String = struct
   let insert_at = insertAt
 end
 
-module IntSet = struct
-  module Set = Belt.Set.Int
-
-  type t = Set.t
-
-  type value = Set.value
-
-  let fromList (l : value list) : t = l |> Belt.List.toArray |> Set.fromArray
-
-  let from_list = fromList
-
-  let member ~(value : value) (set : t) : bool = Set.has set value
-
-  let diff (set1 : t) (set2 : t) : t = Set.diff set1 set2
-
-  let isEmpty (s : t) : bool = Set.isEmpty s
-
-  let is_empty = isEmpty
-
-  let toList (s : t) : value list = Set.toList s
-
-  let to_list = toList
-
-  let ofList (s : value list) : t = s |> Array.of_list |> Set.fromArray
-
-  let of_list = ofList
-
-  let add = Set.add
-
-  let union = Set.union
-
-  let empty = Set.empty
-end
-
 module StrSet = struct
   module Set = Belt.Set.String
 
+  let __pp_value = Format.pp_print_string
+
   type t = Set.t
 
   type value = Set.value
@@ -584,11 +586,75 @@ module StrSet = struct
 
   let of_list = ofList
 
-  let add = Set.add
+  let union = Set.union
+
+  let empty = Set.empty
+
+  let remove ~(value : value) (set : t) = Set.remove set value
+
+  let add ~(value : value) (set : t) = Set.add set value
+
+  let set ~(value : value) (set : t) = Set.add set value
+
+  let has = member
+
+  let pp (fmt : Format.formatter) (set : t) =
+    Format.pp_print_string fmt "{ " ;
+    Set.forEach set (fun v ->
+        __pp_value fmt v ;
+        Format.pp_print_string fmt ", " ) ;
+    Format.pp_print_string fmt " }" ;
+    ()
+end
+
+module IntSet = struct
+  module Set = Belt.Set.String
+
+  let __pp_value = Format.pp_print_string
+
+  type t = Set.t
+
+  type value = Set.value
+
+  let fromList (l : value list) : t = l |> Belt.List.toArray |> Set.fromArray
+
+  let from_list = fromList
+
+  let member ~(value : value) (set : t) : bool = Set.has set value
+
+  let diff (set1 : t) (set2 : t) : t = Set.diff set1 set2
+
+  let isEmpty (s : t) : bool = Set.isEmpty s
+
+  let is_empty = isEmpty
+
+  let toList (s : t) : value list = Set.toList s
+
+  let to_list = toList
+
+  let ofList (s : value list) : t = s |> Array.of_list |> Set.fromArray
+
+  let of_list = ofList
 
   let union = Set.union
 
   let empty = Set.empty
+
+  let remove ~(value : value) (set : t) = Set.remove set value
+
+  let add ~(value : value) (set : t) = Set.add set value
+
+  let set ~(value : value) (set : t) = Set.add set value
+
+  let has = member
+
+  let pp (fmt : Format.formatter) (set : t) =
+    Format.pp_print_string fmt "{ " ;
+    Set.forEach set (fun v ->
+        __pp_value fmt v ;
+        Format.pp_print_string fmt ", " ) ;
+    Format.pp_print_string fmt " }" ;
+    ()
 end
 
 module StrDict = struct
@@ -624,6 +690,40 @@ module StrDict = struct
 
 
   let map dict ~f = Map.map dict f
+
+  (* Js.String.make gives us "[object Object]", so we actually want our own
+     toString. Not perfect, but slightly nicer (e.g., for App.ml's
+     DisplayAndReportHttpError, info's values are all strings, which this
+     handles) *)
+  let toString (d : 'value t) =
+    d
+    |> toList
+    |> List.map ~f:(fun (k, v) -> "\"" ^ k ^ "\": \"" ^ Js.String.make v ^ "\"")
+    |> String.join ~sep:", "
+    |> fun s -> "{" ^ s ^ "}"
+
+
+  let to_string = toString
+
+  let pp
+      (valueFormatter : Format.formatter -> 'value -> unit)
+      (fmt : Format.formatter)
+      (map : 'value t) =
+    Format.pp_print_string fmt "{ " ;
+    Map.forEach map (fun k v ->
+        Format.pp_print_string fmt k ;
+        Format.pp_print_string fmt ": " ;
+        valueFormatter fmt v ;
+        Format.pp_print_string fmt ",  " ) ;
+    Format.pp_print_string fmt "}" ;
+    ()
+
+
+  let merge
+      ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
+      (dict1 : 'v1 t)
+      (dict2 : 'v2 t) : 'v3 t =
+    Map.merge dict1 dict2 f
 end
 
 module IntDict = struct
@@ -659,4 +759,56 @@ module IntDict = struct
   let keys m : key list = Map.keysToArray m |> Belt.List.fromArray
 
   let map dict ~f = Map.map dict f
+
+  (* Js.String.make gives us "[object Object]", so we actually want our own
+     toString. Not perfect, but slightly nicer (e.g., for App.ml's
+     DisplayAndReportHttpError, info's values are all strings, which this
+     handles) *)
+  let toString (d : 'value t) : string =
+    d
+    |> toList
+    |> List.map ~f:(fun (k, v) ->
+           "\"" ^ string_of_int k ^ "\": \"" ^ Js.String.make v ^ "\"" )
+    |> String.join ~sep:", "
+    |> fun s -> "{" ^ s ^ "}"
+
+
+  let to_string = toString
+
+  let pp
+      (valueFormatter : Format.formatter -> 'value -> unit)
+      (fmt : Format.formatter)
+      (map : 'value t) =
+    Format.pp_print_string fmt "{ " ;
+    Map.forEach map (fun k v ->
+        Format.pp_print_int fmt k ;
+        Format.pp_print_string fmt ": " ;
+        valueFormatter fmt v ;
+        Format.pp_print_string fmt ",  " ) ;
+    Format.pp_print_string fmt "}" ;
+    ()
+
+
+  let merge
+      ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
+      (dict1 : 'v1 t)
+      (dict2 : 'v2 t) : 'v3 t =
+    Map.merge dict1 dict2 f
+end
+
+module Regex = struct
+  type t = Js.Re.t
+
+  type result = Js.Re.result
+
+  let regex s : Js.Re.t = Js.Re.fromStringWithFlags ~flags:"g" s
+
+  let contains ~(re : Js.Re.t) (s : string) : bool = Js.Re.test s re
+
+  let replace ~(re : Js.Re.t) ~(repl : string) (str : string) =
+    Js.String.replaceByRe re repl str
+
+
+  let matches ~(re : Js.Re.t) (s : string) : Js.Re.result option =
+    Js.Re.exec s re
 end

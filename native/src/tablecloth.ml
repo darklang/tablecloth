@@ -241,7 +241,7 @@ module List = struct
 
   let maximum_by = maximumBy
 
-  let maximum ~(list : 'comparable list) : 'comparable option =
+  let maximum (list : 'comparable list) : 'comparable option =
     match list with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
 
 
@@ -358,6 +358,12 @@ module Option = struct
   let isSome = Base.Option.is_some
 
   let is_some = isSome
+
+  let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
+    if value = sentinel then None else Some value
+
+
+  let to_option = toOption
 end
 
 module Result = struct
@@ -395,6 +401,28 @@ module Result = struct
 
 
   let to_option = toOption
+
+  let andThen ~(f : 'ok -> ('err, 'value) t) (r : ('err, 'ok) t) :
+      ('err, 'value) t =
+    Base.Result.bind ~f r
+
+
+  let and_then = andThen
+
+  let pp
+      (errf : Format.formatter -> 'err -> unit)
+      (okf : Format.formatter -> 'ok -> unit)
+      (fmt : Format.formatter)
+      (r : ('err, 'ok) t) =
+    match r with
+    | Ok ok ->
+        Format.pp_print_string fmt "<ok: " ;
+        okf fmt ok ;
+        Format.pp_print_string fmt ">"
+    | Error err ->
+        Format.pp_print_string fmt "<ok: " ;
+        errf fmt err ;
+        Format.pp_print_string fmt ">"
 end
 
 module Char = struct
@@ -522,6 +550,8 @@ end
 module IntSet = struct
   module Set = Base.Set.M (Base.Int)
 
+  let __pp_value = Format.pp_print_int
+
   type t = Set.t
 
   type value = int
@@ -546,15 +576,31 @@ module IntSet = struct
 
   let of_list = ofList
 
-  let add (s : t) (value : value) : t = Base.Set.add s value
-
   let union (s1 : t) (s2 : t) : t = Base.Set.union s1 s2
 
   let empty = Base.Set.empty (module Base.Int)
+
+  let add ~(value : value) (s : t) : t = Base.Set.add s value
+
+  let remove ~(value : value) (set : t) = Base.Set.remove set value
+
+  let set ~(value : value) (set : t) = add ~value set
+
+  let has = member
+
+  let pp (fmt : Format.formatter) (set : t) =
+    Format.pp_print_string fmt "{ " ;
+    Base.Set.iter set ~f:(fun v ->
+        __pp_value fmt v ;
+        Format.pp_print_string fmt ", " ) ;
+    Format.pp_print_string fmt " }" ;
+    ()
 end
 
 module StrSet = struct
   module Set = Base.Set.M (Base.String)
+
+  let __pp_value = Format.pp_print_string
 
   type t = Set.t
 
@@ -580,11 +626,25 @@ module StrSet = struct
 
   let of_list = ofList
 
-  let add (s : t) (value : value) : t = Base.Set.add s value
+  let add ~(value : value) (s : t) : t = Base.Set.add s value
 
   let union (s1 : t) (s2 : t) : t = Base.Set.union s1 s2
 
   let empty = Base.Set.empty (module Base.String)
+
+  let remove ~(value : value) (set : t) = Base.Set.remove set value
+
+  let set ~(value : value) (set : t) = add ~value set
+
+  let has = member
+
+  let pp (fmt : Format.formatter) (set : t) =
+    Format.pp_print_string fmt "{ " ;
+    Base.Set.iter set ~f:(fun v ->
+        __pp_value fmt v ;
+        Format.pp_print_string fmt ", " ) ;
+    Format.pp_print_string fmt " }" ;
+    ()
 end
 
 module StrDict = struct
@@ -622,6 +682,33 @@ module StrDict = struct
 
 
   let map dict ~(f : 'a -> 'b) = Base.Map.map dict ~f
+
+  let pp
+      (valueFormatter : Format.formatter -> 'value -> unit)
+      (fmt : Format.formatter)
+      (map : 'value t) =
+    Format.pp_print_string fmt "{ " ;
+    Base.Map.iteri map ~f:(fun ~key ~data ->
+        Format.pp_print_string fmt key ;
+        Format.pp_print_string fmt ": " ;
+        valueFormatter fmt data ;
+        Format.pp_print_string fmt ",  " ) ;
+    Format.pp_print_string fmt "}" ;
+    ()
+
+
+  let merge
+      ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
+      (dict1 : 'v1 t)
+      (dict2 : 'v2 t) : 'v3 t =
+    Base.Map.merge dict1 dict2 ~f:(fun ~key desc ->
+        match desc with
+        | `Left v1 ->
+            f key (Some v1) None
+        | `Right v2 ->
+            f key None (Some v2)
+        | `Both (v1, v2) ->
+            f key (Some v1) (Some v2) )
 end
 
 module IntDict = struct
@@ -659,4 +746,31 @@ module IntDict = struct
 
 
   let map dict ~(f : 'a -> 'b) = Base.Map.map dict ~f
+
+  let pp
+      (valueFormatter : Format.formatter -> 'value -> unit)
+      (fmt : Format.formatter)
+      (map : 'value t) =
+    Format.pp_print_string fmt "{ " ;
+    Base.Map.iteri map ~f:(fun ~key ~data ->
+        Format.pp_print_int fmt key ;
+        Format.pp_print_string fmt ": " ;
+        valueFormatter fmt data ;
+        Format.pp_print_string fmt ",  " ) ;
+    Format.pp_print_string fmt "}" ;
+    ()
+
+
+  let merge
+      ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
+      (dict1 : 'v1 t)
+      (dict2 : 'v2 t) : 'v3 t =
+    Base.Map.merge dict1 dict2 ~f:(fun ~key desc ->
+        match desc with
+        | `Left v1 ->
+            f key (Some v1) None
+        | `Right v2 ->
+            f key None (Some v2)
+        | `Both (v1, v2) ->
+            f key (Some v1) (Some v2) )
 end
