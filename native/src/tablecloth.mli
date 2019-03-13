@@ -31,9 +31,9 @@ module List : sig
 
   val find : f:('a -> bool) -> 'a list -> 'a option
 
-  val elemIndex : value:int -> int list -> int option
+  val elemIndex : value:'a -> 'a list -> int option
 
-  val elem_index : value:int -> int list -> int option
+  val elem_index : value:'a -> 'a list -> int option
 
   val last : 'a list -> 'a option
 

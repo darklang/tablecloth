@@ -34,13 +34,10 @@ module List = struct
   let get_by = getBy
 
   let elemIndex ~(value : 'a) (l : 'a list) : int option =
-    let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
-      if value = sentinel then None else Some value
-    in
     l
     |> Array.of_list
     |> Js.Array.findIndex (( = ) value)
-    |> toOption ~sentinel:(-1)
+    |> function -1 -> None | other -> Some other
 
 
   let elem_index = elemIndex
@@ -303,12 +300,6 @@ module List = struct
   let sort_with = sortWith
 
   let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
-
-  let elemIndex ~(value : 'a) (l : 'a list) : int option =
-    l
-    |> Array.of_list
-    |> Js.Array.findIndex (( = ) value)
-    |> function -1 -> None | other -> Some other
 end
 
 module Result = struct
