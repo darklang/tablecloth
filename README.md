@@ -95,7 +95,7 @@ different:
 Tablecloth solves this by providing an identical API for Bucklescript and
 OCaml. It wraps existing standard libraries on those platforms, and so is fast
 and memory efficient. It is based off Elm standard library, which is extremely
-well designed and ergonomic.
+well-designed and ergonomic.
 
 Tablecloth provides separate libraries for OCaml native, js\_of\_ocaml, and
 Bucklescript. The libraries have the same API, but different implementations,
