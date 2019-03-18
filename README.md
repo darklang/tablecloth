@@ -66,9 +66,9 @@ let () =
 
 [Dark](https://darklang.com) uses multiple versions of OCaml on the frontend
 and backend:
-- Our backend is written in OCaml native, using Jane Street Core as a standard
+- Our backend is written in OCaml native, using [Jane Street Core](https://github.com/janestreet/core) as a standard
   library
-- Our frontend is written in Bucklescript (dba ReasonML)
+- Our frontend is written in [Bucklescript](https://bucklescript.github.io/) (dba [ReasonML](https://reasonml.github.io/))
 - Parts of our backend are shared with the frontend by compiling them using
   js\_of\_ocaml, and running them in a web worker.
 
@@ -77,8 +77,7 @@ frontend and the OCaml backend, as the types and standard libraries were very
 different:
 - Bucklescript uses camelCase by default, while most native libraries,
   including Core and the OCaml standard library, use snake\_case.
-- The libraries in Belt have different names and function signatures than
-  native OCaml and Base/Core.
+- The libraries in [Belt](https://bucklescript.github.io/bucklescript/api/index.html) have different names and function signatures than native OCaml and Base/Core.
 - Many OCaml libraries have APIs optimized for pipelast (`|>`), while Belt aims
   for pipefirst (`|.`). 
 - Core does not work with Bucklescript, while Belt is optimized for the JS
@@ -86,8 +85,8 @@ different:
 - Belt does not work in native OCaml, while Core is optimized for the native
   OCaml runtime.
 - Belt is incomplete relative to Core, or to other languages' standard
-  libraries (such as Elm).
-- Belt makes it challenging to use PPXes.
+  libraries (such as [Elm's](https://package.elm-lang.org/packages/elm/core/1.0.2/)).
+- Belt makes it challenging to use [PPXes](https://github.com/ocaml-ppx).
 
 
 ### Tablecloth's solution
@@ -102,22 +101,20 @@ Bucklescript. The libraries have the same API, but different implementations,
 and are installed as different packages.
 
 The APIs:
-- are taken from Elm's standard library, which is extremely complete and
-  well-designed.
+- are taken from [Elm's standard library](https://package.elm-lang.org/packages/elm/core/1.0.2/), which is extremely complete and well-designed.
 - include support for strings, lists, numbers, maps, options, and results,
 - have both snake\_case and camelCase versions of all functions and types,
-- are backed by Jane Street Base (the slimmed down version of Core) for native
-  OCaml
+- are backed by [Jane Street Base](https://opensource.janestreet.com/base/) for native OCaml
 - are backed by Belt and the `Js` library for Bucklescript/ReasonML,
 - use labelled arguments so that can be used with both pipefirst and pipelast,
 
-We also have design goals that are not yet achieved in the current version. The APIs:
-- should have efficient algorithms tuned for the platform,
-- should support PPX derivers,
-- should not throw any exceptions,
-- should be well documented, with well-known and consistent edge-case behaviour,
-- should be well tested,
-- should have a js\_of\_ocaml optimized version.
+We also have design goals that are not yet achieved in the current version:
+- Many of the functions in the Bucklescript version were written hastily, and could be much more efficient
+- Tablecloth libraries should support PPX derivers,
+- Tablecloth functions should not throw any exceptions,
+- All functions should be well documented, with well-known and consistent edge-case behaviour,
+- All functions should be well tested,
+- There should have a js_of_ocaml optimized version (and perhaps a version wrapping other OCaml standard libraries like [Batteries](https://github.com/ocaml-batteries-team/batteries-included) or [Containers](https://github.com/c-cube/ocaml-containers)).
 
 
 ## Contributing
