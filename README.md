@@ -61,6 +61,12 @@ let () =
   |> Tablecloth.String.fromList
 ```
 
+As tablecloth is still in the early stages, you might find it useful to create
+a module wrapping tablecloth, that allows you make changes to it before
+upstreaming them. We have [an
+example](https://github.com/darklang/tablecloth/blob/master/examples/tc.ml)
+that you can copy from.
+
 
 ## Design of Tablecloth
 
