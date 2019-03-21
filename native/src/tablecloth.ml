@@ -13,17 +13,29 @@ module Tuple2 = struct
 
   let second ((_, b) : 'a * 'b) : 'b = b
 
+  let map ~(f : 'b -> 'y) ((a, b) : 'a * 'b) : 'a * 'y = (a, f b)
+
   let mapFirst ~(f : 'a -> 'x) ((a, b) : 'a * 'b) : 'x * 'b = (f a, b)
 
   let map_first = mapFirst
 
-  let mapSecond ~(f : 'b -> 'y) ((a, b) : 'a * 'b) : 'a * 'y = (a, f b)
+  let mapSecond = map
 
   let map_second = mapSecond
 
-  let mapBoth ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
+  let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
+
+  let map_each = mapEach
   
-  let map_both = mapBoth
+  let mapAll ~(f : 'a -> 'b) (a1, a2) = (f a1, f a2)
+
+  let map_all = mapAll
+
+  let swap (a, b) = (b, a)
+
+  let toList (a, b) = [a; b]
+
+  let to_list = toList
 end
 
 module Tuple3 = struct
@@ -35,6 +47,12 @@ module Tuple3 = struct
   
   let third ((_, _, c) : 'a * 'b * 'c) : 'c = c
 
+  let head ((a, b, _) : 'a * 'b * 'c): ('a * 'b) = (a, b)
+
+  let tail ((_, b, c) : 'a * 'b * 'c): ('b * 'c) = (b, c)
+
+  let map ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z = (a, b, f c)
+
   let mapFirst ~(f : 'a -> 'x) ((a, b, c) : 'a * 'b * 'c) : 'x * 'b *'c = (f a, b, c)
 
   let map_first = mapFirst
@@ -43,13 +61,29 @@ module Tuple3 = struct
 
   let map_second = mapSecond
 
-  let mapThird ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z = (a, b, f c)
+  let mapThird = map
 
   let map_third = mapThird
 
   let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ~(h : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z = (f a, g b, h c)
 
   let map_each = mapEach
+
+  let mapAll ~(f: 'a -> 'b) (a1, a2, a3) = (f a1, f a2, f a3)
+
+  let map_all = mapAll
+
+  let swirlLeft ((a, b, c) : 'a * 'b * 'c) : ('c * 'a * 'b) = (c, a, b)
+
+  let swirl_left = swirlLeft
+
+  let swirlRight ((a, b, c) : 'a * 'b * 'c) : ('b * 'c * 'a) = (b, c, a)
+
+  let swirl_right = swirlRight
+
+  let toList ((a, b, c) : ('a * 'a * 'a)) : 'a list = [a; b; c]
+
+  let to_list = toList
 end
 
 module List = struct

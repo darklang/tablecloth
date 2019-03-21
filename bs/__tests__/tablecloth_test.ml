@@ -21,6 +21,10 @@ let () =
       expect (Tuple2.second (3, 4)) |> toEqual 4      
     );
 
+    test "map" (fun () ->
+      expect (Tuple2.map ~f:sqrt ("stressed", 16.)) |> toEqual ("stressed", 4.)      
+    );
+
     test "mapFirst" (fun () ->
       expect (Tuple2.mapFirst ~f:String.reverse ("stressed", 16)) |> toEqual ("desserts", 16)      
     );
@@ -29,9 +33,21 @@ let () =
       expect (Tuple2.mapSecond ~f:sqrt ("stressed", 16.)) |> toEqual ("stressed", 4.)      
     );
 
-    test "mapBoth" (fun () ->
-      expect (Tuple2.mapBoth ~f:String.reverse ~g:sqrt ("stressed", 16.)) |> toEqual ("desserts", 4.)      
-    )
+    test "mapEach" (fun () ->
+      expect (Tuple2.mapEach ~f:String.reverse ~g:sqrt ("stressed", 16.)) |> toEqual ("desserts", 4.)      
+    );
+
+    test "mapAll" (fun () ->
+      expect (Tuple2.mapAll ~f:String.reverse ("was", "stressed")) |> toEqual ("saw", "desserts")      
+    );
+
+    test "swap" (fun () ->
+      expect (Tuple2.swap (3, 4)) |> toEqual (4, 3)      
+    );
+
+    test "toList" (fun () ->
+      expect (Tuple2.toList (3, 4)) |> toEqual [3; 4]
+    );
   );
 
   describe "Tuple3" (fun () ->
@@ -51,6 +67,18 @@ let () =
       expect (Tuple3.third (3, 4, 5)) |> toEqual 5      
     );
 
+    test "head" (fun () -> 
+      expect (Tuple3.head (3, 4, 5)) |> toEqual (3, 4)      
+    );
+
+    test "tail" (fun () -> 
+      expect (Tuple3.tail (3, 4, 5)) |> toEqual (4, 5)      
+    );
+
+    test "map" (fun () ->
+      expect (Tuple3.map ~f:not ("stressed", 16, false)) |> toEqual ("stressed", 16, true);
+    );
+
     test "mapFirst" (fun () ->
       expect (Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false)) |> toEqual ("desserts", 16, false)
     );
@@ -66,6 +94,20 @@ let () =
     test "mapEach" (fun () ->
       expect (Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false)) |> toEqual ("desserts", 4., true)
     );
-  );
 
-  ()
+    test "mapAll" (fun () ->
+      expect (Tuple3.mapAll ~f:String.reverse ("was", "stressed", "now")) |> toEqual ("saw", "desserts", "won")
+    );
+
+    test "swirlLeft" (fun () ->
+      expect (Tuple3.swirlLeft (3, 4, 5)) |> toEqual (5, 3, 4)
+    );
+
+    test "swirlRight" (fun () ->
+      expect (Tuple3.swirlRight (3, 4, 5)) |> toEqual (4, 5, 3)
+    );
+
+    test "toList" (fun () ->
+      expect (Tuple3.toList (3, 4, 5)) |> toEqual [3; 4; 5]
+    );
+  );

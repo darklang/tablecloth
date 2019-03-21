@@ -232,21 +232,33 @@ end
 module Tuple2 : sig
   val create : 'a -> 'b -> 'a * 'b
 
-  val first : 'a * 'b -> 'a
+  val first : ('a * 'b) -> 'a
 
-  val second : 'a * 'b -> 'b
+  val second : ('a * 'b) -> 'b
 
-  val mapFirst : f:('a -> 'x) -> 'a * 'b -> 'x * 'b
+  val map : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
 
-  val map_first : f:('a -> 'x) -> 'a * 'b -> 'x * 'b
+  val mapFirst : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
 
-  val mapSecond : f:('b -> 'y) -> 'a * 'b -> 'a * 'y
+  val map_first : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
 
-  val map_second : f:('b -> 'y) -> 'a * 'b -> 'a * 'y
+  val mapSecond : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
 
-  val mapBoth : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
+  val map_second : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
 
-  val map_both : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
+  val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
+
+  val map_each : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
+
+  val mapAll : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
+
+  val map_all : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
+
+  val swap : ('a * 'b) -> ('b * 'a)
+
+  val toList : ('a * 'a) -> 'a list
+
+  val to_list : ('a * 'a) -> 'a list
 end
 
 module Tuple3 : sig
@@ -257,6 +269,12 @@ module Tuple3 : sig
   val second : ('a * 'b * 'c) -> 'b
   
   val third : ('a * 'b * 'c) -> 'c
+
+  val head : ('a * 'b * 'c) -> ('a * 'b)
+
+  val tail : ('a * 'b * 'c) -> ('b * 'c)
+
+  val map : f:('c -> 'x) -> ('a * 'b * 'c) -> ('a * 'b * 'x)
 
   val mapFirst : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
 
@@ -273,6 +291,22 @@ module Tuple3 : sig
   val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
 
   val map_each : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
+
+  val mapAll : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
+
+  val map_all : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
+
+  val swirlLeft : ('a * 'b * 'c) -> ('c * 'a * 'b)
+  
+  val swirl_left : ('a * 'b * 'c) -> ('c * 'a * 'b)
+
+  val swirlRight : ('a * 'b * 'c) -> ('b * 'c * 'a)
+
+  val swirl_right : ('a * 'b * 'c) -> ('b * 'c * 'a)
+  
+  val toList : ('a * 'a * 'a) -> 'a list
+
+  val to_list : ('a * 'a * 'a) -> 'a list
 end
 
 module String : sig
