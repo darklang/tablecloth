@@ -507,8 +507,15 @@ module String = struct
   let contains ~(substring : string) (s : string) : bool =
     Js.String.includes substring s
 
-
   let repeat ~(count : int) (s : string) : string = Js.String.repeat count s
+
+  let reverse (s : string) =  
+    s 
+    |> Js.String.castToArrayLike 
+    |> Js.Array.from 
+    |> Js.Array.reverseInPlace 
+    |> Belt.List.fromArray
+    |> String.concat ""
 
   let fromList (l : char list) : string =
     l

@@ -297,6 +297,8 @@ module String : sig
   val contains : substring:string -> string -> bool
 
   val repeat : count:int -> string -> string
+    
+  val reverse : string -> string
 
   val fromList : char list -> string
 
