@@ -426,15 +426,24 @@ module Char = struct
 end
 
 module Tuple2 = struct
-  let mapSecond (f : 'b -> 'c) ((a, b) : 'a * 'b) : 'a * 'c = (a, f b)
+  let create a b = (a, b)
+
+  let first ((a, _) : 'a * 'b) : 'a = a
+  
+  let second ((_, b) : 'a * 'b) : 'b = b
+
+  let mapFirst ~(f : 'a -> 'x) ((a, b) : 'a * 'b) : 'x * 'b = (f a, b)
+
+  let map_first = mapFirst
+
+  let mapSecond ~(f : 'b -> 'y) ((a, b) : 'a * 'b) : 'a * 'y = (a, f b)
 
   let map_second = mapSecond
 
-  let second ((_, b) : 'a * 'b) : 'b = b
+  let mapBoth ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
 
-  let first ((a, _) : 'a * 'b) : 'a = a
+  let map_both = mapBoth
 
-  let create a b = (a, b)
 end
 
 module String = struct

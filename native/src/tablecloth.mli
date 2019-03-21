@@ -230,15 +230,23 @@ module Char : sig
 end
 
 module Tuple2 : sig
-  val mapSecond : ('b -> 'c) -> 'a * 'b -> 'a * 'c
-
-  val map_second : ('b -> 'c) -> 'a * 'b -> 'a * 'c
-
-  val second : 'a * 'b -> 'b
+  val create : 'a -> 'b -> 'a * 'b
 
   val first : 'a * 'b -> 'a
 
-  val create : 'a -> 'b -> 'a * 'b
+  val second : 'a * 'b -> 'b
+
+  val mapFirst : f:('a -> 'x) -> 'a * 'b -> 'x * 'b
+
+  val map_first : f:('a -> 'x) -> 'a * 'b -> 'x * 'b
+
+  val mapSecond : f:('b -> 'y) -> 'a * 'b -> 'a * 'y
+
+  val map_second : f:('b -> 'y) -> 'a * 'b -> 'a * 'y
+
+  val mapBoth : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
+
+  val map_both : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
 end
 
 module String : sig
