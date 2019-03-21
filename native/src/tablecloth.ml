@@ -7,15 +7,23 @@ let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 let identity (value : 'a) : 'a = value
 
 module Tuple2 = struct
-  let mapSecond (f : 'b -> 'c) ((a, b) : 'a * 'b) : 'a * 'c = (a, f b)
-
-  let map_second = mapSecond
-
-  let second ((_, b) : 'a * 'b) : 'b = b
+  let create a b = (a, b)
 
   let first ((a, _) : 'a * 'b) : 'a = a
 
-  let create a b = (a, b)
+  let second ((_, b) : 'a * 'b) : 'b = b
+
+  let mapFirst ~(f : 'a -> 'x) ((a, b) : 'a * 'b) : 'x * 'b = (f a, b)
+
+  let map_first = mapFirst
+
+  let mapSecond ~(f : 'b -> 'y) ((a, b) : 'a * 'b) : 'a * 'y = (a, f b)
+
+  let map_second = mapSecond
+
+  let mapBoth ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
+  
+  let map_both = mapBoth
 end
 
 module List = struct
