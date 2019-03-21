@@ -29,9 +29,34 @@ let t_Tuple2 () =
 
   ()
 
+let trio a b c = 
+  let eq (a1, b1, c1) (a2, b2, c2) = AT.equal a a1 a2 && AT.equal b b1 b2 && AT.equal c c1 c2 in
+  let pp ppf (x, y, z) = Fmt.pf ppf "@[<1>(@[%a@],@ @[%a@],@ @[%a@])@]" (AT.pp a) x (AT.pp b) y (AT.pp c) z in
+  AT.testable pp eq
+
+let t_Tuple3 () =
+    AT.check (trio AT.int AT.int AT.int) "create" (Tuple3.create 3 4 5) (3, 4, 5);
+
+    AT.check AT.int "first" (Tuple3.first (3, 4, 5)) 3;
+
+    AT.check AT.int "second" (Tuple3.second (3, 4, 5)) 4;      
+
+    AT.check AT.int "third" (Tuple3.third (3, 4, 5)) 5;      
+
+    AT.check (trio AT.string AT.int AT.bool) "mapFirst" (Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false)) ("desserts", 16, false);
+
+    AT.check (trio AT.string (AT.float 0.) AT.bool) "mapSecond" (Tuple3.mapSecond ~f:sqrt ("stressed", 16., false)) ("stressed", 4., false);
+
+    AT.check (trio AT.string AT.int AT.bool) "mapThird" (Tuple3.mapThird ~f:not ("stressed", 16, false)) ("stressed", 16, true);
+
+    AT.check (trio AT.string (AT.float 0.) AT.bool) "mapEach" (Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false)) ("desserts", 4., true);
+
+    ()
+
 let suite = [
   ("String", `Quick, t_String); 
   ("Tuple2", `Quick, t_Tuple2);
+  ("Tuple3", `Quick, t_Tuple3);
 ]
 
 let () =
