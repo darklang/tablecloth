@@ -34,4 +34,38 @@ let () =
     )
   );
 
+  describe "Tuple3" (fun () ->
+    test "create" (fun () -> 
+      expect (Tuple3.create 3 4 5) |> toEqual (3, 4, 5)      
+    );
+
+    test "first" (fun () -> 
+      expect (Tuple3.first (3, 4, 5)) |> toEqual 3      
+    );
+
+    test "second" (fun () -> 
+      expect (Tuple3.second (3, 4, 5)) |> toEqual 4      
+    );
+
+    test "third" (fun () -> 
+      expect (Tuple3.third (3, 4, 5)) |> toEqual 5      
+    );
+
+    test "mapFirst" (fun () ->
+      expect (Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false)) |> toEqual ("desserts", 16, false)
+    );
+
+    test "mapSecond" (fun () ->
+      expect (Tuple3.mapSecond ~f:sqrt ("stressed", 16., false)) |> toEqual ("stressed", 4., false)      
+    );
+
+    test "mapThird" (fun () ->
+      expect (Tuple3.mapThird ~f:not ("stressed", 16, false)) |> toEqual ("stressed", 16, true);
+    );
+
+    test "mapEach" (fun () ->
+      expect (Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false)) |> toEqual ("desserts", 4., true)
+    );
+  );
+
   ()

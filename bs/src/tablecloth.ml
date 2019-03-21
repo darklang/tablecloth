@@ -443,7 +443,32 @@ module Tuple2 = struct
   let mapBoth ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
 
   let map_both = mapBoth
+end
 
+module Tuple3 = struct
+  let create a b c = (a, b, c)
+
+  let first ((a, _, _) : 'a * 'b * 'c) : 'a = a
+
+  let second ((_, b, _) : 'a * 'b *'c) : 'b = b
+  
+  let third ((_, _, c) : 'a * 'b * 'c) : 'c = c
+
+  let mapFirst ~(f : 'a -> 'x) ((a, b, c) : 'a * 'b * 'c) : 'x * 'b *'c = (f a, b, c)
+
+  let map_first = mapFirst
+
+  let mapSecond ~(f : 'b -> 'y) ((a, b, c) : 'a * 'b * 'c) : 'a * 'y * 'c = (a, f b, c)
+
+  let map_second = mapSecond
+
+  let mapThird ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z = (a, b, f c)
+
+  let map_third = mapThird
+
+  let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ~(h : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z = (f a, g b, h c)
+
+  let map_each  = mapEach
 end
 
 module String = struct

@@ -249,6 +249,32 @@ module Tuple2 : sig
   val map_both : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
 end
 
+module Tuple3 : sig
+  val create : 'a -> 'b -> 'c -> ('a * 'b * 'c)
+
+  val first : ('a * 'b * 'c) -> 'a
+
+  val second : ('a * 'b * 'c) -> 'b
+  
+  val third : ('a * 'b * 'c) -> 'c
+
+  val mapFirst : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
+
+  val map_first : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
+
+  val mapSecond : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
+
+  val map_second : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
+
+  val mapThird : f:('c -> 'z) -> ('a * 'b * 'c) -> ('a * 'b * 'z)
+
+  val map_third : f:('c -> 'z) -> ('a * 'b * 'c) -> ('a * 'b * 'z)
+
+  val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
+
+  val map_each : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
+end
+
 module String : sig
   val length : string -> int
 
