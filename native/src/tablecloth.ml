@@ -512,6 +512,7 @@ module String = struct
   let repeat ~(count : int) (s : string) : string =
     Base.List.init count ~f:(fun _ -> s) |> Base.String.concat
 
+  let reverse (s : string) = Base.String.rev s
 
   let fromList (l : char list) : string = Base.String.of_char_list l
 
