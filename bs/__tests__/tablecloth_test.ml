@@ -21,10 +21,6 @@ let () =
       expect (Tuple2.second (3, 4)) |> toEqual 4      
     );
 
-    test "map" (fun () ->
-      expect (Tuple2.map ~f:sqrt ("stressed", 16.)) |> toEqual ("stressed", 4.)      
-    );
-
     test "mapFirst" (fun () ->
       expect (Tuple2.mapFirst ~f:String.reverse ("stressed", 16)) |> toEqual ("desserts", 16)      
     );
@@ -75,10 +71,6 @@ let () =
       expect (Tuple3.tail (3, 4, 5)) |> toEqual (4, 5)      
     );
 
-    test "map" (fun () ->
-      expect (Tuple3.map ~f:not ("stressed", 16, false)) |> toEqual ("stressed", 16, true);
-    );
-
     test "mapFirst" (fun () ->
       expect (Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false)) |> toEqual ("desserts", 16, false)
     );
@@ -100,11 +92,11 @@ let () =
     );
 
     test "rotateLeft" (fun () ->
-      expect (Tuple3.rotateLeft (3, 4, 5)) |> toEqual (5, 3, 4)
+      expect (Tuple3.rotateLeft (3, 4, 5)) |> toEqual (4, 5, 3)
     );
 
     test "rotateRight" (fun () ->
-      expect (Tuple3.rotateRight (3, 4, 5)) |> toEqual (4, 5, 3)
+      expect (Tuple3.rotateRight (3, 4, 5)) |> toEqual (5, 3, 4)
     );
 
     test "toList" (fun () ->

@@ -21,8 +21,6 @@ let t_Tuple2 () =
 
   AT.check AT.int "second" (Tuple2.second (3, 4)) 4;
 
-  AT.check (AT.pair AT.string (AT.float 0.)) "map" (Tuple2.map ~f:sqrt ("stressed", 16.)) ("stressed", 4.);
-
   AT.check (AT.pair AT.string AT.int) "mapFirst" (Tuple2.mapFirst ~f:String.reverse ("stressed", 16)) ("desserts", 16);
 
   AT.check (AT.pair AT.string (AT.float 0.)) "mapSecond" (Tuple2.mapSecond ~f:sqrt ("stressed", 16.)) ("stressed", 4.);
@@ -55,8 +53,6 @@ let t_Tuple3 () =
 
   AT.check (AT.pair AT.int AT.int) "tail" (Tuple3.tail (3, 4, 5)) (4, 5);      
 
-  AT.check (trio AT.string AT.int AT.bool) "map" (Tuple3.map ~f:not ("stressed", 16, false)) ("stressed", 16, true);
-
   AT.check (trio AT.string AT.int AT.bool) "mapFirst" (Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false)) ("desserts", 16, false);
 
   AT.check (trio AT.string (AT.float 0.) AT.bool) "mapSecond" (Tuple3.mapSecond ~f:sqrt ("stressed", 16., false)) ("stressed", 4., false);
@@ -67,9 +63,9 @@ let t_Tuple3 () =
 
   AT.check (trio AT.string AT.string AT.string) "mapAll" (Tuple3.mapAll ~f:String.reverse ("was", "stressed", "now")) ("saw", "desserts", "won");
   
-  AT.check (trio AT.int AT.int AT.int) "rotateLeft" (Tuple3.rotateLeft (3, 4, 5)) (5, 3, 4);
+  AT.check (trio AT.int AT.int AT.int) "rotateLeft" (Tuple3.rotateLeft (3, 4, 5)) (4, 5, 3);
   
-  AT.check (trio AT.int AT.int AT.int) "rotateRight" (Tuple3.rotateRight (3, 4, 5)) (4, 5, 3);
+  AT.check (trio AT.int AT.int AT.int) "rotateRight" (Tuple3.rotateRight (3, 4, 5)) (5, 3, 4);
 
   AT.check (AT.list AT.int) "toList" (Tuple3.toList (3, 4, 5)) [3; 4; 5;];
 

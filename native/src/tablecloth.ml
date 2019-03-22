@@ -13,13 +13,11 @@ module Tuple2 = struct
 
   let second ((_, b) : 'a * 'b) : 'b = b
 
-  let map ~(f : 'b -> 'y) ((a, b) : 'a * 'b) : 'a * 'y = (a, f b)
-
   let mapFirst ~(f : 'a -> 'x) ((a, b) : 'a * 'b) : 'x * 'b = (f a, b)
 
   let map_first = mapFirst
 
-  let mapSecond = map
+  let mapSecond ~(f : 'b -> 'y) ((a, b) : 'a * 'b) : 'a * 'y = (a, f b)
 
   let map_second = mapSecond
 
@@ -51,8 +49,6 @@ module Tuple3 = struct
 
   let tail ((_, b, c) : 'a * 'b * 'c): ('b * 'c) = (b, c)
 
-  let map ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z = (a, b, f c)
-
   let mapFirst ~(f : 'a -> 'x) ((a, b, c) : 'a * 'b * 'c) : 'x * 'b *'c = (f a, b, c)
 
   let map_first = mapFirst
@@ -61,7 +57,7 @@ module Tuple3 = struct
 
   let map_second = mapSecond
 
-  let mapThird = map
+  let mapThird ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z = (a, b, f c)
 
   let map_third = mapThird
 
@@ -77,7 +73,7 @@ module Tuple3 = struct
 
   let rotate_left = rotateLeft
 
-  let rotateRight ((a, b, c) : 'a * 'b * 'c) : ('c * 'b * 'a) = (c, b, a)
+  let rotateRight ((a, b, c) : 'a * 'b * 'c) : ('c * 'a * 'b) = (c, a, b)
 
   let rotate_right = rotateRight
 

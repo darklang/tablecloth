@@ -236,8 +236,6 @@ module Tuple2 : sig
 
   val second : ('a * 'b) -> 'b
 
-  val map : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
-
   val mapFirst : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
 
   val map_first : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
@@ -273,8 +271,6 @@ module Tuple3 : sig
   val init : ('a * 'b * 'c) -> ('a * 'b)
 
   val tail : ('a * 'b * 'c) -> ('b * 'c)
-
-  val map : f:('c -> 'x) -> ('a * 'b * 'c) -> ('a * 'b * 'x)
 
   val mapFirst : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
 
