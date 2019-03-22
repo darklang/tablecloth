@@ -99,12 +99,12 @@ let () =
       expect (Tuple3.mapAll ~f:String.reverse ("was", "stressed", "now")) |> toEqual ("saw", "desserts", "won")
     );
 
-    test "swirlLeft" (fun () ->
-      expect (Tuple3.swirlLeft (3, 4, 5)) |> toEqual (5, 3, 4)
+    test "rotateLeft" (fun () ->
+      expect (Tuple3.rotateLeft (3, 4, 5)) |> toEqual (5, 3, 4)
     );
 
-    test "swirlRight" (fun () ->
-      expect (Tuple3.swirlRight (3, 4, 5)) |> toEqual (4, 5, 3)
+    test "rotateRight" (fun () ->
+      expect (Tuple3.rotateRight (3, 4, 5)) |> toEqual (4, 5, 3)
     );
 
     test "toList" (fun () ->

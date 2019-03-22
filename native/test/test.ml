@@ -67,9 +67,9 @@ let t_Tuple3 () =
 
   AT.check (trio AT.string AT.string AT.string) "mapAll" (Tuple3.mapAll ~f:String.reverse ("was", "stressed", "now")) ("saw", "desserts", "won");
   
-  AT.check (trio AT.int AT.int AT.int) "swirlLeft" (Tuple3.swirlLeft (3, 4, 5)) (5, 3, 4);
+  AT.check (trio AT.int AT.int AT.int) "rotateLeft" (Tuple3.rotateLeft (3, 4, 5)) (5, 3, 4);
   
-  AT.check (trio AT.int AT.int AT.int) "swirlRight" (Tuple3.swirlRight (3, 4, 5)) (4, 5, 3);
+  AT.check (trio AT.int AT.int AT.int) "rotateRight" (Tuple3.rotateRight (3, 4, 5)) (4, 5, 3);
 
   AT.check (AT.list AT.int) "toList" (Tuple3.toList (3, 4, 5)) [3; 4; 5;];
 

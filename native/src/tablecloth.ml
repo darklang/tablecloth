@@ -73,13 +73,13 @@ module Tuple3 = struct
 
   let map_all = mapAll
 
-  let swirlLeft ((a, b, c) : 'a * 'b * 'c) : ('c * 'a * 'b) = (c, a, b)
+  let rotateLeft ((a, b, c) : 'a * 'b * 'c) : ('b * 'c * 'a) = (b, c, a)
 
-  let swirl_left = swirlLeft
+  let rotate_left = rotateLeft
 
-  let swirlRight ((a, b, c) : 'a * 'b * 'c) : ('b * 'c * 'a) = (b, c, a)
+  let rotateRight ((a, b, c) : 'a * 'b * 'c) : ('c * 'b * 'a) = (c, b, a)
 
-  let swirl_right = swirlRight
+  let rotate_right = rotateRight
 
   let toList ((a, b, c) : ('a * 'a * 'a)) : 'a list = [a; b; c]
 

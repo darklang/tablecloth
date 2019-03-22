@@ -296,13 +296,13 @@ module Tuple3 : sig
 
   val map_all : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
 
-  val swirlLeft : ('a * 'b * 'c) -> ('c * 'a * 'b)
+  val rotateLeft : ('a * 'b * 'c) -> ('b * 'c * 'a)
   
-  val swirl_left : ('a * 'b * 'c) -> ('c * 'a * 'b)
+  val rotate_left : ('a * 'b * 'c) -> ('b * 'c * 'a)
 
-  val swirlRight : ('a * 'b * 'c) -> ('b * 'c * 'a)
+  val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
 
-  val swirl_right : ('a * 'b * 'c) -> ('b * 'c * 'a)
+  val rotate_right : ('a * 'b * 'c) -> ('c * 'a * 'b)
   
   val toList : ('a * 'a * 'a) -> 'a list
 
