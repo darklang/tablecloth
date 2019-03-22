@@ -67,8 +67,8 @@ let () =
       expect (Tuple3.third (3, 4, 5)) |> toEqual 5      
     );
 
-    test "head" (fun () -> 
-      expect (Tuple3.head (3, 4, 5)) |> toEqual (3, 4)      
+    test "init" (fun () -> 
+      expect (Tuple3.init (3, 4, 5)) |> toEqual (3, 4)      
     );
 
     test "tail" (fun () -> 

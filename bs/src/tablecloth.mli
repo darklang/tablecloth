@@ -270,7 +270,7 @@ module Tuple3 : sig
   
   val third : ('a * 'b * 'c) -> 'c
 
-  val head : ('a * 'b * 'c) -> ('a * 'b)
+  val init : ('a * 'b * 'c) -> ('a * 'b)
 
   val tail : ('a * 'b * 'c) -> ('b * 'c)
 

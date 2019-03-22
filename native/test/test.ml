@@ -51,7 +51,7 @@ let t_Tuple3 () =
 
   AT.check AT.int "third" (Tuple3.third (3, 4, 5)) 5;      
 
-  AT.check (AT.pair AT.int AT.int) "head" (Tuple3.head (3, 4, 5)) (3, 4);      
+  AT.check (AT.pair AT.int AT.int) "init" (Tuple3.init (3, 4, 5)) (3, 4);      
 
   AT.check (AT.pair AT.int AT.int) "tail" (Tuple3.tail (3, 4, 5)) (4, 5);      
 

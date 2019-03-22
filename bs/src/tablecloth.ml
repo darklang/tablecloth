@@ -466,7 +466,7 @@ module Tuple3 = struct
   
   let third ((_, _, c) : 'a * 'b * 'c) : 'c = c
 
-  let head ((a, b, _) : 'a * 'b * 'c): ('a * 'b) = (a, b)
+  let init ((a, b, _) : 'a * 'b * 'c): ('a * 'b) = (a, b)
 
   let tail ((_, b, c) : 'a * 'b * 'c): ('b * 'c) = (b, c)
 
