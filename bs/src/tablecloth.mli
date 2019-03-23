@@ -254,6 +254,10 @@ module Tuple2 : sig
 
   val swap : ('a * 'b) -> ('b * 'a)
 
+  val curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c 
+
+  val uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c
+
   val toList : ('a * 'a) -> 'a list
 
   val to_list : ('a * 'a) -> 'a list
@@ -299,6 +303,10 @@ module Tuple3 : sig
   val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
 
   val rotate_right : ('a * 'b * 'c) -> ('c * 'a * 'b)
+
+  val curry : (('a * 'b * 'c) -> 'd) -> 'a -> 'b -> 'c -> 'd
+
+  val uncurry : ('a -> 'b -> 'c -> 'd) -> ('a * 'b * 'c) -> 'd
   
   val toList : ('a * 'a * 'a) -> 'a list
 

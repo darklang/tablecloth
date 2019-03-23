@@ -31,6 +31,10 @@ module Tuple2 = struct
 
   let swap (a, b) = (b, a)
 
+  let curry (f : (('a * 'b) -> 'c))  (a : 'a) (b : 'b) : 'c = f (a, b)
+
+  let uncurry (f : ('a -> 'b -> 'c)) ((a, b) : ('a * 'b)) : 'c = f a b
+
   let toList (a, b) = [a; b]
 
   let to_list = toList
@@ -76,6 +80,10 @@ module Tuple3 = struct
   let rotateRight ((a, b, c) : 'a * 'b * 'c) : ('c * 'a * 'b) = (c, a, b)
 
   let rotate_right = rotateRight
+
+  let curry (f : (('a * 'b * 'c) -> 'd)) (a : 'a) (b : 'b)  (c : 'c) : 'd = f (a, b, c)
+
+  let uncurry (f : 'a -> 'b -> 'c -> 'd) ((a, b, c) : ('a * 'b * 'c)) : 'd =  f a b c 
 
   let toList ((a, b, c) : ('a * 'a * 'a)) : 'a list = [a; b; c]
 
