@@ -91,7 +91,7 @@ module List = struct
 
 
   let init (l : 'a list) : 'a list option =
-    match List.rev l with _ :: rest -> Some (List.rev rest) | [] -> None
+    match reverse l with _ :: rest -> Some (reverse rest) | [] -> None
 
 
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
