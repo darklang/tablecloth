@@ -27,7 +27,7 @@ module List = struct
   let mapi = indexedMap
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
-    Belt.List.mapReverse2 a b f |> Belt.List.reverse
+    Belt.List.zipBy a b f
 
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
