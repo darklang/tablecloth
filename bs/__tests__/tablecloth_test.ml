@@ -3,6 +3,12 @@ open Jest
 open Expect
 
 let () =
+  describe "List" (fun () ->
+    test "indexedMap empty" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
+    test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
+    test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+  );
+
   describe "String" (fun () ->
     test "length" (fun () -> expect (String.length "123") |> toEqual 3);
     test "reverse" (fun () -> expect (String.reverse "stressed") |> toEqual "desserts");
