@@ -10,7 +10,9 @@ let () =
   );
 
   describe "String" (fun () ->
+    test "length empty string" (fun () -> expect (String.length "") |> toEqual 0);
     test "length" (fun () -> expect (String.length "123") |> toEqual 3);
+    test "reverse empty string" (fun () -> expect (String.reverse "") |> toEqual "");
     test "reverse" (fun () -> expect (String.reverse "stressed") |> toEqual "desserts");
   );
 
