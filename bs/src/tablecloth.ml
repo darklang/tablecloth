@@ -9,7 +9,7 @@ let identity (value : 'a) : 'a = value
 module List = struct
   let flatten = Belt.List.flatten
 
-  let reverse (l : 'a list) : 'a list = List.rev l
+  let reverse (l : 'a list) : 'a list = Belt.List.reverse l
 
   let sum (l : int list) : int = Belt.List.reduce l 0 ( + )
 
