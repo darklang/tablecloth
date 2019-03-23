@@ -119,8 +119,8 @@ module List = struct
 
 
   let rec findIndexHelp
-      (index : int) ~(predicate : 'a -> bool) (list : 'a list) : int option =
-    match list with
+      (index : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+    match l with
     | [] ->
         None
     | x :: xs ->
@@ -139,13 +139,13 @@ module List = struct
     Belt.List.take l count |. Belt.Option.getWithDefault []
 
 
-  let updateAt ~(index : int) ~(f : 'a -> 'a) (list : 'a list) : 'a list =
+  let updateAt ~(index : int) ~(f : 'a -> 'a) (l : 'a list) : 'a list =
     if index < 0
-    then list
+    then l
     else
-      let head = take ~count:index list in
-      let tail = drop ~count:index list in
-      match tail with x :: xs -> head @ (f x :: xs) | _ -> list
+      let head = take ~count:index l in
+      let tail = drop ~count:index l in
+      match tail with x :: xs -> head @ (f x :: xs) | _ -> l
 
 
   let update_at = updateAt
@@ -232,8 +232,8 @@ module List = struct
 
   let maximum_by = maximumBy
 
-  let maximum (list : 'comparable list) : 'comparable option =
-    match list with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
+  let maximum (l : 'comparable list) : 'comparable option =
+    match l with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
 
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
@@ -272,9 +272,9 @@ module List = struct
 
   let insert_at = insertAt
 
-  let splitWhen ~(f : 'a -> bool) (list : 'a list) : ('a list * 'a list) option
+  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) option
       =
-    findIndex ~f list |. Belt.Option.map (fun index -> splitAt ~index list)
+    findIndex ~f l |. Belt.Option.map (fun index -> splitAt ~index l)
 
 
   let split_when = splitWhen
@@ -389,8 +389,8 @@ module Option = struct
 
   let with_default = withDefault
 
-  let foldrValues (item : 'a option) (list : 'a list) : 'a list =
-    match item with None -> list | Some v -> v :: list
+  let foldrValues (item : 'a option) (l: 'a list) : 'a list =
+    match item with None -> l | Some v -> v :: l
 
 
   let foldr_values = foldrValues
