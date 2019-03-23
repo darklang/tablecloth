@@ -441,9 +441,19 @@ module Tuple2 = struct
 
   let map_second = mapSecond
 
-  let mapBoth ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
+  let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
 
-  let map_both = mapBoth
+  let map_each = mapEach
+  
+  let mapAll ~(f : 'a -> 'b) (a1, a2) = (f a1, f a2)
+
+  let map_all = mapAll
+
+  let swap (a, b) = (b, a)
+
+  let toList (a, b) = [a; b]
+
+  let to_list = toList
 end
 
 module Tuple3 = struct
@@ -451,9 +461,13 @@ module Tuple3 = struct
 
   let first ((a, _, _) : 'a * 'b * 'c) : 'a = a
 
-  let second ((_, b, _) : 'a * 'b *'c) : 'b = b
+  let second ((_, b, _) : 'a * 'b * 'c) : 'b = b
   
   let third ((_, _, c) : 'a * 'b * 'c) : 'c = c
+
+  let init ((a, b, _) : 'a * 'b * 'c): ('a * 'b) = (a, b)
+
+  let tail ((_, b, c) : 'a * 'b * 'c): ('b * 'c) = (b, c)
 
   let mapFirst ~(f : 'a -> 'x) ((a, b, c) : 'a * 'b * 'c) : 'x * 'b *'c = (f a, b, c)
 
@@ -469,7 +483,23 @@ module Tuple3 = struct
 
   let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ~(h : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z = (f a, g b, h c)
 
-  let map_each  = mapEach
+  let map_each = mapEach
+
+  let mapAll ~(f: 'a -> 'b) (a1, a2, a3) = (f a1, f a2, f a3)
+
+  let map_all = mapAll
+
+  let rotateLeft ((a, b, c) : 'a * 'b * 'c) : ('b * 'c * 'a) = (b, c, a)
+
+  let rotate_left = rotateLeft
+
+  let rotateRight ((a, b, c) : 'a * 'b * 'c) : ('c * 'a * 'b) = (c, a, b)
+
+  let rotate_right = rotateRight
+
+  let toList ((a, b, c) : ('a * 'a * 'a)) : 'a list = [a; b; c]
+
+  let to_list = toList
 end
 
 module String = struct
