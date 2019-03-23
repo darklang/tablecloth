@@ -3,8 +3,28 @@ open Jest
 open Expect
 
 let () =
+  describe "List" (fun () ->
+    test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
+    test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
+    test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+
+    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
+    test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
+    test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
+
+    test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
+    test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
+    test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+
+    test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
+    test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
+    test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
+  );
+
   describe "String" (fun () ->
+    test "length empty string" (fun () -> expect (String.length "") |> toEqual 0);
     test "length" (fun () -> expect (String.length "123") |> toEqual 3);
+    test "reverse empty string" (fun () -> expect (String.reverse "") |> toEqual "");
     test "reverse" (fun () -> expect (String.reverse "stressed") |> toEqual "desserts");
   );
 

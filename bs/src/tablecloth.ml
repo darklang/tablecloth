@@ -9,6 +9,8 @@ let identity (value : 'a) : 'a = value
 module List = struct
   let flatten = Belt.List.flatten
 
+  let reverse (l : 'a list) : 'a list = Belt.List.reverse l
+
   let sum (l : int list) : int = Belt.List.reduce l 0 ( + )
 
   let floatSum (l : float list) : float = Belt.List.reduce l 0.0 ( +. )
@@ -18,15 +20,14 @@ module List = struct
   let map ~(f : 'a -> 'b) (l : 'a list) : 'b list = Belt.List.map l f
 
   let indexedMap ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list =
-    List.mapi f l
-
+    Belt.List.mapWithIndex l f
 
   let indexed_map = indexedMap
 
   let mapi = indexedMap
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
-    Belt.List.mapReverse2 a b f |> Belt.List.reverse
+    Belt.List.zipBy a b f
 
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
@@ -43,8 +44,10 @@ module List = struct
   let elem_index = elemIndex
 
   let rec last (l : 'a list) : 'a option =
-    match l with [] -> None | [a] -> Some a | _ :: tail -> last tail
-
+    match l with
+    | [] -> None
+    | [a] -> Some a
+    | _ :: tail -> last tail
 
   let member ~(value : 'a) (l : 'a list) : bool = Belt.List.has l value ( = )
 
@@ -104,7 +107,7 @@ module List = struct
 
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
-    List.partition f l
+    Belt.List.partition l f
 
 
   let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
@@ -148,8 +151,6 @@ module List = struct
   let update_at = updateAt
 
   let length (l : 'a list) : int = List.length l
-
-  let reverse (l : 'a list) : 'a list = List.rev l
 
   let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
     match list with
@@ -299,7 +300,7 @@ module List = struct
 
   let sort_with = sortWith
 
-  let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
+  let iter ~(f : 'a -> unit) (l : 'a list) : unit = Belt.List.forEach l f
 end
 
 module Result = struct
