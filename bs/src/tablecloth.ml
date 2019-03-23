@@ -9,6 +9,8 @@ let identity (value : 'a) : 'a = value
 module List = struct
   let flatten = Belt.List.flatten
 
+  let reverse (l : 'a list) : 'a list = List.rev l
+
   let sum (l : int list) : int = Belt.List.reduce l 0 ( + )
 
   let floatSum (l : float list) : float = Belt.List.reduce l 0.0 ( +. )
@@ -149,8 +151,6 @@ module List = struct
   let update_at = updateAt
 
   let length (l : 'a list) : int = List.length l
-
-  let reverse (l : 'a list) : 'a list = List.rev l
 
   let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
     match list with
