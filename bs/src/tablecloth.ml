@@ -300,7 +300,7 @@ module List = struct
 
   let sort_with = sortWith
 
-  let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
+  let iter ~(f : 'a -> unit) (l : 'a list) : unit = Belt.List.forEach l f
 end
 
 module Result = struct
