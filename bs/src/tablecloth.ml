@@ -105,7 +105,7 @@ module List = struct
 
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
-    List.partition f l
+    Belt.List.partition l f
 
 
   let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
