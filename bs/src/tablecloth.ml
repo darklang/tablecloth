@@ -42,8 +42,10 @@ module List = struct
   let elem_index = elemIndex
 
   let rec last (l : 'a list) : 'a option =
-    match l with [] -> None | [a] -> Some a | _ :: tail -> last tail
-
+    match l with
+    | [] -> None
+    | [a] -> Some a
+    | _ :: tail -> last tail
 
   let member ~(value : 'a) (l : 'a list) : bool = Belt.List.has l value ( = )
 
