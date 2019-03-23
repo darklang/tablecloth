@@ -276,8 +276,7 @@ module List = struct
 
   let insert_at = insertAt
 
-  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) option
-      =
+  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) option =
     findIndex ~f l |. Belt.Option.map (fun index -> splitAt ~index l)
 
 
