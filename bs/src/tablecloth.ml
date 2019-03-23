@@ -152,12 +152,12 @@ module List = struct
 
   let length (l : 'a list) : int = List.length l
 
-  let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
-    match list with
+  let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
+    match l with
     | [] ->
         []
     | x :: xs ->
-        if f x then dropWhile ~f xs else list
+        if f x then dropWhile ~f xs else l
 
 
   let drop_while = dropWhile
