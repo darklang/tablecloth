@@ -16,6 +16,10 @@ let () =
     test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
     test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
 
+    test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
+    test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
+    test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
+
     test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
     test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
     test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
