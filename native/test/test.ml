@@ -1,6 +1,31 @@
 open Tablecloth
 module AT = Alcotest
 
+let t_List () =
+  AT.check (AT.list AT.int) "reverse empty list" (List.reverse []) [];
+  AT.check (AT.list AT.int) "reverse one element" (List.reverse [0]) [0];
+  AT.check (AT.list AT.int) "reverse two elements" (List.reverse [0;1]) [1;0];
+
+  AT.check (AT.list AT.int) "map2 empty lists" (List.map2 ~f:(+) [] []) [];
+  AT.check (AT.list AT.int) "map2 one element" (List.map2 ~f:(+) [1] [1]) [2];
+  AT.check (AT.list AT.int) "map2 two elements" (List.map2 ~f:(+) [1;2] [1;2]) [2;4];
+
+  AT.check (AT.list AT.int) "indexedMap empty list" (List.indexedMap ~f:(fun i _ -> i) []) [];
+  AT.check (AT.list AT.int) "indexedMap one element" (List.indexedMap ~f:(fun i _ -> i) ['a']) [0];
+  AT.check (AT.list AT.int) "indexedMap two elements" (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) [0;1];
+
+  AT.check (AT.list AT.int) "indexedMap empty list" (List.indexedMap ~f:(fun _ n -> n + 1) []) [];
+  AT.check (AT.list AT.int) "indexedMap one element" (List.indexedMap ~f:(fun _ n -> n + 1) [-1]) [0];
+  AT.check (AT.list AT.int) "indexedMap two elements" (List.indexedMap ~f:(fun _ n -> n + 1) [-1; 0]) [0;1];
+
+
+(* TODO
+  AT.check (AT.list AT.int * AT.list AT.int) "partition empty list" (List.partition ~f:(fun x -> x mod 2 = 0) []) ([], []);
+  AT.check (pair AT.list AT.int AT.list AT.int) "partition one element" (List.partition ~f:(fun x -> x mod 2 = 0) [1]) ([], [1]);
+  AT.check (pair AT.list AT.int AT.list AT.int) "partition four elements" (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) ([2;4], [1;3]);*)
+
+  ()
+
 let t_String () =
   AT.check
     AT.bool
@@ -8,8 +33,10 @@ let t_String () =
     true
     (Tablecloth.String.length == String.length) ;
 
+  AT.check AT.int "length" (String.length "") 0;
   AT.check AT.int "length" (String.length "123") 3;
 
+  AT.check AT.string "reverse" (String.reverse "") "";
   AT.check AT.string "reverse" (String.reverse "stressed") "desserts";
 
   ()
@@ -72,7 +99,8 @@ let t_Tuple3 () =
   ()
 
 let suite = [
-  ("String", `Quick, t_String); 
+  ("List", `Quick, t_List);
+  ("String", `Quick, t_String);
   ("Tuple2", `Quick, t_Tuple2);
   ("Tuple3", `Quick, t_Tuple3);
 ]
