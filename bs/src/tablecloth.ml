@@ -38,7 +38,7 @@ module List = struct
     l
     |> Array.of_list
     |> Js.Array.findIndex (( = ) value)
-    |> function -1 -> None | other -> Some other
+    |> function -1 -> None | index -> Some index
 
 
   let elem_index = elemIndex
@@ -92,6 +92,10 @@ module List = struct
 
   let init (l : 'a list) : 'a list option =
     match reverse l with _ :: rest -> Some (reverse rest) | [] -> None
+(*    match reverse l with
+    | [] -> None
+    | [v] -> Some [v]
+    | _ :: rest -> Some (reverse rest)*)
 
 
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
