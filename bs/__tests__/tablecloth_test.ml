@@ -4,7 +4,11 @@ open Expect
 
 let () =
   describe "List" (fun () ->
-    test "indexedMap empty" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
+    test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
+    test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
+    test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+
+    test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
     test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
     test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
 
