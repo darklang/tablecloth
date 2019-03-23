@@ -59,7 +59,7 @@ module List = struct
         (accumulator : 'a list) =
       match remaining with
       | [] ->
-          List.rev accumulator
+          reverse accumulator
       | first :: rest ->
           let computedFirst = f first in
           if Belt.Set.String.has existing computedFirst
@@ -119,7 +119,7 @@ module List = struct
 
 
   let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (List.rev l) init
+    List.fold_right f (reverse l) init
 
 
   let rec findIndexHelp
@@ -176,9 +176,9 @@ module List = struct
     let rec takeWhileMemo memo list =
       match list with
       | [] ->
-          List.rev memo
+          reverse memo
       | x :: xs ->
-          if f x then takeWhileMemo (x :: memo) xs else List.rev memo
+          if f x then takeWhileMemo (x :: memo) xs else reverse memo
     in
     takeWhileMemo [] l
 
