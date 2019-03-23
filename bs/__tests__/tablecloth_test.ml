@@ -17,9 +17,7 @@ let () =
     test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
 
     test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
-    (* This seems kinda wrong, if this is correct, delete the comments, proposed solution in tablecloth.ml *)
     test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
-    (*test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some ['a']));*)
     test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
 
     test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
