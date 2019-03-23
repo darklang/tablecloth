@@ -18,8 +18,7 @@ module List = struct
   let map ~(f : 'a -> 'b) (l : 'a list) : 'b list = Belt.List.map l f
 
   let indexedMap ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list =
-    List.mapi f l
-
+    Belt.List.mapWithIndex l f
 
   let indexed_map = indexedMap
 
