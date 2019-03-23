@@ -55,6 +55,8 @@ end
 module List = struct
   let flatten = Base.List.concat
 
+  let reverse (l : 'a list) : 'a list = List.rev l
+
   let sum (l : int list) : int =
     Base.List.reduce l ~f:( + ) |> Base.Option.value ~default:0
 
@@ -192,8 +194,6 @@ module List = struct
   let update_at = updateAt
 
   let length (l : 'a list) : int = List.length l
-
-  let reverse (l : 'a list) : 'a list = List.rev l
 
   let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
     match list with
