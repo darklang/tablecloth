@@ -25,6 +25,7 @@ let () =
     test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
     test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
   );
+
   describe "String" (fun () ->
     test "length empty string" (fun () -> expect (String.length "") |> toEqual 0);
     test "length" (fun () -> expect (String.length "123") |> toEqual 3);
@@ -161,6 +162,8 @@ let () =
     test "reverse one element" (fun () -> expect (Array.reverse [|0|]) |> toEqual [|0|]);
     test "reverse two elements" (fun () -> expect (Array.reverse [|0;1|]) |> toEqual [|1;0|]);
 
+  );
+
 (*    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
     test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
     test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
@@ -176,4 +179,3 @@ let () =
     test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
     test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
     test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));*)
-  );
