@@ -8,7 +8,8 @@ let is_empty = isEmpty
 let length (a : 'a array) : int = BA.length a
 
 let reverse (a : 'a array) : 'a array = BA.reverse a
-(*let reverseInPlace (a : 'a array) : 'a array = BA.reverseInPlace a*)
+
+let reverseInPlace (a : 'a array) = BA.reverseInPlace a
 
 (*Creation*)
 let fromList (l: 'a list) : 'a array = Belt.List.toArray l
