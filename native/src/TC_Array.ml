@@ -70,6 +70,10 @@ let init (a : 'a array) : 'a array option =
   | _ -> Some (filteri a ~f:(fun _ i -> i < (l - 1)) )
 
 
+let member ~(value : 'a) (a : 'a array) : bool = BA.exists a ~f:(fun x -> x = value)
+
+let any ~(f : 'a -> bool) (a : 'a array) : bool = BA.exists ~f a
+
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.iter a ~f
 
 
@@ -95,8 +99,6 @@ match l with
 let findIndex ~(f : 'a -> bool) (a : 'a array) : int option = findIndexHelp 0 ~predicate:f l
 
 let find_index = findIndex
-
-let member ~(value : 'a) (a : 'a array) : bool = BA.mem a value ~equal:( = )
 
 
 let getBy ~(f : 'a -> bool) (a : 'a array) : 'a option = BA.getBy l f
@@ -132,8 +134,6 @@ let find ~(f : 'a -> bool) (a : 'a array) : 'a option = BA.getBy l f
 let getAt ~(index : int) (a : 'a array) : 'a option = BA.get l index
 
 let get_at = getAt
-
-let any ~(f : 'a -> bool) (a : 'a array) : bool = Array.exists f l
 
 let drop ~(count : int) (a : 'a array) : 'a array =
 BA.drop l count |. Belt.Option.getWithDefault []

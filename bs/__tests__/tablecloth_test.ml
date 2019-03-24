@@ -165,6 +165,12 @@ let () =
     test "init empty array" (fun () -> expect (Array.init [||]) |> toEqual None);
     test "init one element" (fun () -> expect (Array.init [|'a'|]) |> toEqual (Some [||]));
     test "init two elements" (fun () -> expect (Array.init [|'a';'b'|]) |> toEqual (Some [|'a'|]));
+
+    test "member not in array" (fun () -> expect (Array.member [||] ~value:0) |> toEqual false);
+    test "member in array" (fun () -> expect (Array.member [|'a'|] ~value:'a') |> toEqual true);
+
+    test "any false" (fun () -> expect (Array.any [||] ~f:(fun e -> e = 0)) |> toEqual false);
+    test "any true" (fun () -> expect (Array.any [|0|] ~f:(fun e -> e = 0)) |> toEqual true);
   );
 
 (*    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
