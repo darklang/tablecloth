@@ -111,7 +111,8 @@ module List = struct
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
 
-(*using flip to get to the same function signature may no be ideal*)
+  (*using flip to get to the same function signature may no be ideal*)
+  (* but without it other functions break *)
   let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
     Belt.List.reduce l init (flip f)
 
