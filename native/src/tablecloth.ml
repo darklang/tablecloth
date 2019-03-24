@@ -221,7 +221,7 @@ module List = struct
 
   let length (l : 'a list) : int = List.length l
 
-  let reverse (l : 'a list) : 'a list = List.rev l
+  let reverse (l : 'a list) : 'a list = Base.List.rev l
 
   let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
     match list with
