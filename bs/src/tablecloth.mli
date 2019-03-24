@@ -57,16 +57,15 @@ module List : sig
 
   val init : 'a list -> 'a list option
 
-  val filterMap : f:('a -> 'b option) -> 'a list -> 'b list
-
-  val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
-
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
   (* argument order of f is flipped in Base version *)
   val filteri : f:('a -> int -> bool) -> 'a list -> 'a list
   val indexed_filter : f:('a -> int -> bool) -> 'a list -> 'a list
   val indexedFilter : f:('a -> int -> bool) -> 'a list -> 'a list
+
+  val filterMap : f:('a -> 'b option) -> 'a list -> 'b list
+  val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
 
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 

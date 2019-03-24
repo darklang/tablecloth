@@ -169,18 +169,15 @@ module List = struct
     match List.rev l with _ :: rest -> Some (List.rev rest) | [] -> None
 
 
-  let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
-    Base.List.filter_map l ~f
-
-
-  let filter_map = filterMap
-
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Base.List.filter l ~f
 
   (* argument order of f is flipped in Belt version *)
   let filteri ~(f: int -> 'a -> bool) (l : 'a list) : 'a list = Base.List.filteri l ~f
   let indexed_filter = filteri
   let indexedFilter = filteri
+
+  let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list = Base.List.filter_map l ~f
+  let filter_map = filterMap
 
   let concat (ls : 'a list list) : 'a list = Base.List.concat ls
 

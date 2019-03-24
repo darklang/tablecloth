@@ -55,16 +55,15 @@ module List : sig
 
   val init : 'a list -> 'a list option
 
-  val filterMap : f:('a -> 'b option) -> 'a list -> 'b list
-
-  val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
-
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
   (* argument order of f is flipped in Belt version *)
   val filteri : f:(int -> 'a -> bool) -> 'a list -> 'a list
   val indexed_filter  : f:(int -> 'a -> bool) -> 'a list -> 'a list
   val indexedFilter  : f:(int -> 'a -> bool) -> 'a list -> 'a list
+
+  val filterMap : f:('a -> 'b option) -> 'a list -> 'b list
+  val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
 
   val concat : 'a list list -> 'a list
 

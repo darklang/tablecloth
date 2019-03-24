@@ -99,18 +99,15 @@ module List = struct
     | _ :: rest -> Some (reverse rest)
 
 
-  let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
-    Belt.List.keepMap l f
-
-
-  let filter_map = filterMap
-
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Belt.List.keep l f
 
   (* argument order of f is flipped in Base version *)
   let filteri ~(f : 'a -> int -> bool) (l : 'a list) : 'a list = Belt.List.keepWithIndex l f
   let indexed_filter = filteri
   let indexedFilter = filteri
+
+  let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list = Belt.List.keepMap l f
+  let filter_map = filterMap
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
