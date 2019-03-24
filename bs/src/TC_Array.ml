@@ -43,11 +43,9 @@ let append (a : 'a array) (a' : 'a array)  : 'a array = BA.concat a a'
 (*Higher Order Functions*)
 let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = BA.map a f
 
-let indexedMap ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = BA.mapWithIndex a f
-
-let indexed_map = indexedMap
-
-let mapi = indexedMap
+let mapi  ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = BA.mapWithIndex a f
+let indexed_map = mapi
+let indexedMap = mapi
 
 let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = BA.zipBy a b f
 
