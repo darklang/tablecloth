@@ -151,6 +151,7 @@ let () =
     test "head of empty array" (fun () -> expect (Array.head [||]) |> toEqual None);
 
     test "flatten empty arrays" (fun () -> expect (Array.flatten [| [||]; [||]; [||] |]) |> toEqual [||]);
+    test "flatten arrays one empty" (fun () -> expect (Array.flatten [|[|1;2;3|]; [||]|]) |> toEqual [|1;2;3|]);
     test "flatten arrays" (fun () -> expect (Array.flatten [| [|1;2;3|]; [|4;5;6|]; [|7;8|] |]) |> toEqual [|1;2;3;4;5;6;7;8|]);
     test "concat arrays" (fun () -> expect (Array.concat [| [|1;2;3|]; [|4;5|] |]) |> toEqual [|1;2;3;4;5|]);
     test "concat arrays one empty" (fun () -> expect (Array.concat [|[|1;2;3|]; [||]|]) |> toEqual [|1;2;3|]);
