@@ -63,10 +63,10 @@ let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.filter_map a
 let filter_map = filterMap
 
 let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-  Base.Array.fold a ~f ~init
+  BA.fold ~f ~init a
 
 let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-    Base.Array.fold_right a ~f ~init
+  BA.fold_right ~f ~init a
 
 let init (a : 'a array) : 'a array option =
   let l = length a in
