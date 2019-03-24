@@ -111,13 +111,12 @@ module List = struct
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
 
+(*using flip to get to the same function signature may no be ideal*)
+  let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
+    Belt.List.reduce l init (flip f)
 
   let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f l init
-
-
-  let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (reverse l) init
+    Belt.List.reduceReverse l init (flip f)
 
 
   let rec findIndexHelp

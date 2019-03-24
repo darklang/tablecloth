@@ -1,5 +1,7 @@
 module BA = Belt.Array
 
+let flip f x y = f y x
+
 (* Helpers *)
 let length (a : 'a array) : int = BA.length a
 
@@ -74,11 +76,12 @@ let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
 (*Still need to be ported to native*)
 
+(*using flip to get to the same function signature may no be ideal*)
 let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-  BA.reduce a init f
+  BA.reduce a init (flip f)
 
 let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-  reverse a |> foldl ~init ~f
+  BA.reduceReverse a init (flip f)
 
 let elemIndex ~(value : 'a) (a : 'a array) : int option =
   a
