@@ -6,6 +6,8 @@ let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 
 let identity (value : 'a) : 'a = value
 
+let flip f x y = f y x
+
 module List = struct
   let flatten = Belt.List.flatten
   (* These do the same via different means, benchmark and decide for one way? for me concat means append *)
