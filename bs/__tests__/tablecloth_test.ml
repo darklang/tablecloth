@@ -1,6 +1,7 @@
 open Tablecloth
 open Jest
 open Expect
+module Array = TC_Array
 
 let () =
   describe "List" (fun () ->
@@ -24,7 +25,6 @@ let () =
     test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
     test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
   );
-
   describe "String" (fun () ->
     test "length empty string" (fun () -> expect (String.length "") |> toEqual 0);
     test "length" (fun () -> expect (String.length "123") |> toEqual 3);
@@ -126,4 +126,53 @@ let () =
     test "toList" (fun () ->
       expect (Tuple3.toList (3, 4, 5)) |> toEqual [3; 4; 5]
     );
+  );
+
+  describe "Array" (fun () ->
+    test "create empty array" (fun () -> expect (Array.empty) |> toEqual [||]);
+    test "length of empty array" (fun () -> expect Array.(empty |> length) |> toEqual 0);
+    test "create empty array with initialize" (fun () -> expect (Array.initialize ~n:0 ~f:identity) |> toEqual [||]);
+    test "check if negative length gives an empty array" (fun () -> expect (Array.initialize ~n:(-1) ~f:identity) |> toEqual [||]);
+    test "create array with initialize" (fun () -> expect (Array.initialize ~n:3 ~f:identity) |> toEqual [|0;1;2|]);
+    test "create empty array with repeat" (fun () -> expect (0 |. Array.repeat ~n:0) |> toEqual [||]);
+    test "check if negative length gives an empty array" (fun () -> expect (Array.repeat ~n:(-1) 0) |> toEqual [||]);
+    test "create array of ints with repeat & fastpipe" (fun () -> expect (0 |. Array.repeat ~n:3) |> toEqual [|0;0;0|]);
+    test "create array of ints with repeat & apply" (fun () -> expect (0 |> Array.repeat ~n:3) |> toEqual [|0;0;0|]);
+    test "create array strings with repeat" (fun () -> expect ("cat" |> Array.repeat ~n:3) |> toEqual [|"cat";"cat";"cat"|]);
+
+    test "last element of empty array" (fun () -> expect (Array.last [||]) |> toEqual None);
+    test "last element of array" (fun () -> expect (Array.last [|0;1|]) |> toEqual (Some 1));
+    test "element index" (fun () -> expect (Array.elem_index ~value:1 [|0;1|]) |> toEqual (Some 1));
+    test "element index of value not inside array" (fun () -> expect (Array.elem_index ~value:2 [|0;1|]) |> toEqual None);
+    test "element index empty array" (fun () -> expect (Array.elem_index ~value:2 [||]) |> toEqual None);
+    test "member there" (fun () -> expect (Array.member ~value:1 [|0;1|]) |> toEqual true);
+    test "member missing" (fun () -> expect (Array.member ~value:2 [|0;1|]) |> toEqual false);
+    test "head of array" (fun () -> expect (Array.head [|0;1|]) |> toEqual (Some 0));
+    test "head of empty array" (fun () -> expect (Array.head [||]) |> toEqual None);
+
+    test "flatten empty arrays" (fun () -> expect (Array.flatten [| [||]; [||]; [||] |]) |> toEqual [||]);
+    test "flatten arrays" (fun () -> expect (Array.flatten [| [|1;2;3|]; [|4;5;6|]; [|7;8|] |]) |> toEqual [|1;2;3;4;5;6;7;8|]);
+    test "concat arrays" (fun () -> expect (Array.concat [|1;2;3|] [|4;5|]) |> toEqual [|1;2;3;4;5|]);
+    test "concat arrays one empty" (fun () -> expect (Array.concat [|1;2;3|] [||]) |> toEqual [|1;2;3|]);
+    test "concat empty arrays" (fun () -> expect (Array.concat [||] [||]) |> toEqual [||]);
+
+    test "reverse empty array" (fun () -> expect (Array.reverse [||]) |> toEqual [||]);
+    test "reverse one element" (fun () -> expect (Array.reverse [|0|]) |> toEqual [|0|]);
+    test "reverse two elements" (fun () -> expect (Array.reverse [|0;1|]) |> toEqual [|1;0|]);
+
+(*    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
+    test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
+    test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
+
+    test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
+    test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
+    test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+
+    test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
+    test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
+    test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
+
+    test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
+    test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
+    test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));*)
   );
