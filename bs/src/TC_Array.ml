@@ -34,15 +34,6 @@ let head (a : 'a array) : 'a option = BA.get a 0
 
 let last (a : 'a array) : 'a option = BA.get a ((length a) - 1)
 
-let elemIndex ~(value : 'a) (a : 'a array) : int option =
-  a
-  |> Js.Array.findIndex (( = ) value)
-  |> function -1 -> None | index -> Some index
-
-let elem_index = elemIndex
-
-let member ~(value : 'a) (a : 'a array) : bool = BA.some a (( = ) value )
-
 let flatten (ars : 'a array array) : 'a array = BA.concatMany ars
 (* TODO decide for one? for me concat means append *)
 let concat = flatten
@@ -66,6 +57,15 @@ let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.keepMap a f
 let filter_map = filterMap
 
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
+
+let elemIndex ~(value : 'a) (a : 'a array) : int option =
+  a
+  |> Js.Array.findIndex (( = ) value)
+  |> function -1 -> None | index -> Some index
+
+let elem_index = elemIndex
+
+let member ~(value : 'a) (a : 'a array) : bool = BA.some a (( = ) value )
 
 
 (*let rec findIndexHelp
