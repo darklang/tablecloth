@@ -38,7 +38,7 @@ let head (a : 'a array) : 'a option =
 let last (a : 'a array) : 'a option =
     (fun () -> BA.last a) |> Base.Option.try_with
 
-let concat  (al : 'a array list) : 'a array = BA.concat ars
+let concat  (al : 'a array list) : 'a array = BA.concat al
 
 let append (a : 'a array) (a' : 'a array)  : 'a array = BA.append a a'
 
