@@ -24,9 +24,9 @@ let initialize ~(n: int) ~(f: int -> 'a): 'a array = BA.makeBy n f
 (*repeat n e creates an array with a given length n, filled with element e. *)
 let repeat  ~(n: int) (e: 'a): 'a array = BA.make n e
 
-let sum (a : int array) : int = Belt.Array.reduce a 0 ( + )
+let sum (a : int array) : int = BA.reduce a 0 ( + )
 
-let floatSum (a : float array) : float = Belt.Array.reduce a 0.0 ( +. )
+let floatSum (a : float array) : float = BA.reduce a 0.0 ( +. )
 
 let float_sum = floatSum
 
@@ -53,33 +53,33 @@ let findIndex ~(f : 'a -> bool) (a : 'a array) : int option = findIndexHelp 0 ~p
 
 let find_index = findIndex
 *)
-let member ~(value : 'a) (a : 'a array) : bool = Belt.Array.some a (( = ) value )
+let member ~(value : 'a) (a : 'a array) : bool = BA.some a (( = ) value )
 
-let head (a : 'a array) : 'a option = Belt.Array.get a 0
+let head (a : 'a array) : 'a option = BA.get a 0
 
-let flatten (ars : 'a array array) : 'a array = Belt.Array.concatMany ars
+let flatten (ars : 'a array array) : 'a array = BA.concatMany ars
 (* TODO decide for one? for me concat means append *)
 let concat = flatten
 
-let append (a : 'a array) (a' : 'a array)  : 'a array = Belt.Array.concat a a'
+let append (a : 'a array) (a' : 'a array)  : 'a array = BA.concat a a'
 
 (*Higher Order Functions*)
-let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.map a f
+let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = BA.map a f
 
-let indexedMap ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.mapWithIndex a f
+let indexedMap ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = BA.mapWithIndex a f
 
 let indexed_map = indexedMap
 
 let mapi = indexedMap
 
-let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = Belt.Array.zipBy a b f
+let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = BA.zipBy a b f
 
-let iter ~(f : 'a -> unit) (a : 'a array) : unit = Belt.Array.forEach a f
+let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
 (*
 
 
-let getBy ~(f : 'a -> bool) (a : 'a array) : 'a option = Belt.Array.getBy l f
+let getBy ~(f : 'a -> bool) (a : 'a array) : 'a option = BA.getBy l f
 
 let get_by = getBy
 
@@ -109,16 +109,16 @@ uniqueHelp f Belt.Set.String.empty l []
 
 let unique_by = uniqueBy*)
 
-let find ~(f : 'a -> bool) (a : 'a array) : 'a option = Belt.Array.getBy l f
+let find ~(f : 'a -> bool) (a : 'a array) : 'a option = BA.getBy l f
 
-let getAt ~(index : int) (a : 'a array) : 'a option = Belt.Array.get l index
+let getAt ~(index : int) (a : 'a array) : 'a option = BA.get l index
 
 let get_at = getAt
 
 let any ~(f : 'a -> bool) (a : 'a array) : bool = Array.exists f l
 
 let drop ~(count : int) (a : 'a array) : 'a array =
-Belt.Array.drop l count |. Belt.Option.getWithDefault []
+BA.drop l count |. Belt.Option.getWithDefault []
 
 
 let init (a : 'a array) : 'a array option =
@@ -128,15 +128,15 @@ match reverse l with
 
 
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array =
-Belt.Array.keepMap l f
+BA.keepMap l f
 
 let filter_map = filterMap
 
-let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = Belt.Array.keep l f
+let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = BA.keep l f
 
 
 let partition ~(f : 'a -> bool) (a : 'a array) : 'a array * 'a array =
-Belt.Array.partition l f
+BA.partition l f
 
 
 let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
@@ -149,7 +149,7 @@ Array.fold_right f (reverse l) init
 
 
 let take ~(count : int) (a : 'a array) : 'a array =
-Belt.Array.take l count |. Belt.Option.getWithDefault []
+BA.take l count |. Belt.Option.getWithDefault []
 
 
 let updateAt ~(index : int) ~(f : 'a -> 'a) (a : 'a array) : 'a array =
@@ -188,7 +188,7 @@ takeWhileMemo [] l
 
 let take_while = takeWhile
 
-let all ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.every l f
+let all ~(f : 'a -> bool) (a : 'a array) : bool = BA.every l f
 
 let tail (a : 'a array) : 'a array option =
 match l with [] -> None | _ :: rest -> Some rest
@@ -242,7 +242,7 @@ match l with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
 
 
 let sortBy ~(f : 'a -> 'b) (a : 'a array) : 'a array =
-Belt.Array.sort l (fun a b ->
+BA.sort l (fun a b ->
     let a' = f a in
     let b' = f b in
     if a' = b' then 0 else if a' < b' then -1 else 1 )
@@ -299,7 +299,7 @@ step (n - 1) []
 
 
 let sortWith (f : 'a -> 'a -> int) (a : 'a array) : 'a array =
-Belt.Array.sort l f
+BA.sort l f
 
 
 let sort_with = sortWith
