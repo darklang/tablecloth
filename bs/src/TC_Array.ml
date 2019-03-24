@@ -40,20 +40,6 @@ let elemIndex ~(value : 'a) (a : 'a array) : int option =
 
 let elem_index = elemIndex
 
-(*let rec findIndexHelp
-  (index : int) ~(predicate : 'a -> bool) (a : 'a array) : int option =
-match l with
-| [] ->
-    None
-| x :: xs ->
-    if predicate x
-    then Some index
-    else findIndexHelp (index + 1) ~predicate xs
-
-let findIndex ~(f : 'a -> bool) (a : 'a array) : int option = findIndexHelp 0 ~predicate:f l
-
-let find_index = findIndex
-*)
 let member ~(value : 'a) (a : 'a array) : bool = BA.some a (( = ) value )
 
 let head (a : 'a array) : 'a option = BA.get a 0
@@ -77,14 +63,24 @@ let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = BA.zip
 
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
-(*
 
+(*let rec findIndexHelp
+  (index : int) ~(predicate : 'a -> bool) (a : 'a array) : int option =
+match l with
+| [] ->
+    None
+| x :: xs ->
+    if predicate x
+    then Some index
+    else findIndexHelp (index + 1) ~predicate xs
+
+let findIndex ~(f : 'a -> bool) (a : 'a array) : int option = findIndexHelp 0 ~predicate:f l
+
+let find_index = findIndex
 
 let getBy ~(f : 'a -> bool) (a : 'a array) : 'a option = BA.getBy l f
 
 let get_by = getBy
-
-
 
 (*let uniqueBy ~(f : 'a -> string) (a : 'a array) : 'a array =
 let rec uniqueHelp
