@@ -79,6 +79,8 @@ let elemIndex ~(value : 'a) (a : 'a array) : int option =
 
 let elem_index = elemIndex
 
+let partition ~(f : 'a -> bool) (a : 'a array) : 'a array * 'a array = BA.partition a f
+
 
 (*let rec findIndexHelp
   (index : int) ~(predicate : 'a -> bool) (a : 'a array) : int option =
@@ -133,9 +135,6 @@ BA.drop l count |. Belt.Option.getWithDefault []
 
 
 
-
-let partition ~(f : 'a -> bool) (a : 'a array) : 'a array * 'a array =
-BA.partition l f
 
 
 let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
