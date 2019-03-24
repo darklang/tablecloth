@@ -72,6 +72,7 @@ let any ~(f : 'a -> bool) (a : 'a array) : bool = BA.some a f
 
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
+(*Still need to be ported to native*)
 let elemIndex ~(value : 'a) (a : 'a array) : int option =
   a
   |> Js.Array.findIndex (( = ) value)
@@ -80,6 +81,7 @@ let elemIndex ~(value : 'a) (a : 'a array) : int option =
 let elem_index = elemIndex
 
 let partition ~(f : 'a -> bool) (a : 'a array) : 'a array * 'a array = BA.partition a f
+(*Still need to be ported to native*)
 
 
 (*let rec findIndexHelp
