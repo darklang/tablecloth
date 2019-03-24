@@ -9,6 +9,8 @@ val identity : 'a -> 'a
 module List : sig
   val flatten : 'a list list -> 'a list
 
+  val concat : 'a list list -> 'a list
+
   val sum : int list -> int
 
   val floatSum : float list -> float
@@ -60,8 +62,6 @@ module List : sig
   val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
 
   val filter : f:('a -> bool) -> 'a list -> 'a list
-
-  val concat : 'a list list -> 'a list
 
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 

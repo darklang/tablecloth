@@ -56,8 +56,10 @@ let member ~(value : 'a) (a : 'a array) : bool = Belt.Array.some a (( = ) value 
 let head (a : 'a array) : 'a option = Belt.Array.get a 0
 
 let flatten (ars : 'a array array) : 'a array = Belt.Array.concatMany ars
+(* TODO decide for one? for me concat means append *)
+let concat = flatten
 
-let concat (a : 'a array) (a' : 'a array)  : 'a array = Belt.Array.concat a a'
+let append (a : 'a array) (a' : 'a array)  : 'a array = Belt.Array.concat a a'
 
 (*Higher Order Functions*)
 let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.map a f

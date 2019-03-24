@@ -8,6 +8,9 @@ let identity (value : 'a) : 'a = value
 
 module List = struct
   let flatten = Belt.List.flatten
+  (* These do the same via different means, benchmark and decide for one way? for me concat means append *)
+  let concat (ls : 'a list list) : 'a list =
+    ls |> Belt.List.toArray |> Belt.List.concatMany
 
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
 
@@ -103,10 +106,6 @@ module List = struct
   let filter_map = filterMap
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Belt.List.keep l f
-
-  let concat (ls : 'a list list) : 'a list =
-    ls |> Belt.List.toArray |> Belt.List.concatMany
-
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
