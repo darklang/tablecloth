@@ -152,9 +152,9 @@ let () =
 
     test "flatten empty arrays" (fun () -> expect (Array.flatten [| [||]; [||]; [||] |]) |> toEqual [||]);
     test "flatten arrays" (fun () -> expect (Array.flatten [| [|1;2;3|]; [|4;5;6|]; [|7;8|] |]) |> toEqual [|1;2;3;4;5;6;7;8|]);
-    test "concat arrays" (fun () -> expect (Array.concat [|1;2;3|] [|4;5|]) |> toEqual [|1;2;3;4;5|]);
-    test "concat arrays one empty" (fun () -> expect (Array.concat [|1;2;3|] [||]) |> toEqual [|1;2;3|]);
-    test "concat empty arrays" (fun () -> expect (Array.concat [||] [||]) |> toEqual [||]);
+    test "concat arrays" (fun () -> expect (Array.concat [| [|1;2;3|]; [|4;5|] |]) |> toEqual [|1;2;3;4;5|]);
+    test "concat arrays one empty" (fun () -> expect (Array.concat [|[|1;2;3|]; [||]|]) |> toEqual [|1;2;3|]);
+    test "concat empty arrays" (fun () -> expect (Array.concat [|[||];[||]|]) |> toEqual [||]);
 
     test "reverse empty array" (fun () -> expect (Array.reverse [||]) |> toEqual [||]);
     test "reverse one element" (fun () -> expect (Array.reverse [|0|]) |> toEqual [|0|]);
