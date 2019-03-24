@@ -24,6 +24,13 @@ let () =
     test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
     test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
     test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
+
+    test "foldr" (fun () -> expect (List.foldr ["a";"b";"c";"d"] ~f:(^) ~init:"") |> toEqual "abcd");
+    test "foldl" (fun () -> expect (List.foldl ["a";"b";"c";"d"] ~f:(^) ~init:"") |> toEqual "dcba");
+    test "foldl empty list" (fun () -> expect (List.foldl [] ~f:(^) ~init:"") |> toEqual "");
+    test "foldr empty list" (fun () -> expect (List.foldr ~f:(fun x acc -> x :: acc) ~init:[] []) |> toEqual []);
+    test "foldl one element" (fun () -> expect (List.foldl ~f:(+) ~init:1 [1]) |> toEqual 2);
+    test "foldr one element" (fun () -> expect (List.foldr ~f:(fun x acc -> x :: acc) ~init:[] [1]) |> toEqual [1]);
   );
 
   describe "String" (fun () ->
