@@ -67,7 +67,7 @@ let init (a : 'a array) : 'a array option =
   match l with
   | 0 -> None
   | 1 -> Some [||]
-  | _ -> Some (filteri a ~f:(fun _ i -> i < (l - 1)) )
+  | _ -> Some (filteri a ~f:(fun i _ -> i < (l - 1)) )
 
 
 let member ~(value : 'a) (a : 'a array) : bool = BA.exists a ~f:(fun x -> x = value)
