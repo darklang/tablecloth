@@ -284,12 +284,6 @@ match xs with
     let spersed = foldr ~f:step ~init:[] tl in
     hd :: spersed
 
-
-let initialize (n : int) (f : int -> 'a) : 'a array =
-let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
-step (n - 1) []
-
-
 let sortWith (f : 'a -> 'a -> int) (a : 'a array) : 'a array =
 BA.sort l f
 
