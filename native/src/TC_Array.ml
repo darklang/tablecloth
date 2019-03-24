@@ -62,6 +62,12 @@ let indexedFilter = filteri
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.filter_map a ~f
 let filter_map = filterMap
 
+let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
+  Base.Array.fold a ~f ~init
+
+let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
+    Base.Array.fold_right a ~f ~init
+
 let init (a : 'a array) : 'a array option =
   let l = length a in
   match l with
@@ -148,14 +154,6 @@ match reverse l with
 
 let partition ~(f : 'a -> bool) (a : 'a array) : 'a array * 'a array =
 BA.partition l f
-
-
-let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-Array.fold_right f l init
-
-
-let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-Array.fold_right f (reverse l) init
 
 
 

@@ -73,6 +73,13 @@ let any ~(f : 'a -> bool) (a : 'a array) : bool = BA.some a f
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
 (*Still need to be ported to native*)
+
+let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
+  BA.reduce a init f
+
+let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
+  reverse a |> foldl ~init ~f
+
 let elemIndex ~(value : 'a) (a : 'a array) : int option =
   a
   |> Js.Array.findIndex (( = ) value)
@@ -138,13 +145,6 @@ BA.drop l count |. Belt.Option.getWithDefault []
 
 
 
-
-let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-Array.fold_right f l init
-
-
-let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-Array.fold_right f (reverse l) init
 
 
 
