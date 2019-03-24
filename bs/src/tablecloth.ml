@@ -22,12 +22,9 @@ module List = struct
 
   let map ~(f : 'a -> 'b) (l : 'a list) : 'b list = Belt.List.map l f
 
-  let indexedMap ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list =
-    Belt.List.mapWithIndex l f
-
-  let indexed_map = indexedMap
-
-  let mapi = indexedMap
+  let mapi ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list = Belt.List.mapWithIndex l f
+  let indexed_map = mapi
+  let indexedMap = mapi
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Belt.List.zipBy a b f

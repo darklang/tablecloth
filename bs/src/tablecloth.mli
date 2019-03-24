@@ -19,11 +19,9 @@ module List : sig
 
   val map : f:('a -> 'b) -> 'a list -> 'b list
 
-  val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list
-
-  val indexed_map : f:(int -> 'a -> 'b) -> 'a list -> 'b list
-
   val mapi : f:(int -> 'a -> 'b) -> 'a list -> 'b list
+  val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list
+  val indexed_map : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 
   val map2 : f:('a -> 'b -> 'c) -> 'a list -> 'b list -> 'c list
 
