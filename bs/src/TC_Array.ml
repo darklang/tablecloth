@@ -13,6 +13,8 @@ let reverse (a : 'a array) : 'a array = BA.reverse a
 (*Creation*)
 let fromList (l: 'a list) : 'a array = Belt.List.toArray l
 let from_list = fromList
+let toList (a: 'a array) : 'a list = Belt.List.fromArray a
+let to_list = toList
 
 let empty:'a array = [||]
 
