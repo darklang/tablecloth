@@ -180,8 +180,9 @@ let () =
     test "any true" (fun () -> expect (Array.any [|0|] ~f:(fun e -> e = 0)) |> toEqual true);
 
     test "fold left empty array" (fun () -> expect (Array.foldl [||] ~f:(^) ~init:"") |> toEqual "");
-    test "fold left" (fun () -> expect (Array.foldl [|"a";"b";"c";"d"|] ~f:(^) ~init:"") |> toEqual "abcd");
-    test "fold right" (fun () -> expect (Array.foldr [|"a";"b";"c";"d"|] ~f:(^) ~init:"") |> toEqual "dcba");
+    test "fold right empty array" (fun () -> expect (Array.foldr [||] ~f:(^) ~init:"") |> toEqual "");
+    test "fold right" (fun () -> expect (Array.foldr [|"a";"b";"c"|] ~f:(^) ~init:"") |> toEqual "abc");
+    test "fold left" (fun () -> expect (Array.foldl [|"a";"b";"c"|] ~f:(^) ~init:"") |> toEqual "cba");
   );
 
 (*    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
