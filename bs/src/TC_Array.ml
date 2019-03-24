@@ -59,6 +59,13 @@ let indexedFilter = indexed_filter
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.keepMap a f
 let filter_map = filterMap
 
+let init (a : 'a array) : 'a array option =
+  let l = length a in
+  match l with
+  | 0 -> None
+  | 1 -> Some [||]
+  | _ -> Some (filteri a ~f:(fun _ i -> i < (l - 1)) )
+
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
 let elemIndex ~(value : 'a) (a : 'a array) : int option =
@@ -69,13 +76,6 @@ let elemIndex ~(value : 'a) (a : 'a array) : int option =
 let elem_index = elemIndex
 
 let member ~(value : 'a) (a : 'a array) : bool = BA.some a (( = ) value )
-
-let init (a : 'a array) : 'a array option =
-  let l = length a in
-  match l with
-  | 0 -> None
-  | 1 -> Some [||]
-  | _ -> Some (filteri a ~f:(fun _ i -> i < (l - 1)) )
 
 
 (*let rec findIndexHelp
