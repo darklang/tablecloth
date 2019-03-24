@@ -51,6 +51,11 @@ let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = BA.zip
 
 let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = BA.keep a f
 
+(* argument order of f is flipped in Base version *)
+let filteri ~(f : 'a -> int -> bool) (a : 'a array) : 'a array = BA.keepWithIndex a f
+let indexed_filter = filteri
+let indexedFilter = indexed_filter
+
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.keepMap a f
 let filter_map = filterMap
 
@@ -119,11 +124,6 @@ let any ~(f : 'a -> bool) (a : 'a array) : bool = Array.exists f l
 let drop ~(count : int) (a : 'a array) : 'a array =
 BA.drop l count |. Belt.Option.getWithDefault []
 
-
-let init (a : 'a array) : 'a array option =
-match reverse l with
-| [] -> None
-| _ :: rest -> Some (reverse rest)
 
 
 

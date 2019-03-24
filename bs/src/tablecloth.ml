@@ -107,6 +107,11 @@ module List = struct
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Belt.List.keep l f
 
+  (* argument order of f is flipped in Base version *)
+  let filteri ~(f : 'a -> int -> bool) (l : 'a list) : 'a list = Belt.List.keepWithIndex l f
+  let indexed_filter = filteri
+  let indexedFilter = filteri
+
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
 

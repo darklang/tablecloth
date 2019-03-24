@@ -61,6 +61,11 @@ module List : sig
 
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
+  (* argument order of f is flipped in Belt version *)
+  val filteri : f:(int -> 'a -> bool) -> 'a list -> 'a list
+  val indexed_filter  : f:(int -> 'a -> bool) -> 'a list -> 'a list
+  val indexedFilter  : f:(int -> 'a -> bool) -> 'a list -> 'a list
+
   val concat : 'a list list -> 'a list
 
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list

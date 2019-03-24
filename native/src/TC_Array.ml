@@ -54,6 +54,11 @@ let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array =
 
 let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = BA.filter a ~f
 
+(* argument order of f is flipped in Belt version *)
+let filteri ~(f : int -> 'a -> bool) (a : 'a array) : 'a array = BA.filteri a ~f
+let indexed_filter = filteri
+let indexedFilter = filteri
+
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.filter_map a ~f
 let filter_map = filterMap
 

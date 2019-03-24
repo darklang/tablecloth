@@ -63,6 +63,11 @@ module List : sig
 
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
+  (* argument order of f is flipped in Base version *)
+  val filteri : f:('a -> int -> bool) -> 'a list -> 'a list
+  val indexed_filter : f:('a -> int -> bool) -> 'a list -> 'a list
+  val indexedFilter : f:('a -> int -> bool) -> 'a list -> 'a list
+
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
   val foldr : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
