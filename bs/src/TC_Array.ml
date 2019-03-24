@@ -1,11 +1,10 @@
 module BA = Belt.Array
 
 (* Helpers *)
-let isEmpty (a : 'a array) : bool = a = [||]
-
-let is_empty = isEmpty
-
 let length (a : 'a array) : int = BA.length a
+
+let isEmpty (a : 'a array) : bool = length a = 0
+let is_empty = isEmpty
 
 let reverse (a : 'a array) : 'a array = BA.reverse a
 
@@ -14,6 +13,7 @@ let reverseInPlace (a : 'a array) = BA.reverseInPlace a
 (*Creation*)
 let fromList (l: 'a list) : 'a array = Belt.List.toArray l
 let from_list = fromList
+
 let toList (a: 'a array) : 'a list = Belt.List.fromArray a
 let to_list = toList
 
@@ -28,8 +28,9 @@ let repeat  ~(n: int) (e: 'a): 'a array = BA.make n e
 let sum (a : int array) : int = BA.reduce a 0 ( + )
 
 let floatSum (a : float array) : float = BA.reduce a 0.0 ( +. )
-
 let float_sum = floatSum
+
+let head (a : 'a array) : 'a option = BA.get a 0
 
 let last (a : 'a array) : 'a option = BA.get a ((length a) - 1)
 
@@ -41,8 +42,6 @@ let elemIndex ~(value : 'a) (a : 'a array) : int option =
 let elem_index = elemIndex
 
 let member ~(value : 'a) (a : 'a array) : bool = BA.some a (( = ) value )
-
-let head (a : 'a array) : 'a option = BA.get a 0
 
 let flatten (ars : 'a array array) : 'a array = BA.concatMany ars
 (* TODO decide for one? for me concat means append *)

@@ -8,6 +8,7 @@ let is_empty = isEmpty
 
 (*TODO find solution*)
 (*let reverse (a : 'a array) : 'a array = *)
+
 let reverseInPlace (a : 'a array) = BA.rev_inplace a
 
 (*Creation*)
