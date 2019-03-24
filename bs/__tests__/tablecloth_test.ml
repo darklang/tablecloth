@@ -162,6 +162,9 @@ let () =
     test "reverse one element" (fun () -> expect (Array.reverse [|0|]) |> toEqual [|0|]);
     test "reverse two elements" (fun () -> expect (Array.reverse [|0;1|]) |> toEqual [|1;0|]);
 
+    test "init empty array" (fun () -> expect (Array.init [||]) |> toEqual None);
+    test "init one element" (fun () -> expect (Array.init [|'a'|]) |> toEqual (Some [||]));
+    test "init two elements" (fun () -> expect (Array.init [|'a';'b'|]) |> toEqual (Some [|'a'|]));
   );
 
 (*    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);

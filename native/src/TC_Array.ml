@@ -62,6 +62,14 @@ let indexedFilter = filteri
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.filter_map a ~f
 let filter_map = filterMap
 
+let init (a : 'a array) : 'a array option =
+  let l = length a in
+  match l with
+  | 0 -> None
+  | 1 -> Some [||]
+  | _ -> Some (filteri a ~f:(fun _ i -> i < (l - 1)) )
+
+
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.iter a ~f
 
 
