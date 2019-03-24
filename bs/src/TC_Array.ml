@@ -60,6 +60,11 @@ let mapi = indexedMap
 
 let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = BA.zipBy a b f
 
+let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = BA.keep a f
+
+let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.keepMap a f
+let filter_map = filterMap
+
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
 
@@ -122,13 +127,6 @@ match reverse l with
 | [] -> None
 | _ :: rest -> Some (reverse rest)
 
-
-let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array =
-BA.keepMap l f
-
-let filter_map = filterMap
-
-let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = BA.keep l f
 
 
 let partition ~(f : 'a -> bool) (a : 'a array) : 'a array * 'a array =
