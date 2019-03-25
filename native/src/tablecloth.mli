@@ -233,33 +233,33 @@ module Tuple2 : sig
   val create : 'a -> 'b -> 'a * 'b
   (** Create a 2-tuple.
 
-      [Tuple2.create 3 4 == (3, 4)]
+      [Tuple2.create 3 4 = (3, 4)]
 
-      [let zip (xs : 'a list) (ys : 'b list) : ('a * 'b) list = List.map2 Tuple2.create xs ys]
+      [let zip (xs : 'a list) (ys : 'b list) : ('a * 'b) list = List.map2 ~f:Tuple2.create xs ys]
   *)
 
   val first : ('a * 'b) -> 'a
   (** Extract the first value from a tuple.
 
-      [Tuple2.first (3, 4) == 3]
+      [Tuple2.first (3, 4) = 3]
 
-      [Tuple2.first ("john", "doe") == "john"]
+      [Tuple2.first ("john", "doe") = "john"]
   *)
 
   val second : ('a * 'b) -> 'b
   (** Extract the second value from a tuple.
 
-      [Tuple2.second (3, 4) == 4]
+      [Tuple2.second (3, 4) = 4]
 
-      [Tuple2.second ("john", "doe") == "doe"]
+      [Tuple2.second ("john", "doe") = "doe"]
   *)
 
   val mapFirst : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
   (** Transform the first value in a tuple.
 
-      [Tuple2.mapFirst ~f:String.reverse ("stressed", 16) == ("desserts", 16)]
+      [Tuple2.mapFirst ~f:String.reverse ("stressed", 16) = ("desserts", 16)]
 
-      [Tuple2.mapFirst ~f:String.length ("stressed", 16) == (8, 16)]
+      [Tuple2.mapFirst ~f:String.length ("stressed", 16) = (8, 16)]
   *)
 
   val map_first : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
@@ -267,9 +267,9 @@ module Tuple2 : sig
   val mapSecond : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
   (** Transform the second value in a tuple.
 
-      [Tuple2.mapSecond ~f:sqrt ("stressed", 16.) == ("stressed", 4.)]
+      [Tuple2.mapSecond ~f:sqrt ("stressed", 16.) = ("stressed", 4.)]
 
-      [Tuple2.mapSecond ~f:(~-) ("stressed", 16) == ("stressed", -16)]
+      [Tuple2.mapSecond ~f:(~-) ("stressed", 16) = ("stressed", -16)]
   *)
 
   val map_second : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
@@ -277,9 +277,9 @@ module Tuple2 : sig
   val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
   (** Transform each value of a tuple.
 
-      [Tuple2.mapEach ~f:String.reverse ~g:sqrt ("stressed", 16.) == ("desserts", 4.)]
+      [Tuple2.mapEach ~f:String.reverse ~g:sqrt ("stressed", 16.) = ("desserts", 4.)]
 
-      [Tuple2.mapEach ~f:String.length ~g:(~-) ("stressed", 16) == (8, -16)]
+      [Tuple2.mapEach ~f:String.length ~g:(~-) ("stressed", 16) = (8, -16)]
   *)
 
   val map_each : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
@@ -287,9 +287,9 @@ module Tuple2 : sig
   val mapAll : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
   (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.
 
-      [Tuple2.mapAll ~f:succ (3, 4, 5) == (4, 5, 6)]
+      [Tuple2.mapAll ~f:succ (3, 4, 5) = (4, 5, 6)]
 
-      [Tuple2.mapAll ~f:String.length ("was", "stressed") == (3, 8)]
+      [Tuple2.mapAll ~f:String.length ("was", "stressed") = (3, 8)]
   *)
 
   val map_all : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
@@ -297,9 +297,9 @@ module Tuple2 : sig
   val swap : ('a * 'b) -> ('b * 'a)
   (** Switches the first and second values of a tuple.
 
-      [Tuple2.swap (3, 4) == (4, 3)]
+      [Tuple2.swap (3, 4) = (4, 3)]
 
-      [Tuple2.swap ("stressed", 16) == (16, "stressed")]
+      [Tuple2.swap ("stressed", 16) = (16, "stressed")]
   *)
 
   val curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c 
@@ -311,7 +311,7 @@ module Tuple2 : sig
 
       [let heights = [3, 4, 5]]
 
-      [List.map widths ~f:(curriedArea 4) == [12; 16; 20]]
+      [List.map widths ~f:(curriedArea 4) = [12; 16; 20]]
   *)
   
   val uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c
@@ -321,15 +321,15 @@ module Tuple2 : sig
 
       [let uncurriedSum : (int * int) -> int = uncurry add]
 
-      [uncurriedSum (3, 4) == 7]
+      [uncurriedSum (3, 4) = 7]
   *)
 
   val toList : ('a * 'a) -> 'a list
   (** Turns a tuple into a list of length two. This function can only be used on tuples which have the same type for each value.
   
-      [Tuple2.toList (3, 4) == [3; 4]]
+      [Tuple2.toList (3, 4) = [3; 4]]
 
-      [Tuple2.toList ("was", "stressed") == ["was"; "stressed"]]
+      [Tuple2.toList ("was", "stressed") = ["was"; "stressed"]]
   *)
 
   val to_list : ('a * 'a) -> 'a list
@@ -339,57 +339,57 @@ module Tuple3 : sig
   val create : 'a -> 'b -> 'c -> ('a * 'b * 'c)
   (** Create a 3-tuple.
 
-      [Tuple3.create 3 4 5 == (3, 4, 5)]
+      [Tuple3.create 3 4 5 = (3, 4, 5)]
 
-      [let zip3 (xs : 'a list) (ys : 'b list) (zs : 'c list) : ('a * 'b * 'c) list = List.map3 Tuple3.create xs ys zs]
+      [let zip3 (xs : 'a list) (ys : 'b list) (zs : 'c list) : ('a * 'b * 'c) list = List.map3 ~f:Tuple3.create xs ys zs]
   *)
 
   val first : ('a * 'b * 'c) -> 'a
   (** Extract the first value from a tuple.
 
-      [Tuple3.first (3, 4, 5) == 3]
+      [Tuple3.first (3, 4, 5) = 3]
 
-      [Tuple3.first ("john", "danger", "doe") == "john"]
+      [Tuple3.first ("john", "danger", "doe") = "john"]
   *)
 
   val second : ('a * 'b * 'c) -> 'b
   (** Extract the second value from a tuple.
 
-      [Tuple2.second (3, 4, 5) == 4]
+      [Tuple2.second (3, 4, 5) = 4]
 
-      [Tuple2.second ("john", "danger", "doe") == "danger"]
+      [Tuple2.second ("john", "danger", "doe") = "danger"]
   *)
   
   val third : ('a * 'b * 'c) -> 'c
   (** Extract the third value from a tuple.
 
-      [Tuple2.third (3, 4, 5) == 5]
+      [Tuple2.third (3, 4, 5) = 5]
 
-      [Tuple2.third ("john", "danger", "doe") == "doe"]
+      [Tuple2.third ("john", "danger", "doe") = "doe"]
   *)
 
   val init : ('a * 'b * 'c) -> ('a * 'b)
   (** Extract the first and second values of a 3-tuple as a 2-tuple.
 
-      [Tuple2.init (3, "stressed", false) == (3, "stressed")]
+      [Tuple2.init (3, "stressed", false) = (3, "stressed")]
 
-      [Tuple2.init ("john", 16, "doe") == ("john", 16)]
+      [Tuple2.init ("john", 16, "doe") = ("john", 16)]
   *)
 
   val tail : ('a * 'b * 'c) -> ('b * 'c)
   (** Extract the second and third values of a 3-tuple as a 2-tuple.
 
-      [Tuple2.init (3, "stressed", false) == ("stressed", false)]
+      [Tuple2.init (3, "stressed", false) = ("stressed", false)]
 
-      [Tuple2.init ("john", 16, false) == (16, false)]
+      [Tuple2.init ("john", 16, false) = (16, false)]
   *)
 
   val mapFirst : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
   (** Transform the first value in a tuple.
 
-      [Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false) == ("desserts", 16, false)]
+      [Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false) = ("desserts", 16, false)]
 
-      [Tuple3.mapFirst ~f:String.length ("stressed", 16, false) == (8, 16, false)]
+      [Tuple3.mapFirst ~f:String.length ("stressed", 16, false) = (8, 16, false)]
   *)
 
   val map_first : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
@@ -397,9 +397,9 @@ module Tuple3 : sig
   val mapSecond : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
   (** Transform the second value in a tuple.
 
-      [Tuple3.mapSecond ~f:sqrt ("stressed", 16., false) == ("stressed", 4., false)]
+      [Tuple3.mapSecond ~f:sqrt ("stressed", 16., false) = ("stressed", 4., false)]
     
-      [Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) == ("stressed", -16, false)]
+      [Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) = ("stressed", -16, false)]
   *)
 
   val map_second : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
@@ -415,7 +415,7 @@ module Tuple3 : sig
   val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
   (** Transform the third value in a tuple.
 
-      [Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false) == ("desserts", 4., true)]
+      [Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false) = ("desserts", 4., true)]
   *)
 
   val map_each : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
@@ -423,9 +423,9 @@ module Tuple3 : sig
   val mapAll : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
   (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.    
 
-      [Tuple2.mapAll ~f:sqrt (9., 16., 25.) == (3., 4., 5.)]
+      [Tuple2.mapAll ~f:sqrt (9., 16., 25.) = (3., 4., 5.)]
 
-      [Tuple2.mapAll ~f:String.length ("was", "stressed", "then") == (3, 8, 4)]
+      [Tuple2.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]
   *)
 
   val map_all : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
@@ -433,9 +433,9 @@ module Tuple3 : sig
   val rotateLeft : ('a * 'b * 'c) -> ('b * 'c * 'a)
   (** Move each value in the tuple one position to the left, moving the value in the first position into the last position.
 
-      [Tuple2.rotateLeft (3, 4, 5) == (4, 5, 3)]
+      [Tuple2.rotateLeft (3, 4, 5) = (4, 5, 3)]
 
-      [Tuple2.rotateLeft ("was", "stressed", "then") == ("stressed", "then", "was")]
+      [Tuple2.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]
   *)
   
   val rotate_left : ('a * 'b * 'c) -> ('b * 'c * 'a)
@@ -443,9 +443,9 @@ module Tuple3 : sig
   val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
   (** Move each value in the tuple one position to the right, moving the value in the last position into the first position.
 
-      [Tuple2.rotateRight (3, 4, 5) == (5, 3, 4)]
+      [Tuple2.rotateRight (3, 4, 5) = (5, 3, 4)]
 
-      [Tuple2.rotateRight ("was", "stressed", "then") == ("then", "was", "stressed")]
+      [Tuple2.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]
   *)
 
   val rotate_right : ('a * 'b * 'c) -> ('c * 'a * 'b)
@@ -459,7 +459,7 @@ module Tuple3 : sig
 
       [let depths = [3; 4; 5]]
 
-      [List.map depths ~f:(curriedArea 3 4) == [36; 48; 60]]
+      [List.map depths ~f:(curriedArea 3 4) = [36; 48; 60]]
   *)
 
   val uncurry : ('a -> 'b -> 'c -> 'd) -> ('a * 'b * 'c) -> 'd
@@ -469,14 +469,14 @@ module Tuple3 : sig
 
       [let uncurriedSum : (int * int * int) -> int = uncurry sum]
 
-      [uncurriedSum (3, 4, 5) == 12] *)
+      [uncurriedSum (3, 4, 5) = 12] *)
   
   val toList : ('a * 'a * 'a) -> 'a list
    (** Turns a tuple into a list of length three. This function can only be used on tuples which have the same type for each value.
   
-      [Tuple3.toList (3, 4, 5) == [3; 4; 5]]
+      [Tuple3.toList (3, 4, 5) = [3; 4; 5]]
     
-      [Tuple3.toList ("was", "stressed", "then") == ["was"; "stressed"; "then"]]
+      [Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]
   *)
 
   val to_list : ('a * 'a * 'a) -> 'a list
