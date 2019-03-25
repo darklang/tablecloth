@@ -227,6 +227,38 @@ module Char : sig
   val fromCode : int -> char
 
   val from_code : int -> char
+  
+  val toString : char -> string
+
+  val to_string : char -> string
+
+  val fromString : string -> char option
+
+  val from_string : string -> char option
+
+  val lowercase : char -> char
+
+  val uppercase : char -> char
+
+  val isDigit : char -> bool
+
+  val is_digit : char -> bool
+
+  val isLowercase : char -> bool
+
+  val is_lowercase : char -> bool
+
+  val isUppercase : char -> bool
+
+  val is_uppercase : char -> bool
+
+  val isAlpha : char -> bool
+
+  val is_alpha : char -> bool
+
+  val isAlphanum : char -> bool
+  
+  val is_alphanum : char -> bool
 end
 
 module Tuple2 : sig

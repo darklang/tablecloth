@@ -490,13 +490,53 @@ module Result = struct
 end
 
 module Char = struct
-  let toCode (c : char) : int = Char.code c
+  let toCode (c : char) : int = Base.Char.code c
 
   let to_code = toCode
 
-  let fromCode (i : int) : char = Char.chr i
+  let fromCode (i : int) : char = Base.Char.chr i
 
   let from_code = fromCode
+
+  let toString = Base.Char.to_string
+
+  let to_string = toString
+
+  let fromString = Base.Char.from_string
+
+  let from_string = fromString
+
+  let lowercase = Base.Char.lowercase
+
+  let uppercase = Base.Char.uppercase
+
+  let isDigit = Base.Char.is_digit
+
+  let is_digit = isDigit
+
+  let isLowercase = Base.Char.is_lowercase
+
+  let is_lowercase = isLowercase
+
+  let isUppercase = Base.Char.is_uppercase
+
+  let is_uppercase = isUppercase
+
+  let isAlpha = Base.Base.Char.is_alpha
+
+  let is_alpha = isAlpha
+
+  let isAlphanum = Base.Char.is_alphanum
+
+  let is_alphanum = isAlphanum
+
+  let isWhitespace = Base.Char.is_whitespace
+  
+  let is_whitespace = isWhitespace
+
+  let isPrint = Base.char.is_print
+
+  let is_print = isPrint
 end
 
 module String = struct

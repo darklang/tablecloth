@@ -416,14 +416,79 @@ module Option = struct
   let to_option = toOption
 end
 
-module Char = struct
+module Char = struct  
   let toCode (c : char) : int = Char.code c
 
   let to_code = toCode
 
-  let fromCode (i : int) : char = Char.chr i
+  let fromCode (i : int) : char option = 
+    if 0 <= i && i <= 255 then Some (Char.chr i) else None
 
   let from_code = fromCode
+
+  let toString c = String.make 1 c
+
+  let to_string = toString
+
+  let fromString (str : string) = match String.length str with
+  | 1 -> Some (String.get str 0)
+  | _ -> None
+
+  let from_string = fromString
+
+  let lowercase _ = 'a' (* Char.lowercase_ascii *)
+
+  let uppercase _ = 'A' (* Char.uppercase_ascii *)
+
+  let isDigit = function
+    | '0' .. '9' -> true
+    | _ -> false
+
+  let is_digit = isDigit
+
+  let isLowercase = function
+  | 'a' .. 'z' -> true
+  | _ -> false
+
+  let is_lowercase = isLowercase
+
+  let isUppercase = function
+  | 'A' .. 'Z' -> true
+  | _ -> false
+
+  let is_uppercase = isUppercase
+
+  let isAlpha = function
+    | 'a' .. 'z' | 'A' .. 'Z' -> true
+    | _ -> false
+
+  let is_alpha = isAlpha
+
+  let isAlphanum = function
+    | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' -> true
+    | _ -> false
+
+  let is_alphanum = isAlphanum
+
+  let isWhitespace = function
+  | '\t'
+  | '\n'
+  | '\011' (* vertical tab *)
+  | '\012' (* form feed *)
+  | '\r'
+  | ' '
+    -> true
+  | _
+    -> false
+  ;;
+
+  let is_whitespace = isWhitespace
+
+  let isPrint = function
+  | ' ' .. '~' -> true
+  | _ -> false
+
+  let is_print = isPrint
 end
 
 module Tuple2 = struct
@@ -859,7 +924,7 @@ module IntDict = struct
     Map.merge dict1 dict2 f
 end
 
-module Regex = struct
+module Regex = struct 
   type t = Js.Re.t
 
   type result = Js.Re.result
