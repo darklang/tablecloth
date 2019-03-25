@@ -45,7 +45,7 @@ jobs:
       - run: opam config exec -- dune build
       - run: opam config exec -- dune runtest -f
       - save_cache:
-          key: v1-native-dependencies-{{ .Branch }}-{{ checksum "native/tablecloth-native.opam" }}
+          key: v1-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
             - ~/opam
 
