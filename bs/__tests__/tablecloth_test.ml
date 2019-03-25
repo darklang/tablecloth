@@ -3,22 +3,95 @@ open Jest
 open Expect
 
 let () =
+  describe "Char" (fun () -> 
+    test "toCode" (fun () -> expect (Char.toCode 'a') |> toEqual 97);
+
+    describe "fromCode" (fun () -> 
+      test "valid ASCII codes return the corresponding character" (fun () -> expect (Char.fromCode 97) |> toEqual (Some 'a'));
+      test "negative integers return none" (fun () -> expect (Char.fromCode (-1)) |> toEqual None);
+      test "integers greater than 255 return none" (fun () -> expect (Char.fromCode 256) |> toEqual None);
+    );
+
+    test "toString" (fun () -> expect (Char.toString 'a') |> toEqual "a");
+
+    describe "fromString" (fun () -> 
+      test "one-length string return Some" (fun () -> expect (Char.fromString "a") |> toEqual (Some 'a'));
+      test "multi character strings return none" (fun () -> expect (Char.fromString "abc") |> toEqual None);
+      test "zero length strings return none" (fun () -> expect (Char.fromString "") |> toEqual None);
+    );
+
+    describe "lowercase" (fun () -> 
+      test "converts uppercase ASCII characters to lowercase" (fun () -> expect (Char.lowercase 'A') |> toEqual 'a');
+      test "perserves lowercase characters" (fun () -> expect (Char.lowercase 'a') |> toEqual 'a');
+      test "perservers non-alphabet characters" (fun () -> expect (Char.lowercase '7') |> toEqual '7');
+    );
+
+    describe "uppercase" (fun () -> 
+      test "converts lowercase ASCII characters to uppercase" (fun () -> expect (Char.uppercase 'a') |> toEqual 'A');
+      test "perserves uppercase characters" (fun () -> expect (Char.uppercase 'A') |> toEqual 'A');
+      test "perservers non-alphabet characters" (fun () -> expect (Char.uppercase '7') |> toEqual '7');
+    );
+
+    describe "isDigit" (fun () -> 
+      test "returns true for digits 0-9" (fun () -> expect (Char.isDigit '7') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isDigit 'a') |> toEqual false);
+    );
+
+    describe "isLowercase" (fun () -> 
+      test "returns true for any lowercase character" (fun () -> expect (Char.isLowercase 'a') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isLowercase '7') |> toEqual false);      
+    );
+
+    describe "isUppercase" (fun () -> 
+      test "returns true for any uppercase character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isUppercase '7') |> toEqual false);      
+    );
+
+    describe "isAlpha" (fun () -> 
+      test "returns true for any alphabet character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isUppercase '7') |> toEqual false);      
+    );
+
+    describe "isAlphanum" (fun () -> 
+      test "returns true for any alphabet or digit character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isUppercase '?') |> toEqual false);      
+    );
+    
+    describe "isWhitespace" (fun () -> 
+      test "returns true for any whitespace character" (fun () -> expect (Char.isUppercase ' ') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isUppercase 'a') |> toEqual false);      
+    );
+
+    describe "isPrint" (fun () -> 
+      test "returns true for any print character" (fun () -> expect (Char.isUppercase '~') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isUppercase 'a') |> toEqual false);      
+    );
+  );
+
   describe "List" (fun () ->
-    test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
-    test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
-    test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+    describe "reverse" (fun () ->
+      test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
+      test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
+      test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+    );
 
-    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
-    test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
-    test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
+    describe "map2" (fun () ->
+      test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
+      test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
+      test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
+    );
 
-    test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
-    test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
-    test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+    describe "indexedMap" (fun () ->
+      test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
+      test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
+      test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+    );
 
-    test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
-    test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
-    test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
+    describe "partition" (fun () ->
+      test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
+      test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
+      test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
+    );
   );
 
   describe "String" (fun () ->
