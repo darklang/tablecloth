@@ -436,9 +436,9 @@ module Char = struct
 
   let from_string = fromString
 
-  let lowercase _ = 'a' (* Char.lowercase_ascii *)
+  let lowercase = Char.lowercase
 
-  let uppercase _ = 'A' (* Char.uppercase_ascii *)
+  let uppercase = Char.uppercase
 
   let isDigit = function
     | '0' .. '9' -> true
@@ -484,11 +484,11 @@ module Char = struct
 
   let is_whitespace = isWhitespace
 
-  let isPrint = function
+  let isPrintable = function
   | ' ' .. '~' -> true
   | _ -> false
 
-  let is_print = isPrint
+  let is_printable = isPrintable
 end
 
 module Tuple2 = struct

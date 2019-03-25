@@ -23,17 +23,17 @@ let () =
     describe "lowercase" (fun () -> 
       test "converts uppercase ASCII characters to lowercase" (fun () -> expect (Char.lowercase 'A') |> toEqual 'a');
       test "perserves lowercase characters" (fun () -> expect (Char.lowercase 'a') |> toEqual 'a');
-      test "perservers non-alphabet characters" (fun () -> expect (Char.lowercase '7') |> toEqual '7');
+      test "perserves non-alphabet characters" (fun () -> expect (Char.lowercase '7') |> toEqual '7');
     );
 
     describe "uppercase" (fun () -> 
       test "converts lowercase ASCII characters to uppercase" (fun () -> expect (Char.uppercase 'a') |> toEqual 'A');
       test "perserves uppercase characters" (fun () -> expect (Char.uppercase 'A') |> toEqual 'A');
-      test "perservers non-alphabet characters" (fun () -> expect (Char.uppercase '7') |> toEqual '7');
+      test "perserves non-alphabet characters" (fun () -> expect (Char.uppercase '7') |> toEqual '7');
     );
 
     describe "isDigit" (fun () -> 
-      test "returns true for digits 0-9" (fun () -> expect (Char.isDigit '7') |> toEqual true);
+      testAll "returns true for digits 0-9" ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9';] (fun digit -> expect (Char.isDigit digit) |> toEqual true);
       test "returns false for all other characters" (fun () -> expect (Char.isDigit 'a') |> toEqual false);
     );
 
@@ -48,23 +48,24 @@ let () =
     );
 
     describe "isAlpha" (fun () -> 
-      test "returns true for any alphabet character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isUppercase '7') |> toEqual false);      
+      test "returns true for any alphabet character" (fun () -> expect (Char.isAlpha 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isAlpha '7') |> toEqual false);      
     );
 
     describe "isAlphanum" (fun () -> 
-      test "returns true for any alphabet or digit character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isUppercase '?') |> toEqual false);      
+      test "returns true for any alphabet or digit character" (fun () -> expect (Char.isAlphanum 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isAlphanum '?') |> toEqual false);      
     );
     
     describe "isWhitespace" (fun () -> 
-      test "returns true for any whitespace character" (fun () -> expect (Char.isUppercase ' ') |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isUppercase 'a') |> toEqual false);      
+      test "returns true for any whitespace character" (fun () -> expect (Char.isWhitespace ' ') |> toEqual true);
+      test "returns false for a non-whitespace character" (fun () -> expect (Char.isWhitespace 'a') |> toEqual false);      
     );
 
-    describe "isPrint" (fun () -> 
-      test "returns true for any print character" (fun () -> expect (Char.isUppercase '~') |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isUppercase 'a') |> toEqual false);      
+    describe "isPrintable" (fun () -> 
+      test "returns true for a printable character" (fun () -> expect (Char.isPrintable '~') |> toEqual true);
+
+      test "returns false for non-printable character" (fun () -> expect (Char.fromCode 31 |> Option.map ~f:Char.isPrintable ) |> toEqual (Some false));      
     );
   );
 

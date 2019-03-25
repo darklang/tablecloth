@@ -224,9 +224,9 @@ module Char : sig
 
   val to_code : char -> int
 
-  val fromCode : int -> char
+  val fromCode : int -> char option
 
-  val from_code : int -> char
+  val from_code : int -> char option
   
   val toString : char -> string
 
@@ -259,6 +259,14 @@ module Char : sig
   val isAlphanum : char -> bool
   
   val is_alphanum : char -> bool
+
+  val isWhitespace : char -> bool
+  
+  val is_whitespace : char -> bool
+
+  val isPrintable : char -> bool
+  
+  val is_printable : char -> bool
 end
 
 module Tuple2 : sig

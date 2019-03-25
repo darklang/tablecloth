@@ -534,9 +534,9 @@ module Char = struct
   
   let is_whitespace = isWhitespace
 
-  let isPrint = Base.char.is_print
+  let isPrintable = Base.char.is_print
 
-  let is_print = isPrint
+  let is_printable = isPrintable
 end
 
 module String = struct
