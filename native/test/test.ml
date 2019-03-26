@@ -1,6 +1,49 @@
 open Tablecloth
 module AT = Alcotest
 
+let t_Char () =
+  AT.check AT.int "toCode" (Char.toCode 'a') 97;
+
+  AT.check (AT.option AT.char) "fromCode - valid ASCII codes return the corresponding character" (Char.fromCode 97) (Some 'a');
+  AT.check (AT.option AT.char) "fromCode - negative integers return none" (Char.fromCode (-1)) None;
+  AT.check (AT.option AT.char) "fromCode - integers greater than 255 return none" (Char.fromCode 256) None;
+
+  AT.check AT.string "toString" (Char.toString 'a') "a";
+
+  AT.check (AT.option AT.char) "fromString - one-length string return Some" (Char.fromString "a") (Some 'a');
+  AT.check (AT.option AT.char) "fromString - multi character strings return none" (Char.fromString "abc") None;
+  AT.check (AT.option AT.char) "fromString - zero length strings return none" (Char.fromString "") None;
+
+  AT.check AT.char "lowercase - converts uppercase ASCII characters to lowercase" (Char.lowercase 'A') 'a';
+  AT.check AT.char "lowercase - perserves lowercase characters" (Char.lowercase 'a') 'a';
+  AT.check AT.char "lowercase - perserves non-alphabet characters" (Char.lowercase '7') '7';
+
+  AT.check AT.char "uppercase - converts lowercase ASCII characters to uppercase" (Char.uppercase 'a') 'A';
+  AT.check AT.char "uppercase - perserves uppercase characters" (Char.uppercase 'A') 'A';
+  AT.check AT.char "uppercase - perserves non-alphabet characters" (Char.uppercase '7') '7';
+
+  AT.check AT.bool "isLowercase - returns true for any lowercase character" (Char.isLowercase 'a') true;
+  AT.check AT.bool "isLowercase - returns false for all other characters" (Char.isLowercase '7') false;      
+
+  AT.check AT.bool "isUppercase - returns true for any uppercase character" (Char.isUppercase 'A') true;
+  AT.check AT.bool "isUppercase - returns false for all other characters" (Char.isUppercase '7') false;      
+
+  AT.check AT.bool "isAlphabetic - returns true for any ASCII alphabet character" (Char.isAlphabetic 'A') true;
+  AT.check AT.bool "isAlphabetic - returns false for all other characters" (Char.isAlphabetic '\n') false;
+
+  AT.check AT.bool "isNumeric - returns true for digits 0-9" (Char.isNumeric '5') true;
+  AT.check AT.bool "isNumeric - returns false for all other characters" (Char.isNumeric 'a') false;
+
+  AT.check AT.bool "isAlphanumeric - returns true for any alphabet or digit character" (Char.isAlphanumeric 'A') true;
+  AT.check AT.bool "isAlphanumeric - returns false for all other characters" (Char.isAlphanumeric '?') false;      
+
+  AT.check AT.bool "isPrintable - returns true for a printable character" (Char.isPrintable '~') true;
+  AT.check (AT.option AT.bool) "isPrintable - returns false for non-printable character" (Char.fromCode 31 |> Option.map ~f:Char.isPrintable ) (Some false);      
+
+  AT.check AT.bool "isWhitespace - returns true for any whitespace character" (Char.isWhitespace ' ') true;
+  AT.check AT.bool "isWhitespace - returns false for a non-whitespace character" (Char.isWhitespace 'a') false;      
+  ()
+
 let t_String () =
   AT.check
     AT.bool
@@ -72,6 +115,7 @@ let t_Tuple3 () =
   ()
 
 let suite = [
+  ("Char", `Quick, t_Char); 
   ("String", `Quick, t_String); 
   ("Tuple2", `Quick, t_Tuple2);
   ("Tuple3", `Quick, t_Tuple3);

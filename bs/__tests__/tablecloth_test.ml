@@ -32,11 +32,6 @@ let () =
       test "perserves non-alphabet characters" (fun () -> expect (Char.uppercase '7') |> toEqual '7');
     );
 
-    describe "isDigit" (fun () -> 
-      testAll "returns true for digits 0-9" ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9';] (fun digit -> expect (Char.isDigit digit) |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isDigit 'a') |> toEqual false);
-    );
-
     describe "isLowercase" (fun () -> 
       test "returns true for any lowercase character" (fun () -> expect (Char.isLowercase 'a') |> toEqual true);
       test "returns false for all other characters" (fun () -> expect (Char.isLowercase '7') |> toEqual false);      
@@ -47,25 +42,30 @@ let () =
       test "returns false for all other characters" (fun () -> expect (Char.isUppercase '7') |> toEqual false);      
     );
 
-    describe "isAlpha" (fun () -> 
-      test "returns true for any alphabet character" (fun () -> expect (Char.isAlpha 'A') |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isAlpha '7') |> toEqual false);      
+    describe "isAlphabetic" (fun () -> 
+      test "returns true for any ASCII alphabet character" (fun () -> expect (Char.isAlphabetic 'A') |> toEqual true);
+      testAll "returns false for all other characters" ['7'; ' '; '\n'; '\011'] (fun char -> expect (Char.isAlphabetic char) |> toEqual false);      
     );
 
-    describe "isAlphanum" (fun () -> 
-      test "returns true for any alphabet or digit character" (fun () -> expect (Char.isAlphanum 'A') |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isAlphanum '?') |> toEqual false);      
-    );
-    
-    describe "isWhitespace" (fun () -> 
-      test "returns true for any whitespace character" (fun () -> expect (Char.isWhitespace ' ') |> toEqual true);
-      test "returns false for a non-whitespace character" (fun () -> expect (Char.isWhitespace 'a') |> toEqual false);      
+    describe "isNumeric" (fun () -> 
+      testAll "returns true for digits 0-9" ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9';] (fun digit -> expect (Char.isNumeric digit) |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isNumeric 'a') |> toEqual false);
     );
 
+    describe "isAlphanumeric" (fun () -> 
+      test "returns true for any alphabet or digit character" (fun () -> expect (Char.isAlphanumeric 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isAlphanumeric '?') |> toEqual false);      
+    );
+ 
     describe "isPrintable" (fun () -> 
       test "returns true for a printable character" (fun () -> expect (Char.isPrintable '~') |> toEqual true);
 
       test "returns false for non-printable character" (fun () -> expect (Char.fromCode 31 |> Option.map ~f:Char.isPrintable ) |> toEqual (Some false));      
+    );   
+
+    describe "isWhitespace" (fun () -> 
+      test "returns true for any whitespace character" (fun () -> expect (Char.isWhitespace ' ') |> toEqual true);
+      test "returns false for a non-whitespace character" (fun () -> expect (Char.isWhitespace 'a') |> toEqual false);      
     );
   );
 

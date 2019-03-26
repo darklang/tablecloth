@@ -490,11 +490,12 @@ module Result = struct
 end
 
 module Char = struct
-  let toCode (c : char) : int = Base.Char.code c
+  let toCode (c : char) : int = Base.Char.to_int c
 
   let to_code = toCode
 
-  let fromCode (i : int) : char = Base.Char.chr i
+  let fromCode (i : int) : char option = 
+    if 0 <= i && i <= 255 then Some (Char.chr i) else None
 
   let from_code = fromCode
 
@@ -502,17 +503,15 @@ module Char = struct
 
   let to_string = toString
 
-  let fromString = Base.Char.from_string
+  let fromString (str : string) : char option = match String.length str with
+    | 1 -> Some (String.get str 0)
+    | _ -> None
 
   let from_string = fromString
 
   let lowercase = Base.Char.lowercase
 
   let uppercase = Base.Char.uppercase
-
-  let isDigit = Base.Char.is_digit
-
-  let is_digit = isDigit
 
   let isLowercase = Base.Char.is_lowercase
 
@@ -522,21 +521,25 @@ module Char = struct
 
   let is_uppercase = isUppercase
 
-  let isAlpha = Base.Base.Char.is_alpha
+  let isAlphabetic = Base.Char.is_alpha
 
-  let is_alpha = isAlpha
+  let is_alphabetic = isAlphabetic
 
-  let isAlphanum = Base.Char.is_alphanum
+  let isNumeric = Base.Char.is_digit
 
-  let is_alphanum = isAlphanum
+  let is_numeric = isNumeric
+
+  let isAlphanumeric = Base.Char.is_alphanum
+
+  let is_alphanumeric = isAlphanumeric
+
+  let isPrintable = Base.Char.is_print
+
+  let is_printable = isPrintable
 
   let isWhitespace = Base.Char.is_whitespace
   
   let is_whitespace = isWhitespace
-
-  let isPrintable = Base.char.is_print
-
-  let is_printable = isPrintable
 end
 
 module String = struct

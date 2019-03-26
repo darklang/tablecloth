@@ -240,10 +240,6 @@ module Char : sig
 
   val uppercase : char -> char
 
-  val isDigit : char -> bool
-
-  val is_digit : char -> bool
-
   val isLowercase : char -> bool
 
   val is_lowercase : char -> bool
@@ -252,21 +248,25 @@ module Char : sig
 
   val is_uppercase : char -> bool
 
-  val isAlpha : char -> bool
+  val isAlphabetic : char -> bool
 
-  val is_alpha : char -> bool
+  val is_alphabetic : char -> bool
 
-  val isAlphanum : char -> bool
-  
-  val is_alphanum : char -> bool
+  val isNumeric : char -> bool
 
-  val isWhitespace : char -> bool
-  
-  val is_whitespace : char -> bool
+  val is_numeric : char -> bool
+
+  val isAlphanumeric : char -> bool
+
+  val is_alphanumeric : char -> bool
 
   val isPrintable : char -> bool
-  
+
   val is_printable : char -> bool
+
+  val isWhitespace : char -> bool
+
+  val is_whitespace : char -> bool
 end
 
 module Tuple2 : sig

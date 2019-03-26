@@ -430,9 +430,9 @@ module Char = struct
 
   let to_string = toString
 
-  let fromString (str : string) = match String.length str with
-  | 1 -> Some (String.get str 0)
-  | _ -> None
+  let fromString (str : string) : char option = match String.length str with
+    | 1 -> Some (String.get str 0)
+    | _ -> None
 
   let from_string = fromString
 
@@ -440,55 +440,55 @@ module Char = struct
 
   let uppercase = Char.uppercase
 
-  let isDigit = function
-    | '0' .. '9' -> true
-    | _ -> false
-
-  let is_digit = isDigit
-
   let isLowercase = function
-  | 'a' .. 'z' -> true
-  | _ -> false
+    | 'a' .. 'z' -> true
+    | _ -> false
 
   let is_lowercase = isLowercase
 
   let isUppercase = function
-  | 'A' .. 'Z' -> true
-  | _ -> false
+    | 'A' .. 'Z' -> true
+    | _ -> false
 
   let is_uppercase = isUppercase
 
-  let isAlpha = function
+  let isAlphabetic = function
     | 'a' .. 'z' | 'A' .. 'Z' -> true
     | _ -> false
 
-  let is_alpha = isAlpha
+  let is_alphabetic = isAlphabetic
 
-  let isAlphanum = function
+  let isNumeric = function
+    | '0' .. '9' -> true
+    | _ -> false
+
+  let is_numeric = isNumeric
+  
+  let isAlphanumeric = function
     | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' -> true
     | _ -> false
 
-  let is_alphanum = isAlphanum
+  let is_alphanumeric = isAlphanumeric
 
+  let isPrintable = function
+    | ' ' .. '~' -> true
+    | _ -> false
+
+  let is_printable = isPrintable
+  
   let isWhitespace = function
-  | '\t'
-  | '\n'
-  | '\011' (* vertical tab *)
-  | '\012' (* form feed *)
-  | '\r'
-  | ' '
-    -> true
-  | _
-    -> false
+    | '\t'
+    | '\n'
+    | '\011' (* vertical tab *)
+    | '\012' (* form feed *)
+    | '\r'
+    | ' '
+      -> true
+    | _
+      -> false
   ;;
 
   let is_whitespace = isWhitespace
-
-  let isPrintable = function
-  | ' ' .. '~' -> true
-  | _ -> false
-
-  let is_printable = isPrintable
 end
 
 module Tuple2 = struct
