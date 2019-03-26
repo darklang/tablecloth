@@ -332,7 +332,6 @@ module Char : sig
 
   val is_uppercase : char -> bool
 
-  (* TODO would this be better as `isLetter`? *)
   val isAlphabetic : char -> bool
   (** Detect upper and lower case ASCII alphabetic characters.
 
