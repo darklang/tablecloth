@@ -38,7 +38,7 @@ module List = struct
     l
     |> Array.of_list
     |> Js.Array.findIndex (( = ) value)
-    |> function -1 -> None | other -> Some other
+    |> function -1 -> None | index -> Some index
 
 
   let elem_index = elemIndex
@@ -59,7 +59,7 @@ module List = struct
         (accumulator : 'a list) =
       match remaining with
       | [] ->
-          List.rev accumulator
+          reverse accumulator
       | first :: rest ->
           let computedFirst = f first in
           if Belt.Set.String.has existing computedFirst
@@ -91,7 +91,9 @@ module List = struct
 
 
   let init (l : 'a list) : 'a list option =
-    match List.rev l with _ :: rest -> Some (List.rev rest) | [] -> None
+    match reverse l with
+    | [] -> None
+    | _ :: rest -> Some (reverse rest)
 
 
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
@@ -115,12 +117,12 @@ module List = struct
 
 
   let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (List.rev l) init
+    List.fold_right f (reverse l) init
 
 
   let rec findIndexHelp
-      (index : int) ~(predicate : 'a -> bool) (list : 'a list) : int option =
-    match list with
+      (index : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+    match l with
     | [] ->
         None
     | x :: xs ->
@@ -139,25 +141,25 @@ module List = struct
     Belt.List.take l count |. Belt.Option.getWithDefault []
 
 
-  let updateAt ~(index : int) ~(f : 'a -> 'a) (list : 'a list) : 'a list =
+  let updateAt ~(index : int) ~(f : 'a -> 'a) (l : 'a list) : 'a list =
     if index < 0
-    then list
+    then l
     else
-      let head = take ~count:index list in
-      let tail = drop ~count:index list in
-      match tail with x :: xs -> head @ (f x :: xs) | _ -> list
+      let head = take ~count:index l in
+      let tail = drop ~count:index l in
+      match tail with x :: xs -> head @ (f x :: xs) | _ -> l
 
 
   let update_at = updateAt
 
   let length (l : 'a list) : int = List.length l
 
-  let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
-    match list with
+  let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
+    match l with
     | [] ->
         []
     | x :: xs ->
-        if f x then dropWhile ~f xs else list
+        if f x then dropWhile ~f xs else l
 
 
   let drop_while = dropWhile
@@ -172,9 +174,9 @@ module List = struct
     let rec takeWhileMemo memo list =
       match list with
       | [] ->
-          List.rev memo
+          reverse memo
       | x :: xs ->
-          if f x then takeWhileMemo (x :: memo) xs else List.rev memo
+          if f x then takeWhileMemo (x :: memo) xs else reverse memo
     in
     takeWhileMemo [] l
 
@@ -232,8 +234,8 @@ module List = struct
 
   let maximum_by = maximumBy
 
-  let maximum (list : 'comparable list) : 'comparable option =
-    match list with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
+  let maximum (l : 'comparable list) : 'comparable option =
+    match l with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
 
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
@@ -272,9 +274,8 @@ module List = struct
 
   let insert_at = insertAt
 
-  let splitWhen ~(f : 'a -> bool) (list : 'a list) : ('a list * 'a list) option
-      =
-    findIndex ~f list |. Belt.Option.map (fun index -> splitAt ~index list)
+  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) option =
+    findIndex ~f l |. Belt.Option.map (fun index -> splitAt ~index l)
 
 
   let split_when = splitWhen
@@ -389,8 +390,8 @@ module Option = struct
 
   let with_default = withDefault
 
-  let foldrValues (item : 'a option) (list : 'a list) : 'a list =
-    match item with None -> list | Some v -> v :: list
+  let foldrValues (item : 'a option) (l: 'a list) : 'a list =
+    match item with None -> l | Some v -> v :: l
 
 
   let foldr_values = foldrValues
