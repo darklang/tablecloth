@@ -14,7 +14,11 @@ Here is the general pattern for function documentation:
 let square: int => int;
 ```
 
-Description of function goes here. To mark inline code as OCaml, follow it with {:.ocaml}; to mark it as ReasonML, follow it with {:.reason}. Example:  `square n`{:.ocaml} `square(n)`{:.reason} returns some the square of `n`.
+Description of function goes here. To mark inline code as OCaml,
+follow it with {:.ocaml}; to mark it as ReasonML, follow it
+with {:.reason}. Example:
+
+`square n`{:.ocaml} `square(n)`{:.reason} returns some the square of `n`.
 
 ### Example
 
