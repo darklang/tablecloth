@@ -16,9 +16,10 @@ let square: int => int;
 
 Description of function goes here. To mark inline code as OCaml,
 follow it with {:.ocaml}; to mark it as ReasonML, follow it
-with {:.reason}. Example:
+with {:.reason}. (This is a convention from kramdown
+https://kramdown.gettalong.org/) Example:
 
-`square n`{:.ocaml} `square(n)`{:.reason} returns some the square of `n`.
+`square n`{:.ocaml} `square(n)`{:.reason} returns the square of `n`.
 
 ### Example
 
