@@ -443,11 +443,19 @@ module Char = struct
 
   let to_digit = toDigit
 
-  let toLowercase = Char.lowercase
+  let toLowercase char =     
+    match char with
+    | 'A'..'Z' -> 
+      Char.chr (toCode 'a' + (toCode char - toCode 'A'))      
+    | _ -> char
 
   let to_lowercase = toLowercase
 
-  let toUppercase = Char.uppercase
+  let toUppercase char = 
+    match char with
+    | 'a'..'z' -> 
+      Char.chr (toCode 'A' + (toCode char - toCode 'a'))
+    | _ -> char
 
   let to_uppercase = toUppercase
 
