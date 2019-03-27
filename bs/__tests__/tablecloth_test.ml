@@ -24,14 +24,14 @@ let () =
       test "converts uppercase ASCII characters to lowercase" (fun () -> expect (Char.toLowercase 'A') |> toEqual 'a');
       test "perserves lowercase characters" (fun () -> expect (Char.toLowercase 'a') |> toEqual 'a');
       test "perserves non-alphabet characters" (fun () -> expect (Char.toLowercase '7') |> toEqual '7');
-      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '/233');
+      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '\233');
     );
 
     describe "toUppercase" (fun () -> 
       test "converts lowercase ASCII characters to uppercase" (fun () -> expect (Char.toUppercase 'a') |> toEqual 'A');
       test "perserves uppercase characters" (fun () -> expect (Char.toUppercase 'A') |> toEqual 'A');
       test "perserves non-alphabet characters" (fun () -> expect (Char.toUppercase '7') |> toEqual '7');
-      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '/233');
+      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '\233');
     );
 
     describe "toDigit" (fun () -> 
