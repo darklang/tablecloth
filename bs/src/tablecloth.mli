@@ -1,68 +1,476 @@
+(** Documentation for tablecloth.mli *)
+
+(**
+  The `<|` operator applies a function to an argument. It is equivalent to the `@@` operator, and its main use is to avoid needing extra parentheses.
+
+  ### Example
+
+  ```ocaml
+  let sqr x = x * x
+  let result = sqr |< 25 (* 625 *)
+  ```
+
+  ```reason
+  let sqr = (x) => {x * x};
+  let result = sqr |< 25  /* 625 */
+  ```
+*)
 val ( <| ) : ('a -> 'b) -> 'a -> 'b
 
+(**
+    The `>>` operator returns a function that is the equivalent of the composition of its function arguments. The main use of `>>` is to avoid writing parentheses.
+
+  `(f >> g) x`{:.ocaml} `(f >> g)(x)`{:.reason} is the equivalent of `f (g x)`{:.ocaml} `f(g(x))`{:.reason}
+
+  ### Example
+
+  ```ocaml
+
+  let f = sqrt >> floor 
+  f 17.0  = 4
+  ```
+
+  ```reason
+  let f = sqrt >> floor
+  f(17.0) == 4.0
+  ```
+*)
 val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 
+(**
+  The `<<` operator returns a function that is the equivalent of the reverse composition of its function arguments.
+
+  `(f << g) x`{:.ocaml} `(f << g)(x)`{:.reason} is the equivalent of `g (f x)`{:.ocaml} `g(f(x))`{:.reason}
+
+
+  ### Example
+
+  ```ocaml
+
+  let f = floor << sqrt 
+  f 3.5 = 1.7320508075688772
+  ```
+
+  ```reason
+  let f = sqrt >> floor
+  f(3.5) == 1.7320508075688772
+  ```
+
+*)
 val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
 
+(**
+  `identity` returns its argument, unchanged. It is useful in circumstances when you need a placeholder function that does not alter the results of a computation.
+*)
 val identity : 'a -> 'a
 
 module List : sig
+  (**
+    `flatten` returns the list obtained by concatenating in order all the sub-lists in a given list.
+
+    ### Example
+
+    ```ocaml
+    flatten [[1; 2]; [3; 4; 5]; []; [6]] = [1; 2; 3; 4; 5; 6]
+    ```
+
+    ```reason
+    flatten([[1, 2], [3, 4, 5], [], [6]]) == [1, 2, 3, 4, 5, 6]
+    ```
+  *)
   val flatten : 'a list list -> 'a list
 
+  (**
+    `sum xs`{:.ocaml} `sum(xs)`{:.reason} returns the sum of the items in the given list of integers.
+
+    ### Example
+
+    ```ocaml
+    sum [1; 3; 5; 7] = 16
+    ```
+
+    ```reason
+    sum([1, 3, 5, 7]) == 16
+    ```
+  *)
   val sum : int list -> int
 
+  (**
+    Equivalent to float_sum
+  *)
   val floatSum : float list -> float
 
+  (**
+    `float_sum xs`{:.ocaml} `floatSum(xs)`{:.reason} returns the sum of the given list of floats.
+    
+    ### Example
+
+    ```ocaml
+    float_sum [1.3; 5.75; 9.2] = 16.25
+    ```
+
+    ```reason
+    floatSum([1.3, 5.75, 9.2]) == 16.25
+    ```
+  *)
   val float_sum : float list -> float
 
+  (**
+    `map ~f:fcn xs`{:.ocaml} `map(~f=fcn, xs)`{:.reason} returns a new list that it is the result of applying function `fcn` to each item in the list `xs`.
+
+    ### Example
+
+    ```ocaml
+    let cube_root (x : int) =
+      ((float_of_int x) ** (1.0 /. 3.0) : float)
+      
+    map ~f:cube_root [8; 1000; 1728] (* [2; 9.999..; 11.999..] *)
+    ```
+
+    ```reason
+    let cube_root = (x:int): float => { float_of_int(x) ** (1.0 /. 3.0); }
+    map(~f=cube_root, [8, 1000, 1728]) /* [2, 9.999.., 11.999..] */
+    ```
+  *)
   val map : f:('a -> 'b) -> 'a list -> 'b list
 
+  (**
+    Same as indexed_map
+  *)
   val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 
+  (**
+    `indexed_map ~f:fcn xs`{:.ocaml} `indexedMap(~f=fcn, xs)`{:.reason} returns a new list that it is the result of applying function `fcn` to each item in the list `xs`. The function has two parameters: the index number of the item in the list, and the item being processed. Item numbers start with zero.
+
+    ### Example
+
+    ```ocaml
+    let numbered (idx: int) (item: string) =
+      ((string_of_int idx) ^ ": " ^ item : string)
+
+    indexed_map ~f:numbered ["zero"; "one"; "two"] =
+      ["0: zero"; "1: one"; "2: two"]
+    ```
+
+    ```reason
+    let numbered = (idx: int, item: string): string =>
+      string_of_int(idx) ++ ": " ++ item;
+      
+    indexedMap(~f=numbered, ["zero", "one", "two"]) ==
+      ["0: zero", "1: one", "2: two"]
+    ```
+  *)
   val indexed_map : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 
+  (**
+    Same as indexed_map
+  *)
   val mapi : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 
+  (*
+    `map2 ~f: fcn xs ys`{:.ocaml} `map2(~f=fcn, xs, ys)`{:.reason} returns a new list whose items are `fcn x y`{:.ocaml} `fcn(x,y)`{:.reason} where `x` and `y` are the items from the given lists.
+
+    ### Example
+    ```ocaml
+    let discount (price: float) (percentage: float) =
+      (price *. (1.0 -. (percentage /. 100.0)) : float)
+      
+    map2 ~f:discount [100.0; 85.0; 30.0] [10.0; 20.0; 30.0] =
+      [90.0; 68.0; 21.0]
+    ```
+
+    ```reason
+    let discount = (price: float, percentage: float): float =>
+      price *. (1.0 -. (percentage /. 100.0));
+      
+    map2(~f=discount, [100.0, 85.0, 30.0], [10.0, 20.0, 30.0]) ==
+      [90.0, 68.0, 21.0]
+    ```
+  *)
   val map2 : f:('a -> 'b -> 'c) -> 'a list -> 'b list -> 'c list
 
+  (**
+    `getBy ~f: predicate xs`{:.ocaml} `getBy(~f=predicate, xs)`{:.reason} returns `Some value`{:.ocaml} `Some(value)`{:.reason} for the first value in `xs` that satisifies the `predicate` function; returns `None` if no element satisifies the function. 
+
+    ### Example
+
+    ```ocaml
+    let even (x: int) = (x mod 2 = 0 : bool)
+    getBy ~f:even [1;4;3;2]) = Some 4
+    getBy ~f:even [15;13;11]) = None
+    ```
+
+    ```reason
+    let even = (x: int): bool => {x mod 2 == 0};
+    getBy(~f=even, [1, 4, 3, 2]) == Some(4);
+    getBy(~f=even, [15, 13, 11]) == None;
+    ```
+  *)
   val getBy : f:('a -> bool) -> 'a list -> 'a option
 
+  (**
+    Same as getBy
+  *)
   val get_by : f:('a -> bool) -> 'a list -> 'a option
 
+  (**
+    Same as getBy
+  *)
   val find : f:('a -> bool) -> 'a list -> 'a option
 
+  (**
+    `elemIndex ~value:v xs`{:.ocaml} `elemIndex(~value: v, xs)`{:.reason} finds the first occurrence of `v` in `xs` and returns its position as `Some index`{:.ocaml} `Some(index)`{:.reason} (with zero being the first element), or `None` if the value is not found. 
+
+    ### Example
+
+    ```ocaml
+    elemIndex ~value: 5 [7; 6; 5; 4; 5] = Some(2)
+    elemIndex ~value: 8 [7; 6; 5; 4; 5] = None
+    ```
+
+    ```reason
+    elemIndex(~value = 5, [7, 6, 5, 4, 5]) == Some(2);
+    elemIndex(~value = 8, [7, 6, 5, 4, 5]) == None;
+    ```
+  *)
   val elemIndex : value:'a -> 'a list -> int option
 
+  (**
+    Same as elemIndex
+  *)
   val elem_index : value:'a -> 'a list -> int option
 
+  (**
+    `last xs`{:.ocaml} `last(xs)`{:.reason} returns the last element in the list as `Some value`{:.ocaml} `Some(value)`{:.reason} unless the list is empty, in which case it returns `None`.
+
+    ### Example
+
+    ```ocaml
+    last ["this"; "is"; "the"; "end"] = Some("end")
+    last [] = None
+    ```
+
+    ```reason
+    last(["this", "is", "the", "end"]) == Some("end");
+    last([]) == None;
+    ```
+  *)
   val last : 'a list -> 'a option
 
+  (**
+    `member ~value: v xs`{:.ocaml} `member(~value=v, xs)`{:.reason} returns `true` if the given value `v` is found in thelist `xs`, `false` otherwise.
+
+    ## Example
+
+    ```ocaml
+    member ~value:3 [1;3;5;7] = true
+    member ~value:4 [1;3;5;7] = false
+    member ~value:5 [] = false
+    ```
+
+    ```reason
+    member(~value = 3, [1, 3, 5, 7]) == true;
+    member(~value = 4, [1, 3, 5, 7]) == false;
+    member(~value = 5, []) == false;
+    ```
+  *)
   val member : value:'a -> 'a list -> bool
 
+  (**
+    `unique_by ~f: fcn xs`{:.ocaml} `uniqueBy(~f=fcn, xs)`{:.reason} returns a new list containing only those elements from `xs` that have a unique value when `fcn` is applied to them. The function `fcn` takes as its single parameter an item from the list and returns a `string`. If the function generates the same string for two or more list items, only the first of them is retained. 
+
+    ### Example
+    ```ocaml
+    uniqueBy ~f: string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]
+
+    let abs_str x = string_of_int (abs x)
+    uniqueBy ~f: abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]
+    ```
+
+    ```reason
+    uniqueBy(~f = string_of_int, [1, 3, 4, 3, 7, 7, 6]) == [1, 3, 4, 7, 6];
+
+    let absStr= (x) => string_of_int(abs(x));
+    uniqueBy(~f=absStr, [1, 3, 4, -3, -7, 7, 6]) == [1, 3, 4, -7, 6];
+    ```
+  *)
   val uniqueBy : f:('a -> string) -> 'a list -> 'a list
 
+  (**
+    Same as unique_by
+  *)
   val unique_by : f:('a -> string) -> 'a list -> 'a list
 
+  (**
+    `getAt ~index: n xs`{:.ocaml} `getAt(~index=n, xs)`{:.reason} retrieves the value of the `n`th item in `xs` (with zero as the starting index) as `Some value`{:.ocaml} `Some(value)`{:.reason}, or `None` if `n` is less than zero or greater than the length of `xs`. 
+
+    ### Example
+
+    ```ocaml
+    getAt ~index: 3 [100; 101; 102; 103] == Some 103
+    getAt ~index: 4 [100; 101; 102; 103] == None
+    getAt ~index: (-1) [100; 101; 102; 103] == None
+    getAt ~index: 0 [] == None
+    ```
+
+    ```reason
+    getAt(~index = 3, [100, 101, 102, 103]) == Some(103);
+    getAt(~index = 4, [100, 101, 102, 103]) == None;
+    getAt(~index = -1, [100, 101, 102, 103]) == None;
+    getAt(~index = 0, []) == None;
+    ```
+  *)
   val getAt : index:int -> 'a list -> 'a option
 
+  (**
+    Same as getAt
+  *)
   val get_at : index:int -> 'a list -> 'a option
 
+  (**
+    `any ~f:fcn xs`{:.ocaml} `any(~f=fcn, xs)`{:.reason} returns `true` if the predicate function `fcn x`{:.ocaml} `fcn(x)`{:.reason} returns `true` for any item in `x` in `xs`.
+
+    ### Example
+    
+    ```ocaml
+    let even x = (x mod 2) = 0
+    any ~f: even [1; 3; 4; 5] = true
+    any ~f: even [1; 3; 5; 7] = false
+    any ~f: even [] = false
+    ```
+
+    ```reason
+    let even = (x) => {(x mod 2) == 0};
+    any(~f = even, [1, 3, 4, 5]) == true;
+    any(~f = even, [1, 3, 5, 7]) == false;
+    any(~f = even, []) == false;
+    ```
+  *)
   val any : f:('a -> bool) -> 'a list -> bool
 
+  (**
+    `head xs`{:.ocaml} `head(xs)`{:ocaml} returns the first item in `xs` as `Some value`{:.ocaml} `Some(value)`{:.reason}, unless it is given an empty list, in which case it returns `None`.
+
+    ### Example
+
+    ```ocaml
+    head ["first"; "second"; "third"] = Some "first"
+    head [] = None
+    ```
+
+    ```reason
+    head(["first", "second", "third"]) == Some("first");
+    head([]) == None;
+    ```
+  *)
   val head : 'a list -> 'a option
 
+  (**
+    `drop ~count:n xs`{:.ocaml} `drop(~count=n, xs)`{:.reason} returns a list without the first `n` elements of `xs`. If `n` negative or greater than the length of `xs`, it returns an empty list.
+
+    ### Example
+
+    ```ocaml
+    drop ~count: 3 [1;2;3;4;5;6] = [4;5;6]
+    drop ~count: 9 [1;2;3;4;5;6] = []
+    drop ~count: (-2) [1;2;3;4;5;6] = []
+    ```
+
+    ```reason
+    drop(~count=3, [1, 2, 3, 4, 5, 6]) == [4, 5, 6];
+    drop(~count=9, [1, 2, 3, 4, 5, 6]) == [];
+    drop(~count=-2, [1, 2, 3, 4, 5, 6]) == [];
+    ```
+  *)
   val drop : count:int -> 'a list -> 'a list
 
+  (**
+    For non-empty lists, `init xs`{:.ocaml} `init(xs)`{:.reason} returns a new list consisting of all but the last list item as a `Some` value. If `xs` is an empty list, `init` returns `None`.
+
+    ### Example
+
+    ```ocaml
+    init ["ant";"bee";"cat";"extra"] = Some ["ant";"bee";"cat"]
+    init [1] = Some []
+    init [] = None
+    ```
+
+    ```reason
+    init(["ant", "bee", "cat", "extra"]) == Some(["ant", "bee", "cat"]);
+    init([1]) == Some([]);
+    init([]) == None;
+    ```
+  *)
   val init : 'a list -> 'a list option
 
+
+  (**
+    `filterMap ~f:fcn xs`{:.ocaml} `filterMap(~f=fcn, xs)`{:.reason} applies `fcn` to each element of `xs`. If `fcn xi`{:.ocaml} `fcn(xi)`{:.reason} is `Some value`{:.ocaml} `Some(value)`{:.reason}, then `value` is kept in the resulting list. If the result is `None`, the element is not retained in the result. 
+
+    ### Example
+
+    ```ocaml
+    filterMap ~f: (fun x -> if x mod 2 = 0 then Some (-x) else None)
+      [1;2;3;4] = [-2;-4]
+    ```
+
+    ```reason
+    filterMap(~f = (x) => if (x mod 2 == 0) {Some(- x)} else {None}, 
+      [1, 2, 3, 4]) == [-2, -4]
+    ```
+  *)
   val filterMap : f:('a -> 'b option) -> 'a list -> 'b list
 
+  (**
+    Same as filterMap
+  *)
   val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
 
+  (**
+    `filter ~f:predicate xs`{:.ocaml} `filter(~f=predicate, xs)`{:.reason} returns a list of all elements in `xs` which satisfy the predicate function `predicate`.
+
+    ### Example
+
+    ```ocaml
+    filter ~f: (fun x -> x mod 2 = 0) [1;2;3;4] = [2;4]
+    ```
+
+    ```reason
+    filter(~f=((x) => x mod 2 == 0), [1, 2, 3, 4]) == [2, 4];
+    ```
+  *)
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
+  (**
+    `concat xs`{:.ocaml} `concat(xs)`{:.reason} returns the list obtained by concatenating all the lists in the list `xs`
+
+    ### Example
+
+    ```ocaml
+    concat [[1;2;3]; []; [4;5]; [6]] = [1;2;3;4;5;6]
+    ```
+
+    ```reason
+    concat([[1, 2, 3], [], [4, 5], [6]]) == [1, 2, 3, 4, 5, 6];
+    ```
+  *)
   val concat : 'a list list -> 'a list
 
+  (**
+    `partition ~f:predicate`{:.ocaml} `partition(~f=predicate, xs)`{:.reason} returns a tuple of two lists. The first element is a list of all the elements of `xs` for which `predicate` returned `true`. The second element of the tuple is a list of all the elements in `xs` for which `predicate` returned `false`.
+
+    ### Example
+
+    ```ocaml
+    let positive x = (x > 0)
+    partition ~f:positive [1;-2;-3;4;5] = ([1;4;5], [-2;-3])
+    ```
+
+    ```reason
+    let positive = (x) => (x > 0);
+    partition(~f = positive, [1, -2, -3, 4, 5]) == ([1, 4, 5], [-2, -3]);
+    ```
+  *)
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
   val foldr : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
