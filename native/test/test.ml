@@ -57,6 +57,10 @@ let t_Tuple2 () =
 
   AT.check (AT.pair AT.int AT.int) "swap" (Tuple2.swap (3, 4)) (4, 3);
 
+  AT.check AT.int "curry" (Tuple2.curry (fun (a, b) -> a + b) 3 4) 7;
+
+  AT.check AT.int "uncurry" (Tuple2.uncurry (fun a b -> a + b) (3, 4)) 7;
+
   AT.check (AT.list AT.int) "toList" (Tuple2.toList (3, 4)) [3; 4;];
 
   ()
@@ -92,6 +96,10 @@ let t_Tuple3 () =
   AT.check (trio AT.int AT.int AT.int) "rotateLeft" (Tuple3.rotateLeft (3, 4, 5)) (4, 5, 3);
   
   AT.check (trio AT.int AT.int AT.int) "rotateRight" (Tuple3.rotateRight (3, 4, 5)) (5, 3, 4);
+
+  AT.check AT.int "curry" (Tuple3.curry (fun (a, b, c) -> a + b + c) 3 4 5) 12;
+
+  AT.check AT.int "uncurry" (Tuple3.uncurry (fun a b c -> a + b + c) (3, 4, 5)) 12;
 
   AT.check (AT.list AT.int) "toList" (Tuple3.toList (3, 4, 5)) [3; 4; 5;];
 
