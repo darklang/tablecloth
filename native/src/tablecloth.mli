@@ -300,51 +300,51 @@ module Char : sig
 
   val toUppercase : char -> char
   (** Convert an ASCII character to upper case, preserving non alphabetic ASCII characters.
-      [uppercase 'a' = 'A']
+      [toUppercase 'a' = 'A']
 
-      [uppercase 'b' = 'B']
+      [toUppercase 'b' = 'B']
 
-      [uppercase '7' = '7'] *)
+      [toUppercase '7' = '7'] *)
 
   val to_uppercase : char -> char
 
   val isLowercase : char -> bool
   (** Detect lower case ASCII characters.
 
-    [isLower 'a' = true]
+    [isLowercase 'a' = true]
 
-    [isLower 'b' = true]
+    [isLowercase 'b' = true]
 
     ...
 
-    [isLower 'z' = true]
+    [isLowercase 'z' = true]
 
-    [isLower '0' = false]
+    [isLowercase '0' = false]
 
-    [isLower 'A' = false]
+    [isLowercase 'A' = false]
 
-    [isLower '-' = false]
+    [isLowercase '-' = false]
 
-    [isLower 'ã' = false] *)
+    [isLowercase 'ã' = false] *)
 
   val is_lowercase : char -> bool
 
   val isUppercase : char -> bool
   (** Detect upper case ASCII characters.
 
-    [isUpper 'A' = true]
+    [isUppercase 'A' = true]
 
-    [isUpper 'B' = true]
+    [isUppercase 'B' = true]
 
     [...]
 
-    [isUpper 'Z' = true]
+    [isUppercase 'Z' = true]
 
-    [isUpper '0' = false]
+    [isUppercase '0' = false]
 
-    [isUpper 'a' = false]
+    [isUppercase 'Ý' = false]
 
-    [isUpper '-' = false] *)
+    [isUppercase '-' = false] *)
 
   val is_uppercase : char -> bool
 
@@ -360,6 +360,8 @@ module Char : sig
       [isLetter 'Y' = true]
 
       [isLetter '0' = false]
+
+      [isLetter 'ý' = false]
 
       [isLetter '-' = false] *)
 
@@ -378,28 +380,26 @@ module Char : sig
 
     [isDigit 'b' = false]
 
-    [isDigit 'Ü' = false] *)
+    [isDigit 'ý' = false] *)
 
   val is_digit : char -> bool
 
   val isAlphanumeric : char -> bool
   (** Detect upper case, lower case and digit ASCII characters.
 
-    [isAlphaNum 'a' = true]
+    [isAlphanumeric 'a' = true]
 
-    [isAlphaNum 'b' = true]
+    [isAlphanumeric 'b' = true]
 
-    [isAlphaNum 'E' = true]
+    [isAlphanumeric 'E' = true]
 
-    [isAlphaNum 'Y' = true]
+    [isAlphanumeric 'Y' = true]
 
-    [isAlphaNum '0' = true]
+    [isAlphanumeric '0' = true]
 
-    [isAlphaNum '7' = true]
+    [isAlphanumeric '7' = true]
 
-    [isAlphaNum '-' = false]
-
-    [isAlphaNum 'π' = false] *)
+    [isAlphanumeric '-' = false] *)
   
   val is_alphanumeric : char -> bool
 
@@ -407,7 +407,7 @@ module Char : sig
   (** Detect if a character is a [printable] character
     https://en.wikipedia.org/wiki/ASCII#Printable_characters
 
-    [isWhitespace ' ' = true] *)
+    [isPrintable ' ' = true] *)
   
   val is_printable : char -> bool
 
@@ -416,7 +416,7 @@ module Char : sig
 
     [isWhitespace ' ' = true]
 
-    [isAlphaNum 'b' = false] *)
+    [isWhitespace 'b' = false] *)
   
   val is_whitespace : char -> bool
 end
