@@ -14,25 +14,34 @@ let t_Char () =
   AT.check (AT.option AT.char) "fromString - multi character strings return none" (Char.fromString "abc") None;
   AT.check (AT.option AT.char) "fromString - zero length strings return none" (Char.fromString "") None;
 
-  AT.check AT.char "lowercase - converts uppercase ASCII characters to lowercase" (Char.lowercase 'A') 'a';
-  AT.check AT.char "lowercase - perserves lowercase characters" (Char.lowercase 'a') 'a';
-  AT.check AT.char "lowercase - perserves non-alphabet characters" (Char.lowercase '7') '7';
+  AT.check AT.char "toLowercase - converts uppercase ASCII characters to lowercase" (Char.toLowercase 'A') 'a';
+  AT.check AT.char "toLowercase - perserves lowercase characters" (Char.toLowercase 'a') 'a';
+  AT.check AT.char "toLowercase - perserves non-alphabet characters" (Char.toLowercase '7') '7';
+  AT.check AT.char "toUppercase - perserves non-ASCII characters" (Char.toUppercase '\237') '\237';
 
-  AT.check AT.char "uppercase - converts lowercase ASCII characters to uppercase" (Char.uppercase 'a') 'A';
-  AT.check AT.char "uppercase - perserves uppercase characters" (Char.uppercase 'A') 'A';
-  AT.check AT.char "uppercase - perserves non-alphabet characters" (Char.uppercase '7') '7';
+  AT.check AT.char "toUppercase - converts lowercase ASCII characters to uppercase" (Char.toUppercase 'a') 'A';
+  AT.check AT.char "toUppercase - perserves uppercase characters" (Char.toUppercase 'A') 'A';
+  AT.check AT.char "toUppercase - perserves non-alphabet characters" (Char.toUppercase '7') '7';
+  AT.check AT.char "toUppercase - perserves non-ASCII characters" (Char.toUppercase '\236') '\236';
+
+  AT.check (AT.option AT.int) "toDigit - converts ASCII characters representing digits into integers" (Char.toDigit '0') (Some 0);
+  AT.check (AT.option AT.int) "toDigit - converts ASCII characters representing digits into integers" (Char.toDigit '8') (Some 8);
+  AT.check (AT.option AT.int) "toDigit - converts ASCII characters representing digits into integers" (Char.toDigit 'a') None;
 
   AT.check AT.bool "isLowercase - returns true for any lowercase character" (Char.isLowercase 'a') true;
   AT.check AT.bool "isLowercase - returns false for all other characters" (Char.isLowercase '7') false;      
+  AT.check AT.bool "isLowercase - returns false for non-ASCII characters" (Char.isLowercase '\236') false;      
 
   AT.check AT.bool "isUppercase - returns true for any uppercase character" (Char.isUppercase 'A') true;
   AT.check AT.bool "isUppercase - returns false for all other characters" (Char.isUppercase '7') false;      
+  AT.check AT.bool "isUppercase - returns false for non-ASCII characters" (Char.isLowercase '\237') false;      
 
-  AT.check AT.bool "isAlphabetic - returns true for any ASCII alphabet character" (Char.isAlphabetic 'A') true;
-  AT.check AT.bool "isAlphabetic - returns false for all other characters" (Char.isAlphabetic '\n') false;
+  AT.check AT.bool "isLetter - returns true for any ASCII alphabet character" (Char.isLetter 'A') true;
+  AT.check AT.bool "isLetter - returns false for all other characters" (Char.isLetter '\n') false;
+  AT.check AT.bool "isLetter - returns false for non-ASCII characters" (Char.isLetter '\236') false;
 
-  AT.check AT.bool "isNumeric - returns true for digits 0-9" (Char.isNumeric '5') true;
-  AT.check AT.bool "isNumeric - returns false for all other characters" (Char.isNumeric 'a') false;
+  AT.check AT.bool "isDigit - returns true for digits 0-9" (Char.isDigit '5') true;
+  AT.check AT.bool "isDigit - returns false for all other characters" (Char.isDigit 'a') false;
 
   AT.check AT.bool "isAlphanumeric - returns true for any alphabet or digit character" (Char.isAlphanumeric 'A') true;
   AT.check AT.bool "isAlphanumeric - returns false for all other characters" (Char.isAlphanumeric '?') false;      

@@ -236,9 +236,17 @@ module Char : sig
 
   val from_string : string -> char option
 
-  val lowercase : char -> char
+  val toDigit : char -> int option
 
-  val uppercase : char -> char
+  val to_digit : char -> int option
+
+  val toLowercase : char -> char
+
+  val to_lowercase : char -> char
+
+  val toUppercase : char -> char
+
+  val to_uppercase : char -> char
 
   val isLowercase : char -> bool
 
@@ -248,13 +256,13 @@ module Char : sig
 
   val is_uppercase : char -> bool
 
-  val isAlphabetic : char -> bool
+  val isLetter : char -> bool
 
-  val is_alphabetic : char -> bool
+  val is_letter : char -> bool
 
-  val isNumeric : char -> bool
+  val isDigit : char -> bool
 
-  val is_numeric : char -> bool
+  val is_digit : char -> bool
 
   val isAlphanumeric : char -> bool
 

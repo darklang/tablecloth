@@ -20,36 +20,47 @@ let () =
       test "zero length strings return none" (fun () -> expect (Char.fromString "") |> toEqual None);
     );
 
-    describe "lowercase" (fun () -> 
-      test "converts uppercase ASCII characters to lowercase" (fun () -> expect (Char.lowercase 'A') |> toEqual 'a');
-      test "perserves lowercase characters" (fun () -> expect (Char.lowercase 'a') |> toEqual 'a');
-      test "perserves non-alphabet characters" (fun () -> expect (Char.lowercase '7') |> toEqual '7');
+    describe "toLowercase" (fun () -> 
+      test "converts uppercase ASCII characters to lowercase" (fun () -> expect (Char.toLowercase 'A') |> toEqual 'a');
+      test "perserves lowercase characters" (fun () -> expect (Char.toLowercase 'a') |> toEqual 'a');
+      test "perserves non-alphabet characters" (fun () -> expect (Char.toLowercase '7') |> toEqual '7');
+      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '/233');
     );
 
-    describe "uppercase" (fun () -> 
-      test "converts lowercase ASCII characters to uppercase" (fun () -> expect (Char.uppercase 'a') |> toEqual 'A');
-      test "perserves uppercase characters" (fun () -> expect (Char.uppercase 'A') |> toEqual 'A');
-      test "perserves non-alphabet characters" (fun () -> expect (Char.uppercase '7') |> toEqual '7');
+    describe "toUppercase" (fun () -> 
+      test "converts lowercase ASCII characters to uppercase" (fun () -> expect (Char.toUppercase 'a') |> toEqual 'A');
+      test "perserves uppercase characters" (fun () -> expect (Char.toUppercase 'A') |> toEqual 'A');
+      test "perserves non-alphabet characters" (fun () -> expect (Char.toUppercase '7') |> toEqual '7');
+      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '/233');
     );
+
+    describe "toDigit" (fun () -> 
+      test "toDigit - converts ASCII characters representing digits into integers" (fun () -> expect (Char.toDigit '0') |> toEqual (Some 0));
+      test "toDigit - converts ASCII characters representing digits into integers" (fun () -> expect (Char.toDigit '8') |> toEqual (Some 8));
+      test "toDigit - converts ASCII characters representing digits into integers" (fun () -> expect (Char.toDigit 'a') |> toEqual None);
+    );
+
 
     describe "isLowercase" (fun () -> 
       test "returns true for any lowercase character" (fun () -> expect (Char.isLowercase 'a') |> toEqual true);
       test "returns false for all other characters" (fun () -> expect (Char.isLowercase '7') |> toEqual false);      
+      test "returns false for non-ASCII characters" (fun () -> expect (Char.isLowercase '\236') |> toEqual false);      
     );
 
     describe "isUppercase" (fun () -> 
       test "returns true for any uppercase character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
       test "returns false for all other characters" (fun () -> expect (Char.isUppercase '7') |> toEqual false);      
+      test "returns false for non-ASCII characters" (fun () -> expect (Char.isLowercase '\237') |> toEqual false);      
     );
 
-    describe "isAlphabetic" (fun () -> 
-      test "returns true for any ASCII alphabet character" (fun () -> expect (Char.isAlphabetic 'A') |> toEqual true);
-      testAll "returns false for all other characters" ['7'; ' '; '\n'; '\011'] (fun char -> expect (Char.isAlphabetic char) |> toEqual false);      
+    describe "isLetter" (fun () -> 
+      test "returns true for any ASCII alphabet character" (fun () -> expect (Char.isLetter 'A') |> toEqual true);
+      testAll "returns false for all other characters" ['7'; ' '; '\n'; '\011'; '\236'] (fun char -> expect (Char.isLetter char) |> toEqual false);      
     );
 
-    describe "isNumeric" (fun () -> 
-      testAll "returns true for digits 0-9" ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9';] (fun digit -> expect (Char.isNumeric digit) |> toEqual true);
-      test "returns false for all other characters" (fun () -> expect (Char.isNumeric 'a') |> toEqual false);
+    describe "isDigit" (fun () -> 
+      testAll "returns true for digits 0-9" ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9';] (fun digit -> expect (Char.isDigit digit) |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isDigit 'a') |> toEqual false);
     );
 
     describe "isAlphanumeric" (fun () -> 

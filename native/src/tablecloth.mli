@@ -276,21 +276,37 @@ module Char : sig
 
   val from_string : string -> char option
 
-  val lowercase : char -> char
+  val toDigit : char -> int option
+  (** Converts a digit character to its corresponding integer. Returns None when the character isn't a digit.
+      [toDigit "7" = Some 7] 
+
+      [toDigit "0" = Some 0]
+
+      [toDigit "A" = None]
+
+      [toDigit "" = None] *)
+
+  val to_digit : char -> int option
+
+  val toLowercase : char -> char
   (** Converts an ASCII character to lower case, preserving non alphabetic ASCII characters.
-      [uppercase 'A' = 'a']
+      [toLowercase 'A' = 'a']
 
-      [uppercase 'B' = 'b']
+      [toLowercase 'B' = 'b']
 
-      [uppercase '7' = '7'] *)
+      [toLowercase '7' = '7'] *)
 
-  val uppercase : char -> char
+  val to_lowercase : char -> char
+
+  val toUppercase : char -> char
   (** Convert an ASCII character to upper case, preserving non alphabetic ASCII characters.
       [uppercase 'a' = 'A']
 
       [uppercase 'b' = 'B']
 
       [uppercase '7' = '7'] *)
+
+  val to_uppercase : char -> char
 
   val isLowercase : char -> bool
   (** Detect lower case ASCII characters.
@@ -332,7 +348,7 @@ module Char : sig
 
   val is_uppercase : char -> bool
 
-  val isAlphabetic : char -> bool
+  val isLetter : char -> bool
   (** Detect upper and lower case ASCII alphabetic characters.
 
       [isLetter 'a' = true]
@@ -347,24 +363,24 @@ module Char : sig
 
       [isLetter '-' = false] *)
 
-  val is_alphabetic : char -> bool
+  val is_letter : char -> bool
 
-  val isNumeric : char -> bool
+  val isDigit : char -> bool
   (** Detect when a character is a number
 
-    [isNumeric '0' = true]
+    [isDigit '0' = true]
 
-    [isNumeric '1' = true]
+    [isDigit '1' = true]
     ...
-    [isNumeric '9' = true]
+    [isDigit '9' = true]
 
-    [isNumeric 'a' = false]
+    [isDigit 'a' = false]
 
-    [isNumeric 'b' = false]
+    [isDigit 'b' = false]
 
-    [isNumeric 'Ü' = false] *)
+    [isDigit 'Ü' = false] *)
 
-  val is_numeric : char -> bool
+  val is_digit : char -> bool
 
   val isAlphanumeric : char -> bool
   (** Detect upper case, lower case and digit ASCII characters.

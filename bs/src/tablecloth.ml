@@ -437,9 +437,19 @@ module Char = struct
 
   let from_string = fromString
 
-  let lowercase = Char.lowercase
+  let toDigit char = match char with
+  | '0' .. '9' -> Some (toCode char - toCode '0')
+  | _ -> None
 
-  let uppercase = Char.uppercase
+  let to_digit = toDigit
+
+  let toLowercase = Char.lowercase
+
+  let to_lowercase = toLowercase
+
+  let toUppercase = Char.uppercase
+
+  let to_uppercase = toUppercase
 
   let isLowercase = function
     | 'a' .. 'z' -> true
@@ -453,17 +463,17 @@ module Char = struct
 
   let is_uppercase = isUppercase
 
-  let isAlphabetic = function
+  let isLetter = function
     | 'a' .. 'z' | 'A' .. 'Z' -> true
     | _ -> false
 
-  let is_alphabetic = isAlphabetic
+  let is_letter = isLetter
 
-  let isNumeric = function
+  let isDigit = function
     | '0' .. '9' -> true
     | _ -> false
 
-  let is_numeric = isNumeric
+  let is_digit = isDigit
   
   let isAlphanumeric = function
     | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' -> true
