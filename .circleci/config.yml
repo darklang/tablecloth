@@ -47,7 +47,7 @@ jobs:
       - save_cache:
           key: v1-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
-            - ~/opam
+            - ~/.opam
 
 workflows:
   version: 2
