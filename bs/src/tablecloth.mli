@@ -722,20 +722,103 @@ module List : sig
   *)
   val append : 'a list -> 'a list -> 'a list
 
+  (**
+    `removeAt(n, xs)` returns a new list with the item at the given index removed. If `n` is less than zero or greater than the length of `xs`, the new list is the same as the original. (Same as `remove_at`.)
+    
+    ### Example
+    
+    ```reason
+    removeAt(~index=2, ["a", "b", "c", "d"] == ["a", "b", "d"]);
+    removeAt(~index=-2, ["a", "b", "c", "d"] == ["a", "b", "c", "d"]);
+    removeAt(~index=7, ["a", "b", "c", "d"] == ["a", "b", "c", "d"]);
+    ```
+  *)
   val removeAt : index:int -> 'a list -> 'a list
 
+  (**
+    `remove_at n xs` returns a new list with the item at the given index removed. If `n` is less than zero or greater than the length of `xs`, the new list is the same as the original. (Same as `removeAt`.)
+    
+    ### Example
+    
+    ```reason
+    remove_at ~index:2, ["a";"b";"c";"d"] = ["a";"b";"d"]
+    remove_at ~index:(-2) ["a";"b";"c";"d"] = ["a";"b";"c";"d"]
+    remove_at ~index:7 ["a";"b";"c";"d"] = ["a";"b";"c";"d"]
+    ```
+  *)
   val remove_at : index:int -> 'a list -> 'a list
 
+  (**
+    `minimumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list for which `fcn(item)` is a minimum. It is returned as `Some(item)`. If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `minimum_by`.)
+    
+    ### Example
+    
+    ```reason
+    let mod12 = (x) => (x mod 12);
+    let hours = [7, 9, 15, 10, 3, 22];
+    minimumBy(~f=mod12, hours) == Some(15);
+    minimumBy(~f=mod12, []) == None;
+    ```
+   *) 
   val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
+  (**
+    `minimum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list for which `fcn item` is a minimum. It is returned as `Some item`. If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `minimumBy`.)
+    
+    ### Example
+    
+    ```reason
+    let mod12 x = x mod 12
+    let hours = [7;9;15;10;3;22]
+    minimum_by ~f:mod12 hours = Some 15
+    minimum_by ~f:mod12 [] = None
+    ```
+   *) 
   val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
   
   val minimum: 'comparable list -> 'comparable option
 
+  (**
+    `maximumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list for which `fcn(item)` is a maximum. It is returned as `Some(item)`. If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `maximum_by`.)
+    
+    ### Example
+    
+    ```reason
+    let mod12 = (x) => (x mod 12);
+    let hours = [7, 9, 15, 10, 3, 22];
+    maximumBy(~f=mod12, hours) == Some(10);
+    maximumBy(~f=mod12 []) == None;
+    ```
+   *) 
   val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
+  (**
+    `maximum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list for which `fcn item` is a maximum. It is returned as `Some item`. If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `maximumBy`.)
+    
+    ### Example
+    
+    ```reason
+    let mod12 x = x mod 12
+    let hours = [7;9;15;10;3;22]
+    maximum_by ~f:mod12 hours = Some 10
+    maximum_by ~f:mod12 [] = None
+    ```
+   *) 
   val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 
+  (**
+    `maximum xs` (`maximum(xs)` in ReasonML), when given a non-empty list, returns the item in the list with the maximum value. It is returned as `Some value` (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`. 
+    
+    The items in the list must be of a type that can be compared---for example, a `string` or `int`.
+   *) 
   val maximum : 'comparable list -> 'comparable option
 
   val sortBy : f:('a -> 'b) -> 'a list -> 'a list
