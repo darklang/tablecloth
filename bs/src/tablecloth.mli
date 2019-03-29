@@ -8,7 +8,8 @@ Function names that are in camelCase have their documentation written in ReasonM
 *)
 
 (**
-  The `<|` operator applies a function to an argument. It is equivalent to the `@@` operator, and its main use is to avoid needing extra parentheses.
+  The `<|` operator applies a function to an argument. It is equivalent to the `@@` operator,
+  and its main use is to avoid needing extra parentheses.
 
   ### Example
 
@@ -25,7 +26,8 @@ Function names that are in camelCase have their documentation written in ReasonM
 val ( <| ) : ('a -> 'b) -> 'a -> 'b
 
 (**
-    The `>>` operator returns a function that is the equivalent of the composition of its function arguments. The main use of `>>` is to avoid writing parentheses.
+    The `>>` operator returns a function that is the equivalent of the composition of its function arguments.
+    The main use of `>>` is to avoid writing parentheses.
 
   `(f >> g) x` (`(f >> g)(x)` in ReasonML) is the equivalent of `f (g x)` (`f(g(x))` in ReasonML)
 
@@ -66,7 +68,8 @@ val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
 
 (**
-  `identity` returns its argument, unchanged. It is useful in circumstances when you need a placeholder function that does not alter the results of a computation.
+  `identity` returns its argument, unchanged. It is useful in circumstances when you need a placeholder
+  function that does not alter the results of a computation.
 *)
 val identity : 'a -> 'a
 
@@ -124,7 +127,8 @@ module List : sig
   val float_sum : float list -> float
 
   (**
-    `map ~f:fcn xs` (`map(~f=fcn, xs)` in ReasonML) returns a new list that it is the result of applying function `fcn` to each item in the list `xs`.
+    `map ~f:fcn xs` (`map(~f=fcn, xs)` in ReasonML) returns a new list that it is the result of
+    applying function `fcn` to each item in the list `xs`.
 
     ### Example
 
@@ -143,7 +147,10 @@ module List : sig
   val map : f:('a -> 'b) -> 'a list -> 'b list
 
   (**
-    `indexedMap(~f=fcn, xs)` returns a new list that it is the result of applying function `fcn` to each item in the list `xs`. The function has two parameters: the index number of the item in the list, and the item being processed. Item numbers start with zero. (Same as `indexed_map`.)
+    `indexedMap(~f=fcn, xs)` returns a new list that it is the result of applying
+    function `fcn` to each item in the list `xs`. The function has two parameters:
+    the index number of the item in the list, and the item being processed.
+    Item numbers start with zero. (Same as `indexed_map`.)
 
     ### Example
 
@@ -158,7 +165,10 @@ module List : sig
   val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 
   (**
-    `indexed_map ~f:fcn xs` returns a new list that it is the result of applying function `fcn` to each item in the list `xs`. The function has two parameters: the index number of the item in the list, and the item being processed. Item numbers start with zero. (Same as `indexedMap`.)
+    `indexed_map ~f:fcn xs` returns a new list that it is the result of applying
+    function `fcn` to each item in the list `xs`. The function has two parameters:
+    the index number of the item in the list, and the item being processed.
+    Item numbers start with zero. (Same as `indexedMap`.)
 
     ### Example
 
@@ -178,7 +188,9 @@ module List : sig
   val mapi : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 
   (*
-    `map2 ~f:fcn xs ys` (`map2(~f=fcn, xs, ys)` in ReasonML) returns a new list whose items are `fcn x y` (`fcn(x,y)` in ReasonML) where `x` and `y` are the items from the given lists.
+    `map2 ~f:fcn xs ys` (`map2(~f=fcn, xs, ys)` in ReasonML) returns a new list
+    whose items are `fcn x y` (`fcn(x,y)` in ReasonML) where `x` and `y` are
+    the items from the given lists.
 
     ### Example
     ```ocaml
@@ -200,7 +212,9 @@ module List : sig
   val map2 : f:('a -> 'b -> 'c) -> 'a list -> 'b list -> 'c list
 
   (**
-    `getBy(~f=predicate, xs)` returns `Some(value)` for the first value in `xs` that satisifies the `predicate` function; returns `None` if no element satisifies the function.  (Same as `get_by`.)
+    `getBy(~f=predicate, xs)` returns `Some(value)` for the first value in `xs`
+    that satisifies the `predicate` function; returns `None` if no element
+    satisifies the function.  (Same as `get_by`.)
 
     ### Example
 
@@ -213,7 +227,9 @@ module List : sig
   val getBy : f:('a -> bool) -> 'a list -> 'a option
 
   (**
-    `get_by ~f:predicate xs`  returns `Some value` for the first value in `xs` that satisifies the `predicate` function; returns `None` if no element satisifies the function. (Same as `getBy`.)
+    `get_by ~f:predicate xs`  returns `Some value` for the first value in `xs`
+    that satisifies the `predicate` function; returns `None` if no element
+    satisifies the function. (Same as `getBy`.)
 
     ### Example
 
@@ -232,7 +248,9 @@ module List : sig
   val find : f:('a -> bool) -> 'a list -> 'a option
 
   (**
-    `elemIndex(~value: v, xs)` finds the first occurrence of `v` in `xs` and returns its position as `Some(index)` (with zero being the first element), or `None` if the value is not found.  (Same as `elem_index`.)
+    `elemIndex(~value: v, xs)` finds the first occurrence of `v` in `xs` and
+    returns its position as `Some(index)` (with zero being the first element),
+    or `None` if the value is not found.  (Same as `elem_index`.)
 
     ### Example
 
@@ -244,7 +262,9 @@ module List : sig
   val elemIndex : value:'a -> 'a list -> int option
 
   (**
-    `elem_index ~value:v xs` finds the first occurrence of `v` in `xs` and returns its position as `Some index` (with zero being the first element), or `None` if the value is not found. (Same as `elemIndex`.)
+    `elem_index ~value:v xs` finds the first occurrence of `v` in `xs` and
+    returns its position as `Some index` (with zero being the first element),
+    or `None` if the value is not found. (Same as `elemIndex`.)
 
     ### Example
 
@@ -256,7 +276,9 @@ module List : sig
   val elem_index : value:'a -> 'a list -> int option
 
   (**
-    `last xs` (`last(xs)` in ReasonML) returns the last element in the list as `Some value` (`Some(value)` in ReasonML) unless the list is empty, in which case it returns `None`.
+    `last xs` (`last(xs)` in ReasonML) returns the last element in the list
+    as `Some value` (`Some(value)` in ReasonML) unless the list is empty,
+    in which case it returns `None`.
 
     ### Example
 
@@ -273,7 +295,8 @@ module List : sig
   val last : 'a list -> 'a option
 
   (**
-    `member ~value: v xs` (`member(~value=v, xs)` in ReasonML) returns `true` if the given value `v` is found in thelist `xs`, `false` otherwise.
+    `member ~value: v xs` (`member(~value=v, xs)` in ReasonML) returns `true`
+    if the given value `v` is found in thelist `xs`, `false` otherwise.
 
     ## Example
 
@@ -292,7 +315,12 @@ module List : sig
   val member : value:'a -> 'a list -> bool
 
   (**
-    `uniqueBy ~f:fcn xs` (`uniqueBy(~f=fcn, xs)` in ReasonML) returns a new list containing only those elements from `xs` that have a unique value when `fcn` is applied to them. The function `fcn` takes as its single parameter an item from the list and returns a `string`. If the function generates the same string for two or more list items, only the first of them is retained. (Same as 'unique_by'.)
+    `uniqueBy ~f:fcn xs` returns a new list containing only those elements from `xs`
+    that have a unique value when `fcn` is applied to them. 
+    
+    The function `fcn` takes as its single parameter an item from the list
+    and returns a `string`. If the function generates the same string for two or more
+    list items, only the first of them is retained. (Same as 'unique_by'.)
 
     ### Example
     ```reason
@@ -305,7 +333,12 @@ module List : sig
   val uniqueBy : f:('a -> string) -> 'a list -> 'a list
 
   (**
-    `unique_by ~f:fcn xs` returns a new list containing only those elements from `xs` that have a unique value when `fcn` is applied to them. The function `fcn` takes as its single parameter an item from the list and returns a `string`. If the function generates the same string for two or more list items, only the first of them is retained. (Same as 'uniqueBy'.)
+    `unique_by ~f:fcn xs` returns a new list containing only those elements from `xs`
+    that have a unique value when `fcn` is applied to them.
+    
+    The function `fcn` takes as its single parameter an item from the list
+    and returns a `string`. If the function generates the same string for two or more
+    list items, only the first of them is retained. (Same as 'uniqueBy'.)
 
     ### Example
     ```ocaml
@@ -318,7 +351,9 @@ module List : sig
   val unique_by : f:('a -> string) -> 'a list -> 'a list
 
   (**
-    `getAt(~index=n, xs)` retrieves the value of the `n`th item in `xs` (with zero as the starting index) as `Some(value)`, or `None` if `n` is less than zero or greater than the length of `xs`. 
+    `getAt(~index=n, xs)` retrieves the value of the `n`th item in `xs`
+    (with zero as the starting index) as `Some(value)`, or `None`
+    if `n` is less than zero or greater than the length of `xs`. 
 
     ### Example
 
@@ -332,7 +367,9 @@ module List : sig
   val getAt : index:int -> 'a list -> 'a option
 
   (**
-    `get_at ~index: n xs` retrieves the value of the `n`th item in `xs` (with zero as the starting index) as `Some value`, or `None` if `n` is less than zero or greater than the length of `xs`. (Same as 'getAt'.)
+    `get_at ~index: n xs` retrieves the value of the `n`th item in `xs`
+    (with zero as the starting index) as `Some value`, or `None`
+    if `n` is less than zero or greater than the length of `xs`. (Same as 'getAt'.)
 
     ### Example
 
@@ -346,7 +383,9 @@ module List : sig
   val get_at : index:int -> 'a list -> 'a option
 
   (**
-    `any ~f:fcn xs` (`any(~f=fcn, xs)` in ReasonML) returns `true` if the predicate function `fcn x` (`fcn(x)` in ReasonML) returns `true` for any item in `x` in `xs`.
+    `any ~f:fcn xs` (`any(~f=fcn, xs)` in ReasonML) returns `true` if
+    the predicate function `fcn x` (`fcn(x)` in ReasonML) returns `true`
+    for any item in `x` in `xs`.
 
     ### Example
     
@@ -367,7 +406,9 @@ module List : sig
   val any : f:('a -> bool) -> 'a list -> bool
 
   (**
-    `head xs` (`head(xs)` in ReasonML) (returns the first item in `xs` as `Some value` (`Some(value)` in ReasonML), unless it is given an empty list, in which case it returns `None`.
+    `head xs` (`head(xs)` in ReasonML) (returns the first item in `xs` as
+    `Some value` (`Some(value)` in ReasonML), unless it is given an empty list,
+    in which case it returns `None`.
 
     ### Example
 
@@ -384,7 +425,9 @@ module List : sig
   val head : 'a list -> 'a option
 
   (**
-    `drop ~count:n xs` (`drop(~count=n, xs)` in ReasonML) returns a list without the first `n` elements of `xs`. If `n` negative or greater than the length of `xs`, it returns an empty list.
+    `drop ~count:n xs` (`drop(~count=n, xs)` in ReasonML) returns a list
+    without the first `n` elements of `xs`. If `n` negative or greater
+    than the length of `xs`, it returns an empty list.
 
     ### Example
 
@@ -403,7 +446,9 @@ module List : sig
   val drop : count:int -> 'a list -> 'a list
 
   (**
-    For non-empty lists, `init xs` (`init(xs)` in ReasonML) returns a new list consisting of all but the last list item as a `Some` value. If `xs` is an empty list, `init` returns `None`.
+    For non-empty lists, `init xs` (`init(xs)` in ReasonML) returns a new list
+    consisting of all but the last list item as a `Some` value.
+    If `xs` is an empty list, `init` returns `None`.
 
     ### Example
 
@@ -423,7 +468,9 @@ module List : sig
 
 
   (**
-    `filterMap(~f=fcn, xs)` applies `fcn` to each element of `xs`. If the function returns `Some(value)`, then `value` is kept in the resulting list. If the result is `None`, the element is not retained in the result. (Same as `filter_map`.)
+    `filterMap(~f=fcn, xs)` applies `fcn` to each element of `xs`.
+    If the function returns `Some(value)`, then `value` is kept in the resulting list.
+    If the result is `None`, the element is not retained in the result. (Same as `filter_map`.)
 
     ### Example
 
@@ -435,7 +482,9 @@ module List : sig
   val filterMap : f:('a -> 'b option) -> 'a list -> 'b list
 
   (**
-    `filter_map ~f:fcn xs` applies `fcn` to each element of `xs`. If the function returns `Some value`, then `value` is kept in the resulting list. If the result is `None`, the element is not retained in the result. (Same as `filterMap`.)
+    `filter_map ~f:fcn xs` applies `fcn` to each element of `xs`.
+    If the function returns `Some value`, then `value` is kept in the resulting list.
+    If the result is `None`, the element is not retained in the result. (Same as `filterMap`.)
 
     ### Example
 
@@ -447,7 +496,8 @@ module List : sig
   val filter_map : f:('a -> 'b option) -> 'a list -> 'b list
 
   (**
-    `filter ~f:predicate xs` (`filter(~f=predicate, xs)` in ReasonML) returns a list of all elements in `xs` which satisfy the predicate function `predicate`.
+    `filter ~f:predicate xs` (`filter(~f=predicate, xs)` in ReasonML) returns
+    a list of all elements in `xs` which satisfy the predicate function `predicate`.
 
     ### Example
 
@@ -462,7 +512,8 @@ module List : sig
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
   (**
-    `concat xs` (`concat(xs)` in ReasonML) returns the list obtained by concatenating all the lists in the list `xs`
+    `concat xs` (`concat(xs)` in ReasonML) returns the list obtained by concatenating
+    all the lists in the list `xs`.
 
     ### Example
 
@@ -477,7 +528,10 @@ module List : sig
   val concat : 'a list list -> 'a list
 
   (**
-    `partition ~f:predicate` (`partition(~f=predicate, xs)` in ReasonML) returns a tuple of two lists. The first element is a list of all the elements of `xs` for which `predicate` returned `true`. The second element of the tuple is a list of all the elements in `xs` for which `predicate` returned `false`.
+    `partition ~f:predicate` (`partition(~f=predicate, xs)` in ReasonML) returns
+    a tuple of two lists. The first element is a list of all the elements of `xs`
+    for which `predicate` returned `true`. The second element of the tuple is a list
+    of all the elements in `xs` for which `predicate` returned `false`.
 
     ### Example
 
@@ -498,7 +552,9 @@ module List : sig
   val foldl : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
 
   (**
-    `findIndex(~f=predicate, xs)` finds the position of the first element in `xs` for which `predicate` returns `true`. The position is returned as `Some(index)`. If no element satisfies the `predicate`, `findIndex` returns `None`. (Same as `find_index`.)
+    `findIndex(~f=predicate, xs)` finds the position of the first element in `xs` for which
+    `predicate` returns `true`. The position is returned as `Some(index)`.
+    If no element satisfies the `predicate`, `findIndex` returns `None`. (Same as `find_index`.)
 
     ### Example
 
@@ -512,7 +568,9 @@ module List : sig
   val findIndex : f:('a -> bool) -> 'a list -> int option
 
   (**
-    `find_index ~f:predicate` finds the position of the first element in `xs` for which `predicate` returns `true`. The position is returned as `Some index`. If no element satisfies the `predicate`, `find_index` returns `None`. (Same as `findIndex`.)
+    `find_index ~f:predicate` finds the position of the first element in `xs` for which
+    `predicate` returns `true`. The position is returned as `Some index`.
+    If no element satisfies the `predicate`, `find_index` returns `None`. (Same as `findIndex`.)
 
     ### Example
 
@@ -526,7 +584,9 @@ module List : sig
   val find_index : f:('a -> bool) -> 'a list -> int option
 
   (**
-    `take ~count:n xs` (`take(~count=n, xs)` in ReasonML) returns a list consisting of the first `n` elements of `xs`. If `n` is less than or equal to zero or greater than the length of `xs`, `take` returns the empty list.
+    `take ~count:n xs` (`take(~count=n, xs)` in ReasonML) returns a list consisting of
+    the first `n` elements of `xs`. If `n` is less than or equal to zero or greater than
+    the length of `xs`, `take` returns the empty list.
 
     ### Example
 
@@ -545,7 +605,10 @@ module List : sig
   val take : count:int -> 'a list -> 'a list
 
   (**
-    `updateAt(~index = n, ~f = fcn, xs)` returns a new list with function `fcn` applied to the list item at index position `n`. (The first item in a list has index zero.) If `n` is less than zero or greater than the number of items in `xs`, the new list is the same as the original list. (Same as `update_at`.)
+    `updateAt(~index = n, ~f = fcn, xs)` returns a new list with function `fcn` applied
+    to the list item at index position `n`. (The first item in a list has index zero.)
+    If `n` is less than zero or greater than the number of items in `xs`,
+    the new list is the same as the original list. (Same as `update_at`.)
   
     ### Example
     
@@ -559,7 +622,10 @@ module List : sig
   val updateAt : index:int -> f:('a -> 'a) -> 'a list -> 'a list
 
   (**
-    `update_at ~index:n ~f:fcn xs` returns a new list with function `fcn` applied to the list item at index position `n`. (The first item in a list has index zero.) If `n` is less than zero or greater than the number of items in `xs`, the new list is the same as the original list. (Same as `updateAt`.)
+    `update_at ~index:n ~f:fcn xs` returns a new list with function `fcn` applied
+    to the list item at index position `n`. (The first item in a list has index zero.)
+    If `n` is less than zero or greater than the number of items in `xs`,
+    the new list is the same as the original list. (Same as `updateAt`.)
   
     ### Example
     
@@ -573,17 +639,20 @@ module List : sig
   val update_at : index:int -> f:('a -> 'a) -> 'a list -> 'a list
 
   (**
-    `length xs` (`length(xs)` in ReasonML)` returns the number of items in the given list. An empty list returns zero.
+    `length xs` (`length(xs)` in ReasonML)` returns the number of items in the given list.
+    An empty list returns zero.
   *)
   val length : 'a list -> int
 
   (**
-    `reverse xs` (`reverse(xs)` in ReasonML)` returns a list whose items are in the reverse order of those in `xs`.
+    `reverse xs` (`reverse(xs)` in ReasonML)` returns a list whose items are in the
+    reverse order of those in `xs`.
   *)
   val reverse : 'a list -> 'a list
 
   (**
-    `dropWhile(~f=predicate, xs)` returns a list without the first elements of `xs` for which the `predicate` function returns `true`. (Same as `drop_while`.)
+    `dropWhile(~f=predicate, xs)` returns a list without the first elements
+    of `xs` for which the `predicate` function returns `true`. (Same as `drop_while`.)
 
     ### Example
 
@@ -597,7 +666,8 @@ module List : sig
   val dropWhile : f:('a -> bool) -> 'a list -> 'a list
 
   (**
-    `drop_while ~f:predicate xs` returns a list without the first elements of `xs` for which the `predicate` function returns `true`. (Same as `dropWhile`.)
+    `drop_while ~f:predicate xs` returns a list without the first elements
+    of `xs` for which the `predicate` function returns `true`. (Same as `dropWhile`.)
 
     ### Example
 
@@ -612,12 +682,14 @@ module List : sig
   val drop_while : f:('a -> bool) -> 'a list -> 'a list
 
   (**
-    `isEmpty(xs)` returns `true` if `xs` is the empty list `[]`; `false` otherwise. (Same as `is_empty`.)
+    `isEmpty(xs)` returns `true` if `xs` is the empty list `[]`; `false` otherwise.
+    (Same as `is_empty`.)
   *)
   val isEmpty : 'a list -> bool
 
   (**
-    `is_empty xs`  returns `true` if `xs` is the empty list `[]`; `false` otherwise. (Same as `isEmpty`.)
+    `is_empty xs`  returns `true` if `xs` is the empty list `[]`; `false` otherwise.
+    (Same as `isEmpty`.)
   *)
   val is_empty : 'a list -> bool
 
@@ -639,7 +711,8 @@ module List : sig
   val cons : 'a -> 'a list -> 'a list
 
   (**
-    `takeWhile(~f=predicate, xs)` returns a list with the first elements of `xs` for which the `predicate` function returns `true`. (Same as `take_while`.)
+    `takeWhile(~f=predicate, xs)` returns a list with the first elements
+    of `xs` for which the `predicate` function returns `true`. (Same as `take_while`.)
 
     ### Example
 
@@ -653,7 +726,8 @@ module List : sig
   val takeWhile : f:('a -> bool) -> 'a list -> 'a list
 
   (**
-    `take_while ~f:predicate xs` returns a list with the first elements of `xs` for which the `predicate` function returns `true`. (Same as `takeWhile`.)
+    `take_while ~f:predicate xs` returns a list with the first elements
+    of `xs` for which the `predicate` function returns `true`. (Same as `takeWhile`.)
 
     ### Example
 
@@ -667,7 +741,9 @@ module List : sig
   val take_while : f:('a -> bool) -> 'a list -> 'a list
 
   (**
-    `all ~f:predicate xs` (`all(~f=predicate, xs)` in ReasonML) returns `true` if all the elements in `xs` satisfy the `predicate` function, `false` otherwise. Note: `all` returns `true` if `xs` is the empty list.
+    `all ~f:predicate xs` (`all(~f=predicate, xs)` in ReasonML) returns `true`
+    if all the elements in `xs` satisfy the `predicate` function, `false` otherwise.
+    Note: `all` returns `true` if `xs` is the empty list.
     
     ### Example
     
@@ -688,7 +764,9 @@ module List : sig
   val all : f:('a -> bool) -> 'a list -> bool
 
   (**
-    `tail xs` (`tail(xs)` in ReasonML) returns all except the first item in `xs` as a `Some` value when `xs` is not empty. If `xs` is the empty list, `tail` returns `None`.
+    `tail xs` (`tail(xs)` in ReasonML) returns all except the first item in `xs`
+    as a `Some` value when `xs` is not empty. If `xs` is the empty list,
+    `tail` returns `None`.
     
     ```ocaml
     tail [3;4;5] = Some [4;5]
@@ -705,7 +783,8 @@ module List : sig
   val tail : 'a list -> 'a list option
 
   (**
-    `append xs ys` (`append(xs, ys)` in ReasonML) returns a new list with the elements of `xs` followed by the elements of `ys`
+    `append xs ys` (`append(xs, ys)` in ReasonML) returns a new list with
+    the elements of `xs` followed by the elements of `ys`.
     
     ### Example
     ```ocaml
@@ -723,7 +802,9 @@ module List : sig
   val append : 'a list -> 'a list -> 'a list
 
   (**
-    `removeAt(n, xs)` returns a new list with the item at the given index removed. If `n` is less than zero or greater than the length of `xs`, the new list is the same as the original. (Same as `remove_at`.)
+    `removeAt(n, xs)` returns a new list with the item at the given index removed.
+    If `n` is less than zero or greater than the length of `xs`, the new list is
+    the same as the original. (Same as `remove_at`.)
     
     ### Example
     
@@ -736,11 +817,13 @@ module List : sig
   val removeAt : index:int -> 'a list -> 'a list
 
   (**
-    `remove_at n xs` returns a new list with the item at the given index removed. If `n` is less than zero or greater than the length of `xs`, the new list is the same as the original. (Same as `removeAt`.)
+    `remove_at n xs` returns a new list with the item at the given index removed.
+    If `n` is less than zero or greater than the length of `xs`, the new list is
+    the same as the original. (Same as `removeAt`.)
     
     ### Example
     
-    ```reason
+    ```ocaml
     remove_at ~index:2, ["a";"b";"c";"d"] = ["a";"b";"d"]
     remove_at ~index:(-2) ["a";"b";"c";"d"] = ["a";"b";"c";"d"]
     remove_at ~index:7 ["a";"b";"c";"d"] = ["a";"b";"c";"d"]
@@ -749,9 +832,14 @@ module List : sig
   val remove_at : index:int -> 'a list -> 'a list
 
   (**
-    `minimumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list for which `fcn(item)` is a minimum. It is returned as `Some(item)`. If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum value for `fcn item`, the first one is returned.
+    `minimumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list
+    for which `fcn(item)` is a minimum. It is returned as `Some(item)`.
     
-    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `minimum_by`.)
+    If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum
+    value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value
+    that can be compared---for example, a `string` or `int`. (Same as `minimum_by`.)
     
     ### Example
     
@@ -765,13 +853,18 @@ module List : sig
   val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
   (**
-    `minimum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list for which `fcn item` is a minimum. It is returned as `Some item`. If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum value for `fcn item`, the first one is returned.
+    `minimum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list
+    for which `fcn item` is a minimum. It is returned as `Some item`.
     
-    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `minimumBy`.)
+    If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum
+    value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value
+    that can be compared---for example, a `string` or `int`. (Same as `minimumBy`.)
     
     ### Example
     
-    ```reason
+    ```ocaml
     let mod12 x = x mod 12
     let hours = [7;9;15;10;3;22]
     minimum_by ~f:mod12 hours = Some 15
@@ -783,9 +876,14 @@ module List : sig
   val minimum: 'comparable list -> 'comparable option
 
   (**
-    `maximumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list for which `fcn(item)` is a maximum. It is returned as `Some(item)`. If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum value for `fcn item`, the first one is returned.
+    `maximumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list
+    for which `fcn(item)` is a maximum. It is returned as `Some(item)`. 
     
-    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `maximum_by`.)
+    If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum
+    value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value
+    that can be compared---for example, a `string` or `int`. (Same as `maximum_by`.)
     
     ### Example
     
@@ -799,13 +897,18 @@ module List : sig
   val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
   (**
-    `maximum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list for which `fcn item` is a maximum. It is returned as `Some item`. If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum value for `fcn item`, the first one is returned.
+    `maximum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list
+    for which `fcn item` is a maximum. It is returned as `Some item`.
     
-    The function provided takes a list item as its parameter and must return a value that can be compared---for example, a `string` or `int`. (Same as `maximumBy`.)
+    If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum
+    value for `fcn item`, the first one is returned.
+    
+    The function provided takes a list item as its parameter and must return a value
+    that can be compared---for example, a `string` or `int`. (Same as `maximumBy`.)
     
     ### Example
     
-    ```reason
+    ```ocaml
     let mod12 x = x mod 12
     let hours = [7;9;15;10;3;22]
     maximum_by ~f:mod12 hours = Some 10
@@ -815,20 +918,93 @@ module List : sig
   val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 
   (**
-    `maximum xs` (`maximum(xs)` in ReasonML), when given a non-empty list, returns the item in the list with the maximum value. It is returned as `Some value` (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`. 
+    `maximum xs` (`maximum(xs)` in ReasonML), when given a non-empty list, returns
+    the item in the list with the maximum value. It is returned as `Some value`
+    (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`. 
     
     The items in the list must be of a type that can be compared---for example, a `string` or `int`.
    *) 
   val maximum : 'comparable list -> 'comparable option
 
+  (**
+    `sortBy(~f=fcn, xs)` returns a new list sorted according to the values
+    returned by `fcn`. This is a stable sort; if two items have the same value,
+    they will appear in the same order that they appeared in the original list.
+    (Same as `sort_by`.)
+    
+    ### Example
+    
+    ```reason
+    sortBy(~f = (x) => {x * x}, [3, 2, 5, -2, 4]) == [2, -2, 3, 4, 5];
+    ```
+  *)
   val sortBy : f:('a -> 'b) -> 'a list -> 'a list
 
+  (**
+    `sort_by ~f:fcn xs` returns a new list sorted according to the values
+    returned by `fcn`. This is a stable sort; if two items have the same value,
+    they will appear in the same order that they appeared in the original list.
+    (Same as `sortBy`.)
+    
+    ### Example
+    
+    ```ocaml
+    sort_by ~f:(fun x -> x * x) [3;2;5;-2;4] = [2;-2;3;4;5]
+    ```
+  *)
   val sort_by : f:('a -> 'b) -> 'a list -> 'a list
 
+  (**
+    `span ~f:predicate xs` (`span(~f=fcn, xs)` in ReasonML) splits the list `xs`
+    into a tuple of two lists. The first list contains the first elements of `xs`
+    that satisfy the predicate; the second list contains the remaining elements of `xs`.
+    
+    ```ocaml
+    let even x = x mod 2 = 0
+    span ~f:even [4;6;8;1;2;3] = ([4;6;8], [1;2;3])
+    span ~f:even [1;2;3] = ([], [1;2;3])
+    span ~f:even [20;40;60] = ([20;40;60], [])
+    ```
+    
+    ```reason
+    let even = (x) => {x mod 2 == 0};
+    span(~f=even, [4, 6, 8, 1, 2, 3]) == ([4, 6, 8], [1, 2, 3]);
+    span(~f=even, [1, 2, 3]) == ([], [1, 2, 3]);
+    span(~f=even, [20, 40, 60]) == ([20, 40, 60], []);
+    ```
+  *)
   val span : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
+  (**
+    `groupWhile(~f=fcn, xs)` produces a list of lists. Each sublist consists of
+    consecutive elements of `xs` which belong to the same group according to `fcn`.
+    
+    `fcn` takes two parameters and returns a `bool`: `true` if
+    the values should be grouped together, `false` if not. (Same as `group_while`.)
+    
+    ### Example
+    
+    ```reason
+    groupWhile(~f = (x, y) => {x mod 2 == y mod 2},
+      [2, 4, 6, 5, 3, 1, 8, 7, 9]) == [[2, 4, 6], [5, 3, 1], [8], [7, 9]]
+    ```
+  *) 
   val groupWhile : f:('a -> 'a -> bool) -> 'a list -> 'a list list
 
+  (**
+    `group_while ~f:fcn xs` produces a list of lists. Each sublist consists of
+    consecutive elements of `xs` which belong to the same group according to `fcn`.
+    
+    `fcn` takes two parameters and returns a `bool`: `true` if
+    the values should be grouped together, `false` if not. (Same as `groupWhile`.)
+    
+    ### Example
+    
+    ```ocaml
+    groupWhile ~f:(fun x y -> x mod 2 == y mod 2)
+      [2;4;6;5;3;1;8;7;9] = [[2;4;6];[5;3;1];[8];[7;9]]
+    ```
+  *) 
   val group_while : f:('a -> 'a -> bool) -> 'a list -> 'a list list
 
   val splitAt : index:int -> 'a list -> 'a list * 'a list
