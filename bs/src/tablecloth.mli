@@ -1007,8 +1007,45 @@ module List : sig
   *) 
   val group_while : f:('a -> 'a -> bool) -> 'a list -> 'a list list
 
+  (**
+    `splitAt(~index=n, xs)` returns a tuple of two lists. The first list has the
+    first `n` items of `xs`, the second has the remaining items of `xs`.
+    
+    If `n` is less than zero or greater than the length of `xs`, `splitAt`
+    returns two empty lists.
+    
+    (Same as `split_at`.)
+    
+    ### Example
+    
+    ```reason
+    splitAt(~index=3, [10, 11, 12, 13, 14]) == ([10, 11, 12], [13, 14])
+    splitAt(~index=0, [10, 11, 12]) == ([], [10, 11, 12])
+    splitAt(~index=4, [10, 11, 12]) == ([10, 11, 12], [])
+    splitAt(~index=-1, [10, 11, 12]) == ([], [])
+    ```
+  *)
   val splitAt : index:int -> 'a list -> 'a list * 'a list
 
+  (**
+    `split_at ~index:n xs` returns a tuple of two lists. The first list has the
+    first `n` items of `xs`, the second has the remaining items of `xs`.
+    
+    If `n` is less than zero or greater than the length of `xs`, `split_at`
+    returns two empty lists.
+    
+    (Same as `splitAt`.)
+    
+    ### Example
+    
+    ```ocaml
+    split_at ~index:3 [10;11;12;13;14] = ([10;11;12], [13;14])
+    split_at ~index:0 [10;11;12] = ([], [10;11;12])
+    split_at ~index:3 [10;11;12] = ([10;11;12], [])
+    split_at ~index:(-1) [10;11;12] = ([], [])
+    split_at ~index:4 [10;11;12] = ([], [])
+    ```
+  *)
   val split_at : index:int -> 'a list -> 'a list * 'a list
 
   val insertAt : index:int -> value:'a -> 'a list -> 'a list
