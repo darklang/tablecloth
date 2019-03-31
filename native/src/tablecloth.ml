@@ -281,35 +281,29 @@ module List = struct
 
   let remove_at = removeAt
 
-  let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
-    let minBy x (y, fy) =
+  let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
+    let minBy (y, fy) x =
       let fx = f x in
       if fx < fy then (x, fx) else (y, fy)
     in
-    match ls with
-    | [l] ->
-        Some l
-    | l1 :: lrest ->
-        Some (fst <| foldl ~f:minBy ~init:(l1, f l1) lrest)
-    | _ ->
-        None
-
+    match l with
+    | [] -> None
+    | [m] -> Some m
+    | hd :: tl ->
+        Some (fst <| foldl ~f:minBy ~init:(hd, f hd) tl)
 
   let minimum_by = minimumBy
 
-  let maximumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
-    let maxBy x (y, fy) =
+  let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
+    let maxBy (y, fy) x =
       let fx = f x in
       if fx > fy then (x, fx) else (y, fy)
     in
-    match ls with
-    | [l_] ->
-        Some l_
-    | l_ :: ls_ ->
-        Some (fst <| foldl ~f:maxBy ~init:(l_, f l_) ls_)
-    | _ ->
-        None
-
+    match l with
+    | [] -> None
+    | [m] -> Some m
+    | hd :: tl ->
+        Some (fst <| foldl ~f:maxBy ~init:(hd, f hd) tl)
 
   let maximum_by = maximumBy
 
