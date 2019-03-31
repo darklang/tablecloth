@@ -37,6 +37,16 @@ let t_List () =
 
   ()
 
+let t_Option () =
+  AT.check (AT.list AT.int) "values empty list" (Option.values []) [];
+  AT.check (AT.list AT.int) "values one None" (Option.values [None]) [];
+  AT.check (AT.list AT.int) "values two Nones" (Option.values [None;None]) [];
+  AT.check (AT.list AT.int) "values one Some" (Option.values [Some 1]) [1];
+  AT.check (AT.list AT.int) "values two Somes" (Option.values [Some 1;Some 1]) [1;1];
+  AT.check (AT.list AT.int) "values mixed" (Option.values [None;Some 1]) [1];
+
+  ()
+
 let t_String () =
   AT.check
     AT.bool
@@ -119,6 +129,7 @@ let t_Tuple3 () =
 
 let suite = [
   ("List", `Quick, t_List);
+  ("Option", `Quick, t_Option);
   ("String", `Quick, t_String);
   ("Tuple2", `Quick, t_Tuple2);
   ("Tuple3", `Quick, t_Tuple3);
