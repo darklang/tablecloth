@@ -6,6 +6,8 @@ let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 
 let identity (value : 'a) : 'a = value
 
+let flip f x y = f y x
+
 module List = struct
   let flatten = Belt.List.flatten
 
@@ -112,12 +114,12 @@ module List = struct
     Belt.List.partition l f
 
 
-  let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f l init
+  let foldr ~(f : 'b -> 'a -> 'b) ~(init : 'b) (l : 'a list) : 'b =
+    Belt.List.reduceReverse l init f
 
 
-  let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (reverse l) init
+  let foldl ~(f : 'b -> 'a -> 'b) ~(init : 'b) (l : 'a list) : 'b =
+    Belt.List.reduce l init f
 
 
   let rec findIndexHelp
@@ -203,7 +205,7 @@ module List = struct
   let remove_at = removeAt
 
   let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
-    let minBy x (y, fy) =
+    let minBy (y, fy) x =
       let fx = f x in
       if fx < fy then (x, fx) else (y, fy)
     in
@@ -216,7 +218,7 @@ module List = struct
   let minimum_by = minimumBy
 
   let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
-    let maxBy x (y, fy) =
+    let maxBy (y, fy) x =
       let fx = f x in
       if fx > fy then (x, fx) else (y, fy)
     in
@@ -225,7 +227,6 @@ module List = struct
     | [m] -> Some m
     | hd :: tl ->
         Some (fst <| foldl ~f:maxBy ~init:(hd, f hd) tl)
-
 
   let maximum_by = maximumBy
 
@@ -280,7 +281,7 @@ module List = struct
     | [] ->
         []
     | hd :: tl ->
-        let step x rest = sep :: x :: rest in
+        let step acc x = sep :: x :: acc in
         let spersed = foldr ~f:step ~init:[] tl in
         hd :: spersed
 
@@ -308,22 +309,15 @@ module Result = struct
 
   let with_default = withDefault
 
-  let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) :
-      ('err, 'c) t =
+  let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) : ('err, 'c) t =
     match (a, b) with
-    | Ok a, Ok b ->
-        Ok (f a b)
-    | Error a, Ok _ ->
-        Error a
-    | Ok _, Error b ->
-        Error b
-    | Error a, Error _ ->
-        Error a
-
+    | Ok a, Ok b -> Ok (f a b)
+    | Error a, Ok _
+    | Error a, Error _ -> Error a
+    | Ok _, Error b -> Error b
 
   let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
-    List.foldr ~f:(map2 ~f:(fun a b -> a :: b)) ~init:(Ok []) l
-
+    List.foldr ~f:(map2 ~f:(fun b a -> a :: b)) ~init:(Ok []) l
 
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
     Belt.Result.map r f
@@ -385,15 +379,13 @@ module Option = struct
 
   let with_default = withDefault
 
-  let foldrValues (item : 'a option) (l: 'a list) : 'a list =
+  let foldrValues (l: 'a list) (item : 'a option) : 'a list =
     match item with None -> l | Some v -> v :: l
-
 
   let foldr_values = foldrValues
 
   let values (l : 'a option list) : 'a list =
     List.foldr ~f:foldrValues ~init:[] l
-
 
   let toList (o : 'a option) : 'a list =
     match o with None -> [] | Some o -> [o]

@@ -70,6 +70,8 @@ val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
 *)
 val identity : 'a -> 'a
 
+val flip : ('a -> 'b -> 'c) -> ('b -> 'a -> 'c)
+
 module List : sig
   (**
     `flatten` returns the list obtained by concatenating in order all the sub-lists in a given list.
@@ -493,9 +495,9 @@ module List : sig
   *)
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
-  val foldr : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val foldr : f:('b -> 'a -> 'b) -> init:'b -> 'a list -> 'b
 
-  val foldl : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val foldl : f:('b -> 'a -> 'b) -> init:'b -> 'a list -> 'b
 
   (**
     `findIndex(~f=predicate, xs)` finds the position of the first element in `xs` for which `predicate` returns `true`. The position is returned as `Some(index)`. If no element satisfies the `predicate`, `findIndex` returns `None`. (Same as `find_index`.)
@@ -819,9 +821,9 @@ module Option : sig
 
   val with_default : default:'a -> 'a option -> 'a
 
-  val foldrValues : 'a option -> 'a list -> 'a list
+  val foldrValues : 'a list -> 'a option -> 'a list
 
-  val foldr_values : 'a option -> 'a list -> 'a list
+  val foldr_values : 'a list -> 'a option -> 'a list
 
   val values : 'a option list -> 'a list
 

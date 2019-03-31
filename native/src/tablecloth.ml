@@ -6,6 +6,8 @@ let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 
 let identity (value : 'a) : 'a = value
 
+let flip f x y = f y x
+
 module Tuple2 = struct
   let create a b = (a, b)
 
@@ -190,13 +192,11 @@ module List = struct
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Base.List.partition_tf ~f l
 
+  let foldr ~(f : 'b -> 'a -> 'b) ~(init : 'b) (l : 'a list) : 'b =
+    List.fold_right (flip f) l init
 
-  let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f l init
-
-
-  let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (List.rev l) init
+  let foldl ~(f : 'b -> 'a -> 'b) ~(init : 'b) (l : 'a list) : 'b =
+    List.fold_left f init l
 
 
   let rec findIndexHelp
@@ -359,7 +359,7 @@ module List = struct
     | [] ->
         []
     | hd :: tl ->
-        let step x rest = sep :: x :: rest in
+        let step acc x = sep :: x :: acc in
         let spersed = foldr ~f:step ~init:[] tl in
         hd :: spersed
 
@@ -405,9 +405,8 @@ module Option = struct
 
   let with_default = withDefault
 
-  let foldrValues (item : 'a option) (list : 'a list) : 'a list =
-    match item with None -> list | Some v -> v :: list
-
+  let foldrValues (l: 'a list) (item : 'a option) : 'a list =
+    match item with None -> l | Some v -> v :: l
 
   let foldr_values = foldrValues
 
@@ -441,21 +440,15 @@ module Result = struct
 
   let with_default = withDefault
 
-  let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) :
-      ('err, 'c) t =
+  let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) : ('err, 'c) t =
     match (a, b) with
-    | Ok a, Ok b ->
-        Ok (f a b)
-    | Error a, Ok _ ->
-        Error a
-    | Ok _, Error b ->
-        Error b
-    | Error a, Error _ ->
-        Error a
-
+    | Ok a, Ok b -> Ok (f a b)
+    | Error a, Ok _
+    | Error a, Error _ -> Error a
+    | Ok _, Error b -> Error b
 
   let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
-    List.foldr ~f:(map2 ~f:(fun a b -> a :: b)) ~init:(Ok []) l
+    List.foldr ~f:(map2 ~f:(fun b a -> a :: b)) ~init:(Ok []) l
 
 
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
