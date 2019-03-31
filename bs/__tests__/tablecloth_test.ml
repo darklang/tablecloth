@@ -46,6 +46,11 @@ let () =
     test "intersperse one turtle" (fun () -> expect (List.intersperse "on" ["turtles"]) |> toEqual ["turtles"]);
     test "intersperse three turtles" (fun () -> expect (List.intersperse "on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
 
+    test "append empty lists" (fun () -> expect (List.append [] []) |> toEqual []);
+    test "append empty list" (fun () -> expect (List.append [] ["turtles"]) |> toEqual ["turtles"]);
+    test "append empty list" (fun () -> expect (List.append ["turtles"] []) |> toEqual ["turtles"]);
+    test "append two lists" (fun () -> expect (List.append ["on"] ["turtles"]) |> toEqual ["on";"turtles"]);
+
   );
 
   describe "Option" (fun () ->
