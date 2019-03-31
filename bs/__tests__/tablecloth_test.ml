@@ -27,6 +27,10 @@ let () =
     test "minimumBy empty list" (fun () -> expect (List.minimumBy ~f:identity []) |> toEqual None);
     test "minimumBy  one element" (fun () -> expect (List.minimumBy  ~f:identity [1]) |> toEqual (Some 1));
     test "minimumBy four elements" (fun () -> expect (List.minimumBy ~f:identity [1;2;3;4]) |> toEqual (Some 1));
+
+    test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:identity []) |> toEqual None);
+    test "maximumBy  one element" (fun () -> expect (List.maximumBy  ~f:identity [1]) |> toEqual (Some 1));
+    test "maximumBy four elements" (fun () -> expect (List.maximumBy ~f:identity [1;2;3;4]) |> toEqual (Some 4));
   );
 
   describe "String" (fun () ->
