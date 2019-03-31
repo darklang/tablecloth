@@ -191,7 +191,7 @@ module List = struct
     match l with [] -> None | _ :: rest -> Some rest
 
 
-  let append (l1 : 'a list) (l2 : 'a list) : 'a list = l1 @ l2
+  let append (l1 : 'a list) (l2 : 'a list) : 'a list = Belt.List.concat l1 l2
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
