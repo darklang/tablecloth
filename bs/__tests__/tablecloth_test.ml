@@ -38,6 +38,15 @@ let () =
 
   );
 
+  describe "Option" (fun () ->
+    test "values empty list" (fun () -> expect (Option.values []) |> toEqual []);
+    test "values one None" (fun () -> expect (Option.values [None]) |> toEqual []);
+    test "values two Nones" (fun () -> expect (Option.values [None;None]) |> toEqual []);
+    test "values one Some" (fun () -> expect (Option.values [Some 1]) |> toEqual [1]);
+    test "values two Somes" (fun () -> expect (Option.values [Some 1;Some 1]) |> toEqual [1;1]);
+    test "values mixed" (fun () -> expect (Option.values [None;Some 1]) |> toEqual [1]);
+  );
+
   describe "String" (fun () ->
     test "length empty string" (fun () -> expect (String.length "") |> toEqual 0);
     test "length" (fun () -> expect (String.length "123") |> toEqual 3);
