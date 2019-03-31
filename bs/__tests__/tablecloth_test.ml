@@ -4,6 +4,16 @@ open Expect
 
 let () =
   describe "List" (fun () ->
+    test "foldl empty list" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
+    test "foldl one element" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
+    test "foldl three elements" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [3;2;1]);
+    test "foldr empty list" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
+    test "foldr one element" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
+    test "foldr three elements" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [1;2;3]);
+
+    test "foldl issue #18" (fun () -> expect (List.foldl ~f:(-) ~init:0 [1;2;3]) |> toEqual (-6));
+    test "foldr issue #18" (fun () -> expect (List.foldr ~f:(-) ~init:0 [1;2;3]) |> toEqual (-6));
+
     test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
     test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
     test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
