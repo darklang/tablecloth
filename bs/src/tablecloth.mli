@@ -1048,11 +1048,61 @@ module List : sig
   *)
   val split_at : index:int -> 'a list -> 'a list * 'a list
 
+  (**
+    `insertAt(~index=n, ~value=v, xs)` returns a new list with the value `v` inserted
+    before position `n` in `xs`. If `n` is less than zero or greater than the length of `xs`, 
+    returns a list consisting only of the value `v`.
+    
+    (Same as `insert_at`.)
+    
+    ### Example:
+    
+    ```reason
+    insertAt(~index=2, ~value=999, [100, 101, 102, 103]) == [100, 101, 999, 102, 103]
+    insertAt(~index=0, ~value=999, [100, 101, 102, 103]) == [999, 100 101, 102, 103]
+    insertAt(~index=4, ~value=999, [100, 101, 102, 103]) == [100, 101, 102, 103, 999]
+    insertAt(~index=-1, ~value=999, [100, 101, 102, 103]) == [999]
+    insertAt(~index=5, ~value=999, [100, 101, 102, 103]) == [999]
+  *)
   val insertAt : index:int -> value:'a -> 'a list -> 'a list
 
+  (**
+    `insert_at ~index:n, ~value:v, xs` returns a new list with the value `v` inserted
+    before position `n` in `xs`. If `n` is less than zero or greater than the length of `xs`, 
+    returns a list consisting only of the value `v`.
+    
+    (Same as `insertAt`.)
+    
+    ### Example:
+    
+    ```ocaml
+    insert_at ~index:2 ~value:999 [100;101;102;103] = [100;101;999;102;103]
+    insert_at ~index:0 ~value:999 [100;101;102;103] = [999;100;101;102;103]
+    insert_at ~index:4 ~value:999 [100;101;102;103] = [100;101;102;103;999]
+    insert_at ~index:(-1) ~value:999 [100;101;102;103] = [999]
+    insert_at ~index:5 ~value:999 [100;101;102;103] = [999]
+    ```
+  *)
   val insert_at : index:int -> value:'a -> 'a list -> 'a list
 
-  val splitWhen : f:('a -> bool) -> 'a list -> 'a list * 'a list
+  (**
+    `splitWhen(~f=predicate, xs)` returns a tuple of two lists as an `option` value.
+    The first element of the tuple is the list of all the elements at the
+    beginning of `xs` that  do _not_ satisfy the `predicate` function.
+    The second element of the tuple is the list of the remaining items in `xs`.
+    If no elements in `xs` satisfy `predicate`, `splitWhen` returns `None`.
+    
+    ### Example
+    
+    ```reason
+    let even = (x) => {x mod 2 == 0};
+    splitWhen(~f = even, [1, 5, 3, 2, 6, 4]);
+    splitWhen(~f = even, [2, 6, 4, 1, 5, 3]);
+    splitWhen(~f = even, [2, 6, 4]);
+    splitWhen(~f = even, [1, 5, 3]);
+    ```
+  *)
+  val splitWhen : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
 
   val split_when : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
