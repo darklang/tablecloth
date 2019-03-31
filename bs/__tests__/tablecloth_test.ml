@@ -25,11 +25,11 @@ let () =
     test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
 
     test "minimumBy empty list" (fun () -> expect (List.minimumBy ~f:identity []) |> toEqual None);
-    test "minimumBy  one element" (fun () -> expect (List.minimumBy  ~f:identity [1]) |> toEqual (Some 1));
+    test "minimumBy one element" (fun () -> expect (List.minimumBy  ~f:identity [1]) |> toEqual (Some 1));
     test "minimumBy four elements" (fun () -> expect (List.minimumBy ~f:identity [1;2;3;4]) |> toEqual (Some 1));
 
     test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:identity []) |> toEqual None);
-    test "maximumBy  one element" (fun () -> expect (List.maximumBy  ~f:identity [1]) |> toEqual (Some 1));
+    test "maximumBy one element" (fun () -> expect (List.maximumBy  ~f:identity [1]) |> toEqual (Some 1));
     test "maximumBy four elements" (fun () -> expect (List.maximumBy ~f:identity [1;2;3;4]) |> toEqual (Some 4));
 
     test "intersperse empty list" (fun () -> expect (List.intersperse "on" []) |> toEqual []);

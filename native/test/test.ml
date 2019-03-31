@@ -24,11 +24,11 @@ let t_List () =
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition four elements" (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) ([2;4], [1;3]);
 
   AT.check (AT.option AT.int) "minimumBy empty list" (List.minimumBy ~f:identity []) None;
-  AT.check (AT.option AT.int) "minimumBy  one element" (List.minimumBy  ~f:identity [1]) (Some 1);
+  AT.check (AT.option AT.int) "minimumBy one element" (List.minimumBy  ~f:identity [1]) (Some 1);
   AT.check (AT.option AT.int) "minimumBy four elements" (List.minimumBy ~f:identity [1;2;3;4]) (Some 1);
 
   AT.check (AT.option AT.int) "maximumBy empty list" (List.maximumBy ~f:identity []) None;
-  AT.check (AT.option AT.int) "maximumBy  one element" (List.maximumBy  ~f:identity [1]) (Some 1);
+  AT.check (AT.option AT.int) "maximumBy one element" (List.maximumBy  ~f:identity [1]) (Some 1);
   AT.check (AT.option AT.int) "maximumBy four elements" (List.maximumBy ~f:identity [1;2;3;4]) (Some 4);
 
   AT.check (AT.list AT.string) "intersperse empty list" (List.intersperse "on" []) [];
