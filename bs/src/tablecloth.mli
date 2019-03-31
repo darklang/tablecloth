@@ -235,8 +235,8 @@ module List : sig
 
     ```ocaml
     let even (x: int) = (x mod 2 = 0 : bool)
-    get_by ~f:even [1;4;3;2]) = Some 4
-    get_by ~f:even [15;13;11]) = None
+    get_by ~f:even [1; 4; 3; 2]) = Some 4
+    get_by ~f:even [15; 13; 11]) = None
     ```
 
   *)
@@ -673,9 +673,9 @@ module List : sig
 
     ```ocaml
     let even x = x mod 2 = 0
-    drop_while ~f:even [2;4;6;7;8;9] = [7;8;9]
-    drop_while ~f:even [2;4;6;8] = []
-    drop_while ~f:even [1;2;3] = [1;2;3]
+    drop_while ~f:even [2; 4; 6; 7; 8; 9] = [7; 8; 9]
+    drop_while ~f:even [2; 4; 6; 8] = []
+    drop_while ~f:even [1; 2; 3] = [1; 2; 3]
     ```
 
   *)
@@ -699,7 +699,7 @@ module List : sig
     ### Example
     
     ```ocaml
-    cons "one" ["two";"three"] = ["one";"two";"three"]
+    cons "one" ["two"; "three"] = ["one"; "two"; "three"]
     cons 42 [] = [42]
     ```
     
@@ -733,9 +733,9 @@ module List : sig
 
     ```ocaml
     let even x = x mod 2 = 0
-    take_while ~f:even [2;4;6;7;8;9] = [2;4;6]
-    take_while ~f:even [2;4;6] = [2;4;6]
-    take_while ~f:even [1;2;3] = []
+    take_while ~f:even [2; 4; 6; 7; 8; 9] = [2; 4; 6]
+    take_while ~f:even [2; 4; 6] = [2; 4; 6]
+    take_while ~f:even [1; 2; 3] = []
     ```
   *)
   val take_while : f:('a -> bool) -> 'a list -> 'a list
@@ -749,8 +749,8 @@ module List : sig
     
     ```ocaml
     let even x = x mod 2 = 0
-    all ~f:even [16;22;40] = true
-    all ~f:even [16;21;40] = false
+    all ~f:even [16; 22; 40] = true
+    all ~f:even [16; 21; 40] = false
     all ~f:even [] = true
     ```
     
@@ -769,7 +769,7 @@ module List : sig
     `tail` returns `None`.
     
     ```ocaml
-    tail [3;4;5] = Some [4;5]
+    tail [3; 4; 5] = Some [4; 5]
     tail [3] = Some []
     tail [] = None
     ```
@@ -788,9 +788,9 @@ module List : sig
     
     ### Example
     ```ocaml
-    append [1;2] [3;4;5] = [1;2;3;4;5]
-    append [] [6;7] = [6;7]
-    append [8;9] [] = [8;9]
+    append [1; 2] [3; 4; 5] = [1; 2; 3; 4; 5]
+    append [] [6; 7] = [6; 7]
+    append [8; 9] [] = [8; 9]
     ```
     
     ```reason
@@ -824,9 +824,9 @@ module List : sig
     ### Example
     
     ```ocaml
-    remove_at ~index:2, ["a";"b";"c";"d"] = ["a";"b";"d"]
-    remove_at ~index:(-2) ["a";"b";"c";"d"] = ["a";"b";"c";"d"]
-    remove_at ~index:7 ["a";"b";"c";"d"] = ["a";"b";"c";"d"]
+    remove_at ~index:2, ["a"; "b"; "c"; "d"] = ["a"; "b"; "d"]
+    remove_at ~index:(-2) ["a"; "b"; "c"; "d"] = ["a"; "b"; "c"; "d"]
+    remove_at ~index:7 ["a"; "b"; "c"; "d"] = ["a"; "b"; "c"; "d"]
     ```
   *)
   val remove_at : index:int -> 'a list -> 'a list
@@ -866,7 +866,7 @@ module List : sig
     
     ```ocaml
     let mod12 x = x mod 12
-    let hours = [7;9;15;10;3;22]
+    let hours = [7; 9; 15; 10; 3; 22]
     minimum_by ~f:mod12 hours = Some 15
     minimum_by ~f:mod12 [] = None
     ```
@@ -949,7 +949,7 @@ module List : sig
     ### Example
     
     ```ocaml
-    sort_by ~f:(fun x -> x * x) [3;2;5;-2;4] = [2;-2;3;4;5]
+    sort_by ~f:(fun x -> x * x) [3; 2; 5; -2; 4] = [2; -2; 3; 4; 5]
     ```
   *)
   val sort_by : f:('a -> 'b) -> 'a list -> 'a list
@@ -961,9 +961,9 @@ module List : sig
     
     ```ocaml
     let even x = x mod 2 = 0
-    span ~f:even [4;6;8;1;2;3] = ([4;6;8], [1;2;3])
-    span ~f:even [1;2;3] = ([], [1;2;3])
-    span ~f:even [20;40;60] = ([20;40;60], [])
+    span ~f:even [4; 6; 8; 1; 2; 3] = ([4; 6; 8], [1; 2; 3])
+    span ~f:even [1; 2; 3] = ([], [1; 2; 3])
+    span ~f:even [20; 40; 60] = ([20; 40; 60], [])
     ```
     
     ```reason
@@ -1002,7 +1002,7 @@ module List : sig
     
     ```ocaml
     groupWhile ~f:(fun x y -> x mod 2 == y mod 2)
-      [2;4;6;5;3;1;8;7;9] = [[2;4;6];[5;3;1];[8];[7;9]]
+      [2; 4; 6; 5; 3; 1; 8; 7; 9] = [[2; 4; 6]; [5; 3; 1]; [8]; [7; 9]]
     ```
   *) 
   val group_while : f:('a -> 'a -> bool) -> 'a list -> 'a list list
@@ -1039,11 +1039,11 @@ module List : sig
     ### Example
     
     ```ocaml
-    split_at ~index:3 [10;11;12;13;14] = ([10;11;12], [13;14])
-    split_at ~index:0 [10;11;12] = ([], [10;11;12])
-    split_at ~index:3 [10;11;12] = ([10;11;12], [])
-    split_at ~index:(-1) [10;11;12] = ([], [])
-    split_at ~index:4 [10;11;12] = ([], [])
+    split_at ~index:3 [10; 11; 12; 13; 14] = ([10; 11; 12], [13; 14])
+    split_at ~index:0 [10; 11; 12] = ([], [10; 11; 12])
+    split_at ~index:3 [10; 11; 12] = ([10; 11; 12], [])
+    split_at ~index:(-1) [10; 11; 12] = ([], [])
+    split_at ~index:4 [10; 11; 12] = ([], [])
     ```
   *)
   val split_at : index:int -> 'a list -> 'a list * 'a list
@@ -1076,11 +1076,11 @@ module List : sig
     ### Example:
     
     ```ocaml
-    insert_at ~index:2 ~value:999 [100;101;102;103] = [100;101;999;102;103]
-    insert_at ~index:0 ~value:999 [100;101;102;103] = [999;100;101;102;103]
-    insert_at ~index:4 ~value:999 [100;101;102;103] = [100;101;102;103;999]
-    insert_at ~index:(-1) ~value:999 [100;101;102;103] = [999]
-    insert_at ~index:5 ~value:999 [100;101;102;103] = [999]
+    insert_at ~index:2 ~value:999 [100; 101; 102; 103] = [100; 101; 999; 102; 103]
+    insert_at ~index:0 ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]
+    insert_at ~index:4 ~value:999 [100; 101; 102; 103] = [100; 101; 102; 103; 999]
+    insert_at ~index:(-1) ~value:999 [100; 101; 102; 103] = [999]
+    insert_at ~index:5 ~value:999 [100; 101; 102; 103] = [999]
     ```
   *)
   val insert_at : index:int -> value:'a -> 'a list -> 'a list
@@ -1092,28 +1092,139 @@ module List : sig
     The second element of the tuple is the list of the remaining items in `xs`.
     If no elements in `xs` satisfy `predicate`, `splitWhen` returns `None`.
     
+    (Same as `split_when`.)
+    
     ### Example
     
     ```reason
     let even = (x) => {x mod 2 == 0};
-    splitWhen(~f = even, [1, 5, 3, 2, 6, 4]);
-    splitWhen(~f = even, [2, 6, 4, 1, 5, 3]);
-    splitWhen(~f = even, [2, 6, 4]);
-    splitWhen(~f = even, [1, 5, 3]);
+    splitWhen(~f = even, [5, 1, 2, 6, 3]) == Some(([5, 1], [2, 6, 3]));
+    splitWhen(~f = even, [2, 6, 5]) == Some(([], [2, 6, 5]));
+    splitWhen(~f = even, [1, 5, 3]) == None;
     ```
   *)
   val splitWhen : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
 
-  val split_when : f:('a -> bool) -> 'a list -> 'a list * 'a list
+  (**
+    `split_when ~f:predicate  xs` returns a tuple of two lists as an `option` value.
+    The first element of the tuple is the list of all the elements at the
+    beginning of `xs` that  do _not_ satisfy the `predicate` function.
+    The second element of the tuple is the list of the remaining items in `xs`.
+    If no elements in `xs` satisfy `predicate`, `split_when` returns `None`.
+    
+    (Same as `splitWhen`.)
+    
+    ### Example
+    
+    ```reason
+    let even x = (x mod 2 = 0)
+    split_when ~f:even [5; 1; 2; 6; 3] = Some ([5; 1], [2; 6; 3])
+    split_when ~f:even [2; 6; 5] = Some ([], [2; 6; 5])
+    split_when ~f:even [1; 5; 3] = None
+    ```
+  *)
+  val split_when : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
 
+  (**
+    `intersperse separator xs` (`intersperse(separator, xs)` in ReasonML)
+    inserts `separator`  between all the elements in `xs`. If `xs` is empty,
+    `intersperse` returns the empty list.
+    
+    ### Example
+    
+    ```ocaml
+    intersperse "/" ["a"; "b"; "c"] = ["a"; "/"; "b"; "/"; "c"]
+    intersperse "?" [] = []
+    ```
+    
+    ```reason
+    intersperse("/", ["a", "b", "c"]) == ["a", "/", "b", "/", "c"]
+    intersperse("?", [] == [])
+    ```
   val intersperse : 'a -> 'a list -> 'a list
 
+  (**
+    `initialize n f` (`initialize(n, f)` in ReasonML) creates a list with values
+    `[f 0; f 1; ...f (n - 1)]` (`[f(0), f(1),...f(n - 1)]` in ReasonML. Returns
+    the empty list if given a negative value for `n`.
+    
+    ### Example
+    ```ocaml
+    let cube_plus_one x = ((float_of_int x) +. 1.0) ** 3.0
+    initialize 3 cube_plus_one = [1.0; 8.0; 27.0]
+    initialize 0 cube_plus_ones = []
+    initialize (-2) cube_plus_one = []
+    ```
+    
+    ```reason
+    let cube_plus_one = (x) => {(float_of_int(x) +. 1.0) ** 3.0};
+    initialize(3, cube_plus_one) == [1.0, 8.0, 27.0];
+    initialize(0, cube_plus_one) == [];
+    initialize(-2, cube_plus_one) == [];
+    ```
+  *)
   val initialize : int -> (int -> 'a) -> 'a list
 
+  (**
+    `sortWith(compareFcn, xs)` returns a new list with the elements in `xs` sorted according `compareFcn`.
+    The `compareFcn` function takes two list items and returns a value less than zero if the first item
+    compares less than the second, zero if the items compare equal, and one if the first item compares
+    greater than the second.
+    
+    This is a stable sort; items with equivalent values according to the `compareFcn`
+    appear in the sorted list in the same order as they appeared in the original list.
+
+    (Same as `sort_with`)
+    
+    ```reason
+    let cmp_mod12 = (a, b) => {
+      (a mod 12) - (b mod 12)
+    };
+    
+    sortWith(cmp_mod12, [15, 3, 22, 10, 16]) == [3, 15, 10, 22, 10] 
+  *)
+  
   val sortWith : ('a -> 'a -> int) -> 'a list -> 'a list
 
+  (**
+    `sort_with compareFcn  xs` returns a new list with the elements in `xs` sorted according `compareFcn`.
+    The `compareFcn` function takes two list items and returns a value less than zero if the first item
+    compares less than the second, zero if the items compare equal, and one if the first item compares
+    greater than the second.
+    
+    This is a stable sort; items with equivalent values according to the `compareFcn`
+    appear in the sorted list in the same order as they appeared in the original list.
+    
+    (Same as `sortWith`)
+    
+    ```ocaml
+    let cmp_mod12 a b = (
+      (a mod 12) - (b mod 12)
+    )
+    
+    sortWith cmp_mod12 [15; 3; 22; 10; 16] == [3; 15; 10; 22; 10]
+    ```
+  *)
   val sort_with : ('a -> 'a -> int) -> 'a list -> 'a list
 
+  (**
+    `iter ~f: fcn xs` (`iter(~f=fcn, xs)` in ReasonML) applies the given function
+    to each element in `xs`. The function you provide must return `unit`, and the
+    `iter` call itself also returns `unit`. You use `iter` when you want to process
+    a list only for side effects.
+    
+    ### Example
+    
+    The following code will print the items in the list to the console.
+    
+    ```ocaml
+    let _ = iter ~f:Js.log ["a"; "b"; "c"]
+    ```
+    
+    ```reason
+    iter(~f=Js.log, ["a", "b", "c"]);
+    ```
+  *)
   val iter : f:('a -> unit) -> 'a list -> unit
 end
 

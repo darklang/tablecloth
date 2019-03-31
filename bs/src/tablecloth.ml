@@ -293,7 +293,6 @@ module List = struct
         let spersed = foldr ~f:step ~init:[] tl in
         hd :: spersed
 
-
   let initialize (n : int) (f : int -> 'a) : 'a list =
     let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
     step (n - 1) []
