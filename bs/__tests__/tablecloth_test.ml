@@ -31,6 +31,11 @@ let () =
     test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:identity []) |> toEqual None);
     test "maximumBy  one element" (fun () -> expect (List.maximumBy  ~f:identity [1]) |> toEqual (Some 1));
     test "maximumBy four elements" (fun () -> expect (List.maximumBy ~f:identity [1;2;3;4]) |> toEqual (Some 4));
+
+    test "intersperse empty list" (fun () -> expect (List.intersperse ~sep:"on" []) |> toEqual []);
+    test "intersperse one turtle" (fun () -> expect (List.intersperse ~sep:"on" ["turtles"]) |> toEqual ["turtles"]);
+    test "intersperse three turtles" (fun () -> expect (List.intersperse ~sep:"on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
+
   );
 
   describe "String" (fun () ->
