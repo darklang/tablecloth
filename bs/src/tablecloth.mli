@@ -756,9 +756,9 @@ module List : sig
 
   val insert_at : index:int -> value:'a -> 'a list -> 'a list
 
-  val splitWhen : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
+  val splitWhen : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
-  val split_when : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
+  val split_when : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
   val intersperse : 'a -> 'a list -> 'a list
 
