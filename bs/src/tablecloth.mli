@@ -843,9 +843,57 @@ module Char : sig
 
   val to_code : char -> int
 
-  val fromCode : int -> char
+  val fromCode : int -> char option
 
-  val from_code : int -> char
+  val from_code : int -> char option
+  
+  val toString : char -> string
+
+  val to_string : char -> string
+
+  val fromString : string -> char option
+
+  val from_string : string -> char option
+
+  val toDigit : char -> int option
+
+  val to_digit : char -> int option
+
+  val toLowercase : char -> char
+
+  val to_lowercase : char -> char
+
+  val toUppercase : char -> char
+
+  val to_uppercase : char -> char
+
+  val isLowercase : char -> bool
+
+  val is_lowercase : char -> bool
+
+  val isUppercase : char -> bool
+
+  val is_uppercase : char -> bool
+
+  val isLetter : char -> bool
+
+  val is_letter : char -> bool
+
+  val isDigit : char -> bool
+
+  val is_digit : char -> bool
+
+  val isAlphanumeric : char -> bool
+
+  val is_alphanumeric : char -> bool
+
+  val isPrintable : char -> bool
+
+  val is_printable : char -> bool
+
+  val isWhitespace : char -> bool
+
+  val is_whitespace : char -> bool
 end
 
 module Tuple2 : sig

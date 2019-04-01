@@ -220,13 +220,205 @@ module Option : sig
 end
 
 module Char : sig
+  (** Functions for working with characters. Character literals are enclosed in ['a'] pair of single quotes. *)
+
   val toCode : char -> int
+  (** Convert to the corresponding ASCII [code point][cp].
+
+    [cp]: https://en.wikipedia.org/wiki/Code_point
+
+    [toCode 'A' = 65]
+
+    [toCode 'B' = 66]
+
+    [toCode 'þ' = 254] *)
 
   val to_code : char -> int
 
-  val fromCode : int -> char
+  val fromCode : int -> char option
+  (** Convert an ASCII [code point][cp] to a character.
 
-  val from_code : int -> char
+    [fromCode 65 = Some 'A']
+
+    [fromCode 66 = Some 'B']
+    
+    [fromCode 3000 = None]
+
+    [fromCode (-1) = None]
+
+    The full range of extended ASCII is from [0] to [255]. For numbers outside that range, you get [None]. 
+
+    [cp]: https://en.wikipedia.org/wiki/Code_point *)
+
+  val from_code : int -> char option
+  
+  val toString : char -> string
+  (** Convert a character into a string.
+      [toString 'A' = "A"]
+
+      [toString '{' = "{"]
+
+      [toString '7' = "7"] *)
+
+  val to_string : char -> string
+
+  val fromString : string -> char option
+  (** Converts a string to character. Returns None when the string isn't of length one.
+      [fromString "A" = Some 'A']
+
+      [fromString " " = Some ' ']
+
+      [fromString "" = None] 
+
+      [fromString "abc" = None] 
+
+      [fromString " a" = None] *)
+
+  val from_string : string -> char option
+
+  val toDigit : char -> int option
+  (** Converts a digit character to its corresponding integer. Returns None when the character isn't a digit.
+      [toDigit "7" = Some 7] 
+
+      [toDigit "0" = Some 0]
+
+      [toDigit "A" = None]
+
+      [toDigit "" = None] *)
+
+  val to_digit : char -> int option
+
+  val toLowercase : char -> char
+  (** Converts an ASCII character to lower case, preserving non alphabetic ASCII characters.
+      [toLowercase 'A' = 'a']
+
+      [toLowercase 'B' = 'b']
+
+      [toLowercase '7' = '7'] *)
+
+  val to_lowercase : char -> char
+
+  val toUppercase : char -> char
+  (** Convert an ASCII character to upper case, preserving non alphabetic ASCII characters.
+      [toUppercase 'a' = 'A']
+
+      [toUppercase 'b' = 'B']
+
+      [toUppercase '7' = '7'] *)
+
+  val to_uppercase : char -> char
+
+  val isLowercase : char -> bool
+  (** Detect lower case ASCII characters.
+
+    [isLowercase 'a' = true]
+
+    [isLowercase 'b' = true]
+
+    ...
+
+    [isLowercase 'z' = true]
+
+    [isLowercase '0' = false]
+
+    [isLowercase 'A' = false]
+
+    [isLowercase '-' = false]
+
+    [isLowercase 'ã' = false] *)
+
+  val is_lowercase : char -> bool
+
+  val isUppercase : char -> bool
+  (** Detect upper case ASCII characters.
+
+    [isUppercase 'A' = true]
+
+    [isUppercase 'B' = true]
+
+    [...]
+
+    [isUppercase 'Z' = true]
+
+    [isUppercase '0' = false]
+
+    [isUppercase 'Ý' = false]
+
+    [isUppercase '-' = false] *)
+
+  val is_uppercase : char -> bool
+
+  val isLetter : char -> bool
+  (** Detect upper and lower case ASCII alphabetic characters.
+
+      [isLetter 'a' = true]
+
+      [isLetter 'b' = true]
+
+      [isLetter 'E' = true]
+
+      [isLetter 'Y' = true]
+
+      [isLetter '0' = false]
+
+      [isLetter 'ý' = false]
+
+      [isLetter '-' = false] *)
+
+  val is_letter : char -> bool
+
+  val isDigit : char -> bool
+  (** Detect when a character is a number
+
+    [isDigit '0' = true]
+
+    [isDigit '1' = true]
+    ...
+    [isDigit '9' = true]
+
+    [isDigit 'a' = false]
+
+    [isDigit 'b' = false]
+
+    [isDigit 'ý' = false] *)
+
+  val is_digit : char -> bool
+
+  val isAlphanumeric : char -> bool
+  (** Detect upper case, lower case and digit ASCII characters.
+
+    [isAlphanumeric 'a' = true]
+
+    [isAlphanumeric 'b' = true]
+
+    [isAlphanumeric 'E' = true]
+
+    [isAlphanumeric 'Y' = true]
+
+    [isAlphanumeric '0' = true]
+
+    [isAlphanumeric '7' = true]
+
+    [isAlphanumeric '-' = false] *)
+  
+  val is_alphanumeric : char -> bool
+
+  val isPrintable : char -> bool
+  (** Detect if a character is a [printable] character
+    https://en.wikipedia.org/wiki/ASCII#Printable_characters
+
+    [isPrintable ' ' = true] *)
+  
+  val is_printable : char -> bool
+
+  val isWhitespace : char -> bool
+  (** Detect ' ', '\t', '\r' or '\n' characters.
+
+    [isWhitespace ' ' = true]
+
+    [isWhitespace 'b' = false] *)
+  
+  val is_whitespace : char -> bool
 end
 
 module Tuple2 : sig

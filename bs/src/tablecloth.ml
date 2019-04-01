@@ -417,14 +417,97 @@ module Option = struct
   let to_option = toOption
 end
 
-module Char = struct
+module Char = struct  
   let toCode (c : char) : int = Char.code c
 
   let to_code = toCode
 
-  let fromCode (i : int) : char = Char.chr i
+  let fromCode (i : int) : char option = 
+    if 0 <= i && i <= 255 then Some (Char.chr i) else None
 
   let from_code = fromCode
+
+  let toString c = String.make 1 c
+
+  let to_string = toString
+
+  let fromString (str : string) : char option = match String.length str with
+    | 1 -> Some (String.get str 0)
+    | _ -> None
+
+  let from_string = fromString
+
+  let toDigit char = match char with
+  | '0' .. '9' -> Some (toCode char - toCode '0')
+  | _ -> None
+
+  let to_digit = toDigit
+
+  let toLowercase char =     
+    match char with
+    | 'A'..'Z' -> 
+      Char.chr (toCode 'a' + (toCode char - toCode 'A'))      
+    | _ -> char
+
+  let to_lowercase = toLowercase
+
+  let toUppercase char = 
+    match char with
+    | 'a'..'z' -> 
+      Char.chr (toCode 'A' + (toCode char - toCode 'a'))
+    | _ -> char
+
+  let to_uppercase = toUppercase
+
+  let isLowercase = function
+    | 'a' .. 'z' -> true
+    | _ -> false
+
+  let is_lowercase = isLowercase
+
+  let isUppercase = function
+    | 'A' .. 'Z' -> true
+    | _ -> false
+
+  let is_uppercase = isUppercase
+
+  let isLetter = function
+    | 'a' .. 'z' | 'A' .. 'Z' -> true
+    | _ -> false
+
+  let is_letter = isLetter
+
+  let isDigit = function
+    | '0' .. '9' -> true
+    | _ -> false
+
+  let is_digit = isDigit
+  
+  let isAlphanumeric = function
+    | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' -> true
+    | _ -> false
+
+  let is_alphanumeric = isAlphanumeric
+
+  let isPrintable = function
+    | ' ' .. '~' -> true
+    | _ -> false
+
+  let is_printable = isPrintable
+  
+  let isWhitespace = function
+    | '\t'
+    | '\n'
+    | '\011' (* vertical tab *)
+    | '\012' (* form feed *)
+    | '\r'
+    | ' '
+      -> true
+    | _
+      -> false
+  ;;
+
+  let is_whitespace = isWhitespace
 end
 
 module Tuple2 = struct
@@ -868,7 +951,7 @@ module IntDict = struct
     Map.merge dict1 dict2 f
 end
 
-module Regex = struct
+module Regex = struct 
   type t = Js.Re.t
 
   type result = Js.Re.result
