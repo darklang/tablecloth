@@ -1093,11 +1093,10 @@ module List : sig
   val insert_at : index:int -> value:'a -> 'a list -> 'a list
 
   (**
-    `splitWhen(~f=predicate, xs)` returns a tuple of two lists as an `option` value.
+    `splitWhen(~f=predicate, xs)` returns a tuple of two lists.
     The first element of the tuple is the list of all the elements at the
     beginning of `xs` that  do _not_ satisfy the `predicate` function.
     The second element of the tuple is the list of the remaining items in `xs`.
-    If no elements in `xs` satisfy `predicate`, `splitWhen` returns `None`.
     
     (Same as `split_when`.)
     
@@ -1105,19 +1104,20 @@ module List : sig
     
     ```reason
     let even = (x) => {x mod 2 == 0};
-    splitWhen(~f = even, [5, 1, 2, 6, 3]) == Some(([5, 1], [2, 6, 3]));
-    splitWhen(~f = even, [2, 6, 5]) == Some(([], [2, 6, 5]));
-    splitWhen(~f = even, [1, 5, 3]) == None;
+    splitWhen(~f = even, [5, 1, 2, 6, 3]) == ([5, 1], [2, 6, 3]);
+    splitWhen(~f = even, [2, 6, 5]) == ([], [2, 6, 5]);
+    splitWhen(~f = even, [1, 5, 3]) == ([1, 5, 3], []);
+    splitWhen(~f = even, [2, 6, 4]) == ([], [2, 6, 4]);
+    splitWhen(~f = even, []) == ([], [])
     ```
   *)
-  val splitWhen : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
+  val splitWhen : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
   (**
     `split_when ~f:predicate  xs` returns a tuple of two lists as an `option` value.
     The first element of the tuple is the list of all the elements at the
     beginning of `xs` that  do _not_ satisfy the `predicate` function.
     The second element of the tuple is the list of the remaining items in `xs`.
-    If no elements in `xs` satisfy `predicate`, `split_when` returns `None`.
     
     (Same as `splitWhen`.)
     
@@ -1125,12 +1125,14 @@ module List : sig
     
     ```reason
     let even x = (x mod 2 = 0)
-    split_when ~f:even [5; 1; 2; 6; 3] = Some ([5; 1], [2; 6; 3])
-    split_when ~f:even [2; 6; 5] = Some ([], [2; 6; 5])
-    split_when ~f:even [1; 5; 3] = None
+    split_when ~f:even [5; 1; 2; 6; 3] = ([5; 1], [2; 6; 3])
+    split_when ~f:even [2; 6; 5] = ([], [2; 6; 5])
+    split_when ~f:even [1; 5; 3] = ([1; 5; 3], [])
+    split_when ~f:even [2; 6; 4] = ([], [2; 6; 4])
+    split_when ~f:even [] = ([], [])
     ```
   *)
-  val split_when : f:('a -> bool) -> 'a list -> ('a list * 'a list) option
+  val split_when : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
   (**
     `intersperse separator xs` (`intersperse(separator, xs)` in ReasonML)
