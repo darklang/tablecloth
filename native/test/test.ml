@@ -71,13 +71,13 @@ let t_List () =
   AT.check (AT.list AT.int) "indexedMap two elements" (List.indexedMap ~f:(fun _ n -> n + 1) [-1; 0]) [0;1];
 
   AT.check (AT.option AT.int) "minimumBy non-empty list" (List.minimumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) (Some 15);
-  AT.check (At.option AT.int) "minimumBy empty list" (List.minimumBy ~f:(fun x -> x mod 12) []) None;
+  AT.check (AT.option AT.int) "minimumBy empty list" (List.minimumBy ~f:(fun x -> x mod 12) []) None;
   
   AT.check (AT.option AT.int) "maximumBy non-empty list" (List.maximumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) (Some 10);
   AT.check (AT.option AT.int) "maximumBy empty list" (List.maximumBy ~f:(fun x -> x mod 12) []) None;
   
   AT.check (AT.option AT.int) "minimum non-empty list" (List.minimum [7;9;15;10;3]) (Some 3);
-  AT.check (At.option AT.int) "minimum empty list" (List.minimum []) None;
+  AT.check (AT.option AT.int) "minimum empty list" (List.minimum []) None;
   
   AT.check (AT.option AT.int) "maximum non-empty list" (List.maximum [7;9;15;10;3]) (Some 15);
   AT.check (AT.option AT.int) "maximum empty list" (List.maximum []) None;
