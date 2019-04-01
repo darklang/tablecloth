@@ -104,6 +104,13 @@ let () =
       test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
       test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
     );
+ 
+    describe "split_when" (fun () ->
+      test "split_when four elements" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;2;4]) |> toEqual ([1;3], [2;4]));
+      test "split_when at zero" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [2;4;6]) |> toEqual ([], [2;4;6]));
+      test "split_when at end" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;5]) |> toEqual ([1;3;5], []));
+      test "split_when empty list" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
+    );
   );
 
   describe "String" (fun () ->

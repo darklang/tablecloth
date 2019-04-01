@@ -75,6 +75,11 @@ let t_List () =
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition one element" (List.partition ~f:(fun x -> x mod 2 = 0) [1]) ([], [1]);
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition four elements" (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) ([2;4], [1;3]);
 
+  AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "split_when four elements" (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;2;4]) ([1;3], [2;4]);
+  AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "split_when at zero" (List.split_when ~f:(fun x -> x mod 2 = 0) [2;4;6]) ([], [2;4;6]);
+  AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "split_when at end" (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;5]) ([1;3;5], []);
+  AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "split_when empty list" (List.split_when ~f:(fun x -> x mod 2 = 0) []) ([], []);
+
   ()
 
 let t_String () =
