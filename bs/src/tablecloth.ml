@@ -1,3 +1,7 @@
+module Caml = struct
+  module Array = Array
+end
+
 let ( <| ) a b = a b
 
 let ( >> ) (f1 : 'a -> 'b) (f2 : 'b -> 'c) : 'a -> 'c = fun x -> x |> f1 |> f2
@@ -5,6 +9,135 @@ let ( >> ) (f1 : 'a -> 'b) (f2 : 'b -> 'c) : 'a -> 'c = fun x -> x |> f1 |> f2
 let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 
 let identity (value : 'a) : 'a = value
+
+let flip f x y = f y x
+
+module Array = struct
+  let empty : 'a array = [||]
+
+  let singleton a = [|a|]
+
+  let length (a : 'a array) : int = Belt.Array.length a
+
+  let isEmpty (a : 'a array) : bool = length a = 0
+
+  let is_empty = isEmpty
+
+  let initialize ~length ~f = Belt.Array.makeBy length f
+
+  let repeat ~length (e: 'a): 'a array = Belt.Array.make length e
+
+  let range ?(from = 0) (to_ : int) : int array =
+    Belt.Array.makeBy (to_ - from) (fun i -> i + from)
+
+  let fromList (l: 'a list) : 'a array = Belt.List.toArray l
+
+  let from_list = fromList
+
+  let toList (a: 'a array) : 'a list = Belt.List.fromArray a
+
+  let to_list = toList
+
+  let toIndexedList array = 
+    Belt.Array.reduceReverse array (length array - 1, []) (fun (i, acc) x -> 
+      (i - 1, ((i, x) :: acc)))
+    |> snd
+
+  let to_indexed_list = toIndexedList
+
+  let get ~index array = Belt.Array.get array index 
+
+  let set ~index ~value array = array.(index) <- value
+
+  let sum (a : int array) : int = Belt.Array.reduce a 0 ( + )
+
+  let floatSum (a : float array) : float = Belt.Array.reduce a 0.0 ( +. )
+
+  let float_sum = floatSum
+
+  let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = Belt.Array.keep a f
+
+  let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.map a f
+
+  let mapWithIndex ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.mapWithIndex a f
+
+  let map_with_index = mapWithIndex
+
+  let mapi = mapWithIndex
+
+  let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = Belt.Array.zipBy a b f
+
+  let map3 ~(f : 'a -> 'b -> 'c -> 'd) (arrayA : 'a array) (arrayB : 'b array) (arrayC : 'c array) : 'd array =
+    let minLength : int = Belt.Array.reduce [|length arrayB; length arrayC|] (length arrayA) min in
+    Belt.Array.makeBy minLength (fun i -> f arrayA.(i) arrayB.(i) arrayC.(i))
+
+  let flatMap ~(f : 'a -> 'b array) (a : 'a array) : 'b array = Belt.Array.map a f |> Belt.Array.concatMany
+
+  let flat_map = flatMap
+
+  let find ~(f : 'a -> bool) (array : 'a array) : 'a option = 
+    let rec find_loop array ~f ~length i =
+      if i >= length then None
+      else if f array.(i) then Some (array.(i))
+      else find_loop array ~f ~length (i + 1)
+    in
+    find_loop array ~f ~length:(length array) 0 
+
+  let any ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.some a f
+
+  let all ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.every a f
+
+  let append (a : 'a array) (a' : 'a array)  : 'a array = Belt.Array.concat a a'
+
+  let concatenate (ars : 'a array array) : 'a array = Belt.Array.concatMany ars
+
+  let flatten = concatenate
+
+  let intersperse ~(sep : 'a) (array : 'a array) : 'a array = 
+    Array.init
+      (max 0 (Array.length array * 2 - 1)) 
+      (fun i -> 
+        if i mod 2 <> 0 then sep else array.(i / 2)
+      )
+
+  let slice ~from ?to_ array =
+    let defaultTo = match to_ with 
+      | None -> length array
+      | Some i -> i
+    in
+    let sliceFrom = 
+      if from >= 0 then min (length array) from 
+      else max 0 (min (length array) (length array + from))
+    in    
+    let sliceTo = 
+      if defaultTo >= 0 then min (length array) defaultTo 
+      else max 0 (min (length array) (length array + defaultTo))
+    in    
+    
+    if sliceFrom >= sliceTo then empty else (
+      Array.init (sliceTo - sliceFrom) (fun i -> array.(i + sliceFrom))
+    )
+
+  let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
+    Belt.Array.reduce a initial (flip f)
+
+  let fold_left = foldLeft
+
+  let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
+    Belt.Array.reduceReverse a initial (flip f)
+
+  let fold_right = foldRight
+
+  let reverse (a : 'a array) : 'a array = Belt.Array.reverse a
+
+  let reverseInPlace (a : 'a array) = Belt.Array.reverseInPlace a
+
+  let reverse_in_place = reverseInPlace
+
+  let forEach ~(f : 'a -> unit) (a : 'a array) : unit = Belt.Array.forEach a f
+
+  let for_each = forEach
+end
 
 module List = struct
   let flatten = Belt.List.flatten
@@ -36,7 +169,7 @@ module List = struct
 
   let elemIndex ~(value : 'a) (l : 'a list) : int option =
     l
-    |> Array.of_list
+    |> Caml.Array.of_list
     |> Js.Array.findIndex (( = ) value)
     |> function -1 -> None | index -> Some index
 
@@ -277,7 +410,7 @@ module List = struct
 
   let insert_at = insertAt
 
-  let splitWhen ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
+  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) =
     match findIndex ~f l with
       | Some index -> splitAt ~index l
       | None -> (l, []) 
@@ -292,6 +425,7 @@ module List = struct
         let step x rest = sep :: x :: rest in
         let spersed = foldr ~f:step ~init:[] tl in
         hd :: spersed
+
 
   let initialize (n : int) (f : int -> 'a) : 'a list =
     let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
@@ -511,6 +645,18 @@ module Char = struct
   ;;
 
   let is_whitespace = isWhitespace
+end
+
+module Int = struct
+  let negate = (~-)
+
+  let isEven n = n mod 2 = 0
+
+  let is_even = isEven
+
+  let isOdd n = n mod 2 != 0
+
+  let is_odd = isOdd
 end
 
 module Tuple2 = struct
@@ -740,7 +886,7 @@ module StrSet = struct
 
   let to_list = toList
 
-  let ofList (s : value list) : t = s |> Array.of_list |> Set.fromArray
+  let ofList (s : value list) : t = s |> Caml.Array.of_list |> Set.fromArray
 
   let of_list = ofList
 
@@ -790,7 +936,7 @@ module IntSet = struct
 
   let to_list = toList
 
-  let ofList (s : value list) : t = s |> Array.of_list |> Set.fromArray
+  let ofList (s : value list) : t = s |> Caml.Array.of_list |> Set.fromArray
 
   let of_list = ofList
 

@@ -6,6 +6,312 @@ val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
 
 val identity : 'a -> 'a
 
+module Array : sig
+  (** A mutable vector of elements which must have the same type with O(1) {!get} and {!set} operations.
+
+   You can create an [array] in OCaml with the [[|1; 2; 3|]] syntax. *)
+
+  val empty : 'a array
+  (** An empty array.
+
+    {[Array.empty = [||]]}
+
+    {[Array.length Array.empty = 0]} *)
+
+  val singleton : 'a -> 'a array
+  (** Create an array with only one element.
+
+    {[Array.singleton 1234 = [|1234|]]}
+
+    {[Array.singleton "hi" = [|"hi"|]]} *)
+  
+  val length : 'a array -> int
+  (** Return the length of an array.
+
+    {[Array.length [|1; 2, 3|] = 3]}  
+
+    {[Array.length [||] = 0]} *)
+
+  val isEmpty : 'a array -> bool
+  (** Determine if an array is empty.
+
+    {[Array.isEmpty Array.empty = true]}
+
+    {[Array.isEmpty [||] = true]} 
+
+    {[Array.isEmpty [|1; 2; 3|] = false]} *)
+
+  val is_empty : 'a array -> bool  
+
+  val initialize : length:int -> f:(int -> 'a) -> 'a array
+  (** Initialize an array. [Array.initialize ~length:n ~f] creates an array of length [n] with
+    the element at index [i] initialized to the result of [(f i)].
+
+    {[Array.initialize ~length:4 ~f:identity = [|0; 1; 2; 3|]]}
+
+    {[Array.initialize ~length:4 ~f:(fun n -> n * n) = [|0; 1; 4; 9|]]} *)
+
+  val repeat : length:int -> 'a -> 'a array
+  (** Creates an array of length [length] with the value [x] populated at each index. 
+
+    {[repeat ~length:5 'a' = [|'a'; 'a'; 'a'; 'a'; 'a'|]]}
+
+    {[repeat ~length:0 7 = [||]]} 
+
+    {[repeat ~length:(-1) "Why?" = [||]]} *)
+
+  val range : ?from:int -> int -> int array
+  (** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to] 
+  
+    {[Array.range 5 = [|0; 1; 2; 3; 4|] ]}
+
+    {[Array.range ~from: 2 5 = [|2; 3; 4|] ]}
+
+    {[Array.range ~from:(-2) 3 = [|-2; -1; 0; 1; 2|] ]} *)
+
+  val fromList : 'a list -> 'a array
+  (** Create an array from a {!List}. 
+
+    {[Array.fromList [1;2;3] = [|1;2;3|]]} *)
+
+  val from_list : 'a list -> 'a array
+
+  val toList : 'a array -> 'a list
+  (** Create a {!List} of elements from an array.
+
+    {[Array.toList [|1;2;3|] = [1;2;3]]}
+
+    {[Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]]} *)
+
+  val to_list : 'a array -> 'a list
+
+  val toIndexedList : 'a array -> (int * 'a) list
+  (**  Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple2}.
+
+    {[Array.toIndexedList [|"cat"; "dog"|] = [(0, "cat"); (1, "dog")]]} *)
+
+  val to_indexed_list : 'a array -> (int * 'a) list
+
+  val get : index:int -> 'a array -> 'a option
+  (** [Array.get ~index:n a] returns, as an {!Option}, the element at index number [n] of array [a].
+
+    The first element has index number 0.
+
+    The last element has index number [Array.length a - 1].
+
+    Returns [None] if [n] is outside the range [0] to [(Array.length a - 1)].
+
+    You can also write [a.(n)] instead of [Array.get a n] but this raises [Invalid_argument "index out of bounds"] for index outside of the range of the array.
+
+    {[Array.get ~index:2 [|"cat"; "dog"; "eel"|] = Some "eel"]}
+
+    {[Array.get ~index:5 [|0; 1; 2|] = None]}
+
+    {[Array.get ~index:0 [||] = None]} *)
+
+  val set : index:int -> value:'a -> 'a array -> unit
+  (** [Array.set a ~index:n ~value:x] modifies array [a] in place, replacing the element at index number [n] with [x].
+
+    You can also write [a.(n) <- x] instead of [Array.set a ~index:n ~value:x].
+
+    Raises [Invalid_argument "index out of bounds"] if [n] is outside the range [0] to [Array.length a - 1]. 
+    
+    {[let setZero = Array.set ~value:0 in
+let numbers = [|1;2;3|] in
+  
+setZero numbers ~index:2;
+setZero numbers ~index:1;
+
+numbers = [|1;0;0|]]}
+
+    {[let setZerothElement = Array.set ~index:0 in
+let animals = [|"ant"; "bat"; "cat"|] in
+
+setZerothElement animals ~value:"antelope";
+
+animals = [|"antelope"; "bat"; "cat"|]]} *)
+
+  val sum : int array -> int
+  (** Get the total of adding all of the integers in an array. 
+
+    {[Array.sum [|1; 2; 3|] = 6]} *)
+
+  val floatSum : float array -> float
+  (** Get the total of adding all of the floating point numbers in an array. 
+
+    {[Array.floatSum [|1.0; 2.0; 3.0|] = 6.0]} *)
+
+  val float_sum : float array -> float
+
+  val filter : f:('a -> bool) -> 'a array -> 'a array
+  (** Keep elements that [f] returns [true] for.
+
+    {[Array.filter ~f:Int.isEven [|1; 2; 3; 4; 5; 6|] = [|2; 4; 6|]]} *)
+
+  val map : f:('a -> 'b) -> 'a array -> 'b array
+  (** Create a new array which is the result of applying a function [f] to every element.
+
+    {[Array.map ~f:sqrt [|1.0; 4.0; 9.0|] = [|1.0; 2.0; 3.0|]]} *)
+
+  val mapWithIndex : f:(int -> 'a -> 'b) -> 'a array -> 'b array
+  (** Apply a function [f] to every element with its index as the first argument.
+
+   {[Array.mapWithIndex ~f:( * ) [|5; 5; 5|] = [|0; 5; 10|]]} *)
+
+  val map_with_index : f:(int -> 'a -> 'b) -> 'a array -> 'b array
+
+  val mapi : f:(int -> 'a -> 'b) -> 'a array -> 'b array
+
+  val map2 : f:('a -> 'b -> 'c) -> 'a array -> 'b array -> 'c array
+  (** Combine two arrays, using [f] to combine each pair of elements.
+    If one array is longer, the extra elements are dropped.
+
+    {[let totals (xs : int array) (ys : int array) : int array =
+Array.map2 ~f:(+) xs ys in
+
+totals [|1;2;3|] [|4;5;6|] = [|5;7;9|]
+  
+Array.map2 
+  ~f:Tuple2.create 
+  [|"alice"; "bob"; "chuck"|] 
+  [|2; 5; 7; 8|] = 
+    [|("alice",2); ("bob",5); ("chuck",7)|] ]} *)
+
+  val map3 : f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array
+  (** Combine three arrays, using [f] to combine each {!Tuple3} of elements.
+    If one array is longer, the extra elements are dropped.
+
+    {[ 
+  Array.map3 
+    ~f:Tuple3.create 
+    [|"alice"; "bob"; "chuck"|] 
+    [|2; 5; 7; 8;|] 
+    [|true; false; true; false|] = 
+      [|("alice", 2, true); ("bob", 5, false); ("chuck", 7, true)|]
+    ]} *)
+
+  val flatMap : f:('a -> 'a array) -> 'a array -> 'a array
+  (** Apply a function [f] onto an array and flatten the resulting array of arrays.
+
+    {[Array.flatMap ~f xs = Array.map ~f xs |> Array.flatten]} 
+    
+    {[Array.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]} *)
+
+  val flat_map : f:('a -> 'a array) -> 'a array -> 'a array
+
+  val find : f:('a -> bool) -> 'a array -> 'a option
+  (** Returns as an option the first element for which f evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None] 
+    {[Array.find ~f:Int.isEven [|1; 3; 4; 8;|] = Some 4]}
+
+    {[Array.find ~f:Int.isOdd [|0; 2; 4; 8;|] = None]}
+
+    {[Array.find ~f:Int.isEven [||] = None]} *)
+
+  val any : f:('a -> bool) -> 'a array -> bool
+  (**  Determine if [f] returns true for [any] values in an array.
+
+    {[Array.any ~f:isEven [|2;3|] = true]}
+
+    {[Array.any ~f:isEven [|1;3|] = false]}
+
+    {[Array.any ~f:isEven [||] = false]} *)
+
+  val all : f:('a -> bool) -> 'a array -> bool
+  (** Determine if [f] returns true for [all] values in an array.
+
+    {[Array.all ~f:Int.isEven [|2;4|] = true]}
+
+    {[Array.all ~f:Int.isEven [|2;3|] = false]}
+
+    {[Array.all ~f:Int.isEven [||] = true]} *)
+
+  val append : 'a array -> 'a array -> 'a array
+  (** Creates a new array which is the result of appending the second array onto the end of the first.
+
+    {[let fortyTwos = Array.repeat ~length:2 42 in 
+let eightyOnes = Array.repeat ~length:3 81 in
+Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
+
+  val concatenate : 'a array array -> 'a array
+  (** Concatenate an array of arrays into a single array:
+
+    {[Array.concatenate [|[|1; 2|]; [|3|]; [|4; 5|]|] = [|1; 2; 3; 4; 5|]]} *)
+
+  val flatten : 'a array array -> 'a array  
+  (** An alias for {!Array.concatenate} *)
+
+  val intersperse : sep : 'a -> 'a array -> 'a array
+  (** Places [sep] between all elements of the given array.
+
+    {[Array.intersperse ~sep:"on" [|"turtles"; "turtles"; "turtles"|] = [|"turtles"; "on"; "turtles"; "on"; "turtles"|]]}
+
+    {[Array.intersperse ~sep:0 [||] = [||]]} *)
+
+  val slice : from : int -> ?to_: int -> 'a array -> 'a array
+  (** Get a sub-section of an array. [from] is a zero-based index where we will start our slice. 
+    The [to_] is a zero-based index that indicates the end of the slice. 
+
+    The slice extracts up to but not including [to_].
+
+    {[Array.slice ~from:0  ~to_:3 [|0; 1; 2; 3; 4|] = [|0; 1; 2|]]}
+
+    {[Array.slice ~from:1  ~to_:4 [|0; 1; 2; 3; 4|] = [|1; 2; 3|]]}
+
+    {[Array.slice ~from:5  ~to_:3 [|0; 1; 2; 3; 4|] = [||]]}
+
+    Both the [from] and [to_] indexes can be negative, indicating an offset from the end of the array.
+
+    {[Array.slice  ~from:1 ~to_:(-1) [|0; 1; 2; 3; 4|] = [|1; 2; 3|]]}
+
+    {[Array.slice ~from:(-2)  ~to_:5 [|0; 1; 2; 3; 4|] = [|3; 4|]]}
+  
+    {[Array.slice ~from:(-2)  ~to_:(-1) [|0; 1; 2; 3; 4|] = [|3|]]} *)
+
+  val foldLeft : f:('a -> 'b -> 'b)  -> initial:'b -> 'a array -> 'b
+  (** Reduces collection to a value which is the accumulated result of running each element in the array through [f], 
+      where each successive invocation is supplied the return value of the previous. 
+    
+    Read [foldLeft] as 'fold from the left'. 
+
+    {[Array.foldLeft ~f:( * ) ~initial:1 (Array.repeat ~length:4 7) = 2401]}
+    
+    {[Array.foldLeft ~f:((fun element list -> element :: list)) ~initial:[] [|1; 2; 3|] = [3; 2; 1]]} *)
+
+  val fold_left : f:('a -> 'b -> 'b)  -> initial:'b -> 'a array -> 'b
+
+  val foldRight : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+  (** This method is like [foldLeft] except that it iterates over the elements of the array from right to left.
+
+    {[Array.foldRight ~f:(+) ~initial:0 (Array.repeat ~length:3 5) = 15]}
+
+    {[Array.foldRight ~f:(fun element list -> element :: list) ~initial:[] [|1; 2; 3|] = [1; 2; 3]]} *)
+
+  val fold_right : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+
+  val reverse : 'a array -> 'a array
+  (** Create a new reversed array leaving the original untouched 
+  
+  {[let numbers = [|1; 2; 3|] in
+Array.reverse numbers = [|3; 2; 1|];
+numbers = [|1; 2; 3|]; ]} *)
+
+  val reverseInPlace : 'a array -> unit
+  (** Reverses array so that the first element becomes the last, the second element becomes the second to last, and so on. 
+  
+  {[let numbers = [|1; 2; 3|] in
+Array.reverseInPlace numbers;
+numbers = [|3; 2; 1|]]} *)
+
+  val reverse_in_place : 'a array -> unit
+
+  val forEach : f:('a -> unit) -> 'a array -> unit
+  (** Iterates over the elements of invokes [f] for each element. 
+
+    {[Array.forEach [|1; 2; 3|] ~f:(fun int -> print (Int.toString int))]} *)
+
+  val for_each : f:('a -> unit) -> 'a array -> unit
+end
+
 module List : sig
   val flatten : 'a list list -> 'a list
 
@@ -421,6 +727,36 @@ module Char : sig
     [isWhitespace 'b' = false] *)
   
   val is_whitespace : char -> bool
+end
+
+module Int : sig
+  val negate : int -> int
+  (**
+    [Int.negate 8 = (-8)]
+
+    [Int.negate (-7) = 7]
+
+    [Int.negate 0 = 0] *)
+
+  val isEven : int -> bool
+  (**
+    [Int.isEven 8 = true]
+
+    [Int.isEven 7 = false]
+
+    [Int.isEven 0 = true] *)
+
+  val is_even : int -> bool
+
+  val isOdd : int -> bool
+    (**
+    [Int.isOdd 7 = true]
+
+    [Int.isOdd 8 = false]
+
+    [Int.isOdd 0 = false] *)
+
+  val is_odd : int -> bool
 end
 
 module Tuple2 : sig
