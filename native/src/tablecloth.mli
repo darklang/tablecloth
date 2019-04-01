@@ -111,6 +111,8 @@ module List : sig
 
   val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 
+  val minimum : 'comparable list -> 'comparable option
+
   val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
   val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
