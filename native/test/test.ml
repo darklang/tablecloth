@@ -74,13 +74,13 @@ let t_List () =
   AT.check (At.option AT.int) "minimumBy empty list" (List.minimumBy ~f:(fun x -> x mod 12) []) None;
   
   AT.check (AT.option AT.int) "maximumBy non-empty list" (List.maximumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) (Some 10);
-  AT.check (At.option AT.int) "maximumBy empty list" (List.maximumBy ~f:(fun x -> x mod 12) []) None;
+  AT.check (AT.option AT.int) "maximumBy empty list" (List.maximumBy ~f:(fun x -> x mod 12) []) None;
   
   AT.check (AT.option AT.int) "minimum non-empty list" (List.minimum [7;9;15;10;3]) (Some 3);
   AT.check (At.option AT.int) "minimum empty list" (List.minimum []) None;
   
   AT.check (AT.option AT.int) "maximum non-empty list" (List.maximum [7;9;15;10;3]) (Some 15);
-  AT.check (At.option AT.int) "maximum empty list" (List.maximum []) None;
+  AT.check (AT.option AT.int) "maximum empty list" (List.maximum []) None;
   
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition empty list" (List.partition ~f:(fun x -> x mod 2 = 0) []) ([], []);
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition one element" (List.partition ~f:(fun x -> x mod 2 = 0) [1]) ([], [1]);
