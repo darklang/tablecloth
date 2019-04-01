@@ -297,6 +297,9 @@ module List = struct
 
   let minimum_by = minimumBy
 
+  let minimum (list : 'comparable list) : 'comparable option =
+    match list with x :: xs -> Some (foldl ~f:min ~init:x xs) | _ -> None
+
   let maximumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
     let maxBy x (y, fy) =
       let fx = f x in
