@@ -1148,6 +1148,7 @@ module List : sig
     intersperse("/", ["a", "b", "c"]) == ["a", "/", "b", "/", "c"]
     intersperse("?", [] == [])
     ```
+  *)
   val intersperse : 'a -> 'a list -> 'a list
 
   (**
