@@ -106,23 +106,23 @@ let () =
     );
  
     describe "minimumBy" (fun () ->
-      test "minimumBy non-empty list" (fun () -> expect (List.minimumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) |> toEqual (Some 15);
-      test "minimumBy empty list" (fun () -> expect (List.minimumBy ~f:(fun x -> x mod 12) []) |> toEqual None;
+      test "minimumBy non-empty list" (fun () -> expect (List.minimumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) |> toEqual (Some 15));
+      test "minimumBy empty list" (fun () -> expect (List.minimumBy ~f:(fun x -> x mod 12) []) |> toEqual None);
     );
     
     describe "maximumBy" (fun () ->
-      test "maximumBy non-empty list" (fun () -> expect (List.maximumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) |> toEqual (Some 10);
-      test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:(fun x -> x mod 12) []) |> toEqual None;
+      test "maximumBy non-empty list" (fun () -> expect (List.maximumBy ~f:(fun x -> x mod 12) [7;9;15;10;3;22]) |> toEqual (Some 10));
+      test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:(fun x -> x mod 12) []) |> toEqual None);
     );
     
     describe "minimum" (fun () ->
-      test "minimum non-empty list" (fun () -> expect (List.minimum [7; 9; 15; 10; 3]) |> toEqual (Some 3);
-      test "minimum empty list" (fun () -> expect (List.minimum []) |> toEqual None;
+      test "minimum non-empty list" (fun () -> expect (List.minimum [7; 9; 15; 10; 3]) |> toEqual (Some 3));
+      test "minimum empty list" (fun () -> expect (List.minimum []) |> toEqual None);
     );
     
     describe "maximum" (fun () ->
-      test "maximum non-empty list" (fun () -> expect (List.maximum [7; 9; 15; 10; 3]) |> toEqual (Some 15);
-      test "maximum empty list" (fun () -> expect (List.maximum []) |> toEqual None;
+      test "maximum non-empty list" (fun () -> expect (List.maximum [7; 9; 15; 10; 3]) |> toEqual (Some 15));
+      test "maximum empty list" (fun () -> expect (List.maximum []) |> toEqual None);
     );
    
     describe "split_when" (fun () ->
