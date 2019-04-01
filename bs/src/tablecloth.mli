@@ -873,6 +873,13 @@ module List : sig
    *) 
   val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
   
+  (**
+    `minimum xs` (`minimum(xs)` in ReasonML), when given a non-empty list, returns
+    the item in the list with the minimum value. It is returned as `Some value`
+    (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`. 
+    
+    The items in the list must be of a type that can be compared---for example, a `string` or `int`.
+   *) 
   val minimum: 'comparable list -> 'comparable option
 
   (**
