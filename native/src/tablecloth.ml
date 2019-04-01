@@ -356,9 +356,10 @@ module List = struct
 
   let insert_at = insertAt
 
-  let splitWhen ~(f : 'a -> bool) (list : 'a list) : ('a list * 'a list) option
-      =
-    findIndex ~f list |> Base.Option.map ~f:(fun index -> splitAt ~index list)
+  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) =
+    match findIndex ~f l with
+      | Some index -> splitAt ~index l
+      | None -> (l, []) 
 
 
   let split_when = splitWhen
