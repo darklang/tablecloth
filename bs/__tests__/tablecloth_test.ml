@@ -3,7 +3,89 @@ open Jest
 open Expect
 
 let () =
+  describe "Char" (fun () ->
+    test "toCode" (fun () -> expect (Char.toCode 'a') |> toEqual 97);
+
+    describe "fromCode" (fun () ->
+      test "valid ASCII codes return the corresponding character" (fun () -> expect (Char.fromCode 97) |> toEqual (Some 'a'));
+      test "negative integers return none" (fun () -> expect (Char.fromCode (-1)) |> toEqual None);
+      test "integers greater than 255 return none" (fun () -> expect (Char.fromCode 256) |> toEqual None);
+    );
+
+    test "toString" (fun () -> expect (Char.toString 'a') |> toEqual "a");
+
+    describe "fromString" (fun () ->
+      test "one-length string return Some" (fun () -> expect (Char.fromString "a") |> toEqual (Some 'a'));
+      test "multi character strings return none" (fun () -> expect (Char.fromString "abc") |> toEqual None);
+      test "zero length strings return none" (fun () -> expect (Char.fromString "") |> toEqual None);
+    );
+
+    describe "toLowercase" (fun () ->
+      test "converts uppercase ASCII characters to lowercase" (fun () -> expect (Char.toLowercase 'A') |> toEqual 'a');
+      test "perserves lowercase characters" (fun () -> expect (Char.toLowercase 'a') |> toEqual 'a');
+      test "perserves non-alphabet characters" (fun () -> expect (Char.toLowercase '7') |> toEqual '7');
+      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '\233');
+    );
+
+    describe "toUppercase" (fun () ->
+      test "converts lowercase ASCII characters to uppercase" (fun () -> expect (Char.toUppercase 'a') |> toEqual 'A');
+      test "perserves uppercase characters" (fun () -> expect (Char.toUppercase 'A') |> toEqual 'A');
+      test "perserves non-alphabet characters" (fun () -> expect (Char.toUppercase '7') |> toEqual '7');
+      test "perserves non-ASCII characters" (fun () -> expect (Char.toUppercase '\233') |> toEqual '\233');
+    );
+
+    describe "toDigit" (fun () ->
+      test "toDigit - converts ASCII characters representing digits into integers" (fun () -> expect (Char.toDigit '0') |> toEqual (Some 0));
+      test "toDigit - converts ASCII characters representing digits into integers" (fun () -> expect (Char.toDigit '8') |> toEqual (Some 8));
+      test "toDigit - converts ASCII characters representing digits into integers" (fun () -> expect (Char.toDigit 'a') |> toEqual None);
+    );
+
+
+    describe "isLowercase" (fun () ->
+      test "returns true for any lowercase character" (fun () -> expect (Char.isLowercase 'a') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isLowercase '7') |> toEqual false);
+      test "returns false for non-ASCII characters" (fun () -> expect (Char.isLowercase '\236') |> toEqual false);
+    );
+
+    describe "isUppercase" (fun () ->
+      test "returns true for any uppercase character" (fun () -> expect (Char.isUppercase 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isUppercase '7') |> toEqual false);
+      test "returns false for non-ASCII characters" (fun () -> expect (Char.isLowercase '\237') |> toEqual false);
+    );
+
+    describe "isLetter" (fun () ->
+      test "returns true for any ASCII alphabet character" (fun () -> expect (Char.isLetter 'A') |> toEqual true);
+      testAll "returns false for all other characters" ['7'; ' '; '\n'; '\011'; '\236'] (fun char -> expect (Char.isLetter char) |> toEqual false);
+    );
+
+    describe "isDigit" (fun () ->
+      testAll "returns true for digits 0-9" ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9';] (fun digit -> expect (Char.isDigit digit) |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isDigit 'a') |> toEqual false);
+    );
+
+    describe "isAlphanumeric" (fun () ->
+      test "returns true for any alphabet or digit character" (fun () -> expect (Char.isAlphanumeric 'A') |> toEqual true);
+      test "returns false for all other characters" (fun () -> expect (Char.isAlphanumeric '?') |> toEqual false);
+    );
+
+    describe "isPrintable" (fun () ->
+      test "returns true for a printable character" (fun () -> expect (Char.isPrintable '~') |> toEqual true);
+
+      test "returns false for non-printable character" (fun () -> expect (Char.fromCode 31 |> Option.map ~f:Char.isPrintable ) |> toEqual (Some false));
+    );
+
+    describe "isWhitespace" (fun () ->
+      test "returns true for any whitespace character" (fun () -> expect (Char.isWhitespace ' ') |> toEqual true);
+      test "returns false for a non-whitespace character" (fun () -> expect (Char.isWhitespace 'a') |> toEqual false);
+    );
+  );
+
   describe "List" (fun () ->
+    describe "reverse" (fun () ->
+    test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
+    test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
+    test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+    );
     test "foldl empty list" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
     test "foldl one element" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
     test "foldl three elements" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [3;2;1]);
@@ -18,14 +100,30 @@ let () =
     test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
     test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
 
-    test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
-    test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
-    test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
+    describe "map2" (fun () ->
+      test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
+      test "map2 one element" (fun () -> expect (List.map2 ~f:(+) [1] [1]) |> toEqual [2]);
+      test "map2 two elements" (fun () -> expect (List.map2 ~f:(+) [1;2] [1;2]) |> toEqual [2;4]);
+    );
 
-    test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
-    test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
-    test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+    describe "indexedMap" (fun () ->
+      test "indexedMap empty list" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) []) |> toEqual []);
+      test "indexedMap one element" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a']) |> toEqual [0]);
+      test "indexedMap two elements" (fun () -> expect (List.indexedMap ~f:(fun i _ -> i) ['a';'b']) |> toEqual [0;1]);
+    );
 
+    describe "partition" (fun () ->
+      test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
+      test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
+      test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
+    );
+
+    describe "split_when" (fun () ->
+      test "split_when four elements" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;2;4]) |> toEqual ([1;3], [2;4]));
+      test "split_when at zero" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [2;4;6]) |> toEqual ([], [2;4;6]));
+      test "split_when at end" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;5]) |> toEqual ([1;3;5], []));
+      test "split_when empty list" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
+    );
     test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
     test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
     test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
