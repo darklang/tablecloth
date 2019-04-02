@@ -9,8 +9,6 @@ let identity (value : 'a) : 'a = value
 let flip f x y = f y x
 
 module List = struct
-  let flatten = Belt.List.flatten
-
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
 
   let sum (l : int list) : int = Belt.List.reduce l 0 ( + )
@@ -106,9 +104,7 @@ module List = struct
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Belt.List.keep l f
 
-  let concat (ls : 'a list list) : 'a list =
-    ls |> Belt.List.toArray |> Belt.List.concatMany
-
+  let concat (ls : 'a list list) : 'a list = Belt.List.flatten ls
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f

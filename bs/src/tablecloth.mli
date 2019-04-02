@@ -74,21 +74,6 @@ val flip : ('a -> 'b -> 'c) -> ('b -> 'a -> 'c)
 
 module List : sig
   (**
-    `flatten` returns the list obtained by concatenating in order all the sub-lists in a given list.
-
-    ### Example
-
-    ```ocaml
-    flatten [[1; 2]; [3; 4; 5]; []; [6]] = [1; 2; 3; 4; 5; 6]
-    ```
-
-    ```reason
-    flatten([[1, 2], [3, 4, 5], [], [6]]) == [1, 2, 3, 4, 5, 6]
-    ```
-  *)
-  val flatten : 'a list list -> 'a list
-
-  (**
     `sum xs` (`sum(xs)` in ReasonML) returns the sum of the items in the given list of integers.
 
     ### Example
