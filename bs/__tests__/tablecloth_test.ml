@@ -142,9 +142,9 @@ let () =
     );
 
     describe "intersperse" (fun () ->
-      test "intersperse empty list" (fun () -> expect (List.intersperse "on" []) |> toEqual []);
-      test "intersperse one turtle" (fun () -> expect (List.intersperse "on" ["turtles"]) |> toEqual ["turtles"]);
-      test "intersperse three turtles" (fun () -> expect (List.intersperse "on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
+      test "intersperse empty list" (fun () -> expect (List.intersperse ~with_:"on" []) |> toEqual []);
+      test "intersperse one turtle" (fun () -> expect (List.intersperse ~with_:"on" ["turtles"]) |> toEqual ["turtles"]);
+      test "intersperse three turtles" (fun () -> expect (List.intersperse ~with_:"on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
     );
 
     describe "intersperse" (fun () ->

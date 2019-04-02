@@ -273,12 +273,12 @@ module List = struct
 
   let split_when = splitWhen
 
-  let intersperse (sep : 'a) (xs : 'a list) : 'a list =
+  let intersperse ~(with_ : 'a) (xs : 'a list) : 'a list =
     match xs with
     | [] ->
         []
     | hd :: tl ->
-        let step acc x = sep :: x :: acc in
+        let step acc x = with_ :: x :: acc in
         let spersed = foldr ~f:step ~init:[] tl in
         hd :: spersed
 

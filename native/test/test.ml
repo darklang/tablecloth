@@ -87,9 +87,9 @@ let t_List () =
   AT.check (AT.option AT.int) "maximumBy one element" (List.maximumBy  ~f:(fun x -> x + 2) [1]) (Some 1);
   AT.check (AT.option AT.int) "maximumBy four elements" (List.maximumBy ~f:(fun x -> x + 2) [1;2;3;4]) (Some 4);
 
-  AT.check (AT.list AT.string) "intersperse empty list" (List.intersperse "on" []) [];
-  AT.check (AT.list AT.string) "intersperse one turtle" (List.intersperse "on" ["turtles"]) ["turtles"];
-  AT.check (AT.list AT.string) "intersperse three turtles" (List.intersperse "on" ["turtles";"turtles";"turtles"]) ["turtles";"on";"turtles";"on";"turtles"];
+  AT.check (AT.list AT.string) "intersperse empty list" (List.intersperse ~with_:"on" []) [];
+  AT.check (AT.list AT.string) "intersperse one turtle" (List.intersperse ~with_:"on" ["turtles"]) ["turtles"];
+  AT.check (AT.list AT.string) "intersperse three turtles" (List.intersperse ~with_:"on" ["turtles";"turtles";"turtles"]) ["turtles";"on";"turtles";"on";"turtles"];
 
   ()
 
