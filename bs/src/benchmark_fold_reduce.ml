@@ -42,6 +42,6 @@ let size = 999
 
 let () = begin
     for i = 1 to 20 do
-    bench (size * i) ;
+        bench (size * i) ;
     done
 end
