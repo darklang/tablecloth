@@ -194,7 +194,7 @@ let suite = [
 let () =
   let suite, exit = Junit_alcotest.run_and_report "suite" [("tests", suite)] in
   let report = Junit.make [suite] in
-  Junit.to_file report "test-native.xml"
+  Junit.to_file report "test-native.xml";
   ()
 
 let t_String () =
