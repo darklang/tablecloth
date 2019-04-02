@@ -70,7 +70,6 @@ let t_List () =
   AT.check (AT.list AT.int) "indexedMap one element" (List.indexedMap ~f:(fun _ n -> n + 1) [-1]) [0];
   AT.check (AT.list AT.int) "indexedMap two elements" (List.indexedMap ~f:(fun _ n -> n + 1) [-1; 0]) [0;1];
 
-
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition empty list" (List.partition ~f:(fun x -> x mod 2 = 0) []) ([], []);
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition one element" (List.partition ~f:(fun x -> x mod 2 = 0) [1]) ([], [1]);
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "partition four elements" (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) ([2;4], [1;3]);

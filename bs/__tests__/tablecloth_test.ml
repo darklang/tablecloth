@@ -82,23 +82,21 @@ let () =
 
   describe "List" (fun () ->
     describe "reverse" (fun () ->
-    test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
-    test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
-    test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+      test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
+      test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
+      test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
     );
-    test "foldl empty list" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
-    test "foldl one element" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
-    test "foldl three elements" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [3;2;1]);
-    test "foldr empty list" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
-    test "foldr one element" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
-    test "foldr three elements" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [1;2;3]);
 
-    test "foldl issue #18" (fun () -> expect (List.foldl ~f:(-) ~init:0 [1;2;3]) |> toEqual (-6));
-    test "foldr issue #18" (fun () -> expect (List.foldr ~f:(-) ~init:0 [1;2;3]) |> toEqual (-6));
-
-    test "reverse empty list" (fun () -> expect (List.reverse []) |> toEqual []);
-    test "reverse one element" (fun () -> expect (List.reverse [0]) |> toEqual [0]);
-    test "reverse two elements" (fun () -> expect (List.reverse [0;1]) |> toEqual [1;0]);
+    describe "folds" (fun () ->
+      test "foldl empty list" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
+      test "foldl one element" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
+      test "foldl three elements" (fun () -> expect (List.foldl ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [3;2;1]);
+      test "foldr empty list" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] []) |> toEqual []);
+      test "foldr one element" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] [1]) |> toEqual [1]);
+      test "foldr three elements" (fun () -> expect (List.foldr ~f:(fun acc x -> x :: acc) ~init:[] [1;2;3]) |> toEqual [1;2;3]);
+      test "foldl issue #18" (fun () -> expect (List.foldl ~f:(-) ~init:0 [1;2;3]) |> toEqual (-6));
+      test "foldr issue #18" (fun () -> expect (List.foldr ~f:(-) ~init:0 [1;2;3]) |> toEqual (-6));
+    );
 
     describe "map2" (fun () ->
       test "map2 empty lists" (fun () -> expect (List.map2 ~f:(+) [] []) |> toEqual []);
@@ -124,30 +122,37 @@ let () =
       test "split_when at end" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;5]) |> toEqual ([1;3;5], []));
       test "split_when empty list" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
     );
-    test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
-    test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
-    test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
 
-    test "partition empty list" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([], []));
-    test "partition one element" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1]) |> toEqual ([], [1]));
-    test "partition four elements" (fun () -> expect (List.partition ~f:(fun x -> x mod 2 = 0) [1;2;3;4]) |> toEqual ([2;4], [1;3]));
+    describe "init" (fun () ->
+      test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
+      test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
+      test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
+    );
 
-    test "minimumBy empty list" (fun () -> expect (List.minimumBy ~f:(fun x -> x + 2) []) |> toEqual None);
-    test "minimumBy one element" (fun () -> expect (List.minimumBy  ~f:(fun x -> x + 2) [1]) |> toEqual (Some 1));
-    test "minimumBy four elements" (fun () -> expect (List.minimumBy ~f:(fun x -> x + 2) [1;2;3;4]) |> toEqual (Some 1));
+    describe "minimumBy" (fun () ->
+      test "minimumBy empty list" (fun () -> expect (List.minimumBy ~f:(fun x -> x + 2) []) |> toEqual None);
+      test "minimumBy one element" (fun () -> expect (List.minimumBy  ~f:(fun x -> x + 2) [1]) |> toEqual (Some 1));
+      test "minimumBy four elements" (fun () -> expect (List.minimumBy ~f:(fun x -> x + 2) [1;2;3;4]) |> toEqual (Some 1));
+    );
 
-    test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:(fun x -> x + 2) []) |> toEqual None);
-    test "maximumBy one element" (fun () -> expect (List.maximumBy  ~f:(fun x -> x + 2) [1]) |> toEqual (Some 1));
-    test "maximumBy four elements" (fun () -> expect (List.maximumBy ~f:(fun x -> x + 2) [1;2;3;4]) |> toEqual (Some 4));
+    describe "maximumBy" (fun () ->
+      test "maximumBy empty list" (fun () -> expect (List.maximumBy ~f:(fun x -> x + 2) []) |> toEqual None);
+      test "maximumBy one element" (fun () -> expect (List.maximumBy  ~f:(fun x -> x + 2) [1]) |> toEqual (Some 1));
+      test "maximumBy four elements" (fun () -> expect (List.maximumBy ~f:(fun x -> x + 2) [1;2;3;4]) |> toEqual (Some 4));
+    );
 
-    test "intersperse empty list" (fun () -> expect (List.intersperse "on" []) |> toEqual []);
-    test "intersperse one turtle" (fun () -> expect (List.intersperse "on" ["turtles"]) |> toEqual ["turtles"]);
-    test "intersperse three turtles" (fun () -> expect (List.intersperse "on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
+    describe "intersperse" (fun () ->
+      test "intersperse empty list" (fun () -> expect (List.intersperse "on" []) |> toEqual []);
+      test "intersperse one turtle" (fun () -> expect (List.intersperse "on" ["turtles"]) |> toEqual ["turtles"]);
+      test "intersperse three turtles" (fun () -> expect (List.intersperse "on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
+    );
 
-    test "append empty lists" (fun () -> expect (List.append [] []) |> toEqual []);
-    test "append empty list" (fun () -> expect (List.append [] ["turtles"]) |> toEqual ["turtles"]);
-    test "append empty list" (fun () -> expect (List.append ["turtles"] []) |> toEqual ["turtles"]);
-    test "append two lists" (fun () -> expect (List.append ["on"] ["turtles"]) |> toEqual ["on";"turtles"]);
+    describe "intersperse" (fun () ->
+      test "append empty lists" (fun () -> expect (List.append [] []) |> toEqual []);
+      test "append empty list" (fun () -> expect (List.append [] ["turtles"]) |> toEqual ["turtles"]);
+      test "append empty list" (fun () -> expect (List.append ["turtles"] []) |> toEqual ["turtles"]);
+      test "append two lists" (fun () -> expect (List.append ["on"] ["turtles"]) |> toEqual ["on";"turtles"]);
+    );
 
   );
 
