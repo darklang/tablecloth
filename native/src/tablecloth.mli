@@ -143,7 +143,7 @@ module List : sig
 
   val split_when : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
-  val intersperse : 'a -> 'a list -> 'a list
+  val intersperse : with_:('a) -> 'a list -> 'a list
 
   val initialize : int -> (int -> 'a) -> 'a list
 
