@@ -1499,22 +1499,24 @@ module Result : sig
     `okFormat` if the `result` is an `Ok` value. `destFormat` is a formatter
     that tells where to send the output.
     
+    The following example will print `<ok: 42><error: bad>`.
+    
     ### Example
     
     ```ocaml
-    let good: (string, int) Tablecloth.Result.t = Ok 3
+    let good: (string, int) Tablecloth.Result.t = Ok 42
     let not_good: (string, int) Tablecloth.Result.t = Error "bad"
     pp Format.pp_print_string Format.pp_print_int Format.std_formatter good
-    Format.pp_print_newline Format.std_formatter ();
     pp Format.pp_print_string Format.pp_print_int Format.std_formatter not_good
     Format.pp_print_newline Format.std_formatter ();
     ```
     
     ```reason
-    let good: Tablecloth.Result.t(string, int) = Ok(3);
+    let good: Tablecloth.Result.t(string, int) = Ok(42);
     let notGood: Tablecloth.Result.t(string, int) = Error("bad");
     pp(Format.pp_print_string, Format.pp_print_int, Format.std_formatter, good);
     pp(Format.pp_print_string, Format.pp_print_int, Format.std_formatter, notGood);
+    Format.pp_print_newline(Format.std_formatter, ());
     ```
   *)
   val pp :
