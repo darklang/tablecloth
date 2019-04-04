@@ -1565,7 +1565,7 @@ module Option : sig
     
     ### Example
     ```reason
-    let recip = (x: float):Tablecloth.Option.t(float) => {
+    let recip = (x: float): Tablecloth.Option.t(float) => {
       if (x == 0.0) {
         None;
       } else {
@@ -1597,6 +1597,45 @@ module Option : sig
   *)
   val andThen : f:('a -> 'b option) -> 'a option -> 'b option
 
+  (**
+    `and_then ~f:fcn opt` applies function `fcn`, which takes a non-`Option`
+    parameter and returns an `Option`, to an `Option` variable `opt`.
+    
+    If `opt` is of the form `Some x`, `and_then` returns `f x`;
+    otherwise it returns `None`.
+    
+    (Same as `andThen`.)
+    
+    ### Example
+    ```ocaml
+    let recip (x:float) : float Tablecloth.Option.t = (
+      if (x == 0.0) then
+        None
+      else
+        Some (1.0 /. x)
+    )
+    
+    and_then ~f:recip (Some 4.0) = Some 0.25
+    and_then ~f:recip None = None
+    and_then ~f:recip (Some 0.0) = None
+    ```
+    
+    `and_then` is usually used to implement a chain of function
+    calls, each of which returns an `Option` value.
+    
+    ```ocaml
+    let root (x:float) : float Tablecloth.Option.t = (
+      if (x < 0.0) then
+        None
+      else
+        Some (sqrt x)
+    )
+    
+    root 4.0 |> and_then ~f:recip = Some 0.5
+    root (-2.0) |> and_then ~f:recip = None 
+    root(0.0) |> and_then ~f:recip = None
+    ```
+  *)
   val and_then : f:('a -> 'b option) -> 'a option -> 'b option
 
   val or_ : 'a option -> 'a option -> 'a option
