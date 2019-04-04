@@ -393,14 +393,11 @@ module Option = struct
 
   let with_default = withDefault
 
-  let foldrValues (item : 'a option) (l: 'a list) : 'a list =
-    match item with None -> l | Some v -> v :: l
-
-
-  let foldr_values = foldrValues
-
+  
   let values (l : 'a option list) : 'a list =
-    List.foldr ~f:foldrValues ~init:[] l
+    let valuesHelper (item : 'a option) (l: 'a list) : 'a list =
+      match item with None -> l | Some v -> v :: l in
+    List.foldr ~f:valuesHelper ~init:[] l
 
 
   let toList (o : 'a option) : 'a list =
