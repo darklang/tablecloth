@@ -1626,6 +1626,10 @@ module Option : sig
     `opt_a` if it is of the form `Some x` (`Some(x) in ReasonML);
     otherwise, it returns `opt_b`.
     
+    Unlike the built in or operator, the or_ function does not short-circuit.
+    When you call `or_`, both arguments are evaluated before
+    being passed to the function.
+    
     ### Example
     
     ```ocaml
