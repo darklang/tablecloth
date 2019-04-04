@@ -1626,6 +1626,10 @@ module Option : sig
     `opt_a` if it is of the form `Some x` (`Some(x) in ReasonML);
     otherwise, it returns `opt_b`.
     
+    Unlike the built in or operator, the or_ function does not short-circuit.
+    When you call `or_`, both arguments are evaluated before
+    being passed to the function.
+    
     ### Example
     
     ```ocaml
@@ -1728,36 +1732,8 @@ module Option : sig
   *)
   val with_default : default:'a -> 'a option -> 'a
 
-  (**
-    `foldrValues(opt, xs)` When `opt` is of the form `Some(x)`,
-    this function returns a list with `x` prepended to the list
-    `xs`; otherwise, the list is returned unchanged.
-    
-    (Same as `foldr_values`.)
-    
-    ### Example
-    
-    ```reason
-    foldrValues(Some(99), [100, 101, 102]) == [99, 100, 101, 102];
-    foldrValues(None, [100, 101, 102]) == [100, 101, 102];
-    ```
-  *)
   val foldrValues : 'a option -> 'a list -> 'a list
 
-  (**
-    `foldr_values opt xs` When `opt` is of the form `Some x`,
-    this function returns a list with `x` prepended to the list
-    `xs`; otherwise, the list is returned unchanged.
-    
-    (Same as `foldrValues`.)
-    
-    ### Example
-    
-    ```ocaml
-    foldr_values (Some 99)  [100; 101; 102] = [99; 100; 101; 102]
-    foldr_values None  [100; 101; 102] = [100; 101; 102]
-    ```
-  *)
   val foldr_values : 'a option -> 'a list -> 'a list
 
   (**
