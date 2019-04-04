@@ -1528,30 +1528,13 @@ module Result : sig
 end
 
 (**
-  This module implements the `Option` type, which has a variant for 
-  valid values (`'Some`), and one for invalid values (`'None`).
+  This module provides functions to work with the `option` type,
+  which has a variant for  valid values (`'Some`), and one for
+  invalid values (`'None`).
 *)
 
 module Option : sig
-  (**
-    `type` is the type constructor for an `Option` type. You specify
-    the type of the `Some` variant.
-    
-    ### Example
-    
-    Here is how you would annotate an `Option` variable whose `Some`
-    variant is an integer:
-    
-    ```ocaml
-    let x: (int) Tablecloth.Option.t = Some 3
-    let y: (int) Tablecloth.Option.t = None
-    ```
-    
-    ```reason
-    let x: Tablecloth.Result.t(string, int) = Ok(3);
-    let y: Tablecloth.Result.t(string, int) = Error("bad");
-    ```
-  *)
+
   type 'a t = 'a option
 
   (**
@@ -1565,7 +1548,7 @@ module Option : sig
     
     ### Example
     ```reason
-    let recip = (x: float): Tablecloth.Option.t(float) => {
+    let recip = (x: float): option(float) => {
       if (x == 0.0) {
         None;
       } else {
@@ -1582,7 +1565,7 @@ module Option : sig
     calls, each of which returns an `Option` value.
     
     ```reason
-    let root = (x: float): Tablecloth.Option.t(float) => {
+    let root = (x: float): option(float) => {
       if (x < 0.0) {
         None
       } else {
@@ -1608,7 +1591,7 @@ module Option : sig
     
     ### Example
     ```ocaml
-    let recip (x:float) : float Tablecloth.Option.t = (
+    let recip (x:float) : float option = (
       if (x == 0.0) then
         None
       else
@@ -1624,7 +1607,7 @@ module Option : sig
     calls, each of which returns an `Option` value.
     
     ```ocaml
-    let root (x:float) : float Tablecloth.Option.t = (
+    let root (x:float) : float option = (
       if (x < 0.0) then
         None
       else
@@ -1663,7 +1646,7 @@ module Option : sig
 
   (**
     `orElse(opt_a, opt_b)` returns `opt_b` if it is of the form `Some(x)`;
-    otherwise, it returns `opt_a`.
+    otherwise, it returns `opt_a`. 
     
     (Same as `or_else`.)
     
