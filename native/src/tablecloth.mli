@@ -202,10 +202,6 @@ module Option : sig
 
   val with_default : default:'a -> 'a option -> 'a
 
-  val foldrValues : 'a option -> 'a list -> 'a list
-
-  val foldr_values : 'a option -> 'a list -> 'a list
-
   val values : 'a option list -> 'a list
 
   val toList : 'a option -> 'a list
