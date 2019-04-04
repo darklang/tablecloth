@@ -1476,7 +1476,7 @@ module Result : sig
     `and_then` is usually used to implement a chain of function
     calls, each of which returns a `Result` value.
     
-    ```reason
+    ```ocaml
     let root (x:float) : (string, float) Tablecloth.Result.t = (
       if (x < 0.0) then
         Error "Cannot be negative"
