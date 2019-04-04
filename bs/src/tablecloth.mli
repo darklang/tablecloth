@@ -1269,9 +1269,74 @@ module Result : sig
     -> unit
 end
 
+(**
+  This module implements the `Option` type, which has a variant for 
+  valid values (`'Some`), and one for invalid values (`'None`).
+*)
+
 module Option : sig
+  (**
+    `type` is the type constructor for an `Option` type. You specify
+    the type of the `Some` variant.
+    
+    ### Example
+    
+    Here is how you would annotate an `Option` variable whose `Some`
+    variant is an integer:
+    
+    ```ocaml
+    let x: (int) Tablecloth.Option.t = Some 3
+    let y: (int) Tablecloth.Option.t = None
+    ```
+    
+    ```reason
+    let x: Tablecloth.Result.t(string, int) = Ok(3);
+    let y: Tablecloth.Result.t(string, int) = Error("bad");
+    ```
+  *)
   type 'a t = 'a option
 
+  (**
+    `andThen(~f = fcn, opt)` applies function `fcn`, which takes a non-`Option`
+    parameter and returns a `Option`, to an `Option` variable `opt`.
+    
+    If `opt` is of the form `Some(x)`, `andThen` returns `f(x)`;
+    otherwise `andThen` returns `None`.
+    
+    (Same as `and_then`.)
+    
+    ### Example
+    ```reason
+    let recip = (x: float):Tablecloth.Option.t(float) => {
+      if (x == 0.0) {
+        None;
+      } else {
+        Some(1.0 /. x);
+      }
+    };
+    
+    andThen(~f = recip, Some(4.0)) == Some(0.25);
+    andThen(~f = recip, None) == None;
+    andThen(~f = recip, Some(0.0)) == None;
+    ```
+    
+    `andThen` is usually used to implement a chain of function
+    calls, each of which returns an `Option` value.
+    
+    ```reason
+    let root = (x: float): Tablecloth.Option.t(float) => {
+      if (x < 0.0) {
+        None
+      } else {
+        Some(sqrt(x));
+      }
+    };
+    
+    root(4.0) |> andThen(~f = recip) == Some(0.5);
+    root(-2.0) |> andThen(~f = recip) == None;
+    root(0.0) |> andThen(~f = recip) == None;
+    ```
+  *)
   val andThen : f:('a -> 'b option) -> 'a option -> 'b option
 
   val and_then : f:('a -> 'b option) -> 'a option -> 'b option
