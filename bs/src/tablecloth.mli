@@ -1380,34 +1380,234 @@ module Option : sig
   *)
   val and_then : f:('a -> 'b option) -> 'a option -> 'b option
 
+  (**
+    `or_ opt_a opt_b` (`or_(opt_a, opt_b)` in ReasonML) returns
+    `opt_a` if it is of the form `Some x` (`Some(x) in ReasonML);
+    otherwise, it returns `opt_b`.
+    
+    ### Example
+    
+    ```ocaml
+    or_ (Some 11) (Some 22) = Some 11
+    or_ None (Some 22) = Some 22
+    or_ (Some 11) None = Some 11
+    or_ None None = None
+    ```
+
+    ```reason
+    or_(Some(11), Some(22)) == Some(11);
+    or_(None, Some(22)) == Some(22);
+    or_((Some(11)), None) == Some(11);
+    or_(None, None) == None;
+    ```
+  *)
   val or_ : 'a option -> 'a option -> 'a option
 
+  (**
+    `orElse(opt_a, opt_b)` returns `opt_b` if it is of the form `Some(x)`;
+    otherwise, it returns `opt_a`.
+    
+    (Same as `or_else`.)
+    
+    ### Example
+    
+    ```reason
+    orElse(Some(11), Some(22)) == Some(22);
+    orElse(None, Some(22)) == Some(22);
+    orElse((Some(11)), None) == Some(11);
+    orElse(None, None) == None;
+    ```
+
+  *)
   val orElse : 'a option -> 'a option -> 'a option
 
+  (**
+    `or_else opt_a opt_b` returns `opt_b` if it is of the form `Some x`;
+    otherwise, it returns `opt_a`.
+    
+    (Same as `orElse`.)
+    
+    ### Example
+    
+    ```ocaml
+    orElse (Some 11) (Some 22) = Some 22
+    orElse None (Some 22) = Some 22
+    orElse (Some 11) None = Some 11
+    orElse None None = None
+    ```
+  *)
   val or_else : 'a option -> 'a option -> 'a option
 
+  (**
+    `map ~f:fcn opt` (`map(~f = fcn, opt)` in ReasonML) returns
+    `fcn x` (`fcn(x)` in ReasonML) if `opt` is of the form
+    `Some x` (`Some(x)` in ReasonML); otherwise, it returns `None`.
+    
+    ### Example
+    
+    ```ocaml
+    map ~f:(fun x -> x * x) (Some 9) = Some 81
+    map ~f:(fun x -> x * x) None = None
+    ```
+    
+    ```reason
+    map(~f = (x) => x * x, Some(9)) == Some(81)
+    map(~f = (x) => x * x, None) == None
+    ```
+  *)
   val map : f:('a -> 'b) -> 'a option -> 'b option
 
+  (**
+    `withDefault(~default = defVal, opt)` If `opt` is of the form `Some(x)`,
+    this function returns `x`. Otherwise, it returns the default value `defVal`.
+    
+    (Same as `with_default`.)
+    
+    ### Example
+    
+    ```reason
+    withDefault(~default = 99, Some(42)) == 42;
+    withDefault(~default = 99, None) == 99;
+    ```
+  *)
   val withDefault : default:'a -> 'a option -> 'a
 
+  (**
+    `with_default(~default: def_val, opt)` If `opt` is of the form `Some x`,
+    this function returns `x`. Otherwise, it returns the default value `def_val`.
+    
+    (Same as `withDefault`.)
+    
+    ### Example
+    
+    ```ocaml
+    with_default ~default:99 (Some 42) = 42
+    with_default ~default:99 None = 99
+    ```
+  *)
   val with_default : default:'a -> 'a option -> 'a
 
+  (**
+    `foldrValues(opt, xs)` When `opt` is of the form `Some(x)`,
+    this function returns a list with `x` prepended to the list
+    `xs`; otherwise, the list is returned unchanged.
+    
+    (Same as `foldr_values`.)
+    
+    ### Example
+    
+    ```reason
+    foldrValues(Some(99), [100, 101, 102]) == [99, 100, 101, 102];
+    foldrValues(None, [100, 101, 102]) == [100, 101, 102];
+    ```
+  *)
   val foldrValues : 'a option -> 'a list -> 'a list
 
+  (**
+    `foldr_values opt xs` When `opt` is of the form `Some x`,
+    this function returns a list with `x` prepended to the list
+    `xs`; otherwise, the list is returned unchanged.
+    
+    (Same as `foldrValues`.)
+    
+    ### Example
+    
+    ```ocaml
+    foldr_values (Some 99)  [100; 101; 102] = [99; 100; 101; 102]
+    foldr_values None  [100; 101; 102] = [100; 101; 102]
+    ```
+  *)
   val foldr_values : 'a option -> 'a list -> 'a list
 
+  (**
+    `values optList` (`values(optList)` in ReasonML) takes a list of `Option`
+    values and returns a list of only the values contained in `Some` elements.
+    
+    ### Example
+    ```ocaml
+    values [Some 100; Some 200; Some 300] = [100; 200; 300]
+    values [Some 100; None; Some 300] = [100; 300]
+    values [None; None] = [ ]
+    values [ ] = [ ]
+    ```
+
+    ```reasonml
+    values([Some(100), Some(200), Some(300)]) == [100, 200, 300];
+    values([Some(100), None, Some(300)]) == [100, 300];
+    values([None, None]) == [ ];
+    values([ ]) == [ ];
+    ```
+  *)
   val values : 'a option list -> 'a list
 
+  (**
+    `toList(opt)` returns the list `[x]` if `opt` is of the form `Some(x)`;
+    otherwise, it returns the empty list.
+    
+    (Same as `to_list`.)
+    
+    ### Example
+    ```reason
+    toList(Some(99)) == [99];
+    toList(None) == [];
+    ```
+  *)  
   val toList : 'a option -> 'a list
 
+  (**
+    `to_list opt` returns the list `[x]` if `opt` is of the form `Some x`;
+    otherwise, it returns the empty list.
+    
+    (Same as `toList`.)
+    
+    ### Example
+    ```reason
+    toList (Some 99) = [99]
+    toList None = []
+    ```
+  *)  
   val to_list : 'a option -> 'a list
 
+  (**
+    `isSome(opt)` returns `true` if `opt` is a `Some` value, `false` otherwise.
+    (Same as `is_some`.)
+  *)
   val isSome : 'a option -> bool
 
+  (**
+    `is_some opt` returns `true` if `opt` is a `Some` value, `false` otherwise.
+    (Same as `isSome`.)
+  *)
   val is_some : 'a option -> bool
 
+  (**
+    `toOption(~sentinel = s, x)` returns `Some(x)` unless `x` equals the sentinel
+    value `s`, in which case `toOption` returns `None`.
+    
+    (Same as `to_option`.)
+    
+    ### Example
+    
+    ```reason
+    toOption(~sentinel = 999, 100) == Some(100);
+    toOption(~sentinel = 999, 999) == None;
+    ```
+  *)
   val toOption : sentinel:'a -> 'a -> 'a option
 
+  (**
+    `to_option ~sentinel:s, x` returns `Some x` unless `x` equals the sentinel
+    value `s`, in which case `to_option` returns `None`.
+    
+    (Same as `toOption`.)
+    
+    ### Example
+    
+    ```reason
+    to_option ~sentinel: 999 100 = Some 100
+    to_option ~sentinel: 999 999 = None
+    ```
+  *)
   val to_option : sentinel:'a -> 'a -> 'a option
 end
 
