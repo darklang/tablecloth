@@ -496,7 +496,7 @@ module Result = struct
         okf fmt ok ;
         Format.pp_print_string fmt ">"
     | Error err ->
-        Format.pp_print_string fmt "<ok: " ;
+        Format.pp_print_string fmt "<error: " ;
         errf fmt err ;
         Format.pp_print_string fmt ">"
 end
