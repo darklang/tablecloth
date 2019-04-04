@@ -1420,7 +1420,7 @@ module Result : sig
       if (x == 0.0) {
         Error("Divide by zero");
       } else {
-        Ok(1.0 / x)
+        Ok(1.0 /. x)
       }
     };
     
