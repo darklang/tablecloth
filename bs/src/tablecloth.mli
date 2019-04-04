@@ -1238,29 +1238,285 @@ module List : sig
   val iter : f:('a -> unit) -> 'a list -> unit
 end
 
+(**
+  This module implements the `Result` type, which has a variant for 
+  successful results (`'ok`), and one for unsuccessful results (`'error`).
+*)
+
 module Result : sig
+
+  (**
+    `type` is the type constructor for a `Result` type. You specify
+    the type of the `Error` and `Ok` variants, in that order.
+    
+    ### Example
+    
+    Here is how you would annotate a `Result` variable whose `Ok`
+    variant is an integer and whose `Error` variant is a string:
+    
+    ```ocaml
+    let x: (string, int) Tablecloth.Result.t = Ok 3
+    let y: (string, int) Tablecloth.Result.t = Error "bad"
+    ```
+    
+    ```reason
+    let x: Tablecloth.Result.t(string, int) = Ok(3);
+    let y: Tablecloth.Result.t(string, int) = Error("bad");
+    ```
+  *)
   type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
 
+  (**
+    `withDefault(~default=defaultValue, result)`, when given an `Ok(value)`, returns
+    `value`; if given an `Error(errValue)`, returns `defaultValue`.
+    
+    (Same as `with_default`)
+    
+    ### Example
+    
+    ```reason
+    withDefault(~default=0, Ok(12)) == 12;
+    withDefault(~default=0, Error("bad")) == 0;
+    ```
+  *)
   val withDefault : default:'ok -> ('err, 'ok) t -> 'ok
 
+  (**
+    `with_default ~default:defaultValue, result`, when given an `Ok value`, returns
+    `value`; if given an `Error errValue `, returns `defaultValue`.
+    
+    (Same as `withDefault`)
+    
+    ### Example
+    
+    ```ocaml
+    with_default ~default:0 (Ok 12) = 12
+    with_default ~default:0 (Error "bad") = 0
+    ```
+  *)
   val with_default : default:'ok -> ('err, 'ok) t -> 'ok
 
+  (**
+    `map2 ~f:fcn result_a result_b` (`map2(~f=fcn, result_a, result_b)` applies
+    `fcn`, a function taking two non-`Result` parameters and returning a 
+    non-`Result` result to two `Result` arguments `result_a` and `result_b` as follows:
+    
+    If `result_a` and `result_b` are of the form `Ok a` and `OK b` (`Ok(a)` and `Ok(b)`
+    in ReasonML), the return value is `Ok (f a b)` (`Ok(f(a, b)` in ReasonML).
+    
+    If only one of `result_a` and `result_b` is of the form `Error err` (`Error(err)`
+    in ReasonML), that becomes the return result.  If both are `Error` values,
+    `map2` returns `result_a`.
+    
+    ### Example
+    
+    ```ocaml
+    let sum_diff x y = (x + y) * (x - y)
+    map2 ~f:sum_diff (Ok 7) (Ok 3) = Ok 40
+    map2 ~f:sum_diff (Error "err A") (Ok 3) = Error "err A"
+    map2 ~f:sum_diff (Ok 7) (Error "err B") = Error "err B"
+    map2 ~f:sum_diff (Error "err A") (Error "err B") = Error ("err A")
+    ```
+    
+    ```reason
+    let sumDiff = (x, y) => { (x + y) * (x - y) };
+    map2(~f=sumDiff, Ok(7), Ok(3)) == Ok(40);
+    map2(~f=sumDiff, Error("err A"), Ok(3)) == Error("err A");
+    map2(~f=sumDiff, Ok(7), Error("err B")) == Error("err B");
+    map2(~f=sumDiff, Error("err A"), Error("err B")) == Error("err A");
+    ```
+  *)
   val map2 : f:('a -> 'b -> 'c) -> ('err, 'a) t -> ('err, 'b) t -> ('err, 'c) t
 
+  (**
+    `combine results` (`combine(results)` in ReasonML) takes a list of `Result` values. If all
+    the elements in `results` are of the form `Ok x` (`Ok(x)` in ReasonML), then `combine`
+    creates a list `xs` of all the values extracted from their `Ok`s, and returns 
+    `Ok xs` (`Ok(xs)` in ReasonML)
+    
+    If any of the elements in `results` are of the form `Error err`
+    (`Error(err)` in ReasonML), the first of them is returned as
+    the result of `combine`.
+    
+    ### Example
+    
+    ```ocaml
+    combine [Ok 1; Ok 2; Ok 3; Ok 4] = Ok [1; 2; 3; 4]
+    combine [Ok 1; Error "two"; Ok 3; Error "four"] = Error "two"
+    ```
+    
+    ```reason
+    combine([Ok(1), Ok(2), Ok(3), Ok(4)]) == Ok([1, 2, 3, 4]);
+    combine([Ok(1), Error("two"), Ok(3), Error("four")]) == Error("two")
+    ```
+  *)
   val combine : ('x, 'a) t list -> ('x, 'a list) t
 
+  (**
+    `map f r` (`map(f, r)` in ReasonML) applies a function `f`, which
+    takes a non-`Result` argument and returns a non-`Result` value, to
+    a `Result` variable `r` as follows:
+    
+    If `r` is of the form `Ok x` (`Ok(x) in ReasonMl), `map` returns
+    `Ok (f x)` (`Ok(f(x))` in ReasonML). Otherwise, `r` is an `Error`
+    value and is returned unchanged.
+    
+    ### Example
+    ```ocaml
+    map (fun x -> x * x) (Ok 3) = Ok 9
+    map (fun x -> x * x) (Error "bad") = Error "bad"
+    ```
+    
+    ```reason
+    map((x) => {x * x}, Ok(3)) == Ok(9);
+    map((x) => {x * x}, Error("bad")) == Error("bad");
+    ```
+  *)
   val map : ('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
 
+  (**
+    `toOption(r)` converts a `Result` value `r` to an `Option` value as follows:
+    a value of `Ok(x)` becomes `Some(x)`; a value of `Error(err)` becomes `None`.
+    
+    (Same as `to_option`.)
+    
+    ### Example
+    
+    ```reason
+    toOption(Ok(42)) == Some(42);
+    toOption(Error("bad")) == None;
+    ```
+  *)    
   val toOption : ('err, 'ok) t -> 'ok option
 
+  (**
+    `to_option r` converts a `Result` value `r` to an `Option` value as follows:
+    a value of `Ok x` becomes `Some x`; a value of `Error err` becomes `None`.
+    
+    (Same as `toOption`.)
+    
+    ### Example
+    
+    ```ocaml
+    to_option (Ok 42) = Some 42
+    to_option (Error "bad") = None
+    ```
+  *)    
   val to_option : ('err, 'ok) t -> 'ok option
 
+  (**
+    `andThen(~f = fcn, r)` applies function `fcn`, which takes a non-`Result`
+    parameter and returns a `Result`, to a `Result` variable `r`.
+    
+    If `r` is of the form `Ok(x)`, `andThen` returns `f(x)`;
+    otherwise `r` is an `Error`, and is returned unchanged.
+    
+    (Same as `and_then`.)
+    
+    ### Example
+
+    ```reason
+    let recip = (x: float):Tablecloth.Result.t(string, float) => {
+      if (x == 0.0) {
+        Error("Divide by zero");
+      } else {
+        Ok(1.0 / x)
+      }
+    };
+    
+    andThen(~f = recip, Ok(4.0)) == Ok(0.25);
+    andThen(~f = recip, Error("bad")) == Error("bad");
+    andThen(~f = recip, Ok(0.0)) == Error("Divide by zero");
+    ```
+    
+    `andThen` is usually used to implement a chain of function
+    calls, each of which returns a `Result` value.
+    
+    ```reason
+    let root = (x: float): Tablecloth.Result.t(string, float) => {
+      if (x < 0.0) {
+        Error("Cannot be negative");
+      } else {
+        Ok(sqrt(x));
+      }
+    };
+    
+    root(4.0) |> andThen(~f = recip) == Ok(0.5);
+    root(-2.0) |> andThen(~f = recip) == Error("Cannot be negative");
+    root(0.0) |> andThen(~f = recip) == Error("Divide by zero");
+    ```
+  *)
   val andThen :
     f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
 
+  (**
+    `and_then ~f:fcn r` applies function `fcn`, which takes a non-`Result`
+    parameter and returns a `Result`, to a `Result` variable `r`.
+    
+    If `r` is of the form `Ok x`, `and_then` returns `f x`;
+    otherwise `r` is an `Error`, and is returned unchanged.
+    
+    (Same as `andThen`.)
+    
+    ### Example
+
+    ```ocaml
+    let recip (x:float) : (string, float) Tablecloth.Result.t = (
+      if (x == 0.0)
+        Error "Divide by zero"
+      else
+        Ok (1.0 /. x)
+    )
+    
+    and_then ~f:recip (Ok 4.0) = Ok 0.25
+    and_then ~f:recip (Error "bad") = Error "bad"
+    and_then ~f:recip (Ok 0.0) = Error "Divide by zero"
+    ```
+    
+    `and_then` is usually used to implement a chain of function
+    calls, each of which returns a `Result` value.
+    
+    ```reason
+    let root (x:float) : (string, float) Tablecloth.Result.t = (
+      if (x < 0.0) then
+        Error "Cannot be negative"
+      else
+        Ok (sqrt x)
+    )
+    
+    root 4.0 |> and_then ~f:recip = Ok 0.5
+    root (-2.0) |> and_then ~f:recip = Error "Cannot be negative" 
+    root(0.0) |> and_then ~f:recip = Error "Divide by zero"
+    ```
+  *) 
   val and_then :
     f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
 
+  (**
+    `pp errFormat okFormat destFormat result`
+    (`pp(errFormat, okFormat, destFormat, result)` in ReasonML “pretty-prints”
+    the `result`, using `errFormat` if the `result` is an `Error` value or
+    `okFormat` if the `result` is an `Ok` value. `destFormat` is a formatter
+    that tells where to send the output.
+    
+    ### Example
+    
+    ```ocaml
+    let good: (string, int) Tablecloth.Result.t = Ok 3
+    let not_good: (string, int) Tablecloth.Result.t = Error "bad"
+    pp Format.pp_print_string Format.pp_print_int Format.std_formatter good
+    Format.pp_print_newline Format.std_formatter ();
+    pp Format.pp_print_string Format.pp_print_int Format.std_formatter not_good
+    Format.pp_print_newline Format.std_formatter ();
+    ```
+    
+    ```reason
+    let good: Tablecloth.Result.t(string, int) = Ok(3);
+    let notGood: Tablecloth.Result.t(string, int) = Error("bad");
+    pp(Format.pp_print_string, Format.pp_print_int, Format.std_formatter, good);
+    pp(Format.pp_print_string, Format.pp_print_int, Format.std_formatter, notGood);
+    ```
+  *)
   val pp :
        (Format.formatter -> 'err -> unit)
     -> (Format.formatter -> 'ok -> unit)
