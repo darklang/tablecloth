@@ -106,7 +106,7 @@ module Array = struct
     in    
     
     if sliceFrom >= sliceTo then empty else (
-      Array.init (sliceTo - sliceFrom) (fun i -> array.(i + sliceFrom))
+      Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
     )
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =

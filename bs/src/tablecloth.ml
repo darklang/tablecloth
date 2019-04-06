@@ -1,7 +1,3 @@
-module Caml = struct
-  module Array = Array
-end
-
 let ( <| ) a b = a b
 
 let ( >> ) (f1 : 'a -> 'b) (f2 : 'b -> 'c) : 'a -> 'c = fun x -> x |> f1 |> f2
@@ -94,8 +90,8 @@ module Array = struct
   let flatten = concatenate
 
   let intersperse ~(sep : 'a) (array : 'a array) : 'a array = 
-    Array.init
-      (max 0 (Array.length array * 2 - 1)) 
+    Belt.Array.makeBy
+      (max 0 (length array * 2 - 1)) 
       (fun i -> 
         if i mod 2 <> 0 then sep else array.(i / 2)
       )
@@ -115,7 +111,7 @@ module Array = struct
     in    
     
     if sliceFrom >= sliceTo then empty else (
-      Array.init (sliceTo - sliceFrom) (fun i -> array.(i + sliceFrom))
+      Belt.Array.makeBy (sliceTo - sliceFrom) (fun i -> array.(i + sliceFrom))
     )
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
@@ -169,7 +165,7 @@ module List = struct
 
   let elemIndex ~(value : 'a) (l : 'a list) : int option =
     l
-    |> Caml.Array.of_list
+    |> Belt.List.toArray
     |> Js.Array.findIndex (( = ) value)
     |> function -1 -> None | index -> Some index
 
@@ -886,7 +882,7 @@ module StrSet = struct
 
   let to_list = toList
 
-  let ofList (s : value list) : t = s |> Caml.Array.of_list |> Set.fromArray
+  let ofList (s : value list) : t = s |> Belt.List.toArray |> Set.fromArray
 
   let of_list = ofList
 
@@ -936,7 +932,7 @@ module IntSet = struct
 
   let to_list = toList
 
-  let ofList (s : value list) : t = s |> Caml.Array.of_list |> Set.fromArray
+  let ofList (s : value list) : t = s |> Belt.List.toArray |> Set.fromArray
 
   let of_list = ofList
 
