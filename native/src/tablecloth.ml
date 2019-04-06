@@ -80,8 +80,6 @@ module Array = struct
 
   let concatenate  (al : 'a array array) : 'a array = Base.Array.concat (Base.Array.to_list al)
 
-  let flatten = concatenate
-
   let intersperse ~sep array = 
     Base.Array.init (max 0 (Array.length array * 2 - 1)) ~f:(fun i -> 
       if i mod 2 <> 0 then sep else array.(i / 2)

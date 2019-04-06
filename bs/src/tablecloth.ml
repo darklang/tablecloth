@@ -87,8 +87,6 @@ module Array = struct
 
   let concatenate (ars : 'a array array) : 'a array = Belt.Array.concatMany ars
 
-  let flatten = concatenate
-
   let intersperse ~(sep : 'a) (array : 'a array) : 'a array = 
     Belt.Array.makeBy
       (max 0 (length array * 2 - 1)) 

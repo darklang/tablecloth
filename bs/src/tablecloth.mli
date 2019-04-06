@@ -140,8 +140,6 @@ module Array : sig
 
   val concatenate : 'a array array -> 'a array
 
-  val flatten : 'a array array -> 'a array
-
   val intersperse : sep:'a -> 'a array -> 'a array
 
   val slice : from:int -> ?to_:int -> 'a array -> 'a array

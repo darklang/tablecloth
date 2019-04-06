@@ -237,9 +237,6 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
 
     {[Array.concatenate [|[|1; 2|]; [|3|]; [|4; 5|]|] = [|1; 2; 3; 4; 5|]]} *)
 
-  val flatten : 'a array array -> 'a array  
-  (** An alias for {!Array.concatenate} *)
-
   val intersperse : sep : 'a -> 'a array -> 'a array
   (** Places [sep] between all elements of the given array.
 
