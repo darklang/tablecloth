@@ -1,4 +1,4 @@
-(** Documentation for tablecloth.mli 
+(** Documentation for tablecloth.mli
 
 Function names that are all lower case have their descriptions and examples in both OCaml and ReasonML format.
 
@@ -35,7 +35,7 @@ val ( <| ) : ('a -> 'b) -> 'a -> 'b
 
   ```ocaml
 
-  let f = sqrt >> floor 
+  let f = sqrt >> floor
   f 17.0  = 4
   ```
 
@@ -55,7 +55,7 @@ val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 
   ```ocaml
 
-  let f = floor << sqrt 
+  let f = floor << sqrt
   f 3.5 = 1.7320508075688772
   ```
 
@@ -72,6 +72,96 @@ val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
   function that does not alter the results of a computation.
 *)
 val identity : 'a -> 'a
+
+module Array : sig
+  val empty : 'a array
+
+  val singleton : 'a -> 'a array
+
+  val length : 'a array -> int
+
+  val isEmpty : 'a array -> bool
+
+  val is_empty : 'a array -> bool
+
+  val initialize : length:int -> f:(int -> 'a) -> 'a array
+
+  val repeat : length:int -> 'a -> 'a array
+
+  val range : ?from:int -> int -> int array
+
+  val fromList : 'a list -> 'a array
+
+  val from_list : 'a list -> 'a array
+
+  val toList : 'a array -> 'a list
+
+  val to_list : 'a array -> 'a list
+
+  val toIndexedList : 'a array -> (int* 'a) list
+
+  val to_indexed_list : 'a array -> (int* 'a) list
+
+  val get : index:int -> 'a array -> 'a option
+
+  val set : index:int -> value:'a -> 'a array -> unit
+
+  val sum : int array -> int
+
+  val floatSum : float array -> float
+
+  val float_sum : float array -> float
+
+  val filter : f:('a -> bool) -> 'a array -> 'a array
+
+  val map : f:('a -> 'b) -> 'a array -> 'b array
+
+  val mapWithIndex : f:(int -> 'a -> 'b) -> 'a array -> 'b array
+
+  val map_with_index : f:(int -> 'a -> 'b) -> 'a array -> 'b array
+
+  val mapi : f:(int -> 'a -> 'b) -> 'a array -> 'b array
+
+  val map2 : f:('a -> 'b -> 'c) -> 'a array -> 'b array -> 'c array
+
+  val map3 : f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array
+
+  val flatMap : f:('a -> 'a array) -> 'a array -> 'a array
+
+  val flat_map : f:('a -> 'a array) -> 'a array -> 'a array
+
+  val find : f:('a -> bool) -> 'a array -> 'a option
+
+  val any : f:('a -> bool) -> 'a array -> bool
+
+  val all : f:('a -> bool) -> 'a array -> bool
+
+  val append : 'a array -> 'a array -> 'a array
+
+  val concatenate : 'a array array -> 'a array
+
+  val intersperse : sep:'a -> 'a array -> 'a array
+
+  val slice : from:int -> ?to_:int -> 'a array -> 'a array
+
+  val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+
+  val fold_left : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+
+  val foldRight : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+
+  val fold_right : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+
+  val reverse : 'a array -> 'a array
+
+  val reverseInPlace : 'a array -> unit
+
+  val reverse_in_place : 'a array -> unit
+
+  val forEach : f:('a -> unit) -> 'a array -> unit
+
+  val for_each : f:('a -> unit) -> 'a array -> unit
+end
 
 module List : sig
   (**
@@ -106,7 +196,7 @@ module List : sig
 
   (**
     `floatSum(xs)` in ReasonML returns the sum of the given list of floats. (Same as `float_sum`.)
-    
+
     ### Example
 
     ```reason
@@ -117,7 +207,7 @@ module List : sig
 
   (**
     `float_sum(xs)` returns the sum of the given list of floats. (Same as `floatSum`.)
-    
+
     ### Example
 
     ```ocaml
@@ -135,7 +225,7 @@ module List : sig
     ```ocaml
     let cube_root (x : int) =
       ((float_of_int x) ** (1.0 /. 3.0) : float)
-      
+
     map ~f:cube_root [8; 1000; 1728] (* [2; 9.999..; 11.999..] *)
     ```
 
@@ -157,7 +247,7 @@ module List : sig
     ```reason
     let numbered = (idx: int, item: string): string =>
       string_of_int(idx) ++ ": " ++ item;
-      
+
     indexedMap(~f=numbered, ["zero", "one", "two"]) ==
       ["0: zero", "1: one", "2: two"]
     ```
@@ -196,7 +286,7 @@ module List : sig
     ```ocaml
     let discount (price: float) (percentage: float) =
       (price *. (1.0 -. (percentage /. 100.0)) : float)
-      
+
     map2 ~f:discount [100.0; 85.0; 30.0] [10.0; 20.0; 30.0] =
       [90.0; 68.0; 21.0]
     ```
@@ -204,7 +294,7 @@ module List : sig
     ```reason
     let discount = (price: float, percentage: float): float =>
       price *. (1.0 -. (percentage /. 100.0));
-      
+
     map2(~f=discount, [100.0, 85.0, 30.0], [10.0, 20.0, 30.0]) ==
       [90.0, 68.0, 21.0]
     ```
@@ -316,8 +406,8 @@ module List : sig
 
   (**
     `uniqueBy ~f:fcn xs` returns a new list containing only those elements from `xs`
-    that have a unique value when `fcn` is applied to them. 
-    
+    that have a unique value when `fcn` is applied to them.
+
     The function `fcn` takes as its single parameter an item from the list
     and returns a `string`. If the function generates the same string for two or more
     list items, only the first of them is retained. (Same as 'unique_by'.)
@@ -335,7 +425,7 @@ module List : sig
   (**
     `unique_by ~f:fcn xs` returns a new list containing only those elements from `xs`
     that have a unique value when `fcn` is applied to them.
-    
+
     The function `fcn` takes as its single parameter an item from the list
     and returns a `string`. If the function generates the same string for two or more
     list items, only the first of them is retained. (Same as 'uniqueBy'.)
@@ -353,7 +443,7 @@ module List : sig
   (**
     `getAt(~index=n, xs)` retrieves the value of the `n`th item in `xs`
     (with zero as the starting index) as `Some(value)`, or `None`
-    if `n` is less than zero or greater than the length of `xs`. 
+    if `n` is less than zero or greater than the length of `xs`.
 
     ### Example
 
@@ -388,7 +478,7 @@ module List : sig
     for any item in `x` in `xs`.
 
     ### Example
-    
+
     ```ocaml
     let even x = (x mod 2) = 0
     any ~f:even [1; 3; 4; 5] = true
@@ -475,7 +565,7 @@ module List : sig
     ### Example
 
     ```reason
-    filterMap(~f = (x) => if (x mod 2 == 0) {Some(- x)} else {None}, 
+    filterMap(~f = (x) => if (x mod 2 == 0) {Some(- x)} else {None},
       [1, 2, 3, 4]) == [-2, -4]
     ```
   *)
@@ -609,9 +699,9 @@ module List : sig
     to the list item at index position `n`. (The first item in a list has index zero.)
     If `n` is less than zero or greater than the number of items in `xs`,
     the new list is the same as the original list. (Same as `update_at`.)
-  
+
     ### Example
-    
+
     ```reason
     let double = (x) => {x * 2};
     updateAt(~index = 1, ~f = double, [1, 2, 3]) == [1, 4, 3];
@@ -626,9 +716,9 @@ module List : sig
     to the list item at index position `n`. (The first item in a list has index zero.)
     If `n` is less than zero or greater than the number of items in `xs`,
     the new list is the same as the original list. (Same as `updateAt`.)
-  
+
     ### Example
-    
+
     ```ocaml
     let double x = x * 2
     update_at ~index:1 ~f:double [1;2;3]  = [1;4;3]
@@ -695,14 +785,14 @@ module List : sig
 
   (**
     `cons item xs` (`cons(item, xs)` in ReasonML) prepends the `item` to `xs`.
-    
+
     ### Example
-    
+
     ```ocaml
     cons "one" ["two"; "three"] = ["one"; "two"; "three"]
     cons 42 [] = [42]
     ```
-    
+
     ```reason
     cons("one", ["two", "three"]) == ["one", "two", "three"];
     cons(42, []) == [42];
@@ -744,16 +834,16 @@ module List : sig
     `all ~f:predicate xs` (`all(~f=predicate, xs)` in ReasonML) returns `true`
     if all the elements in `xs` satisfy the `predicate` function, `false` otherwise.
     Note: `all` returns `true` if `xs` is the empty list.
-    
+
     ### Example
-    
+
     ```ocaml
     let even x = x mod 2 = 0
     all ~f:even [16; 22; 40] = true
     all ~f:even [16; 21; 40] = false
     all ~f:even [] = true
     ```
-    
+
     ```reason
     let even = (x) => {x mod 2 == 0};
     all(~f=even, [16, 22, 40]) == true;
@@ -767,13 +857,13 @@ module List : sig
     `tail xs` (`tail(xs)` in ReasonML) returns all except the first item in `xs`
     as a `Some` value when `xs` is not empty. If `xs` is the empty list,
     `tail` returns `None`.
-    
+
     ```ocaml
     tail [3; 4; 5] = Some [4; 5]
     tail [3] = Some []
     tail [] = None
     ```
-    
+
     ```reason
     tail([3, 4, 5]) == Some([4, 5]);
     tail([3]) == Some([]);
@@ -785,14 +875,14 @@ module List : sig
   (**
     `append xs ys` (`append(xs, ys)` in ReasonML) returns a new list with
     the elements of `xs` followed by the elements of `ys`.
-    
+
     ### Example
     ```ocaml
     append [1; 2] [3; 4; 5] = [1; 2; 3; 4; 5]
     append [] [6; 7] = [6; 7]
     append [8; 9] [] = [8; 9]
     ```
-    
+
     ```reason
     append([1, 2], [3, 4, 5]) == [1, 2, 3, 4, 5];
     append([], [6, 7]) == [6, 7];
@@ -805,9 +895,9 @@ module List : sig
     `removeAt(n, xs)` returns a new list with the item at the given index removed.
     If `n` is less than zero or greater than the length of `xs`, the new list is
     the same as the original. (Same as `remove_at`.)
-    
+
     ### Example
-    
+
     ```reason
     removeAt(~index=2, ["a", "b", "c", "d"] == ["a", "b", "d"]);
     removeAt(~index=-2, ["a", "b", "c", "d"] == ["a", "b", "c", "d"]);
@@ -820,9 +910,9 @@ module List : sig
     `remove_at n xs` returns a new list with the item at the given index removed.
     If `n` is less than zero or greater than the length of `xs`, the new list is
     the same as the original. (Same as `removeAt`.)
-    
+
     ### Example
-    
+
     ```ocaml
     remove_at ~index:2, ["a"; "b"; "c"; "d"] = ["a"; "b"; "d"]
     remove_at ~index:(-2) ["a"; "b"; "c"; "d"] = ["a"; "b"; "c"; "d"]
@@ -834,103 +924,103 @@ module List : sig
   (**
     `minimumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list
     for which `fcn(item)` is a minimum. It is returned as `Some(item)`.
-    
+
     If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum
     value for `fcn item`, the first one is returned.
-    
+
     The function provided takes a list item as its parameter and must return a value
     that can be compared---for example, a `string` or `int`. (Same as `minimum_by`.)
-    
+
     ### Example
-    
+
     ```reason
     let mod12 = (x) => (x mod 12);
     let hours = [7, 9, 15, 10, 3, 22];
     minimumBy(~f=mod12, hours) == Some(15);
     minimumBy(~f=mod12, []) == None;
     ```
-   *) 
+   *)
   val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
   (**
     `minimum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list
     for which `fcn item` is a minimum. It is returned as `Some item`.
-    
+
     If given an empty list, `minimumBy` returns `None`. If more than one value has a minimum
     value for `fcn item`, the first one is returned.
-    
+
     The function provided takes a list item as its parameter and must return a value
     that can be compared---for example, a `string` or `int`. (Same as `minimumBy`.)
-    
+
     ### Example
-    
+
     ```ocaml
     let mod12 x = x mod 12
     let hours = [7; 9; 15; 10; 3; 22]
     minimum_by ~f:mod12 hours = Some 15
     minimum_by ~f:mod12 [] = None
     ```
-   *) 
+   *)
   val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
-  
+
   (**
     `minimum xs` (`minimum(xs)` in ReasonML), when given a non-empty list, returns
     the item in the list with the minimum value. It is returned as `Some value`
-    (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`. 
-    
+    (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`.
+
     The items in the list must be of a type that can be compared---for example, a `string` or `int`.
-   *) 
+   *)
   val minimum: 'comparable list -> 'comparable option
 
   (**
     `maximumBy(~f=fcn, xs)`, when given a non-empty list, returns the item in the list
-    for which `fcn(item)` is a maximum. It is returned as `Some(item)`. 
-    
+    for which `fcn(item)` is a maximum. It is returned as `Some(item)`.
+
     If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum
     value for `fcn item`, the first one is returned.
-    
+
     The function provided takes a list item as its parameter and must return a value
     that can be compared---for example, a `string` or `int`. (Same as `maximum_by`.)
-    
+
     ### Example
-    
+
     ```reason
     let mod12 = (x) => (x mod 12);
     let hours = [7, 9, 15, 10, 3, 22];
     maximumBy(~f=mod12, hours) == Some(10);
     maximumBy(~f=mod12 []) == None;
     ```
-   *) 
+   *)
   val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 
   (**
     `maximum_by ~f:fcn, xs`, when given a non-empty list, returns the item in the list
     for which `fcn item` is a maximum. It is returned as `Some item`.
-    
+
     If given an empty list, `maximumBy` returns `None`. If more than one value has a maximum
     value for `fcn item`, the first one is returned.
-    
+
     The function provided takes a list item as its parameter and must return a value
     that can be compared---for example, a `string` or `int`. (Same as `maximumBy`.)
-    
+
     ### Example
-    
+
     ```ocaml
     let mod12 x = x mod 12
     let hours = [7;9;15;10;3;22]
     maximum_by ~f:mod12 hours = Some 10
     maximum_by ~f:mod12 [] = None
     ```
-   *) 
+   *)
   val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 
   (**
     `maximum xs` (`maximum(xs)` in ReasonML), when given a non-empty list, returns
     the item in the list with the maximum value. It is returned as `Some value`
-    (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`. 
-    
+    (`Some(value) in ReasonML)`. If given an empty list, `maximum` returns `None`.
+
     The items in the list must be of a type that can be compared---for example, a `string` or `int`.
-   *) 
+   *)
   val maximum : 'comparable list -> 'comparable option
 
   (**
@@ -938,9 +1028,9 @@ module List : sig
     returned by `fcn`. This is a stable sort; if two items have the same value,
     they will appear in the same order that they appeared in the original list.
     (Same as `sort_by`.)
-    
+
     ### Example
-    
+
     ```reason
     sortBy(~f = (x) => {x * x}, [3, 2, 5, -2, 4]) == [2, -2, 3, 4, 5];
     ```
@@ -952,9 +1042,9 @@ module List : sig
     returned by `fcn`. This is a stable sort; if two items have the same value,
     they will appear in the same order that they appeared in the original list.
     (Same as `sortBy`.)
-    
+
     ### Example
-    
+
     ```ocaml
     sort_by ~f:(fun x -> x * x) [3; 2; 5; -2; 4] = [2; -2; 3; 4; 5]
     ```
@@ -965,14 +1055,14 @@ module List : sig
     `span ~f:predicate xs` (`span(~f=fcn, xs)` in ReasonML) splits the list `xs`
     into a tuple of two lists. The first list contains the first elements of `xs`
     that satisfy the predicate; the second list contains the remaining elements of `xs`.
-    
+
     ```ocaml
     let even x = x mod 2 = 0
     span ~f:even [4; 6; 8; 1; 2; 3] = ([4; 6; 8], [1; 2; 3])
     span ~f:even [1; 2; 3] = ([], [1; 2; 3])
     span ~f:even [20; 40; 60] = ([20; 40; 60], [])
     ```
-    
+
     ```reason
     let even = (x) => {x mod 2 == 0};
     span(~f=even, [4, 6, 8, 1, 2, 3]) == ([4, 6, 8], [1, 2, 3]);
@@ -985,46 +1075,46 @@ module List : sig
   (**
     `groupWhile(~f=fcn, xs)` produces a list of lists. Each sublist consists of
     consecutive elements of `xs` which belong to the same group according to `fcn`.
-    
+
     `fcn` takes two parameters and returns a `bool`: `true` if
     the values should be grouped together, `false` if not. (Same as `group_while`.)
-    
+
     ### Example
-    
+
     ```reason
     groupWhile(~f = (x, y) => {x mod 2 == y mod 2},
       [2, 4, 6, 5, 3, 1, 8, 7, 9]) == [[2, 4, 6], [5, 3, 1], [8], [7, 9]]
     ```
-  *) 
+  *)
   val groupWhile : f:('a -> 'a -> bool) -> 'a list -> 'a list list
 
   (**
     `group_while ~f:fcn xs` produces a list of lists. Each sublist consists of
     consecutive elements of `xs` which belong to the same group according to `fcn`.
-    
+
     `fcn` takes two parameters and returns a `bool`: `true` if
     the values should be grouped together, `false` if not. (Same as `groupWhile`.)
-    
+
     ### Example
-    
+
     ```ocaml
     groupWhile ~f:(fun x y -> x mod 2 == y mod 2)
       [2; 4; 6; 5; 3; 1; 8; 7; 9] = [[2; 4; 6]; [5; 3; 1]; [8]; [7; 9]]
     ```
-  *) 
+  *)
   val group_while : f:('a -> 'a -> bool) -> 'a list -> 'a list list
 
   (**
     `splitAt(~index=n, xs)` returns a tuple of two lists. The first list has the
     first `n` items of `xs`, the second has the remaining items of `xs`.
-    
+
     If `n` is less than zero or greater than the length of `xs`, `splitAt`
     returns two empty lists.
-    
+
     (Same as `split_at`.)
-    
+
     ### Example
-    
+
     ```reason
     splitAt(~index=3, [10, 11, 12, 13, 14]) == ([10, 11, 12], [13, 14])
     splitAt(~index=0, [10, 11, 12]) == ([], [10, 11, 12])
@@ -1037,14 +1127,14 @@ module List : sig
   (**
     `split_at ~index:n xs` returns a tuple of two lists. The first list has the
     first `n` items of `xs`, the second has the remaining items of `xs`.
-    
+
     If `n` is less than zero or greater than the length of `xs`, `split_at`
     returns two empty lists.
-    
+
     (Same as `splitAt`.)
-    
+
     ### Example
-    
+
     ```ocaml
     split_at ~index:3 [10; 11; 12; 13; 14] = ([10; 11; 12], [13; 14])
     split_at ~index:0 [10; 11; 12] = ([], [10; 11; 12])
@@ -1057,13 +1147,13 @@ module List : sig
 
   (**
     `insertAt(~index=n, ~value=v, xs)` returns a new list with the value `v` inserted
-    before position `n` in `xs`. If `n` is less than zero or greater than the length of `xs`, 
+    before position `n` in `xs`. If `n` is less than zero or greater than the length of `xs`,
     returns a list consisting only of the value `v`.
-    
+
     (Same as `insert_at`.)
-    
+
     ### Example:
-    
+
     ```reason
     insertAt(~index=2, ~value=999, [100, 101, 102, 103]) == [100, 101, 999, 102, 103]
     insertAt(~index=0, ~value=999, [100, 101, 102, 103]) == [999, 100 101, 102, 103]
@@ -1075,13 +1165,13 @@ module List : sig
 
   (**
     `insert_at ~index:n, ~value:v, xs` returns a new list with the value `v` inserted
-    before position `n` in `xs`. If `n` is less than zero or greater than the length of `xs`, 
+    before position `n` in `xs`. If `n` is less than zero or greater than the length of `xs`,
     returns a list consisting only of the value `v`.
-    
+
     (Same as `insertAt`.)
-    
+
     ### Example:
-    
+
     ```ocaml
     insert_at ~index:2 ~value:999 [100; 101; 102; 103] = [100; 101; 999; 102; 103]
     insert_at ~index:0 ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]
@@ -1097,11 +1187,11 @@ module List : sig
     The first element of the tuple is the list of all the elements at the
     beginning of `xs` that  do _not_ satisfy the `predicate` function.
     The second element of the tuple is the list of the remaining items in `xs`.
-    
+
     (Same as `split_when`.)
-    
+
     ### Example
-    
+
     ```reason
     let even = (x) => {x mod 2 == 0};
     splitWhen(~f = even, [5, 1, 2, 6, 3]) == ([5, 1], [2, 6, 3]);
@@ -1118,11 +1208,11 @@ module List : sig
     The first element of the tuple is the list of all the elements at the
     beginning of `xs` that  do _not_ satisfy the `predicate` function.
     The second element of the tuple is the list of the remaining items in `xs`.
-    
+
     (Same as `splitWhen`.)
-    
+
     ### Example
-    
+
     ```reason
     let even x = (x mod 2 = 0)
     split_when ~f:even [5; 1; 2; 6; 3] = ([5; 1], [2; 6; 3])
@@ -1138,14 +1228,14 @@ module List : sig
     `intersperse separator xs` (`intersperse(separator, xs)` in ReasonML)
     inserts `separator`  between all the elements in `xs`. If `xs` is empty,
     `intersperse` returns the empty list.
-    
+
     ### Example
-    
+
     ```ocaml
     intersperse "/" ["a"; "b"; "c"] = ["a"; "/"; "b"; "/"; "c"]
     intersperse "?" [] = []
     ```
-    
+
     ```reason
     intersperse("/", ["a", "b", "c"]) == ["a", "/", "b", "/", "c"]
     intersperse("?", [] == [])
@@ -1157,7 +1247,7 @@ module List : sig
     `initialize n f` (`initialize(n, f)` in ReasonML) creates a list with values
     `[f 0; f 1; ...f (n - 1)]` (`[f(0), f(1),...f(n - 1)]` in ReasonML. Returns
     the empty list if given a negative value for `n`.
-    
+
     ### Example
     ```ocaml
     let cube_plus_one x = ((float_of_int x) +. 1.0) ** 3.0
@@ -1165,7 +1255,7 @@ module List : sig
     initialize 0 cube_plus_ones = []
     initialize (-2) cube_plus_one = []
     ```
-    
+
     ```reason
     let cube_plus_one = (x) => {(float_of_int(x) +. 1.0) ** 3.0};
     initialize(3, cube_plus_one) == [1.0, 8.0, 27.0];
@@ -1180,20 +1270,20 @@ module List : sig
     The `compareFcn` function takes two list items and returns a value less than zero if the first item
     compares less than the second, zero if the items compare equal, and one if the first item compares
     greater than the second.
-    
+
     This is a stable sort; items with equivalent values according to the `compareFcn`
     appear in the sorted list in the same order as they appeared in the original list.
 
     (Same as `sort_with`)
-    
+
     ```reason
     let cmp_mod12 = (a, b) => {
       (a mod 12) - (b mod 12)
     };
-    
-    sortWith(cmp_mod12, [15, 3, 22, 10, 16]) == [3, 15, 10, 22, 10] 
+
+    sortWith(cmp_mod12, [15, 3, 22, 10, 16]) == [3, 15, 10, 22, 10]
   *)
-  
+
   val sortWith : ('a -> 'a -> int) -> 'a list -> 'a list
 
   (**
@@ -1201,17 +1291,17 @@ module List : sig
     The `compareFcn` function takes two list items and returns a value less than zero if the first item
     compares less than the second, zero if the items compare equal, and one if the first item compares
     greater than the second.
-    
+
     This is a stable sort; items with equivalent values according to the `compareFcn`
     appear in the sorted list in the same order as they appeared in the original list.
-    
+
     (Same as `sortWith`)
-    
+
     ```ocaml
     let cmp_mod12 a b = (
       (a mod 12) - (b mod 12)
     )
-    
+
     sortWith cmp_mod12 [15; 3; 22; 10; 16] == [3; 15; 10; 22; 10]
     ```
   *)
@@ -1222,15 +1312,15 @@ module List : sig
     to each element in `xs`. The function you provide must return `unit`, and the
     `iter` call itself also returns `unit`. You use `iter` when you want to process
     a list only for side effects.
-    
+
     ### Example
-    
+
     The following code will print the items in the list to the console.
-    
+
     ```ocaml
     let _ = iter ~f:Js.log ["a"; "b"; "c"]
     ```
-    
+
     ```reason
     iter(~f=Js.log, ["a", "b", "c"]);
     ```
@@ -1813,7 +1903,7 @@ module Char : sig
   val fromCode : int -> char option
 
   val from_code : int -> char option
-  
+
   val toString : char -> string
 
   val to_string : char -> string
@@ -1863,6 +1953,18 @@ module Char : sig
   val is_whitespace : char -> bool
 end
 
+module Int : sig
+  val negate : int -> int
+
+  val isEven : int -> bool
+
+  val is_even : int -> bool
+
+  val isOdd : int -> bool
+
+  val is_odd : int -> bool
+end
+
 module Tuple2 : sig
   val create : 'a -> 'b -> 'a * 'b
 
@@ -1888,7 +1990,7 @@ module Tuple2 : sig
 
   val swap : ('a * 'b) -> ('b * 'a)
 
-  val curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c 
+  val curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c
 
   val uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c
 
@@ -1903,7 +2005,7 @@ module Tuple3 : sig
   val first : ('a * 'b * 'c) -> 'a
 
   val second : ('a * 'b * 'c) -> 'b
-  
+
   val third : ('a * 'b * 'c) -> 'c
 
   val init : ('a * 'b * 'c) -> ('a * 'b)
@@ -1931,7 +2033,7 @@ module Tuple3 : sig
   val map_all : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
 
   val rotateLeft : ('a * 'b * 'c) -> ('b * 'c * 'a)
-  
+
   val rotate_left : ('a * 'b * 'c) -> ('b * 'c * 'a)
 
   val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
@@ -1941,7 +2043,7 @@ module Tuple3 : sig
   val curry : (('a * 'b * 'c) -> 'd) -> 'a -> 'b -> 'c -> 'd
 
   val uncurry : ('a -> 'b -> 'c -> 'd) -> ('a * 'b * 'c) -> 'd
-  
+
   val toList : ('a * 'a * 'a) -> 'a list
 
   val to_list : ('a * 'a * 'a) -> 'a list
@@ -2003,7 +2105,7 @@ module String : sig
   val contains : substring:string -> string -> bool
 
   val repeat : count:int -> string -> string
-  
+
   val reverse : string -> string
 
   val fromList : char list -> string
