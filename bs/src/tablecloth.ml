@@ -1115,6 +1115,10 @@ end
 module Task = struct
   type (+'x, +'a) t = unit -> ('x, 'a) Result.t Js.Promise.t
 
+  let create (f: (('x, 'a) Result.t -> unit) -> unit) : ('x, 'a) t =
+    fun () ->
+      Js.Promise.make (fun ~resolve ~reject:_ -> f (fun res -> (resolve res)[@bs ]))
+
   let succeed (a: 'a) : ('x, 'a) t = fun () -> (Js.Promise.resolve (Belt.Result.Ok a))
 
   let fail (x: 'x) : ('x, 'a) t = fun () -> (Js.Promise.resolve (Belt.Result.Error x))

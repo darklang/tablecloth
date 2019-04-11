@@ -573,6 +573,7 @@ let () =
 
   describe "Task" (fun () ->
     let test = testAsync ~timeout:10 in
+
     test "perform/succeed" (fun cb ->
       Task.perform (Task.succeed 4) ~f:(fun a ->
         cb (expect a |> toEqual 4)
@@ -582,6 +583,22 @@ let () =
     test "attempt/fail" (fun cb ->
       Task.attempt (Task.fail 4) ~f:(fun res ->
         cb (expect res |> toEqual (Belt.Result.Error 4))
+      )
+    );
+
+    test "create" (fun cb ->
+      let task =
+        Task.create (fun complete ->
+          let _ =
+            Js.Global.setTimeout (fun () ->
+              complete (Belt.Result.Ok 4)
+            ) 0
+          in
+          ()
+        )
+      in
+      Task.perform task ~f:(fun a ->
+          cb (expect a |> toEqual 4)
       )
     );
 

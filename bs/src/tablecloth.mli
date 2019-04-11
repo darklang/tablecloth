@@ -2338,6 +2338,8 @@ module Task : sig
    *)
   type (+'x, +'a) t = unit -> ('x, 'a) Result.t Js.Promise.t
 
+  val create : ((('x, 'a) Result.t -> unit) -> unit) -> ('x, 'a) t
+
   val succeed : 'a -> ('x, 'a) t
 
   val fail : 'x -> ('x, 'a) t
