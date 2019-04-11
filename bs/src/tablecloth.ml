@@ -1091,19 +1091,3 @@ module IntDict = struct
     Map.merge dict1 dict2 f
 end
 
-module Regex = struct 
-  type t = Js.Re.t
-
-  type result = Js.Re.result
-
-  let regex s : Js.Re.t = Js.Re.fromStringWithFlags ~flags:"g" s
-
-  let contains ~(re : Js.Re.t) (s : string) : bool = Js.Re.test s re
-
-  let replace ~(re : Js.Re.t) ~(repl : string) (str : string) =
-    Js.String.replaceByRe re repl str
-
-
-  let matches ~(re : Js.Re.t) (s : string) : Js.Re.result option =
-    Js.Re.exec s re
-end
