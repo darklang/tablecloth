@@ -2318,3 +2318,53 @@ module Regex : sig
 
   val matches : re:t -> string -> result option
 end
+
+module Never : sig
+  (** A type with no inhabitants. Possible to express properly in a later OCaml
+   * version. See https://github.com/ocaml/ocaml/pull/1546 *)
+  type t
+end
+
+module Task : sig
+  (** A Task doesn't run until we `perform` it. Unfortunately, Js.Promise.t
+   * doesn't track the error type, (we're given an opaque error in
+   * Js.Promise.catch).
+   *
+   * As such, in order to track the error, we bake the result into the
+   * Promises' success payload.
+   *
+   * And we allow the user to handle the Promise.error case when a task is
+   * attempted or performed.
+   *)
+  type (+'x, +'a) t = unit -> ('x, 'a) Result.t Js.Promise.t
+
+  val succeed : 'a -> ('x, 'a) t
+
+  val fail : 'x -> ('x, 'a) t
+
+  val andThen : ('x, 'a) t -> f:('a -> ('x, 'b) t) -> ('x, 'b) t
+
+  val sequence : ('x, 'a) t array -> ('x, 'a array) t
+
+  val race : ('x, 'a) t array -> ('x, 'a) t
+
+  val map : ('x, 'a) t -> f:('a -> 'b) -> ('x, 'b) t
+
+  val map2 : ('x, 'a) t -> ('x, 'b) t -> f:('a -> 'b -> 'c) -> ('x, 'c) t
+
+  val perform :
+       ?e:(Js.Promise.error -> unit)
+    -> (Never.t, 'a) t
+    -> f:('a -> unit)
+    -> unit
+
+  val attempt :
+      ?e:(Js.Promise.error -> unit)
+    -> ('x, 'a) t
+    -> f:(('x, 'a) Result.t -> unit)
+    -> unit
+
+  val onError : ('x, 'a) t -> f:('x -> ('y, 'a) t) -> ('y, 'a) t
+
+  val mapError : ('x, 'a) t -> f:('x -> 'y) -> ('y, 'a) t
+end

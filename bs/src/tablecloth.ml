@@ -1107,3 +1107,94 @@ module Regex = struct
   let matches ~(re : Js.Re.t) (s : string) : Js.Re.result option =
     Js.Re.exec s re
 end
+
+module Never = struct
+  type t
+end
+
+module Task = struct
+  type (+'x, +'a) t = unit -> ('x, 'a) Result.t Js.Promise.t
+
+  let succeed (a: 'a) : ('x, 'a) t = fun () -> (Js.Promise.resolve (Belt.Result.Ok a))
+
+  let fail (x: 'x) : ('x, 'a) t = fun () -> (Js.Promise.resolve (Belt.Result.Error x))
+
+  let andThen (t: ('x, 'a) t) ~(f:('a -> ('x, 'b) t)) : ('x, 'b) t =
+     fun () ->
+       t()
+        |> Js.Promise.then_ (function
+               | Belt.Result.Ok a -> (f a) ()
+               | Error x -> Js.Promise.resolve (Belt.Result.Error x)
+             )
+
+  let sequence (ts: ('x, 'a) t array) : ('x, 'a array) t =
+    fun () ->
+        ts
+        |> Array.map ~f:(fun t -> t ())
+        |> Js.Promise.all
+        |> Js.Promise.then_ (fun ts ->
+          ts
+          |> Array.to_list
+          |> List.foldl ~init:(Belt.Result.Ok []) ~f:(fun res -> function
+          | Belt.Result.Ok acc ->
+            (match res with
+            | Belt.Result.Ok a ->
+              Ok (a :: acc)
+            | Error e ->
+              Error e)
+          | Error e -> Error e
+        )
+          |> Result.map List.reverse
+          |> Result.map Array.fromList
+          |> Js.Promise.resolve
+        )
+
+  let race (ts: ('x, 'a) t array) : ('x, 'a) t =
+    fun () ->
+      ts
+        |> Array.map ~f:(fun t -> t ())
+        |> Js.Promise.race
+
+  let map (t: ('x, 'a) t) ~(f:('a -> 'b)) : ('x, 'b) t =
+    t |> andThen ~f:(fun x -> succeed (f x))
+
+  let map2 (t1: ('x, 'a) t) (t2: ('x, 'b) t) ~(f:('a -> 'b -> 'c)) : ('x, 'c) t =
+    fun () ->
+      Js.Promise.all2 (t1(), t2())
+      |> Js.Promise.then_ (fun (a, b) ->
+          Js.Promise.resolve (Result.map2 ~f a b)
+      )
+
+  let default_error_handler e = Js.log2 "Uncaught JS failure in Task" e
+
+  (* Run *)
+  let perform ?(e=default_error_handler) (t: (Never.t, 'a) t) ~(f: 'a -> unit)  =
+    ignore( t() |> Js.Promise.then_ (fun res ->
+      (match res with
+      | Belt.Result.Ok a -> f a
+      | Error _ -> failwith "Impossible");
+      Js.Promise.resolve()
+    ) |> Js.Promise.catch (fun x -> e(x); Js.Promise.resolve() ))
+
+  let attempt ?(e=default_error_handler) (t: ('x, 'a) t) ~(f: ('x, 'a) Result.t -> unit) =
+    ignore (
+      t()
+      |> Js.Promise.then_ (fun res ->
+          f res;
+          Js.Promise.resolve())
+      |> Js.Promise.catch (fun err ->
+          e err;
+          Js.Promise.resolve ())
+    )
+
+  (* Errors *)
+  let onError (t: ('x, 'a) t) ~(f:('x -> ('y, 'a) t)) : ('y, 'a) t =
+    fun () ->
+      t() |> Js.Promise.then_ (function
+        | Belt.Result.Ok x -> Js.Promise.resolve (Belt.Result.Ok x)
+        | Error e -> (f e) ()
+      )
+
+  let mapError (t: ('x, 'a) t) ~(f:('x -> 'y)) : ('y, 'a) t =
+    onError t ~f:(fun e -> fail (f e))
+end

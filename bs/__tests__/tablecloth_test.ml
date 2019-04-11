@@ -570,3 +570,97 @@ let () =
       expect (Tuple3.toList (3, 4, 5)) |> toEqual [3; 4; 5]
     );
   );
+
+  describe "Task" (fun () ->
+    let test = testAsync ~timeout:10 in
+    test "perform/succeed" (fun cb ->
+      Task.perform (Task.succeed 4) ~f:(fun a ->
+        cb (expect a |> toEqual 4)
+      )
+    );
+
+    test "attempt/fail" (fun cb ->
+      Task.attempt (Task.fail 4) ~f:(fun res ->
+        cb (expect res |> toEqual (Belt.Result.Error 4))
+      )
+    );
+
+    test "andThen" (fun cb ->
+      let task =
+        Task.andThen (Task.succeed 3) ~f:(fun a ->
+          Task.succeed (a + 1)
+        )
+      in
+      Task.perform task ~f:(fun a ->
+          cb (expect a |> toEqual 4)
+      )
+    );
+
+    test "sequence success" (fun cb ->
+      let task =
+        Array.initialize ~length:4 ~f:Task.succeed
+        |> Task.sequence
+      in
+      Task.perform task ~f:(fun aa ->
+        cb (expect (Array.sum aa) |> toEqual 6)
+      )
+    );
+
+    test "sequence fails" (fun cb ->
+      let task =
+        Array.initialize ~length:4 ~f:(fun i -> if i == 0 then Task.fail i else Task.succeed i)
+        |> Task.sequence
+      in
+      Task.attempt task ~f:(fun res ->
+        cb (expect res |> toEqual (Belt.Result.Error 0))
+      )
+    );
+
+    test "race" (fun cb ->
+      let task =
+        Array.initialize ~length:4 ~f:Task.succeed
+        |> Task.race
+      in
+      Task.perform task ~f:(fun a ->
+        cb (expect a |> toBeLessThanOrEqual 3)
+      )
+    );
+
+    test "map" (fun cb ->
+      let task =
+        Task.map (Task.succeed 3) ~f:(fun a -> a + 1)
+      in
+      Task.perform task ~f:(fun a ->
+          cb (expect a |> toEqual 4)
+      )
+    );
+
+    test "map2" (fun cb ->
+      let task =
+        Task.map2 (Task.succeed 3) (Task.succeed 1) ~f:(fun a b -> a + b)
+      in
+      Task.perform task ~f:(fun a ->
+          cb (expect a |> toEqual 4)
+      )
+    );
+
+    test "onError" (fun cb ->
+      let task =
+        Task.onError (Task.fail 3) ~f:(fun i ->
+          Task.succeed (i + 1)
+        )
+      in
+      Task.perform task ~f:(fun a ->
+          cb (expect a |> toEqual 4)
+      )
+    );
+
+    test "mapError" (fun cb ->
+      let task =
+        Task.mapError (Task.fail 3) ~f:(fun i -> i + 1)
+      in
+      Task.attempt task ~f:(fun res ->
+        cb (expect res |> toEqual (Belt.Result.Error 4))
+      )
+    );
+  );
