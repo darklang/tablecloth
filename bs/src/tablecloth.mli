@@ -2305,20 +2305,6 @@ module IntDict : sig
     -> 'v3 t
 end
 
-module Regex : sig
-  type t = Js.Re.t
-
-  type result = Js.Re.result
-
-  val regex : string -> t
-
-  val contains : re:t -> string -> bool
-
-  val replace : re:t -> repl:string -> string -> string
-
-  val matches : re:t -> string -> result option
-end
-
 module Never : sig
   (** A type with no inhabitants. Possible to express properly in a later OCaml
    * version. See https://github.com/ocaml/ocaml/pull/1546 *)
