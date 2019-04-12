@@ -438,6 +438,10 @@ end
 module Result = struct
   type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
 
+  let succeed a = Belt.Result.Ok a
+
+  let fail e = Belt.Result.Error e
+
   let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Belt.Result.getWithDefault r default
 
@@ -496,6 +500,8 @@ end
 
 module Option = struct
   type 'a t = 'a option
+
+  let some a = Some a
 
   let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x

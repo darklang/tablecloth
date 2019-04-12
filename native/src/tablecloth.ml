@@ -516,6 +516,8 @@ end
 module Option = struct
   type 'a t = 'a option
 
+  let some = Option.some
+
   let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x
 
@@ -566,6 +568,10 @@ end
 
 module Result = struct
   type ('err, 'ok) t = ('ok, 'err) Base.Result.t
+
+  let succeed = Base.Result.return
+
+  let fail = Base.Result.fail
 
   let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Base.Result.ok r |> Base.Option.value ~default
