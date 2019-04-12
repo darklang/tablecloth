@@ -688,20 +688,277 @@ module Char = struct
   let is_printable = isPrintable
 
   let isWhitespace = Base.Char.is_whitespace
-  
+
   let is_whitespace = isWhitespace
 end
 
+module Float = struct
+  type t = float
+
+  let add = (+.)
+
+  let (+) = (+.)
+
+  let subtract = (-.)
+
+  let (-) = (-.)
+
+  let multiply = ( *. )
+
+  let ( * ) = ( *. )
+
+  let divide n ~by = (n /. by)
+
+  let ( / ) = ( /. )
+
+  let power ~base ~exponent = (base ** exponent) 
+
+  let ( ** ) = ( ** )
+
+  let negate = Base.Float.neg
+
+  let (~-) = negate
+
+  let absolute = Base.Float.abs
+
+  let clamp n ~lower ~upper =
+    if upper < lower then
+      raise (
+        Invalid_argument ("~lower:" ^ (Base.Float.to_string lower) ^ " must be less than or equal to ~upper:" ^ (Base.Float.to_string upper))
+      )
+    else if (Base.Float.is_nan lower || Base.Float.is_nan upper || Base.Float.is_nan n) then
+      Base.Float.nan
+    else
+      max lower (min upper n)
+
+  let inRange n ~lower ~upper =
+    if Base.Float.(upper < lower) then
+      raise (
+        Invalid_argument ("~lower:" ^ (Base.Float.to_string lower) ^ " must be less than or equal to ~upper:" ^ (Base.Float.to_string upper))
+      )
+    else
+      n >= lower && n < upper
+
+  let in_range = inRange
+
+  let squareRoot = sqrt
+
+  let square_root = squareRoot
+
+  let log n ~base = Base.Float.(log10(n) / log10(base))
+
+  let zero = 0.0
+
+  let one = 1.0
+
+  let nan = Base.Float.nan
+
+  let infinity = Base.Float.infinity
+
+  let negativeInfinity = Base.Float.neg_infinity
+
+  let negative_infinity = negativeInfinity
+
+  let e = Base.Float.euler
+
+  let pi = Base.Float.pi
+
+  let isNaN = Base.Float.is_nan
+
+  let is_nan = isNaN
+
+  let isInfinite = Base.Float.is_inf
+
+  let is_infinite = isInfinite
+
+  let isFinite n = not (isInfinite n) && not (isNaN n)
+
+  let is_finite = isFinite
+
+  let maximum x y =
+    if isNaN x || isNaN y then
+      nan
+    else if y > x then
+      y
+    else
+      x
+
+  let minimum x y =
+    if isNaN x || isNaN y then
+      nan
+    else if y < x then
+      y
+    else
+      x
+
+  let hypotenuse x y = squareRoot (x * x + y * y)
+
+  let degrees n = n * (pi / 180.0)
+
+  let radians = identity
+
+  let turns n = n * 2. * pi
+
+  let cos = Base.Float.cos
+
+  let acos = Base.Float.acos
+
+  let sin = Base.Float.sin
+
+  let asin = Base.Float.asin
+
+  let tan = Base.Float.tan
+
+  let atan = Base.Float.atan
+
+  let atan2 ~y ~x = Base.Float.atan2 y x
+
+  type direction = [
+    | `Zero
+    | `AwayFromZero
+    | `Up
+    | `Down
+    | `Closest of [
+      | `Zero
+      | `AwayFromZero
+      | `Up
+      | `Down
+      | `ToEven
+    ]
+  ]
+
+  let round ?(direction = (`Closest `Up)) n =
+    match direction with
+    | `Up | `Down | `Zero as dir -> Base.Float.round n ~dir
+    | `AwayFromZero -> (
+        if n < 0. then Base.Float.round n ~dir:`Down
+        else Base.Float.round n ~dir:`Up
+      )
+    | (`Closest `Zero) -> (
+        if n > 0. then Base.Float.round (n -. 0.5) ~dir:`Up
+        else Base.Float.round (n +. 0.5) ~dir:`Down
+      )
+    | `Closest `AwayFromZero -> (
+        if n > 0. then Base.Float.round (n +. 0.5) ~dir:`Down
+        else Base.Float.round (n -. 0.5) ~dir:`Up
+      )
+    | (`Closest `Down) -> (
+        Base.Float.round (n -. 0.5) ~dir:`Up
+      )
+    | (`Closest `Up) -> Base.Float.round_nearest n
+    | (`Closest `ToEven) -> Base.Float.round_nearest_half_to_even n
+
+  let floor = Base.Float.round_down
+
+  let ceiling = Base.Float.round_up
+
+  let truncate = Base.Float.round_towards_zero
+
+  let fromPolar (r, theta) = (r * cos theta, r * sin theta)
+
+  let from_polar = fromPolar
+
+  let toPolar (x, y) = (hypotenuse x y, atan2 ~x ~y)
+
+  let to_polar = toPolar
+
+  let fromInt = Base.Float.of_int
+
+  let from_int = fromInt
+
+  let toInt = Base.Float.iround_towards_zero
+
+  let to_int = toInt
+end
+
 module Int = struct
+  type t = int
+
+  let minimumValue = Base.Int.min_value
+
+  let minimum_value = minimumValue
+
+  let maximumValue = Base.Int.max_value
+
+  let maximum_value = maximumValue
+
+  let zero = 0
+
+  let one = 1
+
+  let add = (+)
+
+  let (+) = (+)
+
+  let subtract = (-)
+
+  let (-) = (-)
+
+  let multiply = ( * )
+
+  let ( * ) = multiply
+
+  let divide n ~by = n / by
+
+  let ( / ) = ( / )
+
+  let ( // ) = Base.Int.( // )
+
+  let power ~base ~exponent = Base.Int.(base ** exponent)
+
+  let ( ** ) = Base.Int.( ** )
+
   let negate = (~-)
+
+  let (~-) = (~-)
+
+  let modulo n ~by = n mod by
+
+  let remainder n ~by = Base.Int.rem n by
+
+  let maximum = Base.Int.max
+
+  let minimum = Base.Int.min
+
+  let absolute n = if n < 0 then n * (-1) else n
 
   let isEven n = n mod 2 = 0
 
   let is_even = isEven
 
-  let isOdd n = n mod 2 != 0
+  let isOdd n = n mod 2 <> 0
 
   let is_odd = isOdd
+
+  let clamp n ~lower ~upper =
+    if upper < lower then
+      raise (
+        Invalid_argument ("~lower:" ^ (Base.Int.to_string lower) ^ " must be less than or equal to ~upper:" ^ (Base.Int.to_string upper))
+      )
+    else
+      max lower (min upper n)
+
+  let inRange n ~lower ~upper =
+    if upper < lower then
+      raise (
+        Invalid_argument ("~lower:" ^ (Base.Int.to_string lower) ^ " must be less than or equal to ~upper:" ^ (Base.Int.to_string upper))
+      )
+    else
+      n >= lower && n < upper
+
+  let in_range = inRange
+
+  let toFloat = Base.Int.to_float
+
+  let to_float = toFloat
+
+  let toString = Base.Int.to_string
+
+  let to_string = toString
+
+  let fromString = int_of_string_opt
+
+  let from_string = fromString
 end
 
 module String = struct
