@@ -493,6 +493,8 @@ end
 module Option : sig
   type 'a t = 'a option
 
+  val some : 'a -> 'a option
+
   val andThen : f:('a -> 'b option) -> 'a option -> 'b option
 
   val and_then : f:('a -> 'b option) -> 'a option -> 'b option
