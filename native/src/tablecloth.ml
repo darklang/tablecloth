@@ -516,7 +516,7 @@ end
 module Option = struct
   type 'a t = 'a option
 
-  let some = Option.some
+  let some = Base.Option.some
 
   let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x
