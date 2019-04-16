@@ -458,6 +458,10 @@ end
 module Result : sig
   type ('err, 'ok) t = ('ok, 'err) Base.Result.t
 
+  val succeed : 'ok -> ('err, 'ok) t
+
+  val fail : 'err -> ('err, 'ok) t
+
   val withDefault : default:'ok -> ('err, 'ok) t -> 'ok
 
   val with_default : default:'ok -> ('err, 'ok) t -> 'ok
@@ -488,6 +492,8 @@ end
 
 module Option : sig
   type 'a t = 'a option
+
+  val some : 'a -> 'a option
 
   val andThen : f:('a -> 'b option) -> 'a option -> 'b option
 

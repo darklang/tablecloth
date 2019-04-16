@@ -1357,6 +1357,52 @@ module Result : sig
   type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
 
   (**
+    `succeed(value)` returns `Ok(value)`. Use this to construct a successful
+    result without having to depend directly on Belt or Base.
+
+    ### Example
+
+    Not only can you use `succeed` whenever you would use the type constructor,
+    but you can also use it when you would have wanted to pass the constructor
+    itself as a function.
+
+    ```ocaml
+    succeed 3 = Ok 3
+    List.map [1; 2; 3] ~f:succeed = [Ok 1; Ok 2; Ok 3]
+    ```
+
+    ```reason
+    succeed(3) == Ok(3);
+    Array.initialize(~length=3, ~f=succeed) == [|Ok(0); Ok(1); Ok(2)|];
+    ```
+  *)
+  val succeed : 'ok -> ('err, 'ok) t
+
+  (**
+    `fail(value)` returns `Error(value)`. Use this to construct a failing
+    result without having to depend directly on Belt or Base.
+
+    (Similar to `succeed`)
+
+    ### Example
+
+    Not only can you use `fail` whenever you would use the type constructor,
+    but you can also use it when you would have wanted to pass the constructor
+    itself as a function.
+
+    ```ocaml
+    fail 3 = Error 3
+    List.map [1; 2; 3] ~f:fail = [Error 1; Error 2; Error 3]
+    ```
+
+    ```reason
+    fail(3) == Error(3);
+    Array.initialize(~length=3, ~f=succeed) == [|Ok(0); Ok(1); Ok(2)|];
+    ```
+  *)
+  val fail : 'err -> ('err, 'ok) t
+
+  (**
     `withDefault(~default=defaultValue, result)`, when given an `Ok(value)`, returns
     `value`; if given an `Error(errValue)`, returns `defaultValue`.
     
@@ -1626,6 +1672,22 @@ end
 module Option : sig
 
   type 'a t = 'a option
+
+  (**
+    `some(value)` returns `Some(value)`. Use this to construct the Some branch
+    of an option whenever you need a function to do so.
+
+    ### Example
+
+    ```ocaml
+    List.map [1; 2; 3] ~f:some = [Some 1; Some 2; Some 3]
+    ```
+
+    ```reason
+    Array.initialize(~length=3, ~f=some) == [|Some(0); Some(1); Some(2)|];
+    ```
+  *)
+  val some : 'a -> 'a option
 
   (**
     `andThen(~f = fcn, opt)` applies function `fcn`, which takes a non-`Option`
