@@ -213,8 +213,8 @@ module List : sig
 
   (**
     `getBy(~f=predicate, xs)` returns `Some(value)` for the first value in `xs`
-    that satisifies the `predicate` function; returns `None` if no element
-    satisifies the function.  (Same as `get_by`.)
+    that satisfies the `predicate` function; returns `None` if no element
+    satisfies the function.  (Same as `get_by`.)
 
     ### Example
 
@@ -228,8 +228,8 @@ module List : sig
 
   (**
     `get_by ~f:predicate xs`  returns `Some value` for the first value in `xs`
-    that satisifies the `predicate` function; returns `None` if no element
-    satisifies the function. (Same as `getBy`.)
+    that satisfies the `predicate` function; returns `None` if no element
+    satisfies the function. (Same as `getBy`.)
 
     ### Example
 
