@@ -6,6 +6,131 @@ let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 
 let identity (value : 'a) : 'a = value
 
+module Array = struct
+  let empty : 'a array = [||]
+
+  let singleton (a : 'a) : 'a array = [|a|]
+
+  let length (a : 'a array) : int = Base.Array.length a
+
+  let isEmpty (a : 'a array) : bool = length a = 0
+
+  let is_empty = isEmpty
+
+  let initialize ~(length : int) ~(f : int -> 'a) = 
+    if length <= 0 then empty else Base.Array.init length ~f
+  
+  let repeat ~(length : int) (e : 'a) : 'a array = 
+    if length <= 0 then empty else Base.Array.init length ~f:(fun _ -> e)
+
+  let range ?(from = 0) (to_ : int) : int array =
+    Base.Array.init (max 0 (to_ - from)) ~f:(fun i -> i + from)
+
+  let fromList (l: 'a list) : 'a array = Base.List.to_array l
+
+  let from_list = fromList
+
+  let toList (a: 'a array) : 'a list = Base.Array.to_list a
+
+  let to_list = toList
+
+  let toIndexedList xs = 
+    Base.Array.fold_right xs ~init:(length xs - 1, []) ~f:(fun x (i, acc) -> 
+      (i - 1, ((i, x) :: acc)))
+    |> Base.snd
+  
+  let to_indexed_list = toIndexedList
+
+  let get ~index a = 
+    if index >= 0 && index < length a then Some (Base.Array.get a index) else None
+
+  let set ~index ~value a = Base.Array.set a index value
+
+  let sum (a : int array) : int = Base.Array.fold a ~init:0 ~f:( + )
+
+  let floatSum (a : float array) : float = Base.Array.fold a ~init:0.0 ~f:( +. )
+
+  let float_sum = floatSum
+
+  let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = Base.Array.filter a ~f
+
+  let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Base.Array.map a ~f
+
+  let mapWithIndex  ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = Base.Array.mapi a ~f
+  
+  let map_with_index = mapWithIndex
+  
+  let mapi = mapWithIndex 
+
+  let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array =
+    let minLength = min (length a) (length b) in
+    Base.Array.init minLength ~f:(fun i -> f a.(i) b.(i))
+
+  let map3 ~(f : 'a -> 'b -> 'c -> 'd) (arrayA : 'a array) (arrayB : 'b array) (arrayC : 'c array) : 'd array =
+    let minLength : int = Base.Array.fold ~f:Base.min ~init:(length arrayA) [|length arrayB; length arrayC|] in
+    Base.Array.init minLength ~f:(fun i -> f arrayA.(i) arrayB.(i) arrayC.(i))
+
+  let flatMap ~f a = Base.Array.concat_map a ~f
+
+  let flat_map = flatMap
+
+  let find ~(f : 'a -> bool) (a : 'a array) : 'a option = Base.Array.find a ~f
+
+  let append (a : 'a array) (a' : 'a array)  : 'a array = Base.Array.append a a'
+
+  let concatenate  (al : 'a array array) : 'a array = Base.Array.concat (Base.Array.to_list al)
+
+  let intersperse ~sep array = 
+    Base.Array.init (max 0 (Array.length array * 2 - 1)) ~f:(fun i -> 
+      if i mod 2 <> 0 then sep else array.(i / 2)
+    )
+
+  let any ~(f : 'a -> bool) (a : 'a array) : bool = Base.Array.exists ~f a
+
+  let all ~(f : 'a -> bool) (a : 'a array) : bool = Base.Array.for_all ~f a
+
+  let slice ~from ?to_ array =
+    let defaultTo = match to_ with 
+      | None -> length array
+      | Some i -> i
+    in
+    let sliceFrom = 
+      if from >= 0 then min (length array) from 
+      else max 0 (min (length array) (length array + from))
+    in    
+    let sliceTo = 
+      if defaultTo >= 0 then min (length array) defaultTo 
+      else max 0 (min (length array) (length array + defaultTo))
+    in    
+    
+    if sliceFrom >= sliceTo then empty else (
+      Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
+    )
+
+  let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
+    Base.Array.fold ~f:(fun b a -> f a b) ~init:initial a
+
+  let fold_left = foldLeft
+  
+  let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
+    Base.Array.fold_right ~f ~init:initial a
+
+  let fold_right = foldRight
+
+  let reverse (a : 'a array) : 'a array = 
+    let copy = Base.Array.copy a in 
+    Base.Array.rev_inplace copy;
+    copy
+
+  let reverseInPlace (a : 'a array) = Base.Array.rev_inplace a
+
+  let reverse_in_place = reverseInPlace
+
+  let forEach ~(f : 'a -> unit) (a : 'a array) : unit = Base.Array.iter a ~f
+
+  let for_each = forEach
+end
+
 module Tuple2 = struct
   let create a b = (a, b)
 
@@ -391,6 +516,8 @@ end
 module Option = struct
   type 'a t = 'a option
 
+  let some = Base.Option.some
+
   let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x
 
@@ -415,14 +542,11 @@ module Option = struct
 
   let with_default = withDefault
 
-  let foldrValues (item : 'a option) (list : 'a list) : 'a list =
-    match item with None -> list | Some v -> v :: list
-
-
-  let foldr_values = foldrValues
-
+  
   let values (l : 'a option list) : 'a list =
-    List.foldr ~f:foldrValues ~init:[] l
+    let valuesHelper (item : 'a option) (list : 'a list) : 'a list =
+      match item with None -> list | Some v -> v :: list in
+    List.foldr ~f:valuesHelper ~init:[] l
 
 
   let toList (o : 'a option) : 'a list =
@@ -444,6 +568,10 @@ end
 
 module Result = struct
   type ('err, 'ok) t = ('ok, 'err) Base.Result.t
+
+  let succeed = Base.Result.return
+
+  let fail = Base.Result.fail
 
   let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Base.Result.ok r |> Base.Option.value ~default
@@ -562,6 +690,18 @@ module Char = struct
   let isWhitespace = Base.Char.is_whitespace
   
   let is_whitespace = isWhitespace
+end
+
+module Int = struct
+  let negate = (~-)
+
+  let isEven n = n mod 2 = 0
+
+  let is_even = isEven
+
+  let isOdd n = n mod 2 != 0
+
+  let is_odd = isOdd
 end
 
 module String = struct
