@@ -1884,10 +1884,6 @@ module Option : sig
   *)
   val with_default : default:'a -> 'a option -> 'a
 
-  val foldrValues : 'a option -> 'a list -> 'a list
-
-  val foldr_values : 'a option -> 'a list -> 'a list
-
   (**
     `values optList` (`values(optList)` in ReasonML) takes a list of `Option`
     values and returns a list of only the values contained in `Some` elements.
