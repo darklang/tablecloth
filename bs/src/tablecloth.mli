@@ -1957,61 +1957,449 @@ module Option : sig
   val to_option : sentinel:'a -> 'a -> 'a option
 end
 
+
+(**
+  The functions in this module work on ASCII
+  characters (range 0-255) only, not Unicode.
+  Since character 128 through 255 have varying values
+  depending on what standard you are using (ISO 8859-1
+  or Windows 1252), you are advised to stick to the
+  0-127 range.
+*)
 module Char : sig
+  (**
+    `toCode(ch)` returns the ASCII value for the given character `ch`.
+    (Same as `to_code`.)
+    
+    ### Example
+    ```reason
+    toCode('a') == 97;
+    toCode('\t') == 9;
+    ```
+  *)
   val toCode : char -> int
 
+  (**
+    `to_code ch` returns the ASCII value for the given character `ch`.
+    (Same as `toCode`.)
+    
+    ### Example
+    ```ocaml
+    to_code 'a' = 97
+    to_code '\t' = 9
+    ```
+  *)
   val to_code : char -> int
 
+  (**
+    `fromCode(n)` returns the character corresponding to ASCII code `n`
+    as `Some(ch)` if `n` is in the range 0-255; otherwise `None`.
+    
+    (Same as `from_code`.)
+    
+    ### Example
+    ```reason
+    fromCode(65) == Some('A');
+    fromCode(9) == Some('\t');
+    fromCode(-1) == None;
+    fromCode(256) == None;
+    ```
+  *)
   val fromCode : int -> char option
 
+  (**
+    `from_code n` returns the character corresponding to ASCII code `n`
+    as `Some ch` if `n` is in the range 0-255; otherwise `None`.
+    
+    (Same as `fromCode`.)
+    
+    ### Example
+    ```ocaml
+    from_code 65 = Some 'A'
+    from_code 9 = Some '\t'
+    (from_code (-1)) = None
+    from_code 256 = None
+    ```
+  *)
   val from_code : int -> char option
 
+  (**
+    `toString(ch)` returns a string of length one containing `ch`.
+    
+    (Same as `to_string`.)
+    
+    ### Example
+    ```reason
+    toString('a') == "a";
+    ```
+  *)
   val toString : char -> string
 
+  (**
+    `to_string ch` returns a string of length one containing `ch`.
+    
+    (Same as `toString`.)
+    
+    ### Example
+    ```ocaml
+    to_string 'a' = "a"
+    ```
+  *)
   val to_string : char -> string
 
+  (**
+    `fromString(s)` converts the first (and only) character in `s` to `Some(ch)`.
+    If the length of `s` is not equal to one, returns `None`.
+    
+    (Same as `from_string`.)
+    
+    ### Example
+    ```reason
+    fromString("R") == Some('R');
+    fromString("wrong") == None;
+    fromString("") == None;
+    ```
+  *)
   val fromString : string -> char option
 
+  (**
+    `from_string s` converts the first (and only) character in `s` to `Some ch`.
+    If the length of `s` is not equal to one, returns `None`.
+    
+    (Same as `fromString`.)
+    
+    ### Example
+    ```ocaml
+    from_string "R"= Some 'R'
+    from_string "wrong" = None
+    from_string "" = None
+    ```
+  *)
   val from_string : string -> char option
 
+  (**
+    For characters in the range `'0'` to `'9'`, `toDigit(ch)` returns the
+    corresponding integer as `Some(n)`; for any characters outside that
+    range, returns `None`.
+    
+    (Same as `to_digit`.)
+    
+    ### Example
+    ```reason
+    toDigit('5') == Some(5);
+    toDigit('x') == None;
+    ```
+  *)
   val toDigit : char -> int option
 
+  (**
+    For characters in the range `'0'` to `'9'`, `to_digit ch` returns the
+    corresponding integer as `Some n`; for any characters outside that
+    range, returns `None`.
+    
+    (Same as `toDigit`.)
+    
+    ### Example
+    ```ocaml
+    to_digit '5' = Some 5
+    to_digit 'x' = None
+    ```
+  *)
   val to_digit : char -> int option
 
+  (**
+    For characters in the range `'A'` to `'Z'`, `toLowercase(ch)` returns the
+    corresponding lower case letter; for any characters outside that
+    range, returns the character unchanged.
+    
+    (Same as `to_lowercase`.)
+    
+    ### Example
+    ```reason
+    toLowercase('G') == 'g';
+    toLowercase('h') == 'h';
+    toLowercase('%') == '%';
+    ```
+  *)
   val toLowercase : char -> char
 
+  (**
+    For characters in the range `'A'` to `'Z'`, `to_lowercase ch` returns the
+    corresponding lower case letter; for any characters outside that
+    range, returns the character unchanged.
+    
+    (Same as `toLowercase`.)
+    
+    ### Example
+    ```ocaml
+    to_lowercase 'G' = 'g'
+    to_lowercase 'h' = 'h'
+    to_lowercase '%' = '%'
+    ```
+  *)
   val to_lowercase : char -> char
 
+  (**
+    For characters in the range `'a'` to `'z'`, `toUppercase(ch)` returns the
+    corresponding upper case letter; for any characters outside that
+    range, returns the character unchanged.
+    
+    (Same as `to_uppercase`.)
+    
+    ### Example
+    ```reason
+    toUppercase('g') == 'G';
+    toUppercase('H') == 'H';
+    toUppercase('%') == '%';
+    ```
+  *)
   val toUppercase : char -> char
 
+  (**
+    For characters in the range `'A'` to `'Z'`, `to_uppercase ch` returns the
+    corresponding upper case letter; for any characters outside that
+    range, returns the character unchanged.
+    
+    (Same as `toUppercase`.)
+    
+    ### Example
+    ```ocaml
+    to_uppercase 'g' = 'G'
+    to_uppercase 'H' = 'H'
+    to_uppercase '%' = '%'
+    ```
+  *) 
   val to_uppercase : char -> char
 
+  (**
+    `isLowercase(ch)` returns `true` if `ch`
+    is in the range `'a'` to `'z'`,
+    `false` otherwise.
+    
+    (Same as `is_lowercase`.)
+    
+    ### Example
+    ```reason
+    isLowercase('g') == true;
+    isLowercase('H') == false;
+    isLowercase('%') == false;
+    ```
+  *)
   val isLowercase : char -> bool
 
+  (**
+    `is_lowercase ch` returns `true` if `ch`
+    is in the range `'a'` to `'z'`,
+    `false` otherwise.
+    
+    (Same as `isLowercase`.)
+    
+    ### Example
+    ```ocaml
+    is_lowercase 'g' = true
+    is_lowercase 'H' = false
+    is_lowercase '%' = false
+    ```
+  *)
   val is_lowercase : char -> bool
 
+  (**
+    `isUppercase(ch)` returns `true` if `ch`
+    is in the range `'A'` to `'Z'`,
+    `false` otherwise.
+    
+    (Same as `is_uppercase`.)
+    
+    ### Example
+    ```reason
+    isUppercase('G') == true;
+    isUppercase('h') == false;
+    isUppercase('%') == false;
+    ```
+  *)
   val isUppercase : char -> bool
 
+  (**
+    `is_uppercase ch` returns `true` if `ch`
+    is in the range `'A'` to `'Z'`,
+    `false` otherwise.
+    
+    (Same as `isUppercase`.)
+    
+    ### Example
+    ```ocaml
+    is_uppercase 'G' = true
+    is_uppercase 'h' = false
+    is_uppercase '%' = false
+    ```
+  *)
   val is_uppercase : char -> bool
 
+  (**
+    `isLetter(ch)` returns `true` if `ch` is
+    in the range `'A'` to `'Z'`
+    or `'a'` to `'z'`, `false` otherwise.
+    
+    (Same as `is_letter`.)
+    
+    ### Example
+    ```reason
+    isLetter('G') == true;
+    isLetter('h') == true;
+    isLetter('%') == false;
+    ```
+  *)
   val isLetter : char -> bool
 
+  (**
+    `is_letter ch` returns `true` if `ch` is in the range `'A'` to `'Z'`
+    or `'a'` to `'z'`, `false` otherwise.
+    
+    (Same as `isLetter`.)
+    
+    ### Example
+    ```ocaml
+    is_letter 'G' = true
+    is_letter 'h' = true
+    is_letter '%' = false
+    ```
+  *)
   val is_letter : char -> bool
 
+  (**
+    `isDigit(ch)` returns `true` if `ch` is in the range `'0'` to `'9'`;
+    `false` otherwise.
+    
+    (Same as `is_digit`.)
+    
+    ### Example
+    ```reason
+    isDigit('3') == true;
+    isDigit('h') == false;
+    isDigit('%') == false;
+    ```
+  *)
   val isDigit : char -> bool
 
+  (**
+    `is_digit ch` returns `true` if `ch` is in the range `'0'` to `'9'`;
+    `false` otherwise.
+    
+    (Same as `isDigit`.)
+    
+    ### Example
+    ```ocaml
+    is_digit '3' = true
+    is_digit 'h' = false
+    is_digit '%' = false
+    ```
+  *)
   val is_digit : char -> bool
 
+  (**
+    `isAlphanumeric(ch)` returns `true` if `ch` is
+    in the range `'0'` to `'9'`, `'A'` to `'Z'`, or `'a'` to `'z'`;
+    `false` otherwise.
+    
+    (Same as `is_alphanumeric`.)
+    
+    ### Example
+    ```reason
+    isAlphanumeric('3') == true;
+    isAlphanumeric('G') == true;
+    isAlphanumeric('h') == true;
+    isAlphanumeric('%') == false;
+    ```
+  *)
   val isAlphanumeric : char -> bool
 
+  (**
+    `is_alphanumeric ch` returns `true` if `ch` is
+    in the range `'0'` to `'9'`, `'A'` to `'Z'`, or `'a'` to `'z'`;
+    `false` otherwise.
+    
+    (Same as `isAlphanumeric`.)
+    
+    ### Example
+    ```ocaml
+    is_alphanumeric '3' = true
+    is_alphanumeric 'G' = true
+    is_alphanumeric 'h' = true
+    is_alphanumeric '%' = false
+    ```
+  *)
   val is_alphanumeric : char -> bool
 
+  (**
+    `isPrintable(ch)` returns `true` if `ch` is
+    in the range `' '` to `'~'`, (ASCII 32 to 127, inclusive)
+    `false` otherwise.
+    
+    (Same as `is_printable`.)
+    
+    ### Example
+    ```reason
+    isPrintable('G') == true;
+    isPrintable('%') == true;
+    isPrintable('\t') == false;
+    isPrintable('\007') == false;
+    ```
+  *)
   val isPrintable : char -> bool
 
+  (**
+    `is_printable ch` returns `true` if `ch` is
+    in the range `' '` to `'~'`, (ASCII 32 to 127, inclusive)
+    `false` otherwise.
+    
+    (Same as `isPrintable`.)
+    
+    ### Example
+    ```ocaml
+    is_printable 'G' = true
+    is_printable '%' = true
+    is_printable '\t' = false
+    is_printable '\007' = false
+    ```
+  *)
   val is_printable : char -> bool
 
+  (**
+    `isWhitespace(ch)` returns `true` if `ch` is one of:
+    `'\t'` (tab), `'\n'` (newline), `'\011'` (vertical tab),
+    `'\012'` (form feed), `'\r'` (carriage return), or
+    `' '` (space). Returns `false` otherwise.
+
+    
+    (Same as `is_whitespace`.)
+    
+    ### Example
+    ```reason
+    isWhitespace('\t') == true;
+    isWhitespace(' ') == true;
+    isWhitespace('?') == false;
+    isWhitespace('G') == false;
+    ```
+  *)
   val isWhitespace : char -> bool
 
+  (**
+    `is_whitespace ch` returns `true` if `ch` is one of:
+    `'\t'` (tab), `'\n'` (newline), `'\011'` (vertical tab),
+    `'\012'` (form feed), `'\r'` (carriage return), or
+    `' '` (space). Returns `false` otherwise.
+
+    
+    (Same as `isWhitespace`.)
+    
+    ### Example
+    ```ocaml
+    is_whitespace '\t' = true
+    is_whitespace ' ' = true
+    is_whitespace '?' = false
+    is_whitespace 'G' = false
+    ```
+  *)
   val is_whitespace : char -> bool
 end
 
