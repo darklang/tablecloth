@@ -2404,14 +2404,52 @@ module Char : sig
 end
 
 module Int : sig
+
+  (**
+    `negate n` (`negate(n) in ReasonML) returns the negative
+    value of the given integer.
+    
+    ### Example
+    ```ocaml
+    negate (-3) = 3
+    negate 5 = (-5)
+    negate 0 = 0
+    ```
+    
+    ```reason
+    negate(-3) == 3;
+    negate(5) == -5;
+    negate(0) == 0;
+    ```
+  *)
   val negate : int -> int
 
+  (**
+    `isEven(n)` returns `true` if `n` is even, `false` otherwise.
+    
+    (Same as `is_even`.)
+  *)
   val isEven : int -> bool
 
+  (**
+    `is_even n` returns `true` if `n` is even, `false` otherwise.
+  
+    (Same as `isEven`.)
+  *)
   val is_even : int -> bool
 
+  (**
+    `isOdd(n)` returns `true` if `n` is odd, `false` otherwise.
+    
+    (Same as `is_odd.`)
+  *)
   val isOdd : int -> bool
 
+  (**
+    `is_odd n` returns `true` if `n` is even, `false` otherwise.
+    
+    (Same as `isOdd`.)
+  *)
   val is_odd : int -> bool
 end
 
