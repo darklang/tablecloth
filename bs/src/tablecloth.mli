@@ -2244,7 +2244,7 @@ module Tuple2 : sig
   val uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c
 
   (**
-    `toList((a, b))` returns a list with the two elements in
+    `toList((a1, a2))` returns a list with the two elements in
     the tuple. Because list elements must have the same types,
     the tuple given to `toList()` must have both of its elements
     of the same type.
@@ -2259,7 +2259,7 @@ module Tuple2 : sig
   val toList : ('a * 'a) -> 'a list
 
   (**
-    `to_list (a, b)` returns a list with the two elements in
+    `to_list (a1, a2)` returns a list with the two elements in
     the tuple. Because list elements must have the same types,
     the tuple given to `to_list` must have both of its elements
     of the same type.
@@ -2326,11 +2326,11 @@ module Tuple3 : sig
     
     ### Example
     ```ocaml
-    second ("str", 16.0, 99) = 99
+    third ("str", 16.0, 99) = 99
     ```
     
     ```reason
-    second(("str", 16.0)) == 99;
+    third(("str", 16.0)) == 99;
     ```
   *)
   val third : ('a * 'b * 'c) -> 'c
@@ -2508,7 +2508,7 @@ module Tuple3 : sig
   val rotateLeft : ('a * 'b * 'c) -> ('b * 'c * 'a)
 
   (**
-    `rotate_left (a, b, c))` rotates the items of the tuple to the left one position.
+    `rotate_left (a, b, c)` rotates the items of the tuple to the left one position.
     
     (Same as `rotateLeft`.)
     
@@ -2532,7 +2532,7 @@ module Tuple3 : sig
   val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
 
   (**
-    `rotate_right (a, b, c))` rotates the items of the tuple to the left one position.
+    `rotate_right (a, b, c)` rotates the items of the tuple to the right one position.
     
     (Same as `rotateRight`.)
     
@@ -2592,7 +2592,7 @@ module Tuple3 : sig
   val uncurry : ('a -> 'b -> 'c -> 'd) -> ('a * 'b * 'c) -> 'd
 
   (**
-    `toList((a, b, c))` returns a list with the three elements in
+    `toList((a1, a2, a3))` returns a list with the three elements in
     the tuple. Because list elements must have the same types,
     the tuple given to `toList()` must have all of its elements
     of the same type.
@@ -2607,7 +2607,7 @@ module Tuple3 : sig
   val toList : ('a * 'a * 'a) -> 'a list
 
   (**
-    `to_list (a, b, c)` returns a list with the three elements in
+    `to_list (a1, a2, a3)` returns a list with the three elements in
     the tuple. Because list elements must have the same types,
     the tuple given to `to_list` must have all of its elements
     of the same type.
