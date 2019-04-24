@@ -2454,86 +2454,597 @@ module Int : sig
 end
 
 module Tuple2 : sig
+
+  (**
+    `create x y` (`create(x, y)` in ReasonML) creates a two-tuple with the
+    given values. The values do not have to be of the same type.
+    
+    ### Example
+    ```ocaml
+    create "str" 16.0 = ("str", 16.0)
+    ```
+    
+    ```reason
+    create("str", 16.0) == ("str", 16.0);
+    ```
+  *)
   val create : 'a -> 'b -> 'a * 'b
 
+  (**
+    `first (a, b)` (`first((a, b))` in ReasonML) returns the first element
+    in the tuple.
+    
+    ### Example
+    ```ocaml
+    first ("str", 16.0) = "str"
+    ```
+    
+    ```reason
+    first(("str", 16.0)) == "str";
+    ```
+  *)
   val first : ('a * 'b) -> 'a
 
+  (**
+    `second (a, b)` (`second((a, b))` in ReasonML) returns the second element
+    in the tuple.
+    
+    ### Example
+    ```ocaml
+    second ("str", 16.0) = 16.0
+    ```
+    
+    ```reason
+    second(("str", 16.0)) == 16.0;
+    ```
+  *)
   val second : ('a * 'b) -> 'b
 
+  (**
+    `mapFirst(~f=fcn, (a, b))` returns a new tuple with `fcn` applied to
+    the first element of the tuple.
+    
+    (Same as `map_first')
+    
+    ### Example
+    ```reason
+    mapFirst(~f=String.length, ("str", 16.0)) == (3, 16.0);
+    ```
+  *)
   val mapFirst : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
 
+  (**
+    `map_first ~f:fcn (a, b)` returns a new tuple with `fcn` applied to
+    the first element of the tuple.
+    
+    (Same as `mapFirst')
+    
+    ### Example
+    ```ocaml
+    map_first ~f:String.length ("str", 16.0) = (3, 16.0)
+    ```
+  *)
   val map_first : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
 
+  (**
+    `mapSecond(~f=fcn, (a, b))` returns a new tuple with `fcn` applied to
+    the second element of the tuple.
+    
+    (Same as `map_second')
+    
+    ### Example
+    ```reason
+    mapSecond(~f=sqrt, ("str", 16.0)) == ("str", 4.0);
+    ```
+  *)
   val mapSecond : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
 
+  (**
+    `map_second ~f:fcn (a, b)` returns a new tuple with `fcn` applied to
+    the second element of the tuple.
+    
+    (Same as `mapSecond')
+    
+    ### Example
+    ```ocaml
+    map_second ~f:sqrt ("str", 16.0) = ("str", 4.0)
+    ```
+  *)
   val map_second : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
 
+  (**
+    `mapEach(~f=fcn1, ~g=fcn2, (a, b))` returns a tuple whose first
+    element is `fcn1(a)` and whose second element is `fcn2(b)`.
+    
+    (Same as `map_each`.)
+    
+    ### Example
+    ```reason
+    mapEach(~f=String.length, ~g=sqrt, ("str", 16.0)) == (3, 4.0);
+    ```
+  *)
   val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
 
+  (**
+    `map_each ~f:fcn1 ~g:fcn2 (a, b)` returns a tuple whose first
+    element is `fcn1 a` and whose second element is `fcn2 b`.
+    
+    (Same as `mapEach`.)
+    
+    ### Example
+    ```ocaml
+    map_each ~f:String.length ~g:sqrt ("str", 16.0) = (3, 4.0)
+    ```
+  *)
   val map_each : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
 
+  (**
+    `mapAll(~f=fcn, (a1, a2))` returns a tuple by applying `fcn` to
+    both elements of the tuple. In this case, the tuple elements *must*
+    be of the same type.
+    
+    (Same as `map_all`.)
+    
+    ### Example
+    ```reason
+    mapAll(~f=String.length, ("first", "second")) == (5, 6);
+    ```
+  *)
   val mapAll : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
 
+  (**
+    `map_all ~f:fcn (a1, a2)` returns a tuple by applying `fcn` to
+    both elements of the tuple. In this case, the tuple elements *must*
+    be of the same type.
+    
+    (Same as `mapAll`.)
+    
+    ### Example
+    ```ocaml
+    map_all ~f:String.length ("first", "second") = (5, 6)
+    ```
+  *)
   val map_all : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
 
+  (**
+    `swap (a, b)` (`swap((a, b))` in ReasonML) returns a
+    tuple with the elements in reverse order.
+    
+    ### Example
+    ```ocaml
+    swap ("str", 16.0) = (16.0, "str")
+    ```
+    
+    ```reason
+    swap(("str", 16.0)) == (16.0, "str");
+    ```
+  *)
   val swap : ('a * 'b) -> ('b * 'a)
 
+  (**
+    Presume that `f` is a function that takes a 2-tuple as an
+    argument and returns a result. `curry f` (`curry(f)` in ReasonML)
+    returns a new function that takes the two items in the tuple
+    as separate arguments and returns the same result as `f`.
+    
+    ### Example
+    ```ocaml
+    let combineTuple (a, b) = a ^ (string_of_int b)
+    combineTuple ("car", 54) = "car54"
+
+    let combineSeparate = curry combineTuple
+    combineSeparate "car" 54 = "car54"
+    ```
+    ```reason
+    let combineTuple = ((a, b)) => { a ++ string_of_int(b) };
+    combineTuple(("car", 54)) == "car54";
+    
+    let combineSeparate = curry(combineTuple);
+    combineSeparate("car", 54) == "car54";
+    ```
+  *)
   val curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c
 
+  (**
+    Presume that `f` is a function that takes two arguments
+    and returns a result. `uncurry f` (`uncurry(f)` in ReasonML)
+    returns a new function that takes a two-tuple as its argument
+    and returns the same result as `f`.
+    
+    ### Example
+    ```ocaml
+    let combineSeparate a b = a ^ (string_of_int b)
+    combineSeparate "car" 54 = "car54"
+
+    let combineTuple = uncurry combineSeparate
+    combineTuple ("car", 54) = "car54"
+    ```
+    ```reason
+    let combineSeparate = (a, b) => { a ++ string_of_int(b) };
+    combineSeparate("car", 54) == "car54";
+    
+    let combineTuple = uncurry(combineSeparate);
+    combineTuple(("car", 54)) == "car54";
+    ```
+  *)
   val uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c
 
+  (**
+    `toList((a1, a2))` returns a list with the two elements in
+    the tuple. Because list elements must have the same types,
+    the tuple given to `toList()` must have both of its elements
+    of the same type.
+    
+    (Same as `to_list`.)
+    
+    ### Example
+    ```reason
+    toList(("first", "second")) == ["first", "second"];
+    ```
+  *)
   val toList : ('a * 'a) -> 'a list
 
+  (**
+    `to_list (a1, a2)` returns a list with the two elements in
+    the tuple. Because list elements must have the same types,
+    the tuple given to `to_list` must have both of its elements
+    of the same type.
+    
+    (Same as `toList`.)
+    
+    ### Example
+    ```ocaml
+    to_list ("first", "second") = ["first"; "second"]
+    ```
+  *)
   val to_list : ('a * 'a) -> 'a list
 end
 
 module Tuple3 : sig
+  (**
+    `create x y z` (`create(x, y, z)` in ReasonML) creates a three-tuple with the
+    given values. The values do not have to be of the same type.
+    
+    ### Example
+    ```ocaml
+    create "str" 16.0 99 = ("str", 16.0, 99)
+    ```
+    
+    ```reason
+    create("str", 16.0, 99) == ("str", 16.0, 99);
+    ```
+  *)
   val create : 'a -> 'b -> 'c -> ('a * 'b * 'c)
 
+  (**
+    `first (a, b, c)` (`first((a, bm c))` in ReasonML) returns the first element
+    in the tuple.
+    
+    ### Example
+    ```ocaml
+    first ("str", 16.0, 99) = "str"
+    ```
+    
+    ```reason
+    first(("str", 16.0, 99)) == "str";
+    ```
+  *)
   val first : ('a * 'b * 'c) -> 'a
 
+  (**
+    `second (a, b, c)` (`second((a, b, c))` in ReasonML) returns the second element
+    in the tuple.
+    
+    ### Example
+    ```ocaml
+    second ("str", 16.0, 99) = 16.0
+    ```
+    
+    ```reason
+    second(("str", 16.0)) == 16.0;
+    ```
+  *)
   val second : ('a * 'b * 'c) -> 'b
 
+  (**
+    `third (a, b, c)` (`third((a, b, c))` in ReasonML) returns the third element
+    in the tuple.
+    
+    ### Example
+    ```ocaml
+    third ("str", 16.0, 99) = 99
+    ```
+    
+    ```reason
+    third(("str", 16.0)) == 99;
+    ```
+  *)
   val third : ('a * 'b * 'c) -> 'c
 
+  (**
+    `init (a, b, c)` (`init((a, b, c))` in ReasonML) returns a
+    two-tuple with the first two elements of the given three-tuple.
+    
+    ### Example
+    ```ocaml
+    init ("str", 16.0, 99) = ("str", 16.0)
+    ```
+    
+    ```reason
+    init(("str", 16.0, 99)) == ("str", 16.0);
+    ```
+  *)
   val init : ('a * 'b * 'c) -> ('a * 'b)
 
+  (**
+    `tail (a, b, c)` (`tail((a, b, c))` in ReasonML) returns a
+    two-tuple with the last two elements of the given three-tuple.
+    
+    ### Example
+    ```ocaml
+    tail ("str", 16.0, 99) = (16.0, 99)
+    ```
+    
+    ```reason
+    tail(("str", 16.0, 99)) == (16.0, 99);
+    ```
+  *)
   val tail : ('a * 'b * 'c) -> ('b * 'c)
 
+  (**
+    `mapFirst(~f=fcn, (a, b, c))` returns a new tuple with `fcn` applied to
+    the first element of the tuple.
+    
+    (Same as `map_first')
+    
+    ### Example
+    ```reason
+    mapFirst(~f=String.length, ("str", 16.0, 99)) == (3, 16.0, 99);
+    ```
+  *)
   val mapFirst : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
 
+  (**
+    `map_first ~f:fcn (a, b, c)` returns a new tuple with `fcn` applied to
+    the first element of the tuple.
+    
+    (Same as `mapFirst')
+    
+    ### Example
+    ```ocaml
+    map_first ~f:String.length ("str", 16.0, 99) = (3, 16.0, 99)
+    ```
+  *)
   val map_first : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
 
+  (**
+    `mapSecond(~f=fcn, (a, b, c))` returns a new tuple with `fcn` applied to
+    the second element of the tuple.
+    
+    (Same as `map_second')
+    
+    ### Example
+    ```reason
+    mapSecond(~f=sqrt, ("str", 16.0, 99)) == ("str", 4.0, 99);
+    ```
+  *)
   val mapSecond : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
 
+  (**
+    `map_second ~f:fcn (a, b, c)` returns a new tuple with `fcn` applied to
+    the second element of the tuple.
+    
+    (Same as `mapSecond')
+    
+    ### Example
+    ```ocaml
+    map_second ~f:sqrt ("str", 16.0, 99) = ("str", 4.0, 99)
+    ```
+  *)
   val map_second : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
 
+  (**
+    `mapThird(~f=fcn, (a, b, c))` returns a new tuple with `fcn` applied to
+    the third element of the tuple.
+    
+    (Same as `map_third')
+    
+    ### Example
+    ```reason
+    mapThird(~f=succ, ("str", 16.0, 99)) == ("str", 16.0, 100);
+    ```
+  *)
   val mapThird : f:('c -> 'z) -> ('a * 'b * 'c) -> ('a * 'b * 'z)
 
+  (**
+    `map_third ~f:fcn, (a, b, c)` returns a new tuple with `fcn` applied to
+    the third element of the tuple.
+    
+    (Same as `mapThird')
+    
+    ### Example
+    ```ocaml
+    map_third ~f:succ ("str", 16.0, 99) = ("str", 16.0, 100)
+    ```
+  *)
   val map_third : f:('c -> 'z) -> ('a * 'b * 'c) -> ('a * 'b * 'z)
 
+  (**
+    `mapEach(~f=fcn1, ~g=fcn2, ~h=fcn3 (a, b, c))` returns a tuple whose elements are `fcn1(a)`, `fcn2(b)`, and `fcn3(c)`.
+    
+    (Same as `map_each`.)
+    
+    ### Example
+    ```reason
+    mapEach(~f=String.length, ~g=sqrt, ~h=succ, ("str", 16.0, 99)) == (3, 4.0, 100);
+    ```
+  *)
   val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
 
+  (**
+    `map_each ~f:fcn1 ~g:fcn2 ~h:fcn3 (a, b, c)` returns a tuple whose elements are `fcn1 a`, `fcn2 b`, and `fcn3 c`.
+    
+    (Same as `mapEach`.)
+    
+    ### Example
+    ```ocaml
+    map_each ~f:String.length ~g:sqrt ~h:succ ("str", 16.0, 99) = (3, 4.0, 100)
+    ```
+  *)
   val map_each : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
 
+  (**
+    `mapAll(~f=fcn, (a1, a2, a3))` returns a tuple by applying `fcn` to
+    all three elements of the tuple. In this case, the tuple elements *must*
+    be of the same type.
+    
+    (Same as `map_all`.)
+    
+    ### Example
+    ```reason
+    mapAll(~f=String.length, ("first", "second", "last")) == (5, 6, 4);
+    ```
+  *)
   val mapAll : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
 
+  (**
+    `map_all ~f:fcn (a1, a2, a3)` returns a tuple by applying `fcn` to
+    all three elements of the tuple. In this case, the tuple elements *must*
+    be of the same type.
+    
+    (Same as `mapAll`.)
+    
+    ### Example
+    ```ocaml
+    map_all ~f:String.length ("first", "second", "last") = (5, 6, 4)
+    ```
+  *)
   val map_all : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
 
+  (**
+    `rotateLeft((a, b, c))` rotates the items of the tuple to the left one position.
+    
+    (Same as `rotate_left`.)
+    
+    ### Example
+    ```reason
+    rotateLeft(("str", 16.0, 99)) == (16.0, 99, "str");
+    ```
+  *)
   val rotateLeft : ('a * 'b * 'c) -> ('b * 'c * 'a)
 
+  (**
+    `rotate_left (a, b, c)` rotates the items of the tuple to the left one position.
+    
+    (Same as `rotateLeft`.)
+    
+    ### Example
+    ```ocaml
+    rotate_left ("str", 16.0, 99) = (16.0, 99, "str")
+    ```
+  *)
   val rotate_left : ('a * 'b * 'c) -> ('b * 'c * 'a)
 
+  (**
+    `rotateRight((a, b, c))` rotates the items of the tuple to the right one position.
+    
+    (Same as `rotate_right`.)
+    
+    ### Example
+    ```reason
+    rotateRight(("str", 16.0, 99)) == (99, "str", 16.0);
+    ```
+  *)
   val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
 
+  (**
+    `rotate_right (a, b, c)` rotates the items of the tuple to the right one position.
+    
+    (Same as `rotateRight`.)
+    
+    ### Example
+    ```ocaml
+    rotate_right ("str", 16.0, 99) = (99, "str", 16.0)
+    ```
+  *)
   val rotate_right : ('a * 'b * 'c) -> ('c * 'a * 'b)
 
+  (**
+    Presume that `f` is a function that takes a 3-tuple as an
+    argument and returns a result. `curry f` (`curry(f)` in ReasonML)
+    returns a new function that takes the three items in the tuple
+    as separate arguments and returns the same result as `f`.
+    
+    ### Example
+    ```ocaml
+    let combineTuple (a, b, c) = a ^ (string_of_int (b + c))
+    combineTuple ("cloud", 5, 4) = "cloud9"
+
+    let combineSeparate = curry combineTuple
+    combineSeparate "cloud" 5 4 = "cloud9"
+    ```
+    ```reason
+    let combineTuple = ((a, b, c)) => { a ++ string_of_int(b + c) };
+    combineTuple(("cloud", 5, 4)) == "cloud9";
+    
+    let combineSeparate = curry(combineTuple);
+    combineSeparate("cloud", 5, 4) == "cloud9";
+    ```
+  *)
   val curry : (('a * 'b * 'c) -> 'd) -> 'a -> 'b -> 'c -> 'd
 
+  (**
+    Presume that `f` is a function that takes three arguments
+    and returns a result. `uncurry f` (`uncurry(f)` in ReasonML)
+    returns a new function that takes a three-tuple as its argument
+    and returns the same result as `f`.
+    
+    ### Example
+    ```ocaml
+    let combineSeparate a b c = a ^ (string_of_int (b + c))
+    combineSeparate "cloud" 5 4 = "cloud9"
+
+    let combineTuple = uncurry combineSeparate
+    combineTuple ("cloud", 5, 4) = "cloud9"
+    ```
+    ```reason
+    let combineSeparate = (a, b, c) => { a ++ string_of_int(b + c) };
+    combineSeparate("cloud", 5, 4) == "cloud9";
+    
+    let combineTuple = uncurry(combineSeparate);
+    combineTuple(("cloud", 5, 4)) == "cloud9";
+    ```
+  *)
   val uncurry : ('a -> 'b -> 'c -> 'd) -> ('a * 'b * 'c) -> 'd
 
+  (**
+    `toList((a1, a2, a3))` returns a list with the three elements in
+    the tuple. Because list elements must have the same types,
+    the tuple given to `toList()` must have all of its elements
+    of the same type.
+    
+    (Same as `to_list`.)
+    
+    ### Example
+    ```reason
+    toList(("first", "second", "third")) == ["first", "second", "third"];
+    ```
+  *)
   val toList : ('a * 'a * 'a) -> 'a list
 
+  (**
+    `to_list (a1, a2, a3)` returns a list with the three elements in
+    the tuple. Because list elements must have the same types,
+    the tuple given to `to_list` must have all of its elements
+    of the same type.
+    
+    (Same as `toList`.)
+    
+    ### Example
+    ```ocaml
+    to_list ("first", "second", "third") = ["first"; "second"; "third"]
+    ```
+  *)
   val to_list : ('a * 'a * 'a) -> 'a list
 end
 
