@@ -7,13 +7,15 @@ library, that has the same API on all OCaml/ReasonML/Bucklescript platforms.
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
 over time as we get more users. Caveat emptor.**
 
+See the [mli](https://github.com/darklang/tablecloth/blob/master/bs/src/tablecloth.mli) for documentation.
+
 ## Installation
 
 ### Bucklescript
 
 Install via npm by:
 
-`npm install --save-dev tablecloth-bucklescript`
+`npm install tablecloth-bucklescript`
 
 Then add to your bsconfig.json file:
 
@@ -81,8 +83,8 @@ and backend:
   js_of_ocaml, and running them in a web worker.
 
 We discovered that it was impossible to share code between the Bucklescript
-frontend and the OCaml backend, as the types and standard libraries were very
-different:
+frontend and the native OCaml backend, as the types and standard libraries were
+very different:
 
 - Bucklescript uses camelCase by default, while most native libraries,
   including Core and the OCaml standard library, use snake_case.
@@ -101,10 +103,10 @@ different:
 
 Tablecloth solves this by providing an identical API for Bucklescript and
 OCaml. It wraps existing standard libraries on those platforms, and so is fast
-and memory efficient. It is based off Elm standard library, which is extremely
+and memory efficient. It is based off the Elm standard library, which is extremely
 well-designed and ergonomic.
 
-Tablecloth provides separate libraries for OCaml native, js_of_ocaml, and
+Tablecloth provides separate libraries for OCaml native/js_of_ocaml and
 Bucklescript. The libraries have the same API, but different implementations,
 and are installed as different packages.
 
@@ -116,15 +118,15 @@ The APIs:
 - are backed by [Jane Street Base](https://opensource.janestreet.com/base/) for native OCaml
 - are backed by Belt and the `Js` library for Bucklescript/ReasonML,
 - use labelled arguments so that can be used with both pipefirst and pipelast,
+- are well documented, and reasonably-well tested.
 
 We also have design goals that are not yet achieved in the current version:
 
 - Many of the functions in the Bucklescript version were written hastily, and could be much more efficient
 - Tablecloth libraries should support PPX derivers,
 - Tablecloth functions should not throw any exceptions,
-- All functions should be well documented, with well-known and consistent edge-case behaviour,
-- All functions should be well tested,
-- There should have a js_of_ocaml optimized version (and perhaps a version wrapping other OCaml standard libraries like [Batteries](https://github.com/ocaml-batteries-team/batteries-included) or [Containers](https://github.com/c-cube/ocaml-containers)).
+- All functions should have well-known and consistent edge-case behaviour,
+- There should versions optimized for other standard libraries or runtimes, such as a js_of_ocaml, [Batteries](https://github.com/ocaml-batteries-team/batteries-included) or [Containers](https://github.com/c-cube/ocaml-containers).
 
 ## Contributing
 
@@ -151,13 +153,9 @@ Here are some ways to contribute:
 - make a plan for the addition (or not) of U-suffixed functions like in Belt,
 - make a plan for adding polymorphic Maps and Sets,
 - design a Regex module,
-- design an Array module,
 - design escape hatches, where the user could convert a `t` into a
   platform-specific type, to allow them create functions we do not currently
   support,
-- add a js_of_ocaml-optimized version,
-- add a Caml namespace to allow users to access the builtin OCaml library
-  functions
 - add more functions from any of Elm's core library: String, List, Result,
   Maybe, Array, Dict, Set, Tuple, or Basics, or from any of the Extras
   libraries.
