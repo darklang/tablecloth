@@ -6,10 +6,14 @@ Summary:
 - new modules: Tuple3, Char, Array (mutable arrays)
 - remove Regex module
 
-TODO: go through blame for each module
+CircleCI:
+- Add CI (#15, #19, @Dean177)
 
-String:
-- Add reverse (#3, @Dean177)
+Toplevel functions:
+- Add documentation (#16, @jdeisenberg)
+
+Array:
+- Add module (#14, #27, @j-m-hoffmann, @Dean177)
 
 List:
 - Add reverse (#9, @j-m-hoffmann)
@@ -18,6 +22,23 @@ List:
 - Add minimum (#21, #28, @jdeisenberg)
 - (Breaking) Make splitWhen consistent with splitAt (removed option return type) (#25, @jdeisenberg)
 - Add significant documentation (#16, @jdeisenberg)
+
+Result:
+- Fix pp() output for Error (#29, @jdeisenberg)
+- Add significant documentation (#30, @jdeisenberg)
+- Add functions for constructors: succeed, fail (#40, @bkase)
+
+Option:
+- Add significant documentation (#32, #41, @jdeisenberg)
+- (Breaking) Remove foldrValues (#33, @jdeisenberg)
+- Add function for constructor: some (#40, @bkase)
+
+Char:
+- Add module (#14, #17, @Dean177)
+- Add significant documentation (#42, @jdeisenberg)
+
+Int:
+- Add significant documentation (#43, @jdeisenberg)
 
 Tuple2:
 - Add create, first, second, mapFirst, mapSecond, mapEach (#4, @Dean177)
@@ -28,35 +49,11 @@ Tuple2:
 Tuple3:
 - Add module (#5, #6, #10, @Dean177)
 
-Array:
-- Add module (#14, #27, @j-m-hoffmann, @Dean177)
-
-Char:
-- Add module (#14, #17, @Dean177)
-- Add significant documentation (#42, @jdeisenberg)
-
-Int:
-- Add significant documentation (#43, @jdeisenberg)
-
-Option:
-- Add significant documentation (#32, #41, @jdeisenberg)
-- (Breaking) Remove foldrValues (#33, @jdeisenberg)
-- Add function for constructor: some (#40, @bkase)
+String:
+- Add reverse (#3, @Dean177)
 
 Regex:
 - Remove module (#1, #38, @bkase)
-
-Result:
-- Fix pp() output for Error (#29, @jdeisenberg)
-- Add significant documentation (#30, @jdeisenberg)
-- Add functions for constructors: succeed, fail (#40, @bkase)
-
-CircleCI:
-- Add CI (#15, #19, @Dean177)
-
-Toplevel functions:
-- Add documentation (#16, @jdeisenberg)
-
 
 # 0.0.5
 
