@@ -60,7 +60,7 @@ val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
   ```
 
   ```reason
-  let f = sqrt >> floor
+  let f = sqrt << floor
   f(3.5) == 1.7320508075688772
   ```
 
