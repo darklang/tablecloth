@@ -15,12 +15,12 @@ Function names that are in camelCase have their documentation written in ReasonM
 
   ```ocaml
   let sqr x = x * x
-  let result = sqr |< 25 (* 625 *)
+  let result = sqr <| 25 (* 625 *)
   ```
 
   ```reason
   let sqr = (x) => {x * x};
-  let result = sqr |< 25  /* 625 */
+  let result = sqr <| 25  /* 625 */
   ```
 *)
 val ( <| ) : ('a -> 'b) -> 'a -> 'b
