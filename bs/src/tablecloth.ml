@@ -644,16 +644,309 @@ module Char = struct
   let is_whitespace = isWhitespace
 end
 
+module Float = struct
+  type t = float
+
+  let add = (+.)
+
+  let (+) = (+.)
+
+  let subtract = (-.)
+
+  let (-) = (-.)
+
+  let multiply = ( *. )
+
+  let ( * ) = ( *. )
+
+  let divide n ~by = n /. by
+
+  let ( / ) = ( /. )
+
+  let power ~base ~exponent = Js.Math.pow_float ~base ~exp:exponent
+
+  let ( ** ) base exponent = power ~base ~exponent
+
+  let negate = (~-.)
+
+  let (~-) = (~-.)
+
+  let absolute = Js.Math.abs_float
+
+  let clamp n ~lower ~upper =
+    if upper < lower then
+      raise (
+        Invalid_argument ("~lower:" ^ (Js.Float.toString lower) ^ " must be less than or equal to ~upper:" ^ (Js.Float.toString upper))
+      )
+    else if (Js.Float.isNaN lower || Js.Float.isNaN upper || Js.Float.isNaN n) then
+      nan
+    else
+      max lower (min upper n)
+
+  let inRange n ~lower ~upper =
+    if upper < lower then
+      raise (Invalid_argument ("~lower:" ^ (Js.Float.toString lower) ^ " must be less than or equal to ~upper:" ^ (Js.Float.toString upper)))
+    else
+      n >= lower && n < upper
+
+  let in_range = inRange
+
+  let squareRoot = sqrt
+
+  let square_root = squareRoot
+
+  let log n ~base = Js.Math.log n / (Js.Math.log base)
+
+  let zero = 0.0
+
+  let one = 1.0
+
+  let nan = Js.Float._NaN
+
+  let infinity = infinity
+
+  let negativeInfinity = neg_infinity
+
+  let negative_infinity = negativeInfinity
+
+  let e = Js.Math._E
+
+  let pi = Js.Math._PI
+
+  let isNaN = Js.Float.isNaN
+
+  let is_nan = isNaN
+
+  let isFinite = Js.Float.isFinite
+
+  let is_finite = isFinite
+
+  let isInfinite n = not (Js.Float.isFinite n) && not (isNaN n)
+
+  let is_infinite = isInfinite
+
+  let maximum x y =
+    if isNaN x || isNaN y then
+      nan
+    else if y > x then
+      y
+    else
+      x
+
+  let minimum x y =
+    if isNaN x || isNaN y then
+      nan
+    else if y < x then
+      y
+    else
+      x
+
+  let hypotenuse = Js.Math.hypot
+
+  let degrees n = n * (pi / 180.0)
+
+  let radians = identity
+
+  let turns n = n * 2. * pi
+
+  let cos = Js.Math.cos
+
+  let acos = Js.Math.acos
+
+  let sin = Js.Math.sin
+
+  let asin = Js.Math.asin
+
+  let tan = Js.Math.tan
+
+  let atan = Js.Math.atan
+
+  let atan2 ~y ~x = Js.Math.atan2 ~y ~x ()
+
+  type direction = [
+    | `Zero
+    | `AwayFromZero
+    | `Up
+    | `Down
+    | `Closest of [
+      | `Zero
+      | `AwayFromZero
+      | `Up
+      | `Down
+      | `ToEven
+    ]
+  ]
+
+  let round ?(direction = (`Closest `Up)) n =
+    match direction with
+    | `Up -> Js.Math.ceil_float n
+    | `Down -> Js.Math.floor_float n
+    | `Zero -> Js.Math.trunc n
+    | `AwayFromZero -> (
+        if n > 0. then Js.Math.ceil_float n
+        else Js.Math.floor_float n
+      )
+    | (`Closest `Zero) -> (
+        if n > 0. then Js.Math.ceil_float (n -. 0.5)
+        else Js.Math.floor_float (n +. 0.5)
+      )
+    | `Closest `AwayFromZero -> (
+        if n > 0. then Js.Math.floor_float (n +. 0.5)
+        else Js.Math.ceil_float (n -. 0.5)
+      )
+    | (`Closest `Down) -> (
+        Js.Math.ceil_float (n -. 0.5)
+      )
+    | (`Closest `Up) -> Js.Math.round n
+    | (`Closest `ToEven) -> (
+        (* Outside of the range (roundNearestLowerBound..roundNearestUpperBound), all representable doubles
+           are integers in the mathematical sense, and [round_nearest] should be identity.
+
+           However, for odd numbers with the absolute value between 2**52 and 2**53, the formula
+           [round x = floor (x + 0.5)] does not hold:
+
+           {v
+             # let naiveRoundNearest x = floor (x +. 0.5);;
+             # let x = 2. ** 52. +. 1.;;
+             val x : float = 4503599627370497.
+             # naive_round_nearest x;;
+             - :     float = 4503599627370498.
+           v}
+        *)
+
+        let roundNearestLowerBound = -.(2. ** 52.) in
+        let roundNearestUpperBound =    2. ** 52. in
+        if n <= roundNearestLowerBound || n >= roundNearestUpperBound then
+          n +. 0.
+        else
+          let floor = floor n in
+          let ceil_or_succ = floor +. 1. in
+          let diff_floor = n -. floor in
+          let diff_ceil = ceil_or_succ -. n in
+          if diff_floor < diff_ceil then
+            floor
+          else if diff_floor > diff_ceil then
+            ceil_or_succ
+          else if mod_float floor 2. = 0. then
+            floor
+          else
+            ceil_or_succ
+    )
+
+  let floor = Js.Math.floor_float
+
+  let ceiling = Js.Math.ceil_float
+
+  let truncate = Js.Math.trunc
+
+  let fromPolar (r, theta) = (r * cos theta, r * sin theta)
+
+  let from_polar = fromPolar
+
+  let toPolar (x, y) = (hypotenuse x y, atan2 ~x ~y)
+
+  let to_polar = toPolar
+
+  let fromInt = Js.Int.toFloat
+
+  let from_int = fromInt
+
+  let toInt f =
+    if Js.Float.isFinite f then
+      Some (Js.Math.unsafe_trunc f)
+    else
+      None
+
+  let to_int = toInt
+end
+
 module Int = struct
+  type t = int
+
+  let minimumValue = Js.Int.min
+
+  let minimum_value = minimumValue
+
+  let maximumValue = Js.Int.max
+
+  let maximum_value = maximumValue
+
+  let zero = 0
+
+  let one = 1
+
+  let add = (+)
+
+  let (+) = (+)
+
+  let subtract = (-)
+
+  let (-) = (-)
+
+  let multiply = ( * )
+
+  let ( * ) = multiply
+
+  let divide n ~by = n / by
+
+  let ( / ) = ( / )
+
+  let ( // ) n by  = Js.Int.toFloat n /. Js.Int.toFloat by
+
+  let power ~base ~exponent = Js.Math.pow_int ~base ~exp:exponent
+
+  let ( ** ) base exponent = Js.Math.pow_int ~base ~exp:exponent
+
   let negate = (~-)
+
+  let (~-) = (~-)
+
+  let modulo n ~by = n mod by
+
+  let remainder n ~by = n mod by
+
+  let maximum = Js.Math.max_int
+
+  let minimum = Js.Math.min_int
+
+  let absolute n = if n < 0 then n * (-1) else n
 
   let isEven n = n mod 2 = 0
 
   let is_even = isEven
 
-  let isOdd n = n mod 2 != 0
+  let isOdd n = n mod 2 <> 0
 
   let is_odd = isOdd
+
+  let clamp n ~lower ~upper =
+    if upper < lower then
+      raise (Invalid_argument "~lower must be less than or equal to ~upper")
+    else
+      max lower (min upper n)
+
+  let inRange n ~lower ~upper =
+    if upper < lower then
+      raise (Invalid_argument "~lower must be less than or equal to ~upper")
+    else
+      n >= lower && n < upper
+
+  let in_range = inRange
+
+  let toFloat = Js.Int.toFloat
+
+  let to_float = toFloat
+
+  let toString = Js.Int.toString
+
+  let to_string = toString
+
+  let fromString s =
+    match int_of_string s with
+    | i -> Some i
+    | exception Failure _ -> None
+
+  let from_string = fromString
 end
 
 module Tuple2 = struct
