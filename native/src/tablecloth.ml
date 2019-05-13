@@ -1,12 +1,37 @@
-let ( <| ) a b = a b
+module Fun = struct
+  external identity : 'a -> 'a = "%identity"
 
-let ( >> ) (f1 : 'a -> 'b) (f2 : 'b -> 'c) : 'a -> 'c = fun x -> x |> f1 |> f2
+  external ignore : _ -> unit = "%ignore"
 
-let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
+  let constant a _ = a
 
-let identity (value : 'a) : 'a = value
+  let sequence a b =
+    ignore a ;
+    b
 
-let flip f x y = f y x
+
+  let flip f a b = f b a
+
+  let apply f a = f a
+
+  let ( <| ) f a = f a
+
+  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
+
+  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
+
+  let compose f g a = f (g a)
+
+  let ( << ) = compose
+
+  let composeRight f g a = g (f a)
+
+  let ( >> ) = composeRight
+
+  let tap value ~f =
+    f value ;
+    value
+end
 
 module Array = struct
   type 'a t = 'a array
@@ -145,7 +170,7 @@ module Array = struct
 
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
-    Base.Array.fold ~f:(flip f) ~init:initial a
+    Base.Array.fold ~f:(Fun.flip f) ~init:initial a
 
 
   let fold_left = foldLeft
@@ -383,7 +408,7 @@ module List = struct
   let fold_right = foldRight
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
-    Base.List.fold l ~init:initial ~f:(flip f)
+    Base.List.fold l ~init:initial ~f:(Fun.flip f)
 
 
   let fold_left = foldLeft
@@ -474,7 +499,7 @@ module List = struct
     | [ l ] ->
         Some l
     | l1 :: lrest ->
-        Some (fst <| foldLeft ~f:minBy ~initial:(l1, f l1) lrest)
+        Some (fst (foldLeft ~f:minBy ~initial:(l1, f l1) lrest))
     | _ ->
         None
 
@@ -500,7 +525,7 @@ module List = struct
     | [ l_ ] ->
         Some l_
     | l_ :: ls_ ->
-        Some (fst <| foldLeft ~f:maxBy ~initial:(l_, f l_) ls_)
+        Some (fst (foldLeft ~f:maxBy ~initial:(l_, f l_) ls_))
     | _ ->
         None
 
@@ -872,7 +897,7 @@ module Float = struct
 
   let degrees n = n * (pi / 180.0)
 
-  let radians = identity
+  let radians = Fun.identity
 
   let turns n = n * 2. * pi
 

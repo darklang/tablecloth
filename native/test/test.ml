@@ -67,17 +67,17 @@ let t_Array () =
   AT.check
     (AT.array AT.int)
     "initialize - create empty array"
-    (Array.initialize ~length:0 ~f:identity)
+    (Array.initialize ~length:0 ~f:Fun.identity)
     [||] ;
   AT.check
     (AT.array AT.int)
     "initialize - negative length gives an empty array"
-    (Array.initialize ~length:(-1) ~f:identity)
+    (Array.initialize ~length:(-1) ~f:Fun.identity)
     [||] ;
   AT.check
     (AT.array AT.int)
     "initialize - create array with initialize"
-    (Array.initialize ~length:3 ~f:identity)
+    (Array.initialize ~length:3 ~f:Fun.identity)
     [| 0; 1; 2 |] ;
 
   AT.check

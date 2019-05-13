@@ -1,10 +1,147 @@
-val ( <| ) : ('a -> 'b) -> 'a -> 'b
+module Fun : sig
+  (** Functions for working with functions.  *)
 
-val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
+  external identity : 'a -> 'a = "%identity"
+  (** Given a value, returns exactly the same value. This may seem pointless at first glance but it can often be useful when an api offers you more control than you actually need.
 
-val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
+    Perhaps you want to create an array of integers
 
-val identity : 'a -> 'a
+    {[Array.initialize ~length:6 ~f:identity = [|0;1;2;3;4;5|]]}
+
+    (In this particular case you probably want to use {!Int.range}.)
+
+    Or maybe you need to register a callback, but dont want to do anything:
+
+    {[
+      let httpMiddleware = HttpLibrary.createMiddleWare {
+        eventYouDoCareAbout=transformAndReturn;
+        eventYouDontCareAbout=Fun.identity;
+      }
+    ]}
+  *)
+
+  external ignore : _ -> unit = "%ignore"
+  (** Discards the value it is given and returns [()] 
+
+  This is primarily useful when working with imperative side-effecting code or to avoid "unused value" compiler warnings when you really meant it, and haven't just made a mistake.
+
+  {[
+    module PretendMutableQueue : sig
+      type 'a t
+
+      val pushReturningIndex : 'a t -> 'a -> int
+    end
+
+    let addListToQueue queue list = 
+      List.forEach list ~f:(fun element ->
+        ignore (PretentMutableQueue.pushReturningIndex queue element)
+      )
+  ]}
+  *)
+
+  val constant : 'a -> 'b -> 'a
+  (** Create a function that {b always} returns the same value.
+
+    Useful with functions like {!List.map}:
+
+    {[List.map ~f:(Fun.constant 0) [1;2;3;4;5] = [0;0;0;0;0]]}
+
+    or {!Array.initialize}
+
+    {[Array.initialize ~length:6 ~f:(Fun.constant 0) = [|0;0;0;0;0;0|]]}
+  *)
+
+  val sequence : 'a -> 'b -> 'b
+  (** A function which always returns its second argument. *)
+
+  val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
+  (** [flip f] reverses the argument order of the binary function [f].
+    For any arguments [x] and [y], [(flip f) x y] is [f y x].
+
+    Perhaps you want to [fold] something, but the arguments of a function you already have access to are in the wrong order.
+  *)
+
+  val apply : ('a -> 'b) -> 'a -> 'b
+  (** See {!Fun.(<|)} *)
+
+  val ( <| ) : ('a -> 'b) -> 'a -> 'b
+  (** [f <| x] is exactly the same as [f x].
+    It can help you avoid parentheses, which can be nice sometimes.
+    Maybe you want to apply a function to a [match] expression? That sort of thing.
+  *)
+
+  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
+  (** See {!Fun.(|>)} *)
+
+  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
+  (** Saying [x |> f] is exactly the same as [f x], just a bit longer.
+
+  It is called the “pipe” operator because it lets you write “pipelined” code.
+  For example, say we have a [sanitize] function for turning user input into
+  integers:
+
+    
+    {[
+      (* Before *)
+      let sanitize (input: string) : int option =     
+        Int.fromString (String.trim input)
+    ]}
+
+  We can rewrite it like this:
+
+   {[
+    (* After *)
+    let sanitize (input: string) : int option =         
+      input
+      |> String.trim
+      |> Int.fromString
+    ]}
+
+  This can be overused! When you have three or four steps, the code often gets clearer if you break things out into
+  some smaller piplines assigned to variables. Now the transformation has a name, maybe it could have a type annotation.
+
+  It can often be more self-documenting that way!
+ *)
+
+  val compose : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
+  (** Function composition, passing results along in the suggested direction. For
+example, the following code (in a very roundabout way) checks if a number divided by two is odd:
+
+    {[let isHalfOdd = Fun.(not << Int.isEven << Int.divide ~by:2)]}
+
+You can think of this operator as equivalent to the following:
+
+    {[(g << f)  ==  (fun x -> g (f x))]}
+
+So our example expands out to something like this:
+
+    {[let isHalfOdd = fun n -> not (Int.isEven (Int.divide ~by:2 n))]} *)
+
+  val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
+  (** See {!Fun.compose} *)
+
+  val composeRight : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
+  (** Function composition, passing results along in the suggested direction. For
+example, the following code checks if the square root of a number is odd:
+
+    {[Int.squareRoot >> Int.isEven >> not]} *)
+
+  val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
+  (** See {!Fun.composeRight} *)
+
+  val tap : 'a -> f:('a -> unit) -> 'a
+  (** 
+    Useful for performing some side affect in {!Fun.pipe}-lined code
+
+    {[    
+    let sanitize (input: string) : int option =         
+      input
+      |> String.trim
+      |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)
+      |> Int.fromString
+    ]}
+  *)
+end
 
 module Array : sig
   (** A mutable vector of elements which must have the same type with O(1) {!get} and {!set} operations.
@@ -152,7 +289,7 @@ animals = [|"antelope"; "bat"; "cat"|]]} *)
 
   val swap : 'a t -> int -> int -> unit
   (** [Array.swap array i j] swaps the value at index [i] with the value at index [j].
-    {[Array.swap [|1;2;3|] 1 2 = [|1;3;2|]
+    {[Array.swap [|1;2;3|] 1 2 = [|1;3;2|]]}
   *)
 
   val map : f:('a -> 'b) -> 'a array -> 'b array
@@ -553,7 +690,7 @@ module Option : sig
   (** [get_exn optional_value]
     Returns [value] if [optional_value] is [Some value], otherwise raises [Invalid_argument]
 
-    @example {[
+    {[
       get_exn (Some 3) = 3;;
       get_exn None (* Raises Invalid_argument error *)
     ]}
