@@ -576,7 +576,7 @@ module Result = struct
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
     Base.Result.map r ~f
 
-  let fromOption ~(error) ma = 
+  let fromOption ~(error) ma =
     match ma with
     | None -> fail error
     | Some right -> succeed right
@@ -943,6 +943,8 @@ module Int = struct
 end
 
 module String = struct
+  type t = string
+
   let length = String.length
 
   let toInt (s : string) : (string, int) Result.t =
@@ -1045,220 +1047,206 @@ module String = struct
   let insert_at = insertAt
 end
 
-module IntSet = struct
-  module Set = Base.Set.M (Base.Int)
+module Set = struct
+  type ('a, 'cmp) t = ('a, 'cmp) Base.Set.t
 
-  let __pp_value = Format.pp_print_int
+  let length = Base.Set.length
 
-  type t = Set.t
+  let isEmpty = Base.Set.is_empty
 
-  type value = int
+  let includes = Base.Set.mem
 
-  let fromList (l : value list) : t = Base.Set.of_list (module Base.Int) l
+  let add = Base.Set.add
 
-  let from_list = fromList
+  let remove = Base.Set.remove
 
-  let member ~(value : value) (s : t) : bool = Base.Set.mem s value
+  let difference = Base.Set.diff
 
-  let diff (set1 : t) (set2 : t) : t = Base.Set.diff set1 set2
+  let intersection = Base.Set.inter
 
-  let isEmpty (s : t) : bool = Base.Set.is_empty s
+  let union = Base.Set.union
 
-  let is_empty = isEmpty
+  let filter = Base.Set.filter
 
-  let toList (s : t) : value list = Base.Set.to_list s
+  let partition = Base.Set.partition_tf
+
+  let find = Base.Set.find
+
+  let all = Base.Set.for_all
+
+  let any = Base.Set.exists
+
+  let forEach = Base.Set.iter
+
+  let for_each = forEach
+
+  let fold s ~initial ~f = Base.Set.fold s ~init:initial ~f
+
+  let toArray = Base.Set.to_array
+
+  let to_array = toArray
+
+  let toList = Base.Set.to_list
 
   let to_list = toList
 
-  let ofList (s : value list) : t = Base.Set.of_list (module Base.Int) s
+  module Poly = struct
+    type nonrec 'a t = ('a, Base.Comparator.Poly.comparator_witness) t
 
-  let of_list = ofList
+    let empty = Base.Set.Poly.empty
 
-  let union (s1 : t) (s2 : t) : t = Base.Set.union s1 s2
+    let singleton = Base.Set.Poly.singleton
 
-  let empty = Base.Set.empty (module Base.Int)
+    let fromArray = Base.Set.Poly.of_array
 
-  let add ~(value : value) (s : t) : t = Base.Set.add s value
+    let from_array = fromArray
 
-  let remove ~(value : value) (set : t) = Base.Set.remove set value
+    let fromList = Base.Set.Poly.of_list
 
-  let set ~(value : value) (set : t) = add ~value set
+    let from_list = fromList
+  end
 
-  let has = member
+  module Int = struct
+    type nonrec t = (Base.Int.t, Base.Int.comparator_witness) t
 
-  let pp (fmt : Format.formatter) (set : t) =
-    Format.pp_print_string fmt "{ " ;
-    Base.Set.iter set ~f:(fun v ->
-        __pp_value fmt v ;
-        Format.pp_print_string fmt ", " ) ;
-    Format.pp_print_string fmt " }" ;
-    ()
+    let empty = Base.Set.empty (module Base.Int)
+
+    let singleton = Base.Set.singleton (module Base.Int)
+
+    let fromArray = Base.Set.of_array (module Base.Int)
+
+    let from_array = fromArray
+
+    let fromList = Base.Set.of_list (module Base.Int)
+
+    let from_list = fromList
+  end
+
+  module String = struct
+    type nonrec t = (String.t, Base.String.comparator_witness) t
+
+    let empty = Base.Set.empty (module Base.String)
+
+    let singleton = Base.Set.singleton (module Base.String)
+
+    let fromArray = Base.Set.of_array (module Base.String)
+
+    let from_array = fromArray
+
+    let fromList = Base.Set.of_list (module Base.String)
+
+    let from_list = fromList
+  end
 end
 
-module StrSet = struct
-  module Set = Base.Set.M (Base.String)
+module Map = struct
+  type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Base.Map.t
 
-  let __pp_value = Format.pp_print_string
+  let isEmpty = Base.Map.is_empty
 
-  type t = Set.t
+  let includes = Base.Map.mem
 
-  type value = string
+  let length = Base.Map.length
 
-  let fromList (l : value list) : t = Base.Set.of_list (module Base.String) l
+  let add m ~key ~value = Base.Map.set m ~key ~data:value
 
-  let from_list = fromList
+  let remove = Base.Map.remove
 
-  let member ~(value : value) (set : t) : bool = Base.Set.mem set value
+  let get = Base.Map.find
 
-  let diff (set1 : t) (set2 : t) : t = Base.Set.diff set1 set2
+  let update m ~key ~f =
+    Base.Map.change m key ~f
 
-  let isEmpty (s : t) : bool = Base.Set.is_empty s
+  let merge m1 m2 ~f =
+    Base.Map.merge m1 m2 ~f:(fun ~key desc ->
+      match desc with
+      | `Left v1 -> f key (Some v1) None
+      | `Right v2 -> f key None (Some v2)
+      | `Both (v1, v2) -> f key (Some v1) (Some v2) )
 
-  let is_empty = isEmpty
+  let map = Base.Map.map
 
-  let toList (s : t) : value list = Base.Set.to_list s
+  let filter = Base.Map.filter
 
-  let to_list = toList
+  let partition m ~f = Base.Map.partition_mapi m ~f:(fun ~key ~data ->
+    if (f ~key ~value:data) then `Fst data else `Snd data
+  )
 
-  let ofList (s : value list) : t = Base.Set.of_list (module Base.String) s
+  let find m ~f = Base.Map.fold m ~init:None ~f:(fun ~key ~data matching ->
+    match matching with
+    | Some _ -> matching
+    | None -> if (f ~key ~value:data) then Some (key, data) else None
+  )
 
-  let of_list = ofList
+  let any = Base.Map.exists
 
-  let add ~(value : value) (s : t) : t = Base.Set.add s value
+  let all = Base.Map.for_all
 
-  let union (s1 : t) (s2 : t) : t = Base.Set.union s1 s2
+  let forEach = Base.Map.iter
 
-  let empty = Base.Set.empty (module Base.String)
+  let for_each = forEach
 
-  let remove ~(value : value) (set : t) = Base.Set.remove set value
+  let fold m ~initial ~f = Base.Map.fold m ~init:initial ~f:(fun ~key ~data acc ->
+    f acc ~key ~value:data
+  )
 
-  let set ~(value : value) (set : t) = add ~value set
+  let keys = Base.Map.keys
 
-  let has = member
+  let values = Base.Map.data
 
-  let pp (fmt : Format.formatter) (set : t) =
-    Format.pp_print_string fmt "{ " ;
-    Base.Set.iter set ~f:(fun v ->
-        __pp_value fmt v ;
-        Format.pp_print_string fmt ", " ) ;
-    Format.pp_print_string fmt " }" ;
-    ()
-end
+  let toArray m = Base.Map.to_alist m |> Base.List.to_array
 
-module StrDict = struct
-  module Map = Base.Map.M (Base.String)
+  let to_array = toArray
 
-  type key = string
-
-  type 'value t = 'value Map.t
-
-  let toList t : ('key * 'value) list = Base.Map.to_alist t
-
-  let to_list = toList
-
-  let empty : 'value t = Base.Map.empty (module Base.String)
-
-  let fromList (l : ('key * 'value) list) : 'value t =
-    Base.Map.of_alist_reduce (module Base.String) ~f:(fun _ r -> r) l
-
-  let from_list = fromList
-
-  let get ~(key : key) (dict : 'value t) : 'value option =
-    Base.Map.find dict key
-
-  let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
-    Base.Map.set dict ~key ~data:value
-
-  let keys dict : key list = Base.Map.keys dict
-
-  let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
-      'value t =
-    Base.Map.change dict key ~f
-
-  let map dict ~(f : 'a -> 'b) = Base.Map.map dict ~f
-
-  let pp
-      (valueFormatter : Format.formatter -> 'value -> unit)
-      (fmt : Format.formatter)
-      (map : 'value t) =
-    Format.pp_print_string fmt "{ " ;
-    Base.Map.iteri map ~f:(fun ~key ~data ->
-        Format.pp_print_string fmt key ;
-        Format.pp_print_string fmt ": " ;
-        valueFormatter fmt data ;
-        Format.pp_print_string fmt ",  " ) ;
-    Format.pp_print_string fmt "}" ;
-    ()
-
-  let merge
-      ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
-      (dict1 : 'v1 t)
-      (dict2 : 'v2 t) : 'v3 t =
-    Base.Map.merge dict1 dict2 ~f:(fun ~key desc ->
-        match desc with
-        | `Left v1 ->
-            f key (Some v1) None
-        | `Right v2 ->
-            f key None (Some v2)
-        | `Both (v1, v2) ->
-            f key (Some v1) (Some v2) )
-end
-
-module IntDict = struct
-  module Map = Base.Map.M (Base.Int)
-
-  type key = int
-
-  type 'value t = 'value Map.t
-
-  let toList t : ('key * 'value) list = Base.Map.to_alist t
+  let toList m = Base.Map.to_alist m
 
   let to_list = toList
 
-  let empty : 'value t = Base.Map.empty (module Base.Int)
+  module Poly = struct
+    type nonrec ('k, 'v) t = ('k, 'v, Base.Comparator.Poly.comparator_witness) t
 
-  let fromList (l : ('key * 'value) list) : 'value t =
-    Base.Map.of_alist_reduce (module Base.Int) ~f:(fun _ r -> r) l
+    let empty = Base.Map.Poly.empty
 
-  let from_list = fromList
+    let singleton ~key ~value = Base.Map.Poly.singleton key value
 
-  let get ~(key : key) (dict : 'value t) : 'value option =
-    Base.Map.find dict key
+    let fromList l = Base.Map.Poly.of_alist_reduce l ~f:(fun _ curr -> curr)
 
-  let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
-    Base.Map.set dict ~key ~data:value
+    let from_list = fromList
 
-  let keys dict : key list = Base.Map.keys dict
+    let fromArray a = Array.toList a |> fromList
 
-  let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
-      'value t =
-    Base.Map.change dict key ~f
+    let from_array = fromArray
+  end
 
-  let map dict ~(f : 'a -> 'b) = Base.Map.map dict ~f
+  module Int = struct
+    type nonrec 'v t = (Int.t, 'v, Base.Int.comparator_witness) t
 
-  let pp
-      (valueFormatter : Format.formatter -> 'value -> unit)
-      (fmt : Format.formatter)
-      (map : 'value t) =
-    Format.pp_print_string fmt "{ " ;
-    Base.Map.iteri map ~f:(fun ~key ~data ->
-        Format.pp_print_int fmt key ;
-        Format.pp_print_string fmt ": " ;
-        valueFormatter fmt data ;
-        Format.pp_print_string fmt ",  " ) ;
-    Format.pp_print_string fmt "}" ;
-    ()
+    let empty = Base.Map.empty (module Base.Int)
 
-  let merge
-      ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
-      (dict1 : 'v1 t)
-      (dict2 : 'v2 t) : 'v3 t =
-    Base.Map.merge dict1 dict2 ~f:(fun ~key desc ->
-        match desc with
-        | `Left v1 ->
-            f key (Some v1) None
-        | `Right v2 ->
-            f key None (Some v2)
-        | `Both (v1, v2) ->
-            f key (Some v1) (Some v2) )
+    let singleton ~key ~value = Base.Map.singleton (module Base.Int) key value
+
+    let fromList l = Base.Map.of_alist_reduce (module Base.Int) l ~f:(fun _ curr -> curr)
+
+    let from_list = fromList
+
+    let fromArray a = Array.toList a |> fromList
+
+    let from_array = fromArray
+  end
+
+  module String = struct
+    type nonrec 'v t = (String.t, 'v, Base.String.comparator_witness) t
+
+    let empty = Base.Map.empty (module Base.String)
+
+    let singleton ~key ~value = Base.Map.singleton (module Base.String) key value
+
+    let fromList l = Base.Map.of_alist_reduce (module Base.String) l ~f:(fun _ curr -> curr)
+
+    let from_list = fromList
+
+    let fromArray a = Array.toList a |> fromList
+
+    let from_array = fromArray
+  end
 end

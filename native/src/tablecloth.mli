@@ -206,7 +206,7 @@ Array.map2
     {[Array.find ~f:Int.isEven [||] = None]} *)
 
   val any : f:('a -> bool) -> 'a array -> bool
-  (**  Determine if [f] returns true for [any] values in an array.
+  (**  Determine if [f] returns [true] for [any] values in an array.
 
     {[Array.any ~f:isEven [|2;3|] = true]}
 
@@ -215,7 +215,7 @@ Array.map2
     {[Array.any ~f:isEven [||] = false]} *)
 
   val all : f:('a -> bool) -> 'a array -> bool
-  (** Determine if [f] returns true for [all] values in an array.
+  (** Determine if [f] returns [true] for [all] values in an array.
 
     {[Array.all ~f:Int.isEven [|2;4|] = true]}
 
@@ -228,7 +228,7 @@ Array.map2
 
     {[let fortyTwos = Array.repeat ~length:2 42 in 
 let eightyOnes = Array.repeat ~length:3 81 in
-Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
+Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|]]} *)
 
   val concatenate : 'a array array -> 'a array
   (** Concatenate an array of arrays into a single array:
@@ -263,7 +263,7 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
     {[Array.slice ~from:(-2)  ~to_:(-1) [|0; 1; 2; 3; 4|] = [|3|]]} *)
 
   val foldLeft : f:('a -> 'b -> 'b)  -> initial:'b -> 'a array -> 'b
-  (** Reduces collection to a value which is the accumulated result of running each element in the array through [f], 
+  (** Transforms an array to a value which is result of running each element in the array through [f],
       where each successive invocation is supplied the return value of the previous. 
     
     Read [foldLeft] as 'fold from the left'. 
@@ -538,7 +538,7 @@ module Option : sig
   (** [get_exn optional_value]
     Returns [value] if [optional_value] is [Some value], otherwise raises [Invalid_argument]
 
-    @example {[
+    {[
       get_exn (Some 3) = 3;;
       get_exn None (* Raises Invalid_argument error *)
     ]}
@@ -1939,6 +1939,8 @@ module Tuple3 : sig
 end
 
 module String : sig
+  type t = string
+
   val length : string -> int
 
   val toInt : string -> (string, int) Result.t
@@ -2024,167 +2026,415 @@ module String : sig
   val insert_at : insert:string -> index:int -> string -> string
 end
 
-module IntSet : sig
-  type t = Base.Set.M(Base.Int).t
+module Set : sig
+  (**
+    A [Set] represents a unique collection of values.
 
-  type value = int
+    [Set] is an immutable data structure which means operations like {!Set.add} and {!Set.remove} do not modify the data structure, but return a new set with the desired changes.
 
-  val fromList : value list -> t
+    Since the usage is so common the {!Set.Int} and {!Set.String} modules are available, offering a convenient way to construct new sets.
 
-  val from_list : value list -> t
+    For other data types you can use {!Set.Poly} which uses OCaml's polymorphic [compare] function.
 
-  val member : value:value -> t -> bool
+    The specialized modules {!Set.Int}, {!Set.String} are in general more efficient.
+  *)
 
-  val diff : t -> t -> t
+  type ('a, 'cmp) t
 
-  val isEmpty : t -> bool
+  (** {1 Construction} *)
 
-  val is_empty : t -> bool
+  (** A [Set] can be constructed using one of the functions available in the {!Set.Int}, {!Set.String} or {!Set.Poly} sub-modules. *)
 
-  val toList : t -> value list
+  (** {1 Basic operations} *)
 
-  val to_list : t -> value list
+  val add : ('a, 'cmp) t -> 'a -> ('a, 'cmp) t
+  (** Insert a value into a set.
 
-  val ofList : value list -> t
+    {[Set.add (Set.Int.fromList [1; 2]) 3 |> Set.toList = [1; 2; 3]]}
 
-  val of_list : value list -> t
+    {[Set.add (Set.Int.fromList [1; 2]) 2 |> Set.toList = [1; 2]]}
+  *)
 
-  val union : t -> t -> t
+  val remove : ('a, 'cmp) t -> 'a -> ('a, 'cmp) t
+  (** Remove a value from a set, if the set doesn't contain the value anyway, returns the original set
 
-  val remove : value:value -> t -> t
+    {[Set.remove (Set.Int.fromList [1; 2]) 2 |> Set.toList = [1]]}
 
-  val add : value:value -> t -> t
+    {[
+      let originalSet = Set.Int.fromList [1; 2] in
+      let newSet = Set.remove orignalSet 3 in
+      originalSet == newSet
+    ]}
+  *)
 
-  val set : value:value -> t -> t
+  val includes : ('a, _) t -> 'a -> bool
+  (** Determine if a value is in a set
 
-  val has : value:value -> t -> bool
+    {[Set.includes (Set.String.fromList ["Ant"; "Bat"; "Cat"]) "Bat" = true]}
+  *)
 
-  val empty : t
+  val length : (_, _) t -> int
+  (** Determine the number of elements in a set.
 
-  val pp : Format.formatter -> t -> unit
+    {[Set.length (Set.Int.fromList [1; 2; 3])) = 3]}
+  *)
+
+  val find : ('v, _) t -> f:('v -> bool) -> 'v option
+  (** Returns, as an {!Option}, the first element for which [f] evaluates to [true]. If [f] doesn't return [true] for any of the elements [find] will return [None].
+
+    {[Set.find ~f:Int.isEven (Set.Int.fromList [1; 3; 4; 8]) = Some 4]}
+
+    {[Set.find ~f:Int.isOdd (Set.Int.fromList [0; 2; 4; 8]) = None]}
+
+    {[Set.find ~f:Int.isEven Set.Int.empty = None]} *)
+
+  (** {1 Query} *)
+
+  val isEmpty : (_, _) t -> bool
+  (** Check if a set is empty.
+
+    {[Set.isEmpty (Set.Int.empty) = true]}
+
+    {[Set.isEmpty (Set.Int.singleton 4) = false]}
+  *)
+
+  val any : ('v, _) t -> f:('v -> bool) -> bool
+  (** Determine if [f] returns true for [any] values in a set.
+
+    {[Set.any (Set.Int.fromArray [|2;3|]) ~f:Int.isEven = true]}
+
+    {[Set.any (Set.Int.fromList [1;3]) ~f:Int.isEven = false]}
+
+    {[Set.any (Set.Int.fromList []) ~f:Int.isEven = false]} *)
+
+  val all : ('v, _) t -> f:('v -> bool) -> bool
+  (** Determine if [f] returns true for [all] values in a set.
+
+    {[Set.all ~f:Int.isEven (Set.Int.fromArray [|2;4|]) = true]}
+
+    {[Set.all ~f:Int.isEven (Set.Int.fromLis [2;3]) = false]}
+
+    {[Set.all ~f:Int.isEven Set.Int.empty = true]} *)
+
+  (** {1 Combine} *)
+
+  val difference : ('a, 'cmp) t -> ('a, 'cmp) t -> ('a, 'cmp) t
+  (** Returns a new set with the values from the first set which are not in the second set.
+
+    {[Set.difference (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList = [1;5]]}
+
+    {[Set.difference (Set.Int.fromList [2;3;4]) (Set.Int.fromList [1;2;5]) |> Set.toList = [3;4]]}
+  *)
+
+  val intersection : ('a, 'cmp) t -> ('a, 'cmp) t -> ('a, 'cmp) t
+  (** Get the intersection of two sets. Keeps values that appear in both sets.
+
+    {[Set.intersection (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList= [2]]}
+  *)
+
+  val union : ('a, 'cmp) t -> ('a, 'cmp) t -> ('a, 'cmp) t
+  (** Get the union of two sets. Keep all values.
+
+    {[Set.union (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList = [1;2;3;4;5]]}
+  *)
+
+  (** {1 Transform} *)
+
+  val filter : ('a, 'cmp) t -> f:('a -> bool) -> ('a, 'cmp) t
+  (** Keep elements that [f] returns [true] for.
+
+    {[Set.filter (Set.Int.fromList [1;2;3]) ~f:Int.isEven |> Set.toList = [2]]}
+  *)
+
+  val partition : ('a, 'cmp) t -> f:('a -> bool) -> ('a, 'cmp) t * ('a, 'cmp) t
+  (** Divide a set into two according to [f]. The first set will contain the values that [f] returns [true] for, values that [f] returns [false] for will end up in the second. *)
+
+  val fold : ('a, _) t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
+  (** Transform a set into a value which is result of running each element in the set through [f], where each successive invocation is supplied the return value of the previous.
+
+    {[Set.fold ~f:( * ) ~initial:1 (Set.Int.fromList [1;2;3;4]) = 24]}
+  *)
+
+  val forEach : ('a, _) t -> f:('a -> unit) -> unit
+  (** Runs a function [f] against each element of the set. *)
+
+  val for_each : ('a, _) t -> f:('a -> unit) -> unit
+
+  (** {1 Conversion} *)
+
+  val toArray : ('a, _) t -> 'a array
+  (** Converts a set into an {!Array}. *)
+
+  val to_array : ('a, _) t -> 'a array
+
+  val toList : ('a, _) t -> 'a list
+  (** Converts a set into a {!List}. *)
+
+  val to_list : ('a, _) t -> 'a list
+
+  (** Construct sets which can hold any data type using the polymorphic [compare] function *)
+  module Poly : sig
+
+    type nonrec 'a t = ('a,  Base.Comparator.Poly.comparator_witness) t
+
+    val empty : 'a t
+    (** The empty set *)
+
+    val singleton : 'a -> 'a t
+    (** Create a set from a single value
+      {[Set.Int.singleton (5, "Emu") |> Set.toList = [(5, "Emu")]]}
+    *)
+
+    val fromArray : 'a array -> 'a t
+    (** Create a set from an {!Array}
+      {[Set.Poly.fromArray [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.toList = [(1, "Ant"); (2, "Bat")]]}
+    *)
+
+    val from_array : 'a array -> 'a t
+
+    val fromList : 'a list -> 'a t
+    (** Create a set from a {!List}
+      {[Set.Poly.fromList [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.toList = [(1, "Ant"); (2, "Bat")]]}
+    *)
+
+    val from_list : 'a list -> 'a t
+  end
+
+  (** Construct sets of {!Int}s *)
+  module Int : sig
+
+    type nonrec t = (Int.t, Base.Int.comparator_witness) t
+
+    val empty : t
+    (** A set with nothing in it. *)
+
+    val singleton : int -> t
+    (** Create a set from a single {!Int}
+      {[Set.Int.singleton 5 |> Set.toList = [5]]}
+    *)
+
+    val fromArray : int array -> t
+    (** Create a set from an {!Array}
+      {[Set.Int.fromArray [|1;2;3;3;2;1;7|] |> Set.toArray = [|1;2;3;7|]]}
+    *)
+
+    val from_array : int array -> t
+
+    val fromList : int list -> t
+    (** Create a set from a {!List}
+      {[Set.Int.fromList [1;2;3;3;2;1;7] |> Set.toList = [1;2;3;7]]}
+    *)
+
+    val from_list : int list -> t
+  end
+
+  (** Construct sets of {!String}s *)
+  module String : sig
+    type nonrec t = (String.t, Base.String.comparator_witness) t
+
+    val empty : t
+    (** A set with nothing in it. *)
+
+    val singleton : String.t -> t
+    (** Create a set from a single {!String}
+      {[Set.String.singleton "Bat" |> Set.toList = ["Bat"]]}
+    *)
+
+    val fromArray : String.t array -> t
+    (** Create a set from an {!Array}
+      {[
+      Set.String.fromArray [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toArray = [|"a";"b";"g"|]
+      ]}
+    *)
+
+    val from_array : String.t array -> t
+
+    val fromList : String.t list -> t
+    (** Create a set from a {!List}
+      {[Set.String.fromList [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toList = ["a";"b";"g"]]}
+    *)
+
+    val from_list : String.t list -> t
+  end
 end
 
-module StrSet : sig
-  type t = Base.Set.M(Base.String).t
+module Map : sig
+  (** A [Map] represents a unique mapping from keys to values.
 
-  type value = string
+  [Map] is an immutable data structure which means operations like {!Map.add} and {!Map.remove} do not modify the data structure, but return a new set with the desired changes.
 
-  val fromList : value list -> t
+  Since the usage is so common the {!Map.Int} and {!Map.String} modules are available, offering a convenient way to construct new Maps.
 
-  val from_list : value list -> t
+  For other data types you can use {!Map.Poly} which internally uses OCaml's polymorphic [compare] function on the keys.
 
-  val member : value:value -> t -> bool
+  The specialized modules {!Map.Int}, {!Map.String} are in general more efficient. *)
 
-  val diff : t -> t -> t
+  type ('key, +'value, 'cmp) t
 
-  val isEmpty : t -> bool
+  (** {1 Construction} *)
 
-  val is_empty : t -> bool
+  (** A [Map] can be constructed using one of the functions available in {!Map.Int}, {!Map.String} or {!Map.Poly}. *)
 
-  val toList : t -> value list
+  (** {1 Basic operations} *)
 
-  val to_list : t -> value list
+  val add : ('k, 'v, 'cmp) t -> key:'k -> value:'v -> ('k, 'v, 'cmp) t
+  (** Adds a new entry to a map. If [key] is allready present, its previous value is replaced with [value].
+    {[Map.add (Map.Int.fromList [(1, "Ant"), (2, "Bat")]) ~key:3 ~value:"Cat"  |> Map.toList = [(1, "Ant"), (2, "Bat"), (3, "Cat")]]}
 
-  val ofList : value list -> t
+    {[Map.add (Map.Int.fromList [(1, "Ant"), (2, "Bat")]) ~key:2 ~value:"Bug" |> Map.toList = [(1, "Ant"), (2, "Bug")]]}
+  *)
 
-  val of_list : value list -> t
+  val remove : ('k, 'v, 'cmp) t -> 'k -> ('k, 'v, 'cmp) t
+  (** Removes a key-value pair from a map based on they provided key. *)
 
-  val union : t -> t -> t
+  val get : ('k, 'v, 'cmp) t -> 'k -> 'v option
+  (** Get the value associated with a key. If the key is not present in the map, returns [None]. *)
 
-  val remove : value:value -> t -> t
+  val find : ('k, 'v, _) t -> f:(key:'k -> value:'v -> bool) -> ('k * 'v) option
+  (** Returns, as an {!Option} the first key-value pair for which [f] evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None]. *)
 
-  val add : value:value -> t -> t
+  val update : ('k, 'v, 'cmp) t -> key:'k -> f:('v option -> 'v option) -> ('k, 'v, 'cmp) t
+  (** Update the value for a specific key using [f]. If [key] is not present in the map [f] will be called with [None]. *)
 
-  val set : value:value -> t -> t
+  val length : (_, _, _) t -> int
+  (** Returns the number of key-value pairs present in the map. *)
 
-  val has : value:value -> t -> bool
+  (** {1 Checks} *)
 
-  val empty : t
+  val isEmpty : (_, _, _) t -> bool
+  (** Determine if a map is empty. *)
 
-  val pp : Format.formatter -> t -> unit
-end
+  val includes : ('k, _, _) t -> 'k -> bool
+  (** Determine if a map contains [key].  *)
 
-module StrDict : sig
-  type key = string
+  val any : (_, 'v, _) t -> f:('v -> bool) -> bool
+  (** Determine if [f] returns [true] for [any] values in a map. *)
 
-  type 'value t = 'value Base.Map.M(Base.String).t
+  val all : (_, 'v, _) t -> f:('v -> bool) -> bool
+  (** Determine if [f] returns [true] for [all] values in a map. *)
 
-  val toList : 'a t -> (key * 'a) list
-
-  val to_list : 'a t -> (key * 'a) list
-
-  val empty : 'a t
-
-  (* If there are multiple list items with the same key, the last one wins *)
-  val fromList : (key * 'value) list -> 'value t
-
-  (* If there are multiple list items with the same key, the last one wins *)
-  val from_list : (key * 'value) list -> 'value t
-
-  val get : key:key -> 'value t -> 'value option
-
-  val insert : key:key -> value:'value -> 'value t -> 'value t
-
-  val keys : 'a t -> key list
-
-  val update :
-    key:key -> f:('value option -> 'value option) -> 'value t -> 'value t
-
-  val map : 'a t -> f:('a -> 'b) -> 'b t
-
-  val pp :
-       (Format.formatter -> 'value -> unit)
-    -> Format.formatter
-    -> 'value t
-    -> unit
+  (** {1 Combine} *)
 
   val merge :
-       f:(key -> 'v1 option -> 'v2 option -> 'v3 option)
-    -> 'v1 t
-    -> 'v2 t
-    -> 'v3 t
-end
+    ('k, 'v1, 'cmp) t ->
+    ('k, 'v2, 'cmp) t ->
+    f:('k -> 'v1 option -> 'v2 option -> 'v3 option) ->
+    ('k, 'v3, 'cmp) t
+  (**
+    Combine two maps. You provide a function [f] which is provided the key and the optional value from each map and needs to account for the three possibilities:
 
-module IntDict : sig
-  type key = int
+    1. Only the 'left' map contains a value for the key.
+    2. Both maps contain a value for the key.
+    3. Only the 'right' map contains a value for the key.
 
-  type 'value t = 'value Base.Map.M(Base.Int).t
+    You then traverse all the keys, building up whatever you want.
+  *)
 
-  val toList : 'a t -> (key * 'a) list
+  (** {1 Transformations} *)
 
-  val to_list : 'a t -> (key * 'a) list
+  val map : ('k, 'v, 'cmp) t -> f:('v -> 'b) -> ('k, 'b, 'cmp) t
+  (** Apply a function to all values in a map. *)
 
-  val empty : 'a t
+  val filter : ('k, 'v, 'cmp) t -> f:('v -> bool) -> ('k, 'v, 'cmp) t
+  (** Keep elements that [f] returns [true] for. *)
 
-  (* If there are multiple list items with the same key, the last one wins *)
-  val fromList : (key * 'value) list -> 'value t
+  val partition : ('k, 'v, 'cmp) t -> f:(key:'k -> value:'v -> bool) -> ('k, 'v, 'cmp) t * ('k, 'v, 'cmp) t
+  (** Divide a map into two, the first map will contain the key-value pairs that [f] returns [true] for, pairs that [f] returns [false] for will end up in the second. *)
 
-  (* If there are multiple list items with the same key, the last one wins *)
-  val from_list : (key * 'value) list -> 'value t
+  val fold : ('k, 'v, _) t -> initial:'a -> f:('a -> key:'k -> value:'v -> 'a) -> 'a
+  (** Fold over the key-value pairs in a map. *)
 
-  val get : key:key -> 'value t -> 'value option
+  val forEach : (_, 'v, _) t -> f:('v -> unit) -> unit
+  (** Runs a function [f] against each value in the map. *)
 
-  val insert : key:key -> value:'value -> 'value t -> 'value t
+  val for_each : (_, 'v, _) t -> f:('v -> unit) -> unit
 
-  val update :
-    key:key -> f:('value option -> 'value option) -> 'value t -> 'value t
+  (** {1 Conversion} *)
 
-  val keys : 'a t -> key list
+  val keys : ('k, _, _) t -> 'k list
+  (** Get a {!List} of all of the keys in a map. *)
 
-  val map : 'a t -> f:('a -> 'b) -> 'b t
+  val values : (_, 'v, _) t -> 'v list
+  (** Get a {!List} of all of the values in a map. *)
 
-  val pp :
-       (Format.formatter -> 'value -> unit)
-    -> Format.formatter
-    -> 'value t
-    -> unit
+  val toArray : ('key, 'value, _) t -> ('key * 'value) array
+  (** Get an {!Array} of all of the key-value pairs in a map. *)
 
-  val merge :
-       f:(key -> 'v1 option -> 'v2 option -> 'v3 option)
-    -> 'v1 t
-    -> 'v2 t
-    -> 'v3 t
-end
+  val to_array : ('key, 'value, _) t -> ('key * 'value) array
+
+  val toList : ('key, 'value, _) t -> ('key * 'value) list
+  (** Get a {!List} of all of the key-value pairs in a map. *)
+
+  val to_list : ('key, 'value, _) t -> ('key * 'value) list
+
+  (** Construct a Map which can be keyed by any data type using the polymorphic [compare] function. *)
+  module Poly : sig
+    type nonrec ('key, 'value) t = ('key, 'value, Base.Comparator.Poly.comparator_witness) t
+
+    val empty : ('k, 'v) t
+    (** A map with nothing in it. *)
+
+    val singleton : key:'k -> value:'v -> ('k, 'v) t
+    (** Create a map from a key and value
+      {[Map.Poly.singleton ~key:false ~value:1 |> Map.toList = [(false, 1)]]}
+    *)
+
+    val fromArray : ('key * 'value) array -> ('key, 'value) t
+    (** Create a map from an {!Array} of key-value tuples *)
+
+    val from_array : ('key * 'value) array -> ('key, 'value) t
+
+    val fromList : ('key * 'value) list -> ('key, 'value) t
+    (** Create a map from a {!List} of key-value tuples *)
+
+    val from_list : ('key * 'value) list -> ('key, 'value) t
+  end
+
+  (** Construct a Map with {!Int}s for keys. *)
+  module Int : sig
+    type nonrec 'value t = (Int.t, 'value, Base.Int.comparator_witness) t
+
+    val empty : 'value t
+    (** A map with nothing in it. *)
+
+    val singleton : key:int -> value:'v -> 'v t
+    (** Create a map from a key and value
+      {[Map.Int.singleton ~key:1 ~value:"Ant" |> Map.toList = [(1, "Ant")]]}
+    *)
+
+    val fromArray : (int * 'value) array -> 'value t
+    (** Create a map from an {!Array} of key-value tuples *)
+
+    val from_array : (int * 'value) array -> 'value t
+
+    val fromList : (int * 'value) list -> 'value t
+    (** Create a map from a {!List} of key-value tuples *)
+
+    val from_list : (int * 'value) list -> 'value t
+  end
+
+  (** Construct a Map with {!String}s for keys. *)
+  module String : sig
+    type nonrec 'value t = (String.t, 'value, Base.String.comparator_witness) t
+
+    val empty : 'value t
+    (** A map with nothing in it. *)
+
+    val singleton : key:string -> value:'v -> 'v t
+    (** Create a map from a key and value
+      {[Map.String.singleton ~key:"Ant" ~value:1 |> Map.toList = [("Ant", 1)]]}
+    *)
+
+    val fromArray : (string * 'value) array -> 'value t
+    (** Create a map from an {!Array} of key-value tuples *)
+
+    val from_array : (string * 'value) array -> 'value t
+
+    val fromList : (string * 'value) list -> 'value t
+    (** Create a map from a {!List} of key-value tuples *)
+
+    val from_list : (string * 'value) list -> 'value t
+  end
 
 (* module Regex : sig *)
 (*   type t *)
@@ -2199,3 +2449,4 @@ end
 (*  *)
 (*   val matches : re:t -> string -> result option *)
 (* end *)
+end
