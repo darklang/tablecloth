@@ -277,8 +277,23 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
   
     {[Array.slice ~from:(-2)  ~to_:(-1) [|0; 1; 2; 3; 4|] = [|3|]]} *)
 
+  val sliding : ?step : int -> 'a t -> size : int ->  'a t t
+  (** Provides a sliding window over an array.
+      Can also be provided with [step] which determines how many elements to skip each time the window advances.
+
+      {[Array.sliding [|1;2;3;4;5|] ~size:1 = [|[|1|]; [|2|]; [|3|]; [|4|]; [|5|]|] ]}
+
+      {[Array.sliding [|1;2;3;4;5|] ~size:2 = [|[|1;2|]; [|2;3|]; [|3;4|]; [|4;5|]|] ]}
+
+      {[Array.sliding [|1;2;3;4;5|] ~size:3 = [|[|1;2;3|]; [|2;3;4|]; [|3;4;5|]|] ]}
+
+      {[Array.sliding [|1;2;3;4;5|] ~size:2 ~step:2 = [|[|1;2|]; [|3;4|]|] ]}
+
+      {[Array.sliding [|1;2;3;4;5|] ~size:1 ~step:3 = [|[|1|]; [|4|]|] ]}
+  *)
+
   val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
-  (** Reduces collection to a value which is the accumulated result of running each element in the array through [f], 
+  (** Reduces collection to a value which is the accumulated result of running each element in the array through [f],
       where each successive invocation is supplied the return value of the previous. 
     
     Read [foldLeft] as 'fold from the left'. 
@@ -332,6 +347,9 @@ module List : sig
   val float_sum : float list -> float
 
   val map : f:('a -> 'b) -> 'a list -> 'b list
+
+  val sliding : ?step : int -> 'a t -> size:int -> 'a t t
+  (** TODO *)
 
   val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 

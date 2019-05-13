@@ -144,6 +144,15 @@ module Array = struct
       Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
 
 
+  let sliding ?(step = 1) (a : 'a t) ~(size : int) : 'a t t =  
+    let n = Array.length a in
+    if size > n then empty else
+    initialize ~length:(1 + ((n - size) / step)) ~f:(fun i -> 
+        initialize ~length:size ~f:(fun j -> 
+          a.((i * step) + j)
+        )
+    )    
+
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
     Base.Array.fold ~f:(flip f) ~init:initial a
 
