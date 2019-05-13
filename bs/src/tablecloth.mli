@@ -3208,7 +3208,7 @@ module String : sig
     split(~on="/", "") == [""];
     split(~on="", "abc") == ["a", "b", "c"];
     ```
-    
+  *)
   val split : on:string -> string -> string list
 
   (**
@@ -3452,6 +3452,7 @@ module String : sig
   *)
   val fromInt : int -> string
 
+  (**
     `from_int n` converts the given integer to a
     base 10 string representation. Gets rid of leading
     zeros and does base conversion. (Same as `from_int`.)
