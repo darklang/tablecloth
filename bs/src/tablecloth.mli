@@ -35,13 +35,13 @@ val ( <| ) : ('a -> 'b) -> 'a -> 'b
 
   ```ocaml
 
-  let f = sqrt >> floor
-  f 17.0  = 4
+  let f = (sqrt >> floor);;
+  (f 17.0) = 4.0
   ```
 
   ```reason
-  let f = sqrt >> floor
-  f(17.0) == 4.0
+  let f = sqrt >> floor;
+  f (17.0) == 4.0;
   ```
 *)
 val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
@@ -55,13 +55,13 @@ val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 
   ```ocaml
 
-  let f = floor << sqrt
-  f 3.5 = 1.7320508075688772
+  let f = floor << sqrt;;
+  (f 3.5) = 1.7320508075688772
   ```
 
   ```reason
-  let f = sqrt << floor
-  f(3.5) == 1.7320508075688772
+  let f = sqrt << floor;
+  f(3.5) == 1.7320508075688772;
   ```
 
 *)
@@ -325,8 +325,8 @@ module List : sig
 
     ```ocaml
     let even (x: int) = (x mod 2 = 0 : bool)
-    get_by ~f:even [1; 4; 3; 2]) = Some 4
-    get_by ~f:even [15; 13; 11]) = None
+    get_by ~f:even [1; 4; 3; 2] = Some 4
+    get_by ~f:even [15; 13; 11] = None
     ```
 
   *)
@@ -899,9 +899,9 @@ module List : sig
     ### Example
 
     ```reason
-    removeAt(~index=2, ["a", "b", "c", "d"] == ["a", "b", "d"]);
-    removeAt(~index=-2, ["a", "b", "c", "d"] == ["a", "b", "c", "d"]);
-    removeAt(~index=7, ["a", "b", "c", "d"] == ["a", "b", "c", "d"]);
+    removeAt(~index=2, ["a", "b", "c", "d"]) == ["a", "b", "d"];
+    removeAt(~index=-2, ["a", "b", "c", "d"]) == ["a", "b", "c", "d"];
+    removeAt(~index=7, ["a", "b", "c", "d"]) == ["a", "b", "c", "d"];
     ```
   *)
   val removeAt : index:int -> 'a list -> 'a list
@@ -988,7 +988,7 @@ module List : sig
     let mod12 = (x) => (x mod 12);
     let hours = [7, 9, 15, 10, 3, 22];
     maximumBy(~f=mod12, hours) == Some(10);
-    maximumBy(~f=mod12 []) == None;
+    maximumBy(~f=mod12, []) == None;
     ```
    *)
   val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
@@ -1252,7 +1252,7 @@ module List : sig
     ```ocaml
     let cube_plus_one x = ((float_of_int x) +. 1.0) ** 3.0
     initialize 3 cube_plus_one = [1.0; 8.0; 27.0]
-    initialize 0 cube_plus_ones = []
+    initialize 0 cube_plus_one = []
     initialize (-2) cube_plus_one = []
     ```
 
@@ -1368,12 +1368,12 @@ module Result : sig
 
     ```ocaml
     succeed 3 = Ok 3
-    List.map [1; 2; 3] ~f:succeed = [Ok 1; Ok 2; Ok 3]
+    Tablecloth.List.map [1; 2; 3] ~f:succeed = [Ok 1; Ok 2; Ok 3]
     ```
 
     ```reason
     succeed(3) == Ok(3);
-    Array.initialize(~length=3, ~f=succeed) == [|Ok(0); Ok(1); Ok(2)|];
+    Tablecloth.List.map([1, 2, 3], ~f=succeed) == [Ok(1), Ok(2), Ok(3)];
     ```
   *)
   val succeed : 'ok -> ('err, 'ok) t
@@ -1392,12 +1392,12 @@ module Result : sig
 
     ```ocaml
     fail 3 = Error 3
-    List.map [1; 2; 3] ~f:fail = [Error 1; Error 2; Error 3]
+    Tablecloth.List.map [1; 2; 3] ~f:fail = [Error 1; Error 2; Error 3]
     ```
 
     ```reason
     fail(3) == Error(3);
-    Array.initialize(~length=3, ~f=succeed) == [|Ok(0); Ok(1); Ok(2)|];
+    Tablecloth.List.map([1, 2, 3], ~f=fail) == [Error(1), Error(2), Error(3)];
     ```
   *)
   val fail : 'err -> ('err, 'ok) t
@@ -1598,7 +1598,7 @@ module Result : sig
 
     ```ocaml
     let recip (x:float) : (string, float) Tablecloth.Result.t = (
-      if (x == 0.0)
+      if (x = 0.0) then
         Error "Divide by zero"
       else
         Ok (1.0 /. x)
@@ -1680,11 +1680,11 @@ module Option : sig
     ### Example
 
     ```ocaml
-    List.map [1; 2; 3] ~f:some = [Some 1; Some 2; Some 3]
+    Tablecloth.List.map [1; 2; 3] ~f:some = [Some 1; Some 2; Some 3]
     ```
 
     ```reason
-    Array.initialize(~length=3, ~f=some) == [|Some(0); Some(1); Some(2)|];
+    Tablecloth.List.map([1, 2, 3], ~f=some) == [Some(1), Some(2), Some(3)];
     ```
   *)
   val some : 'a -> 'a option
@@ -3629,7 +3629,7 @@ module Tuple3 : sig
     ```
     
     ```reason
-    second(("str", 16.0)) == 16.0;
+    second(("str", 16.0, 99)) == 16.0;
     ```
   *)
   val second : ('a * 'b * 'c) -> 'b
@@ -3644,7 +3644,7 @@ module Tuple3 : sig
     ```
     
     ```reason
-    third(("str", 16.0)) == 99;
+    third(("str", 16.0, 99)) == 99;
     ```
   *)
   val third : ('a * 'b * 'c) -> 'c
@@ -3937,88 +3937,537 @@ module Tuple3 : sig
 end
 
 module String : sig
+  (**
+    `length s` (`length(s)` in ReasonML) returns the length of the given string.
+  *)
   val length : string -> int
 
+  (**
+    `toInt(s)` converts the given string to a `Ok(n)` if the string represents
+    a valid integer, `Error("Failure(_)")` if not. (Same as `to_int`.)
+    
+    ### Example
+    ```reason
+    toInt("123") == Ok(123);
+    toInt("xyz") == Error("Failure(_)");
+    ```
+  *)
   val toInt : string -> (string, int) Result.t
 
+  (**
+    `to_int s` converts the given string to a `Ok n` if the string represents
+    a valid integer, `Error "Failure(_)"` if not. (Same as `toInt`.)
+    
+    ### Example
+    ```ocaml
+    to_int "123" = Belt.Result.Ok 123
+    to_int "xyz" = Belt.Result.Error "Failure(_)"
+    ```
+  *)
   val to_int : string -> (string, int) Result.t
 
+  (**
+    `toFloat(s)` converts the given string to a `Ok(n)` if the string represents
+    a valid float, `Error("Failure(_)")` if not. (Same as `to_float`.)
+    
+    ### Example
+    ```reason
+    toFloat("123.4") == Ok(123.4);
+    toFloat("123") == Ok(123.0);
+    toFloat("xyz") == Error("Failure(_)");
+    ```
+  *)
   val toFloat : string -> (string, float) Result.t
 
+  (**
+    `to_float s` converts the given string to a `Ok n` if the string represents
+    a valid float, `Error "Failure(_)"` if not. (Same as `toFlot`.)
+    
+    ### Example
+    ```ocaml
+    to_float "123.4" = Belt.Result.Ok 123.4
+    to_float "123" = Belt.Result.Ok 123.0
+    to_float "xyz" = Belt.Result.Error "Failure(_)"
+    ```
+  *)
   val to_float : string -> (string, float) Result.t
 
+  (**
+    `uncons s` (`uncons(s)` in ReasonML) returns `Some (head_ch, tail)`
+    (`Some((headCh, tail))`) in ReasonML) where the first element of the
+    tuple is the first character of `s` and the second element is a string
+    with the remaining characters of `s`. If given an empty string, `uncons`
+    returns `None`.
+    
+    ### Example
+    ```ocaml
+    uncons "abcde" = Some ('a', "bcde")
+    uncons "a" = Some ('a', "")
+    uncons "" = None
+    ```
+    
+    ```reason
+    uncons("abcde") == Some(('a', "bcde"));
+    uncons("a") == Some(('a', ""));
+    uncons("") == None;
+    ```
+    two-tuple consisting of
+    the first character of `s` and the remaining characters in `s`.
+  *)
   val uncons : string -> (char * string) option
 
-  (* Drop ~count characters from the beginning of a string. *)
+  (**
+    `dropLeft(~count=n, str) drops `n` characters from the beginning of
+    the string `str`. (Same as `drop_left`.)
+   
+    ### Example
+    ```reason
+    dropLeft(~count=3, "abcdefg") == "defg";
+    dropLeft(~count=0, "abcdefg") == "abcdefg";
+    dropLeft(~count=7, "abcdefg") == "";
+    dropLeft(~count=-2, "abcdefg") == "fg";
+    dropLeft(~count=8, "abcdefg") == "";
+    ```
+  *)
   val dropLeft : count:int -> string -> string
 
-  (* Drop ~count characters from the beginning of a string. *)
+  (**
+    `drop_left ~count:n str drops `n` characters from the beginning of
+    the string `str`. (Same as `dropLeft`.)
+   
+    ### Example
+    ```ocaml
+    drop_left ~count:3 "abcdefg" = "defg"
+    drop_left ~count:0 "abcdefg" = "abcdefg"
+    drop_left ~count:7 "abcdefg" = ""
+    drop_left ~count:(-2) "abcdefg" = "fg"
+    drop_left ~count:8 "abcdefg" = ""
+    ```
+  *)
   val drop_left : count:int -> string -> string
 
-  (* Drop ~count characters from the end of a string. *)
+  (**
+    `dropright(~count=n, str) drops `n` characters from the end of
+    the string `str`. (Same as `drop_right`.)
+   
+    ### Example
+    ```reason
+    dropRight(~count=3, "abcdefg") == "abcd";
+    dropRight(~count=0, "abcdefg") == "abcdefg";
+    dropRight(~count=7, "abcdefg") == "";
+    dropRight(~count=-2, "abcdefg") == "abcdefg";
+    dropRight(~count=8, "abcdefg") == "";
+    ```
+  *)
   val dropRight : count:int -> string -> string
 
-  (* Drop ~count characters from the beginning of a string. *)
+  (**
+    `dropright(~count=n, str) drops `n` characters from the end of
+    the string `str`. (Same as `dropRight`.)
+   
+    ### Example
+    ```ocaml
+    drop_right ~count:3 "abcdefg" = "abcd"
+    drop_right ~count:0 "abcdefg" = "abcdefg"
+    drop_right ~count:7 "abcdefg" = ""
+    drop_right ~count:(-2) "abcdefg" = "abcdefg"
+    drop_right ~count:8 "abcdefg" = ""
+    ```
+  *)
   val drop_right : count:int -> string -> string
 
+  (**
+    `split ~on:delim str` (`split(~on=delim str)` in ReasonML) splits the given string
+    into a list of substrings separated by the given delimiter.
+    
+    ### Example
+    ```ocaml
+    split ~on:"/" "a/b/c" = ["a"; "b"; "c"]
+    split ~on:"--" "a--b--c" = ["a"; "b"; "c"]
+    split ~on:"/" "abc" = ["abc"]
+    split ~on:"/" "" = [""]
+    split ~on:"" "abc" = ["a"; "b"; "c"]
+    ```
+    
+    ```reason
+    split(~on="/", "a/b/c") == ["a", "b", "c"];
+    split(~on="--", "a--b--c") == ["a", "b", "c"];
+    split(~on="/", "abc") == ["abc"];
+    split(~on="/", "") == [""];
+    split(~on="", "abc") == ["a", "b", "c"];
+    ```
+  *)
   val split : on:string -> string -> string list
 
+  (**
+    `join ~sep: delim xs` (`join(~sep=delim, xs)` in ReasonML) returns a
+    string created by putting the separator `delim` between every string in
+    the list `xs`.
+    
+    ### Example
+    ```ocaml
+    join ~sep:"-" ["2019"; "31"; "01"] = "2019-31-01"
+    join ~sep:"-" [ ] = ""
+    join ~sep:"-" ["2019"] = "2019"
+    join ~sep:"" ["OC"; ""; "aml"] = "OCaml"
+    ```
+    
+    ```reason
+    join(~sep="-", ["2019", "31", "01"]) == "2019-31-01";
+    join(~sep="-", []) == "";
+    join(~sep="-", ["2019"]) == "2019";
+    join(~sep="" ,["Re", "", "asonML"]) == "ReasonML";
+    ```
+  *)
   val join : sep:string -> string list -> string
 
+  (**
+    `endsWith(~suffix=sfx, s)` returns `true` if
+    `s` ends with `sfx`, `false` otherwise. 
+    `endsWith(~suffix="", s)` always returns `true`.
+    (Same  as `ends_with`.)
+  *)
   val endsWith : suffix:string -> string -> bool
 
+  (**
+    `ends_with ~suffix: sfx s` returns `true` if
+    `s` ends with `sfx`, `false` otherwise. 
+    `ends_with ~suffix:"" s` always returns `true`.
+    (Same as `endsWith`.)
+  *)
   val ends_with : suffix:string -> string -> bool
 
+  (**
+    `startsWith(~prefix=pfx, s)` returns `true` if
+    `s` begins with `pfx`, `false` otherwise. 
+    `startsWith(~prefix="", s)` always returns `true`.
+    (Same as `starts_with`.)
+  *)
   val startsWith : prefix:string -> string -> bool
 
+  (**
+    `starts_with ~prefix:pfx str` returns `true` if
+    `str` begins with `pfx`, `false` otherwise.
+    `startsWith ~prefix:"" str` always returns `true`.
+    (Same as `startsWith`.)
+  *)
   val starts_with : prefix:string -> string -> bool
 
+  (**
+    `toLower(s)` converts all upper case letters in `s` to
+    lower case. This function works only with ASCII characters,
+    not Unicode. (Same as `to_lower`.)
+    
+    ### Example
+    ```reason
+    toLower("AaBbCc123") == "aabbcc123";
+    ```
+  *)
   val toLower : string -> string
 
+  (**
+    `to_lower s` converts all upper case letters in `s` to
+    lower case. This function works only with ASCII characters,
+    not Unicode. (Same as `toLower`.)
+    
+    ### Example
+    ```ocaml
+    to_lower "AaBbCc123" = "aabbcc123"
+    ```
+  *)
   val to_lower : string -> string
 
+  (**
+    `toUpper(s)` converts all lower case letters in `s` to
+    upper case. This function works only with ASCII characters,
+    not Unicode. (Same as `to_upper`.)
+    
+    ### Example
+    ```reason
+    toUpper("AaBbCc123") == "AABBCC123";
+    ```
+    
+  *)
   val toUpper : string -> string
 
+  (**
+    `to_upper s` converts all lower case letters in `s` to
+    upper case.  This function works only with ASCII characters,
+    not Unicode.(Same as `toUpper`.)
+    
+    ### Example
+    ```ocaml
+    to_upper "AaBbCc123" = "AABBCC123"
+    ```
+  *)
   val to_upper : string -> string
 
+  (**
+    `uncapitalize s` (`uncapitalize(s)` in ReasonML) converts
+    the first letter of `s` to lower case if it is upper case.
+    This function works only with ASCII characters,
+    not Unicode.
+  *)
   val uncapitalize : string -> string
 
+  (**
+    `capitalize s` (`capitalize(s)` in ReasonML) converts
+    the first letter of `s` to upper case if it is lower case.
+    This function works only with ASCII characters,
+    not Unicode.
+  *)
   val capitalize : string -> string
 
+  (**
+    `isCapitalized(s) returns `true` if  the first letter
+    of `s` is upper case, `false` otherwise. This function
+    works only with ASCII characters, not Unicode. (Same
+    as `is_capitalized`.)
+  *)
   val isCapitalized : string -> bool
 
+  (**
+    `is_capitalized s returns `true` if  the first letter
+    of `s` is upper case, `false` otherwise. This function
+    works only with ASCII characters, not Unicode. (Same
+    as `isCapitalized`.)
+  *)
   val is_capitalized : string -> bool
 
+  (**
+    `contains ~substring:sub s` (`contains(~substring=sub, s) in ReasonML)
+    returns `true` if `sub` is contained anywhere in `s`; `false` otherwise.
+    `contains ~substring:"" s` returns `true` for all `s`.
+  *)
   val contains : substring:string -> string -> bool
 
+  (**
+    `repeat ~count:n s` (`repeat(~count=n, s)` in ReasonML) creates a
+    string with `n` repetitions of `s`. If `n` is negative, `repeat`
+    throws a `RangeError` exception.
+    
+    ### Example
+    ```ocaml
+    repeat ~count:3 "ok" = "okokok"
+    repeat ~count:3 "" = ""
+    repeat ~count:0 "ok" = ""
+    ```
+
+    ```reason
+    repeat(~count=3, "ok") == "okokok";
+    repeat(~count=3, "") == "";
+    repeat(~count=0, "ok") == "";
+    ```
+  *)
   val repeat : count:int -> string -> string
 
+  (**
+    `reverse s` (`reverse(s)` in ReasonML) returns a new string
+    with its characters in the reverse order of the characters in
+    `s`. This function works with Unicode characters.
+  *)
   val reverse : string -> string
 
+  (**
+    `fromList(chars)` creates a new string from the given list of
+    characters. Note that these *must* be individual characters
+    in single quotes, not strings of length one. (Same as
+    `from_list`.)
+    
+    ### Example
+    ```reason
+    fromList([]) == "";
+    fromList(['a', 'b', 'c']) == "abc";
+    ```
+  *)
   val fromList : char list -> string
 
+  (**
+    `from_list chars` creates a new string from the given list of
+    characters. Note that these *must* be individual characters
+    in single quotes, not strings of length one. (Same as
+    `fromList`.)
+    
+    ### Example
+    ```ocaml
+    from_list [] = ""
+    from_list ['a'; 'b'; 'c'] = "abc"
+    ```
+  *)
   val from_list : char list -> string
 
+  (**
+    `toList(s)` returns a list with the individual characters
+    in the given string. Works with Unicode characters, but
+    because they don't have a literal representation, there is
+    no example here.
+    (Same as `to_list`.)
+    
+    ### Example
+    ```reason
+    toList("") == [];
+    toList("abc") == ['a', 'b', 'c'];
+    ```
+  *)
   val toList : string -> char list
 
+  (**
+    `to_list s` returns a list with the individual characters
+    in the given string. Works with Unicode characters, but
+    because they don't have a literal representation, there is
+    no example here.
+    (Same as `toList`.)
+    
+    ### Example
+    ```ocaml
+    to_list "" = []
+    to_list "abc" = ['a'; 'b'; 'c']
+    ```
+  *)
   val to_list : string -> char list
 
+  (**
+    `fromInt(n)` converts the given integer to a
+    base 10 string representation. Gets rid of leading
+    zeros and does base conversion. (Same as `from_int`.)
+    
+    ### Example
+    ```reason
+    fromInt(-3) == "-3";
+    fromInt(009) == "9";
+    fromInt(0xa5) == "165";
+    ```
+  *)
   val fromInt : int -> string
 
+  (**
+    `from_int n` converts the given integer to a
+    base 10 string representation. Gets rid of leading
+    zeros and does base conversion. (Same as `from_int`.)
+    
+    ### Example
+    ```ocaml
+    from_int (-3) = "-3"
+    from_int 009 = "9"
+    from_int 0xa5 = "165"
+    ```
+  *)
   val from_int : int -> string
 
+  (**
+    `concat xs` (`concat(xs)` in ReasonML) creates a string by
+    concatenating all the strings in the list `xs`.
+    
+    ### Example
+    ```ocaml
+    concat ["ab"; ""; "c"; "de"] = "abcde"
+    concat [] = ""
+    ```
+    
+    ```reason
+    concat(["ab", "", "c", "de"]) == "abcde";
+    concat([]) == "";
+    ```
+  *)
   val concat : string list -> string
 
+  (**
+    `fromChar(ch)` converts the given character to 
+    an equivalent string of length one. (Same as
+    `from_char`.)
+  *)
   val fromChar : char -> string
 
+  (**
+    `from_char ch` converts the given character to 
+    an equivalent string of length one. (Same as
+    `from_char`.)
+  *)
   val from_char : char -> string
 
+  (**
+    `slice ~from:n ~to_:m s` (`slice(~from=n, ~to_=m, s)` in ReasonML)
+    returns a string with characters `n` up to but not including `m`
+    from string `s`. If `n` or `m` are negative, they are interpreted
+    as `length s - (n + 1)`. If `n` is greater than `m, `slice` returns
+    the empty string.
+    
+    ### Example
+    ```ocaml
+    slice ~from:2 ~to_:5 "abcdefg" = "cde"
+    slice ~from:2 ~to_:8 "abcdefg" = "cdefg"
+    slice ~from:(-6) ~to_:5 "abcdefg" = "bcde"
+    slice ~from:5 ~to_:2 "abcdefg" = ""
+    ```
+    
+    ```reason
+    slice(~from=2, ~to_=5, "abcdefg") == "cde"
+    slice(~from=2, ~to_=8, "abcdefg") == "cdefg"
+    slice(~from=(-6), ~to_=5, "abcdefg") == "bcde"
+    slice(~from=5, ~to_=2, "abcdefg") == ""
+    ```
+  *)
   val slice : from:int -> to_:int -> string -> string
 
+  (**
+    `trim s` (`trim(s)` in ReasonML) returns a new string with
+    leading and trailing whitespace (blank, tab, newline,non-breaking
+    space and others as described in <https://www.ecma-international.org/ecma-262/5.1/#sec-7.2>)
+    removed from `s`.
+
+    ### Example
+    ```ocaml
+    trim "  abc  " = "abc"
+    trim "  abc def  " = "abc def"
+    trim {js|\n\u00a0 \t abc \f\r \t|js} = "abc"
+    ``` 
+
+    ```reason
+    trim("  abc  ") == "abc";
+    trim("  abc def  ") == "abc def";
+    trim({js|\n\u00a0 \t abc \f\r \t|js}) == "abc";
+    ``` 
+  *)
   val trim : string -> string
 
+ (**
+    `insertAt(~insert=ins, ~index=n, s)` returns a new string with the value `ins` inserted
+    at position `n` in `s`. If `n` is less than zero, the position is evaluated as
+    `length(s) - (n + 1)`.  `n` is pinned to the range `0..length(s)`.
+
+    (Same as `insert_at`.)
+
+    ### Example:
+
+    ```reason
+    insertAt(~insert="**", ~index=2, "abcde") == "ab**cde";
+    insertAt(~insert="**", ~index=0, "abcde") == "**abcde";
+    insertAt(~insert="**", ~index=5, "abcde") == "abcde**";
+    insertAt(~insert="**", ~index=-2, "abcde") == "abc**de";
+    insertAt(~insert="**", ~index=-9, "abcde") == "**abcde";
+    insertAt(~insert="**", ~index=9, "abcde") == "abcde**";
+    ```
+  *)
   val insertAt : insert:string -> index:int -> string -> string
 
+(**
+    `insert_at ~insert:ins, ~index:n, s)` returns a new string with the value `ins` inserted
+    at position `n` in `s`. If `n` is less than zero, the position is evaluated as
+    `(length s) - (n + 1)`. `n` is pinned to the range `0..length s`.
+
+    (Same as `insertAt`.)
+
+    ### Example:
+
+    ```ocaml
+    insert_at ~insert:"**" ~index:2 "abcde" = "ab**cde"
+    insert_at ~insert:"**" ~index:0 "abcde" = "**abcde"
+    insert_at ~insert:"**" ~index:5 "abcde" = "abcde**"
+    insert_at ~insert:"**" ~index:(-2) "abcde" = "abc**de"
+    insert_at ~insert:"**" ~index:(-9) "abcde" = "**abcde"
+    insert_at ~insert:"**" ~index:9 "abcde" = "abcde**"
+    ```
+  *)
   val insert_at : insert:string -> index:int -> string -> string
 end
 
