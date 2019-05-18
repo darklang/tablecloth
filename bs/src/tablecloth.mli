@@ -1543,8 +1543,6 @@ module Float : sig
       {[
 let isNotANmber x = Float.(x = nan) in
 isNotANumber nan = false
-
-
 ]}
 
       For detecting [Nan] you should use {!Float.isNaN}
@@ -1572,9 +1570,10 @@ isNotANumber nan = false
   val add : t -> t -> t
   (** Addition for floating point numbers.
 
-    {[Float.add 3.14 3.14 = 6.28]}
-
-    {[Float.(3.14 + 3.14 = 6.28)]}
+    {[
+    Float.add 3.14 3.14 = 6.28
+    Float.(3.14 + 3.14 = 6.28)
+    ]}
 
     Although [int]s and [float]s support many of the same basic operations such as
     addition and subtraction you {b cannot} [add] an [int] and a [float] directly which
@@ -1652,11 +1651,11 @@ isNotANumber nan = false
   val negate : t -> t
   (** Flips the 'sign' of a [float] so that positive floats become negative and negative integers become positive. Zero stays as it is.
 
-    {[Float.negate 8 = (-8)]}
-
-    {[Float.negate (-7) = 7]}
-
-    {[Float.negate 0 = 0]}
+    {[
+    Float.negate 8 = (-8)
+    Float.negate (-7) = 7
+    Float.negate 0 = 0
+    ]}
 
     Alternatively an operator is available:
 
@@ -1669,19 +1668,20 @@ isNotANumber nan = false
   val absolute : t -> t
   (** Get the {{: https://en.wikipedia.org/wiki/Absolute_value } absolute value} of a number.
 
-    {[Float.absolute 8. = 8.]}
-
-    {[Float.absolute (-7) = 7]}
-
-    {[Float.absolute 0 = 0]}
+    {[
+    Float.absolute 8. = 8.
+    Float.absolute (-7) = 7
+    Float.absolute 0 = 0
+    ]}
   *)
 
   val maximum : t -> t -> t
    (** Returns the larger of two [float]s, if both arguments are equal, returns the first argument
 
-    {[Float.maximum 7. 9. = 9.]}
-
-    {[Float.maximum (-4.) (-1.) = (-1.)]}
+    {[
+    Float.maximum 7. 9. = 9.
+    Float.maximum (-4.) (-1.) = (-1.)
+    ]}
 
     If either (or both) of the arguments are [NaN], returns [NaN]
 
@@ -1691,9 +1691,10 @@ isNotANumber nan = false
   val minimum : t -> t -> t
   (** Returns the smaller of two [float]s, if both arguments are equal, returns the first argument
 
-    {[Float.minimum 7.0 9.0 = 7.0]}
-
-    {[Float.minimum (-4.0) (-1.0) = (-4.0)]}
+    {[
+    Float.minimum 7.0 9.0 = 7.0]
+    Float.minimum (-4.0) (-1.0) = (-4.0)
+    ]}
 
     If either (or both) of the arguments are [NaN], returns [NaN]
 
@@ -1703,11 +1704,11 @@ isNotANumber nan = false
   val clamp : t -> lower:t -> upper:t -> t
   (** Clamps [n] within the inclusive [lower] and [upper] bounds.
 
-    {[Float.clamp ~lower:0. ~upper:8. 5. = 5.]}
-
-    {[Float.clamp ~lower:0. ~upper:8. 9. = 8.]}
-
-    {[Float.clamp ~lower:(-10.) ~upper:(-5.) 5. = -5.]}
+    {[
+    Float.clamp ~lower:0. ~upper:8. 5. = 5.
+    Float.clamp ~lower:0. ~upper:8. 9. = 8.
+    Float.clamp ~lower:(-10.) ~upper:(-5.) 5. = -5.
+    ]}
 
     Throws an [Invalid_argument] exception if [lower > upper]
   *)
@@ -1715,98 +1716,97 @@ isNotANumber nan = false
   (** {1 Fancier math} *)
 
   val squareRoot : t -> t
-  (** Take the square root of a number.
-    {[Float.squareRoot 4.0 = 2.0]}
-
-    {[Float.squareRoot 9.0 = 3.0]}
-
-    [squareRoot] returns [NaN] when its argument is negative. See {!Float.nan} for more.
-  *)
+  (** Same as {!Float.square_root}. *)
 
   val square_root : t -> t
+  (** Take the square root of a number.
+    {[
+    Float.square_root 4.0 = 2.0
+    Float.square_root 9.0 = 3.0
+    ]}
+
+    [square_root] returns [NaN] when its argument is negative. See {!Float.nan} for more.
+  *)
 
   val log : t -> base:t -> t
   (** Calculate the logarithm of a number with a given base.
 
-    {[Float.log ~base:10. 100. = 2.]}
-
-    {[Float.log ~base:2. 256. = 8.]}
+    {[
+    Float.log ~base:10. 100. = 2.
+    Float.log ~base:2. 256. = 8.
+    ]}
   *)
 
   (** {1 Checks} *)
 
   val isNaN : t -> bool
+  (** Same as {!Float.is_nan}. *)
+
+  val is_nan : t -> bool
   (** Determine whether a float is an undefined or unrepresentable number.
 
-    {[Float.isNaN (0.0 / 0.0) = true]}
-
-    {[Float.(isNaN (squareRoot (-1.0)) = true]}
-
-    {[Float.isNaN (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)]}
-
-    {[Float.isNaN 1. = false]}
+    {[
+    Float.is_nan (0.0 / 0.0) = true
+    Float.(is_nan (square_root (-1.0)) = true
+    Float.is_nan (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)
+    Float.is_nan 1. = false
+    ]}
 
     {b Note } this function is more useful than it might seem since [NaN] {b does not } equal [Nan]:
 
     {[Float.(nan = nan) = false]}
   *)
 
-  val is_nan : t -> bool
-
   val isFinite : t -> bool
+  (** Same as {!Float.is_finite}. *)
+  
+
+  val is_finite : t -> bool
   (** Determine whether a float is finite number. True for any float except [Infinity], [-Infinity] or [NaN]
 
-    {[Float.isFinite (0. / 0.) = false]}
-
-    {[Float.(isFinite (squareRoot (-1.)) = false]}
-
-    {[Float.isFinite (1. / 0.) = false]}
-
-    {[Float.isFinite 1. = true]}
-
-    {[Float.(isFinite nan) = false]}
+    {[
+    Float.is_finite (0. / 0.) = false
+    Float.(is_finite (square_root (-1.)) = false
+    Float.is_finite (1. / 0.) = false
+    Float.is_finite 1. = true
+    Float.(is_finite nan) = false
+    ]}
 
     Notice that [NaN] is not finite!
 
-    For a [float] [n] to be finite implies that [Float.(not (isInfinite n || isNaN n))] evaluates to [true].
+    For a [float] [n] to be finite implies that [Float.(not (is_infinite n || is_nan n))] evaluates to [true].
   *)
-
-  val is_finite : t -> bool
 
   val isInfinite : t -> bool
-  (** Determine whether a float is positive or negative infinity.
-
-    {[Float.isInfinite (0. / 0.) = false]}
-
-    {[Float.(isInfinite (squareRoot (-1.)) = false]}
-
-    {[Float.isInfinite (1. / 0.) = true]}
-
-    {[Float.isInfinite 1. = false]}
-
-    {[Float.(isInfinite nan) = false]}
-
-    Notice that [NaN] is not infinite!
-
-    For a [float] [n] to be finite implies that [Float.(not (isInfinite n || isNaN n))] evaluates to [true].
-  *)
+  (**  Same as {!Float.is_infinite}. *)
 
   val is_infinite : t -> bool
+  (** Determine whether a float is positive or negative infinity.
+
+    {[
+    Float.is_infinite (0. / 0.) = false
+    Float.(is_infinite (square_root (-1.)) = false
+    Float.is_infinite (1. / 0.) = true
+    Float.is_infinite 1. = false
+    Float.(is_infinite nan) = false
+    ]}
+  *)
 
   val inRange : t -> lower:t -> upper:t -> bool
+  (** Same as {!Float.in_range}. *)
+
+  val in_range : t -> lower:t -> upper:t -> bool
   (** Checks if [n] is between [lower] and up to, but not including, [upper].
     If [lower] is not specified, it's set to to [0.0].
 
-    {[Float.inRange ~lower:2. ~upper:4. 3. = true]}
-
-    {[Float.inRange ~lower:1. ~upper:2. 2. = false]}
-
-    {[Float.inRange ~lower:5.2 ~upper:7.9 9.6 = false]}
+    {[
+    Float.in_range ~lower:2. ~upper:4. 3. = true
+    Float.in_range ~lower:1. ~upper:2. 2. = false
+    Float.in_range ~lower:5.2 ~upper:7.9 9.6 = false
+    ]}
 
     Throws an [Invalid_argument] exception if [lower > upper]
   *)
-
-  val in_range : t -> lower:t -> upper:t -> bool
 
   (** {1 Angles} *)
 
@@ -1835,37 +1835,42 @@ isNotANumber nan = false
 
     One turn is equal to 360°.
 
-    {[Float.(turns (1. / 2.)) = pi]}
-
-    {[Float.(turns 1. = degrees 360.)]}
+    {[
+    Float.(turns (1. / 2.)) = pi
+    Float.(turns 1. = degrees 360.)
+    ]}
   *)
 
   (** {1 Polar coordinates} *)
 
   val fromPolar : (float * float) -> (float * float)
-  (** Convert {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } (r, θ) to {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } (x,y).
-
-    {[Float.(fromPolar (squareRoot 2., degrees 45.)) = (1., 1.)]}
-  *)
+  (** Same as {!Float.from_polar}. *)
 
   val from_polar : (float * float) -> (float * float)
+  (** Convert {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } (r, θ) to {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } (x,y).
 
-  val toPolar : (float * float) -> (float * float)
-  (** Convert {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } (x,y) to {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } (r, θ).
-
-    {[Float.toPolar (3.0, 4.0) = (5.0, 0.9272952180016122)]}
-
-    {[Float.toPolar (5.0, 12.0) = (13.0, 1.1760052070951352)]}
+    {[Float.(from_polar (square_root 2., degrees 45.)) = (1., 1.)]}
   *)
 
+  val toPolar : (float * float) -> (float * float)
+  (** Same as {!Float.to_polar}. *)
+
   val to_polar : (float * float) -> (float * float)
+  (** Convert {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } (x,y) to {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } (r, θ).
+
+    {[
+    Float.to_polar (3.0, 4.0) = (5.0, 0.9272952180016122)
+    Float.to_polar (5.0, 12.0) = (13.0, 1.1760052070951352)
+    ]}
+  *)
 
   val cos : t -> t
   (** Figure out the cosine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
 
-    {[Float.(cos (degrees 60.)) = 0.5000000000000001]}
-
-    {[Float.(cos (radians (pi / 3.))) = 0.5000000000000001]}
+    {[
+    Float.(cos (degrees 60.)) = 0.5000000000000001
+    Float.(cos (radians (pi / 3.))) = 0.5000000000000001
+    ]}
   *)
 
   val acos : t -> t
@@ -1877,9 +1882,10 @@ isNotANumber nan = false
   val sin : t -> t
   (** Figure out the sine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
 
-    {[Float.(sin (degrees 30.)) = 0.49999999999999994]}
-
-    {[Float.(sin (radians (pi / 6.)) = 0.49999999999999994]}
+    {[
+    Float.(sin (degrees 30.)) = 0.49999999999999994
+    Float.(sin (radians (pi / 6.)) = 0.49999999999999994
+    ]}
   *)
 
   val asin : t -> t
@@ -1891,11 +1897,11 @@ isNotANumber nan = false
   val tan : t -> t
   (** Figure out the tangent given an angle in radians.
 
-    {[Float.(tan (degrees 45.)) = 0.9999999999999999]}
-
-    {[Float.(tan (radians (pi / 4.)) = 0.9999999999999999]}
-
-    {[Float.(tan (pi / 4.)) = 0.9999999999999999]}
+    {[
+    Float.(tan (degrees 45.)) = 0.9999999999999999
+    Float.(tan (radians (pi / 4.)) = 0.9999999999999999
+    Float.(tan (pi / 4.)) = 0.9999999999999999
+    ]}
   *)
 
   val atan : t -> t
@@ -1909,13 +1915,12 @@ isNotANumber nan = false
     around the origin from point [(1, 1)] to [(1, -1)] to [(-1,-1)] to [(-1,1)] we do
     not get angles that go in the full circle:
 
-    {[Float.atan (1. /. 1.) = 0.7853981633974483  (* 45° or pi/4 radians *)]}
-
-    {[Float.atan (1. /. -1.) = -0.7853981633974483  (* 315° or 7 * pi / 4 radians *)]}
-
-    {[Float.atan (-1. /. -1.) = 0.7853981633974483 (* 45° or pi/4 radians *)]}
-
-    {[Float.atan (-1. /.  1.) = -0.7853981633974483 (* 315° or 7 * pi/4 radians *)]}
+    {[
+    Float.atan (1. /. 1.) = 0.7853981633974483  (* 45° or pi/4 radians *)
+    Float.atan (1. /. -1.) = -0.7853981633974483  (* 315° or 7 * pi / 4 radians *)
+    Float.atan (-1. /. -1.) = 0.7853981633974483 (* 45° or pi/4 radians *)
+    Float.atan (-1. /.  1.) = -0.7853981633974483 (* 315° or 7 * pi/4 radians *)
+    ]}
 
     Notice that everything is between [pi / 2] and [-pi/2]. That is pretty useless
     for figuring out angles in any sort of visualization, so again, check out
@@ -1925,13 +1930,12 @@ isNotANumber nan = false
   val atan2 : y:t -> x:t -> t
   (** This helps you find the angle (in radians) to an [(x, y)] coordinate. So rather than saying [Float.(atan (y / x))] you can [Float.atan2 ~y ~x] and you can get a full range of angles:
 
-    {[Float.atan2 ~y:1. ~x:1. = 0.7853981633974483  (* 45° or pi/4 radians *)]}
-
-    {[Float.atan2 ~y:1. ~x:(-1.) = 2.3561944901923449  (* 135° or 3 * pi/4 radians *)]}
-
-    {[Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225° or 5 * pi/4 radians *)]}
-
-    {[Float.atan2 ~y:(-1.) ~x:1.) = -(0.7853981633974483) (* 315° or 7 * pi/4 radians *)]}
+    {[
+    Float.atan2 ~y:1. ~x:1. = 0.7853981633974483  (* 45° or pi/4 radians *)
+    Float.atan2 ~y:1. ~x:(-1.) = 2.3561944901923449  (* 135° or 3 * pi/4 radians *)
+    Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225° or 5 * pi/4 radians *)
+    Float.atan2 ~y:(-1.) ~x:1.) = -(0.7853981633974483) (* 315° or 7 * pi/4 radians *)
+    ]}
   *)
 
   (** {1 Conversion} *)
@@ -2033,88 +2037,82 @@ Float.round ~direction:`Up (-1.8) = -1.0
 
     This tie-breaking rule is the default rounding mode using in
 
-    {[Float.round ~direction:(`Closest `ToEven) -1.5 = -2.0]}
-
-    {[Float.round ~direction:(`Closest `ToEven) -2.5 = -2.0]}
+    {[
+    Float.round ~direction:(`Closest `ToEven) -1.5 = -2.0
+    Float.round ~direction:(`Closest `ToEven) -2.5 = -2.0
+    ]}
   *)
 
   val floor : t -> t
   (** Floor function, equivalent to [Float.round ~direction:`Down].
 
-    {[Float.floor 1.2 = 1.0]}
-
-    {[Float.floor 1.5 = 1.0]}
-
-    {[Float.floor 1.8 = 1.0]}
-
-    {[Float.floor -1.2 = -2.0]}
-
-    {[Float.floor -1.5 = -2.0]}
-
-    {[Float.floor -1.8 = -2.0]}
+    {[
+    Float.floor 1.2 = 1.0
+    Float.floor 1.5 = 1.0
+    Float.floor 1.8 = 1.0
+    Float.floor -1.2 = -2.0
+    Float.floor -1.5 = -2.0
+    Float.floor -1.8 = -2.0
+    ]}
   *)
 
   val ceiling : t -> t
   (** Ceiling function, equivalent to [Float.round ~direction:`Up].
 
-    {[Float.ceiling 1.2 = 2.0]}
-
-    {[Float.ceiling 1.5 = 2.0]}
-
-    {[Float.ceiling 1.8 = 2.0]}
-
-    {[Float.ceiling -1.2 = (-1.0)]}
-
-    {[Float.ceiling -1.5 = (-1.0)]}
-
-    {[Float.ceiling -1.8 = (-1.0)]}
+    {[
+    Float.ceiling 1.2 = 2.0
+    Float.ceiling 1.5 = 2.0
+    Float.ceiling 1.8 = 2.0
+    Float.ceiling -1.2 = (-1.0)
+    Float.ceiling -1.5 = (-1.0)
+    Float.ceiling -1.8 = (-1.0)
+    ]}
   *)
 
   val truncate : t -> t
   (** Ceiling function, equivalent to [Float.round ~direction:`Zero].
 
-    {[Float.truncate 1.0 = 1]}
-
-    {[Float.truncate 1.2 = 1]}
-
-    {[Float.truncate 1.5 = 1]}
-
-    {[Float.truncate 1.8 = 1]}
-
-    {[Float.truncate (-1.2) = -1]}
-
-    {[Float.truncate (-1.5) = -1]}
-
-    {[Float.truncate (-1.8) = -1]}
+    {[
+    Float.truncate 1.0 = 1
+    Float.truncate 1.2 = 1
+    Float.truncate 1.5 = 1
+    Float.truncate 1.8 = 1
+    Float.truncate (-1.2) = -1
+    Float.truncate (-1.5) = -1
+    Float.truncate (-1.8) = -1
+    ]}
   *)
 
   val fromInt : int -> float
-  (** Convert an [int] to a [float]
-
-    {[Float.fromInt 5 = 5.0]}
-
-    {[Float.fromInt 0 = 0.0]}
-
-    {[Float.fromInt -7 = -7.0]}
-  *)
+  (** Same as {!Float.from_int}. *)
 
   val from_int : int -> float
+  (** Convert an [int] to a [float]
+
+    {[
+    Float.from_int 5 = 5.0
+    Float.from_int 0 = 0.0
+    Float.from_int -7 = -7.0
+    ]}
+  *)
 
   val toInt : t ->  int option
+  (** Same as {!Float.to_int}. *)
+
+  val to_int : t ->  int option
   (** Converts a [float] to an {!Int} by {b ignoring the decimal portion}. See {!Float.truncate} for examples.
 
     Returns [None] when trying to round a [float] which can't be represented as an [int] such as {!Float.nan} or {!Float.infinity} or numbers which are too large or small.
 
-    {[Float.(toInt nan) = None]}
-
-    {[Float.(toInt infinity) = None]}
+    {[
+    Float.(to_int nan) = None]
+    Float.(to_int infinity) = None
+    ]}
 
     You probably want to use some form of {!Float.round} prior to using this function.
 
-    {[Float.(round 1.6 |> toInt) = Some 2]}
+    {[Float.(round 1.6 |> to_int) = Some 2]}
   *)
-
-  val to_int : t ->  int option
 end
 
 module Int : sig
@@ -2163,11 +2161,13 @@ module Int : sig
   (** The maximum representable [int] on the current platform *)
 
   val maximum_value : t
+  (** The maximum representable [int] on the current platform *)
 
   val minimumValue : t
   (** The minimum representable [int] on the current platform *)
 
   val minimum_value : t
+  (** The maximum representable [int] on the current platform *)
 
   (** {1 Operators }
     {b Note } You do not need to open the {!Int} module to use the {!( + )}, {!( - )}, {!( * )} or {!( / )} operators, these are available as soon as you [open Tablecloth]
@@ -2232,11 +2232,11 @@ module Int : sig
 
   val ( // ) : t -> t -> float
   (** Floating point division
-    {[3 // 2 = 1.5]}
-
-    {[27 // 5 = 5.25]}
-
-    {[8 // 4 = 2.0]}
+    {[
+    3 // 2 = 1.5
+    27 // 5 = 5.25
+    [8 // 4 = 2.0
+    ]}
   *)
 
   val power : base:t -> exponent:t -> t
@@ -2255,11 +2255,11 @@ module Int : sig
   val negate : t -> t
   (** Flips the 'sign' of an integer so that positive integers become negative and negative integers become positive. Zero stays as it is.
 
-    {[Int.negate 8 = (-8)]}
-
-    {[Int.negate (-7) = 7]}
-
-    {[Int.negate 0 = 0]}
+    {[
+    Int.negate 8 = (-8)
+    Int.negate (-7) = 7
+    Int.negate 0 = 0
+    ]}
 
     Alternatively the [-] operator can be used:
 
@@ -2272,24 +2272,24 @@ module Int : sig
   val absolute : t -> t
   (** Get the {{: https://en.wikipedia.org/wiki/Absolute_value } absolute value } of a number.
 
-    {[Int.absolute 8 = 8]}
-
-    {[Int.absolute (-7) = 7]}
-
-    {[Int.absolute 0 = 0]} *)
+    {[
+    Int.absolute 8 = 8
+    Int.absolute (-7) = 7
+    Int.absolute 0 = 0
+    ]}
+  *)
 
   val modulo : t -> by:t -> t
   (** Perform {{: https://en.wikipedia.org/wiki/Modular_arithmetic } modular arithmetic }.
 
-    If you intend to use [modulo] to detect even and odd numbers consider using {!Int.isEven} or {!Int.isOdd}.
+    If you intend to use [modulo] to detect even and odd numbers consider using {!Int.is_even} or {!Int.is_odd}.
 
-    {[Int.modulo ~by:2 0 = 0]}
-
-    {[Int.modulo ~by:2 1 = 1]}
-
-    {[Int.modulo ~by:2 2 = 0]}
-
-    {[Int.modulo ~by:2 3 = 1]}
+    {[
+    Int.modulo ~by:2 0 = 0
+    Int.modulo ~by:2 1 = 1
+    Int.modulo ~by:2 2 = 0
+    Int.modulo ~by:2 3 = 1
+    s]}
 
     Our [modulo] function works in the typical mathematical way when you run into negative numbers:
 
@@ -2316,120 +2316,127 @@ module Int : sig
   val maximum : t -> t -> t
   (** Returns the larger of two [int]s
 
-    {[Int.maximum 7 9 = 9]}
-
-    {[Int.maximum (-4) (-1) = (-1)]} *)
+    {[
+    Int.maximum 7 9 = 9
+    Int.maximum (-4) (-1) = (-1)
+    ]}
+  *)
 
   val minimum : t -> t -> t
   (** Returns the smaller of two [int]s
 
-    {[Int.minimum 7 9 = 7]}
-
-    {[Int.minimum (-4) (-1) = (-4)]} *)
+    {[
+    Int.minimum 7 9 = 7
+    Int.minimum (-4) (-1) = (-4)
+    ]}
+  *)
 
   (** {1 Checks} *)
 
   val isEven : t -> bool
-  (** Check if an [int] is even
-
-    {[Int.isEven 8 = true]}
-
-    {[Int.isEven 7 = false]}
-
-    {[Int.isEven 0 = true]} *)
+  (** Same as {!Int.is_even}. *)
 
   val is_even : t -> bool
+  (** Check if an [int] is even
+
+    {[
+    Int.is_even 8 = true
+    Int.is_even 7 = false
+    Int.is_even 0 = true
+    ]} 
+  *)
 
   val isOdd : t -> bool
-  (** Check if an [int] is odd
-
-    {[Int.isOdd 7 = true]}
-
-    {[Int.isOdd 8 = false]}
-
-    {[Int.isOdd 0 = false]} *)
+  (** Same as {!Int.is_odd}. *)
 
   val is_odd : t -> bool
+  (** Check if an [int] is odd
+
+    {[
+    Int.is_odd 7 = true
+    Int.is_odd 8 = false
+    Int.is_odd 0 = false
+    ]}
+  *)
 
   val clamp : t -> lower:t -> upper:t -> t
   (** Clamps [n] within the inclusive [lower] and [upper] bounds.
 
-    {[Int.clamp ~lower:0 ~upper:8 5 = 5]}
-
-    {[Int.clamp ~lower:0 ~upper:8 9 = 8]}
-
-    {[Int.clamp ~lower:(-10) ~upper:(-5) 5 = (-5)]}
+    {[
+    Int.clamp ~lower:0 ~upper:8 5 = 5
+    Int.clamp ~lower:0 ~upper:8 9 = 8
+    Int.clamp ~lower:(-10) ~upper:(-5) 5 = (-5)
+    ]}
 
     Throws an [Invalid_argument] exception if [lower > upper]
   *)
 
   val inRange : t -> lower:t -> upper:t -> bool
+  (** Same as {!Int.in_range}. *)
+
+  val in_range : t -> lower:t -> upper:t -> bool
   (** Checks if [n] is between [lower] and up to, but not including, [upper].
 
-    {[Int.inRange ~lower:2 ~upper:4 3 = true]}
-
-    {[Int.inRange ~lower:5 ~upper:8 4 = false]}
-
-    {[Int.inRange ~lower:(-6) ~upper:(-2) (-3) = true]}
+    {[
+    Int.in_range ~lower:2 ~upper:4 3 = true
+    Int.in_range ~lower:5 ~upper:8 4 = false
+    Int.in_range ~lower:(-6) ~upper:(-2) (-3) = true
+    ]}
 
     Throws an [Invalid_argument] exception if [lower > upper]
   *)
 
-  val in_range : t -> lower:t -> upper:t -> bool
-
   (** {1 Conversion } *)
 
   val toFloat : t -> float
+  (** Same as {!Int.to_float}. *)
+
+  val to_float : t -> float
   (** Convert an integer into a float. Useful when mixing {!Int} and {!Float} values like this:
 
     {[
 let halfOf (number : int) : float =
-  Float.((Int.toFloat number) / 2)
+  Float.((Int.to_float number) / 2)
 
 halfOf 7 = 3.5
     ]}
     Note that locally opening the {!Float} module here allows us to use the floating point division operator
   *)
 
-  val to_float : t -> float
-
   val toString : t -> string
+  (** Same as {!Int.to_string}. *)
+
+  val to_string : t -> string
   (** Convert an [int] into a [string] representation.
 
-    {[Int.toString 3 = "3"]}
-
-    {[Int.toString (-3) = "-3"]}
-
-    {[Int.toString 0 = "0"]}
+    {[
+    Int.to_string 3 = "3"
+    Int.to_string (-3) = "-3"
+    Int.to_sString 0 = "0"
+    ]}
 
     Guarantees that
 
-    {[Int.(fromString (toString n)) = Some n ]}
+    {[Int.(from_string (to_string n)) = Some n ]}
  *)
 
-  val to_string : t -> string
-
   val fromString : string -> t option
+  (** Same as {!Int.from_string}. *)
+  
+  val from_string : string -> t option
   (** Attempt to parse a [string] into a [int].
 
-    {[Int.fromString "0" = Some 0.]}
-
-    {[Int.fromString "42" = Some 42.]}
-
-    {[Int.fromString "-3" = Some (-3)]}
-
-    {[Int.fromString "123_456" = Some 123_456]}
-
-    {[Int.fromString "0xFF" = Some 255]}
-
-    {[Int.fromString "0x00A" = Some 10]}
-
-    {[Int.fromString "Infinity" = None]}
-
-    {[Int.fromString "NaN" = None]}
+    {[
+    Int.fromString "0" = Some 0.
+    Int.from_string "42" = Some 42.
+    Int.from_string "-3" = Some (-3)
+    Int.from_string "123_456" = Some 123_456
+    Int.from_string "0xFF" = Some 255
+    Int.from_string "0x00A" = Some 10
+    Int.from_string "Infinity" = None
+    Int.from_string "NaN" = None
+    ]}
   *)
-
-  val from_string : string -> t option
 end
 
 module Tuple2 : sig
