@@ -126,9 +126,9 @@ module Array : sig
 
   val map3 : f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array
 
-  val flatMap : f:('a -> 'a array) -> 'a array -> 'a array
+  val flatMap : f:('a -> 'b array) -> 'a array -> 'b array
 
-  val flat_map : f:('a -> 'a array) -> 'a array -> 'a array
+  val flat_map : f:('a -> 'b array) -> 'a array -> 'b array
 
   val find : f:('a -> bool) -> 'a array -> 'a option
 
