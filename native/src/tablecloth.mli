@@ -190,14 +190,14 @@ Array.map2
       [|("alice", 2, true); ("bob", 5, false); ("chuck", 7, true)|]
     ]} *)
 
-  val flatMap : f:('a -> 'a array) -> 'a array -> 'a array
+  val flatMap : f:('a -> 'b array) -> 'a array -> 'b array
   (** Apply a function [f] onto an array and flatten the resulting array of arrays.
 
     {[Array.flatMap ~f xs = Array.map ~f xs |> Array.flatten]} 
     
     {[Array.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]} *)
 
-  val flat_map : f:('a -> 'a array) -> 'a array -> 'a array
+  val flat_map : f:('a -> 'b array) -> 'a array -> 'b array
 
   val find : f:('a -> bool) -> 'a array -> 'a option
   (** Returns as an option the first element for which f evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None] 
