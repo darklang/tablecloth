@@ -474,12 +474,10 @@ module List = struct
 
   let intersperse (sep : 'a) (l : 'a list) : 'a list =
     match l with
-    | [] ->
-        []
+    | [] -> []
+    | [x] -> [x]
     | x :: rest ->
-        let step x rest = sep :: x :: rest in
-        let spersed = foldRight ~f:step ~initial:[] rest in
-        x :: spersed
+        x :: (foldRight rest ~initial:[] ~f:(fun x acc -> sep :: x :: acc))
 
   let initialize (n : int) (f : int -> 'a) : 'a list = Base.List.init n ~f
 
