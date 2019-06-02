@@ -261,7 +261,7 @@ module List = struct
     Base.List.exists l ~f:(( = ) value)
 
   let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
-    let rec uniqueHelp
+    let rec uniqueHelper
         ~(f : 'a -> string)
         (existing : Base.Set.M(Base.String).t)
         (remaining : 'a list)
@@ -272,15 +272,15 @@ module List = struct
       | first :: rest ->
           let computedFirst = f first in
           if Base.Set.mem existing computedFirst
-          then uniqueHelp ~f existing rest accumulator
+          then uniqueHelper ~f existing rest accumulator
           else
-            uniqueHelp
+            uniqueHelper
               ~f
               (Base.Set.add existing computedFirst)
               rest
               (first :: accumulator)
     in
-    uniqueHelp ~f (Base.Set.empty (module Base.String)) l []
+    uniqueHelper ~f (Base.Set.empty (module Base.String)) l []
 
   let unique_by = uniqueBy
 
@@ -317,18 +317,16 @@ module List = struct
 
   let fold_left = foldLeft
 
-  let rec findIndexHelp
-      (index : int) ~(predicate : 'a -> bool) (list : 'a list) : int option =
-    match list with
-    | [] ->
-        None
-    | x :: rest ->
-        if predicate x
-        then Some index
-        else findIndexHelp (index + 1) ~predicate rest
-
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    findIndexHelp 0 ~predicate:f l
+    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+      match l with
+      | [] -> None
+      | x :: rest ->
+        if predicate x
+        then Some i
+        else findIndexHelper ~i:(i + 1) ~predicate rest
+    in
+    findIndexHelper ~i:0 ~predicate:f l
 
   let find_index = findIndex
 
@@ -348,12 +346,13 @@ module List = struct
 
   let length (l : 'a list) : int = List.length l
 
-  let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
-    match list with
-    | [] ->
-        []
+  let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
+    match l with
+    | [] -> []
     | x :: rest ->
-        if f x then dropWhile ~f rest else list
+        if f x
+        then dropWhile ~f rest
+        else l
 
   let drop_while = dropWhile
 
@@ -364,21 +363,24 @@ module List = struct
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 
   let takeWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
-    let rec takeWhileMemo memo list =
-      match list with
-      | [] ->
-          reverse memo
+    let rec takeWhileHelper acc l' =
+      match l' with
+      | [] -> reverse acc
       | x :: rest ->
-          if f x then takeWhileMemo (x :: memo) rest else reverse memo
+          if f x
+          then takeWhileHelper (x :: acc) rest
+          else reverse acc
     in
-    takeWhileMemo [] l
+    takeWhileHelper [] l
 
   let take_while = takeWhile
 
   let all ~(f : 'a -> bool) (l : 'a list) : bool = Base.List.for_all l ~f
 
   let tail (l : 'a list) : 'a list option =
-    match l with [] -> None | _ :: rest -> Some rest
+    match l with
+    | [] -> None
+    | _ :: rest -> Some rest
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0

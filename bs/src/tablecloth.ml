@@ -177,7 +177,7 @@ module List = struct
   let member ~(value : 'a) (l : 'a list) : bool = Belt.List.has l value ( = )
 
   let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
-    let rec uniqueHelp
+    let rec uniqueHelper
         (f : 'a -> string)
         (existing : Belt.Set.String.t)
         (remaining : 'a list)
@@ -188,15 +188,15 @@ module List = struct
       | first :: rest ->
           let computedFirst = f first in
           if Belt.Set.String.has existing computedFirst
-          then uniqueHelp f existing rest accumulator
+          then uniqueHelper f existing rest accumulator
           else
-            uniqueHelp
+            uniqueHelper
               f
               (Belt.Set.String.add existing computedFirst)
               rest
               (first :: accumulator)
     in
-    uniqueHelp f Belt.Set.String.empty l []
+    uniqueHelper f Belt.Set.String.empty l []
 
   let unique_by = uniqueBy
 
@@ -239,15 +239,15 @@ module List = struct
   let fold_right = foldRight
 
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    let rec findIndexHelp ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
       match l with
       | [] -> None
       | x :: rest ->
         if predicate x
         then Some i
-        else findIndexHelp ~i:(i + 1) ~predicate rest
+        else findIndexHelper ~i:(i + 1) ~predicate rest
     in
-    findIndexHelp ~i:0 ~predicate:f l
+    findIndexHelper ~i:0 ~predicate:f l
 
   let find_index = findIndex
 
@@ -270,10 +270,11 @@ module List = struct
 
   let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
     match l with
-    | [] ->
-        []
+    | [] -> []
     | x :: rest ->
-        if f x then dropWhile ~f rest else l
+        if f x
+        then dropWhile ~f rest
+        else l
 
   let drop_while = dropWhile
 
@@ -284,21 +285,24 @@ module List = struct
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 
   let takeWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
-    let rec takeWhileMemo memo list =
-      match list with
-      | [] ->
-          reverse memo
+    let rec takeWhileHelper acc l' =
+      match l' with
+      | [] -> reverse acc
       | x :: rest ->
-          if f x then takeWhileMemo (x :: memo) rest else reverse memo
+          if f x
+          then takeWhileHelper (x :: acc) rest
+          else reverse acc
     in
-    takeWhileMemo [] l
+    takeWhileHelper [] l
 
   let take_while = takeWhile
 
   let all ~(f : 'a -> bool) (l : 'a list) : bool = Belt.List.every l f
 
   let tail (l : 'a list) : 'a list option =
-    match l with [] -> None | _ :: rest -> Some rest
+    match l with
+    | [] -> None
+    | _ :: rest -> Some rest
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
