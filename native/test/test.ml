@@ -668,6 +668,7 @@ let t_List () =
   AT.check (AT.list AT.int) "insertAt empty list" (List.insertAt ~index:0 ~value:1 []) [1];
   AT.check (AT.list AT.int) "insertAt in the middle" (List.insertAt ~index:1 ~value:2 [1;3]) [1;2;3];
   AT.check (AT.list AT.int) "insertAt in the front" (List.insertAt ~index:0 ~value:2 [1;3]) [2;1;3];
+(*      the test below would work on Bucklescript, both should show the same behaviour *)
 (*  AT.check (AT.list AT.int) "insertAt after end of list" (List.insertAt ~index:4 ~value:2 [1;3]) [2];*)
 
   AT.check (AT.list AT.int) "updateAt index smaller 0" (List.updateAt ~index:(-1) ~f:(fun x -> x + 1) [1;3]) [1;3];
