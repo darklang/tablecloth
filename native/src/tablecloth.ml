@@ -380,7 +380,7 @@ module List = struct
   let tail (l : 'a list) : 'a list option =
     match l with [] -> None | _ :: rest -> Some rest
 
-  let append (l1 : 'a list) (l2 : 'a list) : 'a list = l1 @ l2
+  let append (l1 : 'a list) (l2 : 'a list) : 'a list = Base.List.append l1 l2
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
