@@ -662,8 +662,10 @@ let t_List () =
   AT.check (AT.list AT.int) "foldr empty list" (List.foldRight ~f:(fun x acc -> x :: acc) ~initial:[] []) [];
   AT.check (AT.list AT.int) "foldr one element" (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1]) [1];
   AT.check (AT.list AT.int) "foldr three elements" (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1;2;3]) [1;2;3];
-(*  AT.check (AT.int) "foldl issue #18" (List.foldLeft ~f:(-) ~initial:0 [1;2;3]) (2);*)
-(*  AT.check (AT.int) "foldr issue #18" (List.foldRight ~f:(-) ~initial:0 [1;2;3]) (2);*)
+  AT.check (AT.int) "foldl issue #18" (List.foldLeft ~f:(-) ~initial:0 [1;2;3]) (2);
+  AT.check (AT.int) "foldr issue #18" (List.foldRight ~f:(-) ~initial:0 [1;2;3]) (2);
+  AT.check (AT.int) "foldl issue #18" (List.foldLeft ~f:(-) ~initial:0 [3;2;1]) (2);
+  AT.check (AT.int) "foldr issue #18" (List.foldRight ~f:(-) ~initial:0 [3;2;1]) (2);
 
   AT.check (AT.list AT.int) "insertAt empty list" (List.insertAt ~index:0 ~value:1 []) [1];
   AT.check (AT.list AT.int) "insertAt in the middle" (List.insertAt ~index:1 ~value:2 [1;3]) [1;2;3];

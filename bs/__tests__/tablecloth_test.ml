@@ -894,8 +894,10 @@ let () =
       test "foldr empty list" (fun () -> expect (List.foldRight ~f:(fun x acc -> x :: acc) ~initial:[] []) |> toEqual []);
       test "foldr one element" (fun () -> expect (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1]) |> toEqual [1]);
       test "foldr three elements" (fun () -> expect (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1;2;3]) |> toEqual [1;2;3]);
-(*      test "foldl issue #18" (fun () -> expect (List.foldLeft ~f:(-) ~initial:0 [1;2;3]) |> toEqual (-6));*)
-(*      test "foldr issue #18" (fun () -> expect (List.foldRight ~f:(-) ~initial:0 [1;2;3]) |> toEqual (-6));*)
+      test "foldl issue #18" (fun () -> expect (List.foldLeft ~f:(-) ~initial:0 [1;2;3]) |> toEqual (2));
+      test "foldr issue #18" (fun () -> expect (List.foldRight ~f:(-) ~initial:0 [1;2;3]) |> toEqual (2));
+      test "foldl issue #18" (fun () -> expect (List.foldLeft ~f:(-) ~initial:0 [3;2;1]) |> toEqual (2));
+      test "foldl issue #18" (fun () -> expect (List.foldRight ~f:(-) ~initial:0 [3;2;1]) |> toEqual (2));
     );
 
     describe "insertAt" (fun () ->
