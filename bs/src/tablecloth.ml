@@ -138,6 +138,8 @@ module List = struct
 
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
 
+  let append (l1 : 'a list) (l2 : 'a list) : 'a list = Belt.List.concat l1 l2
+
   let sum (l : int list) : int = Belt.List.reduce l 0 ( + )
 
   let floatSum (l : float list) : float = Belt.List.reduce l 0.0 ( +. )
@@ -263,7 +265,9 @@ module List = struct
     else
       let head = take ~count:index l in
       let tail = drop ~count:index l in
-      match tail with x :: rest -> head @ (f x :: rest) | _ -> l
+      match tail with
+       | x :: rest -> append head (f x :: rest)
+       | _ -> l
 
   let update_at = updateAt
 
@@ -300,8 +304,6 @@ module List = struct
 
   let tail (l : 'a list) : 'a list option =
     match l with [] -> None | _ :: rest -> Some rest
-
-  let append (l1 : 'a list) (l2 : 'a list) : 'a list = Belt.List.concat l1 l2
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
@@ -371,9 +373,9 @@ module List = struct
 
   let split_at = splitAt
 
-  (* TODO: use append *)
+  (* TODO: what about index > length l??? *)
   let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =
-    take ~count:index l @ (value :: drop ~count:index l)
+    append (take ~count:index l) (value :: drop ~count:index l)
 
   let insert_at = insertAt
 
