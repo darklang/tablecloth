@@ -368,9 +368,13 @@ module List : sig
 
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
-  val foldr : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val foldRight : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
 
-  val foldl : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val fold_right : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
+
+  val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
+
+  val fold_left : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
 
   val findIndex : f:('a -> bool) -> 'a list -> int option
 

@@ -231,14 +231,15 @@ module List = struct
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
 
+  let foldLeft  ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
+    Belt.List.reduce l initial (flip f)
 
-  let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f l init
+  let fold_left = foldLeft
 
+  let foldRight  ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
+    Belt.List.reduceReverse l initial (flip f)
 
-  let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (reverse l) init
-
+  let fold_right = foldRight
 
   let rec findIndexHelp
       (index : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
@@ -323,7 +324,7 @@ module List = struct
     | [l] ->
         Some l
     | l1 :: lrest ->
-        Some (fst <| foldl ~f:minBy ~init:(l1, f l1) lrest)
+        Some (fst <| foldLeft ~f:minBy ~initial:(l1, f l1) lrest)
     | _ ->
         None
 
@@ -331,7 +332,7 @@ module List = struct
   let minimum_by = minimumBy
 
   let minimum (l : 'comparable list) : 'comparable option =
-    match l with x :: xs -> Some (foldl ~f:min ~init:x xs) | _ -> None
+    match l with x :: xs -> Some (foldLeft ~f:min ~initial:x xs) | _ -> None
 
   let maximumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
     let maxBy x (y, fy) =
@@ -342,15 +343,14 @@ module List = struct
     | [l_] ->
         Some l_
     | l_ :: ls_ ->
-        Some (fst <| foldl ~f:maxBy ~init:(l_, f l_) ls_)
+        Some (fst <| foldLeft ~f:maxBy ~initial:(l_, f l_) ls_)
     | _ ->
         None
 
   let maximum_by = maximumBy
 
   let maximum (l : 'comparable list) : 'comparable option =
-    match l with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
-
+    match l with x :: xs -> Some (foldLeft ~f:max ~initial:x xs) | _ -> None
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
     Belt.List.sort l (fun a b ->
@@ -396,7 +396,7 @@ module List = struct
         []
     | hd :: tl ->
         let step x rest = sep :: x :: rest in
-        let spersed = foldr ~f:step ~init:[] tl in
+        let spersed = foldRight ~f:step ~initial:[] tl in
         hd :: spersed
 
   let initialize (n : int) (f : int -> 'a) : 'a list =
@@ -438,7 +438,7 @@ module Result = struct
 
 
   let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
-    List.foldr ~f:(map2 ~f:(fun a b -> a :: b)) ~init:(Ok []) l
+    List.foldRight ~f:(map2 ~f:(fun a b -> a :: b)) ~initial:(Ok []) l
 
 
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
@@ -507,7 +507,7 @@ module Option = struct
   let values (l : 'a option list) : 'a list =
     let valuesHelper (item : 'a option) (l: 'a list) : 'a list =
       match item with None -> l | Some v -> v :: l in
-    List.foldr ~f:valuesHelper ~init:[] l
+    List.foldRight ~f:valuesHelper ~initial:[] l
 
 
   let toList (o : 'a option) : 'a list =
