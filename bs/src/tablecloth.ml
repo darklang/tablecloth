@@ -156,7 +156,6 @@ module List = struct
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Belt.List.zipBy a b f
 
-
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
 
   let get_by = getBy
@@ -166,7 +165,6 @@ module List = struct
     |> Belt.List.toArray
     |> Js.Array.findIndex (( = ) value)
     |> function -1 -> None | index -> Some index
-
 
   let elem_index = elemIndex
 
@@ -200,7 +198,6 @@ module List = struct
     in
     uniqueHelp f Belt.Set.String.empty l []
 
-
   let unique_by = uniqueBy
 
   let find ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
@@ -216,16 +213,13 @@ module List = struct
   let drop ~(count : int) (l : 'a list) : 'a list =
     Belt.List.drop l count |. Belt.Option.getWithDefault []
 
-
   let init (l : 'a list) : 'a list option =
     match reverse l with
     | [] -> None
     | _ :: rest -> Some (reverse rest)
 
-
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
     Belt.List.keepMap l f
-
 
   let filter_map = filterMap
 
@@ -233,7 +227,6 @@ module List = struct
 
   let concat (ls : 'a list list) : 'a list =
     ls |> Belt.List.toArray |> Belt.List.concatMany
-
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
@@ -257,16 +250,13 @@ module List = struct
         then Some index
         else findIndexHelp (index + 1) ~predicate xs
 
-
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
     findIndexHelp 0 ~predicate:f l
-
 
   let find_index = findIndex
 
   let take ~(count : int) (l : 'a list) : 'a list =
     Belt.List.take l count |. Belt.Option.getWithDefault []
-
 
   let updateAt ~(index : int) ~(f : 'a -> 'a) (l : 'a list) : 'a list =
     if index < 0
@@ -275,7 +265,6 @@ module List = struct
       let head = take ~count:index l in
       let tail = drop ~count:index l in
       match tail with x :: xs -> head @ (f x :: xs) | _ -> l
-
 
   let update_at = updateAt
 
@@ -287,7 +276,6 @@ module List = struct
         []
     | x :: xs ->
         if f x then dropWhile ~f xs else l
-
 
   let drop_while = dropWhile
 
@@ -307,7 +295,6 @@ module List = struct
     in
     takeWhileMemo [] l
 
-
   let take_while = takeWhile
 
   let all ~(f : 'a -> bool) (l : 'a list) : bool = Belt.List.every l f
@@ -325,7 +312,6 @@ module List = struct
       let head = take ~count:index l in
       let tail = drop ~count:index l |> tail in
       match tail with None -> l | Some t -> append head t
-
 
   let remove_at = removeAt
 
@@ -361,7 +347,6 @@ module List = struct
     | _ ->
         None
 
-
   let maximum_by = maximumBy
 
   let maximum (l : 'comparable list) : 'comparable option =
@@ -374,12 +359,10 @@ module List = struct
         let b' = f b in
         if a' = b' then 0 else if a' < b' then -1 else 1 )
 
-
   let sort_by = sortBy
 
   let span ~(f : 'a -> bool) (xs : 'a list) : 'a list * 'a list =
     (takeWhile ~f xs, dropWhile ~f xs)
-
 
   let rec groupWhile ~(f : 'a -> 'a -> bool) (xs : 'a list) : 'a list list =
     match xs with
@@ -389,18 +372,15 @@ module List = struct
         let ys, zs = span ~f:(f x) xs in
         (x :: ys) :: groupWhile ~f zs
 
-
   let group_while = groupWhile
 
   let splitAt ~(index : int) (xs : 'a list) : 'a list * 'a list =
     (take ~count:index xs, drop ~count:index xs)
 
-
   let split_at = splitAt
 
   let insertAt ~(index : int) ~(value : 'a) (xs : 'a list) : 'a list =
     take ~count:index xs @ (value :: drop ~count:index xs)
-
 
   let insert_at = insertAt
 
@@ -420,15 +400,12 @@ module List = struct
         let spersed = foldr ~f:step ~init:[] tl in
         hd :: spersed
 
-
   let initialize (n : int) (f : int -> 'a) : 'a list =
     let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
     step (n - 1) []
 
-
   let sortWith (f : 'a -> 'a -> int) (l : 'a list) : 'a list =
     Belt.List.sort l f
-
 
   let sort_with = sortWith
 
