@@ -173,7 +173,7 @@ module List = struct
   let rec last (l : 'a list) : 'a option =
     match l with
     | [] -> None
-    | [a] -> Some a
+    | [x] -> Some x
     | _ :: rest -> last rest
 
   let member ~(value : 'a) (l : 'a list) : bool = Belt.List.has l value ( = )
