@@ -446,6 +446,37 @@ let () =
       test "four elements" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;2;4]) |> toEqual ([1;3], [2;4]));
       test "at end" (fun () -> expect (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;5]) |> toEqual ([1;3;5], []));
     );
+
+    describe "intersperse" (fun () ->
+      test "intersperse empty list" (fun () -> expect (List.intersperse "on" []) |> toEqual []);
+      test "intersperse one turtle" (fun () -> expect (List.intersperse "on" ["turtles"]) |> toEqual ["turtles"]);
+      test "intersperse three turtles" (fun () -> expect (List.intersperse "on" ["turtles";"turtles";"turtles"]) |> toEqual ["turtles";"on";"turtles";"on";"turtles"]);
+    );
+
+    describe "init" (fun () ->
+      test "init empty list" (fun () -> expect (List.init []) |> toEqual None);
+      test "init one element" (fun () -> expect (List.init ['a']) |> toEqual (Some []));
+      test "init two elements" (fun () -> expect (List.init ['a';'b']) |> toEqual (Some ['a']));
+    );
+
+    describe "append" (fun () ->
+      test "append empty lists" (fun () -> expect (List.append [] []) |> toEqual []);
+      test "append empty list" (fun () -> expect (List.append [] ["turtles"]) |> toEqual ["turtles"]);
+      test "append empty list" (fun () -> expect (List.append ["turtles"] []) |> toEqual ["turtles"]);
+      test "append two lists" (fun () -> expect (List.append ["on"] ["turtles"]) |> toEqual ["on";"turtles"]);
+    );
+
+    describe "folds" (fun () ->
+      test "foldl empty list" (fun () -> expect (List.foldLeft ~f:(fun x acc -> x :: acc) ~initial:[] []) |> toEqual []);
+      test "foldl one element" (fun () -> expect (List.foldLeft ~f:(fun x acc -> x :: acc) ~initial:[] [1]) |> toEqual [1]);
+      test "foldl three elements" (fun () -> expect (List.foldLeft ~f:(fun x acc -> x :: acc) ~initial:[] [1;2;3]) |> toEqual [3;2;1]);
+      test "foldr empty list" (fun () -> expect (List.foldRight ~f:(fun x acc -> x :: acc) ~initial:[] []) |> toEqual []);
+      test "foldr one element" (fun () -> expect (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1]) |> toEqual [1]);
+      test "foldr three elements" (fun () -> expect (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1;2;3]) |> toEqual [1;2;3]);
+(*      test "foldl issue #18" (fun () -> expect (List.foldLeft ~f:(-) ~initial:0 [1;2;3]) |> toEqual (-6));*)
+(*      test "foldr issue #18" (fun () -> expect (List.foldRight ~f:(-) ~initial:0 [1;2;3]) |> toEqual (-6));*)
+    );
+
   );
 
   describe "String" (fun () ->

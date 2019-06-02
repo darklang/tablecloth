@@ -312,6 +312,28 @@ let t_List () =
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "split_when at end" (List.split_when ~f:(fun x -> x mod 2 = 0) [1;3;5]) ([1;3;5], []);
   AT.check (AT.pair (AT.list AT.int) (AT.list AT.int)) "split_when empty list" (List.split_when ~f:(fun x -> x mod 2 = 0) []) ([], []);
 
+  AT.check (AT.list AT.string) "intersperse empty list" (List.intersperse "on" []) [];
+  AT.check (AT.list AT.string) "intersperse one turtle" (List.intersperse "on" ["turtles"]) ["turtles"];
+  AT.check (AT.list AT.string) "intersperse three turtles" (List.intersperse "on" ["turtles";"turtles";"turtles"]) ["turtles";"on";"turtles";"on";"turtles"];
+
+  AT.check (AT.option (AT.list AT.char)) "init empty list" (List.init []) None;
+  AT.check (AT.option (AT.list AT.char)) "init one element" (List.init ['a']) (Some []);
+  AT.check (AT.option (AT.list AT.char)) "init two elements" (List.init ['a';'b']) (Some ['a']);
+
+  AT.check (AT.list AT.string) "append empty lists" (List.append [] []) [];
+  AT.check (AT.list AT.string) "append empty list" (List.append [] ["turtles"]) ["turtles"];
+  AT.check (AT.list AT.string) "append empty list" (List.append ["turtles"] []) ["turtles"];
+  AT.check (AT.list AT.string) "append two lists" (List.append ["on"] ["turtles"]) ["on";"turtles"];
+
+  AT.check (AT.list AT.int) "foldl empty list" (List.foldLeft ~f:(fun x acc -> x :: acc) ~initial:[] []) [];
+  AT.check (AT.list AT.int) "foldl one element" (List.foldLeft ~f:(fun x acc -> x :: acc) ~initial:[] [1]) [1];
+  AT.check (AT.list AT.int) "foldl three elements" (List.foldLeft ~f:(fun x acc -> x :: acc) ~initial:[] [1;2;3]) [3;2;1];
+  AT.check (AT.list AT.int) "foldr empty list" (List.foldRight ~f:(fun x acc -> x :: acc) ~initial:[] []) [];
+  AT.check (AT.list AT.int) "foldr one element" (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1]) [1];
+  AT.check (AT.list AT.int) "foldr three elements" (List.foldRight~f:(fun x acc -> x :: acc) ~initial:[] [1;2;3]) [1;2;3];
+(*  AT.check (AT.int) "foldl issue #18" (List.foldLeft ~f:(-) ~initial:0 [1;2;3]) (2);*)
+(*  AT.check (AT.int) "foldr issue #18" (List.foldRight ~f:(-) ~initial:0 [1;2;3]) (2);*)
+
   ()
 
 let t_String () =
@@ -394,7 +416,8 @@ let t_Tuple3 () =
 let suite = [
   ("Array", `Quick, t_Array); 
   ("Char", `Quick, t_Char); 
-  ("String", `Quick, t_String); 
+  ("List", `Quick, t_List);
+  ("String", `Quick, t_String);
   ("Tuple2", `Quick, t_Tuple2);
   ("Tuple3", `Quick, t_Tuple3);
 ]
