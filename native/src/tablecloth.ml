@@ -220,6 +220,8 @@ end
 module List = struct
   let flatten = Base.List.concat
 
+  let reverse (l : 'a list) : 'a list = Base.List.rev l
+
   let append (l1 : 'a list) (l2 : 'a list) : 'a list = Base.List.append l1 l2
 
   let sum (l : int list) : int =
@@ -268,7 +270,7 @@ module List = struct
         (accumulator : 'a list) : 'a list =
       match remaining with
       | [] ->
-          List.rev accumulator
+          reverse accumulator
       | first :: rest ->
           let computedFirst = f first in
           if Base.Set.mem existing computedFirst
@@ -295,7 +297,7 @@ module List = struct
   let drop ~(count : int) (l : 'a list) : 'a list = Base.List.drop l count
 
   let init (l : 'a list) : 'a list option =
-    match List.rev l with _ :: rest -> Some (List.rev rest) | [] -> None
+    match reverse l with _ :: rest -> Some (reverse rest) | [] -> None
 
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
     Base.List.filter_map l ~f
@@ -350,8 +352,6 @@ module List = struct
 
   let length (l : 'a list) : int = List.length l
 
-  let reverse (l : 'a list) : 'a list = List.rev l
-
   let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
     match list with
     | [] ->
@@ -371,9 +371,9 @@ module List = struct
     let rec takeWhileMemo memo list =
       match list with
       | [] ->
-          List.rev memo
+          reverse memo
       | x :: rest ->
-          if f x then takeWhileMemo (x :: memo) rest else List.rev memo
+          if f x then takeWhileMemo (x :: memo) rest else reverse memo
     in
     takeWhileMemo [] l
 
