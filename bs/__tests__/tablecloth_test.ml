@@ -922,6 +922,13 @@ let () =
       test "concat with several lists" (fun () -> expect (List.concat [[1];[2];[3]]) |> toEqual [1;2;3]);
       test "concat with several lists" (fun () -> expect (List.concat [[1];[];[2];[];[3]]) |> toEqual [1;2;3]);
     );
+
+    describe "span" (fun () ->
+      test "span empty list" (fun () -> expect (List.span ~f:(fun x -> x mod 2 = 0) []) |> toEqual ([],[]));
+      test "span list" (fun () -> expect (List.span ~f:(fun x -> x mod 2 = 0) [4; 6; 8; 1; 2; 3]) |> toEqual ([4; 6; 8], [1; 2; 3]));
+      test "span list" (fun () -> expect (List.span ~f:(fun x -> x mod 2 = 0) [1; 2; 3]) |> toEqual ([], [1; 2; 3]));
+      test "span list" (fun () -> expect (List.span ~f:(fun x -> x mod 2 = 0) [20; 40; 60]) |> toEqual ([20; 40; 60], []));
+    );
   );
 
   describe "String" (fun () ->

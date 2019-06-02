@@ -360,7 +360,9 @@ module List = struct
   let sort_by = sortBy
 
   let span ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
-    (takeWhile ~f l, dropWhile ~f l)
+    match l with
+    | [] -> ([], [])
+    | _ -> (takeWhile ~f l, dropWhile ~f l)
 
   let rec groupWhile ~(f : 'a -> 'a -> bool) (l : 'a list) : 'a list list =
     match l with
