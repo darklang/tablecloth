@@ -165,19 +165,20 @@ end
 
 module List : sig
   (**
-    `flatten` returns the list obtained by concatenating in order all the sub-lists in a given list.
+    `concat xs` (`concat(xs)` in ReasonML) returns the list obtained by concatenating
+    in order all the sub-lists in a given list `xs`.
 
     ### Example
 
     ```ocaml
-    flatten [[1; 2]; [3; 4; 5]; []; [6]] = [1; 2; 3; 4; 5; 6]
+    concat [[1;2;3]; []; [4;5]; [6]] = [1;2;3;4;5;6]
     ```
 
     ```reason
-    flatten([[1, 2], [3, 4, 5], [], [6]]) == [1, 2, 3, 4, 5, 6]
+    concat([[1, 2, 3], [], [4, 5], [6]]) == [1, 2, 3, 4, 5, 6];
     ```
   *)
-  val flatten : 'a list list -> 'a list
+  val concat : 'a list list -> 'a list
 
   (**
     `sum xs` (`sum(xs)` in ReasonML) returns the sum of the items in the given list of integers.
@@ -600,22 +601,6 @@ module List : sig
     ```
   *)
   val filter : f:('a -> bool) -> 'a list -> 'a list
-
-  (**
-    `concat xs` (`concat(xs)` in ReasonML) returns the list obtained by concatenating
-    all the lists in the list `xs`.
-
-    ### Example
-
-    ```ocaml
-    concat [[1;2;3]; []; [4;5]; [6]] = [1;2;3;4;5;6]
-    ```
-
-    ```reason
-    concat([[1, 2, 3], [], [4, 5], [6]]) == [1, 2, 3, 4, 5, 6];
-    ```
-  *)
-  val concat : 'a list list -> 'a list
 
   (**
     `partition ~f:predicate` (`partition(~f=predicate, xs)` in ReasonML) returns

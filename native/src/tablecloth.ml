@@ -218,7 +218,7 @@ module Tuple3 = struct
 end
 
 module List = struct
-  let flatten = Base.List.concat
+  let concat (ls : 'a list list) : 'a list = Base.List.concat ls
 
   let reverse (l : 'a list) : 'a list = Base.List.rev l
 
@@ -305,8 +305,6 @@ module List = struct
   let filter_map = filterMap
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Base.List.filter l ~f
-
-  let concat (ls : 'a list list) : 'a list = Base.List.concat ls
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Base.List.partition_tf ~f l

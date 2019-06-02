@@ -346,6 +346,12 @@ let t_List () =
   AT.check (AT.list AT.int) "updateAt in the front" (List.updateAt ~index:0 ~f:(fun x -> x + 1) [1;3]) [2;3];
   AT.check (AT.list AT.int) "updateAt after end of list" (List.updateAt ~index:4 ~f:(fun x -> x + 1) [1;3]) [1;3];
 
+  AT.check (AT.list AT.int) "concat two empty lists" (List.concat [[];[]]) [];
+  AT.check (AT.list AT.int) "concat with one empty list" (List.concat [[1];[]]) [1];
+  AT.check (AT.list AT.int) "concat with one empty list" (List.concat [[];[1]]) [1];
+  AT.check (AT.list AT.int) "concat with several lists" (List.concat [[1];[2];[3]]) [1;2;3];
+  AT.check (AT.list AT.int) "concat with several lists" (List.concat [[1];[];[2];[];[3]]) [1;2;3];
+
   ()
 
 let t_String () =
