@@ -268,7 +268,7 @@ module List = struct
 
   let update_at = updateAt
 
-  let length (l : 'a list) : int = List.length l
+  let length (l : 'a list) : int = Belt.List.length l
 
   let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
     match l with
@@ -302,8 +302,7 @@ module List = struct
   let tail (l : 'a list) : 'a list option =
     match l with [] -> None | _ :: rest -> Some rest
 
-
-  let append (l1 : 'a list) (l2 : 'a list) : 'a list = l1 @ l2
+  let append (l1 : 'a list) (l2 : 'a list) : 'a list = Belt.List.concat l1 l2
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
