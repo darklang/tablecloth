@@ -913,6 +913,14 @@ let () =
       test "updateAt in the front" (fun () -> expect (List.updateAt ~index:0 ~f:(fun x -> x + 1) [1;3]) |> toEqual [2;3]);
       test "updateAt after end of list" (fun () -> expect (List.updateAt ~index:4 ~f:(fun x -> x + 1) [1;3]) |> toEqual [1;3]);
     );
+
+    describe "concat" (fun () ->
+      test "concat two empty lists" (fun () -> expect (List.concat [[];[]]) |> toEqual []);
+      test "concat with one empty list" (fun () -> expect (List.concat [[1];[]]) |> toEqual [1]);
+      test "concat with one empty list" (fun () -> expect (List.concat [[];[1]]) |> toEqual [1]);
+      test "concat with several lists" (fun () -> expect (List.concat [[1];[2];[3]]) |> toEqual [1;2;3]);
+      test "concat with several lists" (fun () -> expect (List.concat [[1];[];[2];[];[3]]) |> toEqual [1;2;3]);
+    );
   );
 
   describe "String" (fun () ->

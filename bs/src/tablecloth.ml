@@ -134,7 +134,7 @@ module Array = struct
 end
 
 module List = struct
-  let flatten = Belt.List.flatten
+  let concat (ls: 'a list list): 'a list = Belt.List.flatten ls
 
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
 
@@ -226,9 +226,6 @@ module List = struct
   let filter_map = filterMap
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Belt.List.keep l f
-
-  let concat (ls : 'a list list) : 'a list =
-    ls |> Belt.List.toArray |> Belt.List.concatMany
 
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
