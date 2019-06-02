@@ -241,18 +241,16 @@ module List = struct
 
   let fold_right = foldRight
 
-  let rec findIndexHelp
-      (index : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
-    match l with
-    | [] ->
-        None
-    | x :: rest ->
-        if predicate x
-        then Some index
-        else findIndexHelp (index + 1) ~predicate rest
-
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    findIndexHelp 0 ~predicate:f l
+    let rec findIndexHelp ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+      match l with
+      | [] -> None
+      | x :: rest ->
+        if predicate x
+        then Some i
+        else findIndexHelp ~i:(i + 1) ~predicate rest
+    in
+    findIndexHelp ~i:0 ~predicate:f l
 
   let find_index = findIndex
 
