@@ -477,6 +477,21 @@ let () =
 (*      test "foldr issue #18" (fun () -> expect (List.foldRight ~f:(-) ~initial:0 [1;2;3]) |> toEqual (-6));*)
     );
 
+    describe "insertAt" (fun () ->
+      test "insertAt empty list" (fun () -> expect (List.insertAt ~index:0 ~value:1 []) |> toEqual [1]);
+      test "insertAt in the middle" (fun () -> expect (List.insertAt ~index:1 ~value:2 [1;3]) |> toEqual [1;2;3]);
+      test "insertAt in the front" (fun () -> expect (List.insertAt ~index:0 ~value:2 [1;3]) |> toEqual [2;1;3]);
+      test "insertAt after end of list" (fun () -> expect (List.insertAt ~index:4 ~value:2 [1;3]) |> toEqual [2]);
+    );
+
+    describe "updateAt" (fun () ->
+      test "updateAt index smaller 0" (fun () -> expect (List.updateAt ~index:(-1) ~f:(fun x -> x + 1) [1;3]) |> toEqual [1;3]);
+      test "updateAt empty list" (fun () -> expect (List.updateAt ~index:0 ~f:(fun x -> x + 1) []) |> toEqual []);
+      test "updateAt empty list" (fun () -> expect (List.updateAt ~index:2 ~f:(fun x -> x + 1) []) |> toEqual []);
+      test "updateAt inside the list" (fun () -> expect (List.updateAt ~index:1 ~f:(fun x -> x + 1) [1;3]) |> toEqual [1;4]);
+      test "updateAt in the front" (fun () -> expect (List.updateAt ~index:0 ~f:(fun x -> x + 1) [1;3]) |> toEqual [2;3]);
+      test "updateAt after end of list" (fun () -> expect (List.updateAt ~index:4 ~f:(fun x -> x + 1) [1;3]) |> toEqual [1;3]);
+    );
   );
 
   describe "String" (fun () ->
