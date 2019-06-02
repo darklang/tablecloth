@@ -481,6 +481,7 @@ let () =
       test "insertAt empty list" (fun () -> expect (List.insertAt ~index:0 ~value:1 []) |> toEqual [1]);
       test "insertAt in the middle" (fun () -> expect (List.insertAt ~index:1 ~value:2 [1;3]) |> toEqual [1;2;3]);
       test "insertAt in the front" (fun () -> expect (List.insertAt ~index:0 ~value:2 [1;3]) |> toEqual [2;1;3]);
+(*      the test below fails on native, both should show the same behaviour  *)
       test "insertAt after end of list" (fun () -> expect (List.insertAt ~index:4 ~value:2 [1;3]) |> toEqual [2]);
     );
 
