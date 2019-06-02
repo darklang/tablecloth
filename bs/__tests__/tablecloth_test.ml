@@ -937,6 +937,15 @@ let () =
       test "initialize length 1" (fun () -> expect (List.initialize 1 (fun i -> i)) |> toEqual [0]);
       test "initialize length 2" (fun () -> expect (List.initialize 2 (fun i -> i)) |> toEqual [0;1]);
     );
+
+    describe "removeAt" (fun () ->
+      test "removeAt index smaller 0" (fun () -> expect (List.removeAt ~index:(-1) [1;3]) |> toEqual [1;3]);
+      test "removeAt empty list" (fun () -> expect (List.removeAt ~index:0 []) |> toEqual []);
+      test "removeAt empty list" (fun () -> expect (List.removeAt ~index:2 []) |> toEqual []);
+      test "removeAt index 1" (fun () -> expect (List.removeAt ~index:1 [1;3]) |> toEqual [1]);
+      test "removeAt index 0" (fun () -> expect (List.removeAt ~index:0 [1;3]) |> toEqual [3]);
+      test "removeAt after end of list" (fun () -> expect (List.removeAt ~index:4 [1;3]) |> toEqual [1;3]);
+    );
   );
 
   describe "String" (fun () ->

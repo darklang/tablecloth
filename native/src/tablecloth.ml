@@ -390,9 +390,10 @@ module List = struct
     if index < 0
     then l
     else
-      let head = take ~count:index l in
-      let tail = drop ~count:index l |> tail in
-      match tail with None -> l | Some t -> append head t
+      let (front, back) = splitAt ~index l in
+      match tail back with
+      | None -> l
+      | Some t -> append front t
 
   let remove_at = removeAt
 

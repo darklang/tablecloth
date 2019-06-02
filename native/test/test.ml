@@ -690,6 +690,13 @@ let t_List () =
   AT.check (AT.list AT.int) "initialize length 1" (List.initialize 1 (fun i -> i)) [0];
   AT.check (AT.list AT.int) "initialize length 2" (List.initialize 2 (fun i -> i)) [0;1];
 
+  AT.check (AT.list AT.int) "removeAt index smaller 0" (List.removeAt ~index:(-1) [1;3]) [1;3];
+  AT.check (AT.list AT.int) "removeAt empty list" (List.removeAt ~index:0 []) [];
+  AT.check (AT.list AT.int) "removeAt empty list" (List.removeAt ~index:2 []) [];
+  AT.check (AT.list AT.int) "removeAt index 1" (List.removeAt ~index:1 [1;3]) [1];
+  AT.check (AT.list AT.int) "removeAt index 0" (List.removeAt ~index:0 [1;3]) [3];
+  AT.check (AT.list AT.int) "removeAt after end of list" (List.removeAt ~index:4 [1;3]) [1;3];
+
   ()
 
 let t_String () =
