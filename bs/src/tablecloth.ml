@@ -381,7 +381,8 @@ module List = struct
 
   (* TODO: what about index > length l??? *)
   let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =
-    append (take ~count:index l) (value :: drop ~count:index l)
+    let (front, back) = splitAt ~index l in
+    append front (value :: back)
 
   let insert_at = insertAt
 
