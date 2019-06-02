@@ -172,7 +172,7 @@ module List = struct
     match l with
     | [] -> None
     | [a] -> Some a
-    | _ :: tail -> last tail
+    | _ :: rest -> last rest
 
   let member ~(value : 'a) (l : 'a list) : bool = Belt.List.has l value ( = )
 
@@ -246,10 +246,10 @@ module List = struct
     match l with
     | [] ->
         None
-    | x :: xs ->
+    | x :: rest ->
         if predicate x
         then Some index
-        else findIndexHelp (index + 1) ~predicate xs
+        else findIndexHelp (index + 1) ~predicate rest
 
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
     findIndexHelp 0 ~predicate:f l
@@ -265,7 +265,7 @@ module List = struct
     else
       let head = take ~count:index l in
       let tail = drop ~count:index l in
-      match tail with x :: xs -> head @ (f x :: xs) | _ -> l
+      match tail with x :: rest -> head @ (f x :: rest) | _ -> l
 
   let update_at = updateAt
 
@@ -275,8 +275,8 @@ module List = struct
     match l with
     | [] ->
         []
-    | x :: xs ->
-        if f x then dropWhile ~f xs else l
+    | x :: rest ->
+        if f x then dropWhile ~f rest else l
 
   let drop_while = dropWhile
 
@@ -291,8 +291,8 @@ module List = struct
       match list with
       | [] ->
           reverse memo
-      | x :: xs ->
-          if f x then takeWhileMemo (x :: memo) xs else reverse memo
+      | x :: rest ->
+          if f x then takeWhileMemo (x :: memo) rest else reverse memo
     in
     takeWhileMemo [] l
 
@@ -315,42 +315,38 @@ module List = struct
 
   let remove_at = removeAt
 
-  let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
+  let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
     let minBy x (y, fy) =
       let fx = f x in
       if fx < fy then (x, fx) else (y, fy)
     in
-    match ls with
-    | [l] ->
-        Some l
-    | l1 :: lrest ->
-        Some (fst <| foldLeft ~f:minBy ~initial:(l1, f l1) lrest)
-    | _ ->
-        None
+    match l with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest ->
+        Some (fst <| foldLeft ~f:minBy ~initial:(x, f x) rest)
 
 
   let minimum_by = minimumBy
 
   let minimum (l : 'comparable list) : 'comparable option =
-    match l with x :: xs -> Some (foldLeft ~f:min ~initial:x xs) | _ -> None
+    match l with x :: rest -> Some (foldLeft ~f:min ~initial:x rest) | _ -> None
 
-  let maximumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
+  let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
     let maxBy x (y, fy) =
       let fx = f x in
       if fx > fy then (x, fx) else (y, fy)
     in
-    match ls with
-    | [l_] ->
-        Some l_
-    | l_ :: ls_ ->
-        Some (fst <| foldLeft ~f:maxBy ~initial:(l_, f l_) ls_)
-    | _ ->
-        None
+    match l with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest ->
+        Some (fst <| foldLeft ~f:maxBy ~initial:(x, f x) rest)
 
   let maximum_by = maximumBy
 
   let maximum (l : 'comparable list) : 'comparable option =
-    match l with x :: xs -> Some (foldLeft ~f:max ~initial:x xs) | _ -> None
+    match l with x :: rest -> Some (foldLeft ~f:max ~initial:x rest) | _ -> None
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
     Belt.List.sort l (fun a b ->
@@ -360,26 +356,26 @@ module List = struct
 
   let sort_by = sortBy
 
-  let span ~(f : 'a -> bool) (xs : 'a list) : 'a list * 'a list =
-    (takeWhile ~f xs, dropWhile ~f xs)
+  let span ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
+    (takeWhile ~f l, dropWhile ~f l)
 
-  let rec groupWhile ~(f : 'a -> 'a -> bool) (xs : 'a list) : 'a list list =
-    match xs with
-    | [] ->
-        []
-    | x :: xs ->
-        let ys, zs = span ~f:(f x) xs in
+  let rec groupWhile ~(f : 'a -> 'a -> bool) (l : 'a list) : 'a list list =
+    match l with
+    | [] -> []
+    | x :: rest ->
+        let ys, zs = span ~f:(f x) rest in
         (x :: ys) :: groupWhile ~f zs
 
   let group_while = groupWhile
 
-  let splitAt ~(index : int) (xs : 'a list) : 'a list * 'a list =
-    (take ~count:index xs, drop ~count:index xs)
+  let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
+    (take ~count:index l, drop ~count:index l)
 
   let split_at = splitAt
 
-  let insertAt ~(index : int) ~(value : 'a) (xs : 'a list) : 'a list =
-    take ~count:index xs @ (value :: drop ~count:index xs)
+  (* TODO: use append *)
+  let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =
+    take ~count:index l @ (value :: drop ~count:index l)
 
   let insert_at = insertAt
 
@@ -390,14 +386,13 @@ module List = struct
 
   let split_when = splitWhen
 
-  let intersperse (sep : 'a) (xs : 'a list) : 'a list =
-    match xs with
-    | [] ->
-        []
-    | hd :: tl ->
+  let intersperse (sep : 'a) (l : 'a list) : 'a list =
+    match l with
+    | [] -> []
+    | x :: rest ->
         let step x rest = sep :: x :: rest in
-        let spersed = foldRight ~f:step ~initial:[] tl in
-        hd :: spersed
+        let spersed = foldRight ~f:step ~initial:[] rest in
+        x :: spersed
 
   let initialize (n : int) (f : int -> 'a) : 'a list =
     let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
