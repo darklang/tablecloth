@@ -434,7 +434,9 @@ let t_Tuple3 () =
 
 let suite = [
   ("Array", `Quick, t_Array); 
-  ("Char", `Quick, t_Char); 
+  ("Char", `Quick, t_Char);
+  ("Float", `Quick, t_Float);
+  ("Int", `Quick, t_Int);
   ("List", `Quick, t_List);
   ("String", `Quick, t_String);
   ("Tuple2", `Quick, t_Tuple2);
