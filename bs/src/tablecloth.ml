@@ -254,15 +254,19 @@ module List = struct
   let take ~(count : int) (l : 'a list) : 'a list =
     Belt.List.take l count |. Belt.Option.getWithDefault []
 
+  let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
+    (take ~count:index l, drop ~count:index l)
+
+  let split_at = splitAt
+
   let updateAt ~(index : int) ~(f : 'a -> 'a) (l : 'a list) : 'a list =
     if index < 0
     then l
     else
-      let head = take ~count:index l in
-      let tail = drop ~count:index l in
-      match tail with
-       | x :: rest -> append head (f x :: rest)
-       | _ -> l
+      let (front, back) = splitAt ~index l in
+      match back with
+       | [] -> l
+       | x :: rest -> append front (f x :: rest)
 
   let update_at = updateAt
 
@@ -374,11 +378,6 @@ module List = struct
         (x :: ys) :: groupWhile ~f zs
 
   let group_while = groupWhile
-
-  let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
-    (take ~count:index l, drop ~count:index l)
-
-  let split_at = splitAt
 
   (* TODO: what about index > length l??? *)
   let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =

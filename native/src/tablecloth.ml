@@ -332,15 +332,19 @@ module List = struct
 
   let take ~(count : int) (l : 'a list) : 'a list = Base.List.take l count
 
-  let updateAt ~(index : int) ~(f : 'a -> 'a) (list : 'a list) : 'a list =
+  let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
+    (take ~count:index l, drop ~count:index l)
+
+  let split_at = splitAt
+
+  let updateAt ~(index : int) ~(f : 'a -> 'a) (l : 'a list) : 'a list =
     if index < 0
-    then list
+    then l
     else
-      let head = take ~count:index list in
-      let tail = drop ~count:index list in
-      match tail with
-        | x :: rest -> append head (f x :: rest)
-        | _ -> list
+      let (front, back) = splitAt ~index l in
+      match back with
+       | [] -> l
+       | x :: rest -> append front (f x :: rest)
 
   let update_at = updateAt
 
@@ -457,11 +461,6 @@ module List = struct
 
   let group_while = groupWhile
 
-  let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
-    (take ~count:index l, drop ~count:index l)
-
-  let split_at = splitAt
-
   let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =
     append (take ~count:index l) (value :: drop ~count:index l)
 
@@ -488,7 +487,7 @@ module List = struct
 
   let sort_with = sortWith
 
-  let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
+  let iter ~(f : 'a -> unit) (l : 'a list) : unit = Base.List.iter l ~f
 end
 
 module Option = struct
