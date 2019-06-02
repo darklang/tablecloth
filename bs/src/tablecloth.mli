@@ -120,8 +120,6 @@ module Array : sig
 
   val map_with_index : f:(int -> 'a -> 'b) -> 'a array -> 'b array
 
-  val mapi : f:(int -> 'a -> 'b) -> 'a array -> 'b array
-
   val map2 : f:('a -> 'b -> 'c) -> 'a array -> 'b array -> 'c array
 
   val map3 : f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array

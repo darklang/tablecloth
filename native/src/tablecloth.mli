@@ -160,8 +160,6 @@ animals = [|"antelope"; "bat"; "cat"|]]} *)
 
   val map_with_index : f:(int -> 'a -> 'b) -> 'a array -> 'b array
 
-  val mapi : f:(int -> 'a -> 'b) -> 'a array -> 'b array
-
   val map2 : f:('a -> 'b -> 'c) -> 'a array -> 'b array -> 'c array
   (** Combine two arrays, using [f] to combine each pair of elements.
     If one array is longer, the extra elements are dropped.

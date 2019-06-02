@@ -61,8 +61,6 @@ module Array = struct
   let mapWithIndex  ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = Base.Array.mapi a ~f
   
   let map_with_index = mapWithIndex
-  
-  let mapi = mapWithIndex 
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array =
     let minLength = min (length a) (length b) in

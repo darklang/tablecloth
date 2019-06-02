@@ -59,8 +59,6 @@ module Array = struct
 
   let map_with_index = mapWithIndex
 
-  let mapi = mapWithIndex
-
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = Belt.Array.zipBy a b f
 
   let map3 ~(f : 'a -> 'b -> 'c -> 'd) (arrayA : 'a array) (arrayB : 'b array) (arrayC : 'c array) : 'd array =
