@@ -686,6 +686,10 @@ let t_List () =
   AT.check (AT.list AT.int) "concat with several lists" (List.concat [[1];[2];[3]]) [1;2;3];
   AT.check (AT.list AT.int) "concat with several lists" (List.concat [[1];[];[2];[];[3]]) [1;2;3];
 
+  AT.check (AT.list AT.int) "initialize length 0" (List.initialize 0 (fun i -> i)) [];
+  AT.check (AT.list AT.int) "initialize length 1" (List.initialize 1 (fun i -> i)) [0];
+  AT.check (AT.list AT.int) "initialize length 2" (List.initialize 2 (fun i -> i)) [0;1];
+
   ()
 
 let t_String () =

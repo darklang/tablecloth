@@ -931,6 +931,12 @@ let () =
       test "span list" (fun () -> expect (List.span ~f:(fun x -> x mod 2 = 0) [1; 2; 3]) |> toEqual ([], [1; 2; 3]));
       test "span list" (fun () -> expect (List.span ~f:(fun x -> x mod 2 = 0) [20; 40; 60]) |> toEqual ([20; 40; 60], []));
     );
+
+    describe "initialize" (fun () ->
+      test "initialize length 0" (fun () -> expect (List.initialize 0 (fun i -> i)) |> toEqual []);
+      test "initialize length 1" (fun () -> expect (List.initialize 1 (fun i -> i)) |> toEqual [0]);
+      test "initialize length 2" (fun () -> expect (List.initialize 2 (fun i -> i)) |> toEqual [0;1]);
+    );
   );
 
   describe "String" (fun () ->

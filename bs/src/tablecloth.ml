@@ -401,9 +401,7 @@ module List = struct
         let spersed = foldRight ~f:step ~initial:[] rest in
         x :: spersed
 
-  let initialize (n : int) (f : int -> 'a) : 'a list =
-    let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
-    step (n - 1) []
+  let initialize (n : int) (f : int -> 'a) : 'a list = Belt.List.makeBy n f
 
   let sortWith (f : 'a -> 'a -> int) (l : 'a list) : 'a list =
     Belt.List.sort l f
