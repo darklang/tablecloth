@@ -330,7 +330,10 @@ module List = struct
   let minimum_by = minimumBy
 
   let minimum (l : 'comparable list) : 'comparable option =
-    match l with x :: rest -> Some (foldLeft ~f:min ~initial:x rest) | _ -> None
+    match l with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest -> Some (foldLeft ~f:min ~initial:x rest)
 
   let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
     let maxBy x (y, fy) =
@@ -346,7 +349,10 @@ module List = struct
   let maximum_by = maximumBy
 
   let maximum (l : 'comparable list) : 'comparable option =
-    match l with x :: rest -> Some (foldLeft ~f:max ~initial:x rest) | _ -> None
+    match l with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest -> Some (foldLeft ~f:max ~initial:x rest)
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
     Belt.List.sort l (fun a b ->
