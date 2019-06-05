@@ -160,8 +160,6 @@ animals = [|"antelope"; "bat"; "cat"|]]} *)
 
   val map_with_index : f:(int -> 'a -> 'b) -> 'a array -> 'b array
 
-  val mapi : f:(int -> 'a -> 'b) -> 'a array -> 'b array
-
   val map2 : f:('a -> 'b -> 'c) -> 'a array -> 'b array -> 'c array
   (** Combine two arrays, using [f] to combine each pair of elements.
     If one array is longer, the extra elements are dropped.
@@ -310,7 +308,7 @@ numbers = [|3; 2; 1|]]} *)
 end
 
 module List : sig
-  val flatten : 'a list list -> 'a list
+  val concat : 'a list list -> 'a list
 
   val sum : int list -> int
 
@@ -364,13 +362,15 @@ module List : sig
 
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
-  val concat : 'a list list -> 'a list
-
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
-  val foldr : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val foldRight : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
 
-  val foldl : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val fold_right : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
+
+  val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
+
+  val fold_left : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
 
   val findIndex : f:('a -> bool) -> 'a list -> int option
 

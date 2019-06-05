@@ -6,6 +6,8 @@ let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
 
 let identity (value : 'a) : 'a = value
 
+let flip f x y = f y x
+
 module Array = struct
   let empty : 'a array = [||]
 
@@ -34,8 +36,8 @@ module Array = struct
 
   let to_list = toList
 
-  let toIndexedList xs = 
-    Base.Array.fold_right xs ~init:(length xs - 1, []) ~f:(fun x (i, acc) -> 
+  let toIndexedList a =
+    Base.Array.fold_right a ~init:(length a - 1, []) ~f:(fun x (i, acc) ->
       (i - 1, ((i, x) :: acc)))
     |> Base.snd
   
@@ -59,8 +61,6 @@ module Array = struct
   let mapWithIndex  ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = Base.Array.mapi a ~f
   
   let map_with_index = mapWithIndex
-  
-  let mapi = mapWithIndex 
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array =
     let minLength = min (length a) (length b) in
@@ -108,7 +108,7 @@ module Array = struct
     )
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
-    Base.Array.fold ~f:(fun b a -> f a b) ~init:initial a
+    Base.Array.fold ~f:(flip f) ~init:initial a
 
   let fold_left = foldLeft
   
@@ -216,15 +216,17 @@ module Tuple3 = struct
 end
 
 module List = struct
-  let flatten = Base.List.concat
+  let concat (ls : 'a list list) : 'a list = Base.List.concat ls
+
+  let reverse (l : 'a list) : 'a list = Base.List.rev l
+
+  let append (l1 : 'a list) (l2 : 'a list) : 'a list = Base.List.append l1 l2
 
   let sum (l : int list) : int =
     Base.List.reduce l ~f:( + ) |> Base.Option.value ~default:0
 
-
   let floatSum (l : float list) : float =
     Base.List.reduce l ~f:( +. ) |> Base.Option.value ~default:0.0
-
 
   let float_sum = floatSum
 
@@ -233,14 +235,12 @@ module List = struct
   let indexedMap ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list =
     Base.List.mapi l ~f
 
-
   let indexed_map = indexedMap
 
   let mapi = indexedMap
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Base.List.map2_exn a b ~f
-
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Base.List.find l ~f
 
@@ -252,39 +252,35 @@ module List = struct
     Base.List.findi l ~f:(fun _ v -> v = value)
     |> Base.Option.map ~f:Tuple2.first
 
-
   let elem_index = elemIndex
 
   let rec last (l : 'a list) : 'a option =
     match l with [] -> None | [a] -> Some a | _ :: tail -> last tail
 
-
   let member ~(value : 'a) (l : 'a list) : bool =
     Base.List.exists l ~f:(( = ) value)
 
-
   let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
-    let rec uniqueHelp
+    let rec uniqueHelper
         ~(f : 'a -> string)
         (existing : Base.Set.M(Base.String).t)
         (remaining : 'a list)
         (accumulator : 'a list) : 'a list =
       match remaining with
       | [] ->
-          List.rev accumulator
+          reverse accumulator
       | first :: rest ->
           let computedFirst = f first in
           if Base.Set.mem existing computedFirst
-          then uniqueHelp ~f existing rest accumulator
+          then uniqueHelper ~f existing rest accumulator
           else
-            uniqueHelp
+            uniqueHelper
               ~f
               (Base.Set.add existing computedFirst)
               rest
               (first :: accumulator)
     in
-    uniqueHelp ~f (Base.Set.empty (module Base.String)) l []
-
+    uniqueHelper ~f (Base.Set.empty (module Base.String)) l []
 
   let unique_by = uniqueBy
 
@@ -299,72 +295,68 @@ module List = struct
   let drop ~(count : int) (l : 'a list) : 'a list = Base.List.drop l count
 
   let init (l : 'a list) : 'a list option =
-    match List.rev l with _ :: rest -> Some (List.rev rest) | [] -> None
-
+    match reverse l with _ :: rest -> Some (reverse rest) | [] -> None
 
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
     Base.List.filter_map l ~f
-
 
   let filter_map = filterMap
 
   let filter ~(f : 'a -> bool) (l : 'a list) : 'a list = Base.List.filter l ~f
 
-  let concat (ls : 'a list list) : 'a list = Base.List.concat ls
-
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Base.List.partition_tf ~f l
 
+  let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
+    Base.List.fold_right l ~init:initial ~f
 
-  let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f l init
+  let fold_right = foldRight
 
+  let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
+    Base.List.fold l ~init:initial ~f:(flip f)
 
-  let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (l : 'a list) : 'b =
-    List.fold_right f (List.rev l) init
-
-
-  let rec findIndexHelp
-      (index : int) ~(predicate : 'a -> bool) (list : 'a list) : int option =
-    match list with
-    | [] ->
-        None
-    | x :: xs ->
-        if predicate x
-        then Some index
-        else findIndexHelp (index + 1) ~predicate xs
-
+  let fold_left = foldLeft
 
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    findIndexHelp 0 ~predicate:f l
-
+    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+      match l with
+      | [] -> None
+      | x :: rest ->
+        if predicate x
+        then Some i
+        else findIndexHelper ~i:(i + 1) ~predicate rest
+    in
+    findIndexHelper ~i:0 ~predicate:f l
 
   let find_index = findIndex
 
   let take ~(count : int) (l : 'a list) : 'a list = Base.List.take l count
 
-  let updateAt ~(index : int) ~(f : 'a -> 'a) (list : 'a list) : 'a list =
-    if index < 0
-    then list
-    else
-      let head = take ~count:index list in
-      let tail = drop ~count:index list in
-      match tail with x :: xs -> head @ (f x :: xs) | _ -> list
+  let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
+    (take ~count:index l, drop ~count:index l)
 
+  let split_at = splitAt
+
+  let updateAt ~(index : int) ~(f : 'a -> 'a) (l : 'a list) : 'a list =
+    if index < 0
+    then l
+    else
+      let (front, back) = splitAt ~index l in
+      match back with
+       | [] -> l
+       | x :: rest -> append front (f x :: rest)
 
   let update_at = updateAt
 
   let length (l : 'a list) : int = List.length l
 
-  let reverse (l : 'a list) : 'a list = List.rev l
-
-  let rec dropWhile ~(f : 'a -> bool) (list : 'a list) : 'a list =
-    match list with
-    | [] ->
-        []
-    | x :: xs ->
-        if f x then dropWhile ~f xs else list
-
+  let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
+    match l with
+    | [] -> []
+    | x :: rest ->
+        if f x
+        then dropWhile ~f rest
+        else l
 
   let drop_while = dropWhile
 
@@ -375,34 +367,33 @@ module List = struct
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 
   let takeWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
-    let rec takeWhileMemo memo list =
-      match list with
-      | [] ->
-          List.rev memo
-      | x :: xs ->
-          if f x then takeWhileMemo (x :: memo) xs else List.rev memo
+    let rec takeWhileHelper acc l' =
+      match l' with
+      | [] -> reverse acc
+      | x :: rest ->
+          if f x
+          then takeWhileHelper (x :: acc) rest
+          else reverse acc
     in
-    takeWhileMemo [] l
-
+    takeWhileHelper [] l
 
   let take_while = takeWhile
 
   let all ~(f : 'a -> bool) (l : 'a list) : bool = Base.List.for_all l ~f
 
   let tail (l : 'a list) : 'a list option =
-    match l with [] -> None | _ :: rest -> Some rest
-
-
-  let append (l1 : 'a list) (l2 : 'a list) : 'a list = l1 @ l2
+    match l with
+    | [] -> None
+    | _ :: rest -> Some rest
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
     then l
     else
-      let head = take ~count:index l in
-      let tail = drop ~count:index l |> tail in
-      match tail with None -> l | Some t -> append head t
-
+      let (front, back) = splitAt ~index l in
+      match tail back with
+      | None -> l
+      | Some t -> append front t
 
   let remove_at = removeAt
 
@@ -415,15 +406,17 @@ module List = struct
     | [l] ->
         Some l
     | l1 :: lrest ->
-        Some (fst <| foldl ~f:minBy ~init:(l1, f l1) lrest)
+        Some (fst <| foldLeft ~f:minBy ~initial:(l1, f l1) lrest)
     | _ ->
         None
 
-
   let minimum_by = minimumBy
 
-  let minimum (list : 'comparable list) : 'comparable option =
-    match list with x :: xs -> Some (foldl ~f:min ~init:x xs) | _ -> None
+  let minimum (l : 'comparable list) : 'comparable option =
+    match l with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest -> Some (foldLeft ~f:min ~initial:x rest)
 
   let maximumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
     let maxBy x (y, fy) =
@@ -434,16 +427,17 @@ module List = struct
     | [l_] ->
         Some l_
     | l_ :: ls_ ->
-        Some (fst <| foldl ~f:maxBy ~init:(l_, f l_) ls_)
+        Some (fst <| foldLeft ~f:maxBy ~initial:(l_, f l_) ls_)
     | _ ->
         None
 
-
   let maximum_by = maximumBy
 
-  let maximum (list : 'comparable list) : 'comparable option =
-    match list with x :: xs -> Some (foldl ~f:max ~init:x xs) | _ -> None
-
+  let maximum (l : 'comparable list) : 'comparable option =
+    match l with
+    | [] -> None
+    | [x] -> Some x
+    | x :: rest -> Some (foldLeft ~f:max ~initial:x rest)
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
     Base.List.sort l ~compare:(fun a b ->
@@ -451,33 +445,26 @@ module List = struct
         let b' = f b in
         if a' = b' then 0 else if a' < b' then -1 else 1 )
 
-
   let sort_by = sortBy
 
-  let span ~(f : 'a -> bool) (xs : 'a list) : 'a list * 'a list =
-    (takeWhile ~f xs, dropWhile ~f xs)
+  let span ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
+    match l with
+    | [] -> ([], [])
+    | _ -> (takeWhile ~f l, dropWhile ~f l)
 
-
-  let rec groupWhile ~(f : 'a -> 'a -> bool) (xs : 'a list) : 'a list list =
-    match xs with
+  let rec groupWhile ~(f : 'a -> 'a -> bool) (l : 'a list) : 'a list list =
+    match l with
     | [] ->
         []
-    | x :: xs ->
-        let ys, zs = span ~f:(f x) xs in
+    | x :: rest ->
+        let ys, zs = span ~f:(f x) rest in
         (x :: ys) :: groupWhile ~f zs
-
 
   let group_while = groupWhile
 
-  let splitAt ~(index : int) (xs : 'a list) : 'a list * 'a list =
-    (take ~count:index xs, drop ~count:index xs)
-
-
-  let split_at = splitAt
-
-  let insertAt ~(index : int) ~(value : 'a) (xs : 'a list) : 'a list =
-    take ~count:index xs @ (value :: drop ~count:index xs)
-
+  let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =
+    let (front, back) = splitAt ~index l in
+    append front (value :: back)
 
   let insert_at = insertAt
 
@@ -486,31 +473,23 @@ module List = struct
       | Some index -> splitAt ~index l
       | None -> (l, []) 
 
-
   let split_when = splitWhen
 
-  let intersperse (sep : 'a) (xs : 'a list) : 'a list =
-    match xs with
-    | [] ->
-        []
-    | hd :: tl ->
-        let step x rest = sep :: x :: rest in
-        let spersed = foldr ~f:step ~init:[] tl in
-        hd :: spersed
+  let intersperse (sep : 'a) (l : 'a list) : 'a list =
+    match l with
+    | [] -> []
+    | [x] -> [x]
+    | x :: rest ->
+        x :: (foldRight rest ~initial:[] ~f:(fun x acc -> sep :: x :: acc))
 
-
-  let initialize (n : int) (f : int -> 'a) : 'a list =
-    let rec step i acc = if i < 0 then acc else step (i - 1) (f i :: acc) in
-    step (n - 1) []
-
+  let initialize (n : int) (f : int -> 'a) : 'a list = Base.List.init n ~f
 
   let sortWith (f : 'a -> 'a -> int) (l : 'a list) : 'a list =
     Base.List.sort l ~compare:f
 
-
   let sort_with = sortWith
 
-  let iter ~(f : 'a -> unit) (l : 'a list) : unit = List.iter f l
+  let iter ~(f : 'a -> unit) (l : 'a list) : unit = Base.List.iter l ~f
 end
 
 module Option = struct
@@ -521,7 +500,6 @@ module Option = struct
   let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x
 
-
   let and_then = andThen
 
   let or_ (ma : 'a option) (mb : 'a option) : 'a option =
@@ -531,7 +509,6 @@ module Option = struct
   let orElse (ma : 'a option) (mb : 'a option) : 'a option =
     match mb with None -> ma | Some _ -> mb
 
-
   let or_else = orElse
 
   let map ~(f : 'a -> 'b) (o : 'a option) : 'b option = Base.Option.map o ~f
@@ -539,19 +516,15 @@ module Option = struct
   let withDefault ~(default : 'a) (o : 'a option) : 'a =
     Base.Option.value o ~default
 
-
   let with_default = withDefault
 
-  
   let values (l : 'a option list) : 'a list =
     let valuesHelper (item : 'a option) (list : 'a list) : 'a list =
       match item with None -> list | Some v -> v :: list in
-    List.foldr ~f:valuesHelper ~init:[] l
-
+    List.foldRight ~f:valuesHelper ~initial:[] l
 
   let toList (o : 'a option) : 'a list =
     match o with None -> [] | Some o -> [o]
-
 
   let to_list = toList
 
@@ -561,7 +534,6 @@ module Option = struct
 
   let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
     if value = sentinel then None else Some value
-
 
   let to_option = toOption
 end
@@ -575,7 +547,6 @@ module Result = struct
 
   let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Base.Result.ok r |> Base.Option.value ~default
-
 
   let with_default = withDefault
 
@@ -591,25 +562,21 @@ module Result = struct
     | Error a, Error _ ->
         Error a
 
-
   let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
-    List.foldr ~f:(map2 ~f:(fun a b -> a :: b)) ~init:(Ok []) l
+    List.foldRight ~f:(map2 ~f:(fun a b -> a :: b)) ~initial:(Ok []) l
 
 
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
     Base.Result.map r ~f
 
-
   let toOption (r : ('err, 'ok) t) : 'ok option =
     match r with Ok v -> Some v | _ -> None
-
 
   let to_option = toOption
 
   let andThen ~(f : 'ok -> ('err, 'value) t) (r : ('err, 'ok) t) :
       ('err, 'value) t =
     Base.Result.bind ~f r
-
 
   let and_then = andThen
 
@@ -967,12 +934,10 @@ module String = struct
   let toInt (s : string) : (string, int) Result.t =
     try Ok (int_of_string s) with e -> Error (Printexc.to_string e)
 
-
   let to_int = toInt
 
   let toFloat (s : string) : (string, float) Result.t =
     try Ok (float_of_string s) with e -> Error (Printexc.to_string e)
-
 
   let to_float = toFloat
 
@@ -983,16 +948,13 @@ module String = struct
     | s ->
         Some (s.[0], String.sub s 1 (String.length s - 1))
 
-
   let dropLeft ~(count : int) (s : string) : string =
     Base.String.drop_prefix s count
-
 
   let drop_left = dropLeft
 
   let dropRight ~(count : int) (s : string) : string =
     Base.String.drop_suffix s count
-
 
   let drop_right = dropRight
 
@@ -1000,18 +962,15 @@ module String = struct
     let on = Str.regexp_string on in
     Str.split on s
 
-
   let join ~(sep : string) (l : string list) : string = String.concat sep l
 
   let endsWith ~(suffix : string) (s : string) =
     Base.String.is_suffix ~suffix s
 
-
   let ends_with = endsWith
 
   let startsWith ~(prefix : string) (s : string) =
     Base.String.is_prefix ~prefix s
-
 
   let starts_with = startsWith
 
@@ -1033,7 +992,6 @@ module String = struct
 
   let contains ~(substring : string) (s : string) : bool =
     Base.String.is_substring s ~substring
-
 
   let repeat ~(count : int) (s : string) : string =
     Base.List.init count ~f:(fun _ -> s) |> Base.String.concat
@@ -1069,7 +1027,6 @@ module String = struct
     let start = dropRight ~count:endCount s in
     let end_ = dropLeft ~count:startCount s in
     join ~sep:"" [start; insert; end_]
-
 
   let insert_at = insertAt
 end
@@ -1190,23 +1147,19 @@ module StrDict = struct
   let fromList (l : ('key * 'value) list) : 'value t =
     Base.Map.of_alist_reduce (module Base.String) ~f:(fun _ r -> r) l
 
-
   let from_list = fromList
 
   let get ~(key : key) (dict : 'value t) : 'value option =
     Base.Map.find dict key
 
-
   let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
     Base.Map.set dict ~key ~data:value
-
 
   let keys dict : key list = Base.Map.keys dict
 
   let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
       'value t =
     Base.Map.change dict key ~f
-
 
   let map dict ~(f : 'a -> 'b) = Base.Map.map dict ~f
 
@@ -1222,7 +1175,6 @@ module StrDict = struct
         Format.pp_print_string fmt ",  " ) ;
     Format.pp_print_string fmt "}" ;
     ()
-
 
   let merge
       ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
@@ -1254,23 +1206,19 @@ module IntDict = struct
   let fromList (l : ('key * 'value) list) : 'value t =
     Base.Map.of_alist_reduce (module Base.Int) ~f:(fun _ r -> r) l
 
-
   let from_list = fromList
 
   let get ~(key : key) (dict : 'value t) : 'value option =
     Base.Map.find dict key
 
-
   let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
     Base.Map.set dict ~key ~data:value
-
 
   let keys dict : key list = Base.Map.keys dict
 
   let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
       'value t =
     Base.Map.change dict key ~f
-
 
   let map dict ~(f : 'a -> 'b) = Base.Map.map dict ~f
 
@@ -1286,7 +1234,6 @@ module IntDict = struct
         Format.pp_print_string fmt ",  " ) ;
     Format.pp_print_string fmt "}" ;
     ()
-
 
   let merge
       ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)

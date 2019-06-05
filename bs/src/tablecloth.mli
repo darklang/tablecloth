@@ -120,8 +120,6 @@ module Array : sig
 
   val map_with_index : f:(int -> 'a -> 'b) -> 'a array -> 'b array
 
-  val mapi : f:(int -> 'a -> 'b) -> 'a array -> 'b array
-
   val map2 : f:('a -> 'b -> 'c) -> 'a array -> 'b array -> 'c array
 
   val map3 : f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array
@@ -165,19 +163,20 @@ end
 
 module List : sig
   (**
-    `flatten` returns the list obtained by concatenating in order all the sub-lists in a given list.
+    `concat xs` (`concat(xs)` in ReasonML) returns the list obtained by concatenating
+    in order all the sub-lists in a given list `xs`.
 
     ### Example
 
     ```ocaml
-    flatten [[1; 2]; [3; 4; 5]; []; [6]] = [1; 2; 3; 4; 5; 6]
+    concat [[1;2;3]; []; [4;5]; [6]] = [1;2;3;4;5;6]
     ```
 
     ```reason
-    flatten([[1, 2], [3, 4, 5], [], [6]]) == [1, 2, 3, 4, 5, 6]
+    concat([[1, 2, 3], [], [4, 5], [6]]) == [1, 2, 3, 4, 5, 6];
     ```
   *)
-  val flatten : 'a list list -> 'a list
+  val concat : 'a list list -> 'a list
 
   (**
     `sum xs` (`sum(xs)` in ReasonML) returns the sum of the items in the given list of integers.
@@ -602,22 +601,6 @@ module List : sig
   val filter : f:('a -> bool) -> 'a list -> 'a list
 
   (**
-    `concat xs` (`concat(xs)` in ReasonML) returns the list obtained by concatenating
-    all the lists in the list `xs`.
-
-    ### Example
-
-    ```ocaml
-    concat [[1;2;3]; []; [4;5]; [6]] = [1;2;3;4;5;6]
-    ```
-
-    ```reason
-    concat([[1, 2, 3], [], [4, 5], [6]]) == [1, 2, 3, 4, 5, 6];
-    ```
-  *)
-  val concat : 'a list list -> 'a list
-
-  (**
     `partition ~f:predicate` (`partition(~f=predicate, xs)` in ReasonML) returns
     a tuple of two lists. The first element is a list of all the elements of `xs`
     for which `predicate` returned `true`. The second element of the tuple is a list
@@ -637,9 +620,13 @@ module List : sig
   *)
   val partition : f:('a -> bool) -> 'a list -> 'a list * 'a list
 
-  val foldr : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val foldRight : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
 
-  val foldl : f:('a -> 'b -> 'b) -> init:'b -> 'a list -> 'b
+  val fold_right : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
+
+  val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
+
+  val fold_left : f:('a -> 'b -> 'b) -> initial:'b -> 'a list -> 'b
 
   (**
     `findIndex(~f=predicate, xs)` finds the position of the first element in `xs` for which
