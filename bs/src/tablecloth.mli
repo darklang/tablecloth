@@ -1248,6 +1248,7 @@ end
   0-127 range.
 *)
 module Char : sig
+
   val toCode : char -> int
   (**
     Same as {!Char.to_code}.
@@ -1506,7 +1507,7 @@ module Float : sig
       123_456.123_456
       6.022e23   (* = (6.022 * 10^23) *)
       6.022e+23  (* = (6.022 * 10^23) *)
-      1.602e−19  (* = (1.602 * 10^-19) *)
+      1.602e-19  (* = (1.602 * 10^-19) *)
       1e3        (* = (1 * 10 ** 3) = 1000. *)
     ]}
 
@@ -1541,8 +1542,8 @@ module Float : sig
       e.g
 
       {[
-let isNotANmber x = Float.(x = nan) in
-isNotANumber nan = false
+let isNotANumber x = Float.(x = nan) in
+  isNotANumber nan = false
 ]}
 
       For detecting [Nan] you should use {!Float.isNaN}
@@ -1552,7 +1553,8 @@ isNotANumber nan = false
   val infinity : t
   (** Positive {{: https://en.wikipedia.org/wiki/IEEE_754-1985#Positive_and_negative_infinity } infinity }
 
-    {[Float.log ~base:10.0 0.0 = Float.infinity]} *)
+    {[Float.log ~base:10.0 0.0 = Float.infinity]}
+  *)
 
   val negativeInfinity : t
   (** Negative infinity, see {!Float.infinity} *)
@@ -1630,7 +1632,8 @@ isNotANumber nan = false
 
     Alternatively the [/] operator can be used:
 
-    {[Float.(3.14 / 2.0) = 1.57]} *)
+    {[Float.(3.14 / 2.0) = 1.57]}
+  *)
 
   val ( / ) : t -> t -> t
   (** See {!Float.divide} *)
@@ -1685,20 +1688,20 @@ isNotANumber nan = false
 
     If either (or both) of the arguments are [NaN], returns [NaN]
 
-    {[Float.(isNaN (maximum 7. nan) = true]}
+    {[Float.(isNaN (maximum 7. nan)) = true]}
   *)
 
   val minimum : t -> t -> t
   (** Returns the smaller of two [float]s, if both arguments are equal, returns the first argument
 
     {[
-    Float.minimum 7.0 9.0 = 7.0]
+    Float.minimum 7.0 9.0 = 7.0
     Float.minimum (-4.0) (-1.0) = (-4.0)
     ]}
 
     If either (or both) of the arguments are [NaN], returns [NaN]
 
-    {[Float.(isNaN (minimum 7. nan) = true]}
+    {[Float.(isNaN (minimum 7. nan)) = true]}
   *)
 
   val clamp : t -> lower:t -> upper:t -> t
@@ -1747,7 +1750,7 @@ isNotANumber nan = false
 
     {[
     Float.is_nan (0.0 / 0.0) = true
-    Float.(is_nan (square_root (-1.0)) = true
+    Float.(is_nan (square_root (-1.0))) = true
     Float.is_nan (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)
     Float.is_nan 1. = false
     ]}
@@ -1766,7 +1769,7 @@ isNotANumber nan = false
 
     {[
     Float.is_finite (0. / 0.) = false
-    Float.(is_finite (square_root (-1.)) = false
+    Float.(is_finite (square_root (-1.))) = false
     Float.is_finite (1. / 0.) = false
     Float.is_finite 1. = true
     Float.(is_finite nan) = false
@@ -1785,7 +1788,7 @@ isNotANumber nan = false
 
     {[
     Float.is_infinite (0. / 0.) = false
-    Float.(is_infinite (square_root (-1.)) = false
+    Float.(is_infinite (square_root (-1.))) = false
     Float.is_infinite (1. / 0.) = true
     Float.is_infinite 1. = false
     Float.(is_infinite nan) = false
@@ -1884,7 +1887,7 @@ isNotANumber nan = false
 
     {[
     Float.(sin (degrees 30.)) = 0.49999999999999994
-    Float.(sin (radians (pi / 6.)) = 0.49999999999999994
+    Float.(sin (radians (pi / 6.))) = 0.49999999999999994
     ]}
   *)
 
@@ -1899,7 +1902,7 @@ isNotANumber nan = false
 
     {[
     Float.(tan (degrees 45.)) = 0.9999999999999999
-    Float.(tan (radians (pi / 4.)) = 0.9999999999999999
+    Float.(tan (radians (pi / 4.))) = 0.9999999999999999
     Float.(tan (pi / 4.)) = 0.9999999999999999
     ]}
   *)
@@ -1934,7 +1937,7 @@ isNotANumber nan = false
     Float.atan2 ~y:1. ~x:1. = 0.7853981633974483  (* 45° or pi/4 radians *)
     Float.atan2 ~y:1. ~x:(-1.) = 2.3561944901923449  (* 135° or 3 * pi/4 radians *)
     Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225° or 5 * pi/4 radians *)
-    Float.atan2 ~y:(-1.) ~x:1.) = -(0.7853981633974483) (* 315° or 7 * pi/4 radians *)
+    Float.atan2 ~y:(-1.) ~x:1. = -(0.7853981633974483) (* 315° or 7 * pi/4 radians *)
     ]}
   *)
 
@@ -2105,7 +2108,7 @@ Float.round ~direction:`Up (-1.8) = -1.0
     Returns [None] when trying to round a [float] which can't be represented as an [int] such as {!Float.nan} or {!Float.infinity} or numbers which are too large or small.
 
     {[
-    Float.(to_int nan) = None]
+    Float.(to_int nan) = None
     Float.(to_int infinity) = None
     ]}
 
@@ -2235,7 +2238,7 @@ module Int : sig
     {[
     3 // 2 = 1.5
     27 // 5 = 5.25
-    [8 // 4 = 2.0
+    8 // 4 = 2.0
     ]}
   *)
 
@@ -2396,9 +2399,8 @@ module Int : sig
 
     {[
 let halfOf (number : int) : float =
-  Float.((Int.to_float number) / 2)
-
-halfOf 7 = 3.5
+  Float.((Int.to_float number) / 2) in
+  halfOf 7 = 3.5
     ]}
     Note that locally opening the {!Float} module here allows us to use the floating point division operator
   *)
