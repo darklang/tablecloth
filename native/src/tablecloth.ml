@@ -836,6 +836,10 @@ module Float = struct
   let toInt = Base.Float.iround_towards_zero
 
   let to_int = toInt
+
+  let toString = Base.Float.to_string
+
+  let to_string = toString
 end
 
 module Int = struct

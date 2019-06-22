@@ -710,6 +710,21 @@ let () =
       test "infinity" (fun () -> expect (toInt infinity) |> toEqual None);
       test "negativeInfinity" (fun () -> expect (toInt negativeInfinity) |> toEqual None);
     );
+
+    describe "toString" (fun () ->
+      test "3." (fun () -> expect (toString 3.) |> toEqual "3");
+      test "-3." (fun () -> expect (toString (-3.)) |> toEqual "-3");
+      test "0." (fun () -> expect (toString 0.) |> toEqual "0");
+      test "-0." (fun () -> expect (toString (-0.)) |> toEqual "0");
+      test "1.23456789012345" (fun () -> expect (toString 1.23456789012345) |> toEqual "1.23456789012345");
+      test "1.234567890123456" (fun () -> expect (toString 1.234567890123456) |> toEqual "1.234567890123456");
+      test "1.2345678901234567" (fun () -> expect (toString 1.2345678901234567) |> toEqual "1.2345678901234567");
+      test "9.12345678912345" (fun () -> expect (toString 9.12345678912345) |> toEqual "9.12345678912345");
+      test "9.123456789123456" (fun () -> expect (toString 9.123456789123456) |> toEqual "9.123456789123456");
+      test "nan" (fun () -> expect (toString nan) |> toEqual "NaN");
+      test "infinity" (fun () -> expect (toString infinity) |> toEqual "Infinity");
+      test "negativeInfinity" (fun () -> expect (toString negativeInfinity) |> toEqual "-Infinity");
+    );
   ));
 
   describe "Int" (fun () -> Int.(

@@ -3011,6 +3011,10 @@ Float.round ~direction:`Up (-1.8) = -1.0
   *)
 
   val to_int : t ->  int option
+
+  val toString : t -> string
+
+  val to_string : t -> string
 end
 
 module Int : sig

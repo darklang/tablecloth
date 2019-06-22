@@ -516,6 +516,19 @@ let t_Float () = Float.(
   AT.check (AT.option AT.int) "toInt - infinity" (toInt infinity) None;
   AT.check (AT.option AT.int) "toInt - negativeInfinity" (toInt negativeInfinity) None;
 
+  AT.check AT.string "toString - 3." (toString 3.) "3.";
+  AT.check AT.string "toString - -3." (toString (-3.)) "-3.";
+  AT.check AT.string "toString - 0." (toString 0.) "0.";
+  AT.check AT.string "toString - -0." (toString (-0.)) "-0.";
+  AT.check AT.string "toString - 1.23456789012345" (toString 1.23456789012345) "1.23456789012345";
+  AT.check AT.string "toString - 1.234567890123456" (toString 1.234567890123456) "1.234567890123456";
+  AT.check AT.string "toString - 1.2345678901234567" (toString 1.2345678901234567) "1.2345678901234567";
+  AT.check AT.string "toString - 9.01234567890123" (toString 9.01234567890123) "9.01234567890123";
+  AT.check AT.string "toString - 9.012345678901234" (toString 9.012345678901234) "9.012345678901234";
+  AT.check AT.string "toString - nan" (toString nan) "nan";
+  AT.check AT.string "toString - infinity" (toString infinity) "inf";
+  AT.check AT.string "toString - negativeInfinity" (toString negativeInfinity) "-inf";
+
   ()
 )
 

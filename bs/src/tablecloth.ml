@@ -821,6 +821,10 @@ module Float = struct
       None
 
   let to_int = toInt
+
+  let toString = Js.Float.toString
+
+  let to_string = toString
 end
 
 module Int = struct
