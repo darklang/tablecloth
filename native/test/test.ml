@@ -386,17 +386,17 @@ let t_Float () = Float.(
   AT.check (AT.pair (AT.float 0.001) (AT.float 0.001)) "fromPolar" (fromPolar (squareRoot 2., degrees 45.)) (1., 1.);
 
   AT.check (AT.pair (AT.float 0.) (AT.float 0.)) "toPolar" (toPolar (3.0, 4.0)) (5.0, 0.9272952180016122);
-  AT.check (AT.pair (AT.float 0.) (AT.float 1e-5)) "toPolar" (toPolar (5.0, 12.0)) (13.0, 1.1760052070951352);
+  AT.check (AT.pair (AT.float 0.) (AT.float 1e-15)) "toPolar" (toPolar (5.0, 12.0)) (13.0, 1.1760052070951352);
 
   AT.check (AT.float 0.) "cos" (cos (degrees 60.)) 0.5000000000000001;
   AT.check (AT.float 0.) "cos" (cos (radians (pi / 3.))) 0.5000000000000001;
 
-  AT.check (AT.float 0.) "acos" (acos (1. / 2.)) 1.0471975511965979 (* pi / 3. *);
+  AT.check (AT.float 1e-15) "acos" (acos (1. / 2.)) 1.0471975511965979 (* pi / 3. *);
 
   AT.check (AT.float 0.) "sin - 30 degrees" (sin (degrees 30.)) 0.49999999999999994;
   AT.check (AT.float 0.) "sin - pi / 6" (sin (radians (pi / 6.))) 0.49999999999999994;
 
-  AT.check (AT.float 0.) "asin" (asin (1. / 2.)) 0.5235987755982989 (* ~ pi / 6. *);
+  AT.check (AT.float 1e-15) "asin" (asin (1. / 2.)) 0.5235987755982989 (* ~ pi / 6. *);
 
   AT.check (AT.float 0.) "tan - 45 degrees" (tan (degrees 45.)) 0.9999999999999999;
   AT.check (AT.float 0.) "tan - pi / 4" (tan (radians (pi / 4.))) 0.9999999999999999;
