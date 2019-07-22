@@ -512,6 +512,13 @@ module Option = struct
     if value = sentinel then None else Some value
 
   let to_option = toOption
+
+  let getExn = fun (x: 'a option) ->
+    match x with
+    | None -> raise (Invalid_argument "option is None")
+    | Some(x) -> x
+
+  let get_exn = getExn
 end
 
 module Char = struct  

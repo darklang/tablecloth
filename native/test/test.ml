@@ -774,6 +774,13 @@ let t_Tuple3 () =
 
   ()
 
+let t_Option () =
+  AT.check AT.int "getExn Some(1)" (Option.getExn (Some(1))) 1;
+
+  AT.check_raises "getExn None" (Invalid_argument "option is None") (fun () -> (Option.getExn (None)));
+
+  ()
+
 let suite = [
   ("Array", `Quick, t_Array);
   ("Char", `Quick, t_Char);
@@ -783,6 +790,7 @@ let suite = [
   ("String", `Quick, t_String);
   ("Tuple2", `Quick, t_Tuple2);
   ("Tuple3", `Quick, t_Tuple3);
+  ("Option", `Quick, t_Option);
 ]
 
 let () =

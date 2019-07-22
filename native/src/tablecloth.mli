@@ -524,6 +524,21 @@ module Option : sig
   val toOption : sentinel:'a -> 'a -> 'a option
 
   val to_option : sentinel:'a -> 'a -> 'a option
+
+  val getExn : 'a option -> 'a
+  (**
+    Same as {!Option.get_exn}
+  *)
+
+  val get_exn : 'a option -> 'a
+  (** [get_exn optional_value]
+    Returns [value] if [optional_value] is [Some value], otherwise raises [Invalid_argument]
+
+    @example {[
+      get_exn (Some 3) = 3;;
+      get_exn None (* Raises Invalid_argument error *)
+    ]}
+  *)
 end
 
 module Char : sig

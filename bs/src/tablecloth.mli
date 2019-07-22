@@ -1237,6 +1237,21 @@ module Option : sig
     [Option.to_option ~sentinel:s, x] returns [Some x] unless [x] equals the sentinel
     value [s], in which case [Option.to_option] returns [None].
   *)
+
+  val getExn : 'a option -> 'a
+  (**
+    Same as {!Option.get_exn}
+  *)
+
+  val get_exn : 'a option -> 'a
+  (** [get_exn optional_value]
+    Returns [value] if [optional_value] is [Some value], otherwise raises [get_exn]
+
+    @example {[
+      get_exn (Some 3) = 3;;
+      get_exn None (* Raises get_exn error *)
+    ]}
+  *)
 end
 
 (**
