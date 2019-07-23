@@ -1070,3 +1070,13 @@ let () =
       expect (Tuple3.toList (3, 4, 5)) |> toEqual [3; 4; 5]
     );
   );
+
+  describe "Option" (fun () ->
+    test "getExn Some(1)" (fun () ->
+      expect (Option.getExn(Some(1))) |> toEqual 1
+    );
+
+    test "getExn None" (fun () ->
+      expect (fun () -> Option.getExn(None)) |> toThrowException (Invalid_argument "option is None")
+    );
+  );
