@@ -165,6 +165,15 @@ issue](https://github.com/darklang/tablecloth/issues/new) with your thoughts,
 or contact us on [Twitter](https://twitter.com/paulbiggar) or by
 [email](mailto:paul.biggar@gmail.com).
 
+## Developing
+
+Please refer to the `Makefile` for a complete list of supported actions. Here is
+a handful of useful, supported commands:
+
+- `make build`: Build the project.
+- `make test`: Run the test suite. You may need to `make build` first.
+- `make docs`: Build the documentation to browse offline.
+
 ## License
 
 Tablecloth uses the [MIT](./LICENSE) license. Some functions are based on
