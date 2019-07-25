@@ -8,20 +8,20 @@ jobs:
       CI: true
       NODE_ENV: test
 
-    working_directory: ~/repo/bs
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
       - restore_cache:
           keys:
-            - v1-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-dependencies-{{ .Branch }}-{{ checksum "bs/package-lock.json" }}
             - v1-dependencies-{{ .Branch }}-
             - v1-dependencies-
-      - run: npm install
-      - run: npm run build
-      - run: npm test
+      - run: make deps-bs
+      - run: make build-bs
+      - run: make test-bs
       - save_cache:
-          key: v1-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: v1-dependencies-{{ .Branch }}-{{ checksum "bs/package-lock.json" }}
           paths:
             - ~/repo/bs/node_modules
 
@@ -30,7 +30,7 @@ jobs:
       - image: ocaml/opam2
     environment:
       CI: true
-    working_directory: ~/repo/native
+    working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
@@ -41,9 +41,9 @@ jobs:
             - v2-native-dependencies-
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
-      - run: opam update && opam install alcotest base dune junit junit_alcotest -y
-      - run: opam config exec -- dune build
-      - run: opam config exec -- dune runtest -f
+      - run: make deps-native
+      - run: make build-native
+      - run: make test-native
       - save_cache:
           key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:

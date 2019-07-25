@@ -172,7 +172,7 @@ a handful of useful, supported commands:
 
 - `make build`: Build the project.
 - `make test`: Run the test suite. You may need to `make build` first.
-- `make docs`: Build the documentation to browse offline.
+- `make documentation`: Build the documentation to browse offline.
 
 ## License
 
