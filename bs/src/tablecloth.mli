@@ -982,6 +982,20 @@ module Result : sig
     ]}
   *)
 
+  val fromOption : error:('err) -> 'ok option -> ('err, 'ok) t
+  (**
+    Same as {!Result.from_option}.
+
+  *)
+
+  val from_option : error:('err) -> 'ok option -> ('err, 'ok) t
+  (**
+    Map a [Option] to a [Result] value where [None] becomes [Error] and [Some]
+    becomes [Ok].
+
+    Useful for interacting with code that primarily uses [Result]s.
+  *)
+
   val toOption : ('err, 'ok) t -> 'ok option
   (**
     Same as {!Result.to_option}.

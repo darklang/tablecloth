@@ -472,6 +472,10 @@ module Result : sig
 
   val map : ('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
 
+  val fromOption : error:('err) -> 'ok option -> ('err, 'ok) t
+
+  val from_option : error:('err) -> 'ok option -> ('err, 'ok) t
+
   val toOption : ('err, 'ok) t -> 'ok option
 
   val to_option : ('err, 'ok) t -> 'ok option

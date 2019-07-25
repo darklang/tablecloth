@@ -781,6 +781,11 @@ let t_Option () =
 
   ()
 
+let t_Result () =
+  AT.check (AT.result AT.int AT.string) "fromOption - maps None into Error" Result.(fromOption ~error:"error message" (None : int option)) (Error "error message");
+  AT.check (AT.result AT.int AT.string) "fromOption - maps Some into Ok" Result.(fromOption ~error:"error message" (Some 10)) (Ok 10);
+  ()
+
 let suite = [
   ("Array", `Quick, t_Array);
   ("Char", `Quick, t_Char);
@@ -791,6 +796,7 @@ let suite = [
   ("Tuple2", `Quick, t_Tuple2);
   ("Tuple3", `Quick, t_Tuple3);
   ("Option", `Quick, t_Option);
+  ("Result", `Quick, t_Result);
 ]
 
 let () =

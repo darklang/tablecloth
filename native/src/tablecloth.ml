@@ -576,6 +576,13 @@ module Result = struct
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
     Base.Result.map r ~f
 
+  let fromOption ~(error) ma = 
+    match ma with
+    | None -> fail error
+    | Some right -> succeed right
+
+  let from_option = fromOption
+
   let toOption (r : ('err, 'ok) t) : 'ok option =
     match r with Ok v -> Some v | _ -> None
 
