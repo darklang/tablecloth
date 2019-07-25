@@ -3,6 +3,13 @@ open Jest
 open Expect
 
 let () =
+  describe "Result" (fun () ->
+    describe "fromOption" (fun () ->
+      test "maps None into Error" (fun () -> expect Result.(fromOption ~error:"error message" None) |> toEqual (Belt.Result.Error "error message"));
+      test "maps Some into Ok" (fun () -> expect Result.(fromOption ~error:"error message" (Some 10)) |> toEqual (Belt.Result.Ok 10));
+    );
+  );
+
   describe "Array" (fun () ->
     describe "empty" (fun () -> 
       test "has length zero" (fun () -> expect Array.(empty |> length) |> toEqual 0);
