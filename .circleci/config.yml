@@ -49,9 +49,25 @@ jobs:
           paths:
             - ~/.opam
 
+  source-code-formatting:
+    docker:
+      - image: ocaml/opam2
+    environment:
+      CI: true
+    working_directory: ~/repo
+    steps:
+      - checkout:
+          path: ~/repo
+      # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
+      # fd (aka fdfind) is needed to support formatting. It will respect the 's .gitignore
+      - run: sudo apt-get install -y m4 fd-find
+      - run: opam update && opam install ocamlformat -y
+      - run: fdfind --extension ml --extension mli | xargs opam config exec -- ocamlformat --check --enable-outside-detected-project
+
 workflows:
   version: 2
   build:
     jobs:
       - bucklescript-build-and-test
       - native-build-and-test
+      - source-code-formatting
