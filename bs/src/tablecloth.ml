@@ -97,6 +97,19 @@ module Array = struct
     find_loop array ~f ~length:(length array) 0
 
 
+  let findIndex array ~f =
+    let rec loop index =
+      if index >= length array
+      then None
+      else if f index array.(index)
+      then Some (index, array.(index))
+      else loop (index + 1)
+    in
+    loop 0
+
+
+  let find_index = findIndex
+
   let any ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.some a f
 
   let all ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.every a f

@@ -109,6 +109,10 @@ module Array : sig
 
   val find : f:('a -> bool) -> 'a array -> 'a option
 
+  val findIndex : 'a array -> f:(int -> 'a -> bool) -> (int * 'a) option
+
+  val find_index : 'a array -> f:(int -> 'a -> bool) -> (int * 'a) option
+
   val any : f:('a -> bool) -> 'a array -> bool
 
   val all : f:('a -> bool) -> 'a array -> bool

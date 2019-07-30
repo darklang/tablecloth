@@ -100,7 +100,11 @@ module Array = struct
 
   let flat_map = flatMap
 
-  let find ~(f : 'a -> bool) (a : 'a array) : 'a option = Base.Array.find a ~f
+  let find = Base.Array.find
+
+  let findIndex = Base.Array.findi
+
+  let find_index = findIndex
 
   let append (a : 'a array) (a' : 'a array) : 'a array = Base.Array.append a a'
 
