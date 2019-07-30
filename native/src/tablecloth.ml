@@ -9,6 +9,8 @@ let identity (value : 'a) : 'a = value
 let flip f x y = f y x
 
 module Array = struct
+  type 'a t = 'a array
+
   let empty : 'a array = [||]
 
   let singleton (a : 'a) : 'a array = [| a |]
@@ -68,6 +70,8 @@ module Array = struct
   let filter ~(f : 'a -> bool) (a : 'a array) : 'a array =
     Base.Array.filter a ~f
 
+
+  let swap = Base.Array.swap
 
   let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Base.Array.map a ~f
 

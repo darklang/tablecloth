@@ -256,6 +256,7 @@ let t_Array () =
     [| "antelope"; "bat"; "cat" |] ;
 
   AT.check AT.int "sum - equals zero for an empty array" (Array.sum [||]) 0 ;
+
   AT.check
     AT.int
     "sum - adds up the elements on an integer array"
@@ -267,6 +268,7 @@ let t_Array () =
     "floatSum - equals zero for an empty array"
     (Array.floatSum [||])
     0.0 ;
+
   AT.check
     (AT.float 0.)
     "floatSum - adds up the elements of a float array"
@@ -278,6 +280,14 @@ let t_Array () =
     "filter - keep elements that [f] returns [true] for"
     (Array.filter ~f:Int.isEven [| 1; 2; 3; 4; 5; 6 |])
     [| 2; 4; 6 |] ;
+
+  let numbers = [| 1; 2; 3 |] in
+  Array.swap numbers 1 2 ;
+  AT.check
+    (AT.array AT.int)
+    "swap - switches values at the given indicies"
+    numbers
+    [| 1; 3; 2 |] ;
 
   AT.check
     (AT.array (AT.float 0.))

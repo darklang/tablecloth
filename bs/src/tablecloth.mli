@@ -52,6 +52,8 @@ val identity : 'a -> 'a
 *)
 
 module Array : sig
+  type 'a t = 'a array
+
   val empty : 'a array
 
   val singleton : 'a -> 'a array
@@ -91,6 +93,8 @@ module Array : sig
   val float_sum : float array -> float
 
   val filter : f:('a -> bool) -> 'a array -> 'a array
+
+  val swap : 'a t -> int -> int -> unit
 
   val map : f:('a -> 'b) -> 'a array -> 'b array
 

@@ -147,6 +147,12 @@ let () =
               expect (Array.filter ~f:Int.isEven [| 1; 2; 3; 4; 5; 6 |])
               |> toEqual [| 2; 4; 6 |])) ;
 
+      describe "swap" (fun () ->
+          test "switches values at the given indicies" (fun () ->
+              let numbers = [| 1; 2; 3 |] in
+              Array.swap numbers 1 2 ;
+              expect numbers |> toEqual [| 1; 3; 2 |])) ;
+
       describe "map" (fun () ->
           test "Apply a function [f] to every element in an array" (fun () ->
               expect (Array.map ~f:sqrt [| 1.0; 4.0; 9.0 |])
