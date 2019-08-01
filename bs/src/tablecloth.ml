@@ -11,7 +11,7 @@ let flip f x y = f y x
 module Array = struct
   let empty : 'a array = [||]
 
-  let singleton a = [|a|]
+  let singleton a = [| a |]
 
   let length (a : 'a array) : int = Belt.Array.length a
 
@@ -21,27 +21,31 @@ module Array = struct
 
   let initialize ~length ~f = Belt.Array.makeBy length f
 
-  let repeat ~length (e: 'a): 'a array = Belt.Array.make length e
+  let repeat ~length (e : 'a) : 'a array = Belt.Array.make length e
 
   let range ?(from = 0) (to_ : int) : int array =
     Belt.Array.makeBy (to_ - from) (fun i -> i + from)
 
-  let fromList (l: 'a list) : 'a array = Belt.List.toArray l
+
+  let fromList (l : 'a list) : 'a array = Belt.List.toArray l
 
   let from_list = fromList
 
-  let toList (a: 'a array) : 'a list = Belt.List.fromArray a
+  let toList (a : 'a array) : 'a list = Belt.List.fromArray a
 
   let to_list = toList
 
-  let toIndexedList array = 
-    Belt.Array.reduceReverse array (length array - 1, []) (fun (i, acc) x -> 
-      (i - 1, ((i, x) :: acc)))
+  let toIndexedList array =
+    Belt.Array.reduceReverse
+      array
+      (length array - 1, [])
+      (fun (i, acc) x -> (i - 1, (i, x) :: acc))
     |> snd
+
 
   let to_indexed_list = toIndexedList
 
-  let get ~index array = Belt.Array.get array index 
+  let get ~index array = Belt.Array.get array index
 
   let set ~index ~value array = array.(index) <- value
 
@@ -55,68 +59,85 @@ module Array = struct
 
   let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.map a f
 
-  let mapWithIndex ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.mapWithIndex a f
+  let mapWithIndex ~(f : 'int -> 'a -> 'b) (a : 'a array) : 'b array =
+    Belt.Array.mapWithIndex a f
+
 
   let map_with_index = mapWithIndex
 
-  let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array = Belt.Array.zipBy a b f
+  let map2 ~(f : 'a -> 'b -> 'c) (a : 'a array) (b : 'b array) : 'c array =
+    Belt.Array.zipBy a b f
 
-  let map3 ~(f : 'a -> 'b -> 'c -> 'd) (arrayA : 'a array) (arrayB : 'b array) (arrayC : 'c array) : 'd array =
-    let minLength : int = Belt.Array.reduce [|length arrayB; length arrayC|] (length arrayA) min in
+
+  let map3
+      ~(f : 'a -> 'b -> 'c -> 'd)
+      (arrayA : 'a array)
+      (arrayB : 'b array)
+      (arrayC : 'c array) : 'd array =
+    let minLength : int =
+      Belt.Array.reduce [| length arrayB; length arrayC |] (length arrayA) min
+    in
     Belt.Array.makeBy minLength (fun i -> f arrayA.(i) arrayB.(i) arrayC.(i))
 
-  let flatMap ~(f : 'a -> 'b array) (a : 'a array) : 'b array = Belt.Array.map a f |> Belt.Array.concatMany
+
+  let flatMap ~(f : 'a -> 'b array) (a : 'a array) : 'b array =
+    Belt.Array.map a f |> Belt.Array.concatMany
+
 
   let flat_map = flatMap
 
-  let find ~(f : 'a -> bool) (array : 'a array) : 'a option = 
+  let find ~(f : 'a -> bool) (array : 'a array) : 'a option =
     let rec find_loop array ~f ~length i =
-      if i >= length then None
-      else if f array.(i) then Some (array.(i))
+      if i >= length
+      then None
+      else if f array.(i)
+      then Some array.(i)
       else find_loop array ~f ~length (i + 1)
     in
-    find_loop array ~f ~length:(length array) 0 
+    find_loop array ~f ~length:(length array) 0
+
 
   let any ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.some a f
 
   let all ~(f : 'a -> bool) (a : 'a array) : bool = Belt.Array.every a f
 
-  let append (a : 'a array) (a' : 'a array)  : 'a array = Belt.Array.concat a a'
+  let append (a : 'a array) (a' : 'a array) : 'a array = Belt.Array.concat a a'
 
   let concatenate (ars : 'a array array) : 'a array = Belt.Array.concatMany ars
 
-  let intersperse ~(sep : 'a) (array : 'a array) : 'a array = 
+  let intersperse ~(sep : 'a) (array : 'a array) : 'a array =
     Belt.Array.makeBy
-      (max 0 (length array * 2 - 1)) 
-      (fun i -> 
-        if i mod 2 <> 0 then sep else array.(i / 2)
-      )
+      (max 0 ((length array * 2) - 1))
+      (fun i -> if i mod 2 <> 0 then sep else array.(i / 2))
+
 
   let slice ~from ?to_ array =
-    let defaultTo = match to_ with 
-      | None -> length array
-      | Some i -> i
-    in
-    let sliceFrom = 
-      if from >= 0 then min (length array) from 
+    let defaultTo = match to_ with None -> length array | Some i -> i in
+    let sliceFrom =
+      if from >= 0
+      then min (length array) from
       else max 0 (min (length array) (length array + from))
-    in    
-    let sliceTo = 
-      if defaultTo >= 0 then min (length array) defaultTo 
+    in
+    let sliceTo =
+      if defaultTo >= 0
+      then min (length array) defaultTo
       else max 0 (min (length array) (length array + defaultTo))
-    in    
-    
-    if sliceFrom >= sliceTo then empty else (
+    in
+    if sliceFrom >= sliceTo
+    then empty
+    else
       Belt.Array.makeBy (sliceTo - sliceFrom) (fun i -> array.(i + sliceFrom))
-    )
+
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
     Belt.Array.reduce a initial (flip f)
+
 
   let fold_left = foldLeft
 
   let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
     Belt.Array.reduceReverse a initial (flip f)
+
 
   let fold_right = foldRight
 
@@ -132,7 +153,7 @@ module Array = struct
 end
 
 module List = struct
-  let concat (ls: 'a list list): 'a list = Belt.List.flatten ls
+  let concat (ls : 'a list list) : 'a list = Belt.List.flatten ls
 
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
 
@@ -149,12 +170,14 @@ module List = struct
   let indexedMap ~(f : 'int -> 'a -> 'b) (l : 'a list) : 'b list =
     Belt.List.mapWithIndex l f
 
+
   let indexed_map = indexedMap
 
   let mapi = indexedMap
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Belt.List.zipBy a b f
+
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
 
@@ -166,13 +189,12 @@ module List = struct
     |> Js.Array.findIndex (( = ) value)
     |> function -1 -> None | index -> Some index
 
+
   let elem_index = elemIndex
 
   let rec last (l : 'a list) : 'a option =
-    match l with
-    | [] -> None
-    | [x] -> Some x
-    | _ :: rest -> last rest
+    match l with [] -> None | [ x ] -> Some x | _ :: rest -> last rest
+
 
   let member ~(value : 'a) (l : 'a list) : bool = Belt.List.has l value ( = )
 
@@ -198,6 +220,7 @@ module List = struct
     in
     uniqueHelper f Belt.Set.String.empty l []
 
+
   let unique_by = uniqueBy
 
   let find ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
@@ -213,13 +236,14 @@ module List = struct
   let drop ~(count : int) (l : 'a list) : 'a list =
     Belt.List.drop l count |. Belt.Option.getWithDefault []
 
+
   let init (l : 'a list) : 'a list option =
-    match reverse l with
-    | [] -> None
-    | _ :: rest -> Some (reverse rest)
+    match reverse l with [] -> None | _ :: rest -> Some (reverse rest)
+
 
   let filterMap ~(f : 'a -> 'b option) (l : 'a list) : 'b list =
     Belt.List.keepMap l f
+
 
   let filter_map = filterMap
 
@@ -228,34 +252,42 @@ module List = struct
   let partition ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
     Belt.List.partition l f
 
-  let foldLeft  ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
+
+  let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
     Belt.List.reduce l initial (flip f)
+
 
   let fold_left = foldLeft
 
-  let foldRight  ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
+  let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
     Belt.List.reduceReverse l initial (flip f)
+
 
   let fold_right = foldRight
 
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) : int option =
+    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list)
+        : int option =
       match l with
-      | [] -> None
+      | [] ->
+          None
       | x :: rest ->
-        if predicate x
-        then Some i
-        else findIndexHelper ~i:(i + 1) ~predicate rest
+          if predicate x
+          then Some i
+          else findIndexHelper ~i:(i + 1) ~predicate rest
     in
     findIndexHelper ~i:0 ~predicate:f l
+
 
   let find_index = findIndex
 
   let take ~(count : int) (l : 'a list) : 'a list =
     Belt.List.take l count |. Belt.Option.getWithDefault []
 
+
   let splitAt ~(index : int) (l : 'a list) : 'a list * 'a list =
     (take ~count:index l, drop ~count:index l)
+
 
   let split_at = splitAt
 
@@ -263,22 +295,17 @@ module List = struct
     if index < 0
     then l
     else
-      let (front, back) = splitAt ~index l in
-      match back with
-       | [] -> l
-       | x :: rest -> append front (f x :: rest)
+      let front, back = splitAt ~index l in
+      match back with [] -> l | x :: rest -> append front (f x :: rest)
+
 
   let update_at = updateAt
 
   let length (l : 'a list) : int = Belt.List.length l
 
   let rec dropWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
-    match l with
-    | [] -> []
-    | x :: rest ->
-        if f x
-        then dropWhile ~f rest
-        else l
+    match l with [] -> [] | x :: rest -> if f x then dropWhile ~f rest else l
+
 
   let drop_while = dropWhile
 
@@ -291,31 +318,29 @@ module List = struct
   let takeWhile ~(f : 'a -> bool) (l : 'a list) : 'a list =
     let rec takeWhileHelper acc l' =
       match l' with
-      | [] -> reverse acc
+      | [] ->
+          reverse acc
       | x :: rest ->
-          if f x
-          then takeWhileHelper (x :: acc) rest
-          else reverse acc
+          if f x then takeWhileHelper (x :: acc) rest else reverse acc
     in
     takeWhileHelper [] l
+
 
   let take_while = takeWhile
 
   let all ~(f : 'a -> bool) (l : 'a list) : bool = Belt.List.every l f
 
   let tail (l : 'a list) : 'a list option =
-    match l with
-    | [] -> None
-    | _ :: rest -> Some rest
+    match l with [] -> None | _ :: rest -> Some rest
+
 
   let removeAt ~(index : int) (l : 'a list) : 'a list =
     if index < 0
     then l
     else
-      let (front, back) = splitAt ~index l in
-      match tail back with
-      | None -> l
-      | Some t -> append front t
+      let front, back = splitAt ~index l in
+      match tail back with None -> l | Some t -> append front t
+
 
   let remove_at = removeAt
 
@@ -325,8 +350,10 @@ module List = struct
       if fx < fy then (x, fx) else (y, fy)
     in
     match l with
-    | [] -> None
-    | [x] -> Some x
+    | [] ->
+        None
+    | [ x ] ->
+        Some x
     | x :: rest ->
         Some (fst <| foldLeft ~f:minBy ~initial:(x, f x) rest)
 
@@ -335,9 +362,13 @@ module List = struct
 
   let minimum (l : 'comparable list) : 'comparable option =
     match l with
-    | [] -> None
-    | [x] -> Some x
-    | x :: rest -> Some (foldLeft ~f:min ~initial:x rest)
+    | [] ->
+        None
+    | [ x ] ->
+        Some x
+    | x :: rest ->
+        Some (foldLeft ~f:min ~initial:x rest)
+
 
   let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
     let maxBy x (y, fy) =
@@ -345,66 +376,79 @@ module List = struct
       if fx > fy then (x, fx) else (y, fy)
     in
     match l with
-    | [] -> None
-    | [x] -> Some x
+    | [] ->
+        None
+    | [ x ] ->
+        Some x
     | x :: rest ->
         Some (fst <| foldLeft ~f:maxBy ~initial:(x, f x) rest)
+
 
   let maximum_by = maximumBy
 
   let maximum (l : 'comparable list) : 'comparable option =
     match l with
-    | [] -> None
-    | [x] -> Some x
-    | x :: rest -> Some (foldLeft ~f:max ~initial:x rest)
+    | [] ->
+        None
+    | [ x ] ->
+        Some x
+    | x :: rest ->
+        Some (foldLeft ~f:max ~initial:x rest)
+
 
   let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
     Belt.List.sort l (fun a b ->
         let a' = f a in
         let b' = f b in
-        if a' = b' then 0 else if a' < b' then -1 else 1 )
+        if a' = b' then 0 else if a' < b' then -1 else 1)
+
 
   let sort_by = sortBy
 
   let span ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
-    match l with
-    | [] -> ([], [])
-    | _ -> (takeWhile ~f l, dropWhile ~f l)
+    match l with [] -> ([], []) | _ -> (takeWhile ~f l, dropWhile ~f l)
+
 
   let rec groupWhile ~(f : 'a -> 'a -> bool) (l : 'a list) : 'a list list =
     match l with
-    | [] -> []
+    | [] ->
+        []
     | x :: rest ->
         let ys, zs = span ~f:(f x) rest in
         (x :: ys) :: groupWhile ~f zs
+
 
   let group_while = groupWhile
 
   (* TODO: what about index > length l??? *)
   let insertAt ~(index : int) ~(value : 'a) (l : 'a list) : 'a list =
-    let (front, back) = splitAt ~index l in
+    let front, back = splitAt ~index l in
     append front (value :: back)
+
 
   let insert_at = insertAt
 
-  let splitWhen ~(f : 'a -> bool) (l : 'a list) : ('a list * 'a list) =
-    match findIndex ~f l with
-      | Some index -> splitAt ~index l
-      | None -> (l, []) 
+  let splitWhen ~(f : 'a -> bool) (l : 'a list) : 'a list * 'a list =
+    match findIndex ~f l with Some index -> splitAt ~index l | None -> (l, [])
+
 
   let split_when = splitWhen
 
   let intersperse (sep : 'a) (l : 'a list) : 'a list =
     match l with
-    | [] -> []
-    | [x] -> [x]
+    | [] ->
+        []
+    | [ x ] ->
+        [ x ]
     | x :: rest ->
-        x :: (foldRight rest ~initial:[] ~f:(fun x acc -> sep :: x :: acc))
+        x :: foldRight rest ~initial:[] ~f:(fun x acc -> sep :: x :: acc)
+
 
   let initialize (n : int) (f : int -> 'a) : 'a list = Belt.List.makeBy n f
 
   let sortWith (f : 'a -> 'a -> int) (l : 'a list) : 'a list =
     Belt.List.sort l f
+
 
   let sort_with = sortWith
 
@@ -421,6 +465,7 @@ module Result = struct
   let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
     Belt.Result.getWithDefault r default
 
+
   let with_default = withDefault
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) :
@@ -435,27 +480,31 @@ module Result = struct
     | Error a, Error _ ->
         Error a
 
+
   let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
     List.foldRight ~f:(map2 ~f:(fun a b -> a :: b)) ~initial:(Ok []) l
+
 
   let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
     Belt.Result.map r f
 
-  let fromOption ~(error) ma = 
-    match ma with
-    | None -> fail error
-    | Some right -> succeed right
+
+  let fromOption ~error ma =
+    match ma with None -> fail error | Some right -> succeed right
+
 
   let from_option = fromOption
 
   let toOption (r : ('err, 'ok) t) : 'ok option =
     match r with Ok v -> Some v | _ -> None
 
+
   let to_option = toOption
 
   let andThen ~(f : 'ok -> ('err, 'value) t) (r : ('err, 'ok) t) :
       ('err, 'value) t =
     Belt.Result.flatMap r f
+
 
   let and_then = andThen
 
@@ -483,6 +532,7 @@ module Option = struct
   let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
     match o with None -> None | Some x -> f x
 
+
   let and_then = andThen
 
   let or_ (ma : 'a option) (mb : 'a option) : 'a option =
@@ -492,6 +542,7 @@ module Option = struct
   let orElse (ma : 'a option) (mb : 'a option) : 'a option =
     match mb with None -> ma | Some _ -> mb
 
+
   let or_else = orElse
 
   let map ~(f : 'a -> 'b) (o : 'a option) : 'b option = Belt.Option.map o f
@@ -499,15 +550,19 @@ module Option = struct
   let withDefault ~(default : 'a) (o : 'a option) : 'a =
     Belt.Option.getWithDefault o default
 
+
   let with_default = withDefault
 
   let values (l : 'a option list) : 'a list =
-    let valuesHelper (item : 'a option) (l: 'a list) : 'a list =
-      match item with None -> l | Some v -> v :: l in
+    let valuesHelper (item : 'a option) (l : 'a list) : 'a list =
+      match item with None -> l | Some v -> v :: l
+    in
     List.foldRight ~f:valuesHelper ~initial:[] l
 
+
   let toList (o : 'a option) : 'a list =
-    match o with None -> [] | Some o -> [o]
+    match o with None -> [] | Some o -> [ o ]
+
 
   let to_list = toList
 
@@ -518,23 +573,28 @@ module Option = struct
   let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
     if value = sentinel then None else Some value
 
+
   let to_option = toOption
 
-  let getExn = fun (x: 'a option) ->
+  let getExn (x : 'a option) =
     match x with
-    | None -> raise (Invalid_argument "option is None")
-    | Some(x) -> x
+    | None ->
+        raise (Invalid_argument "option is None")
+    | Some x ->
+        x
+
 
   let get_exn = getExn
 end
 
-module Char = struct  
+module Char = struct
   let toCode (c : char) : int = Char.code c
 
   let to_code = toCode
 
-  let fromCode (i : int) : char option = 
+  let fromCode (i : int) : char option =
     if 0 <= i && i <= 255 then Some (Char.chr i) else None
+
 
   let from_code = fromCode
 
@@ -542,81 +602,78 @@ module Char = struct
 
   let to_string = toString
 
-  let fromString (str : string) : char option = match String.length str with
-    | 1 -> Some (String.get str 0)
-    | _ -> None
+  let fromString (str : string) : char option =
+    match String.length str with 1 -> Some str.[0] | _ -> None
+
 
   let from_string = fromString
 
-  let toDigit char = match char with
-  | '0' .. '9' -> Some (toCode char - toCode '0')
-  | _ -> None
+  let toDigit char =
+    match char with '0' .. '9' -> Some (toCode char - toCode '0') | _ -> None
+
 
   let to_digit = toDigit
 
-  let toLowercase char =     
+  let toLowercase char =
     match char with
-    | 'A'..'Z' -> 
-      Char.chr (toCode 'a' + (toCode char - toCode 'A'))      
-    | _ -> char
+    | 'A' .. 'Z' ->
+        Char.chr (toCode 'a' + (toCode char - toCode 'A'))
+    | _ ->
+        char
+
 
   let to_lowercase = toLowercase
 
-  let toUppercase char = 
+  let toUppercase char =
     match char with
-    | 'a'..'z' -> 
-      Char.chr (toCode 'A' + (toCode char - toCode 'a'))
-    | _ -> char
+    | 'a' .. 'z' ->
+        Char.chr (toCode 'A' + (toCode char - toCode 'a'))
+    | _ ->
+        char
+
 
   let to_uppercase = toUppercase
 
-  let isLowercase = function
-    | 'a' .. 'z' -> true
-    | _ -> false
+  let isLowercase = function 'a' .. 'z' -> true | _ -> false
 
   let is_lowercase = isLowercase
 
-  let isUppercase = function
-    | 'A' .. 'Z' -> true
-    | _ -> false
+  let isUppercase = function 'A' .. 'Z' -> true | _ -> false
 
   let is_uppercase = isUppercase
 
-  let isLetter = function
-    | 'a' .. 'z' | 'A' .. 'Z' -> true
-    | _ -> false
+  let isLetter = function 'a' .. 'z' | 'A' .. 'Z' -> true | _ -> false
 
   let is_letter = isLetter
 
-  let isDigit = function
-    | '0' .. '9' -> true
-    | _ -> false
+  let isDigit = function '0' .. '9' -> true | _ -> false
 
   let is_digit = isDigit
-  
+
   let isAlphanumeric = function
-    | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' -> true
-    | _ -> false
+    | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' ->
+        true
+    | _ ->
+        false
+
 
   let is_alphanumeric = isAlphanumeric
 
-  let isPrintable = function
-    | ' ' .. '~' -> true
-    | _ -> false
+  let isPrintable = function ' ' .. '~' -> true | _ -> false
 
   let is_printable = isPrintable
-  
+
   let isWhitespace = function
     | '\t'
     | '\n'
     | '\011' (* vertical tab *)
     | '\012' (* form feed *)
     | '\r'
-    | ' '
-      -> true
-    | _
-      -> false
-  ;;
+    | ' ' ->
+        true
+    | _ ->
+        false
+
 
   let is_whitespace = isWhitespace
 end
@@ -624,13 +681,13 @@ end
 module Float = struct
   type t = float
 
-  let add = (+.)
+  let add = ( +. )
 
-  let (+) = (+.)
+  let ( + ) = ( +. )
 
-  let subtract = (-.)
+  let subtract = ( -. )
 
-  let (-) = (-.)
+  let ( - ) = ( -. )
 
   let multiply = ( *. )
 
@@ -644,27 +701,37 @@ module Float = struct
 
   let ( ** ) base exponent = power ~base ~exponent
 
-  let negate = (~-.)
+  let negate = ( ~-. )
 
-  let (~-) = (~-.)
+  let ( ~- ) = ( ~-. )
 
   let absolute = Js.Math.abs_float
 
   let clamp n ~lower ~upper =
-    if upper < lower then
-      raise (
-        Invalid_argument ("~lower:" ^ (Js.Float.toString lower) ^ " must be less than or equal to ~upper:" ^ (Js.Float.toString upper))
-      )
-    else if (Js.Float.isNaN lower || Js.Float.isNaN upper || Js.Float.isNaN n) then
-      nan
-    else
-      max lower (min upper n)
+    if upper < lower
+    then
+      raise
+        (Invalid_argument
+           ( "~lower:"
+           ^ Js.Float.toString lower
+           ^ " must be less than or equal to ~upper:"
+           ^ Js.Float.toString upper ))
+    else if Js.Float.isNaN lower || Js.Float.isNaN upper || Js.Float.isNaN n
+    then nan
+    else max lower (min upper n)
+
 
   let inRange n ~lower ~upper =
-    if upper < lower then
-      raise (Invalid_argument ("~lower:" ^ (Js.Float.toString lower) ^ " must be less than or equal to ~upper:" ^ (Js.Float.toString upper)))
-    else
-      n >= lower && n < upper
+    if upper < lower
+    then
+      raise
+        (Invalid_argument
+           ( "~lower:"
+           ^ Js.Float.toString lower
+           ^ " must be less than or equal to ~upper:"
+           ^ Js.Float.toString upper ))
+    else n >= lower && n < upper
+
 
   let in_range = inRange
 
@@ -672,7 +739,7 @@ module Float = struct
 
   let square_root = squareRoot
 
-  let log n ~base = Js.Math.log n / (Js.Math.log base)
+  let log n ~base = Js.Math.log n / Js.Math.log base
 
   let zero = 0.0
 
@@ -698,25 +765,13 @@ module Float = struct
 
   let is_finite = isFinite
 
-  let isInfinite n = not (Js.Float.isFinite n) && not (isNaN n)
+  let isInfinite n = (not (Js.Float.isFinite n)) && not (isNaN n)
 
   let is_infinite = isInfinite
 
-  let maximum x y =
-    if isNaN x || isNaN y then
-      nan
-    else if y > x then
-      y
-    else
-      x
+  let maximum x y = if isNaN x || isNaN y then nan else if y > x then y else x
 
-  let minimum x y =
-    if isNaN x || isNaN y then
-      nan
-    else if y < x then
-      y
-    else
-      x
+  let minimum x y = if isNaN x || isNaN y then nan else if y < x then y else x
 
   let hypotenuse = Js.Math.hypot
 
@@ -740,42 +795,37 @@ module Float = struct
 
   let atan2 ~y ~x = Js.Math.atan2 ~y ~x ()
 
-  type direction = [
-    | `Zero
+  type direction =
+    [ `Zero
     | `AwayFromZero
     | `Up
     | `Down
-    | `Closest of [
-      | `Zero
-      | `AwayFromZero
-      | `Up
-      | `Down
-      | `ToEven
+    | `Closest of [ `Zero | `AwayFromZero | `Up | `Down | `ToEven ]
     ]
-  ]
 
-  let round ?(direction = (`Closest `Up)) n =
+  let round ?(direction = `Closest `Up) n =
     match direction with
-    | `Up -> Js.Math.ceil_float n
-    | `Down -> Js.Math.floor_float n
-    | `Zero -> Js.Math.trunc n
-    | `AwayFromZero -> (
-        if n > 0. then Js.Math.ceil_float n
-        else Js.Math.floor_float n
-      )
-    | (`Closest `Zero) -> (
-        if n > 0. then Js.Math.ceil_float (n -. 0.5)
+    | `Up ->
+        Js.Math.ceil_float n
+    | `Down ->
+        Js.Math.floor_float n
+    | `Zero ->
+        Js.Math.trunc n
+    | `AwayFromZero ->
+        if n > 0. then Js.Math.ceil_float n else Js.Math.floor_float n
+    | `Closest `Zero ->
+        if n > 0.
+        then Js.Math.ceil_float (n -. 0.5)
         else Js.Math.floor_float (n +. 0.5)
-      )
-    | `Closest `AwayFromZero -> (
-        if n > 0. then Js.Math.floor_float (n +. 0.5)
+    | `Closest `AwayFromZero ->
+        if n > 0.
+        then Js.Math.floor_float (n +. 0.5)
         else Js.Math.ceil_float (n -. 0.5)
-      )
-    | (`Closest `Down) -> (
+    | `Closest `Down ->
         Js.Math.ceil_float (n -. 0.5)
-      )
-    | (`Closest `Up) -> Js.Math.round n
-    | (`Closest `ToEven) -> (
+    | `Closest `Up ->
+        Js.Math.round n
+    | `Closest `ToEven ->
         (* Outside of the range (roundNearestLowerBound..roundNearestUpperBound), all representable doubles
            are integers in the mathematical sense, and [round_nearest] should be identity.
 
@@ -790,25 +840,23 @@ module Float = struct
              - :     float = 4503599627370498.
            v}
         *)
-
         let roundNearestLowerBound = -.(2. ** 52.) in
-        let roundNearestUpperBound =    2. ** 52. in
-        if n <= roundNearestLowerBound || n >= roundNearestUpperBound then
-          n +. 0.
+        let roundNearestUpperBound = 2. ** 52. in
+        if n <= roundNearestLowerBound || n >= roundNearestUpperBound
+        then n +. 0.
         else
           let floor = floor n in
           let ceil_or_succ = floor +. 1. in
           let diff_floor = n -. floor in
           let diff_ceil = ceil_or_succ -. n in
-          if diff_floor < diff_ceil then
-            floor
-          else if diff_floor > diff_ceil then
-            ceil_or_succ
-          else if mod_float floor 2. = 0. then
-            floor
-          else
-            ceil_or_succ
-    )
+          if diff_floor < diff_ceil
+          then floor
+          else if diff_floor > diff_ceil
+          then ceil_or_succ
+          else if mod_float floor 2. = 0.
+          then floor
+          else ceil_or_succ
+
 
   let floor = Js.Math.floor_float
 
@@ -829,10 +877,8 @@ module Float = struct
   let from_int = fromInt
 
   let toInt f =
-    if Js.Float.isFinite f then
-      Some (Js.Math.unsafe_trunc f)
-    else
-      None
+    if Js.Float.isFinite f then Some (Js.Math.unsafe_trunc f) else None
+
 
   let to_int = toInt
 end
@@ -852,13 +898,13 @@ module Int = struct
 
   let one = 1
 
-  let add = (+)
+  let add = ( + )
 
-  let (+) = (+)
+  let ( + ) = ( + )
 
-  let subtract = (-)
+  let subtract = ( - )
 
-  let (-) = (-)
+  let ( - ) = ( - )
 
   let multiply = ( * )
 
@@ -868,15 +914,15 @@ module Int = struct
 
   let ( / ) = ( / )
 
-  let ( // ) n by  = Js.Int.toFloat n /. Js.Int.toFloat by
+  let ( // ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
 
   let power ~base ~exponent = Js.Math.pow_int ~base ~exp:exponent
 
   let ( ** ) base exponent = Js.Math.pow_int ~base ~exp:exponent
 
-  let negate = (~-)
+  let negate = ( ~- )
 
-  let (~-) = (~-)
+  let ( ~- ) = ( ~- )
 
   let modulo n ~by = n mod by
 
@@ -886,7 +932,7 @@ module Int = struct
 
   let minimum = Js.Math.min_int
 
-  let absolute n = if n < 0 then n * (-1) else n
+  let absolute n = if n < 0 then n * -1 else n
 
   let isEven n = n mod 2 = 0
 
@@ -897,16 +943,16 @@ module Int = struct
   let is_odd = isOdd
 
   let clamp n ~lower ~upper =
-    if upper < lower then
-      raise (Invalid_argument "~lower must be less than or equal to ~upper")
-    else
-      max lower (min upper n)
+    if upper < lower
+    then raise (Invalid_argument "~lower must be less than or equal to ~upper")
+    else max lower (min upper n)
+
 
   let inRange n ~lower ~upper =
-    if upper < lower then
-      raise (Invalid_argument "~lower must be less than or equal to ~upper")
-    else
-      n >= lower && n < upper
+    if upper < lower
+    then raise (Invalid_argument "~lower must be less than or equal to ~upper")
+    else n >= lower && n < upper
+
 
   let in_range = inRange
 
@@ -919,9 +965,8 @@ module Int = struct
   let to_string = toString
 
   let fromString s =
-    match int_of_string s with
-    | i -> Some i
-    | exception Failure _ -> None
+    match int_of_string s with i -> Some i | exception Failure _ -> None
+
 
   let from_string = fromString
 end
@@ -930,7 +975,7 @@ module Tuple2 = struct
   let create a b = (a, b)
 
   let first ((a, _) : 'a * 'b) : 'a = a
-  
+
   let second ((_, b) : 'a * 'b) : 'b = b
 
   let mapFirst ~(f : 'a -> 'x) ((a, b) : 'a * 'b) : 'x * 'b = (f a, b)
@@ -941,21 +986,23 @@ module Tuple2 = struct
 
   let map_second = mapSecond
 
-  let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y = (f a, g b)
+  let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ((a, b) : 'a * 'b) : 'x * 'y =
+    (f a, g b)
+
 
   let map_each = mapEach
-  
+
   let mapAll ~(f : 'a -> 'b) (a1, a2) = (f a1, f a2)
 
   let map_all = mapAll
 
   let swap (a, b) = (b, a)
 
-  let curry (f : (('a * 'b) -> 'c))  (a : 'a) (b : 'b) : 'c = f (a, b)
+  let curry (f : 'a * 'b -> 'c) (a : 'a) (b : 'b) : 'c = f (a, b)
 
-  let uncurry (f : ('a -> 'b -> 'c)) ((a, b) : ('a * 'b)) : 'c = f a b
+  let uncurry (f : 'a -> 'b -> 'c) ((a, b) : 'a * 'b) : 'c = f a b
 
-  let toList (a, b) = [a; b]
+  let toList (a, b) = [ a; b ]
 
   let to_list = toList
 end
@@ -966,46 +1013,62 @@ module Tuple3 = struct
   let first ((a, _, _) : 'a * 'b * 'c) : 'a = a
 
   let second ((_, b, _) : 'a * 'b * 'c) : 'b = b
-  
+
   let third ((_, _, c) : 'a * 'b * 'c) : 'c = c
 
-  let init ((a, b, _) : 'a * 'b * 'c): ('a * 'b) = (a, b)
+  let init ((a, b, _) : 'a * 'b * 'c) : 'a * 'b = (a, b)
 
-  let tail ((_, b, c) : 'a * 'b * 'c): ('b * 'c) = (b, c)
+  let tail ((_, b, c) : 'a * 'b * 'c) : 'b * 'c = (b, c)
 
-  let mapFirst ~(f : 'a -> 'x) ((a, b, c) : 'a * 'b * 'c) : 'x * 'b *'c = (f a, b, c)
+  let mapFirst ~(f : 'a -> 'x) ((a, b, c) : 'a * 'b * 'c) : 'x * 'b * 'c =
+    (f a, b, c)
+
 
   let map_first = mapFirst
 
-  let mapSecond ~(f : 'b -> 'y) ((a, b, c) : 'a * 'b * 'c) : 'a * 'y * 'c = (a, f b, c)
+  let mapSecond ~(f : 'b -> 'y) ((a, b, c) : 'a * 'b * 'c) : 'a * 'y * 'c =
+    (a, f b, c)
+
 
   let map_second = mapSecond
 
-  let mapThird ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z = (a, b, f c)
+  let mapThird ~(f : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'a * 'b * 'z =
+    (a, b, f c)
+
 
   let map_third = mapThird
 
-  let mapEach ~(f : 'a -> 'x) ~(g : 'b -> 'y) ~(h : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z = (f a, g b, h c)
+  let mapEach
+      ~(f : 'a -> 'x)
+      ~(g : 'b -> 'y)
+      ~(h : 'c -> 'z)
+      ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z =
+    (f a, g b, h c)
+
 
   let map_each = mapEach
 
-  let mapAll ~(f: 'a -> 'b) (a1, a2, a3) = (f a1, f a2, f a3)
+  let mapAll ~(f : 'a -> 'b) (a1, a2, a3) = (f a1, f a2, f a3)
 
   let map_all = mapAll
 
-  let rotateLeft ((a, b, c) : 'a * 'b * 'c) : ('b * 'c * 'a) = (b, c, a)
+  let rotateLeft ((a, b, c) : 'a * 'b * 'c) : 'b * 'c * 'a = (b, c, a)
 
   let rotate_left = rotateLeft
 
-  let rotateRight ((a, b, c) : 'a * 'b * 'c) : ('c * 'a * 'b) = (c, a, b)
+  let rotateRight ((a, b, c) : 'a * 'b * 'c) : 'c * 'a * 'b = (c, a, b)
 
   let rotate_right = rotateRight
 
-  let curry (f : (('a * 'b * 'c) -> 'd)) (a : 'a) (b : 'b)  (c : 'c) : 'd = f (a, b, c)
+  let curry (f : 'a * 'b * 'c -> 'd) (a : 'a) (b : 'b) (c : 'c) : 'd =
+    f (a, b, c)
 
-  let uncurry (f : 'a -> 'b -> 'c -> 'd) ((a, b, c) : ('a * 'b * 'c)) : 'd =  f a b c 
 
-  let toList ((a, b, c) : ('a * 'a * 'a)) : 'a list = [a; b; c]
+  let uncurry (f : 'a -> 'b -> 'c -> 'd) ((a, b, c) : 'a * 'b * 'c) : 'd =
+    f a b c
+
+
+  let toList ((a, b, c) : 'a * 'a * 'a) : 'a list = [ a; b; c ]
 
   let to_list = toList
 end
@@ -1016,10 +1079,12 @@ module String = struct
   let toInt (s : string) : (string, int) Result.t =
     try Ok (int_of_string s) with e -> Error (Printexc.to_string e)
 
+
   let to_int = toInt
 
   let toFloat (s : string) : (string, float) Result.t =
     try Ok (float_of_string s) with e -> Error (Printexc.to_string e)
+
 
   let to_float = toFloat
 
@@ -1030,18 +1095,22 @@ module String = struct
     | s ->
         Some (s.[0], String.sub s 1 (String.length s - 1))
 
+
   let dropLeft ~(count : int) (s : string) : string =
     Js.String.substr ~from:count s
+
 
   let drop_left = dropLeft
 
   let dropRight ~(count : int) (s : string) : string =
     if count < 1 then s else Js.String.slice ~from:0 ~to_:(-count) s
 
+
   let drop_right = dropRight
 
   let split ~(on : string) (s : string) : string list =
     Js.String.split on s |> Belt.List.fromArray
+
 
   let join ~(sep : string) (l : string list) : string = String.concat sep l
 
@@ -1051,6 +1120,7 @@ module String = struct
 
   let startsWith ~(prefix : string) (s : string) =
     Js.String.startsWith prefix s
+
 
   let starts_with = startsWith
 
@@ -1073,15 +1143,17 @@ module String = struct
   let contains ~(substring : string) (s : string) : bool =
     Js.String.includes substring s
 
+
   let repeat ~(count : int) (s : string) : string = Js.String.repeat count s
 
-  let reverse (s : string) =  
-    s 
-    |> Js.String.castToArrayLike 
-    |> Js.Array.from 
-    |> Js.Array.reverseInPlace 
+  let reverse (s : string) =
+    s
+    |> Js.String.castToArrayLike
+    |> Js.Array.from
+    |> Js.Array.reverseInPlace
     |> Belt.List.fromArray
     |> String.concat ""
+
 
   let fromList (l : char list) : string =
     l
@@ -1089,10 +1161,12 @@ module String = struct
     |> List.map ~f:Js.String.fromCharCode
     |> String.concat ""
 
+
   let from_list = fromList
 
   let toList (s : string) : char list =
     s |> Js.String.castToArrayLike |> Js.Array.from |> Belt.List.fromArray
+
 
   let to_list = toList
 
@@ -1114,6 +1188,7 @@ module String = struct
     Js.String.slice ~from:0 ~to_:index s
     ^ insert
     ^ Js.String.sliceToEnd ~from:index s
+
 
   let insert_at = insertAt
 end
@@ -1163,7 +1238,7 @@ module StrSet = struct
     Format.pp_print_string fmt "{ " ;
     Set.forEach set (fun v ->
         __pp_value fmt v ;
-        Format.pp_print_string fmt ", " ) ;
+        Format.pp_print_string fmt ", ") ;
     Format.pp_print_string fmt " }" ;
     ()
 end
@@ -1213,7 +1288,7 @@ module IntSet = struct
     Format.pp_print_string fmt "{ " ;
     Set.forEach set (fun v ->
         __pp_value fmt v ;
-        Format.pp_print_string fmt ", " ) ;
+        Format.pp_print_string fmt ", ") ;
     Format.pp_print_string fmt " }" ;
     ()
 end
@@ -1234,6 +1309,7 @@ module StrDict = struct
   let fromList (l : ('key * 'value) list) : 'value t =
     l |> Belt.List.toArray |> Map.fromArray
 
+
   let from_list = fromList
 
   let get ~(key : key) (dict : 'value t) : 'value option = Map.get dict key
@@ -1241,11 +1317,13 @@ module StrDict = struct
   let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
     Map.set dict key value
 
+
   let keys m : key list = Map.keysToArray m |> Belt.List.fromArray
 
   let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
       'value t =
     Map.update dict key f
+
 
   let map dict ~f = Map.map dict f
 
@@ -1256,9 +1334,11 @@ module StrDict = struct
   let toString (d : 'value t) =
     d
     |> toList
-    |> List.map ~f:(fun (k, v) -> "\"" ^ k ^ "\": \"" ^ Js.String.make v ^ "\"")
+    |> List.map ~f:(fun (k, v) ->
+           "\"" ^ k ^ "\": \"" ^ Js.String.make v ^ "\"")
     |> String.join ~sep:", "
     |> fun s -> "{" ^ s ^ "}"
+
 
   let to_string = toString
 
@@ -1271,9 +1351,10 @@ module StrDict = struct
         Format.pp_print_string fmt k ;
         Format.pp_print_string fmt ": " ;
         valueFormatter fmt v ;
-        Format.pp_print_string fmt ",  " ) ;
+        Format.pp_print_string fmt ",  ") ;
     Format.pp_print_string fmt "}" ;
     ()
+
 
   let merge
       ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
@@ -1298,6 +1379,7 @@ module IntDict = struct
   let fromList (l : ('key * 'value) list) : 'value t =
     l |> Belt.List.toArray |> Map.fromArray
 
+
   let from_list = fromList
 
   let get ~(key : key) (dict : 'value t) : 'value option = Map.get dict key
@@ -1305,9 +1387,11 @@ module IntDict = struct
   let insert ~(key : key) ~(value : 'value) (dict : 'value t) : 'value t =
     Map.set dict key value
 
+
   let update ~(key : key) ~(f : 'v option -> 'v option) (dict : 'value t) :
       'value t =
     Map.update dict key f
+
 
   let keys m : key list = Map.keysToArray m |> Belt.List.fromArray
 
@@ -1321,9 +1405,10 @@ module IntDict = struct
     d
     |> toList
     |> List.map ~f:(fun (k, v) ->
-           "\"" ^ string_of_int k ^ "\": \"" ^ Js.String.make v ^ "\"" )
+           "\"" ^ string_of_int k ^ "\": \"" ^ Js.String.make v ^ "\"")
     |> String.join ~sep:", "
     |> fun s -> "{" ^ s ^ "}"
+
 
   let to_string = toString
 
@@ -1336,9 +1421,10 @@ module IntDict = struct
         Format.pp_print_int fmt k ;
         Format.pp_print_string fmt ": " ;
         valueFormatter fmt v ;
-        Format.pp_print_string fmt ",  " ) ;
+        Format.pp_print_string fmt ",  ") ;
     Format.pp_print_string fmt "}" ;
     ()
+
 
   let merge
       ~(f : key -> 'v1 option -> 'v2 option -> 'v3 option)
@@ -1346,4 +1432,3 @@ module IntDict = struct
       (dict2 : 'v2 t) : 'v3 t =
     Map.merge dict1 dict2 f
 end
-
