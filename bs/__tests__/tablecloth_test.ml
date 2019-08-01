@@ -41,6 +41,25 @@ let () =
             "returns false for literals with a non-zero number of elements"
             (fun () -> expect (Array.isEmpty [| 1234 |]) |> toEqual false)) ;
 
+      describe "includes" (fun () ->
+          test "returns true when [value] is present in the array" (fun () ->
+              expect (Array.includes [| 1; 2; 3 |] 2 ~equal:( = ))
+              |> toEqual true) ;
+
+          test "can be used with custom `equal` functions" (fun () ->
+              expect
+                (Array.includes
+                   [| (1, "one"); (2, "two"); (3, "three") |]
+                   (2, "Two")
+                   ~equal:(fun (first, _) (second, _) -> first = second))
+              |> toEqual true) ;
+
+          test
+            "returns false when [equal] returns false for all elements"
+            (fun () ->
+              expect (Array.includes [| 1; 2; 3 |] 4 ~equal:(fun _ _ -> false))
+              |> toEqual false)) ;
+
       describe "initialize" (fun () ->
           test "create empty array" (fun () ->
               expect (Array.initialize ~length:0 ~f:identity) |> toEqual [||]) ;

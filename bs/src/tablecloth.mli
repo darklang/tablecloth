@@ -64,6 +64,8 @@ module Array : sig
 
   val initialize : length:int -> f:(int -> 'a) -> 'a array
 
+  val includes : 'a array -> 'a -> equal:('a -> 'a -> bool) -> bool
+
   val repeat : length:int -> 'a -> 'a array
 
   val range : ?from:int -> int -> int array

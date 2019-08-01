@@ -19,6 +19,8 @@ module Array = struct
 
   let is_empty = isEmpty
 
+  let includes = Base.Array.mem
+
   let initialize ~(length : int) ~(f : int -> 'a) =
     if length <= 0 then empty else Base.Array.init length ~f
 

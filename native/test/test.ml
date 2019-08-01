@@ -53,6 +53,18 @@ let t_Array () =
     (Array.isEmpty [| 1234 |])
     false ;
 
+  AT.check
+    AT.bool
+    "includes - returns true when [value] is present in the array"
+    (Array.includes [| 1; 2; 3 |] 2 ~equal:(=))
+    true ;
+
+  AT.check
+    AT.bool
+    "includes - returns false when [equal] returns false for all elements"
+    (Array.includes [| 1; 2; 3 |] 4 ~equal:(fun _ _ -> false))
+    false ;
+
   AT.check (AT.list AT.int) "map2 empty lists" (List.map2 ~f:( + ) [] []) [] ;
   AT.check
     (AT.list AT.int)

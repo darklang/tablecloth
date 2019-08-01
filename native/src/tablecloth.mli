@@ -26,9 +26,9 @@ module Array : sig
     {[Array.singleton "hi" = [|"hi"|]]} *)
 
   val length : 'a array -> int
-  (** Return the length of an array.
+  (** Returns the length of an array.
 
-    {[Array.length [|1; 2, 3|] = 3]}  
+    {[Array.length [|1; 2; 3|] = 3]}
 
     {[Array.length [||] = 0]} *)
 
@@ -42,6 +42,20 @@ module Array : sig
     {[Array.isEmpty [|1; 2; 3|] = false]} *)
 
   val is_empty : 'a array -> bool
+
+  val includes : 'a array -> 'a -> equal:('a -> 'a -> bool) -> bool
+  (**
+    [Array.includes array value ~equal] checks whether [value] is present in [array], using [equal] to test for equality.
+
+    {[Array.includes [|1; 2; 3\] 2 ~equal:Int.equal = true]}
+
+    {[
+      Array.includes
+        [|(1, "one"); (2, "two"); (3, "three")|]
+        (2, "Two")
+        ~equal:(fun (first, _) (second, _) -> Int.equal first second)
+        = true]}
+  *)
 
   val initialize : length:int -> f:(int -> 'a) -> 'a array
   (** Initialize an array. [Array.initialize ~length:n ~f] creates an array of length [n] with

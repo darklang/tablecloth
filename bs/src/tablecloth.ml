@@ -21,6 +21,10 @@ module Array = struct
 
   let initialize ~length ~f = Belt.Array.makeBy length f
 
+  let includes array value ~equal =
+    Belt.Array.some array (fun element -> equal element value)
+
+
   let repeat ~length (e : 'a) : 'a array = Belt.Array.make length e
 
   let range ?(from = 0) (to_ : int) : int array =
