@@ -20,6 +20,7 @@ jobs:
       - run: make deps-bs
       - run: make build-bs
       - run: make test-bs
+      - run: make doc-bs
       - save_cache:
           key: v1-dependencies-{{ .Branch }}-{{ checksum "bs/package-lock.json" }}
           paths:
@@ -44,6 +45,7 @@ jobs:
       - run: make deps-native
       - run: make build-native
       - run: make test-native
+      - run: make doc-native
       - save_cache:
           key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
