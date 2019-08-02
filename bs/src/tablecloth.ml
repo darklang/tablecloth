@@ -9,6 +9,8 @@ let identity (value : 'a) : 'a = value
 let flip f x y = f y x
 
 module Array = struct
+  type 'a t = 'a array
+
   let empty : 'a array = [||]
 
   let singleton a = [| a |]
@@ -56,6 +58,12 @@ module Array = struct
   let float_sum = floatSum
 
   let filter ~(f : 'a -> bool) (a : 'a array) : 'a array = Belt.Array.keep a f
+
+  let swap a i j =
+    let temp = a.(i) in
+    a.(i) <- a.(j) ;
+    a.(j) <- temp
+
 
   let map ~(f : 'a -> 'b) (a : 'a array) : 'b array = Belt.Array.map a f
 

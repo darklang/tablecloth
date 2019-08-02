@@ -11,6 +11,8 @@ module Array : sig
 
    You can create an [array] in OCaml with the [[|1; 2; 3|]] syntax. *)
 
+  type 'a t = 'a array
+
   val empty : 'a array
   (** An empty array.
 
@@ -147,6 +149,11 @@ animals = [|"antelope"; "bat"; "cat"|]]} *)
   (** Keep elements that [f] returns [true] for.
 
     {[Array.filter ~f:Int.isEven [|1; 2; 3; 4; 5; 6|] = [|2; 4; 6|]]} *)
+
+  val swap : 'a t -> int -> int -> unit
+  (** [Array.swap array i j] swaps the value at index [i] with the value at index [j].
+    {[Array.swap [|1;2;3|] 1 2 = [|1;3;2|]
+  *)
 
   val map : f:('a -> 'b) -> 'a array -> 'b array
   (** Create a new array which is the result of applying a function [f] to every element.
