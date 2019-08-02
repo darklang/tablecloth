@@ -198,13 +198,20 @@ Array.map2
 
   val flat_map : f:('a -> 'b array) -> 'a array -> 'b array
 
-  val find : f:('a -> bool) -> 'a array -> 'a option
+  val find : 'a array -> f:('a -> bool) -> 'a option
   (** Returns as an option the first element for which f evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None] 
     {[Array.find ~f:Int.isEven [|1; 3; 4; 8;|] = Some 4]}
 
     {[Array.find ~f:Int.isOdd [|0; 2; 4; 8;|] = None]}
 
     {[Array.find ~f:Int.isEven [||] = None]} *)
+
+  val findIndex : 'a array -> f:(int -> 'a -> bool) -> (int * 'a) option
+  (** Similar to {!Array.find} but [f] is also called with the current index, and the return value will be a tuple of the index the passing value was found at and the passing value.
+    {[Array.findIndex ~f:(fun index number -> index > 2 && Int.isEven number) [|1; 3; 4; 8;|] = Some (3, 8)]}
+  *)
+
+  val find_index : 'a array -> f:(int -> 'a -> bool) -> (int * 'a) option
 
   val any : f:('a -> bool) -> 'a array -> bool
   (**  Determine if [f] returns true for [any] values in an array.

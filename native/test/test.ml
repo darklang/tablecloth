@@ -336,6 +336,28 @@ let t_Array () =
     None ;
 
   AT.check
+    (AT.option (AT.pair AT.int AT.int))
+    "findIndex - returns the first (index,element) tuple which `f` returns true for"
+    (Array.findIndex
+       ~f:(fun index number -> index > 2 && Int.isEven number)
+       [| 1; 3; 4; 8 |])
+    (Some (3, 8)) ;
+
+  AT.check
+    (AT.option (AT.pair AT.int AT.int))
+    "findIndex - returns `None` if `f` returns false for all elements "
+    (Array.findIndex ~f:(fun _ _ -> false) [| 0; 2; 4; 8 |])
+    None ;
+
+  AT.check
+    (AT.option (AT.pair AT.int AT.int))
+    "findIndex - returns `None` for an empty array"
+    (Array.findIndex
+       ~f:(fun index number -> index > 2 && Int.isEven number)
+       [||])
+    None ;
+
+  AT.check
     AT.bool
     "any - returns false for empty arrays"
     (Array.any [||] ~f:Int.isEven)

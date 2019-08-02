@@ -202,6 +202,29 @@ let () =
           test "returns `None` for an empty array" (fun () ->
               expect (Array.find ~f:Int.isEven [||]) |> toEqual None)) ;
 
+      describe "findIndex" (fun () ->
+          test
+            "returns the first (index,element) tuple which `f` returns true for"
+            (fun () ->
+              expect
+                (Array.findIndex
+                   ~f:(fun index number -> index > 2 && Int.isEven number)
+                   [| 1; 3; 4; 8 |])
+              |> toEqual (Some (3, 8))) ;
+
+          test
+            "returns `None` if `f` returns false for all elements "
+            (fun () ->
+              expect (Array.findIndex ~f:(fun _ _ -> false) [| 0; 2; 4; 8 |])
+              |> toEqual None) ;
+
+          test "returns `None` for an empty array" (fun () ->
+              expect
+                (Array.findIndex
+                   ~f:(fun index number -> index > 2 && Int.isEven number)
+                   [||])
+              |> toEqual None)) ;
+
       describe "any" (fun () ->
           test "returns false for empty arrays" (fun () ->
               expect (Array.any [||] ~f:Int.isEven) |> toEqual false) ;
