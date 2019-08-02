@@ -338,6 +338,8 @@ numbers = [|3; 2; 1|]]} *)
 end
 
 module List : sig
+  type 'a t = 'a list
+
   val concat : 'a list list -> 'a list
 
   val sum : int list -> int
@@ -348,8 +350,20 @@ module List : sig
 
   val map : f:('a -> 'b) -> 'a list -> 'b list
 
-  val sliding : ?step : int -> 'a t -> size:int -> 'a t t
-  (** TODO *)
+  val sliding : ?step : int -> 'a t -> size : int ->  'a t t
+  (** Provides a sliding window over an array.
+      Can also be provided with [step] which determines how many elements to skip each time the window advances.
+
+      {[List.sliding [1;2;3;4;5] ~size:1 = [[1]; [2]; [3]; [4]; [5]] ]}
+
+      {[List.sliding [1;2;3;4;5] ~size:2 = [[1;2]; [2;3]; [3;4]; [4;5]] ]}
+
+      {[List.sliding [1;2;3;4;5] ~size:3 = [[1;2;3]; [2;3;4]; [3;4;5]] ]}
+
+      {[List.sliding [1;2;3;4;5] ~size:2 ~step:2 = [[1;2]; [3;4]] ]}
+
+      {[List.sliding [1;2;3;4;5] ~size:1 ~step:3 = [[1]; [4]] ]}
+  *)
 
   val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list
 

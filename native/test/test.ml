@@ -59,21 +59,25 @@ let t_Array () =
     "map2 one element"
     (List.map2 ~f:( + ) [ 1 ] [ 1 ])
     [ 2 ] ;
+
   AT.check
     (AT.list AT.int)
     "map2 two elements"
     (List.map2 ~f:( + ) [ 1; 2 ] [ 1; 2 ])
     [ 2; 4 ] ;
+
   AT.check
     (AT.array AT.int)
     "initialize - create empty array"
     (Array.initialize ~length:0 ~f:identity)
     [||] ;
+
   AT.check
     (AT.array AT.int)
     "initialize - negative length gives an empty array"
     (Array.initialize ~length:(-1) ~f:identity)
     [||] ;
+
   AT.check
     (AT.array AT.int)
     "initialize - create array with initialize"
@@ -294,6 +298,36 @@ let t_Array () =
     "map - Apply a function [f] to every element in an array"
     (Array.map ~f:sqrt [| 1.0; 4.0; 9.0 |])
     [| 1.0; 2.0; 3.0 |] ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 1"
+    (Array.sliding [|1;2;3;4;5|] ~size:1)
+    [|[|1|]; [|2|]; [|3|]; [|4|]; [|5|]|];
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 2"
+    (Array.sliding [|1;2;3;4;5|] ~size:2)
+    [|[|1;2|]; [|2;3|]; [|3;4|]; [|4;5|]|];
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 3 "
+    (Array.sliding [|1;2;3;4;5|] ~size:3)
+    [|[|1;2;3|]; [|2;3;4|]; [|3;4;5|]|];
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 2, size 2"
+    (Array.sliding [|1;2;3;4;5|] ~size:2 ~step:2)
+    [|[|1;2|]; [|3;4|]|];
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 1, size 3"
+    (Array.sliding [|1;2;3;4;5|] ~size:1 ~step:3)
+    [|[|1|]; [|4|]|];
 
   AT.check
     (AT.array AT.int)
@@ -1484,6 +1518,39 @@ let t_List () =
     "reverse two elements"
     (List.reverse [ 0; 1 ])
     [ 1; 0 ] ;
+
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 1"
+    [[1]; [2]; [3]; [4]; [5]]
+    (List.sliding [1;2;3;4;5] ~size:1)
+    ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 2"
+    [[1;2]; [2;3]; [3;4]; [4;5]]
+    (List.sliding [1;2;3;4;5] ~size:2);
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 3 "
+    (List.sliding [1;2;3;4;5] ~size:3)
+    [[1;2;3]; [2;3;4]; [3;4;5]];
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 2, size 2"
+    (List.sliding [1;2;3;4;5] ~size:2 ~step:2)
+    [[1;2]; [3;4]];
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 1, size 3"
+    (List.sliding [1;2;3;4;5] ~size:1 ~step:3)
+    [[1]; [4]];
+
 
   AT.check (AT.list AT.int) "map2 empty lists" (List.map2 ~f:( + ) [] []) [] ;
   AT.check
