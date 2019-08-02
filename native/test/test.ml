@@ -56,7 +56,7 @@ let t_Array () =
   AT.check
     AT.bool
     "includes - returns true when [value] is present in the array"
-    (Array.includes [| 1; 2; 3 |] 2 ~equal:(=))
+    (Array.includes [| 1; 2; 3 |] 2 ~equal:( = ))
     true ;
 
   AT.check
