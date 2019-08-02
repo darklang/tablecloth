@@ -2179,8 +2179,7 @@ module Set : sig
 
   (** Construct sets which can hold any data type using the polymorphic [compare] function *)
   module Poly : sig
-
-    type nonrec 'a t = ('a,  Base.Comparator.Poly.comparator_witness) t
+    type nonrec 'a t = ('a, Base.Comparator.Poly.comparator_witness) t
 
     val empty : 'a t
     (** The empty set *)
@@ -2207,7 +2206,6 @@ module Set : sig
 
   (** Construct sets of {!Int}s *)
   module Int : sig
-
     type nonrec t = (Int.t, Base.Int.comparator_witness) t
 
     val empty : t
@@ -2295,10 +2293,15 @@ module Map : sig
   val get : ('k, 'v, 'cmp) t -> 'k -> 'v option
   (** Get the value associated with a key. If the key is not present in the map, returns [None]. *)
 
-  val find : ('k, 'v, _) t -> f:(key:'k -> value:'v -> bool) -> ('k * 'v) option
+  val find :
+    ('k, 'v, _) t -> f:(key:'k -> value:'v -> bool) -> ('k * 'v) option
   (** Returns, as an {!Option} the first key-value pair for which [f] evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None]. *)
 
-  val update : ('k, 'v, 'cmp) t -> key:'k -> f:('v option -> 'v option) -> ('k, 'v, 'cmp) t
+  val update :
+       ('k, 'v, 'cmp) t
+    -> key:'k
+    -> f:('v option -> 'v option)
+    -> ('k, 'v, 'cmp) t
   (** Update the value for a specific key using [f]. If [key] is not present in the map [f] will be called with [None]. *)
 
   val length : (_, _, _) t -> int
@@ -2321,10 +2324,10 @@ module Map : sig
   (** {1 Combine} *)
 
   val merge :
-    ('k, 'v1, 'cmp) t ->
-    ('k, 'v2, 'cmp) t ->
-    f:('k -> 'v1 option -> 'v2 option -> 'v3 option) ->
-    ('k, 'v3, 'cmp) t
+       ('k, 'v1, 'cmp) t
+    -> ('k, 'v2, 'cmp) t
+    -> f:('k -> 'v1 option -> 'v2 option -> 'v3 option)
+    -> ('k, 'v3, 'cmp) t
   (**
     Combine two maps. You provide a function [f] which is provided the key and the optional value from each map and needs to account for the three possibilities:
 
@@ -2343,10 +2346,14 @@ module Map : sig
   val filter : ('k, 'v, 'cmp) t -> f:('v -> bool) -> ('k, 'v, 'cmp) t
   (** Keep elements that [f] returns [true] for. *)
 
-  val partition : ('k, 'v, 'cmp) t -> f:(key:'k -> value:'v -> bool) -> ('k, 'v, 'cmp) t * ('k, 'v, 'cmp) t
+  val partition :
+       ('k, 'v, 'cmp) t
+    -> f:(key:'k -> value:'v -> bool)
+    -> ('k, 'v, 'cmp) t * ('k, 'v, 'cmp) t
   (** Divide a map into two, the first map will contain the key-value pairs that [f] returns [true] for, pairs that [f] returns [false] for will end up in the second. *)
 
-  val fold : ('k, 'v, _) t -> initial:'a -> f:('a -> key:'k -> value:'v -> 'a) -> 'a
+  val fold :
+    ('k, 'v, _) t -> initial:'a -> f:('a -> key:'k -> value:'v -> 'a) -> 'a
   (** Fold over the key-value pairs in a map. *)
 
   val forEach : (_, 'v, _) t -> f:('v -> unit) -> unit
@@ -2374,7 +2381,8 @@ module Map : sig
 
   (** Construct a Map which can be keyed by any data type using the polymorphic [compare] function. *)
   module Poly : sig
-    type nonrec ('key, 'value) t = ('key, 'value, Base.Comparator.Poly.comparator_witness) t
+    type nonrec ('key, 'value) t =
+      ('key, 'value, Base.Comparator.Poly.comparator_witness) t
 
     val empty : ('k, 'v) t
     (** A map with nothing in it. *)
@@ -2441,17 +2449,17 @@ module Map : sig
     val from_list : (string * 'value) list -> 'value t
   end
 
-(* module Regex : sig *)
-(*   type t *)
-(*  *)
-(*   type result *)
-(*  *)
-(*   val regex : string -> t *)
-(*  *)
-(*   val contains : re:t -> string -> bool *)
-(*  *)
-(*   val replace : re:t -> repl:string -> string -> string *)
-(*  *)
-(*   val matches : re:t -> string -> result option *)
-(* end *)
+  (* module Regex : sig *)
+  (*   type t *)
+  (*  *)
+  (*   type result *)
+  (*  *)
+  (*   val regex : string -> t *)
+  (*  *)
+  (*   val contains : re:t -> string -> bool *)
+  (*  *)
+  (*   val replace : re:t -> repl:string -> string -> string *)
+  (*  *)
+  (*   val matches : re:t -> string -> result option *)
+  (* end *)
 end

@@ -1258,29 +1258,36 @@ module Map = struct
 
   let get = Base.Map.find
 
-  let update m ~key ~f =
-    Base.Map.change m key ~f
+  let update m ~key ~f = Base.Map.change m key ~f
 
   let merge m1 m2 ~f =
     Base.Map.merge m1 m2 ~f:(fun ~key desc ->
-      match desc with
-      | `Left v1 -> f key (Some v1) None
-      | `Right v2 -> f key None (Some v2)
-      | `Both (v1, v2) -> f key (Some v1) (Some v2) )
+        match desc with
+        | `Left v1 ->
+            f key (Some v1) None
+        | `Right v2 ->
+            f key None (Some v2)
+        | `Both (v1, v2) ->
+            f key (Some v1) (Some v2))
+
 
   let map = Base.Map.map
 
   let filter = Base.Map.filter
 
-  let partition m ~f = Base.Map.partition_mapi m ~f:(fun ~key ~data ->
-    if (f ~key ~value:data) then `Fst data else `Snd data
-  )
+  let partition m ~f =
+    Base.Map.partition_mapi m ~f:(fun ~key ~data ->
+        if f ~key ~value:data then `Fst data else `Snd data)
 
-  let find m ~f = Base.Map.fold m ~init:None ~f:(fun ~key ~data matching ->
-    match matching with
-    | Some _ -> matching
-    | None -> if (f ~key ~value:data) then Some (key, data) else None
-  )
+
+  let find m ~f =
+    Base.Map.fold m ~init:None ~f:(fun ~key ~data matching ->
+        match matching with
+        | Some _ ->
+            matching
+        | None ->
+            if f ~key ~value:data then Some (key, data) else None)
+
 
   let any = Base.Map.exists
 
@@ -1290,9 +1297,10 @@ module Map = struct
 
   let for_each = forEach
 
-  let fold m ~initial ~f = Base.Map.fold m ~init:initial ~f:(fun ~key ~data acc ->
-    f acc ~key ~value:data
-  )
+  let fold m ~initial ~f =
+    Base.Map.fold m ~init:initial ~f:(fun ~key ~data acc ->
+        f acc ~key ~value:data)
+
 
   let keys = Base.Map.keys
 
@@ -1307,7 +1315,8 @@ module Map = struct
   let to_list = toList
 
   module Poly = struct
-    type nonrec ('k, 'v) t = ('k, 'v, Base.Comparator.Poly.comparator_witness) t
+    type nonrec ('k, 'v) t =
+      ('k, 'v, Base.Comparator.Poly.comparator_witness) t
 
     let empty = Base.Map.Poly.empty
 
@@ -1329,7 +1338,9 @@ module Map = struct
 
     let singleton ~key ~value = Base.Map.singleton (module Base.Int) key value
 
-    let fromList l = Base.Map.of_alist_reduce (module Base.Int) l ~f:(fun _ curr -> curr)
+    let fromList l =
+      Base.Map.of_alist_reduce (module Base.Int) l ~f:(fun _ curr -> curr)
+
 
     let from_list = fromList
 
@@ -1343,9 +1354,13 @@ module Map = struct
 
     let empty = Base.Map.empty (module Base.String)
 
-    let singleton ~key ~value = Base.Map.singleton (module Base.String) key value
+    let singleton ~key ~value =
+      Base.Map.singleton (module Base.String) key value
 
-    let fromList l = Base.Map.of_alist_reduce (module Base.String) l ~f:(fun _ curr -> curr)
+
+    let fromList l =
+      Base.Map.of_alist_reduce (module Base.String) l ~f:(fun _ curr -> curr)
+
 
     let from_list = fromList
 
