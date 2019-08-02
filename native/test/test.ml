@@ -346,9 +346,7 @@ let t_Array () =
   AT.check
     (AT.option (AT.pair AT.int AT.int))
     "findIndex - returns `None` if `f` returns false for all elements "
-    (Array.findIndex
-       ~f:(fun _ _ -> false)
-       [| 0; 2; 4; 8 |])
+    (Array.findIndex ~f:(fun _ _ -> false) [| 0; 2; 4; 8 |])
     None ;
 
   AT.check
