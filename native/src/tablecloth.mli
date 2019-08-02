@@ -277,7 +277,7 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
   
     {[Array.slice ~from:(-2)  ~to_:(-1) [|0; 1; 2; 3; 4|] = [|3|]]} *)
 
-  val sliding : ?step : int -> 'a t -> size : int ->  'a t t
+  val sliding : ?step:int -> 'a t -> size:int -> 'a t t
   (** Provides a sliding window over an array.
       Can also be provided with [step] which determines how many elements to skip each time the window advances.
 
@@ -350,8 +350,9 @@ module List : sig
 
   val map : f:('a -> 'b) -> 'a list -> 'b list
 
-  val sliding : ?step : int -> 'a t -> size : int ->  'a t t
-  (** Provides a sliding window over an array.
+  val sliding : ?step:int -> 'a t -> size:int -> 'a t t
+  (** Provides a sliding window over a list.
+
       Can also be provided with [step] which determines how many elements to skip each time the window advances.
 
       {[List.sliding [1;2;3;4;5] ~size:1 = [[1]; [2]; [3]; [4]; [5]] ]}
@@ -362,7 +363,11 @@ module List : sig
 
       {[List.sliding [1;2;3;4;5] ~size:2 ~step:2 = [[1;2]; [3;4]] ]}
 
-      {[List.sliding [1;2;3;4;5] ~size:1 ~step:3 = [[1]; [4]] ]}
+      {[List.sliding [1;2;3;4;5] ~size:1 ~step:3 = [[1]; [4]]
+
+      {[List.sliding [1;2;3;4;5] ~size:2 ~step:3 = [[1; 2]; [4; 5]]]}
+
+      {[List.sliding [1;2;3;4;5] ~size:7 = []]}
   *)
 
   val indexedMap : f:(int -> 'a -> 'b) -> 'a list -> 'b list

@@ -193,6 +193,34 @@ let () =
           expect (Array.flatMap ~f:duplicate [| 1; 2; 3 |])
           |> toEqual [| 1; 1; 2; 2; 3; 3 |]) ;
 
+      describe "sliding" (fun () ->
+          test "size 1" (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:1)
+              |> toEqual [| [| 1 |]; [| 2 |]; [| 3 |]; [| 4 |]; [| 5 |] |]) ;
+
+          test "size 2" (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:2)
+              |> toEqual [| [| 1; 2 |]; [| 2; 3 |]; [| 3; 4 |]; [| 4; 5 |] |]) ;
+
+          test "step 3 " (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:3)
+              |> toEqual [| [| 1; 2; 3 |]; [| 2; 3; 4 |]; [| 3; 4; 5 |] |]) ;
+
+          test "size 2, step 2" (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:2 ~step:2)
+              |> toEqual [| [| 1; 2 |]; [| 3; 4 |] |]) ;
+
+          test "size 1, step 3" (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:1 ~step:3)
+              |> toEqual [| [| 1 |]; [| 4 |] |]) ;
+
+          test "size 2, step 3" (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:2 ~step:3)
+              |> toEqual [| [| 1; 2 |]; [| 4; 5 |] |]) ;
+
+          test "step 7" (fun () ->
+              expect (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:7) |> toEqual [||])) ;
+
       describe "find" (fun () ->
           test
             "returns the first element which `f` returns true for"
@@ -1096,6 +1124,34 @@ let () =
           test "indexedMap two elements" (fun () ->
               expect (List.indexedMap ~f:(fun i _ -> i) [ 'a'; 'b' ])
               |> toEqual [ 0; 1 ])) ;
+
+      describe "sliding" (fun () ->
+          test "size 1" (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:1)
+              |> toEqual [ [ 1 ]; [ 2 ]; [ 3 ]; [ 4 ]; [ 5 ] ]) ;
+
+          test "size 2" (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:2)
+              |> toEqual [ [ 1; 2 ]; [ 2; 3 ]; [ 3; 4 ]; [ 4; 5 ] ]) ;
+
+          test "step 3 " (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:3)
+              |> toEqual [ [ 1; 2; 3 ]; [ 2; 3; 4 ]; [ 3; 4; 5 ] ]) ;
+
+          test "size 2, step 2" (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:2 ~step:2)
+              |> toEqual [ [ 1; 2 ]; [ 3; 4 ] ]) ;
+
+          test "size 1, step 3" (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:1 ~step:3)
+              |> toEqual [ [ 1 ]; [ 4 ] ]) ;
+
+          test "size 2, step 3" (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:2 ~step:3)
+              |> toEqual [ [ 1; 2 ]; [ 4; 5 ] ]) ;
+
+          test "step 7" (fun () ->
+              expect (List.sliding [ 1; 2; 3; 4; 5 ] ~size:7) |> toEqual [])) ;
 
       describe "partition" (fun () ->
           test "empty list" (fun () ->
