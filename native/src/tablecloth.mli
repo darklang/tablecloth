@@ -24,7 +24,7 @@ module Array : sig
     {[Array.singleton 1234 = [|1234|]]}
 
     {[Array.singleton "hi" = [|"hi"|]]} *)
-  
+
   val length : 'a array -> int
   (** Return the length of an array.
 
@@ -41,7 +41,7 @@ module Array : sig
 
     {[Array.isEmpty [|1; 2; 3|] = false]} *)
 
-  val is_empty : 'a array -> bool  
+  val is_empty : 'a array -> bool
 
   val initialize : length:int -> f:(int -> 'a) -> 'a array
   (** Initialize an array. [Array.initialize ~length:n ~f] creates an array of length [n] with
@@ -175,7 +175,8 @@ Array.map2
   [|2; 5; 7; 8|] = 
     [|("alice",2); ("bob",5); ("chuck",7)|] ]} *)
 
-  val map3 : f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array
+  val map3 :
+    f:('a -> 'b -> 'c -> 'd) -> 'a array -> 'b array -> 'c array -> 'd array
   (** Combine three arrays, using [f] to combine each {!Tuple3} of elements.
     If one array is longer, the extra elements are dropped.
 
@@ -235,14 +236,14 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|]]} *)
 
     {[Array.concatenate [|[|1; 2|]; [|3|]; [|4; 5|]|] = [|1; 2; 3; 4; 5|]]} *)
 
-  val intersperse : sep : 'a -> 'a array -> 'a array
+  val intersperse : sep:'a -> 'a array -> 'a array
   (** Places [sep] between all elements of the given array.
 
     {[Array.intersperse ~sep:"on" [|"turtles"; "turtles"; "turtles"|] = [|"turtles"; "on"; "turtles"; "on"; "turtles"|]]}
 
     {[Array.intersperse ~sep:0 [||] = [||]]} *)
 
-  val slice : from : int -> ?to_: int -> 'a array -> 'a array
+  val slice : from:int -> ?to_:int -> 'a array -> 'a array
   (** Get a sub-section of an array. [from] is a zero-based index where we will start our slice. 
     The [to_] is a zero-based index that indicates the end of the slice. 
 
@@ -262,8 +263,8 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|]]} *)
   
     {[Array.slice ~from:(-2)  ~to_:(-1) [|0; 1; 2; 3; 4|] = [|3|]]} *)
 
-  val foldLeft : f:('a -> 'b -> 'b)  -> initial:'b -> 'a array -> 'b
-  (** Transforms an array to a value which is result of running each element in the array through [f],
+  val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
+  (** Reduces collection to a value which is the accumulated result of running each element in the array through [f], 
       where each successive invocation is supplied the return value of the previous. 
     
     Read [foldLeft] as 'fold from the left'. 
@@ -272,7 +273,7 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|]]} *)
     
     {[Array.foldLeft ~f:((fun element list -> element :: list)) ~initial:[] [|1; 2; 3|] = [3; 2; 1]]} *)
 
-  val fold_left : f:('a -> 'b -> 'b)  -> initial:'b -> 'a array -> 'b
+  val fold_left : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
 
   val foldRight : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
   (** This method is like [foldLeft] except that it iterates over the elements of the array from right to left.
@@ -472,9 +473,9 @@ module Result : sig
 
   val map : ('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
 
-  val fromOption : error:('err) -> 'ok option -> ('err, 'ok) t
+  val fromOption : error:'err -> 'ok option -> ('err, 'ok) t
 
-  val from_option : error:('err) -> 'ok option -> ('err, 'ok) t
+  val from_option : error:'err -> 'ok option -> ('err, 'ok) t
 
   val toOption : ('err, 'ok) t -> 'ok option
 
@@ -577,7 +578,7 @@ module Char : sig
     [cp]: https://en.wikipedia.org/wiki/Code_point *)
 
   val from_code : int -> char option
-  
+
   val toString : char -> string
   (** Convert a character into a string.
       [toString 'A' = "A"]
@@ -726,7 +727,7 @@ module Char : sig
     [isAlphanumeric '7' = true]
 
     [isAlphanumeric '-' = false] *)
-  
+
   val is_alphanumeric : char -> bool
 
   val isPrintable : char -> bool
@@ -734,7 +735,7 @@ module Char : sig
     https://en.wikipedia.org/wiki/ASCII#Printable_characters
 
     [isPrintable ' ' = true] *)
-  
+
   val is_printable : char -> bool
 
   val isWhitespace : char -> bool
@@ -743,7 +744,7 @@ module Char : sig
     [isWhitespace ' ' = true]
 
     [isWhitespace 'b' = false] *)
-  
+
   val is_whitespace : char -> bool
 end
 
@@ -916,7 +917,7 @@ isNotANumber nan = false
     {[Float.(~- 4.0) = (-4.0)]}
   *)
 
-  val (~-) : t -> t
+  val ( ~- ) : t -> t
   (** See {!Float.negate} *)
 
   val absolute : t -> t
@@ -930,7 +931,7 @@ isNotANumber nan = false
   *)
 
   val maximum : t -> t -> t
-   (** Returns the larger of two [float]s, if both arguments are equal, returns the first argument
+  (** Returns the larger of two [float]s, if both arguments are equal, returns the first argument
 
     {[Float.maximum 7. 9. = 9.]}
 
@@ -1095,15 +1096,15 @@ isNotANumber nan = false
 
   (** {1 Polar coordinates} *)
 
-  val fromPolar : (float * float) -> (float * float)
+  val fromPolar : float * float -> float * float
   (** Convert {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } (r, θ) to {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } (x,y).
 
     {[Float.(fromPolar (squareRoot 2., degrees 45.)) = (1., 1.)]}
   *)
 
-  val from_polar : (float * float) -> (float * float)
+  val from_polar : float * float -> float * float
 
-  val toPolar : (float * float) -> (float * float)
+  val toPolar : float * float -> float * float
   (** Convert {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } (x,y) to {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } (r, θ).
 
     {[Float.toPolar (3.0, 4.0) = (5.0, 0.9272952180016122)]}
@@ -1111,7 +1112,7 @@ isNotANumber nan = false
     {[Float.toPolar (5.0, 12.0) = (13.0, 1.1760052070951352)]}
   *)
 
-  val to_polar : (float * float) -> (float * float)
+  val to_polar : float * float -> float * float
 
   val cos : t -> t
   (** Figure out the cosine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
@@ -1189,21 +1190,15 @@ isNotANumber nan = false
 
   (** {1 Conversion} *)
 
-  type direction = [
-    | `Zero
+  type direction =
+    [ `Zero
     | `AwayFromZero
     | `Up
     | `Down
-    | `Closest of [
-      | `Zero
-      | `AwayFromZero
-      | `Up
-      | `Down
-      | `ToEven
+    | `Closest of [ `Zero | `AwayFromZero | `Up | `Down | `ToEven ]
     ]
-  ]
 
-  val round : ?direction:direction -> t ->  t
+  val round : ?direction:direction -> t -> t
   (** Round a number, by default to the to the closest [int] with halves rounded [`Up] (towards positive infinity)
 
     {[
@@ -1353,7 +1348,7 @@ Float.round ~direction:`Up (-1.8) = -1.0
 
   val from_int : int -> float
 
-  val toInt : t ->  int option
+  val toInt : t -> int option
   (** Converts a [float] to an {!Int} by {b ignoring the decimal portion}. See {!Float.truncate} for examples.
 
     Returns [None] when trying to round a [float] which can't be represented as an [int] such as {!Float.nan} or {!Float.infinity} or numbers which are too large or small.
@@ -1367,7 +1362,7 @@ Float.round ~direction:`Up (-1.8) = -1.0
     {[Float.(round 1.6 |> toInt) = Some 2]}
   *)
 
-  val to_int : t ->  int option
+  val to_int : t -> int option
 end
 
 module Int : sig
@@ -1519,7 +1514,7 @@ module Int : sig
     {[~-(7) = (-7)]}
   *)
 
-  val (~-) : t -> t
+  val ( ~- ) : t -> t
   (** See {!Int.negate} *)
 
   val absolute : t -> t
@@ -1694,7 +1689,7 @@ module Tuple2 : sig
       [let zip (xs : 'a list) (ys : 'b list) : ('a * 'b) list = List.map2 ~f:Tuple2.create xs ys]
   *)
 
-  val first : ('a * 'b) -> 'a
+  val first : 'a * 'b -> 'a
   (** Extract the first value from a tuple.
 
       [Tuple2.first (3, 4) = 3]
@@ -1702,7 +1697,7 @@ module Tuple2 : sig
       [Tuple2.first ("john", "doe") = "john"]
   *)
 
-  val second : ('a * 'b) -> 'b
+  val second : 'a * 'b -> 'b
   (** Extract the second value from a tuple.
 
       [Tuple2.second (3, 4) = 4]
@@ -1710,7 +1705,7 @@ module Tuple2 : sig
       [Tuple2.second ("john", "doe") = "doe"]
   *)
 
-  val mapFirst : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
+  val mapFirst : f:('a -> 'x) -> 'a * 'b -> 'x * 'b
   (** Transform the first value in a tuple.
 
       [Tuple2.mapFirst ~f:String.reverse ("stressed", 16) = ("desserts", 16)]
@@ -1718,9 +1713,9 @@ module Tuple2 : sig
       [Tuple2.mapFirst ~f:String.length ("stressed", 16) = (8, 16)]
   *)
 
-  val map_first : f:('a -> 'x) -> ('a * 'b) -> ('x * 'b)
+  val map_first : f:('a -> 'x) -> 'a * 'b -> 'x * 'b
 
-  val mapSecond : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
+  val mapSecond : f:('b -> 'y) -> 'a * 'b -> 'a * 'y
   (** Transform the second value in a tuple.
 
       [Tuple2.mapSecond ~f:sqrt ("stressed", 16.) = ("stressed", 4.)]
@@ -1728,9 +1723,9 @@ module Tuple2 : sig
       [Tuple2.mapSecond ~f:(~-) ("stressed", 16) = ("stressed", -16)]
   *)
 
-  val map_second : f:('b -> 'y) -> ('a * 'b) -> ('a * 'y)
+  val map_second : f:('b -> 'y) -> 'a * 'b -> 'a * 'y
 
-  val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
+  val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
   (** Transform each value of a tuple.
 
       [Tuple2.mapEach ~f:String.reverse ~g:sqrt ("stressed", 16.) = ("desserts", 4.)]
@@ -1738,9 +1733,9 @@ module Tuple2 : sig
       [Tuple2.mapEach ~f:String.length ~g:(~-) ("stressed", 16) = (8, -16)]
   *)
 
-  val map_each : f:('a -> 'x) -> g:('b -> 'y) -> ('a * 'b) -> ('x * 'y)
+  val map_each : f:('a -> 'x) -> g:('b -> 'y) -> 'a * 'b -> 'x * 'y
 
-  val mapAll : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
+  val mapAll : f:('a -> 'b) -> 'a * 'a -> 'b * 'b
   (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.
 
       [Tuple2.mapAll ~f:succ (3, 4, 5) = (4, 5, 6)]
@@ -1748,9 +1743,9 @@ module Tuple2 : sig
       [Tuple2.mapAll ~f:String.length ("was", "stressed") = (3, 8)]
   *)
 
-  val map_all : f:('a -> 'b) -> ('a * 'a) -> ('b * 'b)
+  val map_all : f:('a -> 'b) -> 'a * 'a -> 'b * 'b
 
-  val swap : ('a * 'b) -> ('b * 'a)
+  val swap : 'a * 'b -> 'b * 'a
   (** Switches the first and second values of a tuple.
 
       [Tuple2.swap (3, 4) = (4, 3)]
@@ -1758,7 +1753,7 @@ module Tuple2 : sig
       [Tuple2.swap ("stressed", 16) = (16, "stressed")]
   *)
 
-  val curry : (('a * 'b) -> 'c) -> 'a -> 'b -> 'c
+  val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
   (** [curry f] takes a function [f] which takes a single argument of a tuple ['a * 'b] and returns a function which takes two arguments that can be partially applied.
 
       [let squareArea (width, height) = width * height]
@@ -1770,7 +1765,7 @@ module Tuple2 : sig
       [List.map widths ~f:(curriedArea 4) = [12; 16; 20]]
   *)
 
-  val uncurry : ('a -> 'b -> 'c) -> ('a * 'b) -> 'c
+  val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
   (** [uncurry f] takes a function [f] which takes two arguments and returns a function which takes a single argument of a 2-tuple
 
       [let sum (a : int) (b: int) : int = a + b]
@@ -1780,7 +1775,7 @@ module Tuple2 : sig
       [uncurriedSum (3, 4) = 7]
   *)
 
-  val toList : ('a * 'a) -> 'a list
+  val toList : 'a * 'a -> 'a list
   (** Turns a tuple into a list of length two. This function can only be used on tuples which have the same type for each value.
   
       [Tuple2.toList (3, 4) = [3; 4]]
@@ -1788,11 +1783,11 @@ module Tuple2 : sig
       [Tuple2.toList ("was", "stressed") = ["was"; "stressed"]]
   *)
 
-  val to_list : ('a * 'a) -> 'a list
+  val to_list : 'a * 'a -> 'a list
 end
 
 module Tuple3 : sig
-  val create : 'a -> 'b -> 'c -> ('a * 'b * 'c)
+  val create : 'a -> 'b -> 'c -> 'a * 'b * 'c
   (** Create a 3-tuple.
 
       [Tuple3.create 3 4 5 = (3, 4, 5)]
@@ -1800,7 +1795,7 @@ module Tuple3 : sig
       [let zip3 (xs : 'a list) (ys : 'b list) (zs : 'c list) : ('a * 'b * 'c) list = List.map3 ~f:Tuple3.create xs ys zs]
   *)
 
-  val first : ('a * 'b * 'c) -> 'a
+  val first : 'a * 'b * 'c -> 'a
   (** Extract the first value from a tuple.
 
       [Tuple3.first (3, 4, 5) = 3]
@@ -1808,15 +1803,15 @@ module Tuple3 : sig
       [Tuple3.first ("john", "danger", "doe") = "john"]
   *)
 
-  val second : ('a * 'b * 'c) -> 'b
+  val second : 'a * 'b * 'c -> 'b
   (** Extract the second value from a tuple.
 
       [Tuple2.second (3, 4, 5) = 4]
 
       [Tuple2.second ("john", "danger", "doe") = "danger"]
   *)
-  
-  val third : ('a * 'b * 'c) -> 'c
+
+  val third : 'a * 'b * 'c -> 'c
   (** Extract the third value from a tuple.
 
       [Tuple2.third (3, 4, 5) = 5]
@@ -1824,7 +1819,7 @@ module Tuple3 : sig
       [Tuple2.third ("john", "danger", "doe") = "doe"]
   *)
 
-  val init : ('a * 'b * 'c) -> ('a * 'b)
+  val init : 'a * 'b * 'c -> 'a * 'b
   (** Extract the first and second values of a 3-tuple as a 2-tuple.
 
       [Tuple2.init (3, "stressed", false) = (3, "stressed")]
@@ -1832,7 +1827,7 @@ module Tuple3 : sig
       [Tuple2.init ("john", 16, "doe") = ("john", 16)]
   *)
 
-  val tail : ('a * 'b * 'c) -> ('b * 'c)
+  val tail : 'a * 'b * 'c -> 'b * 'c
   (** Extract the second and third values of a 3-tuple as a 2-tuple.
 
       [Tuple2.init (3, "stressed", false) = ("stressed", false)]
@@ -1840,7 +1835,7 @@ module Tuple3 : sig
       [Tuple2.init ("john", 16, false) = (16, false)]
   *)
 
-  val mapFirst : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
+  val mapFirst : f:('a -> 'x) -> 'a * 'b * 'c -> 'x * 'b * 'c
   (** Transform the first value in a tuple.
 
       [Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false) = ("desserts", 16, false)]
@@ -1848,9 +1843,9 @@ module Tuple3 : sig
       [Tuple3.mapFirst ~f:String.length ("stressed", 16, false) = (8, 16, false)]
   *)
 
-  val map_first : f:('a -> 'x) -> ('a * 'b * 'c) -> ('x * 'b *'c)
+  val map_first : f:('a -> 'x) -> 'a * 'b * 'c -> 'x * 'b * 'c
 
-  val mapSecond : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
+  val mapSecond : f:('b -> 'y) -> 'a * 'b * 'c -> 'a * 'y * 'c
   (** Transform the second value in a tuple.
 
       [Tuple3.mapSecond ~f:sqrt ("stressed", 16., false) = ("stressed", 4., false)]
@@ -1858,25 +1853,35 @@ module Tuple3 : sig
       [Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) = ("stressed", -16, false)]
   *)
 
-  val map_second : f:('b -> 'y) -> ('a * 'b * 'c) -> ('a * 'y * 'c)
+  val map_second : f:('b -> 'y) -> 'a * 'b * 'c -> 'a * 'y * 'c
 
-  val mapThird : f:('c -> 'z) -> ('a * 'b * 'c) -> ('a * 'b * 'z)
+  val mapThird : f:('c -> 'z) -> 'a * 'b * 'c -> 'a * 'b * 'z
   (** Transform the third value in a tuple.
 
       [Tuple3.mapThird ~f:not ("stressed", 16, false) ("stressed", 16, true)]
   *)
 
-  val map_third : f:('c -> 'z) -> ('a * 'b * 'c) -> ('a * 'b * 'z)
+  val map_third : f:('c -> 'z) -> 'a * 'b * 'c -> 'a * 'b * 'z
 
-  val mapEach : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
+  val mapEach :
+       f:('a -> 'x)
+    -> g:('b -> 'y)
+    -> h:('c -> 'z)
+    -> 'a * 'b * 'c
+    -> 'x * 'y * 'z
   (** Transform the third value in a tuple.
 
       [Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false) = ("desserts", 4., true)]
   *)
 
-  val map_each : f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> ('a * 'b * 'c) -> ('x * 'y * 'z)
+  val map_each :
+       f:('a -> 'x)
+    -> g:('b -> 'y)
+    -> h:('c -> 'z)
+    -> 'a * 'b * 'c
+    -> 'x * 'y * 'z
 
-  val mapAll : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
+  val mapAll : f:('a -> 'b) -> 'a * 'a * 'a -> 'b * 'b * 'b
   (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.    
 
       [Tuple2.mapAll ~f:sqrt (9., 16., 25.) = (3., 4., 5.)]
@@ -1884,19 +1889,19 @@ module Tuple3 : sig
       [Tuple2.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]
   *)
 
-  val map_all : f:('a -> 'b) -> ('a * 'a * 'a) -> ('b * 'b * 'b)
+  val map_all : f:('a -> 'b) -> 'a * 'a * 'a -> 'b * 'b * 'b
 
-  val rotateLeft : ('a * 'b * 'c) -> ('b * 'c * 'a)
+  val rotateLeft : 'a * 'b * 'c -> 'b * 'c * 'a
   (** Move each value in the tuple one position to the left, moving the value in the first position into the last position.
 
       [Tuple2.rotateLeft (3, 4, 5) = (4, 5, 3)]
 
       [Tuple2.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]
   *)
-  
-  val rotate_left : ('a * 'b * 'c) -> ('b * 'c * 'a)
 
-  val rotateRight : ('a * 'b * 'c) -> ('c * 'a * 'b)
+  val rotate_left : 'a * 'b * 'c -> 'b * 'c * 'a
+
+  val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
   (** Move each value in the tuple one position to the right, moving the value in the last position into the first position.
 
       [Tuple2.rotateRight (3, 4, 5) = (5, 3, 4)]
@@ -1904,9 +1909,9 @@ module Tuple3 : sig
       [Tuple2.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]
   *)
 
-  val rotate_right : ('a * 'b * 'c) -> ('c * 'a * 'b)
+  val rotate_right : 'a * 'b * 'c -> 'c * 'a * 'b
 
-  val curry : (('a * 'b * 'c) -> 'd) -> 'a -> 'b -> 'c -> 'd
+  val curry : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd
   (** [curry f] takes a function [f] which takes a single argument of a tuple ['a * 'b *'c] and returns a function which takes three arguments that can be partially applied.
 
       [let cubeVolume (width, height, depth) = width * height * depth]
@@ -1918,7 +1923,7 @@ module Tuple3 : sig
       [List.map depths ~f:(curriedArea 3 4) = [36; 48; 60]]
   *)
 
-  val uncurry : ('a -> 'b -> 'c -> 'd) -> ('a * 'b * 'c) -> 'd
+  val uncurry : ('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd
   (** [uncurry f] takes a function [f] which takes three arguments and returns a function which takes a single argument of a 3-tuple
 
       [let sum (a : int) (b : int) (c : int) : int = a + b + c]
@@ -1926,16 +1931,16 @@ module Tuple3 : sig
       [let uncurriedSum : (int * int * int) -> int = uncurry sum]
 
       [uncurriedSum (3, 4, 5) = 12] *)
-  
-  val toList : ('a * 'a * 'a) -> 'a list
-   (** Turns a tuple into a list of length three. This function can only be used on tuples which have the same type for each value.
+
+  val toList : 'a * 'a * 'a -> 'a list
+  (** Turns a tuple into a list of length three. This function can only be used on tuples which have the same type for each value.
   
       [Tuple3.toList (3, 4, 5) = [3; 4; 5]]
     
       [Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]
   *)
 
-  val to_list : ('a * 'a * 'a) -> 'a list
+  val to_list : 'a * 'a * 'a -> 'a list
 end
 
 module String : sig
@@ -1996,7 +2001,7 @@ module String : sig
   val contains : substring:string -> string -> bool
 
   val repeat : count:int -> string -> string
-    
+
   val reverse : string -> string
 
   val fromList : char list -> string

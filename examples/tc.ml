@@ -7,10 +7,10 @@ end
 include (
   Tablecloth :
     module type of Tablecloth
-    (* with module StrSet := Tablecloth.StrSet *)
-    (*  and module IntSet := Tablecloth.IntSet *)
-    (*  and module StrDict := Tablecloth.StrDict *)
-    with module Option := Tablecloth.Option
+      (* with module StrSet := Tablecloth.StrSet *)
+      (*  and module IntSet := Tablecloth.IntSet *)
+      (*  and module StrDict := Tablecloth.StrDict *)
+      with module Option := Tablecloth.Option
     (*  and module Result := Tablecloth.Result *)
     (*  and module List := Tablecloth.List *) )
 
