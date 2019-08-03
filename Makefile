@@ -12,6 +12,19 @@ build:
 	@$(MAKE) build-native
 	@$(MAKE) build-bs
 
+doc-native:
+	@printf "\n\e[31mBuilding native docs ...\e[0m\n"
+	cd native && opam config exec -- dune build @doc -f
+	@printf "\n\e[31mBuilt!\e[0m\n"
+
+doc-bs:
+	@printf "\n\e[31mBuilding bs docs ...\e[0m\n"
+	@printf "\n\e[31mBuilt!\e[0m\n"
+
+doc:
+	@$(MAKE) doc-native
+	@$(MAKE) doc-bs
+
 test-native:
 	@printf "\n\e[31mRunning tablecloth-native tests ...\e[0m\n"
 	cd native && opam config exec -- dune runtest -f
