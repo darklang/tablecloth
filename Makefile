@@ -43,3 +43,6 @@ documentation:
 	rm ./docs
 	ln -s _build/default/_doc/_html ./docs
 	@printf "\n\e[31mCompiled! The docs are now viewable at ./docs/index.html\e[0m\n"
+
+format:
+	@fd --extension ml --extension mli | xargs ocamlformat --enable-outside-detected-project --inplace
