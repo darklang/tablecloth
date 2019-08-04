@@ -282,7 +282,7 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
 
     The first sub-array starts at index [0] of the array and takes the first [size] elements.
 
-    The sub-array then advances the index [step] (which defaults to 1) positions before taling the next [size] elements.
+    The sub-array then advances the index [step] (which defaults to 1) positions before taking the next [size] elements.
 
     The sub-arrays are guaranteed to always be of length [size] and iteration stops once a sub-array would extend beyond the end of the array.
 
