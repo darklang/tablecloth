@@ -59,25 +59,21 @@ let t_Array () =
     "map2 one element"
     (List.map2 ~f:( + ) [ 1 ] [ 1 ])
     [ 2 ] ;
-
   AT.check
     (AT.list AT.int)
     "map2 two elements"
     (List.map2 ~f:( + ) [ 1; 2 ] [ 1; 2 ])
     [ 2; 4 ] ;
-
   AT.check
     (AT.array AT.int)
     "initialize - create empty array"
     (Array.initialize ~length:0 ~f:identity)
     [||] ;
-
   AT.check
     (AT.array AT.int)
     "initialize - negative length gives an empty array"
     (Array.initialize ~length:(-1) ~f:identity)
     [||] ;
-
   AT.check
     (AT.array AT.int)
     "initialize - create array with initialize"
