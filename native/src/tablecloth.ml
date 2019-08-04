@@ -286,8 +286,6 @@ end
 module List = struct
   type 'a t = 'a list
 
-  let isEmpty t = match t with [] -> true | _ -> false
-
   let concat (ls : 'a list list) : 'a list = Base.List.concat ls
 
   let reverse (l : 'a list) : 'a list = Base.List.rev l
@@ -316,27 +314,6 @@ module List = struct
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Base.List.map2_exn a b ~f
-
-
-  let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
-    let rec takeAllOrEmpty t n (current, count) =
-      if count = n
-      then reverse current
-      else
-        match t with
-        | [] ->
-            []
-        | x :: xs ->
-            takeAllOrEmpty xs n (x :: current, count + 1)
-    in
-    let rec loop t =
-      if isEmpty t
-      then []
-      else
-        let sample = takeAllOrEmpty t size ([], 0) in
-        if isEmpty sample then [] else sample :: loop (Base.List.drop t step)
-    in
-    loop t
 
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Base.List.find l ~f
@@ -468,6 +445,27 @@ module List = struct
   let isEmpty (l : 'a list) : bool = l = []
 
   let is_empty = isEmpty
+
+  let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
+    let rec takeAllOrEmpty t n (current, count) =
+      if count = n
+      then reverse current
+      else
+        match t with
+        | [] ->
+            []
+        | x :: xs ->
+            takeAllOrEmpty xs n (x :: current, count + 1)
+    in
+    let rec loop t =
+      if isEmpty t
+      then []
+      else
+        let sample = takeAllOrEmpty t size ([], 0) in
+        if isEmpty sample then [] else sample :: loop (Base.List.drop t step)
+    in
+    loop t
+
 
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 

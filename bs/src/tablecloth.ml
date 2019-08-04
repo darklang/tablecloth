@@ -186,8 +186,6 @@ end
 module List = struct
   type 'a t = 'a list
 
-  let isEmpty t = match t with [] -> true | _ -> false
-
   let concat (ls : 'a list list) : 'a list = Belt.List.flatten ls
 
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
@@ -212,24 +210,6 @@ module List = struct
 
   let map2 ~(f : 'a -> 'b -> 'c) (a : 'a list) (b : 'b list) : 'c list =
     Belt.List.zipBy a b f
-
-
-  let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
-    let rec loop t =
-      if isEmpty t
-      then []
-      else
-        let sample = Belt.List.take t size in
-        let rest = Belt.List.drop t step in
-        match (sample, rest) with
-        | None, _ ->
-            []
-        | Some x, None ->
-            [ x ]
-        | Some x, Some xs ->
-            x :: loop xs
-    in
-    loop t
 
 
   let getBy ~(f : 'a -> bool) (l : 'a list) : 'a option = Belt.List.getBy l f
@@ -365,6 +345,24 @@ module List = struct
   let isEmpty (l : 'a list) : bool = l = []
 
   let is_empty = isEmpty
+
+  let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
+    let rec loop t =
+      if isEmpty t
+      then []
+      else
+        let sample = Belt.List.take t size in
+        let rest = Belt.List.drop t step in
+        match (sample, rest) with
+        | None, _ ->
+            []
+        | Some x, None ->
+            [ x ]
+        | Some x, Some xs ->
+            x :: loop xs
+    in
+    loop t
+
 
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 
