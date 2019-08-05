@@ -51,13 +51,21 @@ module Array = struct
 
   let to_indexed_list = toIndexedList
 
-  let get ~index a =
+  let get a index =
     if index >= 0 && index < length a
     then Some (Base.Array.get a index)
     else None
 
 
-  let set ~index ~value a = Base.Array.set a index value
+  let getAt ~index a = get a index
+
+  let get_at = getAt
+
+  let set = Base.Array.set
+
+  let setAt ~index ~value a = set a index value
+
+  let set_at = setAt
 
   let sum (a : int array) : int = Base.Array.fold a ~init:0 ~f:( + )
 
