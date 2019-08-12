@@ -53,7 +53,7 @@ deps-bs:
 documentation:
 	@printf "\n\e[31mCompiling the documentation ...\e[0m\n"
 	opam exec -- dune build @doc
-	rm ./docs
+	rm -rf ./docs
 	ln -s _build/default/_doc/_html ./docs
 	@printf "\n\e[31mCompiled! The docs are now viewable at ./docs/index.html\e[0m\n"
 
