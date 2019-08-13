@@ -144,6 +144,16 @@ module Array = struct
       Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
 
 
+  let sliding ?(step = 1) (a : 'a t) ~(size : int) : 'a t t =
+    let n = Array.length a in
+    if size > n
+    then empty
+    else
+      initialize
+        ~length:(1 + ((n - size) / step))
+        ~f:(fun i -> initialize ~length:size ~f:(fun j -> a.((i * step) + j)))
+
+
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
     Base.Array.fold ~f:(flip f) ~init:initial a
 
@@ -274,6 +284,8 @@ module Tuple3 = struct
 end
 
 module List = struct
+  type 'a t = 'a list
+
   let concat (ls : 'a list list) : 'a list = Base.List.concat ls
 
   let reverse (l : 'a list) : 'a list = Base.List.rev l
@@ -433,6 +445,27 @@ module List = struct
   let isEmpty (l : 'a list) : bool = l = []
 
   let is_empty = isEmpty
+
+  let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
+    let rec takeAllOrEmpty t n (current, count) =
+      if count = n
+      then reverse current
+      else
+        match t with
+        | [] ->
+            []
+        | x :: xs ->
+            takeAllOrEmpty xs n (x :: current, count + 1)
+    in
+    let rec loop t =
+      if isEmpty t
+      then []
+      else
+        let sample = takeAllOrEmpty t size ([], 0) in
+        if isEmpty sample then [] else sample :: loop (Base.List.drop t step)
+    in
+    loop t
+
 
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 

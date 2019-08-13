@@ -296,6 +296,48 @@ let t_Array () =
     [| 1.0; 2.0; 3.0 |] ;
 
   AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 1"
+    [| [| 1 |]; [| 2 |]; [| 3 |]; [| 4 |]; [| 5 |] |]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:1) ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 2"
+    [| [| 1; 2 |]; [| 2; 3 |]; [| 3; 4 |]; [| 4; 5 |] |]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:2) ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 3 "
+    [| [| 1; 2; 3 |]; [| 2; 3; 4 |]; [| 3; 4; 5 |] |]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:3) ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 2, size 2"
+    [| [| 1; 2 |]; [| 3; 4 |] |]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:2 ~step:2) ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 1, size 3"
+    [| [| 1 |]; [| 4 |] |]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:1 ~step:3) ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 7"
+    [| [| 1; 2 |]; [| 4; 5 |] |]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:2 ~step:3) ;
+
+  AT.check
+    (AT.array (AT.array AT.int))
+    "sliding - step 7"
+    [||]
+    (Array.sliding [| 1; 2; 3; 4; 5 |] ~size:7) ;
+
+  AT.check
     (AT.array AT.int)
     "mapWithIndex - equals an array literal of the same value"
     (Array.mapWithIndex ~f:( * ) [| 5; 5; 5 |])
@@ -1485,17 +1527,60 @@ let t_List () =
     (List.reverse [ 0; 1 ])
     [ 1; 0 ] ;
 
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 1"
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:1)
+    [ [ 1 ]; [ 2 ]; [ 3 ]; [ 4 ]; [ 5 ] ] ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 2"
+    [ [ 1; 2 ]; [ 2; 3 ]; [ 3; 4 ]; [ 4; 5 ] ]
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:2) ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 3 "
+    [ [ 1; 2; 3 ]; [ 2; 3; 4 ]; [ 3; 4; 5 ] ]
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:3) ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 2, size 2"
+    [ [ 1; 2 ]; [ 3; 4 ] ]
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:2 ~step:2) ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 1, size 3"
+    [ [ 1 ]; [ 4 ] ]
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:1 ~step:3) ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - step 7"
+    [ [ 1; 2 ]; [ 4; 5 ] ]
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:2 ~step:3) ;
+
+  AT.check
+    (AT.list (AT.list AT.int))
+    "sliding - size 7"
+    []
+    (List.sliding [ 1; 2; 3; 4; 5 ] ~size:7) ;
+
   AT.check (AT.list AT.int) "map2 empty lists" (List.map2 ~f:( + ) [] []) [] ;
   AT.check
     (AT.list AT.int)
     "map2 one element"
-    (List.map2 ~f:( + ) [ 1 ] [ 1 ])
-    [ 2 ] ;
+    [ 2 ]
+    (List.map2 ~f:( + ) [ 1 ] [ 1 ]) ;
+
   AT.check
     (AT.list AT.int)
     "map2 two elements"
-    (List.map2 ~f:( + ) [ 1; 2 ] [ 1; 2 ])
-    [ 2; 4 ] ;
+    [ 2; 4 ]
+    (List.map2 ~f:( + ) [ 1; 2 ] [ 1; 2 ]) ;
 
   AT.check
     (AT.list AT.int)

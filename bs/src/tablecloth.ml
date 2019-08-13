@@ -94,6 +94,16 @@ module Array = struct
 
   let flat_map = flatMap
 
+  let sliding ?(step = 1) (a : 'a t) ~(size : int) : 'a t t =
+    let n = Array.length a in
+    if size > n
+    then empty
+    else
+      initialize
+        ~length:(1 + ((n - size) / step))
+        ~f:(fun i -> initialize ~length:size ~f:(fun j -> a.((i * step) + j)))
+
+
   let find ~(f : 'a -> bool) (array : 'a array) : 'a option =
     let rec find_loop array ~f ~length i =
       if i >= length
@@ -174,6 +184,8 @@ module Array = struct
 end
 
 module List = struct
+  type 'a t = 'a list
+
   let concat (ls : 'a list list) : 'a list = Belt.List.flatten ls
 
   let reverse (l : 'a list) : 'a list = Belt.List.reverse l
@@ -333,6 +345,24 @@ module List = struct
   let isEmpty (l : 'a list) : bool = l = []
 
   let is_empty = isEmpty
+
+  let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
+    let rec loop t =
+      if isEmpty t
+      then []
+      else
+        let sample = Belt.List.take t size in
+        let rest = Belt.List.drop t step in
+        match (sample, rest) with
+        | None, _ ->
+            []
+        | Some x, None ->
+            [ x ]
+        | Some x, Some xs ->
+            x :: loop xs
+    in
+    loop t
+
 
   let cons (item : 'a) (l : 'a list) : 'a list = item :: l
 

@@ -111,6 +111,8 @@ module Array : sig
 
   val flat_map : f:('a -> 'b array) -> 'a array -> 'b array
 
+  val sliding : ?step:int -> 'a t -> size:int -> 'a t t
+
   val find : f:('a -> bool) -> 'a array -> 'a option
 
   val findIndex : 'a array -> f:(int -> 'a -> bool) -> (int * 'a) option
@@ -149,6 +151,8 @@ module Array : sig
 end
 
 module List : sig
+  type 'a t = 'a list
+
   val concat : 'a list list -> 'a list
   (**
     [List.concat] returns the list obtained by concatenating in order all the sub-lists in a given list.
@@ -233,6 +237,8 @@ module List : sig
     List.map2 subtract [6; 5] [1; 2; 3] = [5; 3]
     ]}
   *)
+
+  val sliding : ?step:int -> 'a t -> size:int -> 'a t t
 
   val getBy : f:('a -> bool) -> 'a list -> 'a option
   (**
