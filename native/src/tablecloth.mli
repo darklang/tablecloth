@@ -1,5 +1,5 @@
 module Fun : sig
-  (** Functions for working with functions.  *)
+  (** Functions for working with functions. *)
 
   external identity : 'a -> 'a = "%identity"
   (** Given a value, returns exactly the same value. This may seem pointless at first glance but it can often be useful when an api offers you more control than you actually need.
@@ -23,20 +23,20 @@ module Fun : sig
   external ignore : _ -> unit = "%ignore"
   (** Discards the value it is given and returns [()] 
 
-  This is primarily useful when working with imperative side-effecting code or to avoid "unused value" compiler warnings when you really meant it, and haven't just made a mistake.
+    This is primarily useful when working with imperative side-effecting code or to avoid "unused value" compiler warnings when you really meant it, and haven't just made a mistake.
 
-  {[
-    module PretendMutableQueue : sig
-      type 'a t
+    {[
+      module PretendMutableQueue : sig
+        type 'a t
 
-      val pushReturningIndex : 'a t -> 'a -> int
-    end
+        val pushReturningIndex : 'a t -> 'a -> int
+      end
 
-    let addListToQueue queue list = 
-      List.forEach list ~f:(fun element ->
-        ignore (PretentMutableQueue.pushReturningIndex queue element)
-      )
-  ]}
+      let addListToQueue queue list =
+        List.forEach list ~f:(fun element ->
+          ignore (PretentMutableQueue.pushReturningIndex queue element)
+        )
+    ]}
   *)
 
   val constant : 'a -> 'b -> 'a
@@ -76,69 +76,80 @@ module Fun : sig
   external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
   (** Saying [x |> f] is exactly the same as [f x], just a bit longer.
 
-  It is called the “pipe” operator because it lets you write “pipelined” code.
-  For example, say we have a [sanitize] function for turning user input into
-  integers:
+    It is called the “pipe” operator because it lets you write “pipelined” code.
+    For example, say we have a [sanitize] function for turning user input into
+    integers:
 
-    
+
     {[
       (* Before *)
-      let sanitize (input: string) : int option =     
+      let sanitize (input: string) : int option =
         Int.fromString (String.trim input)
     ]}
 
-  We can rewrite it like this:
+    We can rewrite it like this:
 
-   {[
-    (* After *)
-    let sanitize (input: string) : int option =         
-      input
-      |> String.trim
-      |> Int.fromString
+    {[
+      (* After *)
+      let sanitize (input: string) : int option =
+        input
+        |> String.trim
+        |> Int.fromString
     ]}
 
-  This can be overused! When you have three or four steps, the code often gets clearer if you break things out into
-  some smaller piplines assigned to variables. Now the transformation has a name, maybe it could have a type annotation.
+    This can be overused! When you have three or four steps, the code often gets clearer if you break things out into
+    some smaller piplines assigned to variables. Now the transformation has a name, maybe it could have a type annotation.
 
-  It can often be more self-documenting that way!
- *)
+    It can often be more self-documenting that way!
+   *)
 
   val compose : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
-  (** Function composition, passing results along in the suggested direction. For
-example, the following code (in a very roundabout way) checks if a number divided by two is odd:
+  (** Function composition, passing results along in the suggested direction.
+    For example, the following code (in a very roundabout way) checks if a number divided by two is odd:
 
     {[let isHalfOdd = Fun.(not << Int.isEven << Int.divide ~by:2)]}
 
-You can think of this operator as equivalent to the following:
+    You can think of this operator as equivalent to the following:
 
     {[(g << f)  ==  (fun x -> g (f x))]}
 
-So our example expands out to something like this:
+    So our example expands out to something like this:
 
-    {[let isHalfOdd = fun n -> not (Int.isEven (Int.divide ~by:2 n))]} *)
+    {[let isHalfOdd = fun n -> not (Int.isEven (Int.divide ~by:2 n))]}
+  *)
 
   val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
   (** See {!Fun.compose} *)
 
   val composeRight : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-  (** Function composition, passing results along in the suggested direction. For
-example, the following code checks if the square root of a number is odd:
+  (** Function composition, passing results along in the suggested direction.
+    For example, the following code checks if the square root of a number is odd:
 
-    {[Int.squareRoot >> Int.isEven >> not]} *)
+    {[Int.squareRoot >> Int.isEven >> not]}
+  *)
 
   val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
   (** See {!Fun.composeRight} *)
 
   val tap : 'a -> f:('a -> unit) -> 'a
   (** 
-    Useful for performing some side affect in {!Fun.pipe}-lined code
+    Useful for performing some side affect in {!Fun.pipe}-lined code.
+
+    Most commonly used to log a value in the middle of a pipeline of function calls.
 
     {[    
-    let sanitize (input: string) : int option =         
-      input
-      |> String.trim
-      |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)
-      |> Int.fromString
+      let sanitize (input: string) : int option =
+        input
+        |> String.trim
+        |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)
+        |> Int.fromString
+    ]}
+
+    {[
+      Array.filter [|1;3;2;5;4;|] ~f:Int.isEven
+      |> Fun.tap ~f:(fun numbers -> numbers.(0) <- 0)
+      |> Fun.tap ~f:Array.reverseInPlace
+      = [|4;0|]
     ]}
   *)
 end
