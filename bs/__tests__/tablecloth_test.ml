@@ -13,47 +13,35 @@ let () =
               |> toEqual (Belt.Result.Ok 10)))) ;
 
   describe "Fun" (fun () ->
-    test "identity" (fun () ->
-      expect (Fun.identity 1) |> toEqual 1
-    );
+      test "identity" (fun () -> expect (Fun.identity 1) |> toEqual 1) ;
 
-    test "ignore" (fun () ->
-      expect (Fun.ignore 1) |> toEqual ()
-    );
+      test "ignore" (fun () -> expect (Fun.ignore 1) |> toEqual ()) ;
 
-    test "constant" (fun () ->
-      expect (Fun.constant 1 2) |> toEqual 1
-    );
+      test "constant" (fun () -> expect (Fun.constant 1 2) |> toEqual 1) ;
 
-    test "sequence" (fun () ->
-      expect (Fun.sequence 1 2) |> toEqual 2
-    );
+      test "sequence" (fun () -> expect (Fun.sequence 1 2) |> toEqual 2) ;
 
-    test "flip" (fun () ->
-      expect (Fun.flip Int.(/) 2 4) |> toEqual 2
-    );
+      test "flip" (fun () -> expect (Fun.flip Int.( / ) 2 4) |> toEqual 2) ;
 
-    test "apply" (fun () ->
-      expect (Fun.apply (fun a -> a + 1) 1) |> toEqual 2
-    );
+      test "apply" (fun () ->
+          expect (Fun.apply (fun a -> a + 1) 1) |> toEqual 2) ;
 
-    test "compose" (fun () ->
-      let increment x = x + 1 in
-      let double x = x * 2 in
-      expect (Fun.compose increment double 1) |> toEqual 3
-    );
+      test "compose" (fun () ->
+          let increment x = x + 1 in
+          let double x = x * 2 in
+          expect (Fun.compose increment double 1) |> toEqual 3) ;
 
-    test "composeRight" (fun () ->
-      let increment x = x + 1 in
-      let double x = x * 2 in
-      expect (Fun.composeRight increment double 1) |> toEqual 4
-    );
+      test "composeRight" (fun () ->
+          let increment x = x + 1 in
+          let double x = x * 2 in
+          expect (Fun.composeRight increment double 1) |> toEqual 4) ;
 
-    test "tap" (fun () ->
-      let numbers = [|1;2;3|] in
-      expect (Fun.tap numbers ~f:(fun numbers -> ignore(Belt.Array.set numbers 1 0))) |> toEqual [|1;0;3|]
-    );
-  );
+      test "tap" (fun () ->
+          expect
+            ( Array.filter [| 1; 3; 2; 5; 4 |] ~f:Int.isEven
+            |> Fun.tap ~f:(fun numbers -> ignore (Belt.Array.set numbers 1 0))
+            |> Fun.tap ~f:Belt.Array.reverseInPlace )
+          |> toEqual [| 0; 2 |])) ;
 
   describe "Array" (fun () ->
       describe "empty" (fun () ->
@@ -86,10 +74,12 @@ let () =
 
       describe "initialize" (fun () ->
           test "create empty array" (fun () ->
-              expect (Array.initialize ~length:0 ~f:Fun.identity) |> toEqual [||]) ;
+              expect (Array.initialize ~length:0 ~f:Fun.identity)
+              |> toEqual [||]) ;
 
           test "negative length gives an empty array" (fun () ->
-              expect (Array.initialize ~length:(-1) ~f:Fun.identity) |> toEqual [||]) ;
+              expect (Array.initialize ~length:(-1) ~f:Fun.identity)
+              |> toEqual [||]) ;
 
           test "create array with initialize" (fun () ->
               expect (Array.initialize ~length:3 ~f:Fun.identity)

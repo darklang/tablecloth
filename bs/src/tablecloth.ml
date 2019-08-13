@@ -21,12 +21,12 @@ module Fun = struct
 
   let ( << ) = compose
 
-  let composeRight g f a =  f (g a)
+  let composeRight g f a = f (g a)
 
   let ( >> ) = composeRight
 
   let tap a ~f =
-    f a;
+    f a ;
     a
 end
 

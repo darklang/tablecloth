@@ -8,7 +8,7 @@ module Fun : sig
 
     {[Array.initialize ~length:6 ~f:identity = [|0;1;2;3;4;5|]]}
 
-    (In this particular case you probably want to use {!Int.range}.)
+    (In this particular case you probably want to use {!Array.range}.)
 
     Or maybe you need to register a callback, but dont want to do anything:
 
