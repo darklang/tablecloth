@@ -171,18 +171,14 @@ If you are new to [OCaml](https://ocaml.org) there are a few prerequisites you w
 need to get started:
 
 - Install OCaml and OPAM [based on your OS](https://ocaml.org/docs/install.html)
-- Run `opam init`
-- Install [Dune](https://dune.build) with `opam install dune`
-
-Additional dependencies:
-
-- For Bucklescript install a current version of [Node](https://nodejs.org/en/) and `cd bs && npm install`
-- For testing, `opam install alcotest base junit junit_alcotest`
-- For documentation, `opam install odoc`
+- You may need to run `opam init`
+- For Bucklescript install a current version of [Node](https://nodejs.org/en/)
 
 Please refer to the `Makefile` for a complete list of supported actions. Here is
 a handful of useful, supported commands:
 
+- `make deps-native`: Install native dependencies.
+- `make deps-bs`: Install bs dependencies.
 - `make build`: Build the project.
 - `make test`: Run the test suite. You may need to `make build` first.
 - `make documentation`: Build the documentation to browse offline.
