@@ -167,9 +167,18 @@ or contact us on [Twitter](https://twitter.com/paulbiggar) or by
 
 ## Developing
 
+If you are new to [OCaml](https://ocaml.org) there are a few prerequisites you will
+need to get started:
+
+- Install OCaml and OPAM [based on your OS](https://ocaml.org/docs/install.html)
+- You may need to run `opam init`
+- For Bucklescript install a current version of [Node](https://nodejs.org/en/)
+
 Please refer to the `Makefile` for a complete list of supported actions. Here is
 a handful of useful, supported commands:
 
+- `make deps-native`: Install native dependencies.
+- `make deps-bs`: Install bs dependencies.
 - `make build`: Build the project.
 - `make test`: Run the test suite. You may need to `make build` first.
 - `make documentation`: Build the documentation to browse offline.

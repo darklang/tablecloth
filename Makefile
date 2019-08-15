@@ -42,7 +42,7 @@ test:
 deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
 	opam update
-	opam install alcotest base dune junit junit_alcotest -y
+	opam install alcotest base dune junit junit_alcotest odoc -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 deps-bs:
