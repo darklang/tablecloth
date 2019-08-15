@@ -67,17 +67,17 @@ let t_Array () =
   AT.check
     (AT.array AT.int)
     "initialize - create empty array"
-    (Array.initialize ~length:0 ~f:identity)
+    (Array.initialize ~length:0 ~f:Fun.identity)
     [||] ;
   AT.check
     (AT.array AT.int)
     "initialize - negative length gives an empty array"
-    (Array.initialize ~length:(-1) ~f:identity)
+    (Array.initialize ~length:(-1) ~f:Fun.identity)
     [||] ;
   AT.check
     (AT.array AT.int)
     "initialize - create array with initialize"
-    (Array.initialize ~length:3 ~f:identity)
+    (Array.initialize ~length:3 ~f:Fun.identity)
     [| 0; 1; 2 |] ;
 
   AT.check
@@ -1389,6 +1389,45 @@ let t_Float () =
     ())
 
 
+let t_Fun () =
+  Fun.(
+    AT.check AT.int "identity" 1 (Fun.identity 1) ;
+
+    AT.check AT.unit "ignore" () (Fun.ignore 1) ;
+
+    AT.check AT.int "constant" 1 (Fun.constant 1 2) ;
+
+    AT.check AT.int "sequence" 2 (Fun.sequence 1 2) ;
+
+    AT.check AT.int "flip" 2 (Fun.flip Int.( / ) 2 4) ;
+
+    AT.check AT.int "apply" 2 (Fun.apply (fun a -> a + 1) 1) ;
+
+    AT.check
+      AT.int
+      "compose"
+      3
+      (let increment x = x + 1 in
+       let double x = x * 2 in
+       Fun.compose increment double 1) ;
+
+    AT.check
+      AT.int
+      "composeRight"
+      4
+      (let increment x = x + 1 in
+       let double x = x * 2 in
+       Fun.composeRight increment double 1) ;
+
+    AT.check
+      (AT.array AT.int)
+      "tap"
+      [| 0; 2 |]
+      ( Array.filter [| 1; 3; 2; 5; 4 |] ~f:Int.isEven
+      |> Fun.tap ~f:(fun numbers -> Base.Array.set numbers 1 0)
+      |> Fun.tap ~f:Base.Array.rev_inplace ))
+
+
 let t_Int () =
   Int.(
     AT.check AT.int "zero" zero 0 ;
@@ -2061,6 +2100,7 @@ let suite =
   [ ("Array", `Quick, t_Array)
   ; ("Char", `Quick, t_Char)
   ; ("Float", `Quick, t_Float)
+  ; ("Fun", `Quick, t_Fun)
   ; ("Int", `Quick, t_Int)
   ; ("List", `Quick, t_List)
   ; ("String", `Quick, t_String)

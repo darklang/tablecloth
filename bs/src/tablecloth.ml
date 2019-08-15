@@ -1,12 +1,34 @@
-let ( <| ) a b = a b
+module Fun = struct
+  external identity : 'a -> 'a = "%identity"
 
-let ( >> ) (f1 : 'a -> 'b) (f2 : 'b -> 'c) : 'a -> 'c = fun x -> x |> f1 |> f2
+  external ignore : _ -> unit = "%ignore"
 
-let ( << ) (f1 : 'b -> 'c) (f2 : 'a -> 'b) : 'a -> 'c = fun x -> x |> f2 |> f1
+  let constant a _ = a
 
-let identity (value : 'a) : 'a = value
+  let sequence _ b = b
 
-let flip f x y = f y x
+  let flip f x y = f y x
+
+  let apply f a = f a
+
+  let ( <| ) a b = a b
+
+  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
+
+  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
+
+  let compose g f a = g (f a)
+
+  let ( << ) = compose
+
+  let composeRight g f a = f (g a)
+
+  let ( >> ) = composeRight
+
+  let tap a ~f =
+    f a ;
+    a
+end
 
 module Array = struct
   type 'a t = 'a array
@@ -161,13 +183,13 @@ module Array = struct
 
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
-    Belt.Array.reduce a initial (flip f)
+    Belt.Array.reduce a initial (Fun.flip f)
 
 
   let fold_left = foldLeft
 
   let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (a : 'a array) : 'b =
-    Belt.Array.reduceReverse a initial (flip f)
+    Belt.Array.reduceReverse a initial (Fun.flip f)
 
 
   let fold_right = foldRight
@@ -287,13 +309,13 @@ module List = struct
 
 
   let foldLeft ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
-    Belt.List.reduce l initial (flip f)
+    Belt.List.reduce l initial (Fun.flip f)
 
 
   let fold_left = foldLeft
 
   let foldRight ~(f : 'a -> 'b -> 'b) ~(initial : 'b) (l : 'a list) : 'b =
-    Belt.List.reduceReverse l initial (flip f)
+    Belt.List.reduceReverse l initial (Fun.flip f)
 
 
   let fold_right = foldRight
@@ -406,7 +428,7 @@ module List = struct
     | [ x ] ->
         Some x
     | x :: rest ->
-        Some (fst <| foldLeft ~f:minBy ~initial:(x, f x) rest)
+        Some (fst (foldLeft ~f:minBy ~initial:(x, f x) rest))
 
 
   let minimum_by = minimumBy
@@ -432,7 +454,7 @@ module List = struct
     | [ x ] ->
         Some x
     | x :: rest ->
-        Some (fst <| foldLeft ~f:maxBy ~initial:(x, f x) rest)
+        Some (fst (foldLeft ~f:maxBy ~initial:(x, f x) rest))
 
 
   let maximum_by = maximumBy
@@ -828,7 +850,7 @@ module Float = struct
 
   let degrees n = n * (pi / 180.0)
 
-  let radians = identity
+  let radians = Fun.identity
 
   let turns n = n * 2. * pi
 

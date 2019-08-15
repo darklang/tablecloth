@@ -7,49 +7,35 @@ Function names that are in snake_case have their documentation written in OCaml 
 Function names that are in camelCase have their documentation written in ReasonML format.
 *)
 
-val ( <| ) : ('a -> 'b) -> 'a -> 'b
-(**
-  The [<|] operator applies a function to an argument. It is equivalent to the [@@] operator,
-  and its main use is to avoid needing extra parentheses.
+module Fun : sig
+  external identity : 'a -> 'a = "%identity"
 
-  {[
-  let sqr x = x * x
-  let result = sqr <| 25 (* 625 *)
-  ]}
-*)
+  external ignore : _ -> unit = "%ignore"
 
-val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-(**
-    The [>>] operator returns a function that is the equivalent of the composition of its function arguments.
-    The main use of [>>] is to avoid writing parentheses.
+  val constant : 'a -> 'b -> 'a
 
-  [(f >> g) x] is the equivalent of [f (g x)]
+  val sequence : 'a -> 'b -> 'b
 
-  {[
+  val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
 
-  let f = (sqrt >> floor);;
-  (f 17.0) = 4.0
-  ]}
-*)
+  val apply : ('a -> 'b) -> 'a -> 'b
 
-val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
-(**
-  The [<<] operator returns a function that is the equivalent of the reverse composition of its function arguments.
+  val ( <| ) : ('a -> 'b) -> 'a -> 'b
 
-  [(f << g) x] is the equivalent of [g (f x)]
+  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
 
-  {[
+  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
 
-  let f = floor << sqrt;;
-  (f 3.5) = 1.7320508075688772
-  ]}
-*)
+  val compose : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
 
-val identity : 'a -> 'a
-(**
-  [identity] returns its argument, unchanged. It is useful in circumstances when you need a placeholder
-  function that does not alter the results of a computation.
-*)
+  val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
+
+  val composeRight : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
+
+  val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
+
+  val tap : 'a -> f:('a -> unit) -> 'a
+end
 
 module Array : sig
   type 'a t = 'a array
