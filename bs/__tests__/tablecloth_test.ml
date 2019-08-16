@@ -137,26 +137,42 @@ let () =
               |> toEqual [ (0, "cat"); (1, "dog") ])) ;
 
       describe "get" (fun () ->
-          test "returns Some for an in-bounds indexe" (fun () ->
-              expect (Array.get ~index:2 [| "cat"; "dog"; "eel" |])
+          test "returns Some for an in-bounds index" (fun () ->
+              expect [| "cat"; "dog"; "eel" |].(2) |> toEqual (Some "eel")) ;
+
+          test "returns None for an out of bounds index" (fun () ->
+              expect [| 0; 1; 2 |].(5) |> toEqual None) ;
+
+          test "returns None for an empty array" (fun () ->
+              expect [||].(0) |> toEqual None)) ;
+
+      describe "getAt" (fun () ->
+          test "returns Some for an in-bounds index" (fun () ->
+              expect (Array.getAt ~index:2 [| "cat"; "dog"; "eel" |])
               |> toEqual (Some "eel")) ;
 
           test "returns None for an out of bounds index" (fun () ->
-              expect (Array.get ~index:5 [| 0; 1; 2 |]) |> toEqual None) ;
+              expect (Array.getAt ~index:5 [| 0; 1; 2 |]) |> toEqual None) ;
 
           test "returns None for an empty array" (fun () ->
-              expect (Array.get ~index:0 [||]) |> toEqual None)) ;
+              expect (Array.getAt ~index:0 [||]) |> toEqual None)) ;
 
       describe "set" (fun () ->
+          test "can set a value at an index" (fun () ->
+              let numbers = [| 1; 2; 3 |] in
+              numbers.(0) <- 0 ;
+              expect numbers |> toEqual [| 0; 2; 3 |])) ;
+
+      describe "setAt" (fun () ->
           test "can be partially applied to set an element" (fun () ->
-              let setZero = Array.set ~value:0 in
+              let setZero = Array.setAt ~value:0 in
               let numbers = [| 1; 2; 3 |] in
               setZero numbers ~index:2 ;
               setZero numbers ~index:1 ;
               expect numbers |> toEqual [| 1; 0; 0 |]) ;
 
           test "can be partially applied to set an index" (fun () ->
-              let setZerothElement = Array.set ~index:0 in
+              let setZerothElement = Array.setAt ~index:0 in
               let animals = [| "ant"; "bat"; "cat" |] in
               setZerothElement animals ~value:"antelope" ;
               expect animals |> toEqual [| "antelope"; "bat"; "cat" |])) ;
@@ -465,7 +481,7 @@ let () =
           let index = ref 0 in
           let calledValues = [| 0; 0; 0 |] in
           Array.forEach [| 1; 2; 3 |] ~f:(fun value ->
-              Array.set calledValues ~index:!index ~value ;
+              Array.setAt calledValues ~index:!index ~value ;
               index := !index + 1) ;
 
           expect calledValues |> toEqual [| 1; 2; 3 |])) ;

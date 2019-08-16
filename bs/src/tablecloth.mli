@@ -68,9 +68,17 @@ module Array : sig
 
   val to_indexed_list : 'a array -> (int * 'a) list
 
-  val get : index:int -> 'a array -> 'a option
+  val get : 'a array -> int -> 'a option
 
-  val set : index:int -> value:'a -> 'a array -> unit
+  val getAt : index:int -> 'a array -> 'a option
+
+  val get_at : index:int -> 'a array -> 'a option
+
+  val set : 'a array -> int -> 'a -> unit
+
+  val setAt : index:int -> value:'a -> 'a array -> unit
+
+  val set_at : index:int -> value:'a -> 'a array -> unit
 
   val sum : int array -> int
 

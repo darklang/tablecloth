@@ -69,9 +69,17 @@ module Array = struct
 
   let to_indexed_list = toIndexedList
 
-  let get ~index array = Belt.Array.get array index
+  let get = Belt.Array.get
 
-  let set ~index ~value array = array.(index) <- value
+  let getAt ~index array = get array index
+
+  let get_at = getAt
+
+  let set array index value = array.(index) <- value
+
+  let setAt ~index ~value array = set array index value
+
+  let set_at = setAt
 
   let sum (a : int array) : int = Belt.Array.reduce a 0 ( + )
 

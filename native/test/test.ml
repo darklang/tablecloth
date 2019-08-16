@@ -222,24 +222,48 @@ let t_Array () =
 
   AT.check
     (AT.option AT.string)
-    "get - returns Some for an in-bounds indexe"
-    (Array.get ~index:2 [| "cat"; "dog"; "eel" |])
+    "get - returns Some for an in-bounds index"
+    [| "cat"; "dog"; "eel" |].(2)
     (Some "eel") ;
   AT.check
     (AT.option AT.int)
     "get - returns None for an out of bounds index"
-    (Array.get ~index:5 [| 0; 1; 2 |])
+    [| 0; 1; 2 |].(5)
     None ;
   AT.check
     (AT.option AT.int)
     "get - returns None for an empty array"
-    (Array.get ~index:0 [||])
+    [||].(0)
+    None ;
+
+  AT.check
+    (AT.option AT.string)
+    "getAt - returns Some for an in-bounds index"
+    (Array.getAt ~index:2 [| "cat"; "dog"; "eel" |])
+    (Some "eel") ;
+  AT.check
+    (AT.option AT.int)
+    "getAt - returns None for an out of bounds index"
+    (Array.getAt ~index:5 [| 0; 1; 2 |])
+    None ;
+  AT.check
+    (AT.option AT.int)
+    "getAt - returns None for an empty array"
+    (Array.getAt ~index:0 [||])
     None ;
 
   AT.check
     (AT.array AT.int)
-    "set - can be partially applied to set an element"
-    (let setZero = Array.set ~value:0 in
+    "set - can set a value at an index"
+    (let numbers = [| 1; 2; 3 |] in
+     numbers.(0) <- 0 ;
+     numbers)
+    [| 0; 2; 3 |] ;
+
+  AT.check
+    (AT.array AT.int)
+    "setAt - can be partially applied to set an element"
+    (let setZero = Array.setAt ~value:0 in
      let numbers = [| 1; 2; 3 |] in
      setZero numbers ~index:2 ;
      setZero numbers ~index:1 ;
@@ -248,8 +272,8 @@ let t_Array () =
 
   AT.check
     (AT.array AT.string)
-    "set - can be partially applied to set an index"
-    (let setZerothElement = Array.set ~index:0 in
+    "setAt - can be partially applied to set an index"
+    (let setZerothElement = Array.setAt ~index:0 in
      let animals = [| "ant"; "bat"; "cat" |] in
      setZerothElement animals ~value:"antelope" ;
      animals)
@@ -610,7 +634,7 @@ let t_Array () =
     (let index = ref 0 in
      let calledValues = [| 0; 0; 0 |] in
      Array.forEach [| 1; 2; 3 |] ~f:(fun value ->
-         Array.set calledValues ~index:!index ~value ;
+         Array.setAt calledValues ~index:!index ~value ;
          index := !index + 1) ;
 
      calledValues)

@@ -242,8 +242,8 @@ module Array : sig
 
   val to_indexed_list : 'a array -> (int * 'a) list
 
-  val get : index:int -> 'a array -> 'a option
-  (** [Array.get ~index:n a] returns, as an {!Option}, the element at index number [n] of array [a].
+  val get : 'a array -> int -> 'a option
+  (** [Array.get a n] returns, as an {!Option}, the element at index number [n] of array [a].
 
     The first element has index number 0.
 
@@ -251,35 +251,28 @@ module Array : sig
 
     Returns [None] if [n] is outside the range [0] to [(Array.length a - 1)].
 
-    You can also write [a.(n)] instead of [Array.get a n] but this raises [Invalid_argument "index out of bounds"] for index outside of the range of the array.
+    You can also write [a.(n)] instead of [Array.get n a]
 
-    {[Array.get ~index:2 [|"cat"; "dog"; "eel"|] = Some "eel"]}
+    {[Array.get [|"cat"; "dog"; "eel"|] 2 = Some "eel"]}
 
-    {[Array.get ~index:5 [|0; 1; 2|] = None]}
+    {[Array.get [|0; 1; 2|] 5 = None]}
 
-    {[Array.get ~index:0 [||] = None]} *)
+    {[Array.get [||] 0 = None]} *)
 
-  val set : index:int -> value:'a -> 'a array -> unit
-  (** [Array.set a ~index:n ~value:x] modifies array [a] in place, replacing the element at index number [n] with [x].
+  val getAt : index:int -> 'a array -> 'a option
 
-    You can also write [a.(n) <- x] instead of [Array.set a ~index:n ~value:x].
+  val get_at : index:int -> 'a array -> 'a option
 
-    Raises [Invalid_argument "index out of bounds"] if [n] is outside the range [0] to [Array.length a - 1]. 
-    
-    {[let setZero = Array.set ~value:0 in
-let numbers = [|1;2;3|] in
-  
-setZero numbers ~index:2;
-setZero numbers ~index:1;
+  val set : 'a array -> int -> 'a -> unit
+  (** [Array.set a i x] modifies array [a] in place, replacing the element at index number [i] with [x].
 
-numbers = [|1;0;0|]]}
+    You can also write [a.(n) <- x] instead of [Array.set a i x].
 
-    {[let setZerothElement = Array.set ~index:0 in
-let animals = [|"ant"; "bat"; "cat"|] in
+    Raises [Invalid_argument "index out of bounds"] if [i] is outside the range [0] to [Array.length a - 1]. *)
 
-setZerothElement animals ~value:"antelope";
+  val setAt : index:int -> value:'a -> 'a array -> unit
 
-animals = [|"antelope"; "bat"; "cat"|]]} *)
+  val set_at : index:int -> value:'a -> 'a array -> unit
 
   val sum : int array -> int
   (** Get the total of adding all of the integers in an array. 
