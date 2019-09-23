@@ -4,7 +4,10 @@
   "sources": [
     {
       "dir" : "src",
-      "subdirs" : false
+      "subdirs" : false,
+      "public": [
+        "Tablecloth"
+      ]
     },
     {
       "dir": "__tests__",
