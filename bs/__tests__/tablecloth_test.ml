@@ -1411,6 +1411,14 @@ let () =
           test "removeAt after end of list" (fun () ->
               expect (List.removeAt ~index:4 [ 1; 3 ]) |> toEqual [ 1; 3 ]))) ;
 
+  describe "repeat" (fun () ->
+      test "repeat length 0" (fun () ->
+          expect (List.repeat ~n:0 ~value:5) |> toEqual []) ;
+      test "repeat length 1" (fun () ->
+          expect (List.repeat ~n:1 ~value:5) |> toEqual [ 5 ]) ;
+      test "repeat length 3" (fun () ->
+          expect (List.repeat ~n:3 ~value:5) |> toEqual [ 5; 5; 5 ])) ;
+
   describe "String" (fun () ->
       test "length empty string" (fun () ->
           expect (String.length "") |> toEqual 0) ;

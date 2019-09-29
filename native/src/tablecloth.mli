@@ -655,6 +655,17 @@ module List : sig
   val sort_with : ('a -> 'a -> int) -> 'a list -> 'a list
 
   val iter : f:('a -> unit) -> 'a list -> unit
+
+  val repeat : n:int -> value:'a -> 'a list
+  (**
+    [List.repeat ~n=n ~value=v] returns a list with the value [v] repeated 
+    [n] times.
+
+    {[
+    List.repeat ~n:3 ~value:99 = [99; 99; 99]
+    List.repeat ~n:0 ~value:99 = []
+    ]}
+  *)
 end
 
 module Result : sig
