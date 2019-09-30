@@ -863,6 +863,16 @@ module List : sig
     let _ = List.iter ~f:Js.log ["a"; "b"; "c"]
     ]}
   *)
+
+  val repeat : count:int -> 'a -> 'a list
+  (**
+    [List.repeat ~count=n v] returns a list with the value [v] repeated [n] times.
+
+    {[
+    List.repeat ~count:3 99 = [99; 99; 99]
+    List.repeat ~count:0 99 = []
+    ]}
+  *)
 end
 
 (**

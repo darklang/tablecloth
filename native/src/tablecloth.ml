@@ -639,6 +639,9 @@ module List = struct
   let sort_with = sortWith
 
   let iter ~(f : 'a -> unit) (l : 'a list) : unit = Base.List.iter l ~f
+
+  let rec repeat ~(count : int) (value : 'a) : 'a list =
+    if count > 0 then value :: repeat ~count:(count - 1) value else []
 end
 
 module Option = struct
