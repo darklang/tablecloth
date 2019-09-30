@@ -1968,12 +1968,12 @@ let t_List () =
     (List.removeAt ~index:4 [ 1; 3 ])
     [ 1; 3 ] ;
 
-  AT.check (AT.list AT.int) "repeat length 0" (List.repeat ~n:0 ~value:5) [] ;
-  AT.check (AT.list AT.int) "repeat length 1" (List.repeat ~n:1 ~value:5) [ 5 ] ;
+  AT.check (AT.list AT.int) "repeat length 0" (List.repeat ~count:0 5) [] ;
+  AT.check (AT.list AT.int) "repeat length 1" (List.repeat ~count:1 5) [ 5 ] ;
   AT.check
     (AT.list AT.int)
     "repeat length 3"
-    (List.repeat ~n:3 ~value:5)
+    (List.repeat ~count:3 5)
     [ 5; 5; 5 ] ;
 
   ()

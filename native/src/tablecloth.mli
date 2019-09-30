@@ -656,14 +656,13 @@ module List : sig
 
   val iter : f:('a -> unit) -> 'a list -> unit
 
-  val repeat : n:int -> value:'a -> 'a list
+  val repeat : count:int -> 'a -> 'a list
   (**
-    [List.repeat ~n=n ~value=v] returns a list with the value [v] repeated 
-    [n] times.
+    [List.repeat ~count=n v] returns a list with the value [v] repeated [n] times.
 
     {[
-    List.repeat ~n:3 ~value:99 = [99; 99; 99]
-    List.repeat ~n:0 ~value:99 = []
+    List.repeat ~count:3 99 = [99; 99; 99]
+    List.repeat ~count:0 99 = []
     ]}
   *)
 end

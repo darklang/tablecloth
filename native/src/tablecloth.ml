@@ -640,8 +640,8 @@ module List = struct
 
   let iter ~(f : 'a -> unit) (l : 'a list) : unit = Base.List.iter l ~f
 
-  let rec repeat ~(n : int) ~(value : 'a) : 'a list =
-    if n > 0 then value :: repeat ~n:(n - 1) ~value else []
+  let rec repeat ~(count : int) (value : 'a) : 'a list =
+    if count > 0 then value :: repeat ~count:(count - 1) value else []
 end
 
 module Option = struct
