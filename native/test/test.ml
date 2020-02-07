@@ -20,11 +20,11 @@ let trio a b c =
 
 
 let t_Array () =
-  AT.check AT.int "empty - has length zero" Array.(empty |> length) 0 ;
+  AT.check AT.int "empty - has length zero" Array.(empty () |> length) 0 ;
   AT.check
     (AT.array AT.int)
     "empty - equals the empty array literal"
-    Array.empty
+    (Array.empty ())
     [||] ;
 
   AT.check
