@@ -40,7 +40,7 @@ end
 module Array : sig
   type 'a t = 'a array
 
-  val empty : 'a array
+  val empty : unit -> 'a array
 
   val singleton : 'a -> 'a array
 
@@ -791,7 +791,7 @@ module List : sig
     The first element of the tuple is the list of all the elements at the
     beginning of [xs] that  do _not_ satisfy the [predicate] function.
     The second element of the tuple is the list of the remaining items in [xs].
-    
+
     {[
     let even x: int = ((x mod 2) = 0 : bool)
     List.split_when ~f: even [5; 1; 2; 6; 3] =  ([5; 1], [2; 6; 3]);
@@ -835,7 +835,7 @@ module List : sig
 
   val sort_with : ('a -> 'a -> int) -> 'a list -> 'a list
   (**
-    [List.sort_with compareFcn xs] returns a new list with the elements in [xs] sorted according 
+    [List.sort_with compareFcn xs] returns a new list with the elements in [xs] sorted according
     to [compareFcn]. The [compareFcn] function takes two list items and returns a value
     less than zero if the first item compares less than the second, zero if the items compare equal,
     and one if the first item compares greater than the second.
@@ -1232,7 +1232,7 @@ module Option : sig
   (**
     [Option.values xs] takes a list of [option] values and creates
     a new list consisting of the values wrapped in [Some x].
-    
+
     {[
     Option.values [Some 1; None; Some 3; None] = [1; 3]
     Option.values [None; None] = [ ]
@@ -2285,7 +2285,7 @@ module Int : sig
   val power : base:t -> exponent:t -> t
   (** Exponentiation, takes the base first, then the exponent.
 
-    {[Int.power ~base:7 ~exponent:3 = 343]}  
+    {[Int.power ~base:7 ~exponent:3 = 343]}
 
     Alternatively the [**] operator can be used:
 
@@ -2386,7 +2386,7 @@ module Int : sig
     Int.is_even 8 = true
     Int.is_even 7 = false
     Int.is_even 0 = true
-    ]} 
+    ]}
   *)
 
   val isOdd : t -> bool
