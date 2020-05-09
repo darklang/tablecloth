@@ -985,7 +985,7 @@ module Result : sig
     ]}
   *)
 
-  val map : ('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
+  val map : f:('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
   (**
     [Result.map f r] applies a function [f], which
     takes a non-[Result] argument and returns a non-[Result] value, to

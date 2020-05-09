@@ -682,7 +682,7 @@ module Result : sig
 
   val combine : ('x, 'a) t list -> ('x, 'a list) t
 
-  val map : ('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
+  val map : f:('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
 
   val fromOption : error:'err -> 'ok option -> ('err, 'ok) t
 

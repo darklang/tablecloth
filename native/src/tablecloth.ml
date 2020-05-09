@@ -733,7 +733,7 @@ module Result = struct
     List.foldRight ~f:(map2 ~f:(fun a b -> a :: b)) ~initial:(Ok []) l
 
 
-  let map (f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
+  let map ~(f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
     Base.Result.map r ~f
 
 
