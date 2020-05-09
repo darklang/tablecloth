@@ -1032,8 +1032,7 @@ module Result : sig
     ]}
   *)
 
-  val andThen :
-    f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
+  val andThen : f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
   (**
     Same as {!Result.and_then}.
   *)
@@ -2746,21 +2745,13 @@ module Tuple3 : sig
   *)
 
   val mapEach :
-       f:('a -> 'x)
-    -> g:('b -> 'y)
-    -> h:('c -> 'z)
-    -> 'a * 'b * 'c
-    -> 'x * 'y * 'z
+    f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'a * 'b * 'c -> 'x * 'y * 'z
   (**
     Same as {!Tuple3.map_each}.
   *)
 
   val map_each :
-       f:('a -> 'x)
-    -> g:('b -> 'y)
-    -> h:('c -> 'z)
-    -> 'a * 'b * 'c
-    -> 'x * 'y * 'z
+    f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'a * 'b * 'c -> 'x * 'y * 'z
   (**
     [Tuple3.map_each ~f:fcn1 ~g:fcn2 ~h:fcn3 (a, b, c)] returns a tuple
     whose elements are [fcn1 a], [fcn2 b], and [fcn3 c].
@@ -3341,16 +3332,10 @@ module StrDict : sig
   val to_string : 'a t -> string
 
   val pp :
-       (Format.formatter -> 'value -> unit)
-    -> Format.formatter
-    -> 'value t
-    -> unit
+    (Format.formatter -> 'value -> unit) -> Format.formatter -> 'value t -> unit
 
   val merge :
-       f:(key -> 'v1 option -> 'v2 option -> 'v3 option)
-    -> 'v1 t
-    -> 'v2 t
-    -> 'v3 t
+    f:(key -> 'v1 option -> 'v2 option -> 'v3 option) -> 'v1 t -> 'v2 t -> 'v3 t
 end
 
 module IntDict : sig
@@ -3384,14 +3369,8 @@ module IntDict : sig
   val to_string : 'a t -> string
 
   val pp :
-       (Format.formatter -> 'value -> unit)
-    -> Format.formatter
-    -> 'value t
-    -> unit
+    (Format.formatter -> 'value -> unit) -> Format.formatter -> 'value t -> unit
 
   val merge :
-       f:(key -> 'v1 option -> 'v2 option -> 'v3 option)
-    -> 'v1 t
-    -> 'v2 t
-    -> 'v3 t
+    f:(key -> 'v1 option -> 'v2 option -> 'v3 option) -> 'v1 t -> 'v2 t -> 'v3 t
 end

@@ -692,8 +692,7 @@ module Result : sig
 
   val to_option : ('err, 'ok) t -> 'ok option
 
-  val andThen :
-    f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
+  val andThen : f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
 
   val and_then :
     f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
@@ -2075,22 +2074,14 @@ module Tuple3 : sig
   val map_third : f:('c -> 'z) -> 'a * 'b * 'c -> 'a * 'b * 'z
 
   val mapEach :
-       f:('a -> 'x)
-    -> g:('b -> 'y)
-    -> h:('c -> 'z)
-    -> 'a * 'b * 'c
-    -> 'x * 'y * 'z
+    f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'a * 'b * 'c -> 'x * 'y * 'z
   (** Transform the third value in a tuple.
 
       [Tuple3.mapEach ~f:String.reverse ~g:sqrt ~h:not ("stressed", 16., false) = ("desserts", 4., true)]
   *)
 
   val map_each :
-       f:('a -> 'x)
-    -> g:('b -> 'y)
-    -> h:('c -> 'z)
-    -> 'a * 'b * 'c
-    -> 'x * 'y * 'z
+    f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'a * 'b * 'c -> 'x * 'y * 'z
 
   val mapAll : f:('a -> 'b) -> 'a * 'a * 'a -> 'b * 'b * 'b
   (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.
@@ -2349,16 +2340,10 @@ module StrDict : sig
   val map : 'a t -> f:('a -> 'b) -> 'b t
 
   val pp :
-       (Format.formatter -> 'value -> unit)
-    -> Format.formatter
-    -> 'value t
-    -> unit
+    (Format.formatter -> 'value -> unit) -> Format.formatter -> 'value t -> unit
 
   val merge :
-       f:(key -> 'v1 option -> 'v2 option -> 'v3 option)
-    -> 'v1 t
-    -> 'v2 t
-    -> 'v3 t
+    f:(key -> 'v1 option -> 'v2 option -> 'v3 option) -> 'v1 t -> 'v2 t -> 'v3 t
 end
 
 module IntDict : sig
@@ -2390,16 +2375,10 @@ module IntDict : sig
   val map : 'a t -> f:('a -> 'b) -> 'b t
 
   val pp :
-       (Format.formatter -> 'value -> unit)
-    -> Format.formatter
-    -> 'value t
-    -> unit
+    (Format.formatter -> 'value -> unit) -> Format.formatter -> 'value t -> unit
 
   val merge :
-       f:(key -> 'v1 option -> 'v2 option -> 'v3 option)
-    -> 'v1 t
-    -> 'v2 t
-    -> 'v3 t
+    f:(key -> 'v1 option -> 'v2 option -> 'v3 option) -> 'v1 t -> 'v2 t -> 'v3 t
 end
 
 (* module Regex : sig *)

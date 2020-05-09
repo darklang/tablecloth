@@ -57,5 +57,19 @@ documentation:
 	ln -s _build/default/_doc/_html ./docs
 	@printf "\n\e[31mCompiled! The docs are now viewable at ./docs/index.html\e[0m\n"
 
+.PHONY: check-format format
+check-format:
+	@for i in `fd --extension ml --extension mli`; do \
+		echo Checking $$i; \
+		opam config exec -- ocamlformat --root=. --check $$i ; \
+		if [[ $$? != 0 ]]; then \
+			echo "$$i is not properly formatted, see diff below"; \
+			opam config exec -- ocamlformat --root=. --check $$i -g; \
+		fi; \
+	done
+
 format:
-	@fd --extension ml --extension mli | xargs ocamlformat --enable-outside-detected-project --inplace
+	@for i in `fd --extension ml --extension mli`; do \
+		opam config exec -- ocamlformat --root=. --inplace $$i; \
+	done
+

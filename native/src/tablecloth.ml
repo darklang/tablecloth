@@ -94,9 +94,7 @@ module Array = struct
 
   let sum (a : int array) : int = Base.Array.fold a ~init:0 ~f:( + )
 
-  let floatSum (a : float array) : float =
-    Base.Array.fold a ~init:0.0 ~f:( +. )
-
+  let floatSum (a : float array) : float = Base.Array.fold a ~init:0.0 ~f:( +. )
 
   let float_sum = floatSum
 
@@ -282,10 +280,8 @@ module Tuple3 = struct
   let map_third = mapThird
 
   let mapEach
-      ~(f : 'a -> 'x)
-      ~(g : 'b -> 'y)
-      ~(h : 'c -> 'z)
-      ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z =
+      ~(f : 'a -> 'x) ~(g : 'b -> 'y) ~(h : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c)
+      : 'x * 'y * 'z =
     (f a, g b, h c)
 
 
@@ -434,8 +430,8 @@ module List = struct
   let fold_left = foldLeft
 
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list)
-        : int option =
+    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) :
+        int option =
       match l with
       | [] ->
           None
@@ -1154,9 +1150,7 @@ module String = struct
 
   let join ~(sep : string) (l : string list) : string = String.concat sep l
 
-  let endsWith ~(suffix : string) (s : string) =
-    Base.String.is_suffix ~suffix s
-
+  let endsWith ~(suffix : string) (s : string) = Base.String.is_suffix ~suffix s
 
   let ends_with = endsWith
 
