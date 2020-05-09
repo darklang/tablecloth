@@ -1,3 +1,64 @@
+# 0.0.7
+
+Summary:
+- new Fun modules
+- new functions in List, Array, Int, Float, Option and Result
+- support latest bs-platform (7.3.2)
+- there is now a makefile with common commands
+- code is all formatted with ocamlformat
+
+Build:
+- add a `Makefile` with common commands (#68, #69, @wpcarro)
+- `Makefile` improvements (#73, #82, #85, @dmnd, @Dean177, @joesiewert)
+- switch to `ocamlformat` (#70, @wpcarro)
+- expand CI coverage (#80, #84, @Dean177, @joesiewert)
+- support latest bs-platform (#104 @Coobaha)
+
+
+Documentation:
+- fix typos (#50 @tcoopman, #51 @ostera)
+- imrpove String docs (#52, @jdeisenberg)
+- switch to OCaml documentation format only (#53, @jdeisenberg)
+
+Fun:
+- new module (@Dean177)
+
+Massively expanded Int and Float (#47, @Dean177):
+- All operators also get a named function equivalent
+- The `clamp`, `hypotenuse` and `inRange` functions are introduced
+- `round`, `floor`, `ceiling` and `truncate` return a `float` instead of an `int` with `Float.toInt` serving as the only way to convert to an integer.
+- `round` has been expanded to cover (most of) the many possible ways to go about rounding floating point numbers. The documentation for this one might be a little over the top, I wasn't sure about the clearest way to demonstrate the behaviour.
+- `logBase` becomes `log ~base:`
+- `min`, `max`, `mod`, `sqrt` and `abs` get non-abbreviated names
+- `remainderBy` and `modBy` drop the 'By' and get a labelled argument
+- `clamp` and `inRange` can throw an exception if the `upper` argument is less than the `lower` argument.
+
+Float:
+- fix tests on OSX (#60, @kuy)
+
+List:
+- add `sliding` (#81, @Dean177)
+- add `repeat` (#90 @msvbg)
+
+Array:
+- fix signature of `flatMap` (#55, @figitaki)
+- add `findIndex` (#78, @Dean177)
+- add `swap` (#76, @Dean177)
+- add `sliding` (#81, @Dean177)
+- add `get` and `set` (#74, @dmnd)
+- change `empty` to be a function (requirement in latest bs-platform) (#104 @Coobaha)
+
+Option:
+- add `getExn` (#65, dmnd)
+
+Result:
+- add `fromOption` (#66, wpcarro)
+- use `~f` in `Result.map` (#115 @joefiorini)
+
+String:
+- remove deprecation warnings (#88 @msvbg)
+
+
 # 0.0.6
 
 Summary:
