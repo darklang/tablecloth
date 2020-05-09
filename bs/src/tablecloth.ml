@@ -329,8 +329,8 @@ module List = struct
   let fold_right = foldRight
 
   let findIndex ~(f : 'a -> bool) (l : 'a list) : int option =
-    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list)
-        : int option =
+    let rec findIndexHelper ~(i : int) ~(predicate : 'a -> bool) (l : 'a list) :
+        int option =
       match l with
       | [] ->
           None
@@ -1123,10 +1123,8 @@ module Tuple3 = struct
   let map_third = mapThird
 
   let mapEach
-      ~(f : 'a -> 'x)
-      ~(g : 'b -> 'y)
-      ~(h : 'c -> 'z)
-      ((a, b, c) : 'a * 'b * 'c) : 'x * 'y * 'z =
+      ~(f : 'a -> 'x) ~(g : 'b -> 'y) ~(h : 'c -> 'z) ((a, b, c) : 'a * 'b * 'c)
+      : 'x * 'y * 'z =
     (f a, g b, h c)
 
 
@@ -1202,9 +1200,7 @@ module String = struct
 
   let ends_with = endsWith
 
-  let startsWith ~(prefix : string) (s : string) =
-    Js.String.startsWith prefix s
-
+  let startsWith ~(prefix : string) (s : string) = Js.String.startsWith prefix s
 
   let starts_with = startsWith
 
@@ -1410,8 +1406,7 @@ module StrDict = struct
   let toString (d : 'value t) =
     d
     |> toList
-    |> List.map ~f:(fun (k, v) ->
-           "\"" ^ k ^ "\": \"" ^ Js.String.make v ^ "\"")
+    |> List.map ~f:(fun (k, v) -> "\"" ^ k ^ "\": \"" ^ Js.String.make v ^ "\"")
     |> String.join ~sep:", "
     |> fun s -> "{" ^ s ^ "}"
 
