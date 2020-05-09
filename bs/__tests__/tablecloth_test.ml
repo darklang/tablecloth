@@ -46,9 +46,9 @@ let () =
   describe "Array" (fun () ->
       describe "empty" (fun () ->
           test "has length zero" (fun () ->
-              expect Array.(empty |> length) |> toEqual 0) ;
+              expect Array.(empty () |> length) |> toEqual 0) ;
           test "equals the empty array literal" (fun () ->
-              expect Array.empty |> toEqual [||])) ;
+              expect Array.(empty ()) |> toEqual [||])) ;
 
       describe "singleton" (fun () ->
           test "equals an array literal of the same value" (fun () ->

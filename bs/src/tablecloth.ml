@@ -33,7 +33,7 @@ end
 module Array = struct
   type 'a t = 'a array
 
-  let empty : 'a array = [||]
+  let empty () = [||]
 
   let singleton a = [| a |]
 
@@ -127,7 +127,7 @@ module Array = struct
   let sliding ?(step = 1) (a : 'a t) ~(size : int) : 'a t t =
     let n = Array.length a in
     if size > n
-    then empty
+    then empty ()
     else
       initialize
         ~length:(1 + ((n - size) / step))
@@ -185,7 +185,7 @@ module Array = struct
       else max 0 (min (length array) (length array + defaultTo))
     in
     if sliceFrom >= sliceTo
-    then empty
+    then empty ()
     else
       Belt.Array.makeBy (sliceTo - sliceFrom) (fun i -> array.(i + sliceFrom))
 

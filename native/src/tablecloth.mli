@@ -21,7 +21,7 @@ module Fun : sig
   *)
 
   external ignore : _ -> unit = "%ignore"
-  (** Discards the value it is given and returns [()] 
+  (** Discards the value it is given and returns [()]
 
     This is primarily useful when working with imperative side-effecting code or to avoid "unused value" compiler warnings when you really meant it, and haven't just made a mistake.
 
@@ -132,12 +132,12 @@ module Fun : sig
   (** See {!Fun.composeRight} *)
 
   val tap : 'a -> f:('a -> unit) -> 'a
-  (** 
+  (**
     Useful for performing some side affect in {!Fun.pipe}-lined code.
 
     Most commonly used to log a value in the middle of a pipeline of function calls.
 
-    {[    
+    {[
       let sanitize (input: string) : int option =
         input
         |> String.trim
@@ -161,12 +161,12 @@ module Array : sig
 
   type 'a t = 'a array
 
-  val empty : 'a array
+  val empty : unit -> 'a array
   (** An empty array.
 
-    {[Array.empty = [||]]}
+    {[Array.empty () = [||]]}
 
-    {[Array.length Array.empty = 0]} *)
+    {[Array.length (Array.empty ()) = 0]} *)
 
   val singleton : 'a -> 'a array
   (** Create an array with only one element.
@@ -178,7 +178,7 @@ module Array : sig
   val length : 'a array -> int
   (** Return the length of an array.
 
-    {[Array.length [|1; 2, 3|] = 3]}  
+    {[Array.length [|1; 2, 3|] = 3]}
 
     {[Array.length [||] = 0]} *)
 
@@ -187,7 +187,7 @@ module Array : sig
 
     {[Array.isEmpty Array.empty = true]}
 
-    {[Array.isEmpty [||] = true]} 
+    {[Array.isEmpty [||] = true]}
 
     {[Array.isEmpty [|1; 2; 3|] = false]} *)
 
@@ -202,17 +202,17 @@ module Array : sig
     {[Array.initialize ~length:4 ~f:(fun n -> n * n) = [|0; 1; 4; 9|]]} *)
 
   val repeat : length:int -> 'a -> 'a array
-  (** Creates an array of length [length] with the value [x] populated at each index. 
+  (** Creates an array of length [length] with the value [x] populated at each index.
 
     {[repeat ~length:5 'a' = [|'a'; 'a'; 'a'; 'a'; 'a'|]]}
 
-    {[repeat ~length:0 7 = [||]]} 
+    {[repeat ~length:0 7 = [||]]}
 
     {[repeat ~length:(-1) "Why?" = [||]]} *)
 
   val range : ?from:int -> int -> int array
-  (** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to] 
-  
+  (** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to]
+
     {[Array.range 5 = [|0; 1; 2; 3; 4|] ]}
 
     {[Array.range ~from: 2 5 = [|2; 3; 4|] ]}
@@ -220,7 +220,7 @@ module Array : sig
     {[Array.range ~from:(-2) 3 = [|-2; -1; 0; 1; 2|] ]} *)
 
   val fromList : 'a list -> 'a array
-  (** Create an array from a {!List}. 
+  (** Create an array from a {!List}.
 
     {[Array.fromList [1;2;3] = [|1;2;3|]]} *)
 
@@ -275,12 +275,12 @@ module Array : sig
   val set_at : index:int -> value:'a -> 'a array -> unit
 
   val sum : int array -> int
-  (** Get the total of adding all of the integers in an array. 
+  (** Get the total of adding all of the integers in an array.
 
     {[Array.sum [|1; 2; 3|] = 6]} *)
 
   val floatSum : float array -> float
-  (** Get the total of adding all of the floating point numbers in an array. 
+  (** Get the total of adding all of the floating point numbers in an array.
 
     {[Array.floatSum [|1.0; 2.0; 3.0|] = 6.0]} *)
 
@@ -316,11 +316,11 @@ module Array : sig
 Array.map2 ~f:(+) xs ys in
 
 totals [|1;2;3|] [|4;5;6|] = [|5;7;9|]
-  
-Array.map2 
-  ~f:Tuple2.create 
-  [|"alice"; "bob"; "chuck"|] 
-  [|2; 5; 7; 8|] = 
+
+Array.map2
+  ~f:Tuple2.create
+  [|"alice"; "bob"; "chuck"|]
+  [|2; 5; 7; 8|] =
     [|("alice",2); ("bob",5); ("chuck",7)|] ]} *)
 
   val map3 :
@@ -328,26 +328,26 @@ Array.map2
   (** Combine three arrays, using [f] to combine each {!Tuple3} of elements.
     If one array is longer, the extra elements are dropped.
 
-    {[ 
-  Array.map3 
-    ~f:Tuple3.create 
-    [|"alice"; "bob"; "chuck"|] 
-    [|2; 5; 7; 8;|] 
-    [|true; false; true; false|] = 
+    {[
+  Array.map3
+    ~f:Tuple3.create
+    [|"alice"; "bob"; "chuck"|]
+    [|2; 5; 7; 8;|]
+    [|true; false; true; false|] =
       [|("alice", 2, true); ("bob", 5, false); ("chuck", 7, true)|]
     ]} *)
 
   val flatMap : f:('a -> 'b array) -> 'a array -> 'b array
   (** Apply a function [f] onto an array and flatten the resulting array of arrays.
 
-    {[Array.flatMap ~f xs = Array.map ~f xs |> Array.flatten]} 
-    
+    {[Array.flatMap ~f xs = Array.map ~f xs |> Array.flatten]}
+
     {[Array.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]} *)
 
   val flat_map : f:('a -> 'b array) -> 'a array -> 'b array
 
   val find : 'a array -> f:('a -> bool) -> 'a option
-  (** Returns as an option the first element for which f evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None] 
+  (** Returns as an option the first element for which f evaluates to true. If [f] doesn't return [true] for any of the elements [find] will return [None]
     {[Array.find ~f:Int.isEven [|1; 3; 4; 8;|] = Some 4]}
 
     {[Array.find ~f:Int.isOdd [|0; 2; 4; 8;|] = None]}
@@ -382,7 +382,7 @@ Array.map2
   val append : 'a array -> 'a array -> 'a array
   (** Creates a new array which is the result of appending the second array onto the end of the first.
 
-    {[let fortyTwos = Array.repeat ~length:2 42 in 
+    {[let fortyTwos = Array.repeat ~length:2 42 in
 let eightyOnes = Array.repeat ~length:3 81 in
 Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
 
@@ -399,8 +399,8 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
     {[Array.intersperse ~sep:0 [||] = [||]]} *)
 
   val slice : from:int -> ?to_:int -> 'a array -> 'a array
-  (** Get a sub-section of an array. [from] is a zero-based index where we will start our slice. 
-    The [to_] is a zero-based index that indicates the end of the slice. 
+  (** Get a sub-section of an array. [from] is a zero-based index where we will start our slice.
+    The [to_] is a zero-based index that indicates the end of the slice.
 
     The slice extracts up to but not including [to_].
 
@@ -415,7 +415,7 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
     {[Array.slice  ~from:1 ~to_:(-1) [|0; 1; 2; 3; 4|] = [|1; 2; 3|]]}
 
     {[Array.slice ~from:(-2)  ~to_:5 [|0; 1; 2; 3; 4|] = [|3; 4|]]}
-  
+
     {[Array.slice ~from:(-2)  ~to_:(-1) [|0; 1; 2; 3; 4|] = [|3|]]} *)
 
   val sliding : ?step:int -> 'a t -> size:int -> 'a t t
@@ -440,12 +440,12 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
 
   val foldLeft : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
   (** Reduces collection to a value which is the accumulated result of running each element in the array through [f],
-      where each successive invocation is supplied the return value of the previous. 
-    
-    Read [foldLeft] as 'fold from the left'. 
+      where each successive invocation is supplied the return value of the previous.
+
+    Read [foldLeft] as 'fold from the left'.
 
     {[Array.foldLeft ~f:( * ) ~initial:1 (Array.repeat ~length:4 7) = 2401]}
-    
+
     {[Array.foldLeft ~f:((fun element list -> element :: list)) ~initial:[] [|1; 2; 3|] = [3; 2; 1]]} *)
 
   val fold_left : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
@@ -460,15 +460,15 @@ Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];]} *)
   val fold_right : f:('a -> 'b -> 'b) -> initial:'b -> 'a array -> 'b
 
   val reverse : 'a array -> 'a array
-  (** Create a new reversed array leaving the original untouched 
-  
+  (** Create a new reversed array leaving the original untouched
+
   {[let numbers = [|1; 2; 3|] in
 Array.reverse numbers = [|3; 2; 1|];
 numbers = [|1; 2; 3|]; ]} *)
 
   val reverseInPlace : 'a array -> unit
-  (** Reverses array so that the first element becomes the last, the second element becomes the second to last, and so on. 
-  
+  (** Reverses array so that the first element becomes the last, the second element becomes the second to last, and so on.
+
   {[let numbers = [|1; 2; 3|] in
 Array.reverseInPlace numbers;
 numbers = [|3; 2; 1|]]} *)
@@ -476,7 +476,7 @@ numbers = [|3; 2; 1|]]} *)
   val reverse_in_place : 'a array -> unit
 
   val forEach : f:('a -> unit) -> 'a array -> unit
-  (** Iterates over the elements of invokes [f] for each element. 
+  (** Iterates over the elements of invokes [f] for each element.
 
     {[Array.forEach [|1; 2; 3|] ~f:(fun int -> print (Int.toString int))]} *)
 
@@ -779,12 +779,12 @@ module Char : sig
     [fromCode 65 = Some 'A']
 
     [fromCode 66 = Some 'B']
-    
+
     [fromCode 3000 = None]
 
     [fromCode (-1) = None]
 
-    The full range of extended ASCII is from [0] to [255]. For numbers outside that range, you get [None]. 
+    The full range of extended ASCII is from [0] to [255]. For numbers outside that range, you get [None].
 
     [cp]: https://en.wikipedia.org/wiki/Code_point *)
 
@@ -806,9 +806,9 @@ module Char : sig
 
       [fromString " " = Some ' ']
 
-      [fromString "" = None] 
+      [fromString "" = None]
 
-      [fromString "abc" = None] 
+      [fromString "abc" = None]
 
       [fromString " a" = None] *)
 
@@ -816,7 +816,7 @@ module Char : sig
 
   val toDigit : char -> int option
   (** Converts a digit character to its corresponding integer. Returns None when the character isn't a digit.
-      [toDigit "7" = Some 7] 
+      [toDigit "7" = Some 7]
 
       [toDigit "0" = Some 0]
 
@@ -1988,7 +1988,7 @@ module Tuple2 : sig
 
   val toList : 'a * 'a -> 'a list
   (** Turns a tuple into a list of length two. This function can only be used on tuples which have the same type for each value.
-  
+
       [Tuple2.toList (3, 4) = [3; 4]]
 
       [Tuple2.toList ("was", "stressed") = ["was"; "stressed"]]
@@ -2060,7 +2060,7 @@ module Tuple3 : sig
   (** Transform the second value in a tuple.
 
       [Tuple3.mapSecond ~f:sqrt ("stressed", 16., false) = ("stressed", 4., false)]
-    
+
       [Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) = ("stressed", -16, false)]
   *)
 
@@ -2093,7 +2093,7 @@ module Tuple3 : sig
     -> 'x * 'y * 'z
 
   val mapAll : f:('a -> 'b) -> 'a * 'a * 'a -> 'b * 'b * 'b
-  (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.    
+  (** Transform all the values of a tuple using the same function. [mapAll] can only be used on tuples which have the same type for each value.
 
       [Tuple2.mapAll ~f:sqrt (9., 16., 25.) = (3., 4., 5.)]
 
@@ -2145,9 +2145,9 @@ module Tuple3 : sig
 
   val toList : 'a * 'a * 'a -> 'a list
   (** Turns a tuple into a list of length three. This function can only be used on tuples which have the same type for each value.
-  
+
       [Tuple3.toList (3, 4, 5) = [3; 4; 5]]
-    
+
       [Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]
   *)
 

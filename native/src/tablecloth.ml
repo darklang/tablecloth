@@ -36,7 +36,7 @@ end
 module Array = struct
   type 'a t = 'a array
 
-  let empty : 'a array = [||]
+  let empty () = [||]
 
   let singleton (a : 'a) : 'a array = [| a |]
 
@@ -47,11 +47,11 @@ module Array = struct
   let is_empty = isEmpty
 
   let initialize ~(length : int) ~(f : int -> 'a) =
-    if length <= 0 then empty else Base.Array.init length ~f
+    if length <= 0 then empty () else Base.Array.init length ~f
 
 
   let repeat ~(length : int) (e : 'a) : 'a array =
-    if length <= 0 then empty else Base.Array.init length ~f:(fun _ -> e)
+    if length <= 0 then empty () else Base.Array.init length ~f:(fun _ -> e)
 
 
   let range ?(from = 0) (to_ : int) : int array =
@@ -172,7 +172,7 @@ module Array = struct
       else max 0 (min (length array) (length array + defaultTo))
     in
     if sliceFrom >= sliceTo
-    then empty
+    then empty ()
     else
       Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
 
@@ -180,7 +180,7 @@ module Array = struct
   let sliding ?(step = 1) (a : 'a t) ~(size : int) : 'a t t =
     let n = Array.length a in
     if size > n
-    then empty
+    then empty ()
     else
       initialize
         ~length:(1 + ((n - size) / step))
