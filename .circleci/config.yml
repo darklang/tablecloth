@@ -60,11 +60,19 @@ jobs:
     steps:
       - checkout:
           path: ~/repo
+      - restore_cache:
+          keys:
+            - v0-source-dependencies-ocamlformat-0.10
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       # fd (aka fdfind) is needed to support formatting. It will respect the 's .gitignore
       - run: sudo apt-get install -y m4 fd-find
       - run: opam update && opam install 'ocamlformat=0.10' -y
       - run: fdfind --extension ml --extension mli | xargs opam config exec -- ocamlformat --check --enable-outside-detected-project
+      - save_cache:
+          key: v0-source-dependencies-ocamlformat-0.10
+          paths:
+            - ~/.opam
+
 
 workflows:
   version: 2
