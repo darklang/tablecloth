@@ -1103,7 +1103,7 @@ module Int = struct
 
   let to_string = toString
 
-  let fromString = int_of_string_opt
+  let fromString str = try Some (int_of_string str) with _ -> None
 
   let from_string = fromString
 end
