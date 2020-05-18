@@ -7,3 +7,13 @@
  (target Bool.mli)
  (action
   (copy ../../bucklescript/src/Bool.mli ./Bool.mli)))
+
+(rule
+ (target TableclothChar.mli)
+ (action
+  (copy ../../bucklescript/src/TableclothChar.mli ./TableclothChar.mli)))
+
+(rule
+ (target Float.mli)
+ (action
+  (copy ../../bucklescript/src/Float.mli ./Float.mli)))

@@ -1,6 +1,16 @@
 let () = {
   Alcotest.run(
     "Tablecloth",
-    [("tests", [BoolTest.suite, ...TableclothTest.suite])],
+    [
+      (
+        "tests",
+        [
+          BoolTest.suite,
+          CharTest.suite,
+          FloatTest.suite,
+          ...TableclothTest.suite,
+        ],
+      ),
+    ],
   );
 };

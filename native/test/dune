@@ -10,6 +10,16 @@
   (copy ../../bucklescript/test/BoolTest.re ./BoolTest.re)))
 
 (rule
+ (target CharTest.re)
+ (action
+  (copy ../../bucklescript/test/CharTest.re ./CharTest.re)))
+
+(rule
+ (target FloatTest.re)
+ (action
+  (copy ../../bucklescript/test/FloatTest.re ./FloatTest.re)))
+
+(rule
  (alias runtest)
  (action
   (run ./runtest.exe)))
