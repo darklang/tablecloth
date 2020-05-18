@@ -1,0 +1,5 @@
+(dirs :standard \
+  examples
+  lib  
+  node_modules  
+)

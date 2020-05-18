@@ -1,3 +1,30 @@
+module Bool = struct
+  type t = bool
+
+  external ( && ) : bool -> bool -> bool = "%sequand"
+
+  external ( || ) : bool -> bool -> bool = "%sequor"
+
+  let xor a b = (a && not b) || ((not a) && b)
+
+  let not = not
+
+  let negate f t = not (f t)
+
+  let equal = ( = )
+
+  let compare = compare
+
+  let ofInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
+
+  let ofString string =
+    match string with "false" -> Some false | "true" -> Some true | _ -> None
+
+  let toString = function true -> "true" | false -> "false"
+
+  let toInt t = match t with true -> 1 | false -> 0
+end
+
 module Fun = struct
   external identity : 'a -> 'a = "%identity"
 
@@ -635,6 +662,8 @@ module List = struct
   let sort_with = sortWith
 
   let iter ~(f : 'a -> unit) (l : 'a list) : unit = Base.List.iter l ~f
+  
+  let forEachWithIndex (l : 'a list) ~(f : int -> 'a -> unit) : unit = Base.List.iteri l ~f
 
   let rec repeat ~(count : int) (value : 'a) : 'a list =
     if count > 0 then value :: repeat ~count:(count - 1) value else []

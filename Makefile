@@ -5,7 +5,7 @@ build-native:
 
 build-bs:
 	@printf "\n\e[31mBuilding bs ...\e[0m\n"
-	cd bs && npm run build
+	cd bucklescript && npm run build
 	@printf "\n\e[31mBuilt!\e[0m\n"
 
 build:
@@ -32,7 +32,7 @@ test-native:
 
 test-bs:
 	@printf "\n\e[31mRunning tablecloth-bs tests ...\e[0m\n"
-	cd bs && npm run test
+	cd bucklescript && npm run test
 	@printf "\n\e[31mTested!\e[0m\n"
 
 test:
@@ -42,12 +42,12 @@ test:
 deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
 	opam update
-	opam install alcotest base dune junit junit_alcotest odoc -y
+	opam install alcotest base dune junit junit_alcotest odoc reason -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 deps-bs:
 	@printf "\n\e[31mInstalling bs dependencies ...\e[0m\n"
-	cd bs && npm install
+	cd bucklescript && npm install
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 documentation:
@@ -59,7 +59,7 @@ documentation:
 
 .PHONY: check-format format
 check-format:
-	@for i in `fd --extension ml --extension mli`; do \
+	@for i in `fd --extension ml --extension mli .`; do \
 		echo Checking $$i; \
 		opam config exec -- ocamlformat --root=. --check $$i ; \
 		if [[ $$? != 0 ]]; then \
