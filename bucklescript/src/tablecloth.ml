@@ -1,14 +1,14 @@
 module Bool = struct
   type t = bool
 
-  let ofInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
+  let fromInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
 
-  let of_int = ofInt
+  let from_int = fromInt
 
-  let ofString string =
+  let fromString string =
     match string with "false" -> Some false | "true" -> Some true | _ -> None
 
-  let of_string = ofString
+  let from_string = fromString
 
   external ( && ) : bool -> bool -> bool = "%sequand"
 

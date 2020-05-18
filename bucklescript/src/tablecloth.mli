@@ -30,39 +30,39 @@ module Bool : sig
 
       {2 Examples}
 
-      {[Bool.ofInt 0 = Some false]}
+      {[Bool.fromInt 0 = Some false]}
 
-      {[Bool.ofInt 1 = Some true]}
+      {[Bool.fromInt 1 = Some true]}
 
-      {[Bool.ofInt 8 = None]}
+      {[Bool.fromInt 8 = None]}
 
-      {[Bool.ofInt (-3) = None]}
+      {[Bool.fromInt (-3) = None]}
   *)
-  val ofInt : int -> t option
+  val fromInt : int -> t option
 
-  val of_int : int -> t option
+  val from_int : int -> t option
 
   (** Convert a {!String} into a {!Bool}.
 
       {2 Examples}
 
-      {[Bool.ofString "true" = Some true]}
+      {[Bool.fromString "true" = Some true]}
 
-      {[Bool.ofString "false" = Some false]}
+      {[Bool.fromString "false" = Some false]}
 
-      {[Bool.ofString "True" = None]}
+      {[Bool.fromString "True" = None]}
 
-      {[Bool.ofString "False" = None]}
+      {[Bool.fromString "False" = None]}
 
-      {[Bool.ofString "0" = None]}
+      {[Bool.fromString "0" = None]}
 
-      {[Bool.ofString "1" = None]}
+      {[Bool.fromString "1" = None]}
 
-      {[Bool.ofString "Not even close" = None]}
+      {[Bool.fromString "Not even close" = None]}
   *)
-  val ofString : string -> t option
+  val fromString : string -> t option
 
-  val of_string : string -> t option
+  val from_string : string -> t option
 
   (** {1 Basic operations} *)
 
