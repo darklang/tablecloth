@@ -287,3 +287,8 @@ val equal : t -> t -> bool
 
 val compare : t -> t -> int
 (** Compare two {!Char}s *)
+
+(** The unique identity for {!Comparator} *)
+type identity
+
+val comparator : (t, identity) Comparator.t

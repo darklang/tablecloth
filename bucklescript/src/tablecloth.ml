@@ -1,4 +1,5 @@
 module Bool = Bool
+module Comparator = Comparator
 module Char = TableclothChar
 module Float = Float
 module Int = Int

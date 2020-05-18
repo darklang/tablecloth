@@ -1,5 +1,7 @@
 (**  *)
 
+module Comparator : module type of Comparator
+
 (** Functions for working with boolean ([true] or [false]) values. *)
 module Bool : module type of Bool
 

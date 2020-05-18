@@ -1,5 +1,11 @@
 type t = char
 
+include Comparator.Make (struct
+  type nonrec t = t
+
+  let compare = compare
+end)
+
 let toCode (c : char) = (Base.Char.to_int c : int)
 
 let to_code = toCode

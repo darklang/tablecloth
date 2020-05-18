@@ -1,5 +1,6 @@
 module Bool = Bool
 module Char = TableclothChar
+module Comparator = Comparator
 module String = TableclothString
 module Int = Int
 module Float = Float

@@ -1,5 +1,11 @@
 type t = string
 
+include Comparator.Make (struct
+  type nonrec t = t
+
+  let compare = compare
+end)
+
 let initialize length ~f = Base.List.init length ~f |> Base.String.of_char_list
 
 let repeat t ~count = Base.List.init count ~f:(fun _ -> t) |> Base.String.concat
