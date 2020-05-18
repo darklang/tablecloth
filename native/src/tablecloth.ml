@@ -1,6 +1,15 @@
 module Bool = struct
   type t = bool
 
+  let ofInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
+
+  let of_int = ofInt
+
+  let ofString string =
+    match string with "false" -> Some false | "true" -> Some true | _ -> None
+
+  let of_string = ofString
+
   external ( && ) : bool -> bool -> bool = "%sequand"
 
   external ( || ) : bool -> bool -> bool = "%sequor"
@@ -14,11 +23,6 @@ module Bool = struct
   let equal = ( = )
 
   let compare = compare
-
-  let ofInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
-
-  let ofString string =
-    match string with "false" -> Some false | "true" -> Some true | _ -> None
 
   let toString = function true -> "true" | false -> "false"
 

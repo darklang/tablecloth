@@ -40,6 +40,8 @@ module Bool : sig
   *)
   val ofInt : int -> bool option
 
+  val of_int : int -> bool option
+
   (** Convert a {!String} into a {!Bool}.
 
       {2 Examples}
@@ -59,6 +61,8 @@ module Bool : sig
       {[Bool.ofString "Not even close" = None]}
   *)
   val ofString : string -> bool option
+
+  val of_string : string -> bool option
 
   (** {1 Basic operations} *)
 
