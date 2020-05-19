@@ -1,13 +1,16 @@
 {
-  "name": "tablecloth",
-  "version": "0.0.6",
+  "name": "tablecloth-bucklescript",
+  "version": "0.0.7",
   "sources": [
     {
-      "dir": "bucklescript/src"
+      "dir": "bucklescript/src",
+      "public": ["Tablecloth"],
+      "subdirs" : false
     },
     {
       "dir": "bucklescript/test",
-      "type": "dev"
+      "type": "dev",
+      "subdirs" : false
     }
   ],
   "package-specs": {

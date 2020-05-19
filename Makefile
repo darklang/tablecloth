@@ -1,11 +1,11 @@
 build-native:
 	@printf "\n\e[31mBuilding tablecloth-native ...\e[0m\n"
-	cd native && opam config exec -- dune build
+	opam config exec -- dune build
 	@printf "\n\e[31mBuilt!\e[0m\n"
 
 build-bs:
 	@printf "\n\e[31mBuilding bs ...\e[0m\n"
-	cd bucklescript && npm run build
+	npm run build
 	@printf "\n\e[31mBuilt!\e[0m\n"
 
 build:
@@ -14,7 +14,7 @@ build:
 
 doc-native:
 	@printf "\n\e[31mBuilding native docs ...\e[0m\n"
-	cd native && opam config exec -- dune build @doc -f
+	opam config exec -- dune build @doc -f
 	@printf "\n\e[31mBuilt!\e[0m\n"
 
 doc-bs:
@@ -27,12 +27,12 @@ doc:
 
 test-native:
 	@printf "\n\e[31mRunning tablecloth-native tests ...\e[0m\n"
-	cd native && opam config exec -- dune runtest -f
+	opam config exec -- dune runtest -f
 	@printf "\n\e[31mTested!\e[0m\n"
 
 test-bs:
 	@printf "\n\e[31mRunning tablecloth-bs tests ...\e[0m\n"
-	cd bucklescript && npm run test
+	npm run test
 	@printf "\n\e[31mTested!\e[0m\n"
 
 test:
@@ -47,7 +47,7 @@ deps-native:
 
 deps-bs:
 	@printf "\n\e[31mInstalling bs dependencies ...\e[0m\n"
-	cd bucklescript && npm install
+	npm install
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 documentation:
