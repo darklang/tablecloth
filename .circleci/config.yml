@@ -17,9 +17,10 @@ jobs:
             - v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - v1-bucklescript-dependencies-{{ .Branch }}-
             - v1-bucklescript-dependencies-
-      - run: npm install
-      - run: npm run build
-      - run: npm test      
+      - run: make deps-bs
+      - run: make build-bs
+      - run: make test-bs
+      - run: make doc-bs
       - save_cache:
           key: v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
