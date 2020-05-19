@@ -62,5 +62,4 @@ check-format:
 	opam config exec -- dune build @fmt
 
 format:
-  opam config exec -- dune build @fmt --auto-promote
-
+	opam config exec -- dune build @fmt --auto-promote
