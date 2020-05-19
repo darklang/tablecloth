@@ -59,17 +59,8 @@ documentation:
 
 .PHONY: check-format format
 check-format:
-	@for i in `fd --extension ml --extension mli .`; do \
-		echo Checking $$i; \
-		opam config exec -- ocamlformat --root=. --check $$i ; \
-		if [[ $$? != 0 ]]; then \
-			echo "$$i is not properly formatted, see diff below"; \
-			opam config exec -- ocamlformat --root=. --check $$i -g; \
-		fi; \
-	done
+	opam config exec -- dune build @fmt
 
 format:
-	@for i in `fd --extension ml --extension mli`; do \
-		opam config exec -- ocamlformat --root=. --inplace $$i; \
-	done
+  opam config exec -- dune build @fmt --auto-promote
 

@@ -1,5 +1,4 @@
 (library
-  (name tablecloth)
-  (public_name tablecloth-native)
-  (libraries base str)
-)
+ (name tablecloth)
+ (public_name tablecloth-native)
+ (libraries base str))

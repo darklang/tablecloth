@@ -8,6 +8,7 @@ module Bool = struct
   let fromString string =
     match string with "false" -> Some false | "true" -> Some true | _ -> None
 
+
   let from_string = fromString
 
   external ( && ) : bool -> bool -> bool = "%sequand"
@@ -21,7 +22,7 @@ module Bool = struct
   let negate f t = not (f t)
 
   external toString : bool -> string = "toString" [@@bs.send]
-  
+
   let to_string = toString
 
   let toInt t = match t with true -> 1 | false -> 0
@@ -1542,4 +1543,3 @@ module IntDict = struct
       (dict2 : 'v2 t) : 'v3 t =
     Map.merge dict1 dict2 f
 end
-

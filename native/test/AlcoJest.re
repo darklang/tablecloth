@@ -24,7 +24,8 @@ module Eq = {
 
   let float = AT.float(0.0);
 
-  let make = (equal: ('a, 'a) => bool,  prettyPrint: (Format.formatter, 'a) => unit) => 
+  let make =
+      (equal: ('a, 'a) => bool, prettyPrint: (Format.formatter, 'a) => unit) =>
     AT.testable(prettyPrint, equal);
 };
 
@@ -54,7 +55,8 @@ let testAll =
     (description: string, values: list('a), callback: 'a => unit): unit => {
   Tablecloth.List.forEachWithIndex(values, ~f=(index, value) =>
     test(
-      description ++ ", [values][" ++ Tablecloth.Int.toString(index) ++ "]", () =>
+      description ++ ", [values][" ++ Tablecloth.Int.toString(index) ++ "]",
+      () =>
       callback(value)
     )
   );

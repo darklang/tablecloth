@@ -26,6 +26,7 @@ module Bool : sig
 
   (** {1 Create} *)
 
+  val fromInt : int -> t option
   (** Convert an {!Int} into a {!Bool}.
 
       {2 Examples}
@@ -38,10 +39,10 @@ module Bool : sig
 
       {[Bool.fromInt (-3) = None]}
   *)
-  val fromInt : int -> t option
 
   val from_int : int -> t option
 
+  val fromString : string -> t option
   (** Convert a {!String} into a {!Bool}.
 
       {2 Examples}
@@ -60,12 +61,12 @@ module Bool : sig
 
       {[Bool.fromString "Not even close" = None]}
   *)
-  val fromString : string -> t option
 
   val from_string : string -> t option
 
   (** {1 Basic operations} *)
 
+  external ( && ) : bool -> bool -> bool = "%sequand"
   (** The lazy logical AND operator.
 
       Returns [true] if both of its operands evaluate to [true].
@@ -82,8 +83,8 @@ module Bool : sig
 
       {[Bool.(false && false) = false]}
   *)
-  external (&&) : bool -> bool -> bool = "%sequand"
 
+  external ( || ) : bool -> bool -> bool = "%sequor"
   (** The lazy logical OR operator.
 
       Returns [true] if one of its operands evaluates to [true].
@@ -100,8 +101,8 @@ module Bool : sig
 
       {[Bool.(false || false) = false]}
   *)
-  external (||) : bool -> bool -> bool = "%sequor"
 
+  val xor : t -> t -> t
   (** The exclusive or operator.
 
       Returns [true] if {b exactly one} of its operands is [true].
@@ -116,8 +117,8 @@ module Bool : sig
 
       {[Bool.xor false false = false]}
   *)
-  val xor : t -> t -> t
 
+  val not : t -> t
   (** Negate a [bool].
 
       {2 Examples}
@@ -126,8 +127,8 @@ module Bool : sig
 
       {[Bool.not true = false]}
   *)
-  val not : t -> t
-  
+
+  val negate : ('a -> bool) -> 'a -> bool
   (** Negate a function.
 
       This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
@@ -139,10 +140,10 @@ module Bool : sig
         isLessThanTwelve 12 = false
       ]}
   *)
-  val negate : ('a -> bool) -> 'a -> bool
-  
+
   (** {1 Convert} *)
 
+  val toString : t -> string
   (** Convert a [bool] to a {!String}
 
       {2 Examples}
@@ -151,10 +152,10 @@ module Bool : sig
 
       {[Bool.toString false = "false"]}
   *)
-  val toString : t -> string
 
   val to_string : t -> string
-  
+
+  val to_int : t -> int
   (** Convert a [bool] to an {!Int}.
 
       {2 Examples}
@@ -162,11 +163,11 @@ module Bool : sig
       {[Bool.toInt true = 1]}
 
       {[Bool.toInt false = 0]}
-  *)  
-  val to_int : t -> int
+  *)
 
   (** {1 Compare} *)
 
+  val equal : t -> t -> t
   (** Test for the equality of two [bool] values.
 
       {2 Examples}
@@ -177,8 +178,8 @@ module Bool : sig
 
       {[Bool.equal false true = false]}
   *)
-  val equal : t -> t -> t
 
+  val compare : t -> t -> int
   (** Compare two boolean values
 
       {2 Examples}
@@ -191,7 +192,6 @@ module Bool : sig
 
       {[Bool.compare false false = 0]}
   *)
-  val compare : t -> t -> int
 end
 
 module Fun : sig
@@ -1067,7 +1067,6 @@ end
   successful results (['ok]), and one for unsuccessful results (['error]).
 *)
 module Result : sig
-  type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
   (**
     [type] is the type constructor for a [Result] type. You specify
     the type of the [Error] and [Ok] variants, in that order.
@@ -1082,6 +1081,7 @@ module Result : sig
     ]}
 
   *)
+  type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
 
   val succeed : 'ok -> ('err, 'ok) t
   (**
