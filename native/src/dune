@@ -27,3 +27,8 @@
  (target Fun.mli)
  (action
   (copy ../../bucklescript/src/Fun.mli ./Fun.mli)))
+
+(rule
+ (target TableclothString.mli)
+ (action
+  (copy ../../bucklescript/src/TableclothString.mli ./TableclothString.mli)))

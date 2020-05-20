@@ -10,6 +10,7 @@ let () = {
           FloatTest.suite,
           IntTest.suite,
           FunTest.suite,
+          StringTest.suite,
           ...TableclothTest.suite,
         ],
       ),

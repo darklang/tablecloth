@@ -184,6 +184,8 @@ module Array = struct
   let forEach ~(f : 'a -> unit) (a : 'a array) : unit = Belt.Array.forEach a f
 
   let for_each = forEach
+
+  let join t ~sep = Js.Array.joinWith sep t
 end
 
 module List = struct
@@ -510,6 +512,9 @@ module List = struct
 
   let rec repeat ~(count : int) (value : 'a) : 'a list =
     if count > 0 then value :: repeat ~count:(count - 1) value else []
+
+
+  let join strings ~sep = Js.Array.joinWith sep (Belt.List.toArray strings)
 end
 
 module Result = struct
@@ -732,115 +737,7 @@ module Tuple3 = struct
   let to_list = toList
 end
 
-module String = struct
-  let length = String.length
-
-  let toInt (s : string) : (string, int) Result.t =
-    try Ok (int_of_string s) with e -> Error (Printexc.to_string e)
-
-
-  let to_int = toInt
-
-  let toFloat (s : string) : (string, float) Result.t =
-    try Ok (float_of_string s) with e -> Error (Printexc.to_string e)
-
-
-  let to_float = toFloat
-
-  let uncons (s : string) : (char * string) option =
-    match s with
-    | "" ->
-        None
-    | s ->
-        Some (s.[0], String.sub s 1 (String.length s - 1))
-
-
-  let dropLeft ~(count : int) (s : string) : string =
-    Js.String.substr ~from:count s
-
-
-  let drop_left = dropLeft
-
-  let dropRight ~(count : int) (s : string) : string =
-    if count < 1 then s else Js.String.slice ~from:0 ~to_:(-count) s
-
-
-  let drop_right = dropRight
-
-  let split ~(on : string) (s : string) : string list =
-    Js.String.split on s |> Belt.List.fromArray
-
-
-  let join ~(sep : string) (l : string list) : string = String.concat sep l
-
-  let endsWith ~(suffix : string) (s : string) = Js.String.endsWith suffix s
-
-  let ends_with = endsWith
-
-  let startsWith ~(prefix : string) (s : string) = Js.String.startsWith prefix s
-
-  let starts_with = startsWith
-
-  include Compat.String
-
-  let to_lower = toLower
-
-  let to_upper = toUpper
-
-  let is_capitalized = isCapitalized
-
-  let contains ~(substring : string) (s : string) : bool =
-    Js.String.includes substring s
-
-
-  let repeat ~(count : int) (s : string) : string = Js.String.repeat count s
-
-  let reverse (s : string) =
-    s
-    |> Js.String.castToArrayLike
-    |> Js.Array.from
-    |> Js.Array.reverseInPlace
-    |> Belt.List.fromArray
-    |> String.concat ""
-
-
-  let fromList (l : char list) : string =
-    l
-    |> List.map ~f:Char.toCode
-    |> List.map ~f:Js.String.fromCharCode
-    |> String.concat ""
-
-
-  let from_list = fromList
-
-  let toList (s : string) : char list =
-    s |> Js.String.castToArrayLike |> Js.Array.from |> Belt.List.fromArray
-
-
-  let to_list = toList
-
-  let fromInt (i : int) : string = Printf.sprintf "%d" i
-
-  let from_int = fromInt
-
-  let concat = String.concat ""
-
-  let fromChar (c : char) : string = c |> Char.toCode |> Js.String.fromCharCode
-
-  let from_char = fromChar
-
-  let slice ~from ~to_ str = Js.String.slice ~from ~to_ str
-
-  let trim = Js.String.trim
-
-  let insertAt ~(insert : string) ~(index : int) (s : string) : string =
-    Js.String.slice ~from:0 ~to_:index s
-    ^ insert
-    ^ Js.String.sliceToEnd ~from:index s
-
-
-  let insert_at = insertAt
-end
+module String = TableclothString
 
 module StrSet = struct
   module Set = Belt.Set.String
@@ -984,7 +881,7 @@ module StrDict = struct
     d
     |> toList
     |> List.map ~f:(fun (k, v) -> "\"" ^ k ^ "\": \"" ^ Js.String.make v ^ "\"")
-    |> String.join ~sep:", "
+    |> List.join ~sep:", "
     |> fun s -> "{" ^ s ^ "}"
 
 
@@ -1054,7 +951,7 @@ module IntDict = struct
     |> toList
     |> List.map ~f:(fun (k, v) ->
            "\"" ^ string_of_int k ^ "\": \"" ^ Js.String.make v ^ "\"")
-    |> String.join ~sep:", "
+    |> List.join ~sep:", "
     |> fun s -> "{" ^ s ^ "}"
 
 
