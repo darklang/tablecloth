@@ -2,3 +2,8 @@
  (name tablecloth)
  (public_name tablecloth-native)
  (libraries base str))
+
+(rule
+ (target Bool.mli)
+ (action
+  (copy ../../bucklescript/src/Bool.mli ./Bool.mli)))
