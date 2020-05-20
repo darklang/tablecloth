@@ -50,6 +50,28 @@
   (copy ../../bucklescript/test/ListTest.re ./ListTest.re)))
 
 (rule
+ (target MapOcamlSyntaxSpecificTest.ml)
+ (action
+  (copy ../../bucklescript/test/MapOcamlSyntaxSpecificTest.ml
+    ./MapOcamlSyntaxSpecificTest.ml)))
+
+(rule
+ (target MapTest.re)
+ (action
+  (copy ../../bucklescript/test/MapTest.re ./MapTest.re)))
+
+(rule
+ (target SetOcamlSyntaxSpecificTest.ml)
+ (action
+  (copy ../../bucklescript/test/SetOcamlSyntaxSpecificTest.ml
+    ./SetOcamlSyntaxSpecificTest.ml)))
+
+(rule
+ (target SetTest.re)
+ (action
+  (copy ../../bucklescript/test/SetTest.re ./SetTest.re)))
+
+(rule
  (target StringTest.re)
  (action
   (copy ../../bucklescript/test/StringTest.re ./StringTest.re)))

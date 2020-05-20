@@ -279,6 +279,16 @@ let values t =
 
 let join t ~sep = Js.Array.joinWith sep t
 
+let groupBy t comparator ~f =
+  fold t ~initial:(TableclothMap.empty comparator) ~f:(fun map element ->
+      let key = f element in
+      TableclothMap.update map ~key ~f:(function
+          | None ->
+              Some [ element ]
+          | Some elements ->
+              Some (element :: elements)))
+
+
 let equal equal a b =
   if length a <> length b
   then false
