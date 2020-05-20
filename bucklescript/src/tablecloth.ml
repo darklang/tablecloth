@@ -1,4 +1,5 @@
 module Bool = Bool
+module Int = Int
 
 module Fun = struct
   external identity : 'a -> 'a = "%identity"
@@ -967,98 +968,6 @@ module Float = struct
 
 
   let to_int = toInt
-end
-
-module Int = struct
-  type t = int
-
-  let minimumValue = Js.Int.min
-
-  let minimum_value = minimumValue
-
-  let maximumValue = Js.Int.max
-
-  let maximum_value = maximumValue
-
-  let zero = 0
-
-  let one = 1
-
-  let add = ( + )
-
-  let ( + ) = ( + )
-
-  let subtract = ( - )
-
-  let ( - ) = ( - )
-
-  let multiply = ( * )
-
-  let ( * ) = multiply
-
-  let divide n ~by = n / by
-
-  let ( / ) = ( / )
-
-  let ( // ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
-
-  let power ~base ~exponent =
-    Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent)
-    |> Float.toInt
-    |> Option.withDefault ~default:0
-
-
-  let ( ** ) base exponent = power ~base ~exponent
-
-  let negate = ( ~- )
-
-  let ( ~- ) = ( ~- )
-
-  let modulo n ~by = n mod by
-
-  let remainder n ~by = n mod by
-
-  let maximum = Js.Math.max_int
-
-  let minimum = Js.Math.min_int
-
-  let absolute n = if n < 0 then n * -1 else n
-
-  let isEven n = n mod 2 = 0
-
-  let is_even = isEven
-
-  let isOdd n = n mod 2 <> 0
-
-  let is_odd = isOdd
-
-  let clamp n ~lower ~upper =
-    if upper < lower
-    then raise (Invalid_argument "~lower must be less than or equal to ~upper")
-    else max lower (min upper n)
-
-
-  let inRange n ~lower ~upper =
-    if upper < lower
-    then raise (Invalid_argument "~lower must be less than or equal to ~upper")
-    else n >= lower && n < upper
-
-
-  let in_range = inRange
-
-  let toFloat = Js.Int.toFloat
-
-  let to_float = toFloat
-
-  let toString = Js.Int.toString
-
-  let to_string = toString
-
-  let fromString s =
-    match int_of_string s with i -> Some i | exception Failure _ -> None
-
-
-  let from_string = fromString
 end
 
 module Tuple2 = struct

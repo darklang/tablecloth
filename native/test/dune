@@ -10,6 +10,11 @@
   (copy ../../bucklescript/test/BoolTest.re ./BoolTest.re)))
 
 (rule
+ (target IntTest.re)
+ (action
+  (copy ../../bucklescript/test/IntTest.re ./IntTest.re)))
+
+(rule
  (alias runtest)
  (action
   (run ./runtest.exe)))
