@@ -66,7 +66,7 @@ jobs:
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
-      - run: opam update && opam install 'ocamlformat=0.14' reason -y
+      - run: opam update && opam install ocamlformat reason -y
       - run: make check-format
       - save_cache:
           key: v0-source-dependencies-ocamlformat-0.14
