@@ -12,6 +12,7 @@ let () = {
           IntTest.suite,
           OptionTest.suite,
           ResultTest.suite,
+          ListTest.suite,
           FunTest.suite,
           StringTest.suite,
           Tuple2Test.suite,

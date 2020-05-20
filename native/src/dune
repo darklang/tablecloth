@@ -29,6 +29,11 @@
   (copy ../../bucklescript/src/Int.mli ./Int.mli)))
 
 (rule
+ (target TableclothList.mli)
+ (action
+  (copy ../../bucklescript/src/TableclothList.mli ./TableclothList.mli)))
+
+(rule
  (target TableclothArray.mli)
  (action
   (copy ../../bucklescript/src/TableclothArray.mli ./TableclothArray.mli)))
