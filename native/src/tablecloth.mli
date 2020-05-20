@@ -26,6 +26,7 @@ module Bool : sig
 
   (** {1 Create} *)
 
+  val fromInt : int -> bool option
   (** Convert an {!Int} into a {!Bool}.
 
       {2 Examples}
@@ -38,10 +39,10 @@ module Bool : sig
 
       {[Bool.ofInt (-3) = None]}
   *)
-  val fromInt : int -> bool option
 
   val from_int : int -> bool option
 
+  val fromString : string -> bool option
   (** Convert a {!String} into a {!Bool}.
 
       {2 Examples}
@@ -60,12 +61,12 @@ module Bool : sig
 
       {[Bool.fromString "Not even close" = None]}
   *)
-  val fromString : string -> bool option
 
   val from_string : string -> bool option
 
   (** {1 Basic operations} *)
 
+  external ( && ) : bool -> bool -> bool = "%sequand"
   (** The lazy logical AND operator.
 
       Returns [true] if both of its operands evaluate to [true].
@@ -82,8 +83,8 @@ module Bool : sig
 
       {[Bool.(false && false) = false]}
   *)
-  external (&&) : bool -> bool -> bool = "%sequand"
 
+  external ( || ) : bool -> bool -> bool = "%sequor"
   (** The lazy logical OR operator.
 
       Returns [true] if one of its operands evaluates to [true].
@@ -100,8 +101,8 @@ module Bool : sig
 
       {[Bool.(false || false) = false]}
   *)
-  external (||) : bool -> bool -> bool = "%sequor"
 
+  val xor : bool -> bool -> bool
   (** The exclusive or operator.
 
       Returns [true] if {b exactly one} of its operands is [true].
@@ -116,8 +117,8 @@ module Bool : sig
 
       {[Bool.xor false false = false]}
   *)
-  val xor : bool -> bool-> bool
 
+  val not : t -> bool
   (** Negate a [bool].
 
       {2 Examples}
@@ -126,8 +127,8 @@ module Bool : sig
 
       {[Bool.not true = false]}
   *)
-  val not : t -> bool
-  
+
+  val negate : ('a -> bool) -> 'a -> bool
   (** Negate a function.
 
       This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
@@ -139,10 +140,10 @@ module Bool : sig
         isLessThanTwelve 12 = false
       ]}
   *)
-  val negate : ('a -> bool) -> 'a -> bool
-  
+
   (** {1 Convert} *)
 
+  val toString : bool -> string
   (** Convert a [bool] to a {!String}
 
       {2 Examples}
@@ -151,8 +152,8 @@ module Bool : sig
 
       {[Bool.toString false = "false"]}
   *)
-  val toString : bool -> string
-  
+
+  val toInt : bool -> int
   (** Convert a [bool] to an {!Int}.
 
       {2 Examples}
@@ -160,11 +161,11 @@ module Bool : sig
       {[Bool.toInt true = 1]}
 
       {[Bool.toInt false = 0]}
-  *)  
-  val toInt : bool -> int
+  *)
 
   (** {1 Compare} *)
 
+  val equal : bool -> bool -> bool
   (** Test for the equality of two [bool] values.
 
       {2 Examples}
@@ -175,8 +176,8 @@ module Bool : sig
 
       {[Bool.equal false true = false]}
   *)
-  val equal : bool -> bool -> bool
 
+  val compare : bool -> bool -> int
   (** Compare two boolean values
 
       {2 Examples}
@@ -189,7 +190,6 @@ module Bool : sig
 
       {[Bool.compare false false = 0]}
   *)
-  val compare : bool -> bool -> int
 end
 
 module Fun : sig
@@ -849,7 +849,7 @@ module List : sig
   val sort_with : ('a -> 'a -> int) -> 'a list -> 'a list
 
   val iter : f:('a -> unit) -> 'a list -> unit
-  
+
   val forEachWithIndex : 'a list -> f:(int -> 'a -> unit) -> unit
 
   val repeat : count:int -> 'a -> 'a list

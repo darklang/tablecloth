@@ -1,6 +1,5 @@
 open Tablecloth
 open AlcoJest
-
 module AT = Alcotest
 
 let t_Array () =
@@ -843,11 +842,7 @@ let t_Float () =
 
     AT.check (AT.float 0.) "power" (power ~base:7. ~exponent:3.) 343. ;
     AT.check (AT.float 0.) "power - 0 base" (power ~base:0. ~exponent:3.) 0. ;
-    AT.check
-      (AT.float 0.)
-      "power - 0 exponent"
-      (power ~base:7. ~exponent:0.)
-      1. ;
+    AT.check (AT.float 0.) "power - 0 exponent" (power ~base:7. ~exponent:0.) 1. ;
     AT.check (AT.float 0.) "**" (7. ** 3.) 343. ;
 
     AT.check (AT.float 0.) "negate - positive number" (negate 8.) (-8.) ;
@@ -929,11 +924,7 @@ let t_Float () =
       (fun () -> ignore (clamp ~lower:7. ~upper:1. 3.)) ;
 
     AT.check (AT.float 0.) "squareRoot - whole numbers" (squareRoot 4.) 2. ;
-    AT.check
-      (AT.float 0.)
-      "squareRoot - decimal numbers"
-      (squareRoot 20.25)
-      4.5 ;
+    AT.check (AT.float 0.) "squareRoot - decimal numbers" (squareRoot 20.25) 4.5 ;
     AT.check
       AT.bool
       "squareRoot - negative number"
@@ -1092,11 +1083,7 @@ let t_Float () =
       (-0.7853981633974483) ;
 
     AT.check (AT.float 0.) "atan2 0" 0. (atan2 ~y:0. ~x:0.) ;
-    AT.check
-      (AT.float 0.)
-      "atan2 (1, 1)"
-      0.7853981633974483
-      (atan2 ~y:1. ~x:1.) ;
+    AT.check (AT.float 0.) "atan2 (1, 1)" 0.7853981633974483 (atan2 ~y:1. ~x:1.) ;
     AT.check
       (AT.float 0.)
       "atan2 (-1, 1)"
@@ -1493,16 +1480,8 @@ let t_Int () =
       (fun () -> ignore (clamp ~lower:7 ~upper:1 3)) ;
 
     AT.check AT.bool "inRange - in range" (inRange ~lower:2 ~upper:4 3) true ;
-    AT.check
-      AT.bool
-      "inRange - above range"
-      (inRange ~lower:2 ~upper:4 8)
-      false ;
-    AT.check
-      AT.bool
-      "inRange - below range"
-      (inRange ~lower:2 ~upper:4 1)
-      false ;
+    AT.check AT.bool "inRange - above range" (inRange ~lower:2 ~upper:4 8) false ;
+    AT.check AT.bool "inRange - below range" (inRange ~lower:2 ~upper:4 1) false ;
     AT.check
       AT.bool
       "inRange - equal to ~upper"
@@ -1872,11 +1851,7 @@ let t_List () =
     (List.updateAt ~index:4 ~f:(fun x -> x + 1) [ 1; 3 ])
     [ 1; 3 ] ;
 
-  AT.check
-    (AT.list AT.int)
-    "concat two empty lists"
-    (List.concat [ []; [] ])
-    [] ;
+  AT.check (AT.list AT.int) "concat two empty lists" (List.concat [ []; [] ]) [] ;
   AT.check
     (AT.list AT.int)
     "concat with one empty list"
@@ -1919,16 +1894,8 @@ let t_List () =
     "removeAt index smaller 0"
     (List.removeAt ~index:(-1) [ 1; 3 ])
     [ 1; 3 ] ;
-  AT.check
-    (AT.list AT.int)
-    "removeAt empty list"
-    (List.removeAt ~index:0 [])
-    [] ;
-  AT.check
-    (AT.list AT.int)
-    "removeAt empty list"
-    (List.removeAt ~index:2 [])
-    [] ;
+  AT.check (AT.list AT.int) "removeAt empty list" (List.removeAt ~index:0 []) [] ;
+  AT.check (AT.list AT.int) "removeAt empty list" (List.removeAt ~index:2 []) [] ;
   AT.check
     (AT.list AT.int)
     "removeAt index 1"
@@ -2007,7 +1974,11 @@ let t_Tuple2 () =
 
 
 let t_Tuple3 () =
-  AT.check (Eq.trio AT.int AT.int AT.int) "create" (Tuple3.create 3 4 5) (3, 4, 5) ;
+  AT.check
+    (Eq.trio AT.int AT.int AT.int)
+    "create"
+    (Tuple3.create 3 4 5)
+    (3, 4, 5) ;
 
   AT.check AT.int "first" (Tuple3.first (3, 4, 5)) 3 ;
 
@@ -2095,7 +2066,6 @@ let t_Result () =
     Result.(fromOption ~error:"error message" (Some 10))
     (Ok 10) ;
   ()
-
 
 
 let suite =

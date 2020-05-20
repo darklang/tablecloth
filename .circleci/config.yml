@@ -62,15 +62,14 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v0-source-dependencies-ocamlformat-0.12
+            - v0-source-dependencies-ocamlformat-0.14
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
-      # fd (aka fdfind) is needed to support formatting. It will respect the 's .gitignore
-      - run: sudo apt-get install -y m4 fd-find
+      - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
-      - run: opam update && opam install 'ocamlformat=0.12' -y
+      - run: opam update && opam install 'ocamlformat=0.14' reason -y
       - run: make check-format
       - save_cache:
-          key: v0-source-dependencies-ocamlformat-0.12
+          key: v0-source-dependencies-ocamlformat-0.14
           paths:
             - ~/.opam
 

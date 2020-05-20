@@ -1,6 +1,7 @@
 (executable
  (name runtest)
- (flags (-warn-error +A))
+ (flags
+  (-warn-error +A))
  (libraries tablecloth alcotest))
 
 (rule
@@ -10,5 +11,5 @@
 
 (rule
  (alias runtest)
- (action 
+ (action
   (run ./runtest.exe)))
