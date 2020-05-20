@@ -1,3 +1,197 @@
+(**  *)
+
+(** Functions for working with boolean ([true] or [false]) values. *)
+module Bool : sig
+  (** Functions for working with boolean values.
+
+      Booleans in OCaml / Reason are represented by the [true] and [false] literals.
+
+      Whilst a bool isnt a variant, you will get warnings if you haven't
+      exhaustively pattern match on them:
+
+      {[
+        let bool = false
+        let string = 
+          match bool with
+          | false -> "false"        
+        (* 
+          Warning 8: this pattern-matching is not exhaustive.
+          Here is an example of a case that is not matched:
+          true
+        *)
+      ]}
+  *)
+
+  type t = bool
+
+  (** {1 Create} *)
+
+  (** Convert an {!Int} into a {!Bool}.
+
+      {2 Examples}
+
+      {[Bool.ofInt 0 = Some false]}
+
+      {[Bool.ofInt 1 = Some true]}
+
+      {[Bool.ofInt 8 = None]}
+
+      {[Bool.ofInt (-3) = None]}
+  *)
+  val fromInt : int -> bool option
+
+  val from_int : int -> bool option
+
+  (** Convert a {!String} into a {!Bool}.
+
+      {2 Examples}
+
+      {[Bool.fromString "true" = Some true]}
+
+      {[Bool.fromString "false" = Some false]}
+
+      {[Bool.fromString "True" = None]}
+
+      {[Bool.fromString "False" = None]}
+
+      {[Bool.fromString "0" = None]}
+
+      {[Bool.fromString "1" = None]}
+
+      {[Bool.fromString "Not even close" = None]}
+  *)
+  val fromString : string -> bool option
+
+  val from_string : string -> bool option
+
+  (** {1 Basic operations} *)
+
+  (** The lazy logical AND operator.
+
+      Returns [true] if both of its operands evaluate to [true].
+
+      If the 'left' operand evaluates to [false], the 'right' operand is not evaluated.
+
+      {2 Examples}
+
+      {[Bool.(true && true) = true]}
+
+      {[Bool.(true && false) = false]}
+
+      {[Bool.(false && true) = false]}
+
+      {[Bool.(false && false) = false]}
+  *)
+  external (&&) : bool -> bool -> bool = "%sequand"
+
+  (** The lazy logical OR operator.
+
+      Returns [true] if one of its operands evaluates to [true].
+
+      If the 'left' operand evaluates to [true], the 'right' operand is not evaluated.
+
+      {2 Examples}
+
+      {[Bool.(true || true) = true]}
+
+      {[Bool.(true || false) = true]}
+
+      {[Bool.(false || true) = true]}
+
+      {[Bool.(false || false) = false]}
+  *)
+  external (||) : bool -> bool -> bool = "%sequor"
+
+  (** The exclusive or operator.
+
+      Returns [true] if {b exactly one} of its operands is [true].
+
+      {2 Examples}
+
+      {[Bool.xor true true  = false]}
+
+      {[Bool.xor true false = true]}
+
+      {[Bool.xor false true  = true]}
+
+      {[Bool.xor false false = false]}
+  *)
+  val xor : bool -> bool-> bool
+
+  (** Negate a [bool].
+
+      {2 Examples}
+
+      {[Bool.not false = true]}
+
+      {[Bool.not true = false]}
+  *)
+  val not : t -> bool
+  
+  (** Negate a function.
+
+      This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
+
+      {2 Examples}
+
+      {[
+        let isLessThanTwelve = Bool.negate (fun n -> n >= 12) in
+        isLessThanTwelve 12 = false
+      ]}
+  *)
+  val negate : ('a -> bool) -> 'a -> bool
+  
+  (** {1 Convert} *)
+
+  (** Convert a [bool] to a {!String}
+
+      {2 Examples}
+
+      {[Bool.toString true = "true"]}
+
+      {[Bool.toString false = "false"]}
+  *)
+  val toString : bool -> string
+  
+  (** Convert a [bool] to an {!Int}.
+
+      {2 Examples}
+
+      {[Bool.toInt true = 1]}
+
+      {[Bool.toInt false = 0]}
+  *)  
+  val toInt : bool -> int
+
+  (** {1 Compare} *)
+
+  (** Test for the equality of two [bool] values.
+
+      {2 Examples}
+
+      {[Bool.equal true true = true]}
+
+      {[Bool.equal false false = true]}
+
+      {[Bool.equal false true = false]}
+  *)
+  val equal : bool -> bool -> bool
+
+  (** Compare two boolean values
+
+      {2 Examples}
+
+      {[Bool.compare true false = 1]}
+
+      {[Bool.compare false true = -1]}
+
+      {[Bool.compare true true = 0]}
+
+      {[Bool.compare false false = 0]}
+  *)
+  val compare : bool -> bool -> int
+end
+
 module Fun : sig
   (** Functions for working with functions. *)
 
@@ -655,6 +849,8 @@ module List : sig
   val sort_with : ('a -> 'a -> int) -> 'a list -> 'a list
 
   val iter : f:('a -> unit) -> 'a list -> unit
+  
+  val forEachWithIndex : 'a list -> f:(int -> 'a -> unit) -> unit
 
   val repeat : count:int -> 'a -> 'a list
   (**

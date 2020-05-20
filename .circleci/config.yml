@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   bucklescript-build-and-test:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
 
     environment:
       CI: true
@@ -14,17 +14,17 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v1-dependencies-{{ .Branch }}-{{ checksum "bs/package-lock.json" }}
-            - v1-dependencies-{{ .Branch }}-
-            - v1-dependencies-
+            - v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-bucklescript-dependencies-{{ .Branch }}-
+            - v1-bucklescript-dependencies-
       - run: make deps-bs
       - run: make build-bs
       - run: make test-bs
       - run: make doc-bs
       - save_cache:
-          key: v1-dependencies-{{ .Branch }}-{{ checksum "bs/package-lock.json" }}
+          key: v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
-            - ~/repo/bs/node_modules
+            - ~/repo/node_modules
 
   native-build-and-test:
     docker:
@@ -73,8 +73,6 @@ jobs:
           key: v0-source-dependencies-ocamlformat-0.12
           paths:
             - ~/.opam
-
-
 
 workflows:
   version: 2

@@ -1,0 +1,36 @@
+{
+  "name": "tablecloth-bucklescript",
+  "description": "A portable standard library enhancement for Reason and OCaml.",
+  "version": "0.0.7",
+  "repository": "https://github.com/darklang/tablecloth",
+  "private": false,
+  "contributors": [
+    "Paul Biggar <paul@darklang.com>",
+    "Dean Merchant <deanmerchant@gmail.com>"
+  ],
+  "keywords": [
+    "BuckleScript",
+    "ReasonML",
+    "Utility"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@glennsl/bs-jest": "0.5.1",
+    "bs-platform": "7.2.2"
+  },
+  "dependencies": {},
+  "scripts": {
+    "clean": "bsb -clean-world",
+    "build": "bsb -make-world",
+    "watch": "bsb -make-world -w",
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/*Test.bs.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}

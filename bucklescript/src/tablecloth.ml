@@ -1,3 +1,38 @@
+module Bool = struct
+  type t = bool
+
+  let fromInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
+
+  let from_int = fromInt
+
+  let fromString string =
+    match string with "false" -> Some false | "true" -> Some true | _ -> None
+
+  let from_string = fromString
+
+  external ( && ) : bool -> bool -> bool = "%sequand"
+
+  external ( || ) : bool -> bool -> bool = "%sequor"
+
+  let xor a b = (a && not b) || ((not a) && b)
+
+  let not = not
+
+  let negate f t = not (f t)
+
+  external toString : bool -> string = "toString" [@@bs.send]
+  
+  let to_string = toString
+
+  let toInt t = match t with true -> 1 | false -> 0
+
+  let to_int = toInt
+
+  let compare = compare
+
+  let equal = ( = )
+end
+
 module Fun = struct
   external identity : 'a -> 'a = "%identity"
 
@@ -1507,3 +1542,4 @@ module IntDict = struct
       (dict2 : 'v2 t) : 'v3 t =
     Map.merge dict1 dict2 f
 end
+

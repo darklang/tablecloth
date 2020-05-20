@@ -16,6 +16,7 @@ module String = struct
   let isCapitalized (s : string) : bool = s = String.capitalize_ascii s
 
 #else
+
   let toLower (s : string) : string = String.lowercase s
 
   let toUpper (s : string) : string = String.uppercase s

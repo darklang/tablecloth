@@ -39,6 +39,7 @@ let () =
             |> Fun.tap ~f:(fun numbers -> ignore (Belt.Array.set numbers 1 0))
             |> Fun.tap ~f:Belt.Array.reverseInPlace )
           |> toEqual [| 0; 2 |])) ;
+
   describe "Array" (fun () ->
       describe "empty" (fun () ->
           test "has length zero" (fun () ->

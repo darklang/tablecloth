@@ -1,9 +1,14 @@
 (executable
-  (name test)
-  (flags (-warn-error +A))
-  (libraries tablecloth-native alcotest junit junit_alcotest)
-)
+ (name runtest)
+ (flags (-warn-error +A))
+ (libraries tablecloth alcotest))
 
-(alias
- (name   runtest)
- (action (run ./test.exe)))
+(rule
+ (target BoolTest.re)
+ (action
+  (copy ../../bucklescript/test/BoolTest.re ./BoolTest.re)))
+
+(rule
+ (alias runtest)
+ (action 
+  (run ./runtest.exe)))
