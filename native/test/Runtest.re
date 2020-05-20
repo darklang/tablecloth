@@ -5,6 +5,7 @@ let () = {
       (
         "tests",
         [
+          ArrayTest.suite,
           BoolTest.suite,
           CharTest.suite,
           FloatTest.suite,

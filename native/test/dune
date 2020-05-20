@@ -5,6 +5,11 @@
  (libraries tablecloth alcotest))
 
 (rule
+ (target ArrayTest.re)
+ (action
+  (copy ../../bucklescript/test/ArrayTest.re ./ArrayTest.re)))
+
+(rule
  (target BoolTest.re)
  (action
   (copy ../../bucklescript/test/BoolTest.re ./BoolTest.re)))
