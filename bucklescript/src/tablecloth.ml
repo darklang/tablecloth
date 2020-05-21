@@ -3,38 +3,6 @@ module Char = TableclothChar
 module Float = Float
 module Int = Int
 
-module Fun = struct
-  external identity : 'a -> 'a = "%identity"
-
-  external ignore : _ -> unit = "%ignore"
-
-  let constant a _ = a
-
-  let sequence _ b = b
-
-  let flip f x y = f y x
-
-  let apply f a = f a
-
-  let ( <| ) a b = a b
-
-  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-  let compose g f a = g (f a)
-
-  let ( << ) = compose
-
-  let composeRight g f a = f (g a)
-
-  let ( >> ) = composeRight
-
-  let tap a ~f =
-    f a ;
-    a
-end
-
 module Array = struct
   type 'a t = 'a array
 
@@ -703,10 +671,6 @@ module Tuple2 = struct
 
   let swap (a, b) = (b, a)
 
-  let curry (f : 'a * 'b -> 'c) (a : 'a) (b : 'b) : 'c = f (a, b)
-
-  let uncurry (f : 'a -> 'b -> 'c) ((a, b) : 'a * 'b) : 'c = f a b
-
   let toList (a, b) = [ a; b ]
 
   let to_list = toList
@@ -762,14 +726,6 @@ module Tuple3 = struct
   let rotateRight ((a, b, c) : 'a * 'b * 'c) : 'c * 'a * 'b = (c, a, b)
 
   let rotate_right = rotateRight
-
-  let curry (f : 'a * 'b * 'c -> 'd) (a : 'a) (b : 'b) (c : 'c) : 'd =
-    f (a, b, c)
-
-
-  let uncurry (f : 'a -> 'b -> 'c -> 'd) ((a, b, c) : 'a * 'b * 'c) : 'd =
-    f a b c
-
 
   let toList ((a, b, c) : 'a * 'a * 'a) : 'a list = [ a; b; c ]
 
@@ -1124,3 +1080,5 @@ module IntDict = struct
       (dict2 : 'v2 t) : 'v3 t =
     Map.merge dict1 dict2 f
 end
+
+module Fun = Fun

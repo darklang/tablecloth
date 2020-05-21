@@ -10,36 +10,6 @@ module Int : module type of Int
 
 module Float : module type of Float
 
-module Fun : sig
-  external identity : 'a -> 'a = "%identity"
-
-  external ignore : _ -> unit = "%ignore"
-
-  val constant : 'a -> 'b -> 'a
-
-  val sequence : 'a -> 'b -> 'b
-
-  val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
-
-  val apply : ('a -> 'b) -> 'a -> 'b
-
-  val ( <| ) : ('a -> 'b) -> 'a -> 'b
-
-  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-  val compose : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
-
-  val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
-
-  val composeRight : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-
-  val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-
-  val tap : 'a -> f:('a -> unit) -> 'a
-end
-
 module Array : sig
   type 'a t = 'a array
 
@@ -1394,38 +1364,6 @@ module Tuple2 : sig
     ]}
   *)
 
-  val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
-  (**
-    Presume that [f] is a function that takes a 2-tuple as an
-    argument and returns a result. [Tuple2.curry f]
-    returns a new function that takes the two items in the tuple
-    as separate arguments and returns the same result as [f].
-
-    {[
-    let combineTuple (a, b) = a ^ (string_of_int b)
-    combineTuple ("car", 54) = "car54"
-
-    let combineSeparate = Tuple2.curry combineTuple
-    combineSeparate "car" 54 = "car54"
-    ]}
-  *)
-
-  val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
-  (**
-    Presume that [f] is a function that takes two arguments
-    and returns a result. [Tuple2.uncurry f]
-    returns a new function that takes a two-tuple as its argument
-    and returns the same result as [f].
-
-    {[
-    let combineSeparate a b = a ^ (string_of_int b)
-    combineSeparate "car" 54 = "car54"
-
-    let combineTuple = Tuple2.uncurry combineSeparate
-    combineTuple ("car", 54) = "car54"
-    ]}
-  *)
-
   val toList : 'a * 'a -> 'a list
   (**
     Same as {!Tuple2.to_list}.
@@ -1611,38 +1549,6 @@ module Tuple3 : sig
 
     {[
     Tuple3.rotate_right ("str", 16.0, 99) = (99, "str", 16.0)
-    ]}
-  *)
-
-  val curry : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd
-  (**
-    Presume that [f] is a function that takes a 3-tuple as an
-    argument and returns a result. [Tuple3.curry f]
-    returns a new function that takes the three items in the tuple
-    as separate arguments and returns the same result as [f].
-
-    {[
-    let combineTuple (a, b, c) = a ^ (string_of_int (b + c))
-    combineTuple ("cloud", 5, 4) = "cloud9"
-
-    let combineSeparate = Tuple3.curry combineTuple
-    combineSeparate "cloud" 5 4 = "cloud9"
-    ]}
-  *)
-
-  val uncurry : ('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd
-  (**
-    Presume that [f] is a function that takes three arguments
-    and returns a result. [Tuple3.uncurry f]
-    returns a new function that takes a three-tuple as its argument
-    and returns the same result as [f].
-
-    {[
-    let combineSeparate a b c = a ^ (string_of_int (b + c))
-    combineSeparate "cloud" 5 4 = "cloud9"
-
-    let combineTuple = Tuple3.uncurry combineSeparate
-    combineTuple ("cloud", 5, 4) = "cloud9"
     ]}
   *)
 
@@ -2183,3 +2089,6 @@ module IntDict : sig
   val merge :
     f:(key -> 'v1 option -> 'v2 option -> 'v3 option) -> 'v1 t -> 'v2 t -> 'v3 t
 end
+
+(** Functions for working with functions. *)
+module Fun : module type of Fun

@@ -18,8 +18,6 @@ let xor a b = (a && not b) || ((not a) && b)
 
 let not = not
 
-let negate f t = not (f t)
-
 external toString : bool -> string = "toString" [@@bs.send]
 
 let to_string = toString

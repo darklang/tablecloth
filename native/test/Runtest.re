@@ -9,6 +9,7 @@ let () = {
           CharTest.suite,
           FloatTest.suite,
           IntTest.suite,
+          FunTest.suite,
           ...TableclothTest.suite,
         ],
       ),

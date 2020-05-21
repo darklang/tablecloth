@@ -3,41 +3,6 @@ module Char = TableclothChar
 module Int = Int
 module Float = Float
 
-module Fun = struct
-  external identity : 'a -> 'a = "%identity"
-
-  external ignore : _ -> unit = "%ignore"
-
-  let constant a _ = a
-
-  let sequence a b =
-    ignore a ;
-    b
-
-
-  let flip f a b = f b a
-
-  let apply f a = f a
-
-  let ( <| ) f a = f a
-
-  external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-  external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-  let compose f g a = f (g a)
-
-  let ( << ) = compose
-
-  let composeRight f g a = g (f a)
-
-  let ( >> ) = composeRight
-
-  let tap value ~f =
-    f value ;
-    value
-end
-
 module Array = struct
   type 'a t = 'a array
 
@@ -243,10 +208,6 @@ module Tuple2 = struct
   let map_all = mapAll
 
   let swap (a, b) = (b, a)
-
-  let curry (f : 'a * 'b -> 'c) (a : 'a) (b : 'b) : 'c = f (a, b)
-
-  let uncurry (f : 'a -> 'b -> 'c) ((a, b) : 'a * 'b) : 'c = f a b
 
   let toList (a, b) = [ a; b ]
 
@@ -1120,3 +1081,5 @@ module IntDict = struct
         | `Both (v1, v2) ->
             f key (Some v1) (Some v2))
 end
+
+module Fun = Fun

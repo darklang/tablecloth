@@ -619,45 +619,6 @@ let t_Array () =
   ()
 
 
-let t_Fun () =
-  Fun.(
-    AT.check AT.int "identity" 1 (Fun.identity 1) ;
-
-    AT.check AT.unit "ignore" () (Fun.ignore 1) ;
-
-    AT.check AT.int "constant" 1 (Fun.constant 1 2) ;
-
-    AT.check AT.int "sequence" 2 (Fun.sequence 1 2) ;
-
-    AT.check AT.int "flip" 2 (Fun.flip Int.( / ) 2 4) ;
-
-    AT.check AT.int "apply" 2 (Fun.apply (fun a -> a + 1) 1) ;
-
-    AT.check
-      AT.int
-      "compose"
-      3
-      (let increment x = x + 1 in
-       let double x = x * 2 in
-       Fun.compose increment double 1) ;
-
-    AT.check
-      AT.int
-      "composeRight"
-      4
-      (let increment x = x + 1 in
-       let double x = x * 2 in
-       Fun.composeRight increment double 1) ;
-
-    AT.check
-      (AT.array AT.int)
-      "tap"
-      [| 0; 2 |]
-      ( Array.filter [| 1; 3; 2; 5; 4 |] ~f:Int.isEven
-      |> Fun.tap ~f:(fun numbers -> Base.Array.set numbers 1 0)
-      |> Fun.tap ~f:Base.Array.rev_inplace ))
-
-
 let t_List () =
   AT.check (AT.list AT.int) "reverse empty list" (List.reverse []) [] ;
   AT.check (AT.list AT.int) "reverse one element" (List.reverse [ 0 ]) [ 0 ] ;
@@ -1085,10 +1046,6 @@ let t_Tuple2 () =
 
   AT.check (AT.pair AT.int AT.int) "swap" (Tuple2.swap (3, 4)) (4, 3) ;
 
-  AT.check AT.int "curry" (Tuple2.curry (fun (a, b) -> a + b) 3 4) 7 ;
-
-  AT.check AT.int "uncurry" (Tuple2.uncurry (fun a b -> a + b) (3, 4)) 7 ;
-
   AT.check (AT.list AT.int) "toList" (Tuple2.toList (3, 4)) [ 3; 4 ] ;
 
   ()
@@ -1153,14 +1110,6 @@ let t_Tuple3 () =
     (Tuple3.rotateRight (3, 4, 5))
     (5, 3, 4) ;
 
-  AT.check AT.int "curry" (Tuple3.curry (fun (a, b, c) -> a + b + c) 3 4 5) 12 ;
-
-  AT.check
-    AT.int
-    "uncurry"
-    (Tuple3.uncurry (fun a b c -> a + b + c) (3, 4, 5))
-    12 ;
-
   AT.check (AT.list AT.int) "toList" (Tuple3.toList (3, 4, 5)) [ 3; 4; 5 ] ;
 
   ()
@@ -1191,7 +1140,6 @@ let t_Result () =
 
 let suite =
   [ ("Array", `Quick, t_Array)
-  ; ("Fun", `Quick, t_Fun)
   ; ("List", `Quick, t_List)
   ; ("String", `Quick, t_String)
   ; ("Tuple2", `Quick, t_Tuple2)
