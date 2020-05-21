@@ -6,6 +6,8 @@ module Bool : module type of Bool
 (** Functions for working with single characters. *)
 module Char : module type of TableclothChar
 
+module String : module type of TableclothString
+
 (** Fixed precision integers *)
 module Int : module type of Int
 
@@ -847,92 +849,6 @@ module Tuple3 : sig
   *)
 
   val to_list : 'a * 'a * 'a -> 'a list
-end
-
-module String : sig
-  val length : string -> int
-
-  val toInt : string -> (string, int) Result.t
-
-  val to_int : string -> (string, int) Result.t
-
-  val toFloat : string -> (string, float) Result.t
-
-  val to_float : string -> (string, float) Result.t
-
-  val uncons : string -> (char * string) option
-
-  (* Drop ~count characters from the beginning of a string. *)
-  val dropLeft : count:int -> string -> string
-
-  (* Drop ~count characters from the beginning of a string. *)
-  val drop_left : count:int -> string -> string
-
-  (* Drop ~count characters from the end of a string. *)
-  val dropRight : count:int -> string -> string
-
-  (* Drop ~count characters from the beginning of a string. *)
-  val drop_right : count:int -> string -> string
-
-  val split : on:string -> string -> string list
-
-  val join : sep:string -> string list -> string
-
-  val endsWith : suffix:string -> string -> bool
-
-  val ends_with : suffix:string -> string -> bool
-
-  val startsWith : prefix:string -> string -> bool
-
-  val starts_with : prefix:string -> string -> bool
-
-  val toLower : string -> string
-
-  val to_lower : string -> string
-
-  val toUpper : string -> string
-
-  val to_upper : string -> string
-
-  val uncapitalize : string -> string
-
-  val capitalize : string -> string
-
-  val isCapitalized : string -> bool
-
-  val is_capitalized : string -> bool
-
-  val contains : substring:string -> string -> bool
-
-  val repeat : count:int -> string -> string
-
-  val reverse : string -> string
-
-  val fromList : char list -> string
-
-  val from_list : char list -> string
-
-  val toList : string -> char list
-
-  val to_list : string -> char list
-
-  val fromInt : int -> string
-
-  val from_int : int -> string
-
-  val concat : string list -> string
-
-  val fromChar : char -> string
-
-  val from_char : char -> string
-
-  val slice : from:int -> to_:int -> string -> string
-
-  val trim : string -> string
-
-  val insertAt : insert:string -> index:int -> string -> string
-
-  val insert_at : insert:string -> index:int -> string -> string
 end
 
 module IntSet : sig

@@ -629,14 +629,6 @@ let () =
           expect (List.repeat ~count:1 5) |> toEqual [ 5 ]) ;
       test "repeat length 3" (fun () ->
           expect (List.repeat ~count:3 5) |> toEqual [ 5; 5; 5 ])) ;
-  describe "String" (fun () ->
-      test "length empty string" (fun () ->
-          expect (String.length "") |> toEqual 0) ;
-      test "length" (fun () -> expect (String.length "123") |> toEqual 3) ;
-      test "reverse empty string" (fun () ->
-          expect (String.reverse "") |> toEqual "") ;
-      test "reverse" (fun () ->
-          expect (String.reverse "stressed") |> toEqual "desserts")) ;
   describe "Tuple2" (fun () ->
       test "create" (fun () -> expect (Tuple2.create 3 4) |> toEqual (3, 4)) ;
       test "first" (fun () -> expect (Tuple2.first (3, 4)) |> toEqual 3) ;

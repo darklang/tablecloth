@@ -30,6 +30,11 @@
   (copy ../../bucklescript/test/FunTest.re ./FunTest.re)))
 
 (rule
+ (target StringTest.re)
+ (action
+  (copy ../../bucklescript/test/StringTest.re ./StringTest.re)))
+
+(rule
  (alias runtest)
  (action
   (run ./runtest.exe)))

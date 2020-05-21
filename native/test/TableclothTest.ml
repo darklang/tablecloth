@@ -997,22 +997,6 @@ let t_List () =
   ()
 
 
-let t_String () =
-  AT.check
-    AT.bool
-    "imported correctly"
-    true
-    (Tablecloth.String.length == String.length) ;
-
-  AT.check AT.int "length" (String.length "") 0 ;
-  AT.check AT.int "length" (String.length "123") 3 ;
-
-  AT.check AT.string "reverse" (String.reverse "") "" ;
-  AT.check AT.string "reverse" (String.reverse "stressed") "desserts" ;
-
-  ()
-
-
 let t_Tuple2 () =
   AT.check (AT.pair AT.int AT.int) "create" (Tuple2.create 3 4) (3, 4) ;
 
@@ -1141,7 +1125,6 @@ let t_Result () =
 let suite =
   [ ("Array", `Quick, t_Array)
   ; ("List", `Quick, t_List)
-  ; ("String", `Quick, t_String)
   ; ("Tuple2", `Quick, t_Tuple2)
   ; ("Tuple3", `Quick, t_Tuple3)
   ; ("Option", `Quick, t_Option)

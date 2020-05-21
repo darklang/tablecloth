@@ -1,5 +1,6 @@
 module Bool = Bool
 module Char = TableclothChar
+module String = TableclothString
 module Int = Int
 module Float = Float
 
@@ -740,118 +741,6 @@ module Result = struct
         Format.pp_print_string fmt "<error: " ;
         errf fmt err ;
         Format.pp_print_string fmt ">"
-end
-
-module String = struct
-  let length = String.length
-
-  let toInt (s : string) : (string, int) Result.t =
-    try Ok (int_of_string s) with e -> Error (Printexc.to_string e)
-
-
-  let to_int = toInt
-
-  let toFloat (s : string) : (string, float) Result.t =
-    try Ok (float_of_string s) with e -> Error (Printexc.to_string e)
-
-
-  let to_float = toFloat
-
-  let uncons (s : string) : (char * string) option =
-    match s with
-    | "" ->
-        None
-    | s ->
-        Some (s.[0], String.sub s 1 (String.length s - 1))
-
-
-  let dropLeft ~(count : int) (s : string) : string =
-    Base.String.drop_prefix s count
-
-
-  let drop_left = dropLeft
-
-  let dropRight ~(count : int) (s : string) : string =
-    Base.String.drop_suffix s count
-
-
-  let drop_right = dropRight
-
-  let split ~(on : string) (s : string) : string list =
-    let on = Str.regexp_string on in
-    Str.split on s
-
-
-  let join ~(sep : string) (l : string list) : string = String.concat sep l
-
-  let endsWith ~(suffix : string) (s : string) = Base.String.is_suffix ~suffix s
-
-  let ends_with = endsWith
-
-  let startsWith ~(prefix : string) (s : string) =
-    Base.String.is_prefix ~prefix s
-
-
-  let starts_with = startsWith
-
-  let toLower (s : string) : string = String.lowercase_ascii s
-
-  let to_lower = toLower
-
-  let toUpper (s : string) : string = String.uppercase_ascii s
-
-  let to_upper = toUpper
-
-  let uncapitalize (s : string) : string = String.uncapitalize_ascii s
-
-  let capitalize (s : string) : string = String.capitalize_ascii s
-
-  let isCapitalized (s : string) : bool = s = String.capitalize_ascii s
-
-  let is_capitalized = isCapitalized
-
-  let contains ~(substring : string) (s : string) : bool =
-    Base.String.is_substring s ~substring
-
-
-  let repeat ~(count : int) (s : string) : string =
-    Base.List.init count ~f:(fun _ -> s) |> Base.String.concat
-
-
-  let reverse (s : string) = Base.String.rev s
-
-  let fromList (l : char list) : string = Base.String.of_char_list l
-
-  let from_list = fromList
-
-  let toList (s : string) : char list = Base.String.to_list s
-
-  let to_list = toList
-
-  let fromInt (i : int) : string = string_of_int i
-
-  let from_int = fromInt
-
-  let concat = String.concat ""
-
-  let fromChar (c : char) : string = Base.String.of_char c
-
-  let from_char = fromChar
-
-  let slice ~from ~to_ str = String.sub str from (to_ - from)
-
-  let trim = String.trim
-
-  let insertAt ~(insert : string) ~(index : int) (s : string) : string =
-    let length = String.length s in
-    let startCount = index in
-    let endCount = length - index in
-    let start = dropRight ~count:endCount s in
-    let end_ = dropLeft ~count:startCount s in
-    join ~sep:"" [ start; insert; end_ ]
-
-
-  let insert_at = insertAt
 end
 
 module IntSet = struct
