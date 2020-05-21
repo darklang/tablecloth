@@ -124,3 +124,18 @@ let ( |? ) t default = get t ~default
 let ( >>| ) t f = map t ~f
 
 let ( >>= ) t f = andThen t ~f
+
+let pp
+    (okf : Format.formatter -> 'ok -> unit)
+    (errf : Format.formatter -> 'err -> unit)
+    (fmt : Format.formatter)
+    (r : ('ok, 'error) t) =
+  match r with
+  | Ok ok ->
+      Format.pp_print_string fmt "<ok: " ;
+      okf fmt ok ;
+      Format.pp_print_string fmt ">"
+  | Error err ->
+      Format.pp_print_string fmt "<error: " ;
+      errf fmt err ;
+      Format.pp_print_string fmt ">"
