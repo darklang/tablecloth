@@ -18,8 +18,6 @@ let xor a b = (a && not b) || ((not a) && b)
 
 let not = not
 
-let negate f t = not (f t)
-
 let equal = ( = )
 
 let compare = compare

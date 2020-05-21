@@ -124,19 +124,6 @@ val not : t -> bool
     {[Bool.not true = false]}
 *)
 
-val negate : ('a -> bool) -> 'a -> bool
-(** Negate a function.
-
-    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
-
-    {2 Examples}
-
-    {[
-      let isLessThanTwelve = Bool.negate (fun n -> n >= 12) in
-      isLessThanTwelve 12 = false
-    ]}
-*)
-
 (** {1 Convert} *)
 
 val toString : bool -> string

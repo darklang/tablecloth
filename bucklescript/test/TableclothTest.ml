@@ -654,12 +654,6 @@ let () =
           expect (Tuple2.mapAll ~f:String.reverse ("was", "stressed"))
           |> toEqual ("saw", "desserts")) ;
       test "swap" (fun () -> expect (Tuple2.swap (3, 4)) |> toEqual (4, 3)) ;
-      test "curry" (fun () ->
-          let tupleAdder (a, b) = a + b in
-          expect (Tuple2.curry tupleAdder 3 4) |> toEqual 7) ;
-      test "uncurry" (fun () ->
-          let curriedAdder a b = a + b in
-          expect (Tuple2.uncurry curriedAdder (3, 4)) |> toEqual 7) ;
       test "toList" (fun () ->
           expect (Tuple2.toList (3, 4)) |> toEqual [ 3; 4 ])) ;
   describe "Tuple3" (fun () ->
@@ -694,12 +688,6 @@ let () =
           expect (Tuple3.rotateLeft (3, 4, 5)) |> toEqual (4, 5, 3)) ;
       test "rotateRight" (fun () ->
           expect (Tuple3.rotateRight (3, 4, 5)) |> toEqual (5, 3, 4)) ;
-      test "curry" (fun () ->
-          let tupleAdder (a, b, c) = a + b + c in
-          expect (Tuple3.curry tupleAdder 3 4 5) |> toEqual 12) ;
-      test "uncurry" (fun () ->
-          let curriedAdder a b c = a + b + c in
-          expect (Tuple3.uncurry curriedAdder (3, 4, 5)) |> toEqual 12) ;
       test "toList" (fun () ->
           expect (Tuple3.toList (3, 4, 5)) |> toEqual [ 3; 4; 5 ])) ;
   describe "Option" (fun () ->

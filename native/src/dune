@@ -17,3 +17,13 @@
  (target Float.mli)
  (action
   (copy ../../bucklescript/src/Float.mli ./Float.mli)))
+
+(rule
+ (target Fun.ml)
+ (action
+  (copy ../../bucklescript/src/Fun.ml ./Fun.ml)))
+
+(rule
+ (target Fun.mli)
+ (action
+  (copy ../../bucklescript/src/Fun.mli ./Fun.mli)))
