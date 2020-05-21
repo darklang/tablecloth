@@ -189,12 +189,10 @@ module Array = struct
 
   let join t ~sep = Js.Array.joinWith sep t
 
-
   let values t =
     foldLeft t ~initial:[] ~f:(fun element results ->
         match element with None -> results | Some value -> value :: results)
     |. fromList
-
 end
 
 module List = struct
@@ -524,7 +522,6 @@ module List = struct
 
 
   let join strings ~sep = Js.Array.joinWith sep (Belt.List.toArray strings)
-
 
   let values t =
     foldLeft t ~initial:[] ~f:(fun element results ->

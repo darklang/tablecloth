@@ -514,11 +514,11 @@ val ( >>| ) : ('a, 'error) t -> ('a -> 'b) -> ('b, 'error) t
 *)
 
 val pp :
-    (Format.formatter -> 'ok -> unit)
-    -> (Format.formatter -> 'error -> unit)
-    -> Format.formatter
-    -> ('ok, 'error) t
-    -> unit
+     (Format.formatter -> 'ok -> unit)
+  -> (Format.formatter -> 'error -> unit)
+  -> Format.formatter
+  -> ('ok, 'error) t
+  -> unit
 (** [Result.pp errFormat okFormat destFormat result] “pretty-prints”
     the [result], using [errFormat] if the [result] is an [Error] value or
     [okFormat] if the [result] is an [Ok] value. [destFormat] is a formatter
