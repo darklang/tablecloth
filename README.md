@@ -7,7 +7,7 @@ library, that has the same API on all OCaml/ReasonML/Bucklescript platforms.
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
 over time as we get more users. Caveat emptor.**
 
-See the [mli](https://github.com/darklang/tablecloth/blob/master/bs/src/tablecloth.mli) for documentation.
+See the [mli](https://github.com/darklang/tablecloth/blob/0.0.7/bs/src/tablecloth.mli) for documentation.
 
 ## Installation
 
