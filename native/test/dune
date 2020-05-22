@@ -25,6 +25,11 @@
   (copy ../../bucklescript/test/IntTest.re ./IntTest.re)))
 
 (rule
+ (target IntegerTest.re)
+ (action
+  (copy ../../bucklescript/test/IntegerTest.re ./IntegerTest.re)))
+
+(rule
  (target FunTest.re)
  (action
   (copy ../../bucklescript/test/FunTest.re ./FunTest.re)))

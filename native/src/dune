@@ -1,7 +1,7 @@
 (library
  (name tablecloth)
  (public_name tablecloth-native)
- (libraries base str))
+ (libraries base str zarith))
 
 (rule
  (target Bool.mli)
@@ -17,6 +17,11 @@
  (target Float.mli)
  (action
   (copy ../../bucklescript/src/Float.mli ./Float.mli)))
+
+(rule
+ (target Integer.mli)
+ (action
+  (copy ../../bucklescript/src/Integer.mli ./Integer.mli)))
 
 (rule
  (target Fun.ml)

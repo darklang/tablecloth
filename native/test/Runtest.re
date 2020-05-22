@@ -9,6 +9,8 @@ let () = {
           CharTest.suite,
           FloatTest.suite,
           IntTest.suite,
+          IntegerTest.suite,
+          IntegerPlatformSpecificTest.suite,
           FunTest.suite,
           StringTest.suite,
           ...TableclothTest.suite,
