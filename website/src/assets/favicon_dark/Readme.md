@@ -1,0 +1,1 @@
+Generated from https://favicon.io/favicon-generator/?t=T&ff=Roboto+Mono&fs=110&fc=%23FFF&b=rounded&bc=3B217B
