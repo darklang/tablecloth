@@ -73,6 +73,32 @@ jobs:
           paths:
             - ~/.opam
 
+  website-build:
+    docker:
+      - image: circleci/node:12
+
+    environment:
+      CI: true
+      NODE_ENV: test
+
+    working_directory: ~/repo/website
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          keys:
+            - v1-website-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-website-dependencies-{{ .Branch }}-
+            - v1-website-dependencies-
+
+      - run: yarn install
+      - run: yarn build
+
+      - save_cache:
+          key: v1-website-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/repo/website/node_modules
+
 workflows:
   version: 2
   build:
@@ -80,3 +106,4 @@ workflows:
       - bucklescript-build-and-test
       - native-build-and-test
       - source-code-formatting
+      - website-build
