@@ -326,18 +326,6 @@ val mapError : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
 
 val map_error : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
 
-val transpose : ('ok option, 'error) t -> ('ok, 'error) t option
-(** Converts an [Result.t('error, Option.t('ok)] into a [Option.t(Result.t('ok, 'error))]
-
-    {2 Examples}
-
-    {[Result.transpose (Ok (Some 5)) = Some (Ok 5)]}
-
-    {[Result.transpose (Ok (None)) = None]}
-
-    {[Result.transpose (Error "fail") = (Some (Error "fail"))]}
-*)
-
 val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
 (** Run a function which may fail on a result.
 

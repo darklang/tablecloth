@@ -997,7 +997,4 @@ let t_List () =
   ()
 
 
-let suite =
-  [ ("Array", `Quick, t_Array)
-  ; ("List", `Quick, t_List)
-  ]
+let suite = [ ("Array", `Quick, t_Array); ("List", `Quick, t_List) ]

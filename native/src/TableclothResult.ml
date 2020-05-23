@@ -78,16 +78,6 @@ let attempt f =
   match f () with value -> Ok value | exception error -> Error error
 
 
-let transpose t =
-  match t with
-  | Error error ->
-      Some (Error error)
-  | Ok None ->
-      None
-  | Ok (Some value) ->
-      Some (Ok value)
-
-
 let forEach t ~f = match t with Ok a -> f a | _ -> ()
 
 let for_each = forEach
