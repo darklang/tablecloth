@@ -18,14 +18,20 @@ let fromArray (comparator : ('a, 'identity) Comparator.s) (elements : 'a array)
     (Array.to_list elements)
 
 
+let from_array = fromArray
+
 let fromList (comparator : ('a, 'identity) Comparator.s) (elements : 'a list) :
     ('a, 'identity) t =
   Base.Set.of_list (Internal.toBaseComparator comparator) elements
 
 
+let from_list = fromList
+
 let length = Base.Set.length
 
 let isEmpty = Base.Set.is_empty
+
+let is_empty = isEmpty
 
 let includes = Base.Set.mem
 
@@ -55,11 +61,17 @@ let any = Base.Set.exists
 
 let forEach = Base.Set.iter
 
+let for_each = forEach
+
 let fold s ~initial ~f = Base.Set.fold s ~init:initial ~f
 
 let toArray = Base.Set.to_array
 
+let to_array = toArray
+
 let toList = Base.Set.to_list
+
+let to_list = toList
 
 module Poly = struct
   type identity = Base.Comparator.Poly.comparator_witness
@@ -72,7 +84,11 @@ module Poly = struct
 
   let fromArray = Base.Set.Poly.of_array
 
+  let from_array = fromArray
+
   let fromList = Base.Set.Poly.of_list
+
+  let from_list = fromList
 end
 
 module Int = struct
@@ -84,7 +100,11 @@ module Int = struct
 
   let fromArray = fromArray (module Int)
 
+  let from_array = fromArray
+
   let fromList = fromList (module Int)
+
+  let from_list = fromList
 end
 
 module String = struct
@@ -96,5 +116,9 @@ module String = struct
 
   let fromArray = fromArray (module TableclothString)
 
+  let from_array = fromArray
+
   let fromList = fromList (module TableclothString)
+
+  let from_list = fromList
 end

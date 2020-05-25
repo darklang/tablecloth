@@ -14,14 +14,14 @@ type ('key, +'value, 'id) t = ('key, 'value, 'id) Base.Map.t
 (** This functor lets you describe the type of Maps a little more concisely.
 
     {[
-      let stringToInt : int Map.Of(String).t = 
+      let stringToInt : int Map.Of(String).t =
         Map.fromList (module String) [("Apple", 2); ("Pear", 0)]
     ]}
 
     Is the same as
 
     {[
-      let stringToInt : (string, int, String.identity) Map.t = 
+      let stringToInt : (string, int, String.identity) Map.t =
         Map.fromList (module String) [("Apple", 2); ("Pear", 0)]
     ]}
 *)
@@ -45,7 +45,7 @@ val singleton :
 (** Create a map from a key and value
 
     {2 Examples}
-    
+
     {[Map.singleton (module Int) ~key:1 ~value:"Ant" |> Map.toList = [(1, "Ant")]]}
 *)
 
@@ -55,11 +55,21 @@ val fromArray :
   -> ('key, 'value, 'identity) t
 (** Create a map from an {!Array} of key-value tuples *)
 
+val from_array :
+     ('key, 'identity) Comparator.s
+  -> ('key * 'value) array
+  -> ('key, 'value, 'identity) t
+
 val fromList :
      ('key, 'identity) Comparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
 (** Create a map of a {!List} of key-value tuples *)
+
+val from_list :
+     ('key, 'identity) Comparator.s
+  -> ('key * 'value) list
+  -> ('key, 'value, 'identity) t
 
 (** {1 Basic operations} *)
 
@@ -70,10 +80,10 @@ val add :
     {2 Examples}
 
     {[
-      Map.add 
-        (Map.Int.fromList [(1, "Ant"); (2, "Bat")]) 
-        ~key:3 
-        ~value:"Cat" 
+      Map.add
+        (Map.Int.fromList [(1, "Ant"); (2, "Bat")])
+        ~key:3
+        ~value:"Cat"
       |> Map.toList = [(1, "Ant"); (2, "Bat"); (3, "Cat")]
     ]}
 
@@ -82,10 +92,10 @@ val add :
 
 val ( .?{}<- ) :
   ('key, 'value, 'id) t -> 'key -> 'value -> ('key, 'value, 'id) t
-(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!add} 
+(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!add}
 
     {b Note} Currently this is only supported by the OCaml syntax.
-    
+
     {2 Examples}
 
     {[
@@ -129,7 +139,7 @@ val get : ('key, 'value, 'id) t -> 'key -> 'value option
 *)
 
 val ( .?{} ) : ('key, 'value, _) t -> 'key -> 'value option
-(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!Core.Map.get} 
+(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!Core.Map.get}
 
     {b Note} Currently this is only supported by the OCaml syntax.
 
@@ -177,6 +187,8 @@ val update :
 
 val isEmpty : (_, _, _) t -> bool
 (** Determine if a map is empty. *)
+
+val is_empty : (_, _, _) t -> bool
 
 val length : (_, _, _) t -> int
 (** Returns the number of key-value pairs present in the map.
@@ -243,7 +255,7 @@ val maximum : ('key, _, _) t -> 'key option
     {2 Examples}
 
     {[
-      Map.Int.fromList [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")] 
+      Map.Int.fromList [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
       |> Map.maximum = Some 8
     ]}
 *)
@@ -282,11 +294,11 @@ val merge :
     {2 Examples}
 
     {[
-      let animalToPopulation = 
+      let animalToPopulation =
         Map.String.fromList [
           ("Elephant", 3_156);
           ("Shrew", 56_423);
-        ] 
+        ]
       in
       let animalToPopulationGrowthRate = Map.String.fromList [
         ("Elephant", 0.88);
@@ -294,12 +306,12 @@ val merge :
         ("Python", 4.0);
       ] in
 
-      Map.merge 
-        animalToPopulation 
-        animalToPopulationGrowthRate 
+      Map.merge
+        animalToPopulation
+        animalToPopulationGrowthRate
         ~f:(fun _animal population growth ->
           match (Option.both population growth) with
-          | Some (population, growth) -> 
+          | Some (population, growth) ->
               Some Float.((ofInt population) * growth)
           | None -> None
         )
@@ -329,9 +341,12 @@ val map : ('key, 'value, 'id) t -> f:('value -> 'b) -> ('key, 'b, 'id) t
     ]}
 *)
 
-val mapI :
+val mapWithIndex :
   ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
 (** Like {!map} but [f] is also called with each values corresponding key *)
+
+val map_with_index :
+  ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
 
 val filter :
   ('key, 'value, 'id) t -> f:('value -> bool) -> ('key, 'value, 'id) t
@@ -394,9 +409,14 @@ val fold :
 val forEach : (_, 'value, _) t -> f:('value -> unit) -> unit
 (** Runs a function [f] against each {b value} in the map. *)
 
-val forEachI :
+val for_each : (_, 'value, _) t -> f:('value -> unit) -> unit
+
+val forEachWithIndex :
   ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
 (** Like {!Map.forEach} except [~f] is also called with the corresponding key *)
+
+val for_each_with_index :
+  ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
 
 (** {1 Convert} *)
 
@@ -445,8 +465,12 @@ val values : (_, 'value, _) t -> 'value list
 val toArray : ('key, 'value, _) t -> ('key * 'value) array
 (** Get an {!Array} of all of the key-value pairs in a map. *)
 
+val to_array : ('key, 'value, _) t -> ('key * 'value) array
+
 val toList : ('key, 'value, _) t -> ('key * 'value) list
 (** Get a {!List} of all of the key-value pairs in a map. *)
+
+val to_list : ('key, 'value, _) t -> ('key * 'value) list
 
 (** Construct a Map which can be keyed by any data type using the polymorphic [compare] function. *)
 module Poly : sig
@@ -461,15 +485,19 @@ module Poly : sig
   (** Create a map from a key and value
 
       {2 Examples}
-  
+
       {[Map.Poly.singleton ~key:false ~value:1 |> Map.toList = [(false, 1)]]}
   *)
 
   val fromArray : ('key * 'value) array -> ('key, 'value) t
   (** Create a map from an {!Array} of key-value tuples *)
 
+  val from_array : ('key * 'value) array -> ('key, 'value) t
+
   val fromList : ('key * 'value) list -> ('key, 'value) t
   (** Create a map from a {!List} of key-value tuples *)
+
+  val from_list : ('key * 'value) list -> ('key, 'value) t
 end
 
 (** Construct a Map with {!Int}s for keys. *)
@@ -483,15 +511,19 @@ module Int : sig
   (** Create a map from a key and value
 
       {2 Examples}
-      
+
       {[Map.Int.singleton ~key:1 ~value:"Ant" |> Map.toList = [(1, "Ant")]]}
   *)
 
   val fromArray : (int * 'value) array -> 'value t
   (** Create a map from an {!Array} of key-value tuples *)
 
+  val from_array : (int * 'value) array -> 'value t
+
   val fromList : (int * 'value) list -> 'value t
   (** Create a map of a {!List} of key-value tuples *)
+
+  val from_list : (int * 'value) list -> 'value t
 end
 
 (** Construct a Map with {!String}s for keys. *)
@@ -506,13 +538,17 @@ module String : sig
   (** Create a map from a key and value
 
       {2 Examples}
-      
+
       {[Map.String.singleton ~key:"Ant" ~value:1 |> Map.toList = [("Ant", 1)]]}
   *)
 
   val fromArray : (string * 'value) array -> 'value t
   (** Create a map from an {!Array} of key-value tuples *)
 
+  val from_array : (string * 'value) array -> 'value t
+
   val fromList : (string * 'value) list -> 'value t
   (** Create a map from a {!List} of key-value tuples *)
+
+  val from_list : (string * 'value) list -> 'value t
 end

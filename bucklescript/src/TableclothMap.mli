@@ -55,11 +55,21 @@ val fromArray :
   -> ('key, 'value, 'identity) t
 (** Create a map from an {!Array} of key-value tuples *)
 
+val from_array :
+     ('key, 'identity) Comparator.s
+  -> ('key * 'value) array
+  -> ('key, 'value, 'identity) t
+
 val fromList :
      ('key, 'identity) Comparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
 (** Create a map of a {!List} of key-value tuples *)
+
+val from_list :
+     ('key, 'identity) Comparator.s
+  -> ('key * 'value) list
+  -> ('key, 'value, 'identity) t
 
 (** {1 Basic operations} *)
 
@@ -177,6 +187,8 @@ val update :
 
 val isEmpty : (_, _, _) t -> bool
 (** Determine if a map is empty. *)
+
+val is_empty : (_, _, _) t -> bool
 
 val length : (_, _, _) t -> int
 (** Returns the number of key-value pairs present in the map.
@@ -329,9 +341,12 @@ val map : ('key, 'value, 'id) t -> f:('value -> 'b) -> ('key, 'b, 'id) t
     ]}
 *)
 
-val mapI :
+val mapWithIndex :
   ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
 (** Like {!map} but [f] is also called with each values corresponding key *)
+
+val map_with_index :
+  ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
 
 val filter :
   ('key, 'value, 'id) t -> f:('value -> bool) -> ('key, 'value, 'id) t
@@ -394,9 +409,14 @@ val fold :
 val forEach : (_, 'value, _) t -> f:('value -> unit) -> unit
 (** Runs a function [f] against each {b value} in the map. *)
 
-val forEachI :
+val for_each : (_, 'value, _) t -> f:('value -> unit) -> unit
+
+val forEachWithIndex :
   ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
 (** Like {!Map.forEach} except [~f] is also called with the corresponding key *)
+
+val for_each_with_index :
+  ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
 
 (** {1 Convert} *)
 
@@ -445,8 +465,12 @@ val values : (_, 'value, _) t -> 'value list
 val toArray : ('key, 'value, _) t -> ('key * 'value) array
 (** Get an {!Array} of all of the key-value pairs in a map. *)
 
+val to_array : ('key, 'value, _) t -> ('key * 'value) array
+
 val toList : ('key, 'value, _) t -> ('key * 'value) list
 (** Get a {!List} of all of the key-value pairs in a map. *)
+
+val to_list : ('key, 'value, _) t -> ('key * 'value) list
 
 (** Construct a Map which can be keyed by any data type using the polymorphic [compare] function. *)
 module Poly : sig
@@ -468,13 +492,17 @@ module Poly : sig
   val fromArray : ('key * 'value) array -> ('key, 'value) t
   (** Create a map from an {!Array} of key-value tuples *)
 
+  val from_array : ('key * 'value) array -> ('key, 'value) t
+
   val fromList : ('key * 'value) list -> ('key, 'value) t
   (** Create a map from a {!List} of key-value tuples *)
+
+  val from_list : ('key * 'value) list -> ('key, 'value) t
 end
 
 (** Construct a Map with {!Int}s for keys. *)
 module Int : sig
-  type nonrec 'value t = (Int.t, 'value, Int.identity) t
+  type nonrec 'value t = 'value Of(Int).t
 
   val empty : 'value t
   (** A map with nothing in it. *)
@@ -490,14 +518,17 @@ module Int : sig
   val fromArray : (int * 'value) array -> 'value t
   (** Create a map from an {!Array} of key-value tuples *)
 
+  val from_array : (int * 'value) array -> 'value t
+
   val fromList : (int * 'value) list -> 'value t
   (** Create a map of a {!List} of key-value tuples *)
+
+  val from_list : (int * 'value) list -> 'value t
 end
 
 (** Construct a Map with {!String}s for keys. *)
 module String : sig
-  type nonrec 'value t =
-    (TableclothString.t, 'value, TableclothString.identity) t
+  type nonrec 'value t = 'value Of(TableclothString).t
 
   val empty : 'value t
   (** A map with nothing in it. *)
@@ -513,6 +544,10 @@ module String : sig
   val fromArray : (string * 'value) array -> 'value t
   (** Create a map from an {!Array} of key-value tuples *)
 
+  val from_array : (string * 'value) array -> 'value t
+
   val fromList : (string * 'value) list -> 'value t
   (** Create a map from a {!List} of key-value tuples *)
+
+  val from_list : (string * 'value) list -> 'value t
 end
