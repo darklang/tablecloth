@@ -502,7 +502,7 @@ end
 
 (** Construct a Map with {!Int}s for keys. *)
 module Int : sig
-  type nonrec 'value t = (Int.t, 'value, Int.identity) t
+  type nonrec 'value t = 'value Of(Int).t
 
   val empty : 'value t
   (** A map with nothing in it. *)
@@ -528,8 +528,7 @@ end
 
 (** Construct a Map with {!String}s for keys. *)
 module String : sig
-  type nonrec 'value t =
-    (TableclothString.t, 'value, TableclothString.identity) t
+  type nonrec 'value t = 'value Of(TableclothString).t
 
   val empty : 'value t
   (** A map with nothing in it. *)

@@ -9,7 +9,7 @@
 
 type ('a, 'id) t = ('a, 'id) Base.Set.t
 
-(** This functor lets you describe the type of Maps a little more concisely.
+(** This functor lets you describe the type of Sets a little more concisely.
 
     {[
       let names : Set.Of(String).t =
@@ -29,10 +29,10 @@ end
 
 (** {1 Create}
 
-    A [Set] can be constructed using one of the specialised functions available in the
-    {!Set.Int}, {!Set.String} or {!Set.Poly} sub-modules.
+  A [Set] can be constructed using one of the specialised functions available in the
+  {!Set.Int}, {!Set.String} or {!Set.Poly} sub-modules.
 
-    You can create sets of custom data types which conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
+  You can create sets of custom data types which conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
 *)
 
 val empty : ('a, 'identity) Comparator.s -> ('a, 'identity) t
@@ -43,7 +43,7 @@ val singleton : ('a, 'identity) Comparator.s -> 'a -> ('a, 'identity) t
 
   {2 Examples}
 
-  {[Set.Int.singleton 5 |> Set.toList = [5]]}
+  {[Set.singleton (module Char) 'H' |> Set.toList = ['H']]}
 *)
 
 val fromArray : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
@@ -51,7 +51,7 @@ val fromArray : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
 
     {2 Examples}
 
-    {[Set.Int.fromArray [|1;2;3;3;2;1;7|] |> Set.toArray = [|1;2;3;7|]]}
+    {[Set.fromArray (module Char) [|'A'; 'B'; 'B'; 'G'|] |> Set.toArray = [|'A';'B';'G'|]]}
 *)
 
 val from_array : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
@@ -61,7 +61,7 @@ val fromList : ('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) t
 
     {2 Examples}
 
-    {[Set.Int.fromList [1;2;3;3;2;1;7] |> Set.toList = [1;2;3;7]]}
+    {[Set.fromList (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.toList = ['A';'B';'G']]}
 *)
 
 val from_list : ('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) t
@@ -188,7 +188,7 @@ val intersection : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.intersection (Set.Int.ofList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList= [2]]}
+    {[Set.intersection (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList= [2]]}
 *)
 
 val union : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
