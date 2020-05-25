@@ -11,6 +11,8 @@ let () = {
           IntTest.suite,
           FunTest.suite,
           StringTest.suite,
+          Tuple2Test.suite,
+          Tuple3Test.suite,
           ...TableclothTest.suite,
         ],
       ),

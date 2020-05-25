@@ -29,6 +29,26 @@
   (copy ../../bucklescript/src/Fun.mli ./Fun.mli)))
 
 (rule
+ (target Tuple2.ml)
+ (action
+  (copy ../../bucklescript/src/Tuple2.ml ./Tuple2.ml)))
+
+(rule
+ (target Tuple2.mli)
+ (action
+  (copy ../../bucklescript/src/Tuple2.mli ./Tuple2.mli)))
+
+(rule
+ (target Tuple3.ml)
+ (action
+  (copy ../../bucklescript/src/Tuple3.ml ./Tuple3.ml)))
+
+(rule
+ (target Tuple3.mli)
+ (action
+  (copy ../../bucklescript/src/Tuple3.mli ./Tuple3.mli)))
+
+(rule
  (target TableclothString.mli)
  (action
   (copy ../../bucklescript/src/TableclothString.mli ./TableclothString.mli)))

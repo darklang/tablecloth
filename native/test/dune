@@ -35,6 +35,16 @@
   (copy ../../bucklescript/test/StringTest.re ./StringTest.re)))
 
 (rule
+ (target Tuple2Test.re)
+ (action
+  (copy ../../bucklescript/test/Tuple2Test.re ./Tuple2Test.re)))
+
+(rule
+ (target Tuple3Test.re)
+ (action
+  (copy ../../bucklescript/test/Tuple3Test.re ./Tuple3Test.re)))
+
+(rule
  (alias runtest)
  (action
   (run ./runtest.exe)))
