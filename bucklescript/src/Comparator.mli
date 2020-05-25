@@ -89,7 +89,7 @@ val make : compare:('a -> 'a -> int) -> (module S with type t = 'a)
 
 *)
 
-(** Create a new comparator by providing a module which satisifies {!T}. 
+(** Create a new comparator by providing a module which satisifies {!T}.
 
     {2 Examples}
 

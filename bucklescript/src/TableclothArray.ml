@@ -289,6 +289,8 @@ let groupBy t comparator ~f =
               Some (element :: elements)))
 
 
+let group_by = groupBy
+
 let equal equal a b =
   if length a <> length b
   then false

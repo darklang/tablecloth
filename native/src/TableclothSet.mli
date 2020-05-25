@@ -7,7 +7,7 @@
     For other data types you can use {!Set.Poly} which uses OCaml's polymorphic [compare] function.
 *)
 
-type ('a, 'id) t
+type ('a, 'id) t = ('a, 'id) Base.Set.t
 
 (** This functor lets you describe the type of Maps a little more concisely.
 

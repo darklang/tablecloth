@@ -9,7 +9,7 @@
     The specialized modules {!Map.Int}, {!Map.String} are in general more efficient.
 *)
 
-type ('key, +'value, 'id) t
+type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
 
 (** This functor lets you describe the type of Maps a little more concisely.
 

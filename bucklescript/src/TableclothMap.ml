@@ -4,16 +4,17 @@ module Of (M : Comparator.S) = struct
   type nonrec 'value t = (M.t, 'value, M.identity) t
 end
 
-let ofArray (comparator : ('key, 'id) Comparator.s) (values : ('key * 'v) array)
-    : ('key, 'value, 'id) t =
+let fromArray
+    (comparator : ('key, 'id) Comparator.s) (values : ('key * 'v) array) :
+    ('key, 'value, 'id) t =
   Belt.Map.fromArray values ~id:(Internal.toBeltComparator comparator)
 
 
-let empty comparator = ofArray comparator [||]
+let empty comparator = fromArray comparator [||]
 
-let ofList comparator l = ofArray comparator (Array.of_list l)
+let fromList comparator l = fromArray comparator (Array.of_list l)
 
-let singleton comparator ~key ~value = ofArray comparator [| (key, value) |]
+let singleton comparator ~key ~value = fromArray comparator [| (key, value) |]
 
 let isEmpty = Belt.Map.isEmpty
 
@@ -81,7 +82,7 @@ module Poly = struct
 
   type nonrec ('k, 'v) t = ('k, 'v, identity) t
 
-  let ofArray (type k v) (a : (k * v) array) =
+  let fromArray (type k v) (a : (k * v) array) =
     ( Belt.Map.fromArray
         a
         ~id:
@@ -95,33 +96,33 @@ module Poly = struct
       : (k, v) t )
 
 
-  let empty () = ofArray [||]
+  let empty () = fromArray [||]
 
-  let ofList l = ofArray (Array.of_list l)
+  let fromList l = fromArray (Array.of_list l)
 
-  let singleton ~key ~value = ofArray [| (key, value) |]
+  let singleton ~key ~value = fromArray [| (key, value) |]
 end
 
 module Int = struct
-  type nonrec 'v t = (Int.t, 'v, Int.identity) t
+  type nonrec 'value t = 'value Of(Int).t
 
-  let ofArray a = Poly.ofArray a |. Obj.magic
+  let fromArray a = Poly.fromArray a |. Obj.magic
 
-  let empty = ofArray [||]
+  let empty = fromArray [||]
 
-  let singleton ~key ~value = ofArray [| (key, value) |]
+  let singleton ~key ~value = fromArray [| (key, value) |]
 
-  let ofList l = ofArray (Array.of_list l)
+  let fromList l = fromArray (Array.of_list l)
 end
 
 module String = struct
-  type nonrec 'v t = (String.t, 'v, String.identity) t
+  type nonrec 'value t = 'value Of(TableclothString).t
 
-  let ofArray a = Poly.ofArray a |. Obj.magic
+  let fromArray a = Poly.fromArray a |. Obj.magic
 
-  let empty = ofArray [||]
+  let empty = fromArray [||]
 
-  let singleton ~key ~value = ofArray [| (key, value) |]
+  let singleton ~key ~value = fromArray [| (key, value) |]
 
-  let ofList l = ofArray (Array.of_list l)
+  let fromList l = fromArray (Array.of_list l)
 end
