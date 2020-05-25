@@ -29,14 +29,14 @@
   (copy ../../bucklescript/src/Fun.mli ./Fun.mli)))
 
 (rule
- (target Tuple.ml)
+ (target Tuple2.ml)
  (action
-  (copy ../../bucklescript/src/Tuple.ml ./Tuple.ml)))
+  (copy ../../bucklescript/src/Tuple2.ml ./Tuple2.ml)))
 
 (rule
- (target Tuple.mli)
+ (target Tuple2.mli)
  (action
-  (copy ../../bucklescript/src/Tuple.mli ./Tuple.mli)))
+  (copy ../../bucklescript/src/Tuple2.mli ./Tuple2.mli)))
 
 (rule
  (target Tuple3.ml)

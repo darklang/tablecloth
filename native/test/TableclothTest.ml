@@ -352,7 +352,7 @@ let t_Array () =
   AT.check
     (AT.array (AT.pair AT.string AT.int))
     "map2 - works when the order of `f` is important"
-    (Array.map2 ~f:Tuple.make [| "alice"; "bob"; "chuck" |] [| 2; 5; 7; 8 |])
+    (Array.map2 ~f:Tuple2.make [| "alice"; "bob"; "chuck" |] [| 2; 5; 7; 8 |])
     [| ("alice", 2); ("bob", 5); ("chuck", 7) |] ;
 
   AT.check

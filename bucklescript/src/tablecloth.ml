@@ -649,7 +649,7 @@ module Option = struct
   let get_exn = getExn
 end
 
-module Tuple = Tuple
+module Tuple2 = Tuple2
 module Tuple3 = Tuple3
 module String = TableclothString
 

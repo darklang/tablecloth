@@ -11,7 +11,7 @@ val make : 'a -> 'b -> 'a * 'b
 
     {2 Examples}
 
-    {[Tuple.make 3 "Clementine" = (3, "Clementine")]}
+    {[Tuple2.make 3 "Clementine" = (3, "Clementine")]}
 *)
 
 val fromArray : 'a array -> ('a * 'a) option
@@ -23,11 +23,11 @@ val fromArray : 'a array -> ('a * 'a) option
 
     {2 Examples}
 
-    {[Tuple.fromArray [|1; 2|] = Some (1, 2)]}
+    {[Tuple2.fromArray [|1; 2|] = Some (1, 2)]}
 
-    {[Tuple.fromArray [|1|] = None]}
+    {[Tuple2.fromArray [|1|] = None]}
 
-    {[Tuple.fromArray [|4; 5; 6|] = Some (4, 5)]}
+    {[Tuple2.fromArray [|4; 5; 6|] = Some (4, 5)]}
 *)
 
 val from_array : 'a array -> ('a * 'a) option
@@ -41,11 +41,11 @@ val fromList : 'a list -> ('a * 'a) option
 
     {2 Examples}
 
-    {[Tuple.fromList [1; 2] = Some (1, 2)]}
+    {[Tuple2.fromList [1; 2] = Some (1, 2)]}
 
-    {[Tuple.fromList [1] = None]}
+    {[Tuple2.fromList [1] = None]}
 
-    {[Tuple.fromList [4; 5; 6] = Some (4, 5)]}
+    {[Tuple2.fromList [4; 5; 6] = Some (4, 5)]}
 *)
 
 val from_list : 'a list -> ('a * 'a) option
@@ -55,9 +55,9 @@ val first : 'a * 'b -> 'a
 
     {2 Examples}
 
-    {[Tuple.first (3, 4) = 3]}
+    {[Tuple2.first (3, 4) = 3]}
 
-    {[Tuple.first ("john", "doe") = "john"]}
+    {[Tuple2.first ("john", "doe") = "john"]}
 *)
 
 val second : 'a * 'b -> 'b
@@ -65,9 +65,9 @@ val second : 'a * 'b -> 'b
 
     {2 Examples}
 
-    {[Tuple.second (3, 4) = 4]}
+    {[Tuple2.second (3, 4) = 4]}
 
-    {[Tuple.second ("john", "doe") = "doe"]}
+    {[Tuple2.second ("john", "doe") = "doe"]}
 *)
 
 (** {1 Transform} *)
@@ -77,9 +77,9 @@ val mapFirst : 'a * 'b -> f:('a -> 'x) -> 'x * 'b
 
     {2 Examples}
 
-    {[Tuple.mapFirst ~f:String.reverse ("stressed", 16) = ("desserts", 16)]}
+    {[Tuple2.mapFirst ~f:String.reverse ("stressed", 16) = ("desserts", 16)]}
 
-    {[Tuple.mapFirst ~f:String.length ("stressed", 16) = (8, 16)]}
+    {[Tuple2.mapFirst ~f:String.length ("stressed", 16) = (8, 16)]}
 *)
 
 val map_first : 'a * 'b -> f:('a -> 'x) -> 'x * 'b
@@ -89,9 +89,9 @@ val mapSecond : 'a * 'b -> f:('b -> 'c) -> 'a * 'c
 
     {2 Examples}
 
-    {[Tuple.mapSecond ~f:Float.squareRoot ("stressed", 16.) = ("stressed", 4.)]}
+    {[Tuple2.mapSecond ~f:Float.squareRoot ("stressed", 16.) = ("stressed", 4.)]}
 
-    {[Tuple.mapSecond ~f:(~-) ("stressed", 16) = ("stressed", -16)]}
+    {[Tuple2.mapSecond ~f:(~-) ("stressed", 16) = ("stressed", -16)]}
 *)
 
 val map_second : 'a * 'b -> f:('b -> 'c) -> 'a * 'c
@@ -101,9 +101,9 @@ val mapEach : 'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y
 
     {2 Examples}
 
-    {[Tuple.mapEach ~f:String.reverse ~g:Float.squareRoot ("stressed", 16.) = ("desserts", 4.)]}
+    {[Tuple2.mapEach ~f:String.reverse ~g:Float.squareRoot ("stressed", 16.) = ("desserts", 4.)]}
 
-    {[Tuple.mapEach ~f:String.length ~g:(~-) ("stressed", 16) = (8, -16)]}
+    {[Tuple2.mapEach ~f:String.length ~g:(~-) ("stressed", 16) = (8, -16)]}
 *)
 
 val map_each : 'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y
@@ -115,9 +115,9 @@ val mapAll : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
 
     {2 Examples}
 
-    {[Tuple.mapAll ~f:(Int.add 1) (3, 4, 5) = (4, 5, 6)]}
+    {[Tuple2.mapAll ~f:(Int.add 1) (3, 4, 5) = (4, 5, 6)]}
 
-    {[Tuple.mapAll ~f:String.length ("was", "stressed") = (3, 8)]}
+    {[Tuple2.mapAll ~f:String.length ("was", "stressed") = (3, 8)]}
 *)
 
 val map_all : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
@@ -127,9 +127,9 @@ val swap : 'a * 'b -> 'b * 'a
 
     {2 Examples}
 
-    {[Tuple.swap (3, 4) = (4, 3)]}
+    {[Tuple2.swap (3, 4) = (4, 3)]}
 
-    {[Tuple.swap ("stressed", 16) = (16, "stressed")]}
+    {[Tuple2.swap ("stressed", 16) = (16, "stressed")]}
 *)
 
 (** {1 Convert} *)
@@ -141,9 +141,9 @@ val toArray : 'a * 'a -> 'a array
 
     {2 Examples}
 
-    {[Tuple.toArray (3, 4) = [|3; 4|]]}
+    {[Tuple2.toArray (3, 4) = [|3; 4|]]}
 
-    {[Tuple.toArray ("was", "stressed") = [|"was"; "stressed"|]]}
+    {[Tuple2.toArray ("was", "stressed") = [|"was"; "stressed"|]]}
 *)
 
 val to_array : 'a * 'a -> 'a array
@@ -153,9 +153,9 @@ val toList : 'a * 'a -> 'a list
 
     {2 Examples}
 
-    {[Tuple.toList (3, 4) = [3; 4]]}
+    {[Tuple2.toList (3, 4) = [3; 4]]}
 
-    {[Tuple.toList ("was", "stressed") = ["was"; "stressed"]]}
+    {[Tuple2.toList ("was", "stressed") = ["was"; "stressed"]]}
 *)
 
 val to_list : 'a * 'a -> 'a list
@@ -164,26 +164,26 @@ val to_list : 'a * 'a -> 'a list
 
 val equal :
   ('a -> 'a -> bool) -> ('b -> 'b -> bool) -> ('a, 'b) t -> ('a, 'b) t -> bool
-(** Test two {!Tuple}s for equality, using the provided functions to test the
+(** Test two {!Tuple2}s for equality, using the provided functions to test the
     first and second components.
 
     {2 Examples}
 
-    {[Tuple.equal Int.equal String.equal (1, "Fox") (1, "Fox") = true]}
+    {[Tuple2.equal Int.equal String.equal (1, "Fox") (1, "Fox") = true]}
 
-    {[Tuple.equal Int.equal String.equal (1, "Fox") (2, "Hen") = false]}
+    {[Tuple2.equal Int.equal String.equal (1, "Fox") (2, "Hen") = false]}
 *)
 
 val compare :
   ('a -> 'a -> int) -> ('b -> 'b -> int) -> ('a, 'b) t -> ('a, 'b) t -> int
-(** Compare two {!Tuple}s, using the provided functions to compare the first
+(** Compare two {!Tuple2}s, using the provided functions to compare the first
     components then, if the first components are equal, the second components.
 
     {2 Examples}
 
-    {[Tuple.compare Int.compare String.compare (1, "Fox") (1, "Fox") = 0]}
+    {[Tuple2.compare Int.compare String.compare (1, "Fox") (1, "Fox") = 0]}
 
-    {[Tuple.compare Int.compare String.compare (1, "Fox") (1, "Eel") = 1]}
+    {[Tuple2.compare Int.compare String.compare (1, "Fox") (1, "Eel") = 1]}
 
-    {[Tuple.compare Int.compare String.compare (1, "Fox") (2, "Hen") = -1]}
+    {[Tuple2.compare Int.compare String.compare (1, "Fox") (2, "Hen") = -1]}
 *)

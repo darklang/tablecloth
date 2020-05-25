@@ -66,9 +66,9 @@ val second : 'a * 'b * 'c -> 'b
 
     {2 Examples}
 
-    {[Tuple.second (3, 4, 5) = 4]}
+    {[Tuple3.second (3, 4, 5) = 4]}
 
-    {[Tuple.second ("john", "danger", "doe") = "danger"]}
+    {[Tuple3.second ("john", "danger", "doe") = "danger"]}
 *)
 
 val third : 'a * 'b * 'c -> 'c
@@ -76,13 +76,13 @@ val third : 'a * 'b * 'c -> 'c
 
     {2 Examples}
 
-    {[Tuple.third (3, 4, 5) = 5]}
+    {[Tuple3.third (3, 4, 5) = 5]}
 
-    {[Tuple.third ("john", "danger", "doe") = "doe"]}
+    {[Tuple3.third ("john", "danger", "doe") = "doe"]}
 *)
 
 val initial : 'a * 'b * 'c -> 'a * 'b
-(** Extract the first and second values of a {!Tuple3} as a {!Tuple}.
+(** Extract the first and second values of a {!Tuple3} as a {!Tuple2}.
 
     {2 Examples}
 
@@ -92,7 +92,7 @@ val initial : 'a * 'b * 'c -> 'a * 'b
 *)
 
 val tail : 'a * 'b * 'c -> 'b * 'c
-(** Extract the second and third values of a {!Tuple3} as a {!Tuple}.
+(** Extract the second and third values of a {!Tuple3} as a {!Tuple2}.
 
     {2 Examples}
 
@@ -108,9 +108,9 @@ val rotateLeft : 'a * 'b * 'c -> 'b * 'c * 'a
 
     {2 Examples}
 
-    {[Tuple.rotateLeft (3, 4, 5) = (4, 5, 3)]}
+    {[Tuple3.rotateLeft (3, 4, 5) = (4, 5, 3)]}
 
-    {[Tuple.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]}
+    {[Tuple3.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]}
 *)
 
 val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
@@ -118,9 +118,9 @@ val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
 
     {2 Examples}
 
-    {[Tuple.rotateRight (3, 4, 5) = (5, 3, 4)]}
+    {[Tuple3.rotateRight (3, 4, 5) = (5, 3, 4)]}
 
-    {[Tuple.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]}
+    {[Tuple3.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]}
 *)
 
 (** {1 Transform} *)
@@ -175,9 +175,9 @@ val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
 
     {2 Examples}
 
-    {[Tuple.mapAll ~f:Float.squareRoot (9., 16., 25.) = (3., 4., 5.)]}
+    {[Tuple3.mapAll ~f:Float.squareRoot (9., 16., 25.) = (3., 4., 5.)]}
 
-    {[Tuple.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]}
+    {[Tuple3.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]}
 *)
 
 (** {1 Convert} *)
@@ -220,9 +220,9 @@ val equal :
 
     {2 Examples}
 
-    {[Tuple.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (1, "Fox", 'k') = true]}
+    {[Tuple3.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (1, "Fox", 'k') = true]}
 
-    {[Tuple.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (2, "Hen", 'j') = false]}
+    {[Tuple3.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (2, "Hen", 'j') = false]}
  *)
 
 val compare :
@@ -238,9 +238,9 @@ val compare :
 
     {2 Examples}
 
-    {[Tuple.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
+    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
 
-    {[Tuple.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
+    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
 
-    {[Tuple.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
+    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
  *)

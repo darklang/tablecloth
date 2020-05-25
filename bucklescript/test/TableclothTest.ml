@@ -176,7 +176,7 @@ let () =
           test "works when the order of `f` is important" (fun () ->
               expect
                 (Array.map2
-                   ~f:Tuple.make
+                   ~f:Tuple2.make
                    [| "alice"; "bob"; "chuck" |]
                    [| 2; 5; 7; 8 |])
               |> toEqual [| ("alice", 2); ("bob", 5); ("chuck", 7) |])) ;

@@ -35,9 +35,9 @@
   (copy ../../bucklescript/test/StringTest.re ./StringTest.re)))
 
 (rule
- (target TupleTest.re)
+ (target Tuple2Test.re)
  (action
-  (copy ../../bucklescript/test/TupleTest.re ./TupleTest.re)))
+  (copy ../../bucklescript/test/Tuple2Test.re ./Tuple2Test.re)))
 
 (rule
  (target Tuple3Test.re)

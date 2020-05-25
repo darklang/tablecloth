@@ -183,7 +183,7 @@ module Array = struct
   let for_each = forEach
 end
 
-module Tuple = Tuple
+module Tuple2 = Tuple2
 module Tuple3 = Tuple3
 
 module List = struct
@@ -227,7 +227,7 @@ module List = struct
 
   let elemIndex ~(value : 'a) (l : 'a list) : int option =
     Base.List.findi l ~f:(fun _ v -> v = value)
-    |> Base.Option.map ~f:Tuple.first
+    |> Base.Option.map ~f:Tuple2.first
 
 
   let elem_index = elemIndex

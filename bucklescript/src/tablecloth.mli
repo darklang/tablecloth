@@ -1265,7 +1265,7 @@ module Option : sig
   *)
 end
 
-module Tuple : module type of Tuple
+module Tuple2 : module type of Tuple2
 
 module Tuple3 : module type of Tuple3
 
