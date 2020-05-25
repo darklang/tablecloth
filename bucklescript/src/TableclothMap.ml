@@ -1,3 +1,5 @@
+module Option = TableclothOption
+
 type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
 
 module Of (M : Comparator.S) = struct

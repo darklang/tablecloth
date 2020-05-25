@@ -109,7 +109,7 @@ val ( .?{} ) : ('element, _) t -> 'element -> bool
 
     {[
       let animals = Set.String.fromList ["Ant"; "Bat"; "Cat"] in
-      numbers.Set.?{"Emu"} = false
+      Set.includes animals "Emu" = false
     ]}
  *)
 
