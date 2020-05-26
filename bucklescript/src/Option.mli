@@ -22,8 +22,8 @@
 
     - Pattern matching
     - Using {!map} or {!andThen} (or their operators in {!Infix})
-    - Unwrapping it using {!get}, or its operator {!(|?)}
-    - Converting a [None] into an exception using{!getUnsafe}
+    - Unwrapping it using {!unwrap}, or its operator {!(|?)}
+    - Converting a [None] into an exception using{!unwrapUnsafe}
 
     If the function you are writing can fail in a variety of ways, use a {!Result} instead to
     better communicate with the caller.
@@ -209,7 +209,7 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
 
 val and_then : 'a t -> f:('a -> 'b t) -> 'b t
 
-val get : 'a t -> default:'a -> 'a
+val unwrap : 'a t -> default:'a -> 'a
 (** Unwrap an [option('a)] returning [default] if called with [None].
 
     This comes in handy when paired with functions like {!Map.get} or {!List.head} which return an {!Option}.
@@ -220,17 +220,17 @@ val get : 'a t -> default:'a -> 'a
 
     {2 Examples}
 
-    {[Option.get ~default:99 (Some 42) = 42]}
+    {[Option.unwrap ~default:99 (Some 42) = 42]}
 
-    {[Option.get ~default:99 None = 99]}
+    {[Option.unwrap ~default:99 None = 99]}
 
-    {[Option.get ~default:"unknown" (Map.get Map.String.empty "Tom") = "unknown"]}
+    {[Option.unwrap ~default:"unknown" (Map.get Map.String.empty "Tom") = "unknown"]}
 *)
 
-val getUnsafe : 'a t -> 'a
+val unwrapUnsafe : 'a t -> 'a
 (** Unwrap an [option('a)] returning the enclosed ['a].
 
-    {b Note} in most situations it is better to use pattern matching, {!get}, {!map} or {!andThen}.
+    {b Note} in most situations it is better to use pattern matching, {!unwrap}, {!map} or {!andThen}.
     Can you structure your code slightly differently to avoid potentially raising an exception?
 
     {3 Exceptions}
@@ -239,12 +239,12 @@ val getUnsafe : 'a t -> 'a
 
     {2 Examples}
 
-    {[List.head [1;2;3] |> Option.getUnsafe = 1]}
+    {[List.head [1;2;3] |> Option.unwrapUnsafe = 1]}
 
-    {[List.head [] |> Option.getUnsafe]}
+    {[List.head [] |> Option.unwrapUnsafe]}
 *)
 
-val get_unsafe : 'a t -> 'a
+val unwrap_unsafe : 'a t -> 'a
 
 val isSome : 'a t -> bool
 (** Check if an {!Option} is a [Some].

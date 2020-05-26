@@ -94,7 +94,7 @@ val isOk : (_, _) t -> bool
     an [Ok] like logging.
 
     {b Note} if you need access to the contained value rather than doing
-    [Result.isOk] followed by {!Result.getUnsafe} its safer and just as
+    [Result.isOk] followed by {!Result.unwrapUnsafe} its safer and just as
     convenient to use pattern matching directly or use one of {!Result.andThen}
     or {!Result.map}
 
@@ -114,7 +114,7 @@ val isError : (_, _) t -> bool
     an [Error] like logging.
 
     {b Note} if you need access to the contained value rather than doing
-    {!Result.isOk} followed by {!Result.getUnsafe} its safer and just as
+    {!Result.isOk} followed by {!Result.unwrapUnsafe} its safer and just as
     convenient to use pattern matching directly or use one of {!Result.andThen}
     or {!Result.map}
 
@@ -225,53 +225,53 @@ val flatten : (('ok, 'error) t, 'error) t -> ('ok, 'error) t
     ]}
 *)
 
-val get : ('ok, 'error) t -> default:'ok -> 'ok
+val unwrap : ('ok, 'error) t -> default:'ok -> 'ok
 (** Unwrap a Result using the [~default] value in case of an [Error]
 
     {2 Examples}
 
-    {[Result.get ~default:0 (Ok 12) = 12]}
+    {[Result.unwrap ~default:0 (Ok 12) = 12]}
 
-    {[Result.get ~default:0 ((Error (`UnexpectedBird "Ostrich"))) = 0]}
+    {[Result.unwrap ~default:0 ((Error (`UnexpectedBird "Ostrich"))) = 0]}
 *)
 
-val getUnsafe : ('ok, _) t -> 'ok
+val unwrapUnsafe : ('ok, _) t -> 'ok
 (** Unwrap a Result, raising an exception in case of an [Error]
 
     {e Exceptions}
 
-    Raises an [Invalid_argument "Result.getUnsafe called with an Error"] exception.
+    Raises an [Invalid_argument "Result.unwrapUnsafe called with an Error"] exception.
 
     {2 Examples}
 
-    {[Result.getUnsafe (Ok 12) = 12]}
+    {[Result.unwrapUnsafe (Ok 12) = 12]}
 
-    {[Result.getUnsafe (Error "bad") ]}
+    {[Result.unwrapUnsafe (Error "bad") ]}
 *)
 
-val get_unsafe : ('ok, _) t -> 'ok
+val unwrap_unsafe : ('ok, _) t -> 'ok
 
-val getError : ('ok, 'error) t -> default:'error -> 'error
-(** Like {!Result.get} but unwraps an [Error] value instead
+val unwrapError : ('ok, 'error) t -> default:'error -> 'error
+(** Like {!Result.unwrap} but unwraps an [Error] value instead
 
     {2 Examples}
 
     {[
-      Result.getError
+      Result.unwrapError
         (Error (`UnexpectedBird "Swallow"))
         ~default:(`UnexpectedInvertabrate "Ladybird") =
           `UnexpectedBird "Swallow"
     ]}
 
     {[
-      Result.getError
+      Result.unwrapError
         (Ok 5)
         ~default:(`UnexpectedInvertabrate "Ladybird") =
           `UnexpectedInvertabrate "Ladybird"
     ]}
 *)
 
-val get_error : ('ok, 'error) t -> default:'error -> 'error
+val unwrap_error : ('ok, 'error) t -> default:'error -> 'error
 
 val map2 :
   ('a, 'error) t -> ('b, 'error) t -> f:('a -> 'b -> 'c) -> ('c, 'error) t
@@ -452,7 +452,7 @@ val compare :
 *)
 
 val ( |? ) : ('a, 'error) t -> 'a -> 'a
-(** An operator version of {!Result.get} where the [default] value goes to the right of the operator.
+(** An operator version of {!Result.unwrap} where the [default] value goes to the right of the operator.
 
     {2 Examples}
 

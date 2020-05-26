@@ -32,17 +32,17 @@ let map2 (ta : 'a t) (tb : 'b t) ~(f : 'a -> 'b -> 'c) =
   (match (ta, tb) with Some a, Some b -> Some (f a b) | _ -> None : 'c t)
 
 
-let get t ~default = match t with None -> default | Some value -> value
+let unwrap t ~default = match t with None -> default | Some value -> value
 
-let getUnsafe x =
+let unwrapUnsafe x =
   match x with
   | None ->
-      raise (Invalid_argument "Option.getUnsafe called with None")
+      raise (Invalid_argument "Option.unwrapUnsafe called with None")
   | Some x ->
       x
 
 
-let get_unsafe = getUnsafe
+let unwrap_unsafe = unwrapUnsafe
 
 let forEach t ~f = Option.iter f t
 
@@ -78,7 +78,7 @@ let compare compare a b =
       1
 
 
-let ( |? ) t default = get t ~default
+let ( |? ) t default = unwrap t ~default
 
 let ( >>| ) t f = map t ~f
 

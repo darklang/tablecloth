@@ -34,15 +34,17 @@ let or_ a b = match a with Ok _ -> a | _ -> b
 
 let and_ a b = match a with Ok _ -> b | _ -> a
 
-let get = Result.value
+let unwrap = Result.value
 
-let getUnsafe = Result.get_ok
+let unwrapUnsafe = Result.get_ok
 
-let get_unsafe = getUnsafe
+let unwrap_unsafe = unwrapUnsafe
 
-let getError t ~default = match t with Ok _ -> default | Error error -> error
+let unwrapError t ~default =
+  match t with Ok _ -> default | Error error -> error
 
-let get_error = getError
+
+let unwrap_error = unwrapError
 
 let map t ~f = Result.map f t
 
@@ -109,7 +111,7 @@ let compare
     : int )
 
 
-let ( |? ) t default = get t ~default
+let ( |? ) t default = unwrap t ~default
 
 let ( >>| ) t f = map t ~f
 

@@ -38,15 +38,17 @@ let or_ a b = match a with Ok _ -> a | _ -> b
 
 let and_ a b = match a with Ok _ -> b | _ -> a
 
-let get t ~default = Belt.Result.getWithDefault t default
+let unwrap t ~default = Belt.Result.getWithDefault t default
 
-let getUnsafe t = Belt.Result.getExn t
+let unwrapUnsafe t = Belt.Result.getExn t
 
-let get_unsafe = getUnsafe
+let unwrap_unsafe = unwrapUnsafe
 
-let getError t ~default = match t with Ok _ -> default | Error value -> value
+let unwrapError t ~default =
+  match t with Ok _ -> default | Error value -> value
 
-let get_error = getError
+
+let unwrap_error = unwrapError
 
 let map2 a b ~f =
   match (a, b) with
@@ -111,7 +113,7 @@ let compare
     : int )
 
 
-let ( |? ) t default = get t ~default
+let ( |? ) t default = unwrap t ~default
 
 let ( >>| ) t f = map t ~f
 

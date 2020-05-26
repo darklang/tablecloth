@@ -30,17 +30,18 @@ let map t ~f = Belt.Option.map t f
 
 let map2 a b ~f = match (a, b) with Some a, Some b -> Some (f a b) | _ -> None
 
-let get t ~default = Belt.Option.getWithDefault t default
+let unwrap t ~default = Belt.Option.getWithDefault t default
 
-let getOrFailWith t ~exn =
+let unwrapOrFailWith t ~exn =
   match t with Some value -> value | None -> raise exn
 
 
-let getUnsafe =
-  getOrFailWith ~exn:(Invalid_argument "Option.getUnsafe called with None")
+let unwrapUnsafe =
+  unwrapOrFailWith
+    ~exn:(Invalid_argument "Option.unwrapUnsafe called with None")
 
 
-let get_unsafe = getUnsafe
+let unwrap_unsafe = unwrapUnsafe
 
 let toArray t = match t with None -> [||] | Some value -> [| value |]
 
@@ -76,7 +77,7 @@ let compare compare a b =
       1
 
 
-let ( |? ) t default = get t ~default
+let ( |? ) t default = unwrap t ~default
 
 let ( >>| ) t f = map t ~f
 
