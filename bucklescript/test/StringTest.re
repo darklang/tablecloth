@@ -98,6 +98,20 @@ let suite =
     test("reverse", () => {
       expect(String.reverse("stressed")) |> toEqual(Eq.string, "desserts")
     });
+    describe("split", () => {
+      test("middle", () => {
+        expect(String.split("abc", ~on="b"))
+        |> toEqual(Eq.(list(string)), ["a", "c"])
+      });
+      test("start", () => {
+        expect(String.split("ab", ~on="a"))
+        |> toEqual(Eq.(list(string)), ["", "b"])
+      });
+      test("end", () => {
+        expect(String.split("ab", ~on="b"))
+        |> toEqual(Eq.(list(string)), ["a", ""])
+      });
+    });
 
     test("toArray", () => {
       expect(String.toArray("Standard"))
