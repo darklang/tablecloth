@@ -58,7 +58,9 @@ let dropRight (s : string) ~(count : int) =
 
 let drop_right = dropRight
 
-let split t ~(on : string) = (Str.split (Str.regexp_string on) t : string list)
+let split t ~(on : string) =
+  (Str.split_delim (Str.regexp_string on) t : string list)
+
 
 let startsWith t ~prefix = Base.String.is_prefix ~prefix t
 
