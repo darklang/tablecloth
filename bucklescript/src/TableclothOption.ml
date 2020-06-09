@@ -51,9 +51,7 @@ let toList t = match t with None -> [] | Some value -> [ value ]
 
 let to_list = toList
 
-let forEach t ~f = match t with None -> () | Some x -> f x
-
-let for_each = forEach
+let tap t ~f = match t with None -> () | Some x -> f x
 
 let equal equal a b =
   match (a, b) with

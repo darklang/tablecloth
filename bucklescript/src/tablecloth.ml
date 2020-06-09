@@ -2,8 +2,8 @@ module Bool = Bool
 module Char = TableclothChar
 module Float = Float
 module Int = Int
-module Option = Option
-module Result = Result
+module Option = TableclothOption
+module Result = TableclothResult
 
 module Array = struct
   type 'a t = 'a array

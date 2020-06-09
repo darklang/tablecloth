@@ -82,9 +82,7 @@ let attempt f =
   match f () with value -> Ok value | exception error -> Error error
 
 
-let forEach t ~f = match t with Ok a -> f a | _ -> ()
-
-let for_each = forEach
+let tap t ~f = match t with Ok a -> f a | _ -> ()
 
 let equal equalOk equalError a b =
   match (a, b) with

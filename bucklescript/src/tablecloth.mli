@@ -12,9 +12,9 @@ module Int : module type of Int
 
 module Float : module type of Float
 
-module Option : module type of Option
+module Option : module type of TableclothOption
 
-module Result : module type of Result
+module Result : module type of TableclothResult
 
 module Array : sig
   type 'a t = 'a array

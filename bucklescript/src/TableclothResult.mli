@@ -366,18 +366,16 @@ val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
 
 val and_then : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
 
-val forEach : ('ok, _) t -> f:('ok -> unit) -> unit
+val tap : ('ok, _) t -> f:('ok -> unit) -> unit
 (** Run a function against an [(Ok value)], ignores [Error]s.
 
     {2 Examples}
 
     {[
-      Result.forEach (Ok "Dog") ~f:print_endline
+      Result.tap (Ok "Dog") ~f:print_endline
       (* prints "Dog" *)
     ]}
  *)
-
-val for_each : ('ok, _) t -> f:('ok -> unit) -> unit
 
 (** {1 Convert} *)
 

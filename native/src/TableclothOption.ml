@@ -44,9 +44,7 @@ let unwrapUnsafe x =
 
 let unwrap_unsafe = unwrapUnsafe
 
-let forEach t ~f = Option.iter f t
-
-let for_each = forEach
+let tap t ~f = Option.iter f t
 
 let toArray t = match t with None -> [||] | Some value -> [| value |]
 

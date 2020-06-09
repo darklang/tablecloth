@@ -274,10 +274,8 @@ val isNone : 'a t -> bool
 
 val is_none : 'a t -> bool
 
-val forEach : 'a t -> f:('a -> unit) -> unit
+val tap : 'a t -> f:('a -> unit) -> unit
 (** Run a function against a value, if it is present. *)
-
-val for_each : 'a t -> f:('a -> unit) -> unit
 
 val toArray : 'a t -> 'a array
 (** Convert an option to a {!Array}.
