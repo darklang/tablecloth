@@ -17,7 +17,6 @@ let () = {
           StringTest.suite,
           Tuple2Test.suite,
           Tuple3Test.suite,
-          ...TableclothTest.suite,
         ],
       ),
     ],
