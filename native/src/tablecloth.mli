@@ -529,94 +529,9 @@ module List : sig
   *)
 end
 
-module Result : sig
-  type ('err, 'ok) t = ('ok, 'err) Base.Result.t
+module Option : module type of TableclothOption
 
-  val succeed : 'ok -> ('err, 'ok) t
-
-  val fail : 'err -> ('err, 'ok) t
-
-  val withDefault : default:'ok -> ('err, 'ok) t -> 'ok
-
-  val with_default : default:'ok -> ('err, 'ok) t -> 'ok
-
-  val map2 : f:('a -> 'b -> 'c) -> ('err, 'a) t -> ('err, 'b) t -> ('err, 'c) t
-
-  val combine : ('x, 'a) t list -> ('x, 'a list) t
-
-  val map : f:('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
-
-  val fromOption : error:'err -> 'ok option -> ('err, 'ok) t
-
-  val from_option : error:'err -> 'ok option -> ('err, 'ok) t
-
-  val toOption : ('err, 'ok) t -> 'ok option
-
-  val to_option : ('err, 'ok) t -> 'ok option
-
-  val andThen : f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
-
-  val and_then :
-    f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
-
-  val pp :
-       (Format.formatter -> 'err -> unit)
-    -> (Format.formatter -> 'ok -> unit)
-    -> Format.formatter
-    -> ('err, 'ok) t
-    -> unit
-end
-
-module Option : sig
-  type 'a t = 'a option
-
-  val some : 'a -> 'a option
-
-  val andThen : f:('a -> 'b option) -> 'a option -> 'b option
-
-  val and_then : f:('a -> 'b option) -> 'a option -> 'b option
-
-  val or_ : 'a option -> 'a option -> 'a option
-
-  val orElse : 'a option -> 'a option -> 'a option
-
-  val or_else : 'a option -> 'a option -> 'a option
-
-  val map : f:('a -> 'b) -> 'a option -> 'b option
-
-  val withDefault : default:'a -> 'a option -> 'a
-
-  val with_default : default:'a -> 'a option -> 'a
-
-  val values : 'a option list -> 'a list
-
-  val toList : 'a option -> 'a list
-
-  val to_list : 'a option -> 'a list
-
-  val isSome : 'a option -> bool
-
-  val is_some : 'a option -> bool
-
-  val toOption : sentinel:'a -> 'a -> 'a option
-
-  val to_option : sentinel:'a -> 'a -> 'a option
-
-  val getExn : 'a option -> 'a
-  (**
-    Same as {!Option.get_exn}
-  *)
-
-  val get_exn : 'a option -> 'a
-  (** [get_exn optional_value]
-    Returns [value] if [optional_value] is [Some value], otherwise raises [Invalid_argument]
-
-    {[
-      get_exn (Some 3) = 3;;
-      get_exn None (* Raises Invalid_argument error *)
-    ]}
-  *)
-end
+module Result : module type of TableclothResult
 
 module Tuple2 : module type of Tuple2
 

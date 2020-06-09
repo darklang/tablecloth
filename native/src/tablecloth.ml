@@ -3,6 +3,8 @@ module Char = TableclothChar
 module String = TableclothString
 module Int = Int
 module Float = Float
+module Option = TableclothOption
+module Result = TableclothResult
 
 module Array = struct
   type 'a t = 'a array
@@ -516,138 +518,6 @@ module List = struct
 
   let rec repeat ~(count : int) (value : 'a) : 'a list =
     if count > 0 then value :: repeat ~count:(count - 1) value else []
-end
-
-module Option = struct
-  type 'a t = 'a option
-
-  let some = Base.Option.some
-
-  let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
-    match o with None -> None | Some x -> f x
-
-
-  let and_then = andThen
-
-  let or_ (ma : 'a option) (mb : 'a option) : 'a option =
-    match ma with None -> mb | Some _ -> ma
-
-
-  let orElse (ma : 'a option) (mb : 'a option) : 'a option =
-    match mb with None -> ma | Some _ -> mb
-
-
-  let or_else = orElse
-
-  let map ~(f : 'a -> 'b) (o : 'a option) : 'b option = Base.Option.map o ~f
-
-  let withDefault ~(default : 'a) (o : 'a option) : 'a =
-    Base.Option.value o ~default
-
-
-  let with_default = withDefault
-
-  let values (l : 'a option list) : 'a list =
-    let valuesHelper (item : 'a option) (list : 'a list) : 'a list =
-      match item with None -> list | Some v -> v :: list
-    in
-    List.foldRight ~f:valuesHelper ~initial:[] l
-
-
-  let toList (o : 'a option) : 'a list =
-    match o with None -> [] | Some o -> [ o ]
-
-
-  let to_list = toList
-
-  let isSome = Base.Option.is_some
-
-  let is_some = isSome
-
-  let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
-    if value = sentinel then None else Some value
-
-
-  let to_option = toOption
-
-  let getExn (x : 'a option) =
-    match x with
-    | None ->
-        raise (Invalid_argument "option is None")
-    | Some x ->
-        x
-
-
-  let get_exn = getExn
-end
-
-module Result = struct
-  type ('err, 'ok) t = ('ok, 'err) Base.Result.t
-
-  let succeed = Base.Result.return
-
-  let fail = Base.Result.fail
-
-  let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
-    Base.Result.ok r |> Base.Option.value ~default
-
-
-  let with_default = withDefault
-
-  let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) :
-      ('err, 'c) t =
-    match (a, b) with
-    | Ok a, Ok b ->
-        Ok (f a b)
-    | Error a, Ok _ ->
-        Error a
-    | Ok _, Error b ->
-        Error b
-    | Error a, Error _ ->
-        Error a
-
-
-  let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
-    List.foldRight ~f:(map2 ~f:(fun a b -> a :: b)) ~initial:(Ok []) l
-
-
-  let map ~(f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
-    Base.Result.map r ~f
-
-
-  let fromOption ~error ma =
-    match ma with None -> fail error | Some right -> succeed right
-
-
-  let from_option = fromOption
-
-  let toOption (r : ('err, 'ok) t) : 'ok option =
-    match r with Ok v -> Some v | _ -> None
-
-
-  let to_option = toOption
-
-  let andThen ~(f : 'ok -> ('err, 'value) t) (r : ('err, 'ok) t) :
-      ('err, 'value) t =
-    Base.Result.bind ~f r
-
-
-  let and_then = andThen
-
-  let pp
-      (errf : Format.formatter -> 'err -> unit)
-      (okf : Format.formatter -> 'ok -> unit)
-      (fmt : Format.formatter)
-      (r : ('err, 'ok) t) =
-    match r with
-    | Ok ok ->
-        Format.pp_print_string fmt "<ok: " ;
-        okf fmt ok ;
-        Format.pp_print_string fmt ">"
-    | Error err ->
-        Format.pp_print_string fmt "<error: " ;
-        errf fmt err ;
-        Format.pp_print_string fmt ">"
 end
 
 module IntSet = struct

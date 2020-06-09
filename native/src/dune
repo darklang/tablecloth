@@ -52,3 +52,13 @@
  (target TableclothString.mli)
  (action
   (copy ../../bucklescript/src/TableclothString.mli ./TableclothString.mli)))
+
+(rule
+ (target TableclothOption.mli)
+ (action
+  (copy ../../bucklescript/src/TableclothOption.mli ./TableclothOption.mli)))
+
+(rule
+ (target TableclothResult.mli)
+ (action
+  (copy ../../bucklescript/src/TableclothResult.mli ./TableclothResult.mli)))

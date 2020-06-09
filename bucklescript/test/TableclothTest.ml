@@ -3,19 +3,6 @@ open Jest
 open Expect
 
 let () =
-  describe "Result" (fun () ->
-      describe "fromOption" (fun () ->
-          test "maps None into Error" (fun () ->
-              expect Result.(fromOption ~error:"error message" None)
-              |> toEqual (Belt.Result.Error "error message")) ;
-          test "maps Some into Ok" (fun () ->
-              expect Result.(fromOption ~error:"error message" (Some 10))
-              |> toEqual (Belt.Result.Ok 10))) ;
-      describe "map" (fun () ->
-          test "maps value on success" (fun () ->
-              expect Result.(map ~f:String.reverse (succeed "blah"))
-              |> toEqual (Belt.Result.Ok "halb")))) ;
-
   describe "Fun" (fun () ->
       test "identity" (fun () -> expect (Fun.identity 1) |> toEqual 1) ;
       test "ignore" (fun () -> expect (Fun.ignore 1) |> toEqual ()) ;

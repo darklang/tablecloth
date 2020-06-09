@@ -2,6 +2,8 @@ module Bool = Bool
 module Char = TableclothChar
 module Float = Float
 module Int = Int
+module Option = TableclothOption
+module Result = TableclothResult
 
 module Array = struct
   type 'a t = 'a array
@@ -186,6 +188,11 @@ module Array = struct
   let for_each = forEach
 
   let join t ~sep = Js.Array.joinWith sep t
+
+  let values t =
+    foldLeft t ~initial:[] ~f:(fun element results ->
+        match element with None -> results | Some value -> value :: results)
+    |. fromList
 end
 
 module List = struct
@@ -515,138 +522,10 @@ module List = struct
 
 
   let join strings ~sep = Js.Array.joinWith sep (Belt.List.toArray strings)
-end
 
-module Result = struct
-  type ('err, 'ok) t = ('ok, 'err) Belt.Result.t
-
-  let succeed a = Belt.Result.Ok a
-
-  let fail e = Belt.Result.Error e
-
-  let withDefault ~(default : 'ok) (r : ('err, 'ok) t) : 'ok =
-    Belt.Result.getWithDefault r default
-
-
-  let with_default = withDefault
-
-  let map2 ~(f : 'a -> 'b -> 'c) (a : ('err, 'a) t) (b : ('err, 'b) t) :
-      ('err, 'c) t =
-    match (a, b) with
-    | Ok a, Ok b ->
-        Ok (f a b)
-    | Error a, Ok _ ->
-        Error a
-    | Ok _, Error b ->
-        Error b
-    | Error a, Error _ ->
-        Error a
-
-
-  let combine (l : ('x, 'a) t list) : ('x, 'a list) t =
-    List.foldRight ~f:(map2 ~f:(fun a b -> a :: b)) ~initial:(Ok []) l
-
-
-  let map ~(f : 'ok -> 'value) (r : ('err, 'ok) t) : ('err, 'value) t =
-    Belt.Result.map r f
-
-
-  let fromOption ~error ma =
-    match ma with None -> fail error | Some right -> succeed right
-
-
-  let from_option = fromOption
-
-  let toOption (r : ('err, 'ok) t) : 'ok option =
-    match r with Ok v -> Some v | _ -> None
-
-
-  let to_option = toOption
-
-  let andThen ~(f : 'ok -> ('err, 'value) t) (r : ('err, 'ok) t) :
-      ('err, 'value) t =
-    Belt.Result.flatMap r f
-
-
-  let and_then = andThen
-
-  let pp
-      (errf : Format.formatter -> 'err -> unit)
-      (okf : Format.formatter -> 'ok -> unit)
-      (fmt : Format.formatter)
-      (r : ('err, 'ok) t) =
-    match r with
-    | Ok ok ->
-        Format.pp_print_string fmt "<ok: " ;
-        okf fmt ok ;
-        Format.pp_print_string fmt ">"
-    | Error err ->
-        Format.pp_print_string fmt "<error: " ;
-        errf fmt err ;
-        Format.pp_print_string fmt ">"
-end
-
-module Option = struct
-  type 'a t = 'a option
-
-  let some a = Some a
-
-  let andThen ~(f : 'a -> 'b option) (o : 'a option) : 'b option =
-    match o with None -> None | Some x -> f x
-
-
-  let and_then = andThen
-
-  let or_ (ma : 'a option) (mb : 'a option) : 'a option =
-    match ma with None -> mb | Some _ -> ma
-
-
-  let orElse (ma : 'a option) (mb : 'a option) : 'a option =
-    match mb with None -> ma | Some _ -> mb
-
-
-  let or_else = orElse
-
-  let map ~(f : 'a -> 'b) (o : 'a option) : 'b option = Belt.Option.map o f
-
-  let withDefault ~(default : 'a) (o : 'a option) : 'a =
-    Belt.Option.getWithDefault o default
-
-
-  let with_default = withDefault
-
-  let values (l : 'a option list) : 'a list =
-    let valuesHelper (item : 'a option) (l : 'a list) : 'a list =
-      match item with None -> l | Some v -> v :: l
-    in
-    List.foldRight ~f:valuesHelper ~initial:[] l
-
-
-  let toList (o : 'a option) : 'a list =
-    match o with None -> [] | Some o -> [ o ]
-
-
-  let to_list = toList
-
-  let isSome = Belt.Option.isSome
-
-  let is_some = isSome
-
-  let toOption ~(sentinel : 'a) (value : 'a) : 'a option =
-    if value = sentinel then None else Some value
-
-
-  let to_option = toOption
-
-  let getExn (x : 'a option) =
-    match x with
-    | None ->
-        raise (Invalid_argument "option is None")
-    | Some x ->
-        x
-
-
-  let get_exn = getExn
+  let values t =
+    foldLeft t ~initial:[] ~f:(fun element results ->
+        match element with None -> results | Some value -> value :: results)
 end
 
 module Tuple2 = Tuple2

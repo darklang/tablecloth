@@ -25,6 +25,16 @@
   (copy ../../bucklescript/test/IntTest.re ./IntTest.re)))
 
 (rule
+ (target OptionTest.re)
+ (action
+  (copy ../../bucklescript/test/OptionTest.re ./OptionTest.re)))
+
+(rule
+ (target ResultTest.re)
+ (action
+  (copy ../../bucklescript/test/ResultTest.re ./ResultTest.re)))
+
+(rule
  (target FunTest.re)
  (action
   (copy ../../bucklescript/test/FunTest.re ./FunTest.re)))
