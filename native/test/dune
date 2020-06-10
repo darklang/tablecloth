@@ -5,6 +5,11 @@
  (libraries tablecloth alcotest))
 
 (rule
+ (target ArrayTest.re)
+ (action
+  (copy ../../bucklescript/test/ArrayTest.re ./ArrayTest.re)))
+
+(rule
  (target BoolTest.re)
  (action
   (copy ../../bucklescript/test/BoolTest.re ./BoolTest.re)))
@@ -18,6 +23,11 @@
  (target FloatTest.re)
  (action
   (copy ../../bucklescript/test/FloatTest.re ./FloatTest.re)))
+
+(rule
+ (target FunTest.re)
+ (action
+  (copy ../../bucklescript/test/FunTest.re ./FunTest.re)))
 
 (rule
  (target IntTest.re)
@@ -35,9 +45,9 @@
   (copy ../../bucklescript/test/ResultTest.re ./ResultTest.re)))
 
 (rule
- (target FunTest.re)
+ (target ListTest.re)
  (action
-  (copy ../../bucklescript/test/FunTest.re ./FunTest.re)))
+  (copy ../../bucklescript/test/ListTest.re ./ListTest.re)))
 
 (rule
  (target StringTest.re)

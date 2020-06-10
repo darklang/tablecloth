@@ -49,7 +49,7 @@ let suite =
       expect(
         Array.filter([|1, 3, 2, 5, 4|], ~f=Int.isEven)
         |> Fun.tap(~f=numbers => ignore(numbers[1] = 0))
-        |> Fun.tap(~f=Array.reverseInPlace),
+        |> Fun.tap(~f=Array.reverse),
       )
       |> toEqual(Eq.(array(int)), [|0, 2|])
     });

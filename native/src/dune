@@ -9,6 +9,11 @@
   (copy ../../bucklescript/src/Bool.mli ./Bool.mli)))
 
 (rule
+ (target Container.ml)
+ (action
+  (copy ../../bucklescript/src/Container.ml ./Container.ml)))
+
+(rule
  (target TableclothChar.mli)
  (action
   (copy ../../bucklescript/src/TableclothChar.mli ./TableclothChar.mli)))
@@ -19,14 +24,19 @@
   (copy ../../bucklescript/src/Float.mli ./Float.mli)))
 
 (rule
- (target Fun.ml)
+ (target Int.mli)
  (action
-  (copy ../../bucklescript/src/Fun.ml ./Fun.ml)))
+  (copy ../../bucklescript/src/Int.mli ./Int.mli)))
 
 (rule
- (target Fun.mli)
+ (target TableclothList.mli)
  (action
-  (copy ../../bucklescript/src/Fun.mli ./Fun.mli)))
+  (copy ../../bucklescript/src/TableclothList.mli ./TableclothList.mli)))
+
+(rule
+ (target TableclothArray.mli)
+ (action
+  (copy ../../bucklescript/src/TableclothArray.mli ./TableclothArray.mli)))
 
 (rule
  (target Tuple2.ml)
@@ -52,6 +62,16 @@
  (target TableclothString.mli)
  (action
   (copy ../../bucklescript/src/TableclothString.mli ./TableclothString.mli)))
+
+(rule
+ (target Fun.ml)
+ (action
+  (copy ../../bucklescript/src/Fun.ml ./Fun.ml)))
+
+(rule
+ (target Fun.mli)
+ (action
+  (copy ../../bucklescript/src/Fun.mli ./Fun.mli)))
 
 (rule
  (target TableclothOption.mli)
