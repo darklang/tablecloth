@@ -178,7 +178,7 @@ val get : ('key, 'value, 'id) t -> 'key -> 'value option
 *)
 
 val ( .?{} ) : ('key, 'value, _) t -> 'key -> 'value option
-(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!Core.Map.get}
+(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!Map.get}
 
     {b Note} Currently this is only supported by the OCaml syntax.
 
