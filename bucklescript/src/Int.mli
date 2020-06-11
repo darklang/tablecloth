@@ -1,3 +1,5 @@
+(** *)
+
 (** The platform-dependant {{: https://en.wikipedia.org/wiki/Signed_number_representations } signed } {{: https://en.wikipedia.org/wiki/Integer } integer} type.
 
     An [int] is a whole number.

@@ -1,3 +1,5 @@
+(** *)
+
 (** A [Map] represents a unique mapping from keys to values.
 
     [Map] is an immutable data structure which means operations like {!Map.add} and {!Map.remove} do not modify the data structure, but return a new map with the desired changes.

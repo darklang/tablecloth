@@ -1,3 +1,5 @@
+(** *)
+
 (** A module for working with {{: https://en.wikipedia.org/wiki/Floating-point_arithmetic } floating-point numbers}.
 
     Valid syntax for [float]s includes:

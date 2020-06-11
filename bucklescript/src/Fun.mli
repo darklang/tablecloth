@@ -1,3 +1,5 @@
+(** *)
+
 (** Functions for working with functions.
 
     While the functions in this module can often make code more concise, this

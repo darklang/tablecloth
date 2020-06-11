@@ -104,21 +104,37 @@ doc: build
 		-I ./_build \
 		-d ../website \
 		./_build/Bool.mli \
+		./_build/Bool.ml \
 		./_build/Comparator.mli \
+		./_build/Comparator.ml \
 		./_build/Container.ml \
 		./_build/Float.mli \
+		./_build/Float.ml \
 		./_build/Fun.mli \
+		./_build/Fun.ml \
 		./_build/Int.mli \
-		./_build/TableclothArray.mli \
+		./_build/Int.ml \
+		./_build/Internal.ml \
 		./_build/TableclothChar.mli \
-		./_build/TableclothList.mli \
-		./_build/TableclothMap.mli \
-		./_build/TableclothOption.mli \
-		./_build/TableclothResult.mli \
-		./_build/TableclothSet.mli \
+		./_build/TableclothChar.ml \
 		./_build/TableclothString.mli \
+		./_build/TableclothString.ml \
+		./_build/TableclothOption.mli \
+		./_build/TableclothOption.ml \
+		./_build/TableclothMap.mli \
+		./_build/TableclothMap.ml \
+		./_build/TableclothArray.mli \
+		./_build/TableclothArray.ml \
+		./_build/TableclothList.mli \
+		./_build/TableclothList.ml \
+		./_build/TableclothResult.mli \
+		./_build/TableclothResult.ml \
+		./_build/TableclothSet.mli \
+		./_build/TableclothSet.ml \
 		./_build/Tuple2.mli \
+		./_build/Tuple2.ml \
 		./_build/Tuple3.mli \
+		./_build/Tuple3.ml \
 		./_build/tablecloth.ml
 
 all: opt build doc

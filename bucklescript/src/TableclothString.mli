@@ -1,3 +1,5 @@
+(** *)
+
 (** Functions for working with ["strings"] *)
 
 type t = string

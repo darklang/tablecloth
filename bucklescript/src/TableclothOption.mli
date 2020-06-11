@@ -1,3 +1,5 @@
+(** *)
+
 (** {!Option} represents a value which may not be present.
 
     It is a variant containing the [(Some 'a)] and [None] constructors
