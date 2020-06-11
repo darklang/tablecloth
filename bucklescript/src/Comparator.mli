@@ -59,7 +59,7 @@ type ('a, 'identity) t
 type ('a, 'identity) comparator = ('a, 'identity) t
 
 module type S = sig
-  (** The output type of {!Make} and {!make}.  *)
+  (** The output type of {!Make}.  *)
 
   type t
 
