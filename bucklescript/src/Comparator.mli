@@ -1,4 +1,6 @@
-(** Comparator provide a way for custom data structures to be used with {!Map}s and {!Set}s 
+(** *)
+
+(** Comparator provide a way for custom data structures to be used with {!Map}s and {!Set}s
 
     Say we have a module [Book] which we want to be able to create a {!Set} of
 

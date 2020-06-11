@@ -1,3 +1,5 @@
+(** *)
+
 (** Functions for manipulating pairs of values *)
 
 type ('a, 'b) t = 'a * 'b

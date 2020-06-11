@@ -1,3 +1,5 @@
+(** *)
+
 (** A {!Result} is used to represent a computation which may fail.
 
     A [Result] is a variant, which has a constructor for successful results

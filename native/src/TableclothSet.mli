@@ -1,3 +1,5 @@
+(** *)
+
 (** A {!Set} represents a collection of unique values.
 
     [Set] is an immutable data structure which means operations like {!Set.add} and {!Set.remove} do not modify the data structure, but return a new set with the desired changes.
