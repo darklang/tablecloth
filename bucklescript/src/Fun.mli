@@ -114,7 +114,7 @@ external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
     {[
       (* Before *)
       let sanitize (input: string) : int option =
-        Int.ofString (String.trim input)
+        Int.fromString (String.trim input)
     ]}
 
     We can rewrite it like this:
@@ -124,7 +124,7 @@ external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
       let sanitize (input: string) : int option =
         input
         |> String.trim
-        |> Int.ofString
+        |> Int.fromString
     ]}
 
     This can be overused! When you have three or four steps, the code often gets clearer if you break things out into
@@ -175,7 +175,7 @@ val tap : 'a -> f:('a -> unit) -> 'a
         input
         |> String.trim
         |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)
-        |> Int.ofString
+        |> Int.fromString
     ]}
 
     {[

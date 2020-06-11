@@ -27,13 +27,13 @@ val fromInt : int -> bool option
 
     {2 Examples}
 
-    {[Bool.ofInt 0 = Some false]}
+    {[Bool.fromInt 0 = Some false]}
 
-    {[Bool.ofInt 1 = Some true]}
+    {[Bool.fromInt 1 = Some true]}
 
-    {[Bool.ofInt 8 = None]}
+    {[Bool.fromInt 8 = None]}
 
-    {[Bool.ofInt (-3) = None]}
+    {[Bool.fromInt (-3) = None]}
 *)
 
 val from_int : int -> bool option

@@ -808,7 +808,7 @@ val toList : 'a t -> 'a list
 
     {[Array.toList [|1;2;3|] = [1;2;3]]}
 
-    {[Array.toList (Array.ofList [3; 5; 8]) = [3; 5; 8]]}
+    {[Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]]}
 *)
 
 val to_list : 'a t -> 'a list

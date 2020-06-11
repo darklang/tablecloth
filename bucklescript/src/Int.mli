@@ -84,7 +84,7 @@ val from_string : string -> t option
 
     {b Note } You do not need to open the {!Int} module to use the
     {!( + )}, {!( - )}, {!( * )}, {!( ** )}, {! (mod)} or {!( / )} operators, these are
-    available as soon as you [open Standard]
+    available as soon as you [open Tablecloth]
 *)
 
 val add : t -> t -> t

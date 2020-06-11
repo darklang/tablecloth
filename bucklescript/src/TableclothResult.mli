@@ -77,10 +77,10 @@ val fromOption : 'ok option -> error:'error -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[Result.ofOption (Some 84) ~error:"Greater than 100" = Ok 8]}
+    {[Result.fromOption (Some 84) ~error:"Greater than 100" = Ok 8]}
 
     {[
-      Result.ofOption None ~error:"Greater than 100" =
+      Result.fromOption None ~error:"Greater than 100" =
         Error "Greater than 100"
     ]}
 *)

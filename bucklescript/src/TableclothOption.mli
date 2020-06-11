@@ -189,7 +189,7 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
 
       let userInput = "5" in
 
-      Int.ofString userInput
+      Int.fromString userInput
       |> Option.andThen ~f:toValidMonth
     ]}
 
@@ -342,7 +342,7 @@ val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
     on future readers.
 
     {[
-      let nameToAge = Map.String.ofArray [|
+      let nameToAge = Map.String.fromArray [|
         ("Ant", 1);
         ("Bat", 5);
         ("Cat", 19);
