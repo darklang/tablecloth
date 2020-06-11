@@ -2,11 +2,30 @@
 
     [Map] is an immutable data structure which means operations like {!Map.add} and {!Map.remove} do not modify the data structure, but return a new map with the desired changes.
 
-    Since the usage is so common the {!Map.Int} and {!Map.String} modules are available, offering a convenient way to construct new Maps.
+    Since maps of [int]s and [string]s are so common the specialized {!Map.Int} and {!Map.String} modules are available, which offer a convenient way to construct new maps.
 
-    For other data types you can use {!Map.Poly} which internally uses OCaml's polymorphic [compare] function on the keys.
+    Custom data types can be used with maps as long as the module satisfies the {!Comparator.S} interface.
 
-    The specialized modules {!Map.Int}, {!Map.String} are in general more efficient.
+    {[
+      module Point = struct
+        type t = int * int
+        let compare = Tuple2.compare Int.compare Int.compare
+        include Comparator.Make(struct
+          type nonrec t = t
+          let compare = compare
+        end)
+      end
+
+      type animal = 
+        | Cow
+        | Pig
+        | Alpacca
+
+      let pointToAnimal : animal Map.Of(Point).t = 
+        Map.fromList (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
+    ]}
+
+    See the {!Comparator} module for a more details.
 *)
 
 type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
@@ -31,11 +50,31 @@ end
 
 (** {1 Create}
 
-    A [Map] can be constructed using one of the functions available in {!Map.Int}, {!Map.String} or {!Map.Poly}
+    You can create sets of modules types which conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
+
+    Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
 val empty : ('key, 'identity) Comparator.s -> ('key, 'value, 'identity) t
-(** A map with nothing in it. *)
+(** A map with nothing in it.
+
+    Often used as an intial value for functions like {!Array.fold}
+
+    {2 Examples}
+
+    {[
+      Array.fold
+        [|"Pear", "Orange", "Grapefruit"|]
+        ~initial:(Map.empty (module Int))
+        ~f:(fun lengthToFruit fruit ->
+          Map.add lengthToFruit (String.length fruit) fruit
+        )
+      |> Map.toArray
+      = [|(4, "Pear"); (6, "Orange"), (10, "Grapefruit")|]
+    ]}
+
+    In this particular case you might want to use {!Array.groupBy}
+*)
 
 val singleton :
      ('key, 'identity) Comparator.s

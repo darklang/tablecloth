@@ -1,19 +1,24 @@
 open Tablecloth;
 open AlcoJest;
 
-module Coordinate: {
-  type t = (int, int);
-  type identity;
-  let compare: (t, t) => int;
-  let comparator: Comparator.comparator(t, identity);
-} = {
+module Coordinate = {
   type t = (int, int);
   let compare = Tuple2.compare(Int.compare, Int.compare);
   include Comparator.Make({
     type nonrec t = t;
-
-    let compare: (t, t) => int = compare;
+    let compare = compare;
   });
+};
+
+let coordinate = {
+  let eq = (a: Coordinate.t, b: Coordinate.t): bool => a == b;
+  let pp = (formatter, (x, y)) =>
+    Format.pp_print_string(
+      formatter,
+      "(" ++ Int.toString(x) ++ ", " ++ Int.toString(y) ++ ")",
+    );
+
+  Eq.make(eq, pp);
 };
 
 let suite =
@@ -26,6 +31,14 @@ let suite =
     test("fromArray", () => {
       let set = Set.fromArray((module Coordinate), [|(0, 0), (0, 1)|]);
       expect(Set.includes(set, (0, 1))) |> toEqual(Eq.bool, true);
+    });
+
+    test("union", () => {
+      let xAxis = Set.fromList((module Coordinate), [(0, 0), (0, 1)]);
+      let yAxis = Set.fromList((module Coordinate), [(0, 0), (1, 0)]);
+      let union = Set.union(xAxis, yAxis);
+      expect(union |> Set.toArray)
+      |> toEqual(Eq.array(coordinate), [|(0, 0), (0, 1), (1, 0)|]);
     });
 
     describe("Int", () => {

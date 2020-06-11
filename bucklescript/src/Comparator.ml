@@ -32,10 +32,3 @@ module Make (M : T) : S with type t = M.t = struct
 
   let comparator = BeltComparator.cmp
 end
-
-let make (type a) ~(compare : a -> a -> int) : (module S with type t = a) =
-  ( module Make (struct
-    type t = a
-
-    let compare = compare
-  end) )

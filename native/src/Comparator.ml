@@ -21,20 +21,18 @@ type ('a, 'identity) s =
 
 let opaque _ = Base.Sexp.Atom "<opaque>"
 
-module Make (M : T) = struct
+module Make (M : T) : S with type t = M.t = struct
   module BaseComparator = Base.Comparator.Make (struct
-    include M
+    type t = M.t
 
     let compare = M.compare
 
     let sexp_of_t = opaque
   end)
 
-  include BaseComparator
+  type t = M.t
 
   type identity = BaseComparator.comparator_witness
 
   let comparator = BaseComparator.comparator
 end
-
-let make ~compare = Obj.magic (Base.Comparator.make ~compare ~sexp_of_t:opaque)

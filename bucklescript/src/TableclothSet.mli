@@ -1,10 +1,25 @@
-(** A {!Set} represents a unique collection of values.
+(** A {!Set} represents a collection of unique values.
 
     [Set] is an immutable data structure which means operations like {!Set.add} and {!Set.remove} do not modify the data structure, but return a new set with the desired changes.
 
-    Since the usage is so common the {!Set.Int} and {!Set.String} modules are available, offering a convenient way to construct sets.
+    Since sets of [int]s and [string]s are so common the specialised {!Set.Int} and {!Set.String} modules are available which offer a convenient way to construct new sets.
 
-    For other data types you can use {!Set.Poly} which uses OCaml's polymorphic [compare] function.
+    Custom data types can be used with sets as long as the module satisfies the {!Comparator.S} interface.
+
+    {[
+      module Point = struct
+        type t = int * int
+        let compare = Tuple2.compare Int.compare Int.compare
+        include Comparator.Make(struct
+          type nonrec t = t
+          let compare = compare
+        end)
+      end
+
+      let points : Set.Of(Point).t = Set.fromList (module Points) [(0, 0); (3, 4); (6, 7)]
+    ]}
+
+    See the {!Comparator} module for a more details.
 *)
 
 type ('a, 'id) t = ('a, 'id) Belt.Set.t
@@ -27,23 +42,36 @@ module Of : functor (M : Comparator.S) -> sig
   type nonrec t = (M.t, M.identity) t
 end
 
-(** {1 Create}
+(** {1 Create}  
+  
+  You can create a Set by providing a module conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
 
-  A [Set] can be constructed using one of the specialised functions available in the
-  {!Set.Int}, {!Set.String} or {!Set.Poly} sub-modules.
-
-  You can create sets of custom data types which conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
+  Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
 val empty : ('a, 'identity) Comparator.s -> ('a, 'identity) t
-(** A set with nothing in it. *)
+(** A set with nothing in it. 
+
+    Often used as an initial value for functions like {!Array.fold}
+
+    {2 Examples}
+
+    {[
+      Array.fold 
+        [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|] 
+        ~intial:(Set.empty (module Char))
+        ~f:Set.add
+      |> Set.toArray
+      = [|'i'; 'm'; 'p'; 's'|] 
+    ]}
+*)
 
 val singleton : ('a, 'identity) Comparator.s -> 'a -> ('a, 'identity) t
 (** Create a set from a single {!Int}
 
   {2 Examples}
 
-  {[Set.singleton (module Char) 'H' |> Set.toList = ['H']]}
+  {[Set.singleton (module Int) 7 |> Set.toList = [7]]}
 *)
 
 val fromArray : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
@@ -51,7 +79,7 @@ val fromArray : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
 
     {2 Examples}
 
-    {[Set.fromArray (module Char) [|'A'; 'B'; 'B'; 'G'|] |> Set.toArray = [|'A';'B';'G'|]]}
+    {[Set.fromArray (module String) [|"Ant"; "Bat"; "Bat"; "Goldfish"|] |> Set.toArray = [|"Ant";"Bat";"Goldfish"|]]}
 *)
 
 val from_array : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
@@ -109,7 +137,8 @@ val ( .?{} ) : ('element, _) t -> 'element -> bool
 
     {[
       let animals = Set.String.fromList ["Ant"; "Bat"; "Cat"] in
-      Set.includes animals "Emu" = false
+
+      animals.Set.?{"Emu"} = false
     ]}
  *)
 

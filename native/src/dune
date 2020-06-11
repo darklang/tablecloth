@@ -14,6 +14,11 @@
   (copy ../../bucklescript/src/Container.ml ./Container.ml)))
 
 (rule
+ (target Comparator.mli)
+ (action
+  (copy ../../bucklescript/src/Comparator.mli ./Comparator.mli)))
+
+(rule
  (target TableclothChar.mli)
  (action
   (copy ../../bucklescript/src/TableclothChar.mli ./TableclothChar.mli)))

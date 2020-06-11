@@ -814,7 +814,7 @@ val groupBy :
 
     {[
       let animals = ["Ant"; "Bear"; "Cat"; "Dewgong"] in
-      Array.groupBy animals (module Int) ~f:String.length = Map.Int.ofList [
+      Array.groupBy animals (module Int) ~f:String.length = Map.Int.fromList [
         (3, ["Cat"; "Ant"]);
         (4, ["Bear"]);
         (7, ["Dewgong"]);

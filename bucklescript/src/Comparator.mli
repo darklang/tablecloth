@@ -8,12 +8,15 @@
           isbn: string;
           title: string;
         }
+
+        let compare bookA bookB =
+          String.compare bookA.isbn bookb.isbn
       end
     ]}
 
     First we need to make our module conform to the {!S} signature.
 
-    This can be done by using the {!make} function or the {!Make} functor.
+    This can be done by using the {!Make} functor.
 
     {[
       module Book = struct
@@ -21,19 +24,22 @@
           isbn: string;
           title: string;
         }
+
+        let compare bookA bookB =
+          String.compare bookA.isbn bookb.isbn
         
-        module ByIsbn = (
-          val Comparator.make ~compare:(fun bookA bookB ->
-            String.compare bookA.isbn bookb.isbn
-          )
-        )
+        include Comparator.Make(struct 
+          type nonrec t = t
+
+          let compare = compare
+        end)
       end
     ]}
 
-    Then we can create a Set 
+    Now we can create a Set of books
 
     {[
-      Set.ofList (module Book.ByIsbn) [
+      Set.fromList (module Book) [
         { isbn="9788460767923"; title="Moby Dick or The Whale" }
       ]
     ]}
@@ -62,32 +68,9 @@ module type S = sig
   val comparator : (t, identity) comparator
 end
 
-(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.ofArray} *)
+(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.fromArray} *)
 type ('a, 'identity) s =
   (module S with type identity = 'identity and type t = 'a)
-
-val make : compare:('a -> 'a -> int) -> (module S with type t = 'a)
-(** Create a new comparator by providing a compare function. 
-
-    {2 Examples}
-
-    {[
-      module Book = struct
-        type t = {
-          isbn: string;
-          title: string;
-        }
-        
-        module ByTitle = (
-          val Comparator.make ~compare:(fun bookA bookB ->
-            String.compare bookA.title bookb.title)
-        )
-      end
-
-      let books = Set.empty (module Book.ByTitle)
-    ]}
-
-*)
 
 (** Create a new comparator by providing a module which satisifies {!T}.
 
