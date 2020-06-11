@@ -837,11 +837,11 @@ class json = object (self)
               ("path", self#json_of_path path);
               ("expressions", array self#json_of_type_expr ts);
             ])
-        | Tobject((expression : Types.type_expr), ((b) : (Path.t * Types.type_expr list) option ref )) -> 
+        | Tobject((_expression : Types.type_expr), ((_b) : (Path.t * Types.type_expr list) option ref )) -> 
           tagged "Object" (obj [
 
           ]) 
-        | Tfield(string, field_kind, (a : Types.type_expr), (b : Types.type_expr)) -> tagged "Field" null
+        | Tfield(_string, _field_kind, (_a : Types.type_expr), (_b : Types.type_expr)) -> tagged "Field" null
         | Tlink(type_expr) -> tagged "Link" (self#json_of_type_expr type_expr)
         | Tsubst(type_expr) -> tagged "Subst" (self#json_of_type_expr type_expr)
         | Tvariant(row_desc) -> tagged "Variant" (obj [
@@ -852,14 +852,14 @@ class json = object (self)
           ("fixed", bool row_desc.row_fixed);
           ("name", 
             nullable 
-            (fun ((path : Path.t), expressions) -> 
+            (fun ((_path : Path.t), expressions) -> 
               obj [("expressions", array self#json_of_type_expr expressions)])
             row_desc.row_name
           );
         ])
         | Tunivar(univar : string option) -> tagged "Univar" (nullable string univar)
-        | Tpoly((ex : Types.type_expr), (expressions : Types.type_expr list)) -> tagged "Poly" null
-        | Tpackage((path : Path.t), (idents : Longident.t list), (expressions : Types.type_expr list)) -> tagged "Package" null
+        | Tpoly((_ex : Types.type_expr), (_expressions : Types.type_expr list)) -> tagged "Poly" null
+        | Tpackage((_path : Path.t), (_idents : Longident.t list), (_expressions : Types.type_expr list)) -> tagged "Package" null
       in
       (obj [
         ("rendered", string rendered);
@@ -934,13 +934,13 @@ class json = object (self)
           ("kind", self#json_of_module_type_kind father k);
           ("s", string s);
         ]))          
-      | Module_constraint (k, _tk) -> 
+      | Module_constraint (_k, _tk) -> 
           print_endline "Encountered Module_constraint";
           null
-      | Module_typeof s ->
+      | Module_typeof _s ->
           print_endline "Encountered Module_typeof";
           null
-      | Module_unpack (code, mta) ->
+      | Module_unpack (_code, _mta) ->
           print_endline "Encountered Module_unpack";          
           null
 
@@ -956,7 +956,7 @@ class json = object (self)
       | Element_module m ->
           self#json_of_module m          
       | Element_module_type mt ->
-          self#json_of_modtype ~complete:false mt
+          self#json_of_modtype mt
       | Element_included_module im ->
           self#json_of_included_module im
       | Element_class c ->
@@ -1006,18 +1006,6 @@ class json = object (self)
     method json_of_module_parameter_type m_name p : Json.t =
       Json.nullable (self#json_of_module_type m_name ~code: p.mp_type_code) p.mp_type
 
-    (** Generate a file containing the module type in the given file name. *)
-    (* method output_module_type in_title file mtyp : unit =
-      
-      (* self#output_code ~with_pre:false in_title file s *)
-      () *)
-
-    (** Generate a file containing the class type in the given file name. *)
-    (* method output_class_type in_title file ctyp : unit = *)
-      (* let s = Odoc_info.remove_ending_newline (Odoc_info.string_of_class_type ~complete: true ctyp) in *)
-      (* self#output_code ~with_pre:false in_title file s *)
-      (* () *)
-
     method json_of_value v : Json.t =
       let open Json in
       Odoc_info.reset_type_names ();
@@ -1035,6 +1023,7 @@ class json = object (self)
       let s2 = Odoc_info.string_of_type_extension_param_list te |> newline_to_indented_br in
       let print_one x : Json.t =
         let father = Name.father x.xt_name in
+        ignore father;
         let constructor_name = Name.simple x.xt_name in
         obj [
           ("name", string constructor_name);
@@ -1129,7 +1118,8 @@ class json = object (self)
       
       
 
-    method json_of_record ~father gen_name l : Json.t = 
+    method json_of_record ~(father) _gen_name _l : Json.t = 
+      ignore father;
       print_DEBUG "json_of_record";
       Json.null
       (* bs "{";
@@ -1146,7 +1136,7 @@ class json = object (self)
       Json.array print_one l; *)
 
 
-    (** Json for a type. *)
+    
     method json_of_type (t : t_type) : Json.t =
       let open Json in
       Odoc_info.reset_type_names ();
@@ -1194,9 +1184,8 @@ class json = object (self)
         ("info", self#json_of_info t.ty_info);
       ]))
 
-    (** Json for a class attribute. *)
-    method json_of_attribute (a: t_attribute) : Json.t =
-      print_DEBUG "json_of_attribute";
+    method json_of_class_attribute (_a: t_attribute) : Json.t =
+      print_DEBUG "json_of_class_attribute";
       Json.null
       (* let module_name = Name.father (Name.father a.att_value.val_name) in
       bp "<span id=\"%s\">" (Naming.attribute_target a);
@@ -1227,7 +1216,7 @@ class json = object (self)
       self#json_of_info a.att_value.val_info *)
 
     (** Json for a class method. *)
-    method json_of_method m =
+    method json_of_method _m =
       print_DEBUG "json_of_method";
       Json.null
       (* let module_name = Name.father (Name.father m.met_value.val_name) in
@@ -1268,7 +1257,7 @@ class json = object (self)
       Json.array json_of_parameter_name (Parameter.names p)
 
     (** Json for a list of parameters. *)
-    method json_of_parameter_list (m_name : string) (l: Parameter.parameter list) =
+    method json_of_parameter_list (_m_name : string) (l: Parameter.parameter list) =
       let json_of_parameter p = Json.(obj [
         "name", string (
           match Parameter.complete_name p with
@@ -1282,9 +1271,9 @@ class json = object (self)
       Json.array json_of_parameter l
 
     (** Json for the parameters which have a name and description. *)
-    method json_of_described_parameter_list (m_name : string) l =
+    method json_of_described_parameter_list (_m_name : string) l =
       let open Json in
-      (* get the params which have a name, and at least one name described. *)
+      (* get the parameters which have a name, and at least one name described. *)
       let l2 = 
         List.filter
           (fun p ->
@@ -1296,7 +1285,7 @@ class json = object (self)
       tagged "DescribedParameterList" (array self#json_of_parameter_description l2)
 
     (** Json for a list of module parameters. *)
-    method json_of_module_parameter_list (m_name : string) (l : module_parameter list) : Json.t =
+    method json_of_module_parameter_list (_m_name : string) (_l : module_parameter list) : Json.t =
       print_DEBUG "json_of_module_parameter_list";
       Json.null
       (* match l with
@@ -1333,7 +1322,6 @@ class json = object (self)
 
     method json_of_module (m:t_module) : Json.t =
       let open Json in
-      let (html_file, _) = Naming.html_files m.m_name in
       let father = Name.father m.m_name in
       (tagged "Module" (obj [
         ("name", string (Name.simple m.m_name));
@@ -1341,7 +1329,7 @@ class json = object (self)
         ("info", self#json_of_info m.m_info)
       ]))
 
-    method json_of_modtype ?(info=true) ?(complete=true) ?(with_link=true) (mt : t_module_type) =
+    method json_of_modtype (mt : t_module_type) =
       let father = Name.father mt.mt_name in
       let open Json in
       (tagged "ModuleType" (obj [
@@ -1373,7 +1361,7 @@ class json = object (self)
     method json_of_class_element element =
       match element with
       | Class_attribute a ->
-          self#json_of_attribute a
+          self#json_of_class_attribute a
       | Class_method m ->
           self#json_of_method m
       | Class_comment t ->
