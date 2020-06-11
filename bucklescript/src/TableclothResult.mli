@@ -505,16 +505,17 @@ val pp :
   -> Format.formatter
   -> ('ok, 'error) t
   -> unit
-(** [Result.pp errFormat okFormat destFormat result] “pretty-prints”
+(** [Result.pp errFormat okFormat destFormat result] "pretty-prints"
     the [result], using [errFormat] if the [result] is an [Error] value or
     [okFormat] if the [result] is an [Ok] value. [destFormat] is a formatter
     that tells where to send the output.
-    The following example will print [<ok: 42><error: bad>].
+
     {[
-      let good: (int, string) Result.t = Ok 42
-      let not_good: (int, string) Tablecloth.Result.t = Error "bad"
-      Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter good
-      Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter not_good
+      let good: (int, string) Result.t = Ok 42 in
+      let not_good: (int, string) Tablecloth.Result.t = Error "bad" in
+      Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter good;
+      Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter not_good;
       Format.pp_print_newline Format.std_formatter ();
+      (* prints <ok: 42><error: bad>*)
     ]}
   *)

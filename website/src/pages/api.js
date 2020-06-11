@@ -36,12 +36,12 @@ import { CodeBlock } from '../components/CodeBlock';
 import { SyntaxProvider, SyntaxToggle } from '../components/Syntax';
 import * as lzString from 'lz-string';
 
-let stripCorePrefix = path => path.replace(/Core\./g, '');
+let stripTableclothPrefix = path => path.replace(/Tablecloth/g, '');
 
 function deDupeIncludedModules(moduleElements, modulesByName) {
   let flattenedModuleElements = [];
   moduleElements.forEach(moduleElement => {
-    if (moduleElement.tag == 'IncludedModule') {
+    if (moduleElement.tag === 'IncludedModule') {
       let includedModule = modulesByName[moduleElement.value.name];
       includedModule.value.kind.value.forEach(includedModuleElement => {
         flattenedModuleElements.push(includedModuleElement);
@@ -94,7 +94,7 @@ let UnhandledCase = props => {
       `}
     >
       <h1>Unhandled Case</h1>
-      <Json value={props} />
+      <Json value={props}/>
     </div>
   );
 };
@@ -138,7 +138,10 @@ function renderSidebarElements(
           }
           return (
             <div key={typeId}>
-              <a onClick={() => scrollToId(typeId)}>
+              <a
+                onClick={() => scrollToId(typeId)}
+                href={`/api#${typeId}`}
+              >
                 type {moduleElement.value.name}
               </a>
             </div>
@@ -160,7 +163,9 @@ function renderSidebarElements(
           }
           return (
             <div key={valueLink}>
-              <a onClick={() => scrollToId(valueLink)}>
+              <a
+                href={`/api#${valueLink}`}
+                onClick={() => scrollToId(valueLink)}>
                 {moduleElement.value.name}
               </a>
             </div>
@@ -175,7 +180,9 @@ function renderSidebarElements(
             return null;
           }
           return (
-            <a onClick={() => scrollToId(moduleTypeId)} key={moduleTypeId}>
+            <a
+              href={`/api#${moduleTypeId}`}
+              onClick={() => scrollToId(moduleTypeId)} key={moduleTypeId}>
               module type {moduleElement.value.name}
             </a>
           );
@@ -195,6 +202,7 @@ function renderSidebarElements(
               }
               return (
                 <a
+                  href={`/api#${moduleFunctorId}`}
                   onClick={() => scrollToId(moduleFunctorId)}
                   key={moduleFunctorId}
                 >
@@ -219,11 +227,11 @@ function renderSidebarElements(
                   `The module '${moduleElement.value.kind.value.name} (aliased to ${moduleElement.value.name}) is missing`,
                 );
               }
-              if (aliasedModule.value.kind.tag != 'ModuleStruct') {
+              if (aliasedModule.value.kind.tag !== 'ModuleStruct') {
                 throw new Error(
                   'Unmapped case for ' +
-                    kind.value.name +
-                    aliasedModule.value.kind,
+                  kind.value.name +
+                  aliasedModule.value.kind,
                 );
               }
               return renderSidebarModule(
@@ -250,7 +258,7 @@ function renderSidebarElements(
               `The included module '${moduleElement.value.name}' is missing`,
             );
           }
-          if (includedModule.value.kind.tag != 'ModuleStruct') {
+          if (includedModule.value.kind.tag !== 'ModuleStruct') {
             throw new Error(
               `Unmapped case for ${moduleElement.kind.value.name} ${includedModule.value.kind}`,
             );
@@ -287,21 +295,20 @@ function renderSidebarModule(
   scrollToId,
   path,
 ) {
+  let moduleName = stripTableclothPrefix(moduleElement.value.name);
   let moduleSearchPath =
     search.length > 1 ? search.slice(0, search.length - 1) : [];
   let valueSearch = search.length === 0 ? '' : search[search.length - 1];
   let hasSearch = valueSearch.length > 0;
   let qualifiedModuleName =
     path.length > 0
-      ? [...path, moduleElement.value.name].join('.')
-      : moduleElement.value.name;
+      ? [...path, moduleName].join('.')
+      : moduleName;
 
   let isCollapsed = !!collapsed[qualifiedModuleName];
-  let moduleId = idFor(path, moduleElement.tag, moduleElement.value.name);
+  let moduleId = idFor(path, moduleElement.tag, moduleName);
 
-  let moduleNameMatchesValueSearch = moduleElement.value.name.includes(
-    valueSearch,
-  );
+  let moduleNameMatchesValueSearch = moduleName.includes(valueSearch);
 
   let subSearch;
   if (moduleSearchPath.length === 0) {
@@ -328,7 +335,7 @@ function renderSidebarModule(
     collapsed,
     toggleModule,
     scrollToId,
-    [...path, moduleElement.value.name],
+    [...path, moduleName],
   );
 
   let hasElementsMatchingSearch = content.filter(e => e != null).length > 0;
@@ -380,7 +387,10 @@ function renderSidebarModule(
           {isCollapsed ? '▷' : '▽'}
         </div>
 
-        <a onClick={() => scrollToId(moduleId)}>module {qualifiedModuleName}</a>
+        <a
+          href={`/api#${moduleId}`}
+          onClick={() => scrollToId(moduleId)}
+        >module {qualifiedModuleName}</a>
       </div>
       {isCollapsed ? null : <div className="elements">{content}</div>}
     </div>
@@ -631,12 +641,12 @@ let renderTextElements = (elements = [], parentPath = []) => {
         let content =
           value.reference.content.length === 1 &&
           value.reference.content[0].tag === 'Code'
-            ? stripCorePrefix(value.reference.content[0].value)
+            ? stripTableclothPrefix(value.reference.content[0].value)
             : renderTextElements(value.reference.content, parentPath);
         return (
           <a
             key={index}
-            href={`/api#${stripCorePrefix(value.reference.target)}`}
+            href={`/api#${stripTableclothPrefix(value.reference.target)}`}
           >
             {content}
           </a>
@@ -676,7 +686,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
               }
             `}
           >
-            <CodeBlock code={value} />
+            <CodeBlock code={value}/>
             {/* TODO get the playground working */}
             {/* <button
               className="try"
@@ -734,7 +744,7 @@ let TextElement = ({ elements, path }) => {
 let TypeSignature = ({ signature }) => {
   return (
     <pre>
-      <code children={stripCorePrefix(signature.rendered)} />
+      <code children={stripTableclothPrefix(signature.rendered)}/>
     </pre>
   );
 };
@@ -775,7 +785,7 @@ let Value = ({ id, path, name, type, info, parameters, ...value }) => {
           <pre>
             <code>let {name}: </code>
           </pre>
-          <TypeSignature signature={type} />
+          <TypeSignature signature={type}/>
         </ValueWrapper>
       </PageAnchor>
       {info && (
@@ -807,7 +817,7 @@ let ModuleSpacer = () => (
 let registerId = (state, id) => {
   let nextElementIndex = state.elements.length;
   // console.info(id, nextElementIndex)
-  state.idToIndex[id] = nextElementIndex;
+  state.idToIndex[stripTableclothPrefix(id)] = nextElementIndex;
 };
 
 let initialState = {
@@ -815,6 +825,7 @@ let initialState = {
   elements: [],
   idToIndex: {},
 };
+
 function generateModuleElements(
   moduleElements,
   modulesByName,
@@ -830,7 +841,7 @@ function generateModuleElements(
                 padding: 10px 0px;
               `}
             >
-              <TextElement elements={moduleElement.value} path={state.path} />
+              <TextElement elements={moduleElement.value} path={state.path}/>
             </div>,
           );
           return;
@@ -849,7 +860,7 @@ function generateModuleElements(
                     <code>
                       type {moduleElement.value.name}
                       {moduleElement.value.parameters.length > 0 &&
-                        `(${moduleElement.value.parameters})`}
+                      `(${moduleElement.value.parameters})`}
                       {moduleElement.value.manifest ? ' = ' : ''}
                     </code>
                   </pre>
@@ -888,7 +899,7 @@ function generateModuleElements(
           registerId(state, moduleTypeId);
           state.elements.push(
             <PageAnchor id={moduleTypeId}>
-              <Identifiers.moduleType name={moduleTypeId} />
+              <Identifiers.moduleType name={moduleTypeId}/>
             </PageAnchor>,
           );
           generateModuleElements(moduleElement.value.elements, modulesByName, {
@@ -899,16 +910,17 @@ function generateModuleElements(
         case 'Module':
           switch (moduleElement.value.kind.tag) {
             case 'ModuleStruct':
+              let moduleName = stripTableclothPrefix(moduleElement.value.name);
               let moduleStructId = idFor(
                 state.path,
                 moduleElement.tag,
-                moduleElement.value.name,
+                moduleName,
               );
               let path = [...state.path, moduleElement.value.name];
               registerId(state, moduleStructId);
               state.elements.push(
                 <PageAnchor id={moduleStructId}>
-                  <Identifiers.module name={moduleStructId} />
+                  <Identifiers.module name={moduleStructId}/>
                 </PageAnchor>,
               );
               generateModuleElements(
@@ -924,17 +936,17 @@ function generateModuleElements(
                   `The module '${moduleElement.value.name} (aliased to ${moduleElement.value.name}) is missing`,
                 );
               }
-              if (module.value.kind.tag != 'ModuleStruct') {
+              if (module.value.kind.tag !== 'ModuleStruct') {
                 throw new Error(
                   'Unmapped case for ' + kind.value.name + module.value.kind,
                 );
               }
-              let id = idFor(state.path, 'ModuleStruct', module.value.name);
+              let id = idFor(state.path, 'ModuleStruct', stripTableclothPrefix(module.value.name));
               registerId(state, id);
               state.elements.push(
                 <PageAnchor id={id}>
                   <Identifiers.module
-                    name={stripCorePrefix(moduleElement.value.kind.value.name)}
+                    name={stripTableclothPrefix(moduleElement.value.kind.value.name)}
                   />
                 </PageAnchor>,
               );
@@ -942,7 +954,7 @@ function generateModuleElements(
                 ...state,
                 path: [...state.path, moduleElement.value.name],
               });
-              state.elements.push(<ModuleSpacer />);
+              state.elements.push(<ModuleSpacer/>);
               return;
             case 'ModuleFunctor':
               let functor = moduleElement.value;
@@ -961,7 +973,7 @@ function generateModuleElements(
                   signature = `sig type t = ${result.value[0].value.manifest.value.rendered} end`;
                   break;
                 case 'ModuleWith':
-                  signature = stripCorePrefix(result.value.kind.value);
+                  signature = stripTableclothPrefix(result.value.kind.value);
                   break;
                 default:
                   throw new Error('UNHANDLED CASE ' + result.tag);
@@ -975,14 +987,14 @@ function generateModuleElements(
                       <pre>
                         <code>
                           module {functor.name} : functor({parameter.value.name}{' '}
-                          : {stripCorePrefix(parameter.value.kind.value)}) ->{' '}
+                          : {stripTableclothPrefix(parameter.value.kind.value)}) ->{' '}
                           {signature}
                         </code>
                       </pre>
                     </ValueWrapper>
                   </PageAnchor>
                   {functor.info && (
-                    <TextElement elements={functor.info.description.value} />
+                    <TextElement elements={functor.info.description.value}/>
                   )}
                 </ValueContainer>,
               );
@@ -997,7 +1009,7 @@ function generateModuleElements(
               return;
           }
         default:
-          state.elements.push(<UnhandledCase el={moduleElement} />);
+          state.elements.push(<UnhandledCase el={moduleElement}/>);
           return;
       }
     },
@@ -1058,9 +1070,9 @@ let Header = ({ title }) => {
         sizes="16x16"
         href={theme.favicon.icon16}
       />
-      <meta name="title" content={title} />
-      <meta property="og:title" content={title} />
-      <meta property="twitter:title" content={title} />
+      <meta name="title" content={title}/>
+      <meta property="og:title" content={title}/>
+      <meta property="twitter:title" content={title}/>
     </Helmet>
   );
 };
@@ -1092,6 +1104,8 @@ export default ({ data }) => {
       moduleByModulePath,
     );
 
+    console.info(idToIndex);
+
     return {
       moduleElements: model.entry_point.value.kind.value,
       moduleByModulePath,
@@ -1101,6 +1115,7 @@ export default ({ data }) => {
   }, [data]);
   let listScroll = React.useRef();
   let scrollToId = id => {
+    console.info(id);
     setIsOpen(false);
     // react-virtualized's layout calculations aren't accurate for some reason
     // To get the users browser to consistently arrive at the correct scroll, use the id of the element.
@@ -1123,7 +1138,7 @@ export default ({ data }) => {
   };
   React.useEffect(() => {
     let id = window.location.hash.split('#')[1];
-    if (id != null && id != '') {
+    if (id != null && id !== '') {
       scrollToId(id);
     }
   }, []);
@@ -1131,8 +1146,8 @@ export default ({ data }) => {
   return (
     <ThemeProvider>
       <SyntaxProvider>
-        <GlobalStyles />
-        <Header title={title} />
+        <GlobalStyles/>
+        <Header title={title}/>
         <AppWrapper>
           <div
             css={css`
@@ -1141,7 +1156,7 @@ export default ({ data }) => {
             `}
           >
             <NavBarContainer>
-              <NavBar />
+              <NavBar/>
             </NavBarContainer>
             <div
               css={css`
@@ -1180,7 +1195,7 @@ export default ({ data }) => {
                   >
                     <PageTitle>API</PageTitle>
                     <div>
-                      <SyntaxToggle />
+                      <SyntaxToggle/>
                     </div>
                   </div>
                   <WindowScroller>
@@ -1210,10 +1225,10 @@ export default ({ data }) => {
                                       className="row"
                                       css={css`
                                         padding-left: ${spacing.pageMargin
-                                          .mobile}px;
+                                        .mobile}px;
                                         @media (min-width: ${breakpoints.desktop}px) {
                                           padding-left: ${spacing.pageMargin
-                                            .desktop}px;
+                                        .desktop}px;
                                         }
                                       `}
                                     >
