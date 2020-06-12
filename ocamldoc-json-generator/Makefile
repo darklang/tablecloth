@@ -1,16 +1,13 @@
 dummy:
 
 CMO=JsonGenerator.cmo
-CMX=$(CMO:.cmo=.cma)
-CMXS=$(CMA:.cmo=.cmxs)
+CMX=JsonGenerator.cmx
+CMXS=JsonGenerator.cmxs
 
 COMPFLAGS=-package menhirLib,ocamldoc,reason
 CMXA_DEPS=menhirLib.cmxa migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmxa
 
 opt: $(CMXS)
-
-$(CMXS): $(CMO:.cmo=.cmx)
-	ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
 
 $(CMO): JsonGenerator.ml
 	ocamlfind ocamlc $(COMPFLAGS) -c $<
@@ -18,11 +15,15 @@ $(CMO): JsonGenerator.ml
 $(CMX): JsonGenerator.ml
 	ocamlfind ocamlopt $(COMPFLAGS) -c $<
 
+$(CMXS): $(CMX)
+	ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
+
 install: opt
 	mkdir -p `ocamlfind ocamldoc -customdir`
-	cp -f $(CMXS) `ocamlfind ocamldoc -customdir`/
+	cp -f JsonGenerator.cmxs `ocamlfind ocamldoc -customdir`/
 
-build: all dummy
+# We need to build tablecloth to create the cmi files for ocamldoc
+build: opt dummy
 	cp ../native/src/Bool.ml ./_build/Bool.ml
 	cp ../bucklescript/src/Bool.mli ./_build/Bool.mli
 	cp ../native/src/Comparator.ml ./_build/Comparator.ml
