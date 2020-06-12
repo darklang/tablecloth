@@ -10,17 +10,17 @@ CMXA_DEPS=menhirLib.cmxa migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmx
 opt: $(CMXS)
 
 $(CMO): JsonGenerator.ml
-	ocamlfind ocamlc $(COMPFLAGS) -c $<
+	opam config exec -- ocamlfind ocamlc $(COMPFLAGS) -c $<
 
 $(CMX): JsonGenerator.ml
-	ocamlfind ocamlopt $(COMPFLAGS) -c $<
+	opam config exec -- ocamlfind ocamlopt $(COMPFLAGS) -c $<
 
 $(CMXS): $(CMX)
-	ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
+	opam config exec -- ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
 
 install: opt
-	mkdir -p `ocamlfind ocamldoc -customdir`
-	cp -f JsonGenerator.cmxs `ocamlfind ocamldoc -customdir`/
+	mkdir -p `opam config exec -- ocamlfind ocamldoc -customdir`
+	cp -f JsonGenerator.cmxs `opam config exec -- ocamlfind ocamldoc -customdir`/
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build: opt dummy
@@ -57,7 +57,7 @@ build: opt dummy
 	cp ../bucklescript/src/Tuple3.ml ./_build/Tuple3.ml
 	cp ../bucklescript/src/Tuple3.mli ./_build/Tuple3.mli
 	cp ../native/src/tablecloth.ml ./_build/tablecloth.ml	
-	ocamlfind ocamlc \
+	opam config exec -- ocamlfind ocamlc \
 		-package base,str \
 		-linkpkg \
 		-I ./_build \
@@ -97,7 +97,7 @@ build: opt dummy
 		./_build/tablecloth.ml
 
 doc: build
-	ocamldoc.opt \
+	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
 		`ocamlfind query -i-format base` \
 		`ocamlfind query -i-format str` \
