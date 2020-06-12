@@ -2,11 +2,10 @@ dummy:
 
 CMO=JsonGenerator.cmo
 CMX=$(CMO:.cmo=.cma)
-CMXS=$(CMA:.cma=.cmxs)
+CMXS=$(CMA:.cmo=.cmxs)
 
 COMPFLAGS=-package menhirLib,ocamldoc,reason
 CMXA_DEPS=menhirLib.cmxa migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmxa
-OCAMLFIND_CUSTOM_GENERATORS_DIRECTORY=`ocamlfind ocamldoc -customdir`
 
 opt: $(CMXS)
 
@@ -21,7 +20,7 @@ $(CMX): JsonGenerator.ml
 
 install: opt
 	mkdir -p `ocamlfind ocamldoc -customdir`
-	cp -f JsonGenerator.cmxs `ocamlfind ocamldoc -customdir`/
+	cp -f $(CMXS) `ocamlfind ocamldoc -customdir`/
 
 build: all dummy
 	cp ../native/src/Bool.ml ./_build/Bool.ml
@@ -98,7 +97,7 @@ build: all dummy
 
 doc: build
 	ocamldoc.opt \
-		-g JsonGenerator.cmxs \
+		-g $(CMXS) \
 		`ocamlfind query -i-format base` \
 		`ocamlfind query -i-format str` \
 		-I ./_build \
@@ -137,8 +136,6 @@ doc: build
 		./_build/Tuple3.ml \
 		./_build/tablecloth.ml
 
-all: opt build doc
-
 clean:
-	rm -f *.cm* *.o *.a
+	rm -f _build/* *.cm* *.o *.a
 

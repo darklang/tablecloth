@@ -73,13 +73,36 @@ jobs:
           paths:
             - ~/.opam
 
+  documentation-generator-build:
+    docker:
+      - image: ocaml/opam2
+      environment:
+        CI: true
+      working_directory: ~/repo
+      steps:
+        - checkout:
+            path: ~/repo
+        - restore_cache:
+            keys:
+              - v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+              - v2-native-dependencies-{{ .Branch }}-
+              - v2-native-dependencies-
+        # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
+        - run: sudo apt-get install -y m4
+        - run: make deps-native
+        - run: cd ocamldoc-json-generator && make doc
+        - save_cache:
+            key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+            paths:
+              - ~/.opam
+
   website-build:
     docker:
       - image: circleci/node:12
 
     environment:
       CI: true
-      NODE_ENV: test
+      NODE_ENV: production
 
     working_directory: ~/repo/website
     steps:
@@ -87,15 +110,15 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v1-website-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-website-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - v1-website-dependencies-{{ .Branch }}-
             - v1-website-dependencies-
 
-      - run: yarn install
-      - run: yarn build
+      - run: npm install
+      - run: npm run build
 
       - save_cache:
-          key: v1-website-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v1-website-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/repo/website/node_modules
 
