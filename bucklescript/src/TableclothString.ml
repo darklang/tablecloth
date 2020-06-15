@@ -50,6 +50,20 @@ let fromChar c = TableclothChar.toCode c |. Js.String.fromCharCode
 
 let from_char = fromChar
 
+let firstIndexOf (s : string) ~char:(char : char)  =
+  (let result = Js.String.indexOf (TableclothChar.toCode char |. Js.String.fromCharCode) s in
+   if result = (-1) then None else Some (result): 
+  int option)
+
+let first_index_of = firstIndexOf
+
+let lastIndexOf (s : string) ~char:(char : char)  =
+  (let result = Js.String.lastIndexOf (TableclothChar.toCode char |. Js.String.fromCharCode) s in
+   if result = (-1) then None else Some (result): 
+  int option)
+
+let last_index_of = lastIndexOf
+
 let isEmpty t = t = ""
 
 let is_empty = isEmpty

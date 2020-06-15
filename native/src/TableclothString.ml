@@ -100,6 +100,14 @@ let reverse = Base.String.rev
 
 let slice ?(to_ = 0) str ~from = String.sub str from (to_ - from)
 
+let firstIndexOf (s: string) ~(char: char)  = (String.index_opt s char : int option)
+
+let first_index_of = firstIndexOf
+
+let lastIndexOf (s: string) ~(char: char)  = (String.rindex_opt s char : int option)
+
+let last_index_of = lastIndexOf
+
 let insertAt t ~(index : int) ~(value : string) =
   ( let length = length t in
     let startCount = index in

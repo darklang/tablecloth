@@ -212,6 +212,32 @@ val dropRight : string -> count:int -> string
 
 val drop_right : string -> count:int -> string
 
+val firstIndexOf : string -> char:char -> int option
+(** Returns the index of the first occurrence of [~char] or None if string has no occurences of [char]
+
+    {2 Examples}
+
+    {[
+      String.firstIndexOf ~char:'h' "hello" = Some 0
+      String.firstIndexOf ~char:'x' "hello" = None
+    ]}
+*)
+
+val first_index_of : string -> char:char -> int option
+
+val lastIndexOf : string -> char:char -> int option
+(** Returns the index of the last occurrence of [~char] or None if string has no occurences of [char]
+
+    {2 Examples}
+
+    {[
+      String.lastIndexOf ~char:'l' "hello" = Some 3
+      String.lastIndexOf ~char:'x' "hello" = None
+    ]}
+*)
+
+val last_index_of : string -> char:char -> int option
+
 val insertAt : string -> index:int -> value:t -> string
 (** Insert a string at [index].
 

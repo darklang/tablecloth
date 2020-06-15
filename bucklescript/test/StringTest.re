@@ -28,6 +28,50 @@ let suite =
       });
     });
 
+    describe("firstIndexOf", () => {
+      test("returns some index of the first matching character", () => {
+        expect(
+          firstIndexOf("hello", ~char='h') |> Option.unwrap(~default=9999),
+        )
+        |> toEqual(Eq.int, 0)
+      });
+
+      test("returns the first index even though multiple present", () => {
+        expect(
+          firstIndexOf("hellh", ~char='h') |> Option.unwrap(~default=9999),
+        )
+        |> toEqual(Eq.int, 0)
+      });
+
+      test("returns None when no character matches", () => {
+        expect(
+          firstIndexOf("hello", ~char='x') |> Option.unwrap(~default=0),
+        )
+        |> toEqual(Eq.int, 0)
+      });
+    });
+
+    describe("lastIndexOf", () => {
+      test("returns some index of the last matching character", () => {
+        expect(
+          lastIndexOf("hello", ~char='o') |> Option.unwrap(~default=9999),
+        )
+        |> toEqual(Eq.int, 4)
+      });
+
+      test("returns the last index even though multiple present", () => {
+        expect(
+          lastIndexOf("hellh", ~char='h') |> Option.unwrap(~default=9999),
+        )
+        |> toEqual(Eq.int, 4)
+      });
+
+      test("returns None when no character matches", () => {
+        expect(lastIndexOf("hello", ~char='x') |> Option.unwrap(~default=0))
+        |> toEqual(Eq.int, 0)
+      });
+    });
+
     describe("fromList", () => {
       test("creates an empty string from an empty array", () => {
         expect(fromList([])) |> toEqual(Eq.string, "")
