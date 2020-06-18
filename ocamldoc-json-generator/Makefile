@@ -104,8 +104,8 @@ build: opt dummy
 doc: build
 	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
-		`ocamlfind query -i-format base` \
-		`ocamlfind query -i-format str` \
+		`opam config exec -- ocamlfind query -i-format base` \
+		`opam config exec -- ocamlfind query -i-format str` \
 		-I ./_build \
 		-d ../website \
 		./_build/Bool.mli \
