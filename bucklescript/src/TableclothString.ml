@@ -1,5 +1,11 @@
 type t = string
 
+include Comparator.Make (struct
+  type nonrec t = t
+
+  let compare = compare
+end)
+
 let initialize length ~f =
   Js.Array.joinWith
     ""

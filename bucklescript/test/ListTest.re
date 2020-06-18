@@ -414,4 +414,24 @@ let suite =
         |> toEqual(Eq.(list(int)), [1, 3])
       });
     });
+
+    describe("groupBy", () => {
+      test("returns an empty map for an empty array", () => {
+        expect(
+          List.groupBy([], (module Int), ~f=String.length) |> Map.length,
+        )
+        |> toEqual(Eq.int, 0)
+      });
+
+      test("example test case", () => {
+        let animals = ["Ant", "Bear", "Cat", "Dewgong"];
+        expect(
+          List.groupBy(animals, (module Int), ~f=String.length) |> Map.toList,
+        )
+        |> toEqual(
+             Eq.(list(pair(int, list(string)))),
+             [(3, ["Cat", "Ant"]), (4, ["Bear"]), (7, ["Dewgong"])],
+           );
+      });
+    });
   });

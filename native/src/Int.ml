@@ -1,5 +1,11 @@
 type t = int
 
+include Comparator.Make (struct
+  type nonrec t = t
+
+  let compare = compare
+end)
+
 let minimumValue = Base.Int.min_value
 
 let minimum_value = minimumValue

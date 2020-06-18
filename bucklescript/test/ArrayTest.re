@@ -537,4 +537,24 @@ let suite =
         expect(numbers) |> toEqual(Eq.(array(int)), [|3, 2, 1|]);
       })
     });
+
+    describe("groupBy", () => {
+      test("returns an empty map for an empty array", () => {
+        expect(
+          Array.groupBy([||], (module Int), ~f=String.length) |> Map.length,
+        )
+        |> toEqual(Eq.int, 0)
+      });
+
+      test("example test case", () => {
+        let animals = [|"Ant", "Bear", "Cat", "Dewgong"|];
+        expect(
+          Array.groupBy(animals, (module Int), ~f=String.length) |> Map.toList,
+        )
+        |> toEqual(
+             Eq.(list(pair(int, list(string)))),
+             [(3, ["Cat", "Ant"]), (4, ["Bear"]), (7, ["Dewgong"])],
+           );
+      });
+    });
   });

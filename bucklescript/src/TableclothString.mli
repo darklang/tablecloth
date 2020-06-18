@@ -402,3 +402,8 @@ val compare : string -> string -> int
 
     {[String.compare "Peach" "Peach" = 0]}
 *)
+
+(** The unique identity for {!Comparator} *)
+type identity
+
+val comparator : (t, identity) Comparator.t
