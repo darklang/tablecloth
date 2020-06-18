@@ -38836,8 +38836,68 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      String.dropLeft ~count:3 \"abcdefg\" = \"defg\"\n      String.dropLeft ~count:0 \"abcdefg\" = \"abcdefg\"\n      String.dropLeft ~count:7 \"abcdefg\" = \"\"\n      String.dropLeft ~count:(-2) \"abcdefg\" = \"fg\"\n      String.dropLeft ~count:8 \"abcdefg\" = \"\"\n    ",
-                            "reason": "String.dropLeft(~count=3, \"abcdefg\")\n== \"defg\"(String.dropLeft, ~count=0, \"abcdefg\")\n== \"abcdefg\"(String.dropLeft, ~count=7, \"abcdefg\")\n== \"\"(String.dropLeft, ~count=-2, \"abcdefg\")\n== \"fg\"(String.dropLeft, ~count=8, \"abcdefg\")\n== \"\";\n"
+                            "ocaml": "String.dropLeft ~count:3 \"abcdefg\" = \"defg\"",
+                            "reason": "String.dropLeft(~count=3, \"abcdefg\") == \"defg\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropLeft ~count:0 \"abcdefg\" = \"abcdefg\"",
+                            "reason": "String.dropLeft(~count=0, \"abcdefg\") == \"abcdefg\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropLeft ~count:7 \"abcdefg\" = \"\"",
+                            "reason": "String.dropLeft(~count=7, \"abcdefg\") == \"\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropLeft ~count:(-2) \"abcdefg\" = \"fg\"",
+                            "reason": "String.dropLeft(~count=-2, \"abcdefg\") == \"fg\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropLeft ~count:8 \"abcdefg\" = \"\"",
+                            "reason": "String.dropLeft(~count=8, \"abcdefg\") == \"\";\n"
                           }
                         }
                       ]
@@ -38934,8 +38994,68 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      String.dropRight ~count:3 \"abcdefg\" = \"abcd\"\n      String.dropRight ~count:0 \"abcdefg\" = \"abcdefg\"\n      String.dropRight ~count:7 \"abcdefg\" = \"\"\n      String.dropRight ~count:(-2) \"abcdefg\" = \"abcdefg\"\n      String.dropRight ~count:8 \"abcdefg\" = \"\"\n    ",
-                            "reason": "String.dropRight(~count=3, \"abcdefg\")\n== \"abcd\"(String.dropRight, ~count=0, \"abcdefg\")\n== \"abcdefg\"(String.dropRight, ~count=7, \"abcdefg\")\n== \"\"(String.dropRight, ~count=-2, \"abcdefg\")\n== \"abcdefg\"(String.dropRight, ~count=8, \"abcdefg\")\n== \"\";\n"
+                            "ocaml": "String.dropRight ~count:3 \"abcdefg\" = \"abcd\"",
+                            "reason": "String.dropRight(~count=3, \"abcdefg\") == \"abcd\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropRight ~count:0 \"abcdefg\" = \"abcdefg\"",
+                            "reason": "String.dropRight(~count=0, \"abcdefg\") == \"abcdefg\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropRight ~count:7 \"abcdefg\" = \"\"",
+                            "reason": "String.dropRight(~count=7, \"abcdefg\") == \"\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropRight ~count:(-2) \"abcdefg\" = \"abcdefg\"",
+                            "reason": "String.dropRight(~count=-2, \"abcdefg\") == \"abcdefg\";\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.dropRight ~count:8 \"abcdefg\" = \"\"",
+                            "reason": "String.dropRight(~count=8, \"abcdefg\") == \"\";\n"
                           }
                         }
                       ]
