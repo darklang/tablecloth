@@ -12,7 +12,7 @@ opam switch create 4.08
 Then install the dependencies
 
 ```sh
-opan install reason menhir
+make deps
 ```
 
 ## Usage
