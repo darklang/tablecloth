@@ -86,8 +86,8 @@ const Section = ({ tell, show, flip }) => {
               flex-direction: ${flip ? 'row-reverse' : 'row'};
               .tell {
                 flex: 4;
-                padding-left: ${flip ? spacing.largere : 0}px;
-                padding-right: ${flip ? 0 : spacing.largere}px;
+                padding-left: ${flip ? spacing.larger : 0}px;
+                padding-right: ${flip ? 0 : spacing.larger}px;
               }
               .show {
                 max-width: 50%;
