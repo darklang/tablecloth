@@ -18,6 +18,11 @@ $(CMX): JsonGenerator.ml
 $(CMXS): $(CMX)
 	opam config exec -- ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
 
+deps:
+	@printf "\n\e[31mInstalling generator dependencies ...\e[0m\n"
+	opam update
+	opam install base reason menhir -y
+
 install: opt
 	mkdir -p `opam config exec -- ocamlfind ocamldoc -customdir`
 	cp -f JsonGenerator.cmxs `opam config exec -- ocamlfind ocamldoc -customdir`/

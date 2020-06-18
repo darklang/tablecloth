@@ -87,9 +87,9 @@ jobs:
             - v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
             - v2-native-dependencies-{{ .Branch }}-
             - v2-native-dependencies-
-      # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
+      # m4 is a system dependency required lots of packages
       - run: sudo apt-get install -y m4
-      - run: make deps-native
+      - run: cd ocamldoc-json-generator && make deps
       - run: cd ocamldoc-json-generator && make doc
       # Check that model.json has been regenerated when there are changes in the interface files
       - run: git diff --exit-code website/model.json
