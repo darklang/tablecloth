@@ -918,8 +918,6 @@ class json =
       let desc = t.desc in
       let rendered =
         Odoc_info.string_of_type_expr t |> Odoc_info.remove_ending_newline
-        (* |> newline_to_indented_br  *)
-        (* |> (self#create_fully_qualified_idents_links "ModuleName") *)
       in
       let raw =
         match desc with
@@ -1003,7 +1001,10 @@ class json =
             , (_expressions : Types.type_expr list) ) ->
             tagged "Package" null
       in
-      obj [ ("rendered", string rendered); ("raw", raw) ]
+      obj [
+      ("rendered", string rendered);
+(*      ("raw", raw) *)
+      ]
 
     (** Json to display a [Types.type_expr list]. *)
     method json_of_cstr_args
