@@ -23,7 +23,7 @@ import {
 import { CodeBlock } from '../components/CodeBlock';
 import { OCaml, Reason } from '../components/Icon';
 import { SyntaxProvider } from '../components/Syntax';
-import { ArtificialInteligence, BookLover } from '../components/Illustration';
+import { BookLover } from '../components/Illustration';
 
 let AnimatedOCaml = animated(OCaml);
 let AnimatedReason = animated(Reason);
@@ -38,7 +38,7 @@ const Section = ({ tell, show, flip }) => {
       css={css`
         align-items: center;
         background-color: ${({ flip, theme }) =>
-          flip ? theme.card.background : theme.body};
+        flip ? theme.body : theme.card.background};
         border-top: 1px solid ${({ theme }) => theme.card.border};
         display: flex;
         flex-direction: column;
@@ -85,13 +85,13 @@ const Section = ({ tell, show, flip }) => {
             @media (min-width: ${breakpoints.desktop}px) {
               flex-direction: ${flip ? 'row-reverse' : 'row'};
               .tell {
-                flex: 4;
+                flex: 8;
                 padding-left: ${flip ? spacing.larger : 0}px;
                 padding-right: ${flip ? 0 : spacing.larger}px;
               }
               .show {
                 max-width: 50%;
-                flex: 5;
+                flex: 10;
               }
             }
           `}
@@ -102,6 +102,32 @@ const Section = ({ tell, show, flip }) => {
       </Container>
     </section>
   );
+};
+
+let CodeSample = ({ language, code }) => {
+  return <div
+    css={css`
+      margin-top: -${sellingPointPadding + 1}px;
+      margin-left: -${sellingPointPadding}px;
+      margin-right: -${sellingPointPadding}px;
+      margin-bottom: -${sellingPointPadding + 2}px;
+      pre {
+        padding-top: ${sellingPointPadding}px;
+        padding-left: ${spacing.larger}px;
+        padding-right: ${sellingPointPadding}px;
+        padding-bottom: ${sellingPointPadding}px;
+      }
+      @media (min-width: ${breakpoints.desktop}px) {
+        margin-left: 0px;
+        margin-right: -1000px;
+      }
+    `}
+  >
+    <CodeBlock
+      language={language}
+      code={code}
+    />
+  </div>;
 };
 
 const CallToAction = () => (
@@ -137,7 +163,6 @@ const CallToAction = () => (
             padding: 12px 16px;
             letter-spacing: 1px;
             font-size: 16px;
-            /* font-weight: bold; */
             text-transform: uppercase;
           }
         `}
@@ -198,12 +223,12 @@ let Header = () => {
         sizes="16x16"
         href={theme.favicon.icon16}
       />
-      <meta name="title" content={title} />
-      <meta property="og:title" content={title} />
-      <meta property="twitter:title" content={title} />
-      <meta name="description" content={description} />
-      <meta property="og:description" content={description} />
-      <meta property="twitter:description" content={description} />
+      <meta name="title" content={title}/>
+      <meta property="og:title" content={title}/>
+      <meta property="twitter:title" content={title}/>
+      <meta name="description" content={description}/>
+      <meta property="og:description" content={description}/>
+      <meta property="twitter:description" content={description}/>
     </Helmet>
   );
 };
@@ -222,29 +247,29 @@ export default () => {
   const logoStyles = useSpring(
     logo === 'reason'
       ? {
-          // Using hsl colors with useSpring throws an exception during interpolation
-          background: `linear-gradient(#d44f3a, #d44f3a)`,
-          borderRadius: 0,
-          reTransform: `translate3d(${logoSize / 7}px,${-logoSize / 2.25}px,0)`,
-          camlTransform: `translate3d(-${logoSize}px, ${-logoSize /
-            1.12}px, 0)`,
-        }
+        // Using hsl colors with useSpring throws an exception during interpolation, so we can't use the ones defined in 'theme'
+        background: `linear-gradient(#d44f3a, #d44f3a)`,
+        borderRadius: 0,
+        reTransform: `translate3d(${logoSize / 7}px,${-logoSize / 2.25}px,0)`,
+        camlTransform: `translate3d(-${logoSize}px, ${-logoSize /
+        1.12}px, 0)`,
+      }
       : {
-          background: `linear-gradient(${colors.orange.ocaml.start}, ${colors.orange.ocaml.end})`,
-          borderRadius: 40,
-          reTransform: `translate3d(${logoSize}px, ${-logoSize / 2.25}px, 0)`,
-          camlTransform: `translate3d(${0}px, ${-logoSize / 1.12}px,0)`,
-        },
+        background: `linear-gradient(${colors.orange.ocaml.start}, ${colors.orange.ocaml.end})`,
+        borderRadius: 40,
+        reTransform: `translate3d(${logoSize}px, ${-logoSize / 2.25}px, 0)`,
+        camlTransform: `translate3d(${0}px, ${-logoSize / 1.12}px,0)`,
+      },
   );
   return (
     <ThemeProvider>
       <SyntaxProvider>
-        <GlobalStyles />
-        <Header />
+        <GlobalStyles/>
+        <Header/>
         <AppWrapper>
           <ContentContainer>
             <NavBarContainer>
-              <NavBar />
+              <NavBar/>
             </NavBarContainer>
             <Main
               css={css`
@@ -305,8 +330,47 @@ String.toList("Tablecloth")
                     />
                   </div>
                 </Container>
-                <CallToAction />
+                <CallToAction/>
                 <Section
+                  flip={true}
+                  show={() => <BookLover className="illustration"/>}
+                  tell={() => (
+                    <>
+                      <h2>Easy to learn</h2>
+                      <span>
+                        Excellent documentation, comprehensive examples and
+                        consistent behaviour make Tablecloth efficient to get
+                        started with
+                      </span>
+                    </>
+                  )}
+                />
+                <Section
+                  flip={false}
+                  show={() => (
+                    <CodeSample language="reason" code={`
+                      let name = Some("Kubo");
+                      let species = Some("dog");
+                      let favoriteGame = None;
+                      
+                      let bio = Option.({
+                        let (name, species) = Option.both(name, species);
+                        name ++ " the " ++ "'s favorite game is" ++ (favoriteGame |? "fetch");
+                      })                                              
+                    `}/>
+                  )}
+                  tell={() => (
+                    <>
+                      <h2>Safe</h2>
+                      <span>
+                        Banish runtime errors and work effectively with Options
+                        and Results
+                      </span>
+                    </>
+                  )}
+                />
+                <Section
+                  flip={true}
                   show={() => (
                     <animated.div
                       onClick={() =>
@@ -356,66 +420,26 @@ String.toList("Tablecloth")
                     </>
                   )}
                 />
-                <Section
-                  flip={true}
-                  show={() => (
-                    <ArtificialInteligence className="illustration" />
-                  )}
-                  tell={() => (
-                    <>
-                      <h2>Safe</h2>
-                      <span>
-                        Banish runtime errors and work effectively with Options
-                        and Results
-                      </span>
-                    </>
-                  )}
-                />
+
                 <Section
                   flip={false}
                   show={() => (
-                    <div
-                      css={css`
-                        margin-top: -${sellingPointPadding}px;
-                        margin-left: -${sellingPointPadding}px;
-                        margin-right: -${sellingPointPadding}px;
-                        margin-bottom: -${sellingPointPadding}px;
-                        pre {
-                          padding-top: ${sellingPointPadding}px;
-                          padding-left: ${spacing.larger}px;
-                          padding-right: ${sellingPointPadding}px;
-                          padding-bottom: ${sellingPointPadding}px;
-                        }
-                        @media (min-width: ${breakpoints.desktop}px) {
-                          margin-left: 0;
-                          margin-right: -1000px;
-                        }
-                      `}
-                    >
-                      <CodeBlock
-                        language="ocaml"
-                        code={`
-                    open Tablecloth
-
+                    <CodeSample flip={false} language="reason" code={`
                     let nameToSpecies = Map.String.fromList [
-                      ("Alan", "Ant"); 
-                      ("Bertie", "Badger");                         
-                    ] in
-                    let nameToSpecies = 
-                      nameToSpecies.Map.?{"Delilah"} <- "Duck" in
-
-                    let hybrid = Option.(
-                      let+ delilahSpecies =
-                        nameToSpecies.Map.?{"Delilah"} in
-                      and+ frankSpecies =
-                        nameToSpecies.Map.?{"Frank"} |? "Cat" in
-                      delilahSpecies ^ frankSpecies 
-                    ) in
-
-                    hybrid = Some "DuckCat"                    
+                      ("Amy", "Ant"),
+                      ("Barry", "Badger"),
+                    ];
+                    
+                    /* Get a value from a Map by its key */                     
+                    nameToSpecies.Map.?{"Carolyn"} == None;
+                      
+                    /* Index into a String safely */
+                    "Tablecloth".String.?[1] == Some('a')
+                    
+                    /* Index into an Array without fear */
+                    [|2;3;5;7|].Array.?(3) == Some(7)
                   `}
-                      />
-                    </div>
+                    />
                   )}
                   tell={() => (
                     <>
@@ -428,21 +452,8 @@ String.toList("Tablecloth")
                     </>
                   )}
                 />
-                <Section
-                  flip={true}
-                  show={() => <BookLover className="illustration" />}
-                  tell={() => (
-                    <>
-                      <h2>Easy to learn</h2>
-                      <span>
-                        Excellent documentation, comprehensive examples and
-                        consistent behaviour make Tablecloth efficient to get
-                        started with
-                      </span>
-                    </>
-                  )}
-                />
-                <CallToAction />
+
+                <CallToAction/>
               </div>
             </Main>
           </ContentContainer>
