@@ -919,6 +919,7 @@ class json =
       let rendered =
         Odoc_info.string_of_type_expr t |> Odoc_info.remove_ending_newline
       in
+      (*
       let raw =
         match desc with
         | Tvar tvar ->
@@ -1001,10 +1002,8 @@ class json =
             , (_expressions : Types.type_expr list) ) ->
             tagged "Package" null
       in
-      obj [
-      ("rendered", string rendered);
-(*      ("raw", raw) *)
-      ]
+      *)
+      obj [ ("rendered", string rendered) (*      ("raw", raw) *) ]
 
     (** Json to display a [Types.type_expr list]. *)
     method json_of_cstr_args
