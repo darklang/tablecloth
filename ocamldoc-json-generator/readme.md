@@ -4,4 +4,4 @@ JsonGenerator.ml is responsible for taking the `/native` source files and turnin
 
 ## Usage
 
-After making any changes to interface files run `make doc` to regenerate `model.json` 
+After making any changes to interface files run `make doc` to regenerate `website/model.json` 

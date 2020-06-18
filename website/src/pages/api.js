@@ -153,7 +153,7 @@ function renderSidebarElements(
             moduleElement.value.name,
           );
           // Filter out the snake_case functions
-          if (moduleElement.value.name.includes("_")){
+          if (moduleElement.value.name.includes('_')) {
             return null;
           }
           if (
@@ -885,10 +885,10 @@ function generateModuleElements(
           return;
         case 'Value':
           // Filter out the snake_case functions
-          if (moduleElement.value.name.includes("_")){
+          if (moduleElement.value.name.includes('_')) {
             return null;
           }
-          
+
           let valueId = idFor(
             state.path,
             moduleElement.tag,
@@ -1113,7 +1113,7 @@ export default ({ data }) => {
       moduleByModulePath,
     );
 
-    console.info(idToIndex);
+    // console.info(idToIndex);
 
     return {
       moduleElements: model.entry_point.value.kind.value,
@@ -1124,7 +1124,7 @@ export default ({ data }) => {
   }, [data]);
   let listScroll = React.useRef();
   let scrollToId = id => {
-    console.info(id);
+    // console.info(id);
     setIsOpen(false);
     // react-virtualized's layout calculations aren't accurate for some reason
     // To get the users browser to consistently arrive at the correct scroll, use the id of the element.

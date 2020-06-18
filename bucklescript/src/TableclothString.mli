@@ -181,13 +181,15 @@ val dropLeft : string -> count:int -> string
 
     {2 Examples}
 
-    {[
-      String.dropLeft ~count:3 "abcdefg" = "defg"
-      String.dropLeft ~count:0 "abcdefg" = "abcdefg"
-      String.dropLeft ~count:7 "abcdefg" = ""
-      String.dropLeft ~count:(-2) "abcdefg" = "fg"
-      String.dropLeft ~count:8 "abcdefg" = ""
-    ]}
+    {[String.dropLeft ~count:3 "abcdefg" = "defg"]}
+
+    {[String.dropLeft ~count:0 "abcdefg" = "abcdefg"]}
+
+    {[String.dropLeft ~count:7 "abcdefg" = ""]}
+
+    {[String.dropLeft ~count:(-2) "abcdefg" = "fg"]}
+
+    {[String.dropLeft ~count:8 "abcdefg" = ""]}
 *)
 
 val drop_left : string -> count:int -> string
@@ -197,13 +199,15 @@ val dropRight : string -> count:int -> string
 
     {2 Examples}
 
-    {[
-      String.dropRight ~count:3 "abcdefg" = "abcd"
-      String.dropRight ~count:0 "abcdefg" = "abcdefg"
-      String.dropRight ~count:7 "abcdefg" = ""
-      String.dropRight ~count:(-2) "abcdefg" = "abcdefg"
-      String.dropRight ~count:8 "abcdefg" = ""
-    ]}
+    {[String.dropRight ~count:3 "abcdefg" = "abcd"]}
+
+    {[String.dropRight ~count:0 "abcdefg" = "abcdefg"]}
+
+    {[String.dropRight ~count:7 "abcdefg" = ""]}
+
+    {[String.dropRight ~count:(-2) "abcdefg" = "abcdefg"]}
+
+    {[String.dropRight ~count:8 "abcdefg" = ""]}
 *)
 
 val drop_right : string -> count:int -> string
