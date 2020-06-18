@@ -152,6 +152,10 @@ function renderSidebarElements(
             moduleElement.tag,
             moduleElement.value.name,
           );
+          // Filter out the snake_case functions
+          if (moduleElement.value.name.includes("_")){
+            return null;
+          }
           if (
             hasSearch &&
             !(
@@ -880,6 +884,11 @@ function generateModuleElements(
           );
           return;
         case 'Value':
+          // Filter out the snake_case functions
+          if (moduleElement.value.name.includes("_")){
+            return null;
+          }
+          
           let valueId = idFor(
             state.path,
             moduleElement.tag,
