@@ -7,22 +7,22 @@ order: "4"
 
 Tablecloth is an ideal library to contribute to, even if you're new to OCaml / Reason.
 
-The maintainers are warm and friendly, and the project abides by a [Code of Conduct](../.github/CODE_OF_CONDUCT.md).
+The maintainers are warm and friendly, and the project abides by a [Code of Conduct](../CODE_OF_CONDUCT.md).
 
 There are many small tasks to be done and even a small change to a single function's documentation is extremely helpful.
 
 Here are some ways to contribute:
 
-- Fix a typo or gramatical error
+- Check out the issues marked [help wanted](https://github.com/darklang/tablecloth/labels/help%20wanted), especially those marked [good first issue](https://github.com/darklang/tablecloth/labels/good%20first%20issue)
+- Fix a typo or grammatical error
+- Add test cases 
+- Add examples 
+- Add documentation 
 - Point out a way in which the library or any of its parts are confusing
 - Point out inconsistencies between different functions in the library
 - Report an edge-case or performance problem in one of the functions
-- Add test cases for a function
-- Add examples for a function
-- Add documentation to a function
 - Improve a function's documentation by discussing an edge-case
 - Check a function cannot throw exceptions (and add a note to the function documentation to that effect)
-- Propose a strategy for benchmarking
 - Suggest a new function or module by [creating an issue](https://github.com/darklang/tablecloth/issues/new). 
 - Improve the [documentation site](https://github.com/darklang/tablecloth/tree/master/website)
 - Optimize a function
@@ -66,7 +66,7 @@ Abbreviations impose additional mental overhead when reading code:
 - You have to translate them back to the 'real' word in your head
 - You have to disambiguate them, does `init` mean `initial` or `initialize` (`List` has both!)
 
-If it's a super common abbreviation, it needs to be justified and explained in the documentation or in [Conventions](./conventions).
+If it's a super common abbreviation, it needs to be justified and explained in the documentation or in [Conventions](./conventions.md).
 
 ### Don't be cute
 
@@ -112,4 +112,4 @@ It's incredibly dense, the names are short to the point of basically being symbo
 
 Either a longer explanation using real words or an example using real data would have been better.
 
-In Tablecloth we do both.
+In Tablecloth, we do both.
