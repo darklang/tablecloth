@@ -41,6 +41,7 @@ test:
 
 deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
+	cd ~/opam-repository && git pull
 	opam update
 	opam install alcotest "base>=v0.14.0" dune junit junit_alcotest odoc reason -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
