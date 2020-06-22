@@ -27,7 +27,8 @@
   },
   "jest": {
     "testMatch": [
-      "**/test/*Test.bs.js"
+      "<rootDir>/bucklescript/test/*Test.bs.js",
+      "<rootDir>/bucklescript/test/*Test.js"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"

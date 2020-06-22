@@ -1,5 +1,11 @@
 type t = int
 
+include Comparator.Make (struct
+  type nonrec t = t
+
+  let compare = compare
+end)
+
 let minimumValue = Js.Int.min
 
 let minimum_value = minimumValue

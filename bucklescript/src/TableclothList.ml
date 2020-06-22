@@ -319,6 +319,18 @@ let to_array = toArray
 
 let join strings ~sep = Js.Array.joinWith sep (toArray strings)
 
+let groupBy t comparator ~f =
+  fold t ~initial:(TableclothMap.empty comparator) ~f:(fun map element ->
+      let key = f element in
+      TableclothMap.update map ~key ~f:(function
+          | None ->
+              Some [ element ]
+          | Some elements ->
+              Some (element :: elements)))
+
+
+let group_by = groupBy
+
 let rec equal equalElement a b =
   match (a, b) with
   | [], [] ->
