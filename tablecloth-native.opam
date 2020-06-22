@@ -5,8 +5,11 @@ synopsis: "Native OCaml library implementing Tablecloth, a cross-platform standa
 description: """
 Longer description
 """
-maintainer: "Paul Biggar <paul@darklang.com>"
-authors: "Paul Biggar <paul@darklang.com>"
+maintainer: "Dean Merchant <deanmerchant@gmail.com>"
+authors: [
+  "Paul Biggar <paul@darklang.com>"
+  "Dean Merchant <deanmerchant@gmail.com>"
+]
 license: "MIT with some exceptions"
 homepage: "https://github.com/darklang/tablecloth"
 bug-reports: "https://github.com/darklang/tablecloth/issues"
