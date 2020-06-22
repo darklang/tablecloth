@@ -18,11 +18,11 @@ let fromList = Belt.List.toArray
 
 let from_list = fromList
 
-let toList = Belt.List.fromArray
+let toList : 'a array -> 'a list = Belt.List.fromArray
 
 let to_list = toList
 
-let toIndexedList array =
+let toIndexedList (array : 'a array) : (int * 'a) list =
   Belt.Array.reduceReverse
     array
     (length array - 1, [])
