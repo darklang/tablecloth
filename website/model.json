@@ -9585,8 +9585,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.ofOption (Some 84) ~error:\"Greater than 100\" = Ok 8",
-                            "reason": "Result.ofOption(Some(84), ~error=\"Greater than 100\") == Ok(8);\n"
+                            "ocaml": "Result.fromOption (Some 84) ~error:\"Greater than 100\" = Ok 8",
+                            "reason": "Result.fromOption(Some(84), ~error=\"Greater than 100\") == Ok(8);\n"
                           }
                         },
                         {
@@ -9600,8 +9600,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.ofOption None ~error:\"Greater than 100\" =\n        Error \"Greater than 100\"\n    ",
-                            "reason": "Result.ofOption(None, ~error=\"Greater than 100\") == Error(\"Greater than 100\");\n"
+                            "ocaml": "\n      Result.fromOption None ~error:\"Greater than 100\" =\n        Error \"Greater than 100\"\n    ",
+                            "reason": "Result.fromOption(None, ~error=\"Greater than 100\")\n== Error(\"Greater than 100\");\n"
                           }
                         }
                       ]
@@ -28451,8 +28451,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.toList (Array.ofList [3; 5; 8]) = [3; 5; 8]",
-                            "reason": "Array.toList(Array.ofList([3, 5, 8])) == [3, 5, 8];\n"
+                            "ocaml": "Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]",
+                            "reason": "Array.toList(Array.fromList([3, 5, 8])) == [3, 5, 8];\n"
                           }
                         }
                       ]
@@ -35089,8 +35089,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let toValidMonth (month: int) : (int option) =\n        if (1 <= month && month <= 12) then\n          Some month\n        else\n          None\n      in\n\n      let userInput = \"5\" in\n\n      Int.ofString userInput\n      |> Option.andThen ~f:toValidMonth\n    ",
-                            "reason": "{\n  let toValidMonth = (month: int): option(int) =>\n    if (1 <= month && month <= 12) {\n      Some(month);\n    } else {\n      None;\n    };\n\n  let userInput = \"5\";\n\n  Int.ofString(userInput) |> Option.andThen(~f=toValidMonth);\n};\n"
+                            "ocaml": "\n      let toValidMonth (month: int) : (int option) =\n        if (1 <= month && month <= 12) then\n          Some month\n        else\n          None\n      in\n\n      let userInput = \"5\" in\n\n      Int.fromString userInput\n      |> Option.andThen ~f:toValidMonth\n    ",
+                            "reason": "{\n  let toValidMonth = (month: int): option(int) =>\n    if (1 <= month && month <= 12) {\n      Some(month);\n    } else {\n      None;\n    };\n\n  let userInput = \"5\";\n\n  Int.fromString(userInput) |> Option.andThen(~f=toValidMonth);\n};\n"
                           }
                         },
                         {
@@ -36735,8 +36735,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      let nameToAge = Map.String.ofArray [|\n        (\"Ant\", 1);\n        (\"Bat\", 5);\n        (\"Cat\", 19);\n      |] in\n\n      let catAge = Map.get nameToAge \"Cat\" |? 8 in\n      (* 19 *)\n\n      Option.(\n        Map.get nameToAge \"Ant\" >>= (fun antAge ->\n          Map.get nameToAge \"Bat\" >>| (fun batAge ->\n            Int.absolute(batAge - antAge)\n          )\n        )\n      )\n      (* Some (4) *)\n    ",
-                      "reason": "{\n  let nameToAge =\n    Map.String.ofArray([|(\"Ant\", 1), (\"Bat\", 5), (\"Cat\", 19)|]);\n\n  let catAge = Map.get(nameToAge, \"Cat\") |? 8;\n  /* 19 */\n\n  Option.(\n    Map.get(nameToAge, \"Ant\")\n    >>= (\n      antAge =>\n        Map.get(nameToAge, \"Bat\")\n        >>| (batAge => Int.absolute(batAge - antAge))\n    )\n  );\n};\n/* Some (4) */\n"
+                      "ocaml": "\n      let nameToAge = Map.String.fromArray [|\n        (\"Ant\", 1);\n        (\"Bat\", 5);\n        (\"Cat\", 19);\n      |] in\n\n      let catAge = Map.get nameToAge \"Cat\" |? 8 in\n      (* 19 *)\n\n      Option.(\n        Map.get nameToAge \"Ant\" >>= (fun antAge ->\n          Map.get nameToAge \"Bat\" >>| (fun batAge ->\n            Int.absolute(batAge - antAge)\n          )\n        )\n      )\n      (* Some (4) *)\n    ",
+                      "reason": "{\n  let nameToAge =\n    Map.String.fromArray([|(\"Ant\", 1), (\"Bat\", 5), (\"Cat\", 19)|]);\n\n  let catAge = Map.get(nameToAge, \"Cat\") |? 8;\n  /* 19 */\n\n  Option.(\n    Map.get(nameToAge, \"Ant\")\n    >>= (\n      antAge =>\n        Map.get(nameToAge, \"Bat\")\n        >>| (batAge => Int.absolute(batAge - antAge))\n    )\n  );\n};\n/* Some (4) */\n"
                     }
                   }
                 ]
@@ -44965,7 +44965,7 @@
                   },
                   {
                     "tag": "Code",
-                    "value": "open Standard"
+                    "value": "open Tablecloth"
                   }
                 ]
               },
@@ -49000,8 +49000,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      (* Before *)\n      let sanitize (input: string) : int option =\n        Int.ofString (String.trim input)\n    ",
-                            "reason": "/* Before */\nlet sanitize = (input: string): option(int) =>\n  Int.ofString(String.trim(input));\n"
+                            "ocaml": "\n      (* Before *)\n      let sanitize (input: string) : int option =\n        Int.fromString (String.trim input)\n    ",
+                            "reason": "/* Before */\nlet sanitize = (input: string): option(int) =>\n  Int.fromString(String.trim(input));\n"
                           }
                         },
                         {
@@ -49023,8 +49023,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      (* After *)\n      let sanitize (input: string) : int option =\n        input\n        |> String.trim\n        |> Int.ofString\n    ",
-                            "reason": "/* After */\nlet sanitize = (input: string): option(int) =>\n  input |> String.trim |> Int.ofString;\n"
+                            "ocaml": "\n      (* After *)\n      let sanitize (input: string) : int option =\n        input\n        |> String.trim\n        |> Int.fromString\n    ",
+                            "reason": "/* After */\nlet sanitize = (input: string): option(int) =>\n  input |> String.trim |> Int.fromString;\n"
                           }
                         },
                         {
@@ -49417,8 +49417,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let sanitize (input: string) : int option =\n        input\n        |> String.trim\n        |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)\n        |> Int.ofString\n    ",
-                            "reason": "let sanitize = (input: string): option(int) =>\n  input\n  |> String.trim\n  |> Fun.tap(~f=trimmedString => print_endline(trimmedString))\n  |> Int.ofString;\n"
+                            "ocaml": "\n      let sanitize (input: string) : int option =\n        input\n        |> String.trim\n        |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)\n        |> Int.fromString\n    ",
+                            "reason": "let sanitize = (input: string): option(int) =>\n  input\n  |> String.trim\n  |> Fun.tap(~f=trimmedString => print_endline(trimmedString))\n  |> Int.fromString;\n"
                           }
                         },
                         {
@@ -58653,8 +58653,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.ofInt 0 = Some false",
-                            "reason": "Bool.ofInt(0) == Some(false);\n"
+                            "ocaml": "Bool.fromInt 0 = Some false",
+                            "reason": "Bool.fromInt(0) == Some(false);\n"
                           }
                         },
                         {
@@ -58668,8 +58668,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.ofInt 1 = Some true",
-                            "reason": "Bool.ofInt(1) == Some(true);\n"
+                            "ocaml": "Bool.fromInt 1 = Some true",
+                            "reason": "Bool.fromInt(1) == Some(true);\n"
                           }
                         },
                         {
@@ -58683,8 +58683,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.ofInt 8 = None",
-                            "reason": "Bool.ofInt(8) == None;\n"
+                            "ocaml": "Bool.fromInt 8 = None",
+                            "reason": "Bool.fromInt(8) == None;\n"
                           }
                         },
                         {
@@ -58698,8 +58698,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.ofInt (-3) = None",
-                            "reason": "Bool.ofInt(-3) == None;\n"
+                            "ocaml": "Bool.fromInt (-3) = None",
+                            "reason": "Bool.fromInt(-3) == None;\n"
                           }
                         }
                       ]
