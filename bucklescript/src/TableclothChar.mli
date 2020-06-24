@@ -1,3 +1,5 @@
+(** *)
+
 (** Functions for working with single characters.
 
     Character literals are enclosed in ['a'] pair of single quotes.

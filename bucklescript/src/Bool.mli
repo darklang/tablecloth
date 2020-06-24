@@ -1,3 +1,5 @@
+(** *)
+
 (** Functions for working with boolean values.
 
     Booleans in OCaml / Reason are represented by the [true] and [false] literals.

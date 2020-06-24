@@ -1,7 +1,7 @@
 # Tablecloth
 
 [![CircleCI](https://circleci.com/gh/darklang/tablecloth.svg?style=shield)](https://circleci.com/gh/darklang/tablecloth)
-[![Npm](https://badge.fury.io/js/tablecloth.svg)](https://www.npmjs.com/package/tablecloth-bucklescript)
+[![Npm](https://badge.fury.io/js/tablecloth-bucklescript.svg)](https://www.npmjs.com/package/tablecloth-bucklescript)
 [![Opam](https://img.shields.io/badge/opam_package-0.7.0-brightgreen)](https://opam.ocaml.org/packages/tablecloth-native)
 
 Tablecloth is an ergonomic, cross-platform, standard library for use with OCaml
@@ -11,7 +11,7 @@ library, that has the same API on all OCaml/ReasonML/Bucklescript platforms.
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
 over time as we get more users. Caveat emptor.**
 
-See the [mli](https://github.com/darklang/tablecloth/blob/0.0.7/bs/src/tablecloth.mli) for documentation.
+Check out the [website](https://tableclothml.netlify.app) our interactive API documentation.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Install via npm by:
 
 `npm install tablecloth-bucklescript`
 
-Then add to your bsconfig.json file:
+Then add to your `bsconfig.json` file:
 
 `"bs-dependencies" : ["tablecloth-bucklescript"]`
 
@@ -35,45 +35,22 @@ Then add to your dune file:
 
 `(libraries (tablecloth-native ...))`
 
-### js_of_ocaml
-
-We have not built a js_of_ocaml specific version yet. However, the native version should work perfectly with js_of_ocaml.
-
 ## Usage
 
-By design, the usage of the libraries is the same on all platforms:
+The recommended way to use Tablecloth is with a top-level open at the beginning of a file. 
 
-Either open the module, and replace the builtin modules
+This will ensure that all the built-in modules are replaced.
 
 ```
 open Tablecloth
 
 let () =
-  "somestring"
-  |> String.toList
+  String.toList "somestring"
   |> List.map ~f:Char.toCode
   |> List.map ~f:(fun x -> x+1)
-  |> List.map ~f:Char.fromCode
+  |> List.filterMap ~f:Char.fromCode
   |> String.fromList
 ```
-
-Or use the fully qualified names:
-
-```
-let () =
-  "somestring"
-  |> Tablecloth.String.toList
-  |> Tablecloth.List.map ~f:Char.toCode
-  |> Tablecloth.List.map ~f:(fun x -> x+1)
-  |> Tablecloth.List.map ~f:Char.fromCode
-  |> Tablecloth.String.fromList
-```
-
-As tablecloth is still in the early stages, you might find it useful to create
-a module wrapping tablecloth, that allows you make changes to it before
-upstreaming them. We have [an
-example](https://github.com/darklang/tablecloth/blob/master/examples/tc.ml)
-that you can copy from.
 
 ## Design of Tablecloth
 
@@ -99,15 +76,13 @@ very different:
   platform.
 - Belt does not work in native OCaml, while Core is optimized for the native
   OCaml runtime.
-- Belt is incomplete relative to Core, or to other languages' standard
-  libraries (such as [Elm's](https://package.elm-lang.org/packages/elm/core/1.0.2/)).
-- Belt makes it challenging to use [PPXes](https://github.com/ocaml-ppx).
+- Belt is incomplete relative to Core, or to other languages' standard libraries
 
 ### Tablecloth's solution
 
 Tablecloth solves this by providing an identical API for Bucklescript and
 OCaml. It wraps existing standard libraries on those platforms, and so is fast
-and memory efficient. It is based off the Elm standard library, which is extremely
+and memory efficient. It is draws inspiration from [Elm's standard library](https://package.elm-lang.org/packages/elm/core/1.0.2/), which is extremely
 well-designed and ergonomic.
 
 Tablecloth provides separate libraries for OCaml native/js_of_ocaml and
@@ -116,58 +91,28 @@ and are installed as different packages.
 
 The APIs:
 
-- are taken from [Elm's standard library](https://package.elm-lang.org/packages/elm/core/1.0.2/), which is extremely complete and well-designed.
-- include support for strings, lists, numbers, maps, options, and results,
-- have both snake_case and camelCase versions of all functions and types,
+- have both snake_case and camelCase versions of all functions and types
 - are backed by [Jane Street Base](https://opensource.janestreet.com/base/) for native OCaml
-- are backed by Belt and the `Js` library for Bucklescript/ReasonML,
-- use labelled arguments so that can be used with both pipefirst and pipelast,
-- are well documented, and reasonably-well tested.
+- are backed by Belt and the `Js` library for Bucklescript/ReasonML
+- use labelled arguments so that can be used with both pipefirst (`->`) and pipelast (`|>`)
+- are well documented, and reasonably-well tested
 
 We also have design goals that are not yet achieved in the current version:
 
-- Many of the functions in the Bucklescript version were written hastily, and could be much more efficient
-- Tablecloth libraries should support PPX derivers,
-- Tablecloth functions should not throw any exceptions,
-- All functions should have well-known and consistent edge-case behaviour,
-- There should versions optimized for other standard libraries or runtimes, such as a js_of_ocaml, [Batteries](https://github.com/ocaml-batteries-team/batteries-included) or [Containers](https://github.com/c-cube/ocaml-containers).
+- Many of the functions could be much more efficient
+- Tablecloth functions should not throw any exceptions
+- All functions should have well-known and consistent edge-case behaviour
 
 ## Contributing
 
-Tablecloth is an ideal library to contribute to, even if you're new to OCaml or
-new to writing algorithms. The maintainers are warm and friendly, and the
-project abides by a [Code of Conduct](./CODE_OF_CONDUCT.md). There are many
-small tasks to be done - a small change to a single function can be extremely
+Tablecloth is an ideal library to contribute to, even if you're new to OCaml or Reason. 
+
+The maintainers are warm and friendly, and the project abides by a [Code of Conduct](./CODE_OF_CONDUCT.md). 
+
+There are many small tasks to be done - a small change to a single function can be extremely
 helpful.
 
-Here are some ways to contribute:
-
-- point out inconsistencies between different functions in the library,
-- point out an inelegant function signature which could be improved,
-- point out a way in which the library or any of its parts are confusing,
-- report an edge-case or performance problem in one of the functions,
-- add a small test for an edge-case of one of the functions,
-- copy test cases for a function from another language's standard library,
-- add documentation to a function,
-- improve a function's documentation by discussing an edge-case,
-- check that a function cannot throw exceptions (and add a note to the function
-  documentation to that effect),
-- optimize a function (the Bucklescript functions in particular),
-- write a benchmark for a function, or a set of functions,
-- make a plan for the addition (or not) of U-suffixed functions like in Belt,
-- make a plan for adding polymorphic Maps and Sets,
-- design a Regex module,
-- design escape hatches, where the user could convert a `t` into a
-  platform-specific type, to allow them create functions we do not currently
-  support,
-- add more functions from any of Elm's core library: String, List, Result,
-  Maybe, Array, Dict, Set, Tuple, or Basics, or from any of the Extras
-  libraries.
-
-If you'd like to contribute but don't know where to start, [open an
-issue](https://github.com/darklang/tablecloth/issues/new) with your thoughts,
-or contact us on [Twitter](https://twitter.com/paulbiggar) or by
-[email](mailto:paul.biggar@gmail.com).
+Check out the [dedicated guide](./documentation/contributing.md) on contributing for more.
 
 ## Developing
 
@@ -197,4 +142,4 @@ license.
 
 ## Authors
 
-Written by [Dark](https://darklang.com). We may be [hiring](https://darklang.com/careers).
+Written with the help of [Dark](https://darklang.com). We may be [hiring](https://darklang.com/careers).

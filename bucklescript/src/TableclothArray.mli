@@ -1,3 +1,5 @@
+(** *)
+
 (** A mutable vector of elements which must have the same type.
 
     Has constant time (O(1)) {!get}, {!set} and {!length} operations.

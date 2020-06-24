@@ -1,3 +1,5 @@
+(** *)
+
 (** Immutable singly-linked list of elements which must have the same type.
 
     Lists can have any number of elements.
