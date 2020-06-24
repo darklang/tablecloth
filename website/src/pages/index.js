@@ -111,18 +111,33 @@ let CodeSample = ({ language, code }) => {
       margin-left: -${sellingPointPadding}px;
       margin-right: -${sellingPointPadding}px;
       margin-bottom: -${sellingPointPadding + 2}px;
+      position: relative;
+      
+      .language-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 6px;
+        color: ${colors.grey.base};
+      }
       pre {
         padding-top: ${sellingPointPadding}px;
         padding-left: ${spacing.larger}px;
         padding-right: ${sellingPointPadding}px;
         padding-bottom: ${sellingPointPadding}px;
       }
+      
+      
       @media (min-width: ${breakpoints.desktop}px) {
         margin-left: 0px;
         margin-right: -1000px;
       }
     `}
   >
+    <span className="language-label">{language}</span>
     <CodeBlock
       language={language}
       code={code}
@@ -424,20 +439,20 @@ String.toList("Tablecloth")
                 <Section
                   flip={false}
                   show={() => (
-                    <CodeSample flip={false} language="reason" code={`
+                    <CodeSample flip={false} language="ocaml" code={`
                     let nameToSpecies = Map.String.fromList [
-                      ("Amy", "Ant"),
-                      ("Barry", "Badger"),
-                    ];
+                      ("Amy", "Ant");
+                      ("Barry", "Badger");
+                    ]
                     
-                    /* Get a value from a Map by its key */                     
-                    nameToSpecies.Map.?{"Carolyn"} == None;
+                    (* Get a value from a Map by its key *)                     
+                    nameToSpecies.Map.?{"Carolyn"} = None
                       
-                    /* Index into a String safely */
-                    "Tablecloth".String.?[1] == Some('a')
+                    (* Extract a Char from a String safely *)
+                    "Tablecloth".String.?[1] = Some('a')
                     
-                    /* Index into an Array without fear */
-                    [|2;3;5;7|].Array.?(3) == Some(7)
+                    (* Index into an Array without fear *)
+                    [|2;3;5;7|].Array.?(3) = Some(7)
                   `}
                     />
                   )}

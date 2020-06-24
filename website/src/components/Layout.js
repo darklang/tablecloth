@@ -197,10 +197,6 @@ export const NavBar = () => {
           <div className="navLink">
             <Link to="/api">api</Link>
           </div>
-          {/* TODO get the playground working */}
-          {/* <div>
-            <Link to="/try">try</Link>
-          </div> */}
           <div className="navLink">
             <Link
               to={githubUrl}
