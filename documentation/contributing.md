@@ -3,8 +3,6 @@ title: "Contributing"
 order: "4"
 ---
 
-## Contributing
-
 Tablecloth is an ideal library to contribute to, even if you're new to OCaml / Reason.
 
 The maintainers are warm and friendly, and the project abides by a [Code of Conduct](../CODE_OF_CONDUCT.md).
