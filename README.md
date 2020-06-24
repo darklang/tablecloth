@@ -11,7 +11,7 @@ library, that has the same API on all OCaml/ReasonML/Bucklescript platforms.
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
 over time as we get more users. Caveat emptor.**
 
-See the [website](TODO) for the documentation.
+Check out the [website](https://tableclothml.netlify.app) our interactive API documentation.
 
 ## Installation
 
