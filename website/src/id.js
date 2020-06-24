@@ -1,0 +1,1 @@
+export let formatTitleToId = title => title.toLowerCase().replace(/\s+/g, '-');

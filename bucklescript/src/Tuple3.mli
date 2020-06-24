@@ -1,3 +1,5 @@
+(** *)
+
 (** Functions for manipulating trios of values *)
 
 type ('a, 'b, 'c) t = 'a * 'b * 'c

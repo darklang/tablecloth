@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink" width="578" height="218" viewBox="0 0 578 218">
+  <defs>
+    <filter x="-.5%" y="-.5%" width="100.9%" height="101.9%" filterUnits="objectBoundingBox" id="a">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feComposite in="shadowOffsetOuter1" in2="SourceAlpha" operator="out" result="shadowOffsetOuter1"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0" in="shadowOffsetOuter1"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0" in="shadowOffsetOuter1"/>
+    </filter>
+    <filter x="-.7%" y="-1.2%" width="101.3%" height="102.4%" filterUnits="objectBoundingBox" id="d">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0" in="shadowInnerInner1"/>
+    </filter>
+    <path id="b" d="M0 0h216v216H0z"/>
+    <path d="M128.128 197h-24.426l-12.036-22.892H75.618V197H54.024v-82.718h37.17c21.948 0 34.456 10.62 34.456 29.028 0 12.508-5.192 21.712-14.75 26.668L128.128 197zm-52.51-65.49v25.37h15.694c8.732 0 13.806-4.484 13.806-12.862 0-8.142-5.074-12.508-13.806-12.508H75.618zm63.838-17.228h65.254v17.228h-43.66v15.458h39.412v17.11l-39.412.118v15.576h44.84V197h-66.434v-82.718z" id="c"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+    <use fill="#DD4B39" xlink:href="#b"/>
+    <path stroke="#D74837" d="M.5.5h215v215H.5z"/>
+    <path d="M288.086 197l-5.664-14.632h-35.754L240.886 197h-22.184l35.518-82.718h22.184L311.096 197h-23.01zm-34.928-31.152h22.892l-11.328-29.5-11.564 29.5zM379.17 139.77c-8.732-4.956-19.824-8.85-26.668-8.85-5.192 0-8.614 1.888-8.614 5.664 0 13.688 43.542 5.9 43.542 35.636 0 16.874-14.868 25.488-33.276 25.488-13.806 0-28.202-5.074-38.114-13.216l8.378-16.874c8.496 7.316 21.358 12.508 29.972 12.508 6.372 0 10.384-2.36 10.384-6.726 0-14.042-43.542-5.546-43.542-34.81 0-15.458 13.098-25.252 33.04-25.252 12.154 0 24.426 3.776 33.04 9.322l-8.142 17.11zm62.646-26.078c25.606 0 44.722 17.936 44.722 41.89 0 24.19-19.116 42.362-44.722 42.362s-44.722-18.172-44.722-42.362c0-24.072 19.116-41.89 44.722-41.89zm.236 18.408c-12.39 0-22.774 10.148-22.774 23.6 0 13.452 10.502 23.836 22.774 23.836 12.39 0 22.302-10.384 22.302-23.836 0-13.452-9.912-23.6-22.302-23.6zm59.224-17.818h18.998l37.524 49.796v-49.796h20.06V197h-18.88l-37.524-49.56V197h-20.178v-82.718z" fill="#333"/>
+    <use fill="#FFF" xlink:href="#c"/>
+    <use fill="#000" filter="url(#d)" xlink:href="#c"/>
+  </g>
+</svg>
