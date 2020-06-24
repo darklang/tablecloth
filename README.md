@@ -1,7 +1,7 @@
 # Tablecloth
 
 [![CircleCI](https://circleci.com/gh/darklang/tablecloth.svg?style=shield)](https://circleci.com/gh/darklang/tablecloth)
-[![Npm](https://badge.fury.io/js/tablecloth.svg)](https://www.npmjs.com/package/tablecloth-bucklescript)
+[![Npm](https://badge.fury.io/js/tablecloth-bucklescript.svg)](https://www.npmjs.com/package/tablecloth-bucklescript)
 [![Opam](https://img.shields.io/badge/opam_package-0.7.0-brightgreen)](https://opam.ocaml.org/packages/tablecloth-native)
 
 Tablecloth is an ergonomic, cross-platform, standard library for use with OCaml
