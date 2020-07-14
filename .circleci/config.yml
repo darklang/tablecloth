@@ -167,6 +167,7 @@ workflows:
   build:
     jobs:
       - bucklescript-build-and-test
+      - bucklescript-integration-test
       - native-build-and-test
       - source-code-formatting
       - documentation-generator-build
