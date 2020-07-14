@@ -29,17 +29,17 @@ install: opt
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build: opt dummy
-	cp ../native/src/Bool.ml ./_build/Bool.ml
-	cp ../bucklescript/src/Bool.mli ./_build/Bool.mli
-	cp ../native/src/Comparator.ml ./_build/Comparator.ml
-	cp ../bucklescript/src/Comparator.mli ./_build/Comparator.mli
-	cp ../bucklescript/src/Container.ml ./_build/Container.ml
-	cp ../bucklescript/src/Fun.ml ./_build/Fun.ml
-	cp ../native/src/Float.ml ./_build/Float.ml
-	cp ../bucklescript/src/Float.mli ./_build/Float.mli
-	cp ../bucklescript/src/Fun.mli ./_build/Fun.mli
-	cp ../native/src/Int.ml ./_build/Int.ml
-	cp ../bucklescript/src/Int.mli ./_build/Int.mli
+	cp ../native/src/TableclothBool.ml ./_build/TableclothBool.ml
+	cp ../bucklescript/src/TableclothBool.mli ./_build/TableclothBool.mli
+	cp ../native/src/TableclothComparator.ml ./_build/TableclothComparator.ml
+	cp ../bucklescript/src/TableclothComparator.mli ./_build/TableclothComparator.mli
+	cp ../bucklescript/src/TableclothContainer.ml ./_build/TableclothContainer.ml
+	cp ../bucklescript/src/TableclothFun.ml ./_build/TableclothFun.ml
+	cp ../native/src/TableclothFloat.ml ./_build/TableclothFloat.ml
+	cp ../bucklescript/src/TableclothFloat.mli ./_build/TableclothFloat.mli
+	cp ../bucklescript/src/TableclothFun.mli ./_build/TableclothFun.mli
+	cp ../native/src/TableclothInt.ml ./_build/TableclothInt.ml
+	cp ../bucklescript/src/TableclothInt.mli ./_build/TableclothInt.mli
 	cp ../native/src/Internal.ml ./_build/Internal.ml
 	cp ../native/src/TableclothArray.ml ./_build/TableclothArray.ml
 	cp ../bucklescript/src/TableclothArray.mli ./_build/TableclothArray.mli
@@ -57,27 +57,27 @@ build: opt dummy
 	cp ../native/src/TableclothSet.mli ./_build/TableclothSet.mli
 	cp ../native/src/TableclothString.ml ./_build/TableclothString.ml
 	cp ../bucklescript/src/TableclothString.mli ./_build/TableclothString.mli
-	cp ../bucklescript/src/Tuple2.ml ./_build/Tuple2.ml
-	cp ../bucklescript/src/Tuple2.mli ./_build/Tuple2.mli
-	cp ../bucklescript/src/Tuple3.ml ./_build/Tuple3.ml
-	cp ../bucklescript/src/Tuple3.mli ./_build/Tuple3.mli
-	cp ../native/src/tablecloth.ml ./_build/tablecloth.ml	
+	cp ../bucklescript/src/TableclothTuple2.ml ./_build/TableclothTuple2.ml
+	cp ../bucklescript/src/TableclothTuple2.mli ./_build/TableclothTuple2.mli
+	cp ../bucklescript/src/TableclothTuple3.ml ./_build/TableclothTuple3.ml
+	cp ../bucklescript/src/TableclothTuple3.mli ./_build/TableclothTuple3.mli
+	cp ../native/src/Tablecloth.ml ./_build/Tablecloth.ml
 	opam config exec -- ocamlfind ocamlc \
 		-package base,str \
 		-linkpkg \
 		-I ./_build \
 		-o ./_build/out \
-		./_build/Bool.mli \
-		./_build/Bool.ml \
-		./_build/Comparator.mli \
-		./_build/Comparator.ml \
-		./_build/Container.ml \
-		./_build/Float.mli \
-		./_build/Float.ml \
-		./_build/Fun.mli \
-		./_build/Fun.ml \
-		./_build/Int.mli \
-		./_build/Int.ml \
+		./_build/TableclothBool.mli \
+		./_build/TableclothBool.ml \
+		./_build/TableclothComparator.mli \
+		./_build/TableclothComparator.ml \
+		./_build/TableclothContainer.ml \
+		./_build/TableclothFloat.mli \
+		./_build/TableclothFloat.ml \
+		./_build/TableclothFun.mli \
+		./_build/TableclothFun.ml \
+		./_build/TableclothInt.mli \
+		./_build/TableclothInt.ml \
 		./_build/Internal.ml \
 		./_build/TableclothChar.mli \
 		./_build/TableclothChar.ml \
@@ -95,11 +95,11 @@ build: opt dummy
 		./_build/TableclothResult.ml \
 		./_build/TableclothSet.mli \
 		./_build/TableclothSet.ml \
-		./_build/Tuple2.mli \
-		./_build/Tuple2.ml \
-		./_build/Tuple3.mli \
-		./_build/Tuple3.ml \
-		./_build/tablecloth.ml
+		./_build/TableclothTuple2.mli \
+		./_build/TableclothTuple2.ml \
+		./_build/TableclothTuple3.mli \
+		./_build/TableclothTuple3.ml \
+		./_build/Tablecloth.ml
 
 doc: build
 	opam config exec -- ocamldoc.opt \
@@ -108,17 +108,17 @@ doc: build
 		`opam config exec -- ocamlfind query -i-format str` \
 		-I ./_build \
 		-d ../website \
-		./_build/Bool.mli \
-		./_build/Bool.ml \
-		./_build/Comparator.mli \
-		./_build/Comparator.ml \
-		./_build/Container.ml \
-		./_build/Float.mli \
-		./_build/Float.ml \
-		./_build/Fun.mli \
-		./_build/Fun.ml \
-		./_build/Int.mli \
-		./_build/Int.ml \
+		./_build/TableclothBool.mli \
+		./_build/TableclothBool.ml \
+		./_build/TableclothComparator.mli \
+		./_build/TableclothComparator.ml \
+		./_build/TableclothContainer.ml \
+		./_build/TableclothFloat.mli \
+		./_build/TableclothFloat.ml \
+		./_build/TableclothFun.mli \
+		./_build/TableclothFun.ml \
+		./_build/TableclothInt.mli \
+		./_build/TableclothInt.ml \
 		./_build/Internal.ml \
 		./_build/TableclothChar.mli \
 		./_build/TableclothChar.ml \
@@ -136,11 +136,11 @@ doc: build
 		./_build/TableclothResult.ml \
 		./_build/TableclothSet.mli \
 		./_build/TableclothSet.ml \
-		./_build/Tuple2.mli \
-		./_build/Tuple2.ml \
-		./_build/Tuple3.mli \
-		./_build/Tuple3.ml \
-		./_build/tablecloth.ml
+		./_build/TableclothTuple2.mli \
+		./_build/TableclothTuple2.ml \
+		./_build/TableclothTuple3.mli \
+		./_build/TableclothTuple3.ml \
+		./_build/Tablecloth.ml
 
 clean:
 	rm -f _build/* *.cm* *.o *.a

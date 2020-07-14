@@ -1,17 +1,20 @@
+module Comparator = TableclothComparator
+
 type ('key, 'value, 'id) t = ('key, 'value, 'id) Base.Map.t
 
-module Of (M : Comparator.S) = struct
+module Of (M : TableclothComparator.S) = struct
   type nonrec 'value t = (M.t, 'value, M.identity) t
 end
 
 let keepLatestOnly _ latest = latest
 
-let empty (comparator : ('key, 'identity) Comparator.s) :
+let empty (comparator : ('key, 'identity) TableclothComparator.s) :
     ('key, 'value, 'identity) t =
   Base.Map.empty (Internal.toBaseComparator comparator)
 
 
-let singleton (comparator : ('key, 'identity) Comparator.s) ~key ~value :
+let singleton
+    (comparator : ('key, 'identity) TableclothComparator.s) ~key ~value :
     ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
     (Internal.toBaseComparator comparator)
@@ -20,7 +23,7 @@ let singleton (comparator : ('key, 'identity) Comparator.s) ~key ~value :
 
 
 let fromArray
-    (comparator : ('key, 'identity) Comparator.s)
+    (comparator : ('key, 'identity) TableclothComparator.s)
     (elements : ('key * 'value) array) : ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
     (Internal.toBaseComparator comparator)
@@ -31,7 +34,7 @@ let fromArray
 let from_array = fromArray
 
 let fromList
-    (comparator : ('key, 'identity) Comparator.s)
+    (comparator : ('key, 'identity) TableclothComparator.s)
     (elements : ('key * 'value) list) : ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
     (Internal.toBaseComparator comparator)
@@ -156,7 +159,7 @@ module Poly = struct
 end
 
 module Int = struct
-  type nonrec 'v t = (Int.t, 'v, Int.identity) t
+  type nonrec 'v t = (TableclothInt.t, 'v, TableclothInt.identity) t
 
   let empty = Obj.magic (Base.Map.empty (module Base.Int))
 

@@ -8,7 +8,9 @@ let initialize (length : int) ~(f : int -> 'a) =
   if length <= 0 then [||] else Base.Array.init length ~f
 
 
-let repeat element ~length = initialize length ~f:(Fun.constant element)
+let repeat element ~length =
+  initialize length ~f:(TableclothFun.constant element)
+
 
 let range ?(from = 0) (to_ : int) =
   (Base.Array.init (max 0 (to_ - from)) ~f:(fun i -> i + from) : int array)
@@ -48,7 +50,7 @@ let set_at = setAt
 
 let filter = Base.Array.filter
 
-let sum (type a) t (module M : Container.Sum with type t = a) =
+let sum (type a) t (module M : TableclothContainer.Sum with type t = a) =
   Base.Array.fold t ~init:M.zero ~f:M.add
 
 

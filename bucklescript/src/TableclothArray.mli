@@ -399,7 +399,7 @@ val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
     {[Array.extent [||] ~compare:Int.compare = None]}
 *)
 
-val sum : 'a t -> (module Container.Sum with type t = 'a) -> 'a
+val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
 (** Calculate the sum of a list using the provided modules [zero] value and [add] function.
 
     {2 Examples}
@@ -805,7 +805,7 @@ val join : string t -> sep:string -> string
 
 val groupBy :
      'value t
-  -> ('key, 'id) Comparator.s
+  -> ('key, 'id) TableclothComparator.s
   -> f:('value -> 'key)
   -> ('key, 'value list, 'id) TableclothMap.t
 (** Collect elements which [f] produces the same key for
@@ -826,7 +826,7 @@ val groupBy :
 
 val group_by :
      'value t
-  -> ('key, 'id) Comparator.s
+  -> ('key, 'id) TableclothComparator.s
   -> f:('value -> 'key)
   -> ('key, 'value list, 'id) TableclothMap.t
 

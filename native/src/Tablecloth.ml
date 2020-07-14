@@ -1,5 +1,5 @@
 (** Functions for working with boolean ([true] or [false]) values. *)
-module Bool = Bool
+module Bool = TableclothBool
 
 (** Functions for working with single characters. *)
 module Char = TableclothChar
@@ -8,13 +8,13 @@ module Char = TableclothChar
 module String = TableclothString
 
 (** Fixed precision integers *)
-module Int = Int
+module Int = TableclothInt
 
 (** Functions for working with floating point numbers. *)
-module Float = Float
+module Float = TableclothFloat
 
 (** Interfaces for use with container types like {!Array} or {!List} *)
-module Container = Container
+module Container = TableclothContainer
 
 (** A fixed lenfth collection of values *)
 module Array = TableclothArray
@@ -29,12 +29,12 @@ module Option = TableclothOption
 module Result = TableclothResult
 
 (** Functions for manipulating tuples of length two *)
-module Tuple2 = Tuple2
+module Tuple2 = TableclothTuple2
 
 (** Functions for manipulating tuples of length three *)
-module Tuple3 = Tuple3
+module Tuple3 = TableclothTuple3
 
-module Comparator = Comparator
+module Comparator = TableclothComparator
 
 (** A collection of unique values *)
 module Set = TableclothSet
@@ -43,4 +43,4 @@ module Set = TableclothSet
 module Map = TableclothMap
 
 (** Functions for working with functions. *)
-module Fun = Fun
+module Fun = TableclothFun

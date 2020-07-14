@@ -14,7 +14,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Bool"
+                    "name": "TableclothBool"
                   }
                 },
                 "info": null
@@ -104,7 +104,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Int"
+                    "name": "TableclothInt"
                   }
                 },
                 "info": {
@@ -140,7 +140,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Float"
+                    "name": "TableclothFloat"
                   }
                 },
                 "info": {
@@ -176,7 +176,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Container"
+                    "name": "TableclothContainer"
                   }
                 },
                 "info": {
@@ -392,7 +392,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Tuple2"
+                    "name": "TableclothTuple2"
                   }
                 },
                 "info": {
@@ -428,7 +428,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Tuple3"
+                    "name": "TableclothTuple3"
                   }
                 },
                 "info": {
@@ -464,7 +464,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Comparator"
+                    "name": "TableclothComparator"
                   }
                 },
                 "info": null
@@ -550,7 +550,7 @@
                   "tag": "ModuleAlias",
                   "value": {
                     "father": "Tablecloth",
-                    "name": "Fun"
+                    "name": "TableclothFun"
                   }
                 },
                 "info": {
@@ -622,10 +622,10 @@
       }
     },
     "modules": {
-      "Tuple3": {
+      "TableclothTuple3": {
         "tag": "Module",
         "value": {
-          "name": "Tuple3",
+          "name": "TableclothTuple3",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -644,7 +644,7 @@
                   "name": "t",
                   "parameters": "('a, 'b, 'c)",
                   "is_private": false,
-                  "father": "Tuple3",
+                  "father": "TableclothTuple3",
                   "field_comment": null,
                   "kind": {
                     "tag": "TypeAbstract",
@@ -681,7 +681,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "make",
-                  "qualified_name": "Tuple3.make",
+                  "qualified_name": "TableclothTuple3.make",
                   "type": {
                     "rendered": "'a -> 'b -> 'c -> 'a * 'b * 'c"
                   },
@@ -699,7 +699,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -790,7 +790,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromArray",
-                  "qualified_name": "Tuple3.fromArray",
+                  "qualified_name": "TableclothTuple3.fromArray",
                   "type": {
                     "rendered": "'a array -> ('a * 'a * 'a) option"
                   },
@@ -934,7 +934,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromList",
-                  "qualified_name": "Tuple3.fromList",
+                  "qualified_name": "TableclothTuple3.fromList",
                   "type": {
                     "rendered": "'a list -> ('a * 'a * 'a) option"
                   },
@@ -1096,7 +1096,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "first",
-                  "qualified_name": "Tuple3.first",
+                  "qualified_name": "TableclothTuple3.first",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'a"
                   },
@@ -1185,7 +1185,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "second",
-                  "qualified_name": "Tuple3.second",
+                  "qualified_name": "TableclothTuple3.second",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'b"
                   },
@@ -1274,7 +1274,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "third",
-                  "qualified_name": "Tuple3.third",
+                  "qualified_name": "TableclothTuple3.third",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'c"
                   },
@@ -1363,7 +1363,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "initial",
-                  "qualified_name": "Tuple3.initial",
+                  "qualified_name": "TableclothTuple3.initial",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'a * 'b"
                   },
@@ -1381,7 +1381,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -1401,7 +1401,7 @@
                           "value": {
                             "name": "Tuple2",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple2",
                               "content": [
                                 {
@@ -1492,7 +1492,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "tail",
-                  "qualified_name": "Tuple3.tail",
+                  "qualified_name": "TableclothTuple3.tail",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'b * 'c"
                   },
@@ -1510,7 +1510,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -1530,7 +1530,7 @@
                           "value": {
                             "name": "Tuple2",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple2",
                               "content": [
                                 {
@@ -1639,7 +1639,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "rotateLeft",
-                  "qualified_name": "Tuple3.rotateLeft",
+                  "qualified_name": "TableclothTuple3.rotateLeft",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'b * 'c * 'a"
                   },
@@ -1728,7 +1728,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "rotateRight",
-                  "qualified_name": "Tuple3.rotateRight",
+                  "qualified_name": "TableclothTuple3.rotateRight",
                   "type": {
                     "rendered": "'a * 'b * 'c -> 'c * 'a * 'b"
                   },
@@ -1835,7 +1835,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapFirst",
-                  "qualified_name": "Tuple3.mapFirst",
+                  "qualified_name": "TableclothTuple3.mapFirst",
                   "type": {
                     "rendered": "'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c"
                   },
@@ -1924,7 +1924,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapSecond",
-                  "qualified_name": "Tuple3.mapSecond",
+                  "qualified_name": "TableclothTuple3.mapSecond",
                   "type": {
                     "rendered": "'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c"
                   },
@@ -2013,7 +2013,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapThird",
-                  "qualified_name": "Tuple3.mapThird",
+                  "qualified_name": "TableclothTuple3.mapThird",
                   "type": {
                     "rendered": "'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z"
                   },
@@ -2087,7 +2087,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapEach",
-                  "qualified_name": "Tuple3.mapEach",
+                  "qualified_name": "TableclothTuple3.mapEach",
                   "type": {
                     "rendered": "'a * 'b * 'c -> f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'x * 'y * 'z"
                   },
@@ -2111,14 +2111,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple3.first",
+                            "name": "TableclothTuple3.first",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Tuple3.first",
+                              "target": "TableclothTuple3.first",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple3.first"
+                                  "value": "TableclothTuple3.first"
                                 }
                               ]
                             }
@@ -2139,14 +2139,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple3.second",
+                            "name": "TableclothTuple3.second",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Tuple3.second",
+                              "target": "TableclothTuple3.second",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple3.second"
+                                  "value": "TableclothTuple3.second"
                                 }
                               ]
                             }
@@ -2167,14 +2167,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple3.third",
+                            "name": "TableclothTuple3.third",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Tuple3.third",
+                              "target": "TableclothTuple3.third",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple3.third"
+                                  "value": "TableclothTuple3.third"
                                 }
                               ]
                             }
@@ -2245,7 +2245,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapAll",
-                  "qualified_name": "Tuple3.mapAll",
+                  "qualified_name": "TableclothTuple3.mapAll",
                   "type": {
                     "rendered": "'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b"
                   },
@@ -2368,7 +2368,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "toArray",
-                  "qualified_name": "Tuple3.toArray",
+                  "qualified_name": "TableclothTuple3.toArray",
                   "type": {
                     "rendered": "'a * 'a * 'a -> 'a array"
                   },
@@ -2485,7 +2485,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "toList",
-                  "qualified_name": "Tuple3.toList",
+                  "qualified_name": "TableclothTuple3.toList",
                   "type": {
                     "rendered": "'a * 'a * 'a -> 'a list"
                   },
@@ -2620,9 +2620,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "equal",
-                  "qualified_name": "Tuple3.equal",
+                  "qualified_name": "TableclothTuple3.equal",
                   "type": {
-                    "rendered": "('a -> 'a -> bool) ->\n  ('b -> 'b -> bool) ->\n  ('c -> 'c -> bool) -> ('a, 'b, 'c) Tuple3.t -> ('a, 'b, 'c) Tuple3.t -> bool"
+                    "rendered": "('a -> 'a -> bool) ->\n  ('b -> 'b -> bool) ->\n  ('c -> 'c -> bool) ->\n  ('a, 'b, 'c) TableclothTuple3.t -> ('a, 'b, 'c) TableclothTuple3.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -2638,7 +2638,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -2729,9 +2729,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "compare",
-                  "qualified_name": "Tuple3.compare",
+                  "qualified_name": "TableclothTuple3.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) ->\n  ('b -> 'b -> int) ->\n  ('c -> 'c -> int) -> ('a, 'b, 'c) Tuple3.t -> ('a, 'b, 'c) Tuple3.t -> int"
+                    "rendered": "('a -> 'a -> int) ->\n  ('b -> 'b -> int) ->\n  ('c -> 'c -> int) ->\n  ('a, 'b, 'c) TableclothTuple3.t -> ('a, 'b, 'c) TableclothTuple3.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -2747,7 +2747,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -2868,10 +2868,10 @@
           }
         }
       },
-      "Tuple2": {
+      "TableclothTuple2": {
         "tag": "Module",
         "value": {
-          "name": "Tuple2",
+          "name": "TableclothTuple2",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -2890,7 +2890,7 @@
                   "name": "t",
                   "parameters": "('a, 'b)",
                   "is_private": false,
-                  "father": "Tuple2",
+                  "father": "TableclothTuple2",
                   "field_comment": null,
                   "kind": {
                     "tag": "TypeAbstract",
@@ -2927,7 +2927,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "make",
-                  "qualified_name": "Tuple2.make",
+                  "qualified_name": "TableclothTuple2.make",
                   "type": {
                     "rendered": "'a -> 'b -> 'a * 'b"
                   },
@@ -3009,7 +3009,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromArray",
-                  "qualified_name": "Tuple2.fromArray",
+                  "qualified_name": "TableclothTuple2.fromArray",
                   "type": {
                     "rendered": "'a array -> ('a * 'a) option"
                   },
@@ -3153,7 +3153,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_array",
-                  "qualified_name": "Tuple2.from_array",
+                  "qualified_name": "TableclothTuple2.from_array",
                   "type": {
                     "rendered": "'a array -> ('a * 'a) option"
                   },
@@ -3169,7 +3169,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromList",
-                  "qualified_name": "Tuple2.fromList",
+                  "qualified_name": "TableclothTuple2.fromList",
                   "type": {
                     "rendered": "'a list -> ('a * 'a) option"
                   },
@@ -3313,7 +3313,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_list",
-                  "qualified_name": "Tuple2.from_list",
+                  "qualified_name": "TableclothTuple2.from_list",
                   "type": {
                     "rendered": "'a list -> ('a * 'a) option"
                   },
@@ -3329,7 +3329,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "first",
-                  "qualified_name": "Tuple2.first",
+                  "qualified_name": "TableclothTuple2.first",
                   "type": {
                     "rendered": "'a * 'b -> 'a"
                   },
@@ -3418,7 +3418,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "second",
-                  "qualified_name": "Tuple2.second",
+                  "qualified_name": "TableclothTuple2.second",
                   "type": {
                     "rendered": "'a * 'b -> 'b"
                   },
@@ -3525,7 +3525,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapFirst",
-                  "qualified_name": "Tuple2.mapFirst",
+                  "qualified_name": "TableclothTuple2.mapFirst",
                   "type": {
                     "rendered": "'a * 'b -> f:('a -> 'x) -> 'x * 'b"
                   },
@@ -3541,14 +3541,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple2.first",
+                            "name": "TableclothTuple2.first",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Tuple2.first",
+                              "target": "TableclothTuple2.first",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple2.first"
+                                  "value": "TableclothTuple2.first"
                                 }
                               ]
                             }
@@ -3634,7 +3634,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "map_first",
-                  "qualified_name": "Tuple2.map_first",
+                  "qualified_name": "TableclothTuple2.map_first",
                   "type": {
                     "rendered": "'a * 'b -> f:('a -> 'x) -> 'x * 'b"
                   },
@@ -3650,7 +3650,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapSecond",
-                  "qualified_name": "Tuple2.mapSecond",
+                  "qualified_name": "TableclothTuple2.mapSecond",
                   "type": {
                     "rendered": "'a * 'b -> f:('b -> 'c) -> 'a * 'c"
                   },
@@ -3739,7 +3739,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "map_second",
-                  "qualified_name": "Tuple2.map_second",
+                  "qualified_name": "TableclothTuple2.map_second",
                   "type": {
                     "rendered": "'a * 'b -> f:('b -> 'c) -> 'a * 'c"
                   },
@@ -3755,7 +3755,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapEach",
-                  "qualified_name": "Tuple2.mapEach",
+                  "qualified_name": "TableclothTuple2.mapEach",
                   "type": {
                     "rendered": "'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y"
                   },
@@ -3860,7 +3860,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "map_each",
-                  "qualified_name": "Tuple2.map_each",
+                  "qualified_name": "TableclothTuple2.map_each",
                   "type": {
                     "rendered": "'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y"
                   },
@@ -3876,7 +3876,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "mapAll",
-                  "qualified_name": "Tuple2.mapAll",
+                  "qualified_name": "TableclothTuple2.mapAll",
                   "type": {
                     "rendered": "'a * 'a -> f:('a -> 'b) -> 'b * 'b"
                   },
@@ -3981,7 +3981,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "map_all",
-                  "qualified_name": "Tuple2.map_all",
+                  "qualified_name": "TableclothTuple2.map_all",
                   "type": {
                     "rendered": "'a * 'a -> f:('a -> 'b) -> 'b * 'b"
                   },
@@ -3997,7 +3997,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "swap",
-                  "qualified_name": "Tuple2.swap",
+                  "qualified_name": "TableclothTuple2.swap",
                   "type": {
                     "rendered": "'a * 'b -> 'b * 'a"
                   },
@@ -4104,7 +4104,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "toArray",
-                  "qualified_name": "Tuple2.toArray",
+                  "qualified_name": "TableclothTuple2.toArray",
                   "type": {
                     "rendered": "'a * 'a -> 'a array"
                   },
@@ -4221,7 +4221,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_array",
-                  "qualified_name": "Tuple2.to_array",
+                  "qualified_name": "TableclothTuple2.to_array",
                   "type": {
                     "rendered": "'a * 'a -> 'a array"
                   },
@@ -4237,7 +4237,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "toList",
-                  "qualified_name": "Tuple2.toList",
+                  "qualified_name": "TableclothTuple2.toList",
                   "type": {
                     "rendered": "'a * 'a -> 'a list"
                   },
@@ -4326,7 +4326,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_list",
-                  "qualified_name": "Tuple2.to_list",
+                  "qualified_name": "TableclothTuple2.to_list",
                   "type": {
                     "rendered": "'a * 'a -> 'a list"
                   },
@@ -4360,9 +4360,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "equal",
-                  "qualified_name": "Tuple2.equal",
+                  "qualified_name": "TableclothTuple2.equal",
                   "type": {
-                    "rendered": "('a -> 'a -> bool) ->\n  ('b -> 'b -> bool) -> ('a, 'b) Tuple2.t -> ('a, 'b) Tuple2.t -> bool"
+                    "rendered": "('a -> 'a -> bool) ->\n  ('b -> 'b -> bool) ->\n  ('a, 'b) TableclothTuple2.t -> ('a, 'b) TableclothTuple2.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -4378,7 +4378,7 @@
                           "value": {
                             "name": "Tuple2",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple2",
                               "content": [
                                 {
@@ -4469,9 +4469,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "compare",
-                  "qualified_name": "Tuple2.compare",
+                  "qualified_name": "TableclothTuple2.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) ->\n  ('b -> 'b -> int) -> ('a, 'b) Tuple2.t -> ('a, 'b) Tuple2.t -> int"
+                    "rendered": "('a -> 'a -> int) ->\n  ('b -> 'b -> int) ->\n  ('a, 'b) TableclothTuple2.t -> ('a, 'b) TableclothTuple2.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -4487,7 +4487,7 @@
                           "value": {
                             "name": "Tuple2",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple2",
                               "content": [
                                 {
@@ -4775,7 +4775,7 @@
                     "value": {
                       "name": "Comparator.S",
                       "reference": {
-                        "kind": "MODULETYPE",
+                        "kind": "Unknown",
                         "target": "Comparator.S",
                         "content": [
                           {
@@ -4818,7 +4818,7 @@
                     "value": {
                       "name": "Comparator",
                       "reference": {
-                        "kind": "MODULE",
+                        "kind": "Unknown",
                         "target": "Comparator",
                         "content": [
                           {
@@ -4869,7 +4869,7 @@
                           "name": "M",
                           "kind": {
                             "tag": "ModuleTypeAlias",
-                            "value": "Comparator.S"
+                            "value": "TableclothComparator.S"
                           }
                         }
                       },
@@ -4997,7 +4997,7 @@
                     "value": {
                       "name": "Comparator.S",
                       "reference": {
-                        "kind": "MODULETYPE",
+                        "kind": "Unknown",
                         "target": "Comparator.S",
                         "content": [
                           {
@@ -5228,7 +5228,7 @@
                   "name": "empty",
                   "qualified_name": "TableclothSet.empty",
                   "type": {
-                    "rendered": "('a, 'identity) Comparator.s -> ('a, 'identity) TableclothSet.t"
+                    "rendered": "('a, 'identity) TableclothComparator.s -> ('a, 'identity) TableclothSet.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -5326,7 +5326,7 @@
                   "name": "singleton",
                   "qualified_name": "TableclothSet.singleton",
                   "type": {
-                    "rendered": "('a, 'identity) Comparator.s -> 'a -> ('a, 'identity) TableclothSet.t"
+                    "rendered": "('a, 'identity) TableclothComparator.s ->\n  'a -> ('a, 'identity) TableclothSet.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -5340,14 +5340,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Int",
+                            "name": "TableclothSet.Int",
                             "reference": {
                               "kind": "MODULE",
-                              "target": "Int",
+                              "target": "TableclothSet.Int",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Int"
+                                  "value": "TableclothSet.Int"
                                 }
                               ]
                             }
@@ -5416,7 +5416,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothSet.fromArray",
                   "type": {
-                    "rendered": "('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) TableclothSet.t"
+                    "rendered": "('a, 'identity) TableclothComparator.s ->\n  'a array -> ('a, 'identity) TableclothSet.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -5506,7 +5506,7 @@
                   "name": "from_array",
                   "qualified_name": "TableclothSet.from_array",
                   "type": {
-                    "rendered": "('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) TableclothSet.t"
+                    "rendered": "('a, 'identity) TableclothComparator.s ->\n  'a array -> ('a, 'identity) TableclothSet.t"
                   },
                   "info": null,
                   "parameters": {
@@ -5522,7 +5522,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothSet.fromList",
                   "type": {
-                    "rendered": "('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) TableclothSet.t"
+                    "rendered": "('a, 'identity) TableclothComparator.s ->\n  'a list -> ('a, 'identity) TableclothSet.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -5612,7 +5612,7 @@
                   "name": "from_list",
                   "qualified_name": "TableclothSet.from_list",
                   "type": {
-                    "rendered": "('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) TableclothSet.t"
+                    "rendered": "('a, 'identity) TableclothComparator.s ->\n  'a list -> ('a, 'identity) TableclothSet.t"
                   },
                   "info": null,
                   "parameters": {
@@ -7872,7 +7872,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "Of(Int).t"
+                              "rendered": "Of(TableclothInt).t"
                             }
                           },
                           "info": null
@@ -7936,14 +7936,14 @@
                                 {
                                   "tag": "Ref",
                                   "value": {
-                                    "name": "Int",
+                                    "name": "TableclothSet.Int",
                                     "reference": {
                                       "kind": "MODULE",
-                                      "target": "Int",
+                                      "target": "TableclothSet.Int",
                                       "content": [
                                         {
                                           "tag": "Code",
-                                          "value": "Int"
+                                          "value": "TableclothSet.Int"
                                         }
                                       ]
                                     }
@@ -8232,14 +8232,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Int",
+                            "name": "TableclothSet.Int",
                             "reference": {
                               "kind": "MODULE",
-                              "target": "Int",
+                              "target": "TableclothSet.Int",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Int"
+                                  "value": "TableclothSet.Int"
                                 }
                               ]
                             }
@@ -9034,7 +9034,7 @@
                           "value": {
                             "name": "Fun.(|>)",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.(|>)",
                               "content": [
                                 {
@@ -9171,7 +9171,7 @@
                           "value": {
                             "name": "Fun.pipe",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.pipe",
                               "content": [
                                 {
@@ -10171,7 +10171,7 @@
                           "value": {
                             "name": "Bool.(&&)",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Bool.(&&)",
                               "content": [
                                 {
@@ -17509,7 +17509,7 @@
                   "name": "sum",
                   "qualified_name": "TableclothList.sum",
                   "type": {
-                    "rendered": "'a TableclothList.t -> (module Container.Sum with type t = 'a) -> 'a"
+                    "rendered": "'a TableclothList.t ->\n  (module TableclothContainer.Sum with type t = 'a) -> 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -20769,7 +20769,7 @@
                   "name": "groupBy",
                   "qualified_name": "TableclothList.groupBy",
                   "type": {
-                    "rendered": "'value TableclothList.t ->\n  ('key, 'id) Comparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
+                    "rendered": "'value TableclothList.t ->\n  ('key, 'id) TableclothComparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -20891,7 +20891,7 @@
                   "name": "group_by",
                   "qualified_name": "TableclothList.group_by",
                   "type": {
-                    "rendered": "'value TableclothList.t ->\n  ('key, 'id) Comparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
+                    "rendered": "'value TableclothList.t ->\n  ('key, 'id) TableclothComparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
                   },
                   "info": null,
                   "parameters": {
@@ -24967,7 +24967,7 @@
                   "name": "sum",
                   "qualified_name": "TableclothArray.sum",
                   "type": {
-                    "rendered": "'a TableclothArray.t -> (module Container.Sum with type t = 'a) -> 'a"
+                    "rendered": "'a TableclothArray.t ->\n  (module TableclothContainer.Sum with type t = 'a) -> 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -28235,7 +28235,7 @@
                   "name": "groupBy",
                   "qualified_name": "TableclothArray.groupBy",
                   "type": {
-                    "rendered": "'value TableclothArray.t ->\n  ('key, 'id) Comparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
+                    "rendered": "'value TableclothArray.t ->\n  ('key, 'id) TableclothComparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -28357,7 +28357,7 @@
                   "name": "group_by",
                   "qualified_name": "TableclothArray.group_by",
                   "type": {
-                    "rendered": "'value TableclothArray.t ->\n  ('key, 'id) Comparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
+                    "rendered": "'value TableclothArray.t ->\n  ('key, 'id) TableclothComparator.s ->\n  f:('value -> 'key) -> ('key, 'value list, 'id) TableclothMap.t"
                   },
                   "info": null,
                   "parameters": {
@@ -28964,7 +28964,7 @@
                     "value": {
                       "name": "Comparator.S",
                       "reference": {
-                        "kind": "MODULETYPE",
+                        "kind": "Unknown",
                         "target": "Comparator.S",
                         "content": [
                           {
@@ -29007,7 +29007,7 @@
                     "value": {
                       "name": "Comparator",
                       "reference": {
-                        "kind": "MODULE",
+                        "kind": "Unknown",
                         "target": "Comparator",
                         "content": [
                           {
@@ -29058,7 +29058,7 @@
                           "name": "M",
                           "kind": {
                             "tag": "ModuleTypeAlias",
-                            "value": "Comparator.S"
+                            "value": "TableclothComparator.S"
                           }
                         }
                       },
@@ -29182,7 +29182,7 @@
                     "value": {
                       "name": "Comparator.S",
                       "reference": {
-                        "kind": "MODULETYPE",
+                        "kind": "Unknown",
                         "target": "Comparator.S",
                         "content": [
                           {
@@ -29413,7 +29413,7 @@
                   "name": "empty",
                   "qualified_name": "TableclothMap.empty",
                   "type": {
-                    "rendered": "('key, 'identity) Comparator.s -> ('key, 'value, 'identity) TableclothMap.t"
+                    "rendered": "('key, 'identity) TableclothComparator.s ->\n  ('key, 'value, 'identity) TableclothMap.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -29535,7 +29535,7 @@
                   "name": "singleton",
                   "qualified_name": "TableclothMap.singleton",
                   "type": {
-                    "rendered": "('key, 'identity) Comparator.s ->\n  key:'key -> value:'value -> ('key, 'value, 'identity) TableclothMap.t"
+                    "rendered": "('key, 'identity) TableclothComparator.s ->\n  key:'key -> value:'value -> ('key, 'value, 'identity) TableclothMap.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -29609,7 +29609,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothMap.fromArray",
                   "type": {
-                    "rendered": "('key, 'identity) Comparator.s ->\n  ('key * 'value) array -> ('key, 'value, 'identity) TableclothMap.t"
+                    "rendered": "('key, 'identity) TableclothComparator.s ->\n  ('key * 'value) array -> ('key, 'value, 'identity) TableclothMap.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -29667,7 +29667,7 @@
                   "name": "from_array",
                   "qualified_name": "TableclothMap.from_array",
                   "type": {
-                    "rendered": "('key, 'identity) Comparator.s ->\n  ('key * 'value) array -> ('key, 'value, 'identity) TableclothMap.t"
+                    "rendered": "('key, 'identity) TableclothComparator.s ->\n  ('key * 'value) array -> ('key, 'value, 'identity) TableclothMap.t"
                   },
                   "info": null,
                   "parameters": {
@@ -29683,7 +29683,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothMap.fromList",
                   "type": {
-                    "rendered": "('key, 'identity) Comparator.s ->\n  ('key * 'value) list -> ('key, 'value, 'identity) TableclothMap.t"
+                    "rendered": "('key, 'identity) TableclothComparator.s ->\n  ('key * 'value) list -> ('key, 'value, 'identity) TableclothMap.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -29741,7 +29741,7 @@
                   "name": "from_list",
                   "qualified_name": "TableclothMap.from_list",
                   "type": {
-                    "rendered": "('key, 'identity) Comparator.s ->\n  ('key * 'value) list -> ('key, 'value, 'identity) TableclothMap.t"
+                    "rendered": "('key, 'identity) TableclothComparator.s ->\n  ('key * 'value) list -> ('key, 'value, 'identity) TableclothMap.t"
                   },
                   "info": null,
                   "parameters": {
@@ -32701,7 +32701,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "'value Of(Int).t"
+                              "rendered": "'value Of(TableclothInt).t"
                             }
                           },
                           "info": null
@@ -32981,14 +32981,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Int",
+                            "name": "TableclothMap.Int",
                             "reference": {
                               "kind": "MODULE",
-                              "target": "Int",
+                              "target": "TableclothMap.Int",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Int"
+                                  "value": "TableclothMap.Int"
                                 }
                               ]
                             }
@@ -41062,7 +41062,7 @@
                           "value": {
                             "name": "Comparator",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Comparator",
                               "content": [
                                 {
@@ -41106,7 +41106,7 @@
                           "value": {
                             "name": "Comparator",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Comparator",
                               "content": [
                                 {
@@ -41139,7 +41139,7 @@
                   "name": "comparator",
                   "qualified_name": "TableclothString.comparator",
                   "type": {
-                    "rendered": "(TableclothString.t, TableclothString.identity) Comparator.t"
+                    "rendered": "(TableclothString.t, TableclothString.identity) TableclothComparator.t"
                   },
                   "info": null,
                   "parameters": {
@@ -43475,7 +43475,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -43779,7 +43779,7 @@
                           "value": {
                             "name": "Comparator",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Comparator",
                               "content": [
                                 {
@@ -43823,7 +43823,7 @@
                           "value": {
                             "name": "Comparator",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Comparator",
                               "content": [
                                 {
@@ -43856,7 +43856,7 @@
                   "name": "comparator",
                   "qualified_name": "TableclothChar.comparator",
                   "type": {
-                    "rendered": "(TableclothChar.t, TableclothChar.identity) Comparator.t"
+                    "rendered": "(TableclothChar.t, TableclothChar.identity) TableclothComparator.t"
                   },
                   "info": null,
                   "parameters": {
@@ -43893,12 +43893,26 @@
             "tag": "ModuleStruct",
             "value": [
               {
+                "tag": "Module",
+                "value": {
+                  "name": "Comparator",
+                  "kind": {
+                    "tag": "ModuleAlias",
+                    "value": {
+                      "father": "Internal",
+                      "name": "TableclothComparator"
+                    }
+                  },
+                  "info": null
+                }
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "toBaseComparator",
                   "qualified_name": "Internal.toBaseComparator",
                   "type": {
-                    "rendered": "('a, 'id) Comparator.s -> ('a, 'id) Base.Map.comparator"
+                    "rendered": "('a, 'id) TableclothComparator.s -> ('a, 'id) Base.Map.comparator"
                   },
                   "info": null,
                   "parameters": {
@@ -43913,10 +43927,10 @@
           "info": null
         }
       },
-      "Int": {
+      "TableclothInt": {
         "tag": "Module",
         "value": {
-          "name": "Int",
+          "name": "TableclothInt",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -44026,14 +44040,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.maximumValue",
+                      "name": "TableclothInt.maximumValue",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.maximumValue",
+                        "target": "TableclothInt.maximumValue",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.maximumValue"
+                            "value": "TableclothInt.maximumValue"
                           }
                         ]
                       }
@@ -44046,14 +44060,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.minimumValue",
+                      "name": "TableclothInt.minimumValue",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.minimumValue",
+                        "target": "TableclothInt.minimumValue",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.minimumValue"
+                            "value": "TableclothInt.minimumValue"
                           }
                         ]
                       }
@@ -44308,7 +44322,7 @@
                   "name": "t",
                   "parameters": "",
                   "is_private": false,
-                  "father": "Int",
+                  "father": "TableclothInt",
                   "field_comment": null,
                   "kind": {
                     "tag": "TypeAbstract",
@@ -44345,9 +44359,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "zero",
-                  "qualified_name": "Int.zero",
+                  "qualified_name": "TableclothInt.zero",
                   "type": {
-                    "rendered": "Int.t"
+                    "rendered": "TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44391,9 +44405,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "one",
-                  "qualified_name": "Int.one",
+                  "qualified_name": "TableclothInt.one",
                   "type": {
-                    "rendered": "Int.t"
+                    "rendered": "TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44437,9 +44451,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "maximumValue",
-                  "qualified_name": "Int.maximumValue",
+                  "qualified_name": "TableclothInt.maximumValue",
                   "type": {
-                    "rendered": "Int.t"
+                    "rendered": "TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44483,9 +44497,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "maximum_value",
-                  "qualified_name": "Int.maximum_value",
+                  "qualified_name": "TableclothInt.maximum_value",
                   "type": {
-                    "rendered": "Int.t"
+                    "rendered": "TableclothInt.t"
                   },
                   "info": null,
                   "parameters": {
@@ -44499,9 +44513,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "minimumValue",
-                  "qualified_name": "Int.minimumValue",
+                  "qualified_name": "TableclothInt.minimumValue",
                   "type": {
-                    "rendered": "Int.t"
+                    "rendered": "TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44545,9 +44559,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "minimum_value",
-                  "qualified_name": "Int.minimum_value",
+                  "qualified_name": "TableclothInt.minimum_value",
                   "type": {
-                    "rendered": "Int.t"
+                    "rendered": "TableclothInt.t"
                   },
                   "info": null,
                   "parameters": {
@@ -44579,9 +44593,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromString",
-                  "qualified_name": "Int.fromString",
+                  "qualified_name": "TableclothInt.fromString",
                   "type": {
-                    "rendered": "string -> Int.t option"
+                    "rendered": "string -> TableclothInt.t option"
                   },
                   "info": {
                     "deprecated": null,
@@ -44774,9 +44788,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_string",
-                  "qualified_name": "Int.from_string",
+                  "qualified_name": "TableclothInt.from_string",
                   "type": {
-                    "rendered": "string -> Int.t option"
+                    "rendered": "string -> TableclothInt.t option"
                   },
                   "info": null,
                   "parameters": {
@@ -44828,7 +44842,7 @@
                     "value": {
                       "name": "Int",
                       "reference": {
-                        "kind": "MODULE",
+                        "kind": "Unknown",
                         "target": "Int",
                         "content": [
                           {
@@ -44846,14 +44860,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.(+)",
+                      "name": "TableclothInt.(+)",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.(+)",
+                        "target": "TableclothInt.(+)",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.(+)"
+                            "value": "TableclothInt.(+)"
                           }
                         ]
                       }
@@ -44866,14 +44880,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.(-)",
+                      "name": "TableclothInt.(-)",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.(-)",
+                        "target": "TableclothInt.(-)",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.(-)"
+                            "value": "TableclothInt.(-)"
                           }
                         ]
                       }
@@ -44886,14 +44900,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.( * )",
+                      "name": "TableclothInt.( * )",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.( * )",
+                        "target": "TableclothInt.( * )",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.( * )"
+                            "value": "TableclothInt.( * )"
                           }
                         ]
                       }
@@ -44906,14 +44920,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.( ** )",
+                      "name": "TableclothInt.( ** )",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.( ** )",
+                        "target": "TableclothInt.( ** )",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.( ** )"
+                            "value": "TableclothInt.( ** )"
                           }
                         ]
                       }
@@ -44926,14 +44940,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.(mod)",
+                      "name": "TableclothInt.(mod)",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.(mod)",
+                        "target": "TableclothInt.(mod)",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.(mod)"
+                            "value": "TableclothInt.(mod)"
                           }
                         ]
                       }
@@ -44946,14 +44960,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Int.(/)",
+                      "name": "TableclothInt.(/)",
                       "reference": {
                         "kind": "VAL",
-                        "target": "Int.(/)",
+                        "target": "TableclothInt.(/)",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Int.(/)"
+                            "value": "TableclothInt.(/)"
                           }
                         ]
                       }
@@ -44973,9 +44987,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "add",
-                  "qualified_name": "Int.add",
+                  "qualified_name": "TableclothInt.add",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44991,7 +45005,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -45094,7 +45108,7 @@
                           "value": {
                             "name": "Float.add",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.add",
                               "content": [
                                 {
@@ -45134,9 +45148,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(+)",
-                  "qualified_name": "Int.(+)",
+                  "qualified_name": "TableclothInt.(+)",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45152,7 +45166,7 @@
                           "value": {
                             "name": "Int.add",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.add",
                               "content": [
                                 {
@@ -45188,9 +45202,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "subtract",
-                  "qualified_name": "Int.subtract",
+                  "qualified_name": "TableclothInt.subtract",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45264,9 +45278,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(-)",
-                  "qualified_name": "Int.(-)",
+                  "qualified_name": "TableclothInt.(-)",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45282,7 +45296,7 @@
                           "value": {
                             "name": "Int.subtract",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.subtract",
                               "content": [
                                 {
@@ -45318,9 +45332,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "multiply",
-                  "qualified_name": "Int.multiply",
+                  "qualified_name": "TableclothInt.multiply",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45402,9 +45416,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "( * )",
-                  "qualified_name": "Int.( * )",
+                  "qualified_name": "TableclothInt.( * )",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45420,7 +45434,7 @@
                           "value": {
                             "name": "Int.multiply",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.multiply",
                               "content": [
                                 {
@@ -45456,9 +45470,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "divide",
-                  "qualified_name": "Int.divide",
+                  "qualified_name": "TableclothInt.divide",
                   "type": {
-                    "rendered": "Int.t -> by:Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> by:TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45598,9 +45612,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(/)",
-                  "qualified_name": "Int.(/)",
+                  "qualified_name": "TableclothInt.(/)",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45616,7 +45630,7 @@
                           "value": {
                             "name": "Int.divide",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.divide",
                               "content": [
                                 {
@@ -45652,9 +45666,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(/.)",
-                  "qualified_name": "Int.(/.)",
+                  "qualified_name": "TableclothInt.(/.)",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> float"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> float"
                   },
                   "info": {
                     "deprecated": null,
@@ -45756,9 +45770,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "power",
-                  "qualified_name": "Int.power",
+                  "qualified_name": "TableclothInt.power",
                   "type": {
-                    "rendered": "base:Int.t -> exponent:Int.t -> Int.t"
+                    "rendered": "base:TableclothInt.t -> exponent:TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45861,9 +45875,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "( ** )",
-                  "qualified_name": "Int.( ** )",
+                  "qualified_name": "TableclothInt.( ** )",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -45879,7 +45893,7 @@
                           "value": {
                             "name": "Int.power",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.power",
                               "content": [
                                 {
@@ -45915,9 +45929,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "negate",
-                  "qualified_name": "Int.negate",
+                  "qualified_name": "TableclothInt.negate",
                   "type": {
-                    "rendered": "Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46050,9 +46064,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(~-)",
-                  "qualified_name": "Int.(~-)",
+                  "qualified_name": "TableclothInt.(~-)",
                   "type": {
-                    "rendered": "Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46068,7 +46082,7 @@
                           "value": {
                             "name": "Int.negate",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.negate",
                               "content": [
                                 {
@@ -46104,9 +46118,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "absolute",
-                  "qualified_name": "Int.absolute",
+                  "qualified_name": "TableclothInt.absolute",
                   "type": {
-                    "rendered": "Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46224,9 +46238,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "modulo",
-                  "qualified_name": "Int.modulo",
+                  "qualified_name": "TableclothInt.modulo",
                   "type": {
-                    "rendered": "Int.t -> by:Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> by:TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46274,7 +46288,7 @@
                           "value": {
                             "name": "Int.isEven",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.isEven",
                               "content": [
                                 {
@@ -46294,7 +46308,7 @@
                           "value": {
                             "name": "Int.isOdd",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.isOdd",
                               "content": [
                                 {
@@ -46338,7 +46352,7 @@
                           "value": {
                             "name": "Int.remainder",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.remainder",
                               "content": [
                                 {
@@ -46534,9 +46548,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(mod)",
-                  "qualified_name": "Int.(mod)",
+                  "qualified_name": "TableclothInt.(mod)",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46552,7 +46566,7 @@
                           "value": {
                             "name": "Int.modulo",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.modulo",
                               "content": [
                                 {
@@ -46588,9 +46602,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "remainder",
-                  "qualified_name": "Int.remainder",
+                  "qualified_name": "TableclothInt.remainder",
                   "type": {
-                    "rendered": "Int.t -> by:Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> by:TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46614,7 +46628,7 @@
                           "value": {
                             "name": "Int.modulo",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.modulo",
                               "content": [
                                 {
@@ -46690,9 +46704,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "maximum",
-                  "qualified_name": "Int.maximum",
+                  "qualified_name": "TableclothInt.maximum",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46787,9 +46801,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "minimum",
-                  "qualified_name": "Int.minimum",
+                  "qualified_name": "TableclothInt.minimum",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> Int.t"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -46902,9 +46916,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isEven",
-                  "qualified_name": "Int.isEven",
+                  "qualified_name": "TableclothInt.isEven",
                   "type": {
-                    "rendered": "Int.t -> bool"
+                    "rendered": "TableclothInt.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -47014,9 +47028,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_even",
-                  "qualified_name": "Int.is_even",
+                  "qualified_name": "TableclothInt.is_even",
                   "type": {
-                    "rendered": "Int.t -> bool"
+                    "rendered": "TableclothInt.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -47030,9 +47044,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isOdd",
-                  "qualified_name": "Int.isOdd",
+                  "qualified_name": "TableclothInt.isOdd",
                   "type": {
-                    "rendered": "Int.t -> bool"
+                    "rendered": "TableclothInt.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -47142,9 +47156,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_odd",
-                  "qualified_name": "Int.is_odd",
+                  "qualified_name": "TableclothInt.is_odd",
                   "type": {
-                    "rendered": "Int.t -> bool"
+                    "rendered": "TableclothInt.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -47158,9 +47172,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "clamp",
-                  "qualified_name": "Int.clamp",
+                  "qualified_name": "TableclothInt.clamp",
                   "type": {
-                    "rendered": "Int.t -> lower:Int.t -> upper:Int.t -> Int.t"
+                    "rendered": "TableclothInt.t ->\n  lower:TableclothInt.t -> upper:TableclothInt.t -> TableclothInt.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47327,9 +47341,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "inRange",
-                  "qualified_name": "Int.inRange",
+                  "qualified_name": "TableclothInt.inRange",
                   "type": {
-                    "rendered": "Int.t -> lower:Int.t -> upper:Int.t -> bool"
+                    "rendered": "TableclothInt.t -> lower:TableclothInt.t -> upper:TableclothInt.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -47496,9 +47510,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "in_range",
-                  "qualified_name": "Int.in_range",
+                  "qualified_name": "TableclothInt.in_range",
                   "type": {
-                    "rendered": "Int.t -> lower:Int.t -> upper:Int.t -> bool"
+                    "rendered": "TableclothInt.t -> lower:TableclothInt.t -> upper:TableclothInt.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -47530,9 +47544,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "toFloat",
-                  "qualified_name": "Int.toFloat",
+                  "qualified_name": "TableclothInt.toFloat",
                   "type": {
-                    "rendered": "Int.t -> float"
+                    "rendered": "TableclothInt.t -> float"
                   },
                   "info": {
                     "deprecated": null,
@@ -47548,7 +47562,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -47568,7 +47582,7 @@
                           "value": {
                             "name": "Float",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Float",
                               "content": [
                                 {
@@ -47644,9 +47658,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_float",
-                  "qualified_name": "Int.to_float",
+                  "qualified_name": "TableclothInt.to_float",
                   "type": {
-                    "rendered": "Int.t -> float"
+                    "rendered": "TableclothInt.t -> float"
                   },
                   "info": null,
                   "parameters": {
@@ -47660,9 +47674,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "toString",
-                  "qualified_name": "Int.toString",
+                  "qualified_name": "TableclothInt.toString",
                   "type": {
-                    "rendered": "Int.t -> string"
+                    "rendered": "TableclothInt.t -> string"
                   },
                   "info": {
                     "deprecated": null,
@@ -47803,9 +47817,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_string",
-                  "qualified_name": "Int.to_string",
+                  "qualified_name": "TableclothInt.to_string",
                   "type": {
-                    "rendered": "Int.t -> string"
+                    "rendered": "TableclothInt.t -> string"
                   },
                   "info": null,
                   "parameters": {
@@ -47837,9 +47851,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "equal",
-                  "qualified_name": "Int.equal",
+                  "qualified_name": "TableclothInt.equal",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> bool"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -47883,9 +47897,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "compare",
-                  "qualified_name": "Int.compare",
+                  "qualified_name": "TableclothInt.compare",
                   "type": {
-                    "rendered": "Int.t -> Int.t -> int"
+                    "rendered": "TableclothInt.t -> TableclothInt.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -47931,7 +47945,7 @@
                   "name": "identity",
                   "parameters": "",
                   "is_private": false,
-                  "father": "Int",
+                  "father": "TableclothInt",
                   "field_comment": {
                     "deprecated": null,
                     "description": {
@@ -47946,7 +47960,7 @@
                           "value": {
                             "name": "Comparator",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Comparator",
                               "content": [
                                 {
@@ -47990,7 +48004,7 @@
                           "value": {
                             "name": "Comparator",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Comparator",
                               "content": [
                                 {
@@ -48021,9 +48035,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "comparator",
-                  "qualified_name": "Int.comparator",
+                  "qualified_name": "TableclothInt.comparator",
                   "type": {
-                    "rendered": "(Int.t, Int.identity) Comparator.t"
+                    "rendered": "(TableclothInt.t, TableclothInt.identity) TableclothComparator.t"
                   },
                   "info": null,
                   "parameters": {
@@ -48052,10 +48066,10 @@
           }
         }
       },
-      "Fun": {
+      "TableclothFun": {
         "tag": "Module",
         "value": {
-          "name": "Fun",
+          "name": "TableclothFun",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -48080,7 +48094,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "identity",
-                  "qualified_name": "Fun.identity",
+                  "qualified_name": "TableclothFun.identity",
                   "type": {
                     "rendered": "'a -> 'a"
                   },
@@ -48192,7 +48206,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "ignore",
-                  "qualified_name": "Fun.ignore",
+                  "qualified_name": "TableclothFun.ignore",
                   "type": {
                     "rendered": "'a -> unit"
                   },
@@ -48286,7 +48300,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "constant",
-                  "qualified_name": "Fun.constant",
+                  "qualified_name": "TableclothFun.constant",
                   "type": {
                     "rendered": "'a -> 'b -> 'a"
                   },
@@ -48432,7 +48446,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "sequence",
-                  "qualified_name": "Fun.sequence",
+                  "qualified_name": "TableclothFun.sequence",
                   "type": {
                     "rendered": "'a -> 'b -> 'b"
                   },
@@ -48470,7 +48484,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "flip",
-                  "qualified_name": "Fun.flip",
+                  "qualified_name": "TableclothFun.flip",
                   "type": {
                     "rendered": "('a -> 'b -> 'c) -> 'b -> 'a -> 'c"
                   },
@@ -48564,7 +48578,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "negate",
-                  "qualified_name": "Fun.negate",
+                  "qualified_name": "TableclothFun.negate",
                   "type": {
                     "rendered": "('a -> bool) -> 'a -> bool"
                   },
@@ -48722,7 +48736,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "apply",
-                  "qualified_name": "Fun.apply",
+                  "qualified_name": "TableclothFun.apply",
                   "type": {
                     "rendered": "('a -> 'b) -> 'a -> 'b"
                   },
@@ -48740,7 +48754,7 @@
                           "value": {
                             "name": "Fun.(<|)",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.(<|)",
                               "content": [
                                 {
@@ -48776,7 +48790,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "(<|)",
-                  "qualified_name": "Fun.(<|)",
+                  "qualified_name": "TableclothFun.(<|)",
                   "type": {
                     "rendered": "('a -> 'b) -> 'a -> 'b"
                   },
@@ -48792,14 +48806,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Fun.(|>)",
+                            "name": "TableclothFun.(|>)",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Fun.(|>)",
+                              "target": "TableclothFun.(|>)",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Fun.(|>)"
+                                  "value": "TableclothFun.(|>)"
                                 }
                               ]
                             }
@@ -48874,7 +48888,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "pipe",
-                  "qualified_name": "Fun.pipe",
+                  "qualified_name": "TableclothFun.pipe",
                   "type": {
                     "rendered": "'a -> ('a -> 'b) -> 'b"
                   },
@@ -48892,7 +48906,7 @@
                           "value": {
                             "name": "Fun.(|>)",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.(|>)",
                               "content": [
                                 {
@@ -48928,7 +48942,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "(|>)",
-                  "qualified_name": "Fun.(|>)",
+                  "qualified_name": "TableclothFun.(|>)",
                   "type": {
                     "rendered": "'a -> ('a -> 'b) -> 'b"
                   },
@@ -49068,7 +49082,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "compose",
-                  "qualified_name": "Fun.compose",
+                  "qualified_name": "TableclothFun.compose",
                   "type": {
                     "rendered": "('b -> 'c) -> ('a -> 'b) -> 'a -> 'c"
                   },
@@ -49175,7 +49189,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "(<<)",
-                  "qualified_name": "Fun.(<<)",
+                  "qualified_name": "TableclothFun.(<<)",
                   "type": {
                     "rendered": "('b -> 'c) -> ('a -> 'b) -> 'a -> 'c"
                   },
@@ -49193,7 +49207,7 @@
                           "value": {
                             "name": "Fun.compose",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.compose",
                               "content": [
                                 {
@@ -49229,7 +49243,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "composeRight",
-                  "qualified_name": "Fun.composeRight",
+                  "qualified_name": "TableclothFun.composeRight",
                   "type": {
                     "rendered": "('a -> 'b) -> ('b -> 'c) -> 'a -> 'c"
                   },
@@ -49290,7 +49304,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "(>>)",
-                  "qualified_name": "Fun.(>>)",
+                  "qualified_name": "TableclothFun.(>>)",
                   "type": {
                     "rendered": "('a -> 'b) -> ('b -> 'c) -> 'a -> 'c"
                   },
@@ -49308,7 +49322,7 @@
                           "value": {
                             "name": "Fun.composeRight",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.composeRight",
                               "content": [
                                 {
@@ -49344,7 +49358,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "tap",
-                  "qualified_name": "Fun.tap",
+                  "qualified_name": "TableclothFun.tap",
                   "type": {
                     "rendered": "'a -> f:('a -> unit) -> 'a"
                   },
@@ -49362,7 +49376,7 @@
                           "value": {
                             "name": "Fun.pipe",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Fun.pipe",
                               "content": [
                                 {
@@ -49461,7 +49475,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "forever",
-                  "qualified_name": "Fun.forever",
+                  "qualified_name": "TableclothFun.forever",
                   "type": {
                     "rendered": "(unit -> unit) -> exn"
                   },
@@ -49507,7 +49521,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "times",
-                  "qualified_name": "Fun.times",
+                  "qualified_name": "TableclothFun.times",
                   "type": {
                     "rendered": "int -> f:(unit -> unit) -> unit"
                   },
@@ -49581,7 +49595,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "curry",
-                  "qualified_name": "Fun.curry",
+                  "qualified_name": "TableclothFun.curry",
                   "type": {
                     "rendered": "('a * 'b -> 'c) -> 'a -> 'b -> 'c"
                   },
@@ -49671,7 +49685,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "uncurry",
-                  "qualified_name": "Fun.uncurry",
+                  "qualified_name": "TableclothFun.uncurry",
                   "type": {
                     "rendered": "('a -> 'b -> 'c) -> 'a * 'b -> 'c"
                   },
@@ -49745,7 +49759,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "curry3",
-                  "qualified_name": "Fun.curry3",
+                  "qualified_name": "TableclothFun.curry3",
                   "type": {
                     "rendered": "('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd"
                   },
@@ -49761,14 +49775,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Fun.curry",
+                            "name": "TableclothFun.curry",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Fun.curry",
+                              "target": "TableclothFun.curry",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Fun.curry"
+                                  "value": "TableclothFun.curry"
                                 }
                               ]
                             }
@@ -49783,7 +49797,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -49819,7 +49833,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "uncurry3",
-                  "qualified_name": "Fun.uncurry3",
+                  "qualified_name": "TableclothFun.uncurry3",
                   "type": {
                     "rendered": "('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd"
                   },
@@ -49835,14 +49849,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Fun.uncurry",
+                            "name": "TableclothFun.uncurry",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Fun.uncurry",
+                              "target": "TableclothFun.uncurry",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Fun.uncurry"
+                                  "value": "TableclothFun.uncurry"
                                 }
                               ]
                             }
@@ -49857,7 +49871,7 @@
                           "value": {
                             "name": "Tuple3",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Tuple3",
                               "content": [
                                 {
@@ -49908,10 +49922,10 @@
           }
         }
       },
-      "Float": {
+      "TableclothFloat": {
         "tag": "Module",
         "value": {
-          "name": "Float",
+          "name": "TableclothFloat",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -50068,7 +50082,7 @@
                   "name": "t",
                   "parameters": "",
                   "is_private": false,
-                  "father": "Float",
+                  "father": "TableclothFloat",
                   "field_comment": null,
                   "kind": {
                     "tag": "TypeAbstract",
@@ -50105,9 +50119,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "zero",
-                  "qualified_name": "Float.zero",
+                  "qualified_name": "TableclothFloat.zero",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50151,9 +50165,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "one",
-                  "qualified_name": "Float.one",
+                  "qualified_name": "TableclothFloat.one",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50197,9 +50211,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "nan",
-                  "qualified_name": "Float.nan",
+                  "qualified_name": "TableclothFloat.nan",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50256,7 +50270,7 @@
                           "value": {
                             "name": "Float.nan",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.nan",
                               "content": [
                                 {
@@ -50344,7 +50358,7 @@
                           "value": {
                             "name": "Float.isNaN",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.isNaN",
                               "content": [
                                 {
@@ -50380,9 +50394,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "infinity",
-                  "qualified_name": "Float.infinity",
+                  "qualified_name": "TableclothFloat.infinity",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50445,9 +50459,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "negativeInfinity",
-                  "qualified_name": "Float.negativeInfinity",
+                  "qualified_name": "TableclothFloat.negativeInfinity",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50463,7 +50477,7 @@
                           "value": {
                             "name": "Float.infinity",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.infinity",
                               "content": [
                                 {
@@ -50499,9 +50513,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "negative_infinity",
-                  "qualified_name": "Float.negative_infinity",
+                  "qualified_name": "TableclothFloat.negative_infinity",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -50515,9 +50529,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "e",
-                  "qualified_name": "Float.e",
+                  "qualified_name": "TableclothFloat.e",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50569,9 +50583,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "pi",
-                  "qualified_name": "Float.pi",
+                  "qualified_name": "TableclothFloat.pi",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50623,9 +50637,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "epsilon",
-                  "qualified_name": "Float.epsilon",
+                  "qualified_name": "TableclothFloat.epsilon",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50661,9 +50675,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "largestValue",
-                  "qualified_name": "Float.largestValue",
+                  "qualified_name": "TableclothFloat.largestValue",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50703,9 +50717,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "largest_value",
-                  "qualified_name": "Float.largest_value",
+                  "qualified_name": "TableclothFloat.largest_value",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -50719,9 +50733,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "smallestValue",
-                  "qualified_name": "Float.smallestValue",
+                  "qualified_name": "TableclothFloat.smallestValue",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50765,9 +50779,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "smallest_value",
-                  "qualified_name": "Float.smallest_value",
+                  "qualified_name": "TableclothFloat.smallest_value",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -50781,9 +50795,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "maximumSafeInteger",
-                  "qualified_name": "Float.maximumSafeInteger",
+                  "qualified_name": "TableclothFloat.maximumSafeInteger",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50831,9 +50845,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "maximum_safe_integer",
-                  "qualified_name": "Float.maximum_safe_integer",
+                  "qualified_name": "TableclothFloat.maximum_safe_integer",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -50847,9 +50861,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "minimumSafeInteger",
-                  "qualified_name": "Float.minimumSafeInteger",
+                  "qualified_name": "TableclothFloat.minimumSafeInteger",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50897,9 +50911,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "minimum_safe_integer",
-                  "qualified_name": "Float.minimum_safe_integer",
+                  "qualified_name": "TableclothFloat.minimum_safe_integer",
                   "type": {
-                    "rendered": "Float.t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -50931,9 +50945,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromInt",
-                  "qualified_name": "Float.fromInt",
+                  "qualified_name": "TableclothFloat.fromInt",
                   "type": {
-                    "rendered": "int -> Float.t"
+                    "rendered": "int -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50949,7 +50963,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -51029,9 +51043,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_int",
-                  "qualified_name": "Float.from_int",
+                  "qualified_name": "TableclothFloat.from_int",
                   "type": {
-                    "rendered": "int -> Float.t"
+                    "rendered": "int -> TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -51045,9 +51059,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromString",
-                  "qualified_name": "Float.fromString",
+                  "qualified_name": "TableclothFloat.fromString",
                   "type": {
-                    "rendered": "string -> Float.t option"
+                    "rendered": "string -> TableclothFloat.t option"
                   },
                   "info": {
                     "deprecated": null,
@@ -51246,9 +51260,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_string",
-                  "qualified_name": "Float.from_string",
+                  "qualified_name": "TableclothFloat.from_string",
                   "type": {
-                    "rendered": "string -> Float.t option"
+                    "rendered": "string -> TableclothFloat.t option"
                   },
                   "info": null,
                   "parameters": {
@@ -51280,9 +51294,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "add",
-                  "qualified_name": "Float.add",
+                  "qualified_name": "TableclothFloat.add",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51359,7 +51373,7 @@
                           "value": {
                             "name": "Int.toFloat",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Int.toFloat",
                               "content": [
                                 {
@@ -51541,9 +51555,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(+)",
-                  "qualified_name": "Float.(+)",
+                  "qualified_name": "TableclothFloat.(+)",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51559,7 +51573,7 @@
                           "value": {
                             "name": "Float.add",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.add",
                               "content": [
                                 {
@@ -51595,9 +51609,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "subtract",
-                  "qualified_name": "Float.subtract",
+                  "qualified_name": "TableclothFloat.subtract",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51700,9 +51714,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(-)",
-                  "qualified_name": "Float.(-)",
+                  "qualified_name": "TableclothFloat.(-)",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51718,7 +51732,7 @@
                           "value": {
                             "name": "Float.subtract",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.subtract",
                               "content": [
                                 {
@@ -51754,9 +51768,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "multiply",
-                  "qualified_name": "Float.multiply",
+                  "qualified_name": "TableclothFloat.multiply",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51859,9 +51873,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "( * )",
-                  "qualified_name": "Float.( * )",
+                  "qualified_name": "TableclothFloat.( * )",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51877,7 +51891,7 @@
                           "value": {
                             "name": "Float.multiply",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.multiply",
                               "content": [
                                 {
@@ -51913,9 +51927,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "divide",
-                  "qualified_name": "Float.divide",
+                  "qualified_name": "TableclothFloat.divide",
                   "type": {
-                    "rendered": "Float.t -> by:Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> by:TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52018,9 +52032,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(/)",
-                  "qualified_name": "Float.(/)",
+                  "qualified_name": "TableclothFloat.(/)",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52036,7 +52050,7 @@
                           "value": {
                             "name": "Float.divide",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.divide",
                               "content": [
                                 {
@@ -52072,9 +52086,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "power",
-                  "qualified_name": "Float.power",
+                  "qualified_name": "TableclothFloat.power",
                   "type": {
-                    "rendered": "base:Float.t -> exponent:Float.t -> Float.t"
+                    "rendered": "base:TableclothFloat.t -> exponent:TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52177,9 +52191,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "( ** )",
-                  "qualified_name": "Float.( ** )",
+                  "qualified_name": "TableclothFloat.( ** )",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52195,7 +52209,7 @@
                           "value": {
                             "name": "Float.power",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.power",
                               "content": [
                                 {
@@ -52231,9 +52245,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "negate",
-                  "qualified_name": "Float.negate",
+                  "qualified_name": "TableclothFloat.negate",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52336,9 +52350,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "(~-)",
-                  "qualified_name": "Float.(~-)",
+                  "qualified_name": "TableclothFloat.(~-)",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52354,7 +52368,7 @@
                           "value": {
                             "name": "Float.negate",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.negate",
                               "content": [
                                 {
@@ -52390,9 +52404,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "absolute",
-                  "qualified_name": "Float.absolute",
+                  "qualified_name": "TableclothFloat.absolute",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52480,9 +52494,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "maximum",
-                  "qualified_name": "Float.maximum",
+                  "qualified_name": "TableclothFloat.maximum",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52612,9 +52626,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "minimum",
-                  "qualified_name": "Float.minimum",
+                  "qualified_name": "TableclothFloat.minimum",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52744,9 +52758,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "clamp",
-                  "qualified_name": "Float.clamp",
+                  "qualified_name": "TableclothFloat.clamp",
                   "type": {
-                    "rendered": "Float.t -> lower:Float.t -> upper:Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t ->\n  lower:TableclothFloat.t -> upper:TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52931,9 +52945,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "squareRoot",
-                  "qualified_name": "Float.squareRoot",
+                  "qualified_name": "TableclothFloat.squareRoot",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52973,7 +52987,7 @@
                           "value": {
                             "name": "Float.nan",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.nan",
                               "content": [
                                 {
@@ -53064,9 +53078,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "square_root",
-                  "qualified_name": "Float.square_root",
+                  "qualified_name": "TableclothFloat.square_root",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": null,
                   "parameters": {
@@ -53080,9 +53094,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "log",
-                  "qualified_name": "Float.log",
+                  "qualified_name": "TableclothFloat.log",
                   "type": {
-                    "rendered": "Float.t -> base:Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> base:TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -53187,9 +53201,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isNaN",
-                  "qualified_name": "Float.isNaN",
+                  "qualified_name": "TableclothFloat.isNaN",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -53371,9 +53385,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_nan",
-                  "qualified_name": "Float.is_nan",
+                  "qualified_name": "TableclothFloat.is_nan",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -53387,9 +53401,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isFinite",
-                  "qualified_name": "Float.isFinite",
+                  "qualified_name": "TableclothFloat.isFinite",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -53557,9 +53571,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_finite",
-                  "qualified_name": "Float.is_finite",
+                  "qualified_name": "TableclothFloat.is_finite",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -53573,9 +53587,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isInfinite",
-                  "qualified_name": "Float.isInfinite",
+                  "qualified_name": "TableclothFloat.isInfinite",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -53707,9 +53721,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_infinite",
-                  "qualified_name": "Float.is_infinite",
+                  "qualified_name": "TableclothFloat.is_infinite",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -53723,9 +53737,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isInteger",
-                  "qualified_name": "Float.isInteger",
+                  "qualified_name": "TableclothFloat.isInteger",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -53812,9 +53826,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_integer",
-                  "qualified_name": "Float.is_integer",
+                  "qualified_name": "TableclothFloat.is_integer",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -53828,9 +53842,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "isSafeInteger",
-                  "qualified_name": "Float.isSafeInteger",
+                  "qualified_name": "TableclothFloat.isSafeInteger",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -53932,9 +53946,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "is_safe_integer",
-                  "qualified_name": "Float.is_safe_integer",
+                  "qualified_name": "TableclothFloat.is_safe_integer",
                   "type": {
-                    "rendered": "Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -53948,9 +53962,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "inRange",
-                  "qualified_name": "Float.inRange",
+                  "qualified_name": "TableclothFloat.inRange",
                   "type": {
-                    "rendered": "Float.t -> lower:Float.t -> upper:Float.t -> bool"
+                    "rendered": "TableclothFloat.t ->\n  lower:TableclothFloat.t -> upper:TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -54133,9 +54147,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "in_range",
-                  "qualified_name": "Float.in_range",
+                  "qualified_name": "TableclothFloat.in_range",
                   "type": {
-                    "rendered": "Float.t -> lower:Float.t -> upper:Float.t -> bool"
+                    "rendered": "TableclothFloat.t ->\n  lower:TableclothFloat.t -> upper:TableclothFloat.t -> bool"
                   },
                   "info": null,
                   "parameters": {
@@ -54169,7 +54183,7 @@
                   "name": "radians",
                   "parameters": "",
                   "is_private": false,
-                  "father": "Float",
+                  "father": "TableclothFloat",
                   "field_comment": {
                     "deprecated": null,
                     "description": {
@@ -54264,9 +54278,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "hypotenuse",
-                  "qualified_name": "Float.hypotenuse",
+                  "qualified_name": "TableclothFloat.hypotenuse",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -54374,9 +54388,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "degrees",
-                  "qualified_name": "Float.degrees",
+                  "qualified_name": "TableclothFloat.degrees",
                   "type": {
-                    "rendered": "Float.t -> Float.radians"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -54408,7 +54422,7 @@
                           "value": {
                             "name": "Float.radians",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.radians",
                               "content": [
                                 {
@@ -54514,9 +54528,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "radians",
-                  "qualified_name": "Float.radians",
+                  "qualified_name": "TableclothFloat.radians",
                   "type": {
-                    "rendered": "Float.t -> Float.radians"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -54532,7 +54546,7 @@
                           "value": {
                             "name": "Float.t",
                             "reference": {
-                              "kind": "TYPE",
+                              "kind": "Unknown",
                               "target": "Float.t",
                               "content": [
                                 {
@@ -54645,9 +54659,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "turns",
-                  "qualified_name": "Float.turns",
+                  "qualified_name": "TableclothFloat.turns",
                   "type": {
-                    "rendered": "Float.t -> Float.radians"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -54679,7 +54693,7 @@
                           "value": {
                             "name": "Float.radians",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.radians",
                               "content": [
                                 {
@@ -54796,9 +54810,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromPolar",
-                  "qualified_name": "Float.fromPolar",
+                  "qualified_name": "TableclothFloat.fromPolar",
                   "type": {
-                    "rendered": "float * Float.radians -> float * float"
+                    "rendered": "float * TableclothFloat.radians -> float * float"
                   },
                   "info": {
                     "deprecated": null,
@@ -54902,9 +54916,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_polar",
-                  "qualified_name": "Float.from_polar",
+                  "qualified_name": "TableclothFloat.from_polar",
                   "type": {
-                    "rendered": "float * Float.radians -> float * float"
+                    "rendered": "float * TableclothFloat.radians -> float * float"
                   },
                   "info": null,
                   "parameters": {
@@ -54918,9 +54932,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "toPolar",
-                  "qualified_name": "Float.toPolar",
+                  "qualified_name": "TableclothFloat.toPolar",
                   "type": {
-                    "rendered": "float * float -> float * Float.radians"
+                    "rendered": "float * float -> float * TableclothFloat.radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -55070,9 +55084,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_polar",
-                  "qualified_name": "Float.to_polar",
+                  "qualified_name": "TableclothFloat.to_polar",
                   "type": {
-                    "rendered": "float * float -> float * Float.radians"
+                    "rendered": "float * float -> float * TableclothFloat.radians"
                   },
                   "info": null,
                   "parameters": {
@@ -55086,9 +55100,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "cos",
-                  "qualified_name": "Float.cos",
+                  "qualified_name": "TableclothFloat.cos",
                   "type": {
-                    "rendered": "Float.radians -> Float.t"
+                    "rendered": "TableclothFloat.radians -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -55191,9 +55205,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "acos",
-                  "qualified_name": "Float.acos",
+                  "qualified_name": "TableclothFloat.acos",
                   "type": {
-                    "rendered": "Float.radians -> Float.t"
+                    "rendered": "TableclothFloat.radians -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -55289,9 +55303,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "sin",
-                  "qualified_name": "Float.sin",
+                  "qualified_name": "TableclothFloat.sin",
                   "type": {
-                    "rendered": "Float.radians -> Float.t"
+                    "rendered": "TableclothFloat.radians -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -55394,9 +55408,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "asin",
-                  "qualified_name": "Float.asin",
+                  "qualified_name": "TableclothFloat.asin",
                   "type": {
-                    "rendered": "Float.radians -> Float.t"
+                    "rendered": "TableclothFloat.radians -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -55492,9 +55506,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "tan",
-                  "qualified_name": "Float.tan",
+                  "qualified_name": "TableclothFloat.tan",
                   "type": {
-                    "rendered": "Float.radians -> Float.t"
+                    "rendered": "TableclothFloat.radians -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -55596,9 +55610,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "atan",
-                  "qualified_name": "Float.atan",
+                  "qualified_name": "TableclothFloat.atan",
                   "type": {
-                    "rendered": "Float.t -> Float.radians"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -55641,14 +55655,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Float.atan2",
+                            "name": "TableclothFloat.atan2",
                             "reference": {
                               "kind": "VAL",
-                              "target": "Float.atan2",
+                              "target": "TableclothFloat.atan2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Float.atan2"
+                                  "value": "TableclothFloat.atan2"
                                 }
                               ]
                             }
@@ -55751,7 +55765,7 @@
                           "value": {
                             "name": "Float.atan2",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.atan2",
                               "content": [
                                 {
@@ -55872,9 +55886,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "atan2",
-                  "qualified_name": "Float.atan2",
+                  "qualified_name": "TableclothFloat.atan2",
                   "type": {
-                    "rendered": "y:Float.t -> x:Float.t -> Float.radians"
+                    "rendered": "y:TableclothFloat.t -> x:TableclothFloat.t -> TableclothFloat.radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -56043,7 +56057,7 @@
                   "name": "direction",
                   "parameters": "",
                   "is_private": false,
-                  "father": "Float",
+                  "father": "TableclothFloat",
                   "field_comment": {
                     "deprecated": null,
                     "description": {
@@ -56066,7 +56080,7 @@
                           "value": {
                             "name": "Float.round",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.round",
                               "content": [
                                 {
@@ -56094,7 +56108,7 @@
                           "value": {
                             "name": "Float.round",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.round",
                               "content": [
                                 {
@@ -56155,7 +56169,7 @@
                           "value": {
                             "name": "Float.round",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.round",
                               "content": [
                                 {
@@ -56183,7 +56197,7 @@
                           "value": {
                             "name": "Float.round",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.round",
                               "content": [
                                 {
@@ -56218,9 +56232,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "round",
-                  "qualified_name": "Float.round",
+                  "qualified_name": "TableclothFloat.round",
                   "type": {
-                    "rendered": "?direction:Float.direction -> Float.t -> Float.t"
+                    "rendered": "?direction:TableclothFloat.direction ->\n  TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -56405,7 +56419,7 @@
                           "value": {
                             "name": "Float.ceiling",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.ceiling",
                               "content": [
                                 {
@@ -56465,7 +56479,7 @@
                           "value": {
                             "name": "Float.floor",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.floor",
                               "content": [
                                 {
@@ -56787,9 +56801,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "floor",
-                  "qualified_name": "Float.floor",
+                  "qualified_name": "TableclothFloat.floor",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -56869,9 +56883,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "ceiling",
-                  "qualified_name": "Float.ceiling",
+                  "qualified_name": "TableclothFloat.ceiling",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -56951,9 +56965,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "truncate",
-                  "qualified_name": "Float.truncate",
+                  "qualified_name": "TableclothFloat.truncate",
                   "type": {
-                    "rendered": "Float.t -> Float.t"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -57051,9 +57065,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "toInt",
-                  "qualified_name": "Float.toInt",
+                  "qualified_name": "TableclothFloat.toInt",
                   "type": {
-                    "rendered": "Float.t -> int option"
+                    "rendered": "TableclothFloat.t -> int option"
                   },
                   "info": {
                     "deprecated": null,
@@ -57077,7 +57091,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -57110,7 +57124,7 @@
                           "value": {
                             "name": "Float.truncate",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.truncate",
                               "content": [
                                 {
@@ -57162,7 +57176,7 @@
                           "value": {
                             "name": "Float.nan",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.nan",
                               "content": [
                                 {
@@ -57182,7 +57196,7 @@
                           "value": {
                             "name": "Float.infinity",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.infinity",
                               "content": [
                                 {
@@ -57210,7 +57224,7 @@
                           "value": {
                             "name": "Float.round",
                             "reference": {
-                              "kind": "VAL",
+                              "kind": "Unknown",
                               "target": "Float.round",
                               "content": [
                                 {
@@ -57361,9 +57375,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_int",
-                  "qualified_name": "Float.to_int",
+                  "qualified_name": "TableclothFloat.to_int",
                   "type": {
-                    "rendered": "Float.t -> int option"
+                    "rendered": "TableclothFloat.t -> int option"
                   },
                   "info": null,
                   "parameters": {
@@ -57377,9 +57391,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "toString",
-                  "qualified_name": "Float.toString",
+                  "qualified_name": "TableclothFloat.toString",
                   "type": {
-                    "rendered": "Float.t -> string"
+                    "rendered": "TableclothFloat.t -> string"
                   },
                   "info": {
                     "deprecated": null,
@@ -57447,9 +57461,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_string",
-                  "qualified_name": "Float.to_string",
+                  "qualified_name": "TableclothFloat.to_string",
                   "type": {
-                    "rendered": "Float.t -> string"
+                    "rendered": "TableclothFloat.t -> string"
                   },
                   "info": null,
                   "parameters": {
@@ -57481,9 +57495,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "equal",
-                  "qualified_name": "Float.equal",
+                  "qualified_name": "TableclothFloat.equal",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> bool"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -57519,9 +57533,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "compare",
-                  "qualified_name": "Float.compare",
+                  "qualified_name": "TableclothFloat.compare",
                   "type": {
-                    "rendered": "Float.t -> Float.t -> int"
+                    "rendered": "TableclothFloat.t -> TableclothFloat.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -57572,10 +57586,10 @@
           }
         }
       },
-      "Container": {
+      "TableclothContainer": {
         "tag": "Module",
         "value": {
-          "name": "Container",
+          "name": "TableclothContainer",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -57586,10 +57600,10 @@
                   "target": "MODULETYPESum",
                   "kind": {
                     "tag": "ModuleTypeStruct",
-                    "value": "Container.Sum"
+                    "value": "TableclothContainer.Sum"
                   },
                   "info": null,
-                  "signature": "sig\n  type t\n  val zero : Container.Sum.t\n  val add : Container.Sum.t -> Container.Sum.t -> Container.Sum.t\nend",
+                  "signature": "sig\n  type t\n  val zero : TableclothContainer.Sum.t\n  val add :\n    TableclothContainer.Sum.t ->\n    TableclothContainer.Sum.t -> TableclothContainer.Sum.t\nend",
                   "elements": [
                     {
                       "tag": "Text",
@@ -57642,7 +57656,7 @@
                         "name": "t",
                         "parameters": "",
                         "is_private": false,
-                        "father": "Container.Sum",
+                        "father": "TableclothContainer.Sum",
                         "field_comment": null,
                         "kind": {
                           "tag": "TypeAbstract",
@@ -57656,9 +57670,9 @@
                       "tag": "Value",
                       "value": {
                         "name": "zero",
-                        "qualified_name": "Container.Sum.zero",
+                        "qualified_name": "TableclothContainer.Sum.zero",
                         "type": {
-                          "rendered": "Container.Sum.t"
+                          "rendered": "TableclothContainer.Sum.t"
                         },
                         "info": null,
                         "parameters": {
@@ -57672,9 +57686,9 @@
                       "tag": "Value",
                       "value": {
                         "name": "add",
-                        "qualified_name": "Container.Sum.add",
+                        "qualified_name": "TableclothContainer.Sum.add",
                         "type": {
-                          "rendered": "Container.Sum.t -> Container.Sum.t -> Container.Sum.t"
+                          "rendered": "TableclothContainer.Sum.t ->\n  TableclothContainer.Sum.t -> TableclothContainer.Sum.t"
                         },
                         "info": null,
                         "parameters": {
@@ -57714,10 +57728,10 @@
           }
         }
       },
-      "Comparator": {
+      "TableclothComparator": {
         "tag": "Module",
         "value": {
-          "name": "Comparator",
+          "name": "TableclothComparator",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -57830,14 +57844,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Comparator.S",
+                      "name": "TableclothComparator.S",
                       "reference": {
                         "kind": "MODULETYPE",
-                        "target": "Comparator.S",
+                        "target": "TableclothComparator.S",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Comparator.S"
+                            "value": "TableclothComparator.S"
                           }
                         ]
                       }
@@ -57858,14 +57872,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Comparator.Make",
+                      "name": "TableclothComparator.Make",
                       "reference": {
                         "kind": "MODULE",
-                        "target": "Comparator.Make",
+                        "target": "TableclothComparator.Make",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Comparator.Make"
+                            "value": "TableclothComparator.Make"
                           }
                         ]
                       }
@@ -57922,10 +57936,10 @@
                   "target": "MODULETYPET",
                   "kind": {
                     "tag": "ModuleTypeStruct",
-                    "value": "Comparator.T"
+                    "value": "TableclothComparator.T"
                   },
                   "info": null,
-                  "signature": "sig type nonrec t val compare : Comparator.T.t -> Comparator.T.t -> int end",
+                  "signature": "sig\n  type nonrec t\n  val compare : TableclothComparator.T.t -> TableclothComparator.T.t -> int\nend",
                   "elements": [
                     {
                       "tag": "Text",
@@ -57937,14 +57951,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Comparator.Make",
+                            "name": "TableclothComparator.Make",
                             "reference": {
                               "kind": "MODULE",
-                              "target": "Comparator.Make",
+                              "target": "TableclothComparator.Make",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Comparator.Make"
+                                  "value": "TableclothComparator.Make"
                                 }
                               ]
                             }
@@ -57962,7 +57976,7 @@
                         "name": "t",
                         "parameters": "",
                         "is_private": false,
-                        "father": "Comparator.T",
+                        "father": "TableclothComparator.T",
                         "field_comment": null,
                         "kind": {
                           "tag": "TypeAbstract",
@@ -57976,9 +57990,9 @@
                       "tag": "Value",
                       "value": {
                         "name": "compare",
-                        "qualified_name": "Comparator.T.compare",
+                        "qualified_name": "TableclothComparator.T.compare",
                         "type": {
-                          "rendered": "Comparator.T.t -> Comparator.T.t -> int"
+                          "rendered": "TableclothComparator.T.t -> TableclothComparator.T.t -> int"
                         },
                         "info": null,
                         "parameters": {
@@ -57997,7 +58011,7 @@
                   "name": "t",
                   "parameters": "('a, 'identity)",
                   "is_private": false,
-                  "father": "Comparator",
+                  "father": "TableclothComparator",
                   "field_comment": null,
                   "kind": {
                     "tag": "TypeAbstract",
@@ -58013,7 +58027,7 @@
                   "name": "comparator",
                   "parameters": "('a, 'identity)",
                   "is_private": false,
-                  "father": "Comparator",
+                  "father": "TableclothComparator",
                   "field_comment": {
                     "deprecated": null,
                     "description": {
@@ -58026,14 +58040,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Comparator.t",
+                            "name": "TableclothComparator.t",
                             "reference": {
                               "kind": "TYPE",
-                              "target": "Comparator.t",
+                              "target": "TableclothComparator.t",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Comparator.t"
+                                  "value": "TableclothComparator.t"
                                 }
                               ]
                             }
@@ -58060,7 +58074,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "('a, 'identity) Comparator.t"
+                      "rendered": "('a, 'identity) TableclothComparator.t"
                     }
                   },
                   "info": {
@@ -58075,14 +58089,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Comparator.t",
+                            "name": "TableclothComparator.t",
                             "reference": {
                               "kind": "TYPE",
-                              "target": "Comparator.t",
+                              "target": "TableclothComparator.t",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Comparator.t"
+                                  "value": "TableclothComparator.t"
                                 }
                               ]
                             }
@@ -58111,10 +58125,10 @@
                   "target": "MODULETYPES",
                   "kind": {
                     "tag": "ModuleTypeStruct",
-                    "value": "Comparator.S"
+                    "value": "TableclothComparator.S"
                   },
                   "info": null,
-                  "signature": "sig\n  type t\n  type identity\n  val comparator :\n    (Comparator.S.t, Comparator.S.identity) Comparator.comparator\nend",
+                  "signature": "sig\n  type t\n  type identity\n  val comparator :\n    (TableclothComparator.S.t, TableclothComparator.S.identity)\n    TableclothComparator.comparator\nend",
                   "elements": [
                     {
                       "tag": "Text",
@@ -58126,14 +58140,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Comparator.Make",
+                            "name": "TableclothComparator.Make",
                             "reference": {
                               "kind": "MODULE",
-                              "target": "Comparator.Make",
+                              "target": "TableclothComparator.Make",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Comparator.Make"
+                                  "value": "TableclothComparator.Make"
                                 }
                               ]
                             }
@@ -58151,7 +58165,7 @@
                         "name": "t",
                         "parameters": "",
                         "is_private": false,
-                        "father": "Comparator.S",
+                        "father": "TableclothComparator.S",
                         "field_comment": null,
                         "kind": {
                           "tag": "TypeAbstract",
@@ -58167,7 +58181,7 @@
                         "name": "identity",
                         "parameters": "",
                         "is_private": false,
-                        "father": "Comparator.S",
+                        "father": "TableclothComparator.S",
                         "field_comment": null,
                         "kind": {
                           "tag": "TypeAbstract",
@@ -58181,9 +58195,9 @@
                       "tag": "Value",
                       "value": {
                         "name": "comparator",
-                        "qualified_name": "Comparator.S.comparator",
+                        "qualified_name": "TableclothComparator.S.comparator",
                         "type": {
-                          "rendered": "(Comparator.S.t, Comparator.S.identity) Comparator.comparator"
+                          "rendered": "(TableclothComparator.S.t, TableclothComparator.S.identity)\n  TableclothComparator.comparator"
                         },
                         "info": null,
                         "parameters": {
@@ -58202,7 +58216,7 @@
                   "name": "s",
                   "parameters": "('a, 'identity)",
                   "is_private": false,
-                  "father": "Comparator",
+                  "father": "TableclothComparator",
                   "field_comment": {
                     "deprecated": null,
                     "description": {
@@ -58269,7 +58283,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "(module Comparator.S with type identity = 'identity and type t = 'a)"
+                      "rendered": "(module TableclothComparator.S with type identity = 'identity and type t = 'a)"
                     }
                   },
                   "info": {
@@ -58346,7 +58360,7 @@
                           "name": "M",
                           "kind": {
                             "tag": "ModuleTypeAlias",
-                            "value": "Comparator.T"
+                            "value": "TableclothComparator.T"
                           }
                         }
                       },
@@ -58355,7 +58369,7 @@
                         "value": {
                           "kind": {
                             "tag": "ModuleTypeAlias",
-                            "value": "Comparator.S"
+                            "value": "TableclothComparator.S"
                           },
                           "s": " with type t := M.t"
                         }
@@ -58374,14 +58388,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Comparator.T",
+                            "name": "TableclothComparator.T",
                             "reference": {
                               "kind": "MODULETYPE",
-                              "target": "Comparator.T",
+                              "target": "TableclothComparator.T",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Comparator.T"
+                                  "value": "TableclothComparator.T"
                                 }
                               ]
                             }
@@ -58462,10 +58476,10 @@
           }
         }
       },
-      "Bool": {
+      "TableclothBool": {
         "tag": "Module",
         "value": {
-          "name": "Bool",
+          "name": "TableclothBool",
           "kind": {
             "tag": "ModuleStruct",
             "value": [
@@ -58531,7 +58545,7 @@
                   "name": "t",
                   "parameters": "",
                   "is_private": false,
-                  "father": "Bool",
+                  "father": "TableclothBool",
                   "field_comment": null,
                   "kind": {
                     "tag": "TypeAbstract",
@@ -58568,7 +58582,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromInt",
-                  "qualified_name": "Bool.fromInt",
+                  "qualified_name": "TableclothBool.fromInt",
                   "type": {
                     "rendered": "int -> bool option"
                   },
@@ -58586,7 +58600,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -58606,7 +58620,7 @@
                           "value": {
                             "name": "Bool",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Bool",
                               "content": [
                                 {
@@ -58727,7 +58741,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_int",
-                  "qualified_name": "Bool.from_int",
+                  "qualified_name": "TableclothBool.from_int",
                   "type": {
                     "rendered": "int -> bool option"
                   },
@@ -58743,7 +58757,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "fromString",
-                  "qualified_name": "Bool.fromString",
+                  "qualified_name": "TableclothBool.fromString",
                   "type": {
                     "rendered": "string -> bool option"
                   },
@@ -58781,7 +58795,7 @@
                           "value": {
                             "name": "Bool",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Bool",
                               "content": [
                                 {
@@ -58947,7 +58961,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "from_string",
-                  "qualified_name": "Bool.from_string",
+                  "qualified_name": "TableclothBool.from_string",
                   "type": {
                     "rendered": "string -> bool option"
                   },
@@ -58981,7 +58995,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "(&&)",
-                  "qualified_name": "Bool.(&&)",
+                  "qualified_name": "TableclothBool.(&&)",
                   "type": {
                     "rendered": "bool -> bool -> bool"
                   },
@@ -59140,7 +59154,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "(||)",
-                  "qualified_name": "Bool.(||)",
+                  "qualified_name": "TableclothBool.(||)",
                   "type": {
                     "rendered": "bool -> bool -> bool"
                   },
@@ -59299,7 +59313,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "xor",
-                  "qualified_name": "Bool.xor",
+                  "qualified_name": "TableclothBool.xor",
                   "type": {
                     "rendered": "bool -> bool -> bool"
                   },
@@ -59455,9 +59469,9 @@
                 "tag": "Value",
                 "value": {
                   "name": "not",
-                  "qualified_name": "Bool.not",
+                  "qualified_name": "TableclothBool.not",
                   "type": {
-                    "rendered": "Bool.t -> bool"
+                    "rendered": "TableclothBool.t -> bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -59570,7 +59584,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "toString",
-                  "qualified_name": "Bool.toString",
+                  "qualified_name": "TableclothBool.toString",
                   "type": {
                     "rendered": "bool -> string"
                   },
@@ -59683,7 +59697,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_string",
-                  "qualified_name": "Bool.to_string",
+                  "qualified_name": "TableclothBool.to_string",
                   "type": {
                     "rendered": "bool -> string"
                   },
@@ -59699,7 +59713,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "toInt",
-                  "qualified_name": "Bool.toInt",
+                  "qualified_name": "TableclothBool.toInt",
                   "type": {
                     "rendered": "bool -> int"
                   },
@@ -59725,7 +59739,7 @@
                           "value": {
                             "name": "Int",
                             "reference": {
-                              "kind": "MODULE",
+                              "kind": "Unknown",
                               "target": "Int",
                               "content": [
                                 {
@@ -59816,7 +59830,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "to_int",
-                  "qualified_name": "Bool.to_int",
+                  "qualified_name": "TableclothBool.to_int",
                   "type": {
                     "rendered": "bool -> int"
                   },
@@ -59850,7 +59864,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "equal",
-                  "qualified_name": "Bool.equal",
+                  "qualified_name": "TableclothBool.equal",
                   "type": {
                     "rendered": "bool -> bool -> bool"
                   },
@@ -59962,7 +59976,7 @@
                 "tag": "Value",
                 "value": {
                   "name": "compare",
-                  "qualified_name": "Bool.compare",
+                  "qualified_name": "TableclothBool.compare",
                   "type": {
                     "rendered": "bool -> bool -> int"
                   },

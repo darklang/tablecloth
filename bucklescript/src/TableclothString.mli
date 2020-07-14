@@ -412,4 +412,4 @@ val compare : string -> string -> int
 (** The unique identity for {!Comparator} *)
 type identity
 
-val comparator : (t, identity) Comparator.t
+val comparator : (t, identity) TableclothComparator.t

@@ -2,13 +2,13 @@ module Option = TableclothOption
 
 type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
 
-module Of (M : Comparator.S) = struct
+module Of (M : TableclothComparator.S) = struct
   type nonrec 'value t = (M.t, 'value, M.identity) t
 end
 
 let fromArray
-    (comparator : ('key, 'id) Comparator.s) (values : ('key * 'v) array) :
-    ('key, 'value, 'id) t =
+    (comparator : ('key, 'id) TableclothComparator.s)
+    (values : ('key * 'v) array) : ('key, 'value, 'id) t =
   Belt.Map.fromArray values ~id:(Internal.toBeltComparator comparator)
 
 
@@ -126,7 +126,7 @@ module Poly = struct
 end
 
 module Int = struct
-  type nonrec 'value t = 'value Of(Int).t
+  type nonrec 'value t = 'value Of(TableclothInt).t
 
   let fromArray a = Poly.fromArray a |. Obj.magic
 

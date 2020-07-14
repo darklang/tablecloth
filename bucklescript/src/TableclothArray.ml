@@ -2,7 +2,7 @@ type 'a t = 'a array
 
 let singleton a = [| a |]
 
-let clone t = Array.map Fun.identity t
+let clone t = Array.map TableclothFun.identity t
 
 let length = Belt.Array.length
 
@@ -112,7 +112,7 @@ let extent t ~compare =
                   max ))
 
 
-let sum (type a) t (module M : Container.Sum with type t = a) =
+let sum (type a) t (module M : TableclothContainer.Sum with type t = a) =
   (Array.fold_left M.add M.zero t : a)
 
 
@@ -306,7 +306,7 @@ let equal equal a b =
 
 
 let compare compare a b =
-  match Int.compare (length a) (length b) with
+  match TableclothInt.compare (length a) (length b) with
   | 0 ->
       if length a == 0
       then 0

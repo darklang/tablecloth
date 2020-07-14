@@ -39,6 +39,21 @@ test:
 	@$(MAKE) test-native
 	@$(MAKE) test-bs
 
+integration-test-bs:
+	echo -e "\n\e[31mBuilding bucklescript integration test\e[0m"
+	cd integration-test;\
+		npm install;\
+		npm run build;\
+		echo -e "\n\e[31mRunning generated js\e[0m";\
+		node main.bs.js
+
+integration-test-native:
+	echo -e "\n\e[31mBuilding native integration test\e[0m"
+	cd integration-test;\
+		dune build main.exe;\
+		echo -e "\n\e[31mRunning compiled file\e[0m";\
+		../_build/default/integration-test/main.exe
+
 deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
 	opam update
