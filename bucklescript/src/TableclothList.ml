@@ -20,7 +20,7 @@ let reverse = Belt.List.reverse
 
 let append = Belt.List.concat
 
-let sum (type a) t (module M : Container.Sum with type t = a) =
+let sum (type a) t (module M : TableclothContainer.Sum with type t = a) =
   List.fold_left M.add M.zero t
 
 

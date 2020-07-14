@@ -40,7 +40,7 @@ type ('a, 'id) t = ('a, 'id) Base.Set.t
         Set.fromList (module String) ["Andrew"; "Tina"]
     ]}
 *)
-module Of : functor (M : Comparator.S) -> sig
+module Of : functor (M : TableclothComparator.S) -> sig
   type nonrec t = (M.t, M.identity) t
 end
 
@@ -51,7 +51,7 @@ end
   Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
-val empty : ('a, 'identity) Comparator.s -> ('a, 'identity) t
+val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
 (** A set with nothing in it. 
 
     Often used as an initial value for functions like {!Array.fold}
@@ -68,7 +68,7 @@ val empty : ('a, 'identity) Comparator.s -> ('a, 'identity) t
     ]}
 *)
 
-val singleton : ('a, 'identity) Comparator.s -> 'a -> ('a, 'identity) t
+val singleton : ('a, 'identity) TableclothComparator.s -> 'a -> ('a, 'identity) t
 (** Create a set from a single {!Int}
 
   {2 Examples}
@@ -76,7 +76,7 @@ val singleton : ('a, 'identity) Comparator.s -> 'a -> ('a, 'identity) t
   {[Set.singleton (module Int) 7 |> Set.toList = [7]]}
 *)
 
-val fromArray : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
+val fromArray : ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
 (** Create a set from an {!Array}
 
     {2 Examples}
@@ -84,9 +84,9 @@ val fromArray : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
     {[Set.fromArray (module String) [|"Ant"; "Bat"; "Bat"; "Goldfish"|] |> Set.toArray = [|"Ant";"Bat";"Goldfish"|]]}
 *)
 
-val from_array : ('a, 'identity) Comparator.s -> 'a array -> ('a, 'identity) t
+val from_array : ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
 
-val fromList : ('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) t
+val fromList : ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 (** Create a set from a {!List}
 
     {2 Examples}
@@ -94,7 +94,7 @@ val fromList : ('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) t
     {[Set.fromList (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.toList = ['A';'B';'G']]}
 *)
 
-val from_list : ('a, 'identity) Comparator.s -> 'a list -> ('a, 'identity) t
+val from_list : ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 
 (** {1 Basic operations} *)
 
@@ -323,7 +323,7 @@ end
 
 (** Construct sets of {!Int}s *)
 module Int : sig
-  type nonrec t = Of(Int).t
+  type nonrec t = Of(TableclothInt).t
 
   val empty : t
   (** A set with nothing in it. *)

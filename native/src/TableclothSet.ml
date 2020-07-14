@@ -1,17 +1,19 @@
+module Comparator = TableclothComparator
+
 type ('a, 'id) t = ('a, 'id) Base.Set.t
 
-module Of (M : Comparator.S) = struct
+module Of (M : TableclothComparator.S) = struct
   type nonrec t = (M.t, M.identity) t
 end
 
 let empty comparator = Base.Set.empty (Internal.toBaseComparator comparator)
 
-let singleton (comparator : ('a, 'identity) Comparator.s) (element : 'a) :
+let singleton (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
     ('a, 'identity) t =
   Base.Set.of_list (Internal.toBaseComparator comparator) [ element ]
 
 
-let fromArray (comparator : ('a, 'identity) Comparator.s) (elements : 'a array)
+let fromArray (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
     : ('a, 'identity) t =
   Base.Set.of_list
     (Internal.toBaseComparator comparator)
@@ -20,7 +22,7 @@ let fromArray (comparator : ('a, 'identity) Comparator.s) (elements : 'a array)
 
 let from_array = fromArray
 
-let fromList (comparator : ('a, 'identity) Comparator.s) (elements : 'a list) :
+let fromList (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
     ('a, 'identity) t =
   Base.Set.of_list (Internal.toBaseComparator comparator) elements
 
@@ -92,17 +94,17 @@ module Poly = struct
 end
 
 module Int = struct
-  type nonrec t = Of(Int).t
+  type nonrec t = Of(TableclothInt).t
 
-  let empty = empty (module Int)
+  let empty = empty (module TableclothInt)
 
-  let singleton = singleton (module Int)
+  let singleton = singleton (module TableclothInt)
 
-  let fromArray = fromArray (module Int)
+  let fromArray = fromArray (module TableclothInt)
 
   let from_array = fromArray
 
-  let fromList = fromList (module Int)
+  let fromList = fromList (module TableclothInt)
 
   let from_list = fromList
 end

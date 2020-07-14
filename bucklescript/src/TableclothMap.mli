@@ -46,7 +46,7 @@ type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
         Map.fromList (module String) [("Apple", 2); ("Pear", 0)]
     ]}
 *)
-module Of : functor (M : Comparator.S) -> sig
+module Of : functor (M : TableclothComparator.S) -> sig
   type nonrec 'value t = (M.t, 'value, M.identity) t
 end
 
@@ -57,7 +57,7 @@ end
     Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
-val empty : ('key, 'identity) Comparator.s -> ('key, 'value, 'identity) t
+val empty : ('key, 'identity) TableclothComparator.s -> ('key, 'value, 'identity) t
 (** A map with nothing in it.
 
     Often used as an intial value for functions like {!Array.fold}
@@ -79,7 +79,7 @@ val empty : ('key, 'identity) Comparator.s -> ('key, 'value, 'identity) t
 *)
 
 val singleton :
-     ('key, 'identity) Comparator.s
+     ('key, 'identity) TableclothComparator.s
   -> key:'key
   -> value:'value
   -> ('key, 'value, 'identity) t
@@ -91,24 +91,24 @@ val singleton :
 *)
 
 val fromArray :
-     ('key, 'identity) Comparator.s
+     ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) array
   -> ('key, 'value, 'identity) t
 (** Create a map from an {!Array} of key-value tuples *)
 
 val from_array :
-     ('key, 'identity) Comparator.s
+     ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) array
   -> ('key, 'value, 'identity) t
 
 val fromList :
-     ('key, 'identity) Comparator.s
+     ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
 (** Create a map of a {!List} of key-value tuples *)
 
 val from_list :
-     ('key, 'identity) Comparator.s
+     ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
 
@@ -543,7 +543,7 @@ end
 
 (** Construct a Map with {!Int}s for keys. *)
 module Int : sig
-  type nonrec 'value t = 'value Of(Int).t
+  type nonrec 'value t = 'value Of(TableclothInt).t
 
   val empty : 'value t
   (** A map with nothing in it. *)

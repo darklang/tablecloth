@@ -1,5 +1,7 @@
 {
-  "name": "bs",
+  "name": "bucklescript-integration-test",
+  "description": "Checks that Tablecloth's sub modules can be accessed",
+  "repository": "https://github.com/darklang/tablecloth",
   "version": "0.1.0",
   "scripts": {
     "clean": "bsb -clean-world",
@@ -12,9 +14,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "^4.0.18"
+    "bs-platform": "7.2.2"
   },
   "dependencies": {
-    "tablecloth-bucklescript": "0.0.2"
+    "tablecloth-bucklescript": "../"
   }
 }

@@ -4,13 +4,31 @@
   "sources": [
     {
       "dir": "bucklescript/src",
-      "public": ["Tablecloth"],
-      "subdirs" : false
+      "public": [
+        "Tablecloth",
+        "TableclothBool",
+        "TableclothChar",
+        "TableclothString",
+        "TableclothInt",
+        "TableclothFloat",
+        "TableclothContainer",
+        "TableclothArray",
+        "TableclothList",
+        "TableclothOption",
+        "TableclothResult",
+        "TableclothTuple2",
+        "TableclothTuple3",
+        "TableclothComparator",
+        "TableclothSet",
+        "TableclothMap",
+        "TableclothFun"
+      ],
+      "subdirs": false
     },
     {
       "dir": "bucklescript/test",
       "type": "dev",
-      "subdirs" : false
+      "subdirs": false
     }
   ],
   "package-specs": {
@@ -19,7 +37,9 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [],
-  "bs-dev-dependencies": ["@glennsl/bs-jest"],
+  "bs-dev-dependencies": [
+    "@glennsl/bs-jest"
+  ],
   "bsc-flags": [
     "-bs-g",
     "-bs-super-errors",

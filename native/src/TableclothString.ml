@@ -1,6 +1,8 @@
+module Comparator = TableclothComparator
+
 type t = string
 
-include Comparator.Make (struct
+include TableclothComparator.Make (struct
   type nonrec t = t
 
   let compare = compare

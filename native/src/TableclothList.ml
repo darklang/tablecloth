@@ -12,7 +12,7 @@ let rec range ?(from = 0) to_ =
 
 let initialize = Base.List.init
 
-let sum (type a) (a : a t) (module M : Container.Sum with type t = a) =
+let sum (type a) (a : a t) (module M : TableclothContainer.Sum with type t = a) =
   (Base.List.fold a ~init:M.zero ~f:M.add : a)
 
 

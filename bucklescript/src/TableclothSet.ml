@@ -1,24 +1,24 @@
 type ('a, 'id) t = ('a, 'id) Belt.Set.t
 
-module Of (M : Comparator.S) = struct
+module Of (M : TableclothComparator.S) = struct
   type nonrec t = (M.t, M.identity) t
 end
 
 let empty comparator = Belt.Set.make ~id:(Internal.toBeltComparator comparator)
 
-let singleton (comparator : ('a, 'identity) Comparator.s) (element : 'a) :
+let singleton (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
     ('a, 'identity) t =
   Belt.Set.fromArray ~id:(Internal.toBeltComparator comparator) [| element |]
 
 
-let fromArray (comparator : ('a, 'identity) Comparator.s) (elements : 'a array)
+let fromArray (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
     : ('a, 'identity) t =
   Belt.Set.fromArray ~id:(Internal.toBeltComparator comparator) elements
 
 
 let from_array = fromArray
 
-let fromList (comparator : ('a, 'identity) Comparator.s) (elements : 'a list) :
+let fromList (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
     ('a, 'identity) t =
   Belt.Set.fromArray
     ~id:(Internal.toBeltComparator comparator)
@@ -104,7 +104,7 @@ module Poly = struct
 end
 
 module Int = struct
-  type nonrec t = Of(Int).t
+  type nonrec t = Of(TableclothInt).t
 
   let fromArray a = Poly.fromArray a |. Obj.magic
 
