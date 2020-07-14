@@ -8,12 +8,14 @@ end
 
 let empty comparator = Base.Set.empty (Internal.toBaseComparator comparator)
 
-let singleton (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
+let singleton
+    (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
     ('a, 'identity) t =
   Base.Set.of_list (Internal.toBaseComparator comparator) [ element ]
 
 
-let fromArray (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
+let fromArray
+    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
     : ('a, 'identity) t =
   Base.Set.of_list
     (Internal.toBaseComparator comparator)
@@ -22,7 +24,8 @@ let fromArray (comparator : ('a, 'identity) TableclothComparator.s) (elements : 
 
 let from_array = fromArray
 
-let fromList (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
+let fromList
+    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
     ('a, 'identity) t =
   Base.Set.of_list (Internal.toBaseComparator comparator) elements
 

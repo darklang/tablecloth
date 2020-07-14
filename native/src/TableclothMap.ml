@@ -13,7 +13,8 @@ let empty (comparator : ('key, 'identity) TableclothComparator.s) :
   Base.Map.empty (Internal.toBaseComparator comparator)
 
 
-let singleton (comparator : ('key, 'identity) TableclothComparator.s) ~key ~value :
+let singleton
+    (comparator : ('key, 'identity) TableclothComparator.s) ~key ~value :
     ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
     (Internal.toBaseComparator comparator)

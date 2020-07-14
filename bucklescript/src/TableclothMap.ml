@@ -7,8 +7,8 @@ module Of (M : TableclothComparator.S) = struct
 end
 
 let fromArray
-    (comparator : ('key, 'id) TableclothComparator.s) (values : ('key * 'v) array) :
-    ('key, 'value, 'id) t =
+    (comparator : ('key, 'id) TableclothComparator.s)
+    (values : ('key * 'v) array) : ('key, 'value, 'id) t =
   Belt.Map.fromArray values ~id:(Internal.toBeltComparator comparator)
 
 

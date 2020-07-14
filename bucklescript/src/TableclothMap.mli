@@ -57,7 +57,8 @@ end
     Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
-val empty : ('key, 'identity) TableclothComparator.s -> ('key, 'value, 'identity) t
+val empty :
+  ('key, 'identity) TableclothComparator.s -> ('key, 'value, 'identity) t
 (** A map with nothing in it.
 
     Often used as an intial value for functions like {!Array.fold}

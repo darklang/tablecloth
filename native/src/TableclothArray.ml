@@ -8,7 +8,9 @@ let initialize (length : int) ~(f : int -> 'a) =
   if length <= 0 then [||] else Base.Array.init length ~f
 
 
-let repeat element ~length = initialize length ~f:(TableclothFun.constant element)
+let repeat element ~length =
+  initialize length ~f:(TableclothFun.constant element)
+
 
 let range ?(from = 0) (to_ : int) =
   (Base.Array.init (max 0 (to_ - from)) ~f:(fun i -> i + from) : int array)

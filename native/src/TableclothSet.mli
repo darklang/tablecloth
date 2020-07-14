@@ -68,7 +68,8 @@ val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
     ]}
 *)
 
-val singleton : ('a, 'identity) TableclothComparator.s -> 'a -> ('a, 'identity) t
+val singleton :
+  ('a, 'identity) TableclothComparator.s -> 'a -> ('a, 'identity) t
 (** Create a set from a single {!Int}
 
   {2 Examples}
@@ -76,7 +77,8 @@ val singleton : ('a, 'identity) TableclothComparator.s -> 'a -> ('a, 'identity) 
   {[Set.singleton (module Int) 7 |> Set.toList = [7]]}
 *)
 
-val fromArray : ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
+val fromArray :
+  ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
 (** Create a set from an {!Array}
 
     {2 Examples}
@@ -84,9 +86,11 @@ val fromArray : ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'iden
     {[Set.fromArray (module String) [|"Ant"; "Bat"; "Bat"; "Goldfish"|] |> Set.toArray = [|"Ant";"Bat";"Goldfish"|]]}
 *)
 
-val from_array : ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
+val from_array :
+  ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
 
-val fromList : ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
+val fromList :
+  ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 (** Create a set from a {!List}
 
     {2 Examples}
@@ -94,7 +98,8 @@ val fromList : ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identi
     {[Set.fromList (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.toList = ['A';'B';'G']]}
 *)
 
-val from_list : ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
+val from_list :
+  ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 
 (** {1 Basic operations} *)
 
