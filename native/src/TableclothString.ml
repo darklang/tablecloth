@@ -100,17 +100,18 @@ let reverse = Base.String.rev
 
 let slice ?(to_ = 0) str ~from = String.sub str from (to_ - from)
 
-let firstIndexOf (s : string) ~(char : char) =
-  (String.index_opt s char : int option)
+let indexOf haystack needle =
+  Base.String.Search_pattern.index ~pos:0 ~in_:haystack
+    (Base.String.Search_pattern.create needle)
 
+let index_of = indexOf
 
-let first_index_of = firstIndexOf
+let indexOfRight haystack needle =
+  (Base.String.Search_pattern.index_all ~may_overlap:false ~in_:haystack
+     (Base.String.Search_pattern.create needle))
+    |> Base.List.last
 
-let lastIndexOf (s : string) ~(char : char) =
-  (String.rindex_opt s char : int option)
-
-
-let last_index_of = lastIndexOf
+let index_of_right = indexOfRight
 
 let insertAt t ~(index : int) ~(value : string) =
   ( let length = length t in

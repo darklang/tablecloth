@@ -28,47 +28,41 @@ let suite =
       });
     });
 
-    describe("firstIndexOf", () => {
-      test("returns some index of the first matching character", () => {
-        expect(
-          firstIndexOf("hello", ~char='h') |> Option.unwrap(~default=9999),
-        )
-        |> toEqual(Eq.int, 0)
+    describe("indexOf", () => {
+      test("returns some index of the first matching substring", () => {
+        expect(indexOf("hello", "h"))
+        |> toEqual(Eq.(option(int)), Some(0))
       });
 
       test("returns the first index even though multiple present", () => {
-        expect(
-          firstIndexOf("hellh", ~char='h') |> Option.unwrap(~default=9999),
-        )
-        |> toEqual(Eq.int, 0)
+        expect(indexOf("hellh", "h"))
+        |> toEqual(Eq.(option(int)), Some(0))
       });
 
-      test("returns None when no character matches", () => {
-        expect(
-          firstIndexOf("hello", ~char='x') |> Option.unwrap(~default=0),
-        )
-        |> toEqual(Eq.int, 0)
+      test("returns first substring that matches with multiple characters", () => {
+        expect(indexOf("hellh", "ell"))
+        |> toEqual(Eq.(option(int)), Some(1))
+      });
+
+      test("returns None when no substring matches", () => {
+        expect(indexOf("hello", "xy")) |> toEqual(Eq.(option(int)), None)
       });
     });
 
-    describe("lastIndexOf", () => {
-      test("returns some index of the last matching character", () => {
-        expect(
-          lastIndexOf("hello", ~char='o') |> Option.unwrap(~default=9999),
-        )
-        |> toEqual(Eq.int, 4)
+    describe("indexOfRight", () => {
+      test("returns some index of the last matching string", () => {
+        expect(indexOfRight("helloh", "oh"))
+        |> toEqual(Eq.(option(int)), Some(4))
       });
 
       test("returns the last index even though multiple present", () => {
-        expect(
-          lastIndexOf("hellh", ~char='h') |> Option.unwrap(~default=9999),
-        )
-        |> toEqual(Eq.int, 4)
+        expect(indexOfRight("ohelloh", "oh"))
+        |> toEqual(Eq.(option(int)), Some(5))
       });
 
       test("returns None when no character matches", () => {
-        expect(lastIndexOf("hello", ~char='x') |> Option.unwrap(~default=0))
-        |> toEqual(Eq.int, 0)
+        expect(indexOfRight("hello", "x"))
+        |> toEqual(Eq.(option(int)), None)
       });
     });
 

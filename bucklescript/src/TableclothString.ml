@@ -50,27 +50,24 @@ let fromChar c = TableclothChar.toCode c |. Js.String.fromCharCode
 
 let from_char = fromChar
 
-let firstIndexOf (s : string) ~(char : char) =
-  ( let result =
-      Js.String.indexOf (TableclothChar.toCode char |. Js.String.fromCharCode) s
+let indexOf haystack needle =
+  ( let result = Js.String.indexOf needle haystack 
     in
     if result = -1 then None else Some result
     : int option )
 
 
-let first_index_of = firstIndexOf
+let index_of = indexOf
 
-let lastIndexOf (s : string) ~(char : char) =
+let indexOfRight haystack needle =
   ( let result =
-      Js.String.lastIndexOf
-        (TableclothChar.toCode char |. Js.String.fromCharCode)
-        s
+      Js.String.lastIndexOf needle haystack
     in
     if result = -1 then None else Some result
     : int option )
 
 
-let last_index_of = lastIndexOf
+let index_of_right = indexOfRight 
 
 let isEmpty t = t = ""
 
