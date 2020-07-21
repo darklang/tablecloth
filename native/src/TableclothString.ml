@@ -101,15 +101,21 @@ let reverse = Base.String.rev
 let slice ?(to_ = 0) str ~from = String.sub str from (to_ - from)
 
 let indexOf haystack needle =
-  Base.String.Search_pattern.index ~pos:0 ~in_:haystack
+  Base.String.Search_pattern.index
+    ~pos:0
+    ~in_:haystack
     (Base.String.Search_pattern.create needle)
+
 
 let index_of = indexOf
 
 let indexOfRight haystack needle =
-  (Base.String.Search_pattern.index_all ~may_overlap:false ~in_:haystack
-     (Base.String.Search_pattern.create needle))
-    |> Base.List.last
+  Base.String.Search_pattern.index_all
+    ~may_overlap:false
+    ~in_:haystack
+    (Base.String.Search_pattern.create needle)
+  |> Base.List.last
+
 
 let index_of_right = indexOfRight
 
