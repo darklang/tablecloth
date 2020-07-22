@@ -50,6 +50,22 @@ let fromChar c = TableclothChar.toCode c |. Js.String.fromCharCode
 
 let from_char = fromChar
 
+let indexOf haystack needle =
+  ( let result = Js.String.indexOf needle haystack in
+    if result = -1 then None else Some result
+    : int option )
+
+
+let index_of = indexOf
+
+let indexOfRight haystack needle =
+  ( let result = Js.String.lastIndexOf needle haystack in
+    if result = -1 then None else Some result
+    : int option )
+
+
+let index_of_right = indexOfRight
+
 let isEmpty t = t = ""
 
 let is_empty = isEmpty

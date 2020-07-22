@@ -212,6 +212,32 @@ val dropRight : string -> count:int -> string
 
 val drop_right : string -> count:int -> string
 
+val indexOf : string -> string -> int option
+(** Returns the index of the first occurrence of [string] or None if string has no occurences of [string]
+
+    {2 Examples}
+
+    {[
+      String.indexOf "Hello World World" "World" = Some 6
+      String.indexOf "Hello World World" "Bye" = None 
+    ]}
+*)
+
+val index_of : string -> string -> int option
+
+val indexOfRight : string -> string -> int option
+(** Returns the index of the last occurrence of [string] or None if string has no occurences of [string]
+
+    {2 Examples}
+
+    {[
+      String.indexOfRight "Hello World World" "World" = Some 12
+      String.indexOfRight "Hello World World" "Bye" = None 
+    ]}
+*)
+
+val index_of_right : string -> string -> int option
+
 val insertAt : string -> index:int -> value:t -> string
 (** Insert a string at [index].
 

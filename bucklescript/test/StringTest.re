@@ -28,6 +28,44 @@ let suite =
       });
     });
 
+    describe("indexOf", () => {
+      test("returns some index of the first matching substring", () => {
+        expect(indexOf("hello", "h"))
+        |> toEqual(Eq.(option(int)), Some(0))
+      });
+
+      test("returns the first index even though multiple present", () => {
+        expect(indexOf("hellh", "h"))
+        |> toEqual(Eq.(option(int)), Some(0))
+      });
+
+      test("returns first substring that matches with multiple characters", () => {
+        expect(indexOf("hellh", "ell"))
+        |> toEqual(Eq.(option(int)), Some(1))
+      });
+
+      test("returns None when no substring matches", () => {
+        expect(indexOf("hello", "xy")) |> toEqual(Eq.(option(int)), None)
+      });
+    });
+
+    describe("indexOfRight", () => {
+      test("returns some index of the last matching string", () => {
+        expect(indexOfRight("helloh", "oh"))
+        |> toEqual(Eq.(option(int)), Some(4))
+      });
+
+      test("returns the last index even though multiple present", () => {
+        expect(indexOfRight("ohelloh", "oh"))
+        |> toEqual(Eq.(option(int)), Some(5))
+      });
+
+      test("returns None when no character matches", () => {
+        expect(indexOfRight("hello", "x"))
+        |> toEqual(Eq.(option(int)), None)
+      });
+    });
+
     describe("fromList", () => {
       test("creates an empty string from an empty array", () => {
         expect(fromList([])) |> toEqual(Eq.string, "")

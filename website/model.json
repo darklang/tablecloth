@@ -39098,6 +39098,210 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "indexOf",
+                  "qualified_name": "TableclothString.indexOf",
+                  "type": {
+                    "rendered": "string -> string -> int option"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Returns the index of the first occurrence of "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " or None if string has no occurences of "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n      String.indexOf \"Hello World World\" \"World\" = Some 6\n      String.indexOf \"Hello World World\" \"Bye\" = None \n    ",
+                            "reason": "\n      String.indexOf \"Hello World World\" \"World\" = Some 6\n      String.indexOf \"Hello World World\" \"Bye\" = None \n    "
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "index_of",
+                  "qualified_name": "TableclothString.index_of",
+                  "type": {
+                    "rendered": "string -> string -> int option"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "indexOfRight",
+                  "qualified_name": "TableclothString.indexOfRight",
+                  "type": {
+                    "rendered": "string -> string -> int option"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Returns the index of the last occurrence of "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " or None if string has no occurences of "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n      String.indexOfRight \"Hello World World\" \"World\" = Some 12\n      String.indexOfRight \"Hello World World\" \"Bye\" = None \n    ",
+                            "reason": "\n      String.indexOfRight \"Hello World World\" \"World\" = Some 12\n      String.indexOfRight \"Hello World World\" \"Bye\" = None \n    "
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "index_of_right",
+                  "qualified_name": "TableclothString.index_of_right",
+                  "type": {
+                    "rendered": "string -> string -> int option"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "insertAt",
                   "qualified_name": "TableclothString.insertAt",
                   "type": {
