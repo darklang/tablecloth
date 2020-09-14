@@ -36,6 +36,10 @@ let flatten a = match a with Ok a' -> a' | Error error -> Error error
 
 let or_ a b = match a with Ok _ -> a | _ -> b
 
+let orElse ta tb = match isError tb with true -> ta | false -> tb
+
+let or_else = orElse
+
 let and_ a b = match a with Ok _ -> b | _ -> a
 
 let unwrap t ~default = Belt.Result.getWithDefault t default
