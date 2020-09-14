@@ -178,19 +178,15 @@ val or_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
   {[Result.or_ (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedBird "Robin"))]}
 *)
 
-val orElse : ('ok, 'error) t -> ('ok 'error) t -> ('ok 'error) t
+val orElse : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
 (** Return the first argument if it {isError} otherwise return second
    
    {2 Examples}
 
-   Ok "the value I want"
-        |> Result.orElse (Ok "a default value")
-        = Ok “the value I want”
+   {[(Ok "the value I want") |> Result.orElse (Ok "a default value") = (Ok “the value I want”)]}
 
-   Error "Snakes!"
-        |> Result.orElse (Ok "a default value")
-        = Ok "a default value"
+   {[(Error "Snakes!") |> Result.orElse (Ok "a default value")= Ok ("a default value")]}
 *)
 
 val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
