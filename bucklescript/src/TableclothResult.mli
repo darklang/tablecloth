@@ -180,13 +180,13 @@ val or_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
 val orElse : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
-(** Return the first argument if it {isError} otherwise return second
+(** Return the second argument if the first one is {!isError}, otherwise return the first
    
    {2 Examples}
 
    {[(Ok "the value I want") |> Result.orElse (Ok "a default value") = (Ok “the value I want”)]}
 
-   {[(Error "Snakes!") |> Result.orElse (Ok "a default value")= Ok ("a default value")]}
+   {[(Error "Snakes!") |> Result.orElse (Ok "a default value") = Ok ("a default value")]}
 *)
 
 val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
