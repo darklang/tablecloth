@@ -4,6 +4,7 @@ open AlcoJest;
 let suite =
   suite("Result", () => {
     open Result;
+
     describe("fromOption", () => {
       test("maps None into Error", () => {
         expect(fromOption(~error="error message", None))
@@ -17,13 +18,13 @@ let suite =
     });
 
     describe("orElse", () => {
-      test("if first is Ok then choose the first value", () => {
-        expect(orElse(Ok("This is Ok"), Ok("This is default")))
+      test("the first value is the default and if second value is an Ok we get the second value", () => {
+        expect(orElse(Ok("This is default"), Ok("This is Ok")))
         |> toEqual(Eq.(result(string, string)), Ok("This is Ok"))
       });
 
-      test("if the first is an Error then choose the second value aka default value", () => {
-        expect(orElse(Error("This is an Error"), Ok("This is default")))
+      test("if the second is an Error then choose the default value", () => {
+        expect(orElse(Ok("This is default"), Error("This is an Error")))
         |> toEqual(Eq.(result(string,string)), Ok("This is default"))
       });
     });
