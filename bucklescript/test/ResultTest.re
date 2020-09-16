@@ -18,15 +18,14 @@ let suite =
     });
 
     describe("orElse", () => {
-      test("the first value is the default and if second value is an Ok we get the second value", () => {
+      test("returns second value if Ok", () => {
         expect(orElse(Ok("This is default"), Ok("This is Ok")))
         |> toEqual(Eq.(result(string, string)), Ok("This is Ok"))
       });
 
-      test("if the second is an Error then choose the default value", () => {
+      test("returns the first value if an Error", () => {
         expect(orElse(Ok("This is default"), Error("This is an Error")))
-        |> toEqual(Eq.(result(string,string)), Ok("This is default"))
+        |> toEqual(Eq.(result(string, string)), Ok("This is default"))
       });
     });
-
   });
