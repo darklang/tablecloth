@@ -20,7 +20,14 @@ let or_else = orElse
 
 let andThen t ~f = match t with Some x -> f x | None -> None
 
+let andThen2 a b ~f = 
+  match (a, b) with 
+  | Some a, Some b -> f a b 
+  | _ -> None
+
 let and_then = andThen
+
+let and_then2 = andThen2
 
 let flatten = Option.join
 

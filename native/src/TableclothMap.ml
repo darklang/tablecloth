@@ -96,7 +96,7 @@ let filter = Base.Map.filter
 
 let partition m ~f =
   Base.Map.partition_mapi m ~f:(fun ~key ~data ->
-      if f ~key ~value:data then `Fst data else `Snd data)
+      if f ~key ~value:data then First data else Second data)
 
 
 let find m ~f =

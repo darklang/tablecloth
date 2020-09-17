@@ -209,7 +209,49 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
     {[Option.andThen (Some []) ~f:List.head = None]}
 *)
 
+val andThen2 : 'a t -> 'b t -> f:('a -> 'b -> 'c t) -> 'c t
+(** Chain together many computations that may not return a value.
+
+    It is helpful to see its definition:
+    {[
+      let andThen2 a b ~f =
+        match (a, b) with
+        | Some a, Some b -> f a b
+        | _              -> None
+    ]}
+
+    This means we only continue with the callback if we have a value.
+
+    For example, if you want to zip 2 strings which might or might not be of equal lengths:
+
+    {[
+      let zip (a : 'a list) (b : 'b list) : (('a * 'b) list) =
+        if List.length a = List.length b then
+          Some (List.map2 (fun x y -> (x, y)) a b)
+        else
+          None
+      in
+
+      let lst_a = Some ([1; 2; 3; 4]) in
+      let lst_b = Some ([5; 6; 7; 8]) in
+
+      Option.andThen2 ~f:zip lst_a lst_b
+    ]}
+
+    If [lst_a,lst_b] are [None] this entire chain of operations will 
+    short-circuit and result in [None]. If [zip] results in [None] the 
+    chain of computations will result in [None].
+
+    {2 Examples}
+
+    {[Option.andThen (Some [1; 2; 3]) (Some [2; 3])) ~f:Base.List.zip_exn = None]}
+
+    {[Option.andThen (Some [1]) (Some [2]) ~f:Base.List.zip_exn = Some [(1, 2)]]}
+*)
+
 val and_then : 'a t -> f:('a -> 'b t) -> 'b t
+
+val and_then2 : 'a t -> 'b t -> f:('a -> 'b -> 'c t) -> 'c t
 
 val unwrap : 'a t -> default:'a -> 'a
 (** Unwrap an [option('a)] returning [default] if called with [None].
