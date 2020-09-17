@@ -232,13 +232,13 @@ val andThen2 : 'a t -> 'b t -> f:('a -> 'b -> 'c t) -> 'c t
           None
       in
 
-      let lst_a = Some ([1; 2; 3; 4]) in
-      let lst_b = Some ([5; 6; 7; 8]) in
+      let lst_a = Some [1; 2; 3; 4] in
+      let lst_b = Some [5; 6; 7; 8] in
 
       Option.andThen2 ~f:zip lst_a lst_b
     ]}
 
-    If [lst_a,lst_b] are [None] this entire chain of operations will 
+    If [lst_a] and [lst_b] are [None] this entire chain of operations will 
     short-circuit and result in [None]. If [zip] results in [None] the 
     chain of computations will result in [None].
 
