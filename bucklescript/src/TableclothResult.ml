@@ -98,17 +98,16 @@ let compare
     (compareOk : 'ok -> 'ok -> int)
     (compareError : 'error -> 'error -> int)
     (a : ('ok, 'error) t)
-    (b : ('ok, 'error) t) =
-  ( match (a, b) with
-    | Error a', Error b' ->
-        compareError a' b'
-    | Ok a', Ok b' ->
-        compareOk a' b'
-    | Error _, Ok _ ->
-        -1
-    | Ok _, Error _ ->
-        1
-    : int )
+    (b : ('ok, 'error) t) : int =
+  match (a, b) with
+  | Error a', Error b' ->
+      compareError a' b'
+  | Ok a', Ok b' ->
+      compareOk a' b'
+  | Error _, Ok _ ->
+      -1
+  | Ok _, Error _ ->
+      1
 
 
 let ( |? ) t default = unwrap t ~default

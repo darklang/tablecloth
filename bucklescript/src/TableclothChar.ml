@@ -15,8 +15,8 @@ let toCode (c : char) = Char.code c
 
 let to_code = toCode
 
-let fromCode i =
-  (if 0 <= i && i <= 255 then Some (Char.chr i) else None : char option)
+let fromCode i : char option =
+  if 0 <= i && i <= 255 then Some (Char.chr i) else None
 
 
 let from_code = fromCode
@@ -25,8 +25,8 @@ let toString c = String.make 1 c
 
 let to_string = toString
 
-let fromString str =
-  (match String.length str with 1 -> Some str.[0] | _ -> None : char option)
+let fromString str : char option =
+  match String.length str with 1 -> Some str.[0] | _ -> None
 
 
 let from_string = fromString

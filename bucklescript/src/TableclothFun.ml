@@ -50,9 +50,9 @@ let forever f =
       exn
 
 
-let curry (f : 'a * 'b -> 'c) a b = (f (a, b) : 'c)
+let curry (f : 'a * 'b -> 'c) a b : 'c = f (a, b)
 
-let uncurry (f : 'a -> 'b -> 'c) ((a, b) : 'a * 'b) = (f a b : 'c)
+let uncurry (f : 'a -> 'b -> 'c) ((a, b) : 'a * 'b) : 'c = f a b
 
 let curry3 f a b c = f (a, b, c)
 

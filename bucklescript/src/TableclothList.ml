@@ -305,11 +305,11 @@ let intersperse t ~sep =
 
 let initialize length ~f = Belt.List.makeBy length f
 
-let forEach t ~f = (Belt.List.forEach t f : unit)
+let forEach t ~f : unit = Belt.List.forEach t f
 
 let for_each = forEach
 
-let forEachWithIndex t ~f = (Belt.List.forEachWithIndex t f : unit)
+let forEachWithIndex t ~f : unit = Belt.List.forEachWithIndex t f
 
 let for_each_with_index = forEachWithIndex
 

@@ -1540,10 +1540,9 @@ class json =
            ; ("info", self#json_of_info mt.mt_info)
            ; ( "signature"
              , nullable
-                 (fun (m_type : Types.module_type) ->
-                   ( string
-                       (Odoc_info.string_of_module_type ~complete:true m_type)
-                     : Json.t ))
+                 (fun (m_type : Types.module_type) : Json.t ->
+                   string
+                     (Odoc_info.string_of_module_type ~complete:true m_type))
                  mt.mt_type )
            ; ( "elements"
              , array
@@ -2009,9 +2008,8 @@ class json =
              (Module.module_type_parameters mt)); *)
           ( "signature"
           , nullable
-              (fun (m_type : Types.module_type) ->
-                ( string (Odoc_info.string_of_module_type ~complete:true m_type)
-                  : Json.t ))
+              (fun (m_type : Types.module_type) : Json.t ->
+                string (Odoc_info.string_of_module_type ~complete:true m_type))
               mt.mt_type )
         ; ( "elements"
           , array

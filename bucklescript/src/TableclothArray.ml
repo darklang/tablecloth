@@ -112,8 +112,8 @@ let extent t ~compare =
                   max ))
 
 
-let sum (type a) t (module M : TableclothContainer.Sum with type t = a) =
-  (Array.fold_left M.add M.zero t : a)
+let sum (type a) t (module M : TableclothContainer.Sum with type t = a) : a =
+  Array.fold_left M.add M.zero t
 
 
 let map t ~f = Belt.Array.map t f
@@ -122,7 +122,7 @@ let mapWithIndex t ~f = Belt.Array.mapWithIndex t f
 
 let map_with_index = mapWithIndex
 
-let map2 a b ~(f : 'a -> 'b -> 'c) = (Belt.Array.zipBy a b f : 'c array)
+let map2 a b ~(f : 'a -> 'b -> 'c) : 'c array = Belt.Array.zipBy a b f
 
 let map3 as_ bs (cs : 'c t) ~f =
   let minLength =
@@ -215,15 +215,14 @@ let chunks_of = chunksOf
 
 let reverse = Belt.Array.reverseInPlace
 
-let forEach t ~f = (Belt.Array.forEach t f : unit)
+let forEach t ~f : unit = Belt.Array.forEach t f
 
 let for_each = forEach
 
-let forEachWithIndex t ~f =
-  ( for i = 0 to length t - 1 do
-      f i t.(i)
-    done
-    : unit )
+let forEachWithIndex t ~f : unit =
+  for i = 0 to length t - 1 do
+    f i t.(i)
+  done
 
 
 let for_each_with_index = forEachWithIndex

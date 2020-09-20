@@ -32,8 +32,8 @@ let both a b = match (a, b) with Some a, Some b -> Some (a, b) | _ -> None
 
 let map t ~f = Option.map f t
 
-let map2 (ta : 'a t) (tb : 'b t) ~(f : 'a -> 'b -> 'c) =
-  (match (ta, tb) with Some a, Some b -> Some (f a b) | _ -> None : 'c t)
+let map2 (ta : 'a t) (tb : 'b t) ~(f : 'a -> 'b -> 'c) : 'c t =
+  match (ta, tb) with Some a, Some b -> Some (f a b) | _ -> None
 
 
 let unwrap t ~default = match t with None -> default | Some value -> value
