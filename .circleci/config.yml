@@ -169,6 +169,7 @@ workflows:
       - bucklescript-build-and-test
       - bucklescript-integration-test
       - native-build-and-test
+      - native-integration-test
       - source-code-formatting
       - documentation-generator-build
       - website-build
