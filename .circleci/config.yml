@@ -30,6 +30,8 @@ jobs:
       - image: ocaml/opam2
     environment:
       CI: true
+      NATIVE_OCAML_SWITCH: 4.10
+      BASE_VERSION: v0.13.2
     working_directory: ~/repo
     steps:
       - checkout:
