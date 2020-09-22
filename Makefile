@@ -8,7 +8,7 @@ endif
 
 
 ifndef TC_BUCKLESCRIPT_VERSION
-	TC_BUCKLESCRIPT_VERSION := 7.2.2
+	TC_BUCKLESCRIPT_VERSION := 8.2.0
 endif
 
 build-native:
