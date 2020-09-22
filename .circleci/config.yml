@@ -26,6 +26,9 @@ jobs:
             - ~/repo/node_modules
 
   native-build-and-test:
+    parameters:
+      ocaml-version: { type: string }
+      base-version: { type: string }
     docker:
       - image: ocaml/opam2
     environment:
