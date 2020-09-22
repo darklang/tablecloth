@@ -42,9 +42,17 @@ let ( / ) = ( / )
 
 let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
 
-let power ~base ~exponent = Js.Math.pow_int ~base ~exp:exponent
+let power ~base ~exponent =
+  let result = Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent) in
+  let result =
+  if result > TableclothFloat.maximumSafeInteger
+  then TableclothFloat.maximumSafeInteger
+  else if result < TableclothFloat.minimumSafeInteger
+  then TableclothFloat.minimumSafeInteger
+  else result
+  in Js.Math.unsafe_trunc result
 
-let ( ** ) base exponent = Js.Math.pow_int ~base ~exp:exponent
+let ( ** ) base exponent = power ~base ~exponent
 
 let negate = ( ~- )
 
