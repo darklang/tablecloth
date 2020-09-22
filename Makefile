@@ -6,6 +6,11 @@ ifndef TC_BASE_VERSION
 	TC_BASE_VERSION := v0.13.2
 endif
 
+
+ifndef TC_BUCKLESCRIPT_VERSION
+	TC_BUCKLESCRIPT_VERSION := 7.2.2
+endif
+
 build-native:
 	@printf "\n\e[31mBuilding tablecloth-native ...\e[0m\n"
 	opam config exec -- dune build
@@ -71,6 +76,7 @@ deps-native:
 
 deps-bs:
 	@printf "\n\e[31mInstalling bs dependencies ...\e[0m\n"
+	npm install --only=dev bs-platform@${TC_BUCKLESCRIPT_VERSION}
 	npm install
 	@printf "\n\e[31mInstalled!\e[0m\n"
 

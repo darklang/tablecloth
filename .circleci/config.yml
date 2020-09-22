@@ -1,11 +1,14 @@
 version: 2.1
 jobs:
   bucklescript-build-and-test:
+    parameters:
+      bucklescript-version: { type: string }
     docker:
       - image: cimg/node:14.11.0
     environment:
       CI: true
       NODE_ENV: test
+      TC_BUCKLESCRIPT_VERSION: << parameters.bucklescript-version >>
     working_directory: ~/repo
     steps:
       - checkout:
@@ -129,7 +132,15 @@ workflows:
   version: 2
   build:
     jobs:
-      - bucklescript-build-and-test
+      - bucklescript-build-and-test:
+          matrix:
+            parameters:
+              bucklescript-version:
+                - "8.2.0"
+                - "7.3.2"
+                - "6.2.1"
+                - "5.2.1"
+                - "4.0.18"
       - native-build-and-test:
           matrix:
             parameters:
