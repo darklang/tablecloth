@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   bucklescript-build-and-test:
     docker:
-      - image: circleci/node:12
+      - image: cimg/node:14.11.0
     environment:
       CI: true
       NODE_ENV: test
@@ -105,7 +105,7 @@ jobs:
 
   website-build:
     docker:
-      - image: circleci/node:12
+      - image: cimg/node:14.11.0
     environment:
       CI: true
       NODE_ENV: production
