@@ -133,8 +133,9 @@ workflows:
       - native-build-and-test:
           matrix:
             parameters:
-              ocaml-version: ["4.06", "4.07", "4.08", "4.09", "4.10", "4.11", "4.12"]
-              base-version: ["v0.10", "v0.11", "v0.12", "v0.13", "v0.14"]
+              # the ocaml/opam2 only supports to 4.10 atm
+              ocaml-version: ["4.06", "4.07", "4.08", "4.09", "4.10"]
+              base-version: ["v0.9.4", "v0.10.0", "v0.11.1", "v0.12.2", "v0.13.2", "v0.14.0"]
       - source-code-formatting
       - documentation-generator-build
       - website-build
