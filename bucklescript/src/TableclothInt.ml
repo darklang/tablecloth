@@ -43,14 +43,18 @@ let ( / ) = ( / )
 let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
 
 let power ~base ~exponent =
-  let result = Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent) in
   let result =
-  if result > TableclothFloat.maximumSafeInteger
-  then TableclothFloat.maximumSafeInteger
-  else if result < TableclothFloat.minimumSafeInteger
-  then TableclothFloat.minimumSafeInteger
-  else result
-  in Js.Math.unsafe_trunc result
+    Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent)
+  in
+  let result =
+    if result > TableclothFloat.maximumSafeInteger
+    then TableclothFloat.maximumSafeInteger
+    else if result < TableclothFloat.minimumSafeInteger
+    then TableclothFloat.minimumSafeInteger
+    else result
+  in
+  Js.Math.unsafe_trunc result
+
 
 let ( ** ) base exponent = power ~base ~exponent
 
