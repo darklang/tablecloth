@@ -133,20 +133,21 @@ workflows:
       - native-build-and-test:
           matrix:
             parameters:
+              # Contributions welcome for commente out versions, see README
               ocaml-version:
-                 # - "4.06" # contributions welcome
-                 # - "4.07" # contributions welcome
+                 #- "4.06"
+                 #- "4.07"
                  - "4.08"
                  - "4.09"
-                 # - "4.10" # separate config below
+                 #- "4.10" # separate config below
                  #- "4.11" # no ocaml/opam2 version for this, probably works
               base-version:
-                 #- "v0.9.4" # contributions welcome
-                 #- "v0.10.0" # contributions welcome
-                 #- "v0.11.1" # contributions welcome
+                 #- "v0.9.4"
+                 #- "v0.10.0"
+                 #- "v0.11.1"
                  - "v0.12.2"
                  - "v0.13.2"
-                 #- "v0.14.0" # contributions welcome
+                 #- "v0.14.0"
       # Base 12 does not support OCaml 4.10
       - native-build-and-test:
           matrix:
