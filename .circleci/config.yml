@@ -144,8 +144,6 @@ workflows:
                 - "7.1.1"
                 - "7.0.1"
                 # Pre version 6 not supported
-                #- "5.2.1"
-                #- "4.0.18"
       - native-build-and-test:
           matrix:
             parameters:
