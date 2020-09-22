@@ -138,7 +138,7 @@ workflows:
                  # - "4.07" # contributions welcome
                  - "4.08"
                  - "4.09"
-                 - "4.10"
+                 # - "4.10" # separate config below
                  #- "4.11" # no ocaml/opam2 version for this, probably works
               base-version:
                  #- "v0.9.4" # contributions welcome
