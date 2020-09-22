@@ -137,9 +137,12 @@ workflows:
             parameters:
               bucklescript-version:
                 - "8.2.0"
-                - "8.0.0"
+                - "8.1.1"
+                - "8.0.3"
                 - "7.3.2"
-                - "7.0.0"
+                - "7.2.2"
+                - "7.1.1"
+                - "7.0.1"
                 # Pre version 6 not supported
                 #- "5.2.1"
                 #- "4.0.18"
