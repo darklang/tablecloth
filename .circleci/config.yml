@@ -30,8 +30,8 @@ jobs:
       - image: ocaml/opam2
     environment:
       CI: true
-      TC_NATIVE_OCAML_SWITCH: "4.10"
-      TC_BASE_VERSION: v0.13.2
+      TC_NATIVE_OCAML_SWITCH: << parameters.ocaml-version >>
+      TC_BASE_VERSION: << parameters.base-version >>
     working_directory: ~/repo
     steps:
       - checkout:
@@ -127,7 +127,11 @@ workflows:
   build:
     jobs:
       - bucklescript-build-and-test
-      - native-build-and-test
+      - native-build-and-test:
+          matrix:
+            parameters:
+              ocaml-version: ["4.06", "4.07", "4.08", "4.09", "4.10", "4.11", "4.12"]
+              base-version: ["v0.10", "v0.11", "v0.12", "v0.13", "v0.14"]
       - source-code-formatting
       - documentation-generator-build
       - website-build
