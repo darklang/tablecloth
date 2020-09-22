@@ -157,6 +157,7 @@ a handful of useful, supported commands:
 - `make test`: Run the test suite. You may need to `make build` first.
 - `make documentation`: Build the documentation to browse offline.
 - `make check-format`: Check your code is formatted correctly.
+- `make format`: Format code.
 
 ## License
 
