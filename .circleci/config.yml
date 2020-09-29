@@ -19,37 +19,22 @@ jobs:
       - run: make build-bs
       - run: make test-bs
       - run: make doc-bs
+      - run: make integration-test-bs
       - save_cache:
           key: v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/repo/node_modules
 
-  bucklescript-integration-test:
-    docker:
-      - image: circleci/node:12
-    environment:
-      CI: true
-      NODE_ENV: test
-    working_directory: ~/repo
-    steps:
-      - checkout:
-          path: ~/repo
-      - restore_cache:
-          keys:
-            - v1-bucklescript-integration-test-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-bucklescript-integration-test-dependencies-{{ .Branch }}-
-            - v1-bucklescript-integration-test-dependencies-
-      - run: make integration-test-bs
-      - save_cache:
-          key: v1-bucklescript-integration-test-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          paths:
-            - ~/repo/integration-test/node_modules
-
   native-build-and-test:
+    parameters:
+      ocaml-version: { type: string }
+      base-version: { type: string }
     docker:
       - image: ocaml/opam2
     environment:
       CI: true
+      TC_NATIVE_OCAML_SWITCH: << parameters.ocaml-version >>
+      TC_BASE_VERSION: << parameters.base-version >>
     working_directory: ~/repo
     steps:
       - checkout:
@@ -65,31 +50,9 @@ jobs:
       - run: make build-native
       - run: make test-native
       - run: make doc-native
-      - save_cache:
-          key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
-          paths:
-            - ~/.opam
-
-  native-integration-test:
-    docker:
-      - image: ocaml/opam2
-    environment:
-      CI: true
-    working_directory: ~/repo
-    steps:
-      - checkout:
-          path: ~/repo
-      - restore_cache:
-          keys:
-            - v2-native-integration-test-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
-            - v2-native-integration-test-dependencies-{{ .Branch }}-
-            - v2-native-integration-test-dependencies-
-      # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
-      - run: sudo apt-get install -y m4
-      - run: make deps-native
       - run: make integration-test-native
       - save_cache:
-          key: v2-native-integration-test-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+          key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
             - ~/.opam
 
@@ -167,8 +130,30 @@ workflows:
   build:
     jobs:
       - bucklescript-build-and-test
-      - bucklescript-integration-test
-      - native-build-and-test
+      - native-build-and-test:
+          matrix:
+            parameters:
+              # Contributions welcome for commente out versions, see README
+              ocaml-version:
+                 #- "4.06"
+                 #- "4.07"
+                 - "4.08"
+                 - "4.09"
+                 #- "4.10" # separate config below
+                 #- "4.11" # no ocaml/opam2 version for this, probably works
+              base-version:
+                 #- "v0.9.4"
+                 #- "v0.10.0"
+                 #- "v0.11.1"
+                 - "v0.12.2"
+                 - "v0.13.2"
+                 #- "v0.14.0"
+      # Base 12 does not support OCaml 4.10
+      - native-build-and-test:
+          matrix:
+            parameters:
+              ocaml-version: ["4.10"]
+              base-version: ["v0.13.2"]
       - source-code-formatting
       - documentation-generator-build
       - website-build

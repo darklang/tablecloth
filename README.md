@@ -37,7 +37,7 @@ Then add to your dune file:
 
 ## Usage
 
-The recommended way to use Tablecloth is with a top-level open at the beginning of a file. 
+The recommended way to use Tablecloth is with a top-level open at the beginning of a file.
 
 This will ensure that all the built-in modules are replaced.
 
@@ -51,6 +51,23 @@ let () =
   |> List.filterMap ~f:Char.fromCode
   |> String.fromList
 ```
+
+## Supported versions
+
+Tablecloth for native OCaml/reason supports OCaml 4.08-4.10 and Base
+v0.12.2/v0.13.2. Other versions of OCaml require small tweaks to our build
+system and may be supported later. Other versions of base require small code
+changes and may be supported later. OCaml 4.11 is believed to work but is not
+officially supported as there is no docker container for it in CI.
+
+We does not currently support (contributions welcome!):
+
+- OCaml 4.06
+- OCaml 4.07
+- Base v0.9
+- Base v0.10
+- Base v0.11
+- Base v0.14
 
 ## Design of Tablecloth
 
@@ -105,9 +122,9 @@ We also have design goals that are not yet achieved in the current version:
 
 ## Contributing
 
-Tablecloth is an ideal library to contribute to, even if you're new to OCaml or Reason. 
+Tablecloth is an ideal library to contribute to, even if you're new to OCaml or Reason.
 
-The maintainers are warm and friendly, and the project abides by a [Code of Conduct](./CODE_OF_CONDUCT.md). 
+The maintainers are warm and friendly, and the project abides by a [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 There are many small tasks to be done - a small change to a single function can be extremely
 helpful.

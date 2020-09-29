@@ -1,3 +1,11 @@
+ifndef TC_NATIVE_OCAML_SWITCH
+	TC_NATIVE_OCAML_SWITCH := 4.10.0
+endif
+
+ifndef TC_BASE_VERSION
+	TC_BASE_VERSION := v0.13.2
+endif
+
 build-native:
 	@printf "\n\e[31mBuilding tablecloth-native ...\e[0m\n"
 	opam config exec -- dune build
@@ -57,7 +65,8 @@ integration-test-native:
 deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
 	opam update
-	opam install alcotest base dune junit junit_alcotest odoc reason -y
+	opam switch set ${TC_NATIVE_OCAML_SWITCH}
+	opam install alcotest base.${TC_BASE_VERSION} dune junit junit_alcotest odoc reason -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 deps-bs:
