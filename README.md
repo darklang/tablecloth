@@ -54,20 +54,28 @@ let () =
 
 ## Supported versions
 
-Tablecloth for native OCaml/reason supports OCaml 4.08-4.10 and Base
-v0.12.2/v0.13.2. Other versions of OCaml require small tweaks to our build
-system and may be supported later. Other versions of base require small code
-changes and may be supported later. OCaml 4.11 is believed to work but is not
-officially supported as there is no docker container for it in CI.
+### Bucklescript/ReasonML/Rescript
 
-We does not currently support (contributions welcome!):
+Tablecloth for Rescript supports bs-platform 7 and 8. Older versions of Tablecloth supported older versions of bs-platform.
 
-- OCaml 4.06
-- OCaml 4.07
-- Base v0.9
-- Base v0.10
-- Base v0.11
-- Base v0.14
+### Native
+
+Tablecloth for native OCaml/Reason supports OCaml 4.08-4.10 and Base
+v0.12.2/v0.13.2. We are open to supporting other versions:
+
+- OCaml 4.11 is believed to work but is not officially supported as there is no
+  docker container for it in CI.
+- OCaml 4.06 and 4.07 require small tweaks to our build system
+- Base v0.9, v0.10, and v0.11 require small code changes
+- Base v0.14 require small dependency tweaks
+
+### Development
+
+When developing Tablecloth, you can test it against different versions of
+bs-platform, OCaml (native) and Base, using the following commands:
+
+- `TC_BUCKLESCRIPT_VERSION=6.1.1 make deps-bs`
+- `TC_BASE_VERSION=v0.14.0 TC_NATIVE_OCAML_SWITCH=4.11.0 make deps-native`
 
 ## Design of Tablecloth
 
@@ -148,6 +156,8 @@ a handful of useful, supported commands:
 - `make build`: Build the project.
 - `make test`: Run the test suite. You may need to `make build` first.
 - `make documentation`: Build the documentation to browse offline.
+- `make check-format`: Check your code is formatted correctly.
+- `make format`: Format code.
 
 ## License
 
