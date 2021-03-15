@@ -16,7 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "0.5.1",
-    "bs-platform": ">=7.0.1"
+    "bs-platform": ">=9.0.2"
   },
   "dependencies": {},
   "scripts": {
