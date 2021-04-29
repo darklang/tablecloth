@@ -1,0 +1,21 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: bs-platform
+    versions:
+    - 8.4.2
+    - 9.0.0
+    - 9.0.1
+  - dependency-name: "@glennsl/bs-jest"
+    versions:
+    - 0.6.0
