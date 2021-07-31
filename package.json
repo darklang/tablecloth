@@ -1,5 +1,5 @@
 {
-  "name": "tablecloth-rescript",
+  "name": "tablecloth-bucklescript",
   "description": "A portable standard library enhancement for Rescript and OCaml.",
   "version": "0.0.8",
   "repository": "https://github.com/darklang/tablecloth",
@@ -28,8 +28,8 @@
   },
   "jest": {
     "testMatch": [
-      "<rootDir>/bucklescript/test/*Test.bs.js",
-      "<rootDir>/bucklescript/test/*Test.js"
+      "<rootDir>/rescript/test/*Test.bs.js",
+      "<rootDir>/rescript/test/*Test.js"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"

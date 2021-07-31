@@ -30,37 +30,37 @@ install: opt
 # We need to build tablecloth to create the cmi files for ocamldoc
 build: opt dummy
 	cp ../native/src/TableclothBool.ml ./_build/TableclothBool.ml
-	cp ../bucklescript/src/TableclothBool.mli ./_build/TableclothBool.mli
+	cp ../rescript/src/TableclothBool.mli ./_build/TableclothBool.mli
 	cp ../native/src/TableclothComparator.ml ./_build/TableclothComparator.ml
-	cp ../bucklescript/src/TableclothComparator.mli ./_build/TableclothComparator.mli
-	cp ../bucklescript/src/TableclothContainer.ml ./_build/TableclothContainer.ml
-	cp ../bucklescript/src/TableclothFun.ml ./_build/TableclothFun.ml
+	cp ../rescript/src/TableclothComparator.mli ./_build/TableclothComparator.mli
+	cp ../rescript/src/TableclothContainer.ml ./_build/TableclothContainer.ml
+	cp ../rescript/src/TableclothFun.ml ./_build/TableclothFun.ml
 	cp ../native/src/TableclothFloat.ml ./_build/TableclothFloat.ml
-	cp ../bucklescript/src/TableclothFloat.mli ./_build/TableclothFloat.mli
-	cp ../bucklescript/src/TableclothFun.mli ./_build/TableclothFun.mli
+	cp ../rescript/src/TableclothFloat.mli ./_build/TableclothFloat.mli
+	cp ../rescript/src/TableclothFun.mli ./_build/TableclothFun.mli
 	cp ../native/src/TableclothInt.ml ./_build/TableclothInt.ml
-	cp ../bucklescript/src/TableclothInt.mli ./_build/TableclothInt.mli
+	cp ../rescript/src/TableclothInt.mli ./_build/TableclothInt.mli
 	cp ../native/src/Internal.ml ./_build/Internal.ml
 	cp ../native/src/TableclothArray.ml ./_build/TableclothArray.ml
-	cp ../bucklescript/src/TableclothArray.mli ./_build/TableclothArray.mli
+	cp ../rescript/src/TableclothArray.mli ./_build/TableclothArray.mli
 	cp ../native/src/TableclothChar.ml ./_build/TableclothChar.ml
-	cp ../bucklescript/src/TableclothChar.mli ./_build/TableclothChar.mli
+	cp ../rescript/src/TableclothChar.mli ./_build/TableclothChar.mli
 	cp ../native/src/TableclothList.ml ./_build/TableclothList.ml
-	cp ../bucklescript/src/TableclothList.mli ./_build/TableclothList.mli
+	cp ../rescript/src/TableclothList.mli ./_build/TableclothList.mli
 	cp ../native/src/TableclothMap.ml ./_build/TableclothMap.ml
 	cp ../native/src/TableclothMap.mli ./_build/TableclothMap.mli
 	cp ../native/src/TableclothOption.ml ./_build/TableclothOption.ml
-	cp ../bucklescript/src/TableclothOption.mli ./_build/TableclothOption.mli
+	cp ../rescript/src/TableclothOption.mli ./_build/TableclothOption.mli
 	cp ../native/src/TableclothResult.ml ./_build/TableclothResult.ml
-	cp ../bucklescript/src/TableclothResult.mli ./_build/TableclothResult.mli
+	cp ../rescript/src/TableclothResult.mli ./_build/TableclothResult.mli
 	cp ../native/src/TableclothSet.ml ./_build/TableclothSet.ml
 	cp ../native/src/TableclothSet.mli ./_build/TableclothSet.mli
 	cp ../native/src/TableclothString.ml ./_build/TableclothString.ml
-	cp ../bucklescript/src/TableclothString.mli ./_build/TableclothString.mli
-	cp ../bucklescript/src/TableclothTuple2.ml ./_build/TableclothTuple2.ml
-	cp ../bucklescript/src/TableclothTuple2.mli ./_build/TableclothTuple2.mli
-	cp ../bucklescript/src/TableclothTuple3.ml ./_build/TableclothTuple3.ml
-	cp ../bucklescript/src/TableclothTuple3.mli ./_build/TableclothTuple3.mli
+	cp ../rescript/src/TableclothString.mli ./_build/TableclothString.mli
+	cp ../rescript/src/TableclothTuple2.ml ./_build/TableclothTuple2.ml
+	cp ../rescript/src/TableclothTuple2.mli ./_build/TableclothTuple2.mli
+	cp ../rescript/src/TableclothTuple3.ml ./_build/TableclothTuple3.ml
+	cp ../rescript/src/TableclothTuple3.mli ./_build/TableclothTuple3.mli
 	cp ../native/src/Tablecloth.ml ./_build/Tablecloth.ml
 	opam config exec -- ocamlfind ocamlc \
 		-package base,str \

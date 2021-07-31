@@ -15,7 +15,7 @@ Check out the [website](https://tableclothml.netlify.app) for our interactive AP
 
 ## Installation
 
-### Rescript 
+### Rescript
 
 Install via npm by:
 
@@ -146,7 +146,7 @@ need to get started:
 
 - Install OCaml and OPAM [based on your OS](https://ocaml.org/docs/install.html)
 - You may need to run `opam init`
-- For Bucklescript install a current version of [Node](https://nodejs.org/en/)
+- For Rescript install a current version of [Node](https://nodejs.org/en/)
 
 Please refer to the `Makefile` for a complete list of supported actions. Here is
 a handful of useful, supported commands:

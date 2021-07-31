@@ -6,86 +6,86 @@
 (rule
  (target TableclothBool.mli)
  (action
-  (copy ../../bucklescript/src/TableclothBool.mli ./TableclothBool.mli)))
+  (copy ../../rescript/src/TableclothBool.mli ./TableclothBool.mli)))
 
 (rule
  (target TableclothContainer.ml)
  (action
-  (copy ../../bucklescript/src/TableclothContainer.ml
+  (copy ../../rescript/src/TableclothContainer.ml
     ./TableclothContainer.ml)))
 
 (rule
  (target TableclothComparator.mli)
  (action
-  (copy ../../bucklescript/src/TableclothComparator.mli
+  (copy ../../rescript/src/TableclothComparator.mli
     ./TableclothComparator.mli)))
 
 (rule
  (target TableclothChar.mli)
  (action
-  (copy ../../bucklescript/src/TableclothChar.mli ./TableclothChar.mli)))
+  (copy ../../rescript/src/TableclothChar.mli ./TableclothChar.mli)))
 
 (rule
  (target TableclothFloat.mli)
  (action
-  (copy ../../bucklescript/src/TableclothFloat.mli ./TableclothFloat.mli)))
+  (copy ../../rescript/src/TableclothFloat.mli ./TableclothFloat.mli)))
 
 (rule
  (target TableclothInt.mli)
  (action
-  (copy ../../bucklescript/src/TableclothInt.mli ./TableclothInt.mli)))
+  (copy ../../rescript/src/TableclothInt.mli ./TableclothInt.mli)))
 
 (rule
  (target TableclothList.mli)
  (action
-  (copy ../../bucklescript/src/TableclothList.mli ./TableclothList.mli)))
+  (copy ../../rescript/src/TableclothList.mli ./TableclothList.mli)))
 
 (rule
  (target TableclothArray.mli)
  (action
-  (copy ../../bucklescript/src/TableclothArray.mli ./TableclothArray.mli)))
+  (copy ../../rescript/src/TableclothArray.mli ./TableclothArray.mli)))
 
 (rule
  (target TableclothTuple2.ml)
  (action
-  (copy ../../bucklescript/src/TableclothTuple2.ml ./TableclothTuple2.ml)))
+  (copy ../../rescript/src/TableclothTuple2.ml ./TableclothTuple2.ml)))
 
 (rule
  (target TableclothTuple2.mli)
  (action
-  (copy ../../bucklescript/src/TableclothTuple2.mli ./TableclothTuple2.mli)))
+  (copy ../../rescript/src/TableclothTuple2.mli ./TableclothTuple2.mli)))
 
 (rule
  (target TableclothTuple3.ml)
  (action
-  (copy ../../bucklescript/src/TableclothTuple3.ml ./TableclothTuple3.ml)))
+  (copy ../../rescript/src/TableclothTuple3.ml ./TableclothTuple3.ml)))
 
 (rule
  (target TableclothTuple3.mli)
  (action
-  (copy ../../bucklescript/src/TableclothTuple3.mli ./TableclothTuple3.mli)))
+  (copy ../../rescript/src/TableclothTuple3.mli ./TableclothTuple3.mli)))
 
 (rule
  (target TableclothString.mli)
  (action
-  (copy ../../bucklescript/src/TableclothString.mli ./TableclothString.mli)))
+  (copy ../../rescript/src/TableclothString.mli ./TableclothString.mli)))
 
 (rule
  (target TableclothFun.ml)
  (action
-  (copy ../../bucklescript/src/TableclothFun.ml ./TableclothFun.ml)))
+  (copy ../../rescript/src/TableclothFun.ml ./TableclothFun.ml)))
 
 (rule
  (target TableclothFun.mli)
  (action
-  (copy ../../bucklescript/src/TableclothFun.mli ./TableclothFun.mli)))
+  (copy ../../rescript/src/TableclothFun.mli ./TableclothFun.mli)))
 
 (rule
  (target TableclothOption.mli)
  (action
-  (copy ../../bucklescript/src/TableclothOption.mli ./TableclothOption.mli)))
+  (copy ../../rescript/src/TableclothOption.mli ./TableclothOption.mli)))
 
 (rule
  (target TableclothResult.mli)
  (action
-  (copy ../../bucklescript/src/TableclothResult.mli ./TableclothResult.mli)))
+  (copy ../../rescript/src/TableclothResult.mli ./TableclothResult.mli)))

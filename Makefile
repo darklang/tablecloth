@@ -53,7 +53,7 @@ test:
 	@$(MAKE) test-rescript
 
 integration-test-rescript:
-	echo -e "\n\e[31mBuilding bucklescript integration test\e[0m"
+	echo -e "\n\e[31mBuilding rescript integration test\e[0m"
 	cd integration-test;\
 		npm install;\
 		npm run build;\
