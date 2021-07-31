@@ -5,8 +5,8 @@
 [![Opam](https://img.shields.io/badge/opam_package-0.7.0-brightgreen)](https://opam.ocaml.org/packages/tablecloth-native)
 
 Tablecloth is an ergonomic, cross-platform, standard library for use with OCaml
-and ReasonML. It provides an easy-to-use, comprehensive and performant standard
-library, that has the same API on all OCaml/ReasonML/Bucklescript platforms.
+and Rescript. It provides an easy-to-use, comprehensive and performant standard
+library, that has the same API on all OCaml/Rescript platforms.
 
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
 over time as we get more users. Caveat emptor.**
@@ -15,7 +15,7 @@ Check out the [website](https://tableclothml.netlify.app) for our interactive AP
 
 ## Installation
 
-### Bucklescript
+### Rescript 
 
 Install via npm by:
 
@@ -54,9 +54,9 @@ let () =
 
 ## Supported versions
 
-### Bucklescript/ReasonML/Rescript
+### Rescript
 
-Tablecloth for Rescript supports bs-platform 7 and 8. Older versions of Tablecloth supported older versions of bs-platform.
+Tablecloth for Rescript supports rescript 9. Older versions of Tablecloth supported older versions of bs-platform.
 
 ### Native
 
@@ -72,9 +72,9 @@ v0.12.2/v0.13.2. We are open to supporting other versions:
 ### Development
 
 When developing Tablecloth, you can test it against different versions of
-bs-platform, OCaml (native) and Base, using the following commands:
+rescript, OCaml (native) and Base, using the following commands:
 
-- `TC_BUCKLESCRIPT_VERSION=6.1.1 make deps-bs`
+- `TC_RESCRIPT_VERSION=7.1.1 make deps-bs`
 - `TC_BASE_VERSION=v0.14.0 TC_NATIVE_OCAML_SWITCH=4.11.0 make deps-native`
 
 ## Design of Tablecloth
@@ -84,20 +84,20 @@ and backend:
 
 - Our backend is written in OCaml native, using [Jane Street Core](https://github.com/janestreet/core) as a standard
   library
-- Our frontend is written in [Bucklescript](https://bucklescript.github.io/) (dba [ReasonML](https://reasonml.github.io/))
+- Our frontend is written in [Rescript](https://rescript-lang.org/)
 - Parts of our backend are shared with the frontend by compiling them using
   js_of_ocaml, and running them in a web worker.
 
-We discovered that it was impossible to share code between the Bucklescript
+We discovered that it was impossible to share code between the Rescript
 frontend and the native OCaml backend, as the types and standard libraries were
 very different:
 
-- Bucklescript uses camelCase by default, while most native libraries,
+- Rescript uses camelCase by default, while most native libraries,
   including Core and the OCaml standard library, use snake_case.
 - The libraries in [Belt](https://bucklescript.github.io/bucklescript/api/index.html) have different names and function signatures than native OCaml and Base/Core.
 - Many OCaml libraries have APIs optimized for pipelast (`|>`), while Belt aims
   for pipefirst (`|.`).
-- Core does not work with Bucklescript, while Belt is optimized for the JS
+- Core does not work with Rescript, while Belt is optimized for the JS
   platform.
 - Belt does not work in native OCaml, while Core is optimized for the native
   OCaml runtime.
@@ -105,20 +105,20 @@ very different:
 
 ### Tablecloth's solution
 
-Tablecloth solves this by providing an identical API for Bucklescript and
+Tablecloth solves this by providing an identical API for Rescript and
 OCaml. It wraps existing standard libraries on those platforms, and so is fast
 and memory efficient. It is draws inspiration from [Elm's standard library](https://package.elm-lang.org/packages/elm/core/1.0.2/), which is extremely
 well-designed and ergonomic.
 
 Tablecloth provides separate libraries for OCaml native/js_of_ocaml and
-Bucklescript. The libraries have the same API, but different implementations,
+Rescript . The libraries have the same API, but different implementations,
 and are installed as different packages.
 
 The APIs:
 
 - have both snake_case and camelCase versions of all functions and types
 - are backed by [Jane Street Base](https://opensource.janestreet.com/base/) for native OCaml
-- are backed by Belt and the `Js` library for Bucklescript/ReasonML
+- are backed by Belt and the `Js` library for Rescript
 - use labelled arguments so that can be used with both pipefirst (`->`) and pipelast (`|>`)
 - are well documented, and reasonably-well tested
 
@@ -130,7 +130,7 @@ We also have design goals that are not yet achieved in the current version:
 
 ## Contributing
 
-Tablecloth is an ideal library to contribute to, even if you're new to OCaml or Reason.
+Tablecloth is an ideal library to contribute to, even if you're new to OCaml or Rescript.
 
 The maintainers are warm and friendly, and the project abides by a [Code of Conduct](./CODE_OF_CONDUCT.md).
 
@@ -152,7 +152,7 @@ Please refer to the `Makefile` for a complete list of supported actions. Here is
 a handful of useful, supported commands:
 
 - `make deps-native`: Install native dependencies.
-- `make deps-bs`: Install bs dependencies.
+- `make deps-rescript`: Install rescript dependencies.
 - `make build`: Build the project.
 - `make test`: Run the test suite. You may need to `make build` first.
 - `make documentation`: Build the documentation to browse offline.
@@ -169,4 +169,4 @@ license.
 
 ## Authors
 
-Written with the help of [Dark](https://darklang.com). We may be [hiring](https://darklang.com/careers).
+Written with the help of [Dark](https://darklang.com).
