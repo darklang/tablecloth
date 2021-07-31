@@ -2,18 +2,13 @@ open Tablecloth;
 open AlcoJest;
 
 module Coordinate = {
-  type t = (int, int);
-  let compare = Tuple2.compare(Int.compare, Int.compare);
+  include Coordinate;
   include Comparator.Make({
     type nonrec t = t;
     let compare = compare;
   });
 };
 
-let coordinate = {
-  let eq = (a: Coordinate.t, b: Coordinate.t): bool => a == b;
-  Eq.make(eq);
-};
 
 let suite =
   suite("Set", () => {
@@ -32,7 +27,7 @@ let suite =
       let yAxis = Set.fromList((module Coordinate), [(0, 0), (1, 0)]);
       let union = Set.union(xAxis, yAxis);
       expect(union |> Set.toArray)
-      |> toEqual(Eq.array(coordinate), [|(0, 0), (0, 1), (1, 0)|]);
+      |> toEqual(Eq.array(Eq.coordinate), [|(0, 0), (0, 1), (1, 0)|]);
     });
 
     describe("Int", () => {

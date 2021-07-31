@@ -1,7 +1,38 @@
 module AT = Alcotest;
 
+module Coordinate = {
+  type t = (int, int);
+  let compare = ((x1, y1), (x2, y2)) =>
+     if (x1 == x2) {
+       if (y1 == y2) {
+         0
+       } else if (y1 > y2) {
+         1
+       } else {
+         -1
+       }
+     } else {
+       if (x1 > x2) {
+         1
+       } else {
+         -1
+       }
+     }
+};
+
 module Eq = {
   include AT;
+
+  let coordinate = {
+    let eq = (a: Coordinate.t, b: Coordinate.t): bool => a == b
+    let pp = (ppf : Format.formatter, (x, y) : Coordinate.t) =>
+      Format.pp_print_string(
+        ppf,
+        "(" ++ string_of_int(x) ++ ", " ++ string_of_int(y) ++ ")",
+      );
+
+    AT.testable(pp, eq);
+  }
 
   let trio = (a, b, c) => {
     let eq = ((a1, b1, c1), (a2, b2, c2)) =>
@@ -23,10 +54,6 @@ module Eq = {
   };
 
   let float = AT.float(0.0);
-
-  let make =
-      (equal: ('a, 'a) => bool, prettyPrint: (Format.formatter, 'a) => unit) =>
-    AT.testable(prettyPrint, equal);
 };
 
 type expectation('a) =

@@ -1,6 +1,10 @@
 open Jest;
 open Expect;
 
+module Coordinate = {
+  type t = (int, int);
+};
+
 module Eq: {
   /** This module is purely to make the API match the one provided in
       native/test/AlcoJest.re
@@ -17,6 +21,7 @@ module Eq: {
   let int: t(int);
   // let integer: t(Standard.Integer.t);
   let float: t(float);
+  let coordinate: t(Coordinate.t);
   let string: t(string);
   let unit: t(unit);
   let array: t('a) => t(array('a));
@@ -34,6 +39,7 @@ module Eq: {
   let char = ignore;
   let int = ignore;
   let float = ignore;
+  let coordinate = ignore;
   let string = ignore;
   let unit = ignore;
   let array = _ => ignore;

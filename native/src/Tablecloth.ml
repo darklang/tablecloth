@@ -26,7 +26,24 @@ module List = TableclothList
 module Option = TableclothOption
 
 (** Functions for working with computations which may fail. *)
-module Result = TableclothResult
+module Result = struct
+  include TableclothResult
+  let pp
+      (okf : Format.formatter -> 'ok -> unit)
+      (errf : Format.formatter -> 'error -> unit)
+      (fmt : Format.formatter)
+      (r : ('ok, 'error) t) : unit =
+    match r with
+    | Ok ok ->
+        Format.pp_print_string fmt "<ok: " ;
+        okf fmt ok ;
+        Format.pp_print_string fmt ">"
+    | Error err ->
+        Format.pp_print_string fmt "<error: " ;
+        errf fmt err ;
+        Format.pp_print_string fmt ">"
+end
+
 
 (** Functions for manipulating tuples of length two *)
 module Tuple2 = TableclothTuple2
