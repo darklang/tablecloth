@@ -72,7 +72,7 @@ let clamp n ~lower ~upper =
          ( "~lower:"
          ^ Base.Int.to_string lower
          ^ " must be less than or equal to ~upper:"
-         ^ Base.Int.to_string upper ))
+         ^ Base.Int.to_string upper ) )
   else max lower (min upper n)
 
 
@@ -84,7 +84,7 @@ let inRange n ~lower ~upper =
          ( "~lower:"
          ^ Base.Int.to_string lower
          ^ " must be less than or equal to ~upper:"
-         ^ Base.Int.to_string upper ))
+         ^ Base.Int.to_string upper ) )
   else n >= lower && n < upper
 
 

@@ -90,7 +90,7 @@ let fold t ~initial ~f = Belt.List.reduce t initial f
 
 let count t ~f =
   fold t ~initial:0 ~f:(fun total element ->
-      total + match f element with true -> 1 | false -> 0)
+      total + match f element with true -> 1 | false -> 0 )
 
 
 let foldRight t ~initial ~f = Belt.List.reduceReverse t initial f
@@ -130,7 +130,7 @@ let split_at = splitAt
 let updateAt =
   ( fun t ~index ~f ->
       Belt.List.mapWithIndex t (fun i element ->
-          if i = index then f element else element)
+          if i = index then f element else element )
     : 'a t -> index:int -> f:('a -> 'a) -> 'a t )
 
 
@@ -209,7 +209,7 @@ let minimum t ~compare =
         | true ->
             Some element
         | false ->
-            min ))
+            min ) )
 
 
 let maximum t ~compare =
@@ -222,7 +222,7 @@ let maximum t ~compare =
         | true ->
             Some element
         | false ->
-            max ))
+            max ) )
 
 
 let extent t ~compare =
@@ -241,7 +241,7 @@ let extent t ~compare =
               | true ->
                   element
               | false ->
-                  max ))
+                  max ) )
 
 
 let sort t ~compare = Belt.List.sort t compare
@@ -305,11 +305,11 @@ let intersperse t ~sep =
 
 let initialize length ~f = Belt.List.makeBy length f
 
-let forEach t ~f = (Belt.List.forEach t f : unit)
+let forEach t ~f : unit = Belt.List.forEach t f
 
 let for_each = forEach
 
-let forEachWithIndex t ~f = (Belt.List.forEachWithIndex t f : unit)
+let forEachWithIndex t ~f : unit = Belt.List.forEachWithIndex t f
 
 let for_each_with_index = forEachWithIndex
 
@@ -326,7 +326,7 @@ let groupBy t comparator ~f =
           | None ->
               Some [ element ]
           | Some elements ->
-              Some (element :: elements)))
+              Some (element :: elements) ) )
 
 
 let group_by = groupBy

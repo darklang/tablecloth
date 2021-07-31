@@ -1,46 +1,46 @@
-module Bool = TableclothBool
 (** Functions for working with boolean ([true] or [false]) values. *)
+module Bool = TableclothBool
 
-module Char = TableclothChar
 (** Functions for working with single characters. *)
+module Char = TableclothChar
 
-module String = TableclothString
 (** Functions for working with ["strings"] *)
+module String = TableclothString
 
-module Int = TableclothInt
 (** Fixed precision integers *)
+module Int = TableclothInt
 
-module Float = TableclothFloat
 (** Functions for working with floating point numbers. *)
+module Float = TableclothFloat
 
-module Container = TableclothContainer
 (** Interfaces for use with container types like {!Array} or {!List} *)
+module Container = TableclothContainer
 
-module Array = TableclothArray
 (** A fixed lenfth collection of values *)
+module Array = TableclothArray
 
-module List = TableclothList
 (** Arbitrary length, singly linked lists *)
+module List = TableclothList
 
-module Option = TableclothOption
 (** Functions for working with optional values. *)
+module Option = TableclothOption
 
-module Result = TableclothResult
 (** Functions for working with computations which may fail. *)
+module Result = TableclothResult
 
-module Tuple2 = TableclothTuple2
 (** Functions for manipulating tuples of length two *)
+module Tuple2 = TableclothTuple2
 
-module Tuple3 = TableclothTuple3
 (** Functions for manipulating tuples of length three *)
+module Tuple3 = TableclothTuple3
 
 module Comparator = TableclothComparator
 
-module Set = TableclothSet
 (** A collection of unique values *)
+module Set = TableclothSet
 
-module Map = TableclothMap
 (** A collection of key-value pairs *)
+module Map = TableclothMap
 
-module Fun = TableclothFun
 (** Functions for working with functions. *)
+module Fun = TableclothFun

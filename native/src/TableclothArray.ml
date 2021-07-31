@@ -1,6 +1,6 @@
 type 'a t = 'a array
 
-let singleton (a : 'a) = ([| a |] : 'a array)
+let singleton (a : 'a) : 'a array = [| a |]
 
 let clone = Base.Array.copy
 
@@ -12,15 +12,15 @@ let repeat element ~length =
   initialize length ~f:(TableclothFun.constant element)
 
 
-let range ?(from = 0) (to_ : int) =
-  (Base.Array.init (max 0 (to_ - from)) ~f:(fun i -> i + from) : int array)
+let range ?(from = 0) (to_ : int) : int array =
+  Base.Array.init (max 0 (to_ - from)) ~f:(fun i -> i + from)
 
 
 let fromList = Base.List.to_array
 
 let from_list = fromList
 
-let length (a : 'a array) = (Base.Array.length a : int)
+let length (a : 'a array) : int = Base.Array.length a
 
 let isEmpty a = length a = 0
 
@@ -33,9 +33,7 @@ let last t = if length t < 1 then None else Some t.(length t - 1)
 let get = Base.Array.get
 
 let getAt a ~index =
-  if index >= 0 && index < length a
-  then Some (Base.Array.get a index)
-  else None
+  if index >= 0 && index < length a then Some (Base.Array.get a index) else None
 
 
 let get_at = getAt
@@ -74,7 +72,7 @@ let fold_right = foldRight
 
 let count t ~f =
   fold t ~initial:0 ~f:(fun total element ->
-      total + match f element with true -> 1 | false -> 0)
+      total + match f element with true -> 1 | false -> 0 )
 
 
 let swap = Base.Array.swap
@@ -91,10 +89,9 @@ let mapWithIndex = Base.Array.mapi
 
 let map_with_index = mapWithIndex
 
-let map2 (a : 'a array) (b : 'b array) ~(f : 'a -> 'b -> 'c) =
-  ( let minLength = min (length a) (length b) in
-    Base.Array.init minLength ~f:(fun i -> f a.(i) b.(i))
-    : 'c array )
+let map2 (a : 'a array) (b : 'b array) ~(f : 'a -> 'b -> 'c) : 'c array =
+  let minLength = min (length a) (length b) in
+  Base.Array.init minLength ~f:(fun i -> f a.(i) b.(i))
 
 
 let zip = map2 ~f:(fun left right -> (left, right))
@@ -131,10 +128,10 @@ let split_when = splitWhen
 
 let unzip = Base.Array.unzip
 
-let append (a : 'a array) (a' : 'a array) = (Base.Array.append a a' : 'a array)
+let append (a : 'a array) (a' : 'a array) : 'a array = Base.Array.append a a'
 
-let flatten (al : 'a array array) =
-  (Base.Array.concat (Base.Array.to_list al) : 'a array)
+let flatten (al : 'a array array) : 'a array =
+  Base.Array.concat (Base.Array.to_list al)
 
 
 let intersperse array ~sep =
@@ -151,7 +148,7 @@ let includes = Base.Array.mem
 
 let values t =
   fold t ~initial:[] ~f:(fun results element ->
-      match element with None -> results | Some value -> value :: results)
+      match element with None -> results | Some value -> value :: results )
   |> fromList
 
 
@@ -164,7 +161,7 @@ let groupBy t comparator ~f =
           | None ->
               Some [ element ]
           | Some elements ->
-              Some (element :: elements)))
+              Some (element :: elements) ) )
 
 
 let group_by = groupBy
@@ -183,8 +180,7 @@ let slice ?to_ array ~from =
   in
   if sliceFrom >= sliceTo
   then [||]
-  else
-    Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
+  else Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
 
 
 let sliding ?(step = 1) a ~size =
@@ -221,7 +217,7 @@ let extent t ~compare =
               | true ->
                   element
               | false ->
-                  max ))
+                  max ) )
 
 
 let sort t = Base.Array.sort t
@@ -236,7 +232,7 @@ let forEachWithIndex a ~f = Base.Array.iteri a ~f
 
 let for_each_with_index = forEachWithIndex
 
-let toList (a : 'a array) = (Base.Array.to_list a : 'a list)
+let toList (a : 'a array) : 'a list = Base.Array.to_list a
 
 let to_list = toList
 

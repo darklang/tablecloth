@@ -28,9 +28,7 @@ let both a b = match (a, b) with Some a, Some b -> Some (a, b) | _ -> None
 
 let map t ~f = Belt.Option.map t f
 
-let map2 a b ~f =
-  match (a, b) with Some a, Some b -> Some (f a b) | _ -> None
-
+let map2 a b ~f = match (a, b) with Some a, Some b -> Some (f a b) | _ -> None
 
 let unwrap t ~default = Belt.Option.getWithDefault t default
 
@@ -39,8 +37,7 @@ let unwrapOrFailWith t ~exn =
 
 
 let unwrapUnsafe =
-  unwrapOrFailWith
-    ~exn:(Invalid_argument "Option.unwrapUnsafe called with None")
+  unwrapOrFailWith ~exn:(Invalid_argument "Option.unwrapUnsafe called with None")
 
 
 let unwrap_unsafe = unwrapUnsafe

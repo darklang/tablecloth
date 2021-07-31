@@ -431,7 +431,7 @@ val compare : string -> string -> int
     {[String.compare "Peach" "Peach" = 0]}
 *)
 
-type identity
 (** The unique identity for {!Comparator} *)
+type identity
 
 val comparator : (t, identity) TableclothComparator.t

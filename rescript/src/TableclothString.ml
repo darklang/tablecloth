@@ -22,17 +22,15 @@ let getAt (string : string) ~(index : int) =
 
 let get_at = getAt
 
-let ( .?[] ) (string : string) (index : int) : char option =
-  getAt string ~index
-
+let ( .?[] ) (string : string) (index : int) : char option = getAt string ~index
 
 let fromArray characters =
   Js.Array.joinWith
     ""
     (Array.map
        (fun character ->
-         TableclothChar.toCode character |. Js.String.fromCharCode)
-       characters)
+         TableclothChar.toCode character |. Js.String.fromCharCode )
+       characters )
 
 
 let from_array = fromArray
@@ -42,8 +40,8 @@ let fromList t =
     ""
     (Array.map
        (fun character ->
-         TableclothChar.toCode character |. Js.String.fromCharCode)
-       (Array.of_list t))
+         TableclothChar.toCode character |. Js.String.fromCharCode )
+       (Array.of_list t) )
 
 
 let from_list = fromList
@@ -52,18 +50,16 @@ let fromChar c = TableclothChar.toCode c |. Js.String.fromCharCode
 
 let from_char = fromChar
 
-let indexOf haystack needle =
-  ( let result = Js.String.indexOf needle haystack in
-    if result = -1 then None else Some result
-    : int option )
+let indexOf haystack needle : int option =
+  let result = Js.String.indexOf needle haystack in
+  if result = -1 then None else Some result
 
 
 let index_of = indexOf
 
-let indexOfRight haystack needle =
-  ( let result = Js.String.lastIndexOf needle haystack in
-    if result = -1 then None else Some result
-    : int option )
+let indexOfRight haystack needle : int option =
+  let result = Js.String.lastIndexOf needle haystack in
+  if result = -1 then None else Some result
 
 
 let index_of_right = indexOfRight
@@ -152,7 +148,7 @@ let toArray (t : string) : char array =
   Js.String.castToArrayLike t
   |. Js.Array.from
   |> Js.Array.map (fun characterString ->
-         TableclothChar.fromString characterString |. Belt.Option.getExn)
+         TableclothChar.fromString characterString |. Belt.Option.getExn )
 
 
 let to_array = toArray
@@ -161,9 +157,8 @@ let toList (s : string) : char list = toArray s |> Belt.List.fromArray
 
 let to_list = toList
 
-let slice ?to_ (t : string) ~from =
-  ( Js.String.slice ~from ~to_:(Belt.Option.getWithDefault to_ (length t)) t
-    : string )
+let slice ?to_ (t : string) ~from : string =
+  Js.String.slice ~from ~to_:(Belt.Option.getWithDefault to_ (length t)) t
 
 
 let insertAt t ~index ~value =

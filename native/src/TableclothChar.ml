@@ -8,12 +8,12 @@ include TableclothComparator.Make (struct
   let compare = compare
 end)
 
-let toCode (c : char) = (Base.Char.to_int c : int)
+let toCode (c : char) : int = Base.Char.to_int c
 
 let to_code = toCode
 
-let fromCode (i : int) =
-  (if 0 <= i && i <= 255 then Some (Char.chr i) else None : char option)
+let fromCode (i : int) : char option =
+  if 0 <= i && i <= 255 then Some (Char.chr i) else None
 
 
 let from_code = fromCode
@@ -22,8 +22,8 @@ let toString = Base.Char.to_string
 
 let to_string = toString
 
-let fromString (str : string) =
-  (match String.length str with 1 -> Some str.[0] | _ -> None : char option)
+let fromString (str : string) : char option =
+  match String.length str with 1 -> Some str.[0] | _ -> None
 
 
 let from_string = fromString

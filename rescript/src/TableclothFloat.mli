@@ -437,12 +437,12 @@ val in_range : t -> lower:t -> upper:t -> bool
 
 (** {1 Angles} *)
 
-type radians = float
 (** This type is just an alias for [float].
 
     Its purpose is to make understanding the signatures of the following
     functions a little easier.
 *)
+type radians = float
 
 val hypotenuse : t -> t -> t
 (** [hypotenuse x y] returns the length of the hypotenuse of a right-angled triangle with sides of length [x] and [y], or, equivalently, the distance of the point [(x, y)] to [(0, 0)].
@@ -604,6 +604,10 @@ val atan2 : y:t -> x:t -> radians
 
 (** {1 Rounding} *)
 
+(** The possible [direction]s availible when doing {!Float.round}.
+
+    See {!Float.round} for what each variant represents.
+ *)
 type direction =
   [ `Zero
   | `AwayFromZero
@@ -611,10 +615,6 @@ type direction =
   | `Down
   | `Closest of [ `Zero | `AwayFromZero | `Up | `Down | `ToEven ]
   ]
-(** The possible [direction]s availible when doing {!Float.round}.
-
-    See {!Float.round} for what each variant represents.
- *)
 
 val round : ?direction:direction -> t -> t
 (** Round a number, by default to the to the closest [int] with halves rounded [`Up] (towards positive infinity)

@@ -290,7 +290,7 @@ val equal : t -> t -> bool
 val compare : t -> t -> int
 (** Compare two {!Char}s *)
 
-type identity
 (** The unique identity for {!Comparator} *)
+type identity
 
 val comparator : (t, identity) TableclothComparator.t

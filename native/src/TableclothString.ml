@@ -10,9 +10,7 @@ end)
 
 let initialize length ~f = Base.List.init length ~f |> Base.String.of_char_list
 
-let repeat t ~count =
-  Base.List.init count ~f:(fun _ -> t) |> Base.String.concat
-
+let repeat t ~count = Base.List.init count ~f:(fun _ -> t) |> Base.String.concat
 
 let fromChar = Base.String.of_char
 
@@ -45,33 +43,30 @@ let getAt a ~index =
 
 let get_at = getAt
 
-let ( .?[] ) (string : string) (index : int) : char option =
-  getAt string ~index
+let ( .?[] ) (string : string) (index : int) : char option = getAt string ~index
+
+let uncons (s : string) : (char * string) option =
+  match s with
+  | "" ->
+      None
+  | s ->
+      Some (s.[0], String.sub s 1 (String.length s - 1))
 
 
-let uncons (s : string) =
-  ( match s with
-    | "" ->
-        None
-    | s ->
-        Some (s.[0], String.sub s 1 (String.length s - 1))
-    : (char * string) option )
-
-
-let dropLeft (s : string) ~(count : int) =
-  (Base.String.drop_prefix s count : string)
+let dropLeft (s : string) ~(count : int) : string =
+  Base.String.drop_prefix s count
 
 
 let drop_left = dropLeft
 
-let dropRight (s : string) ~(count : int) =
-  (Base.String.drop_suffix s count : string)
+let dropRight (s : string) ~(count : int) : string =
+  Base.String.drop_suffix s count
 
 
 let drop_right = dropRight
 
-let split t ~(on : string) =
-  (Str.split_delim (Str.regexp_string on) t : string list)
+let split t ~(on : string) : string list =
+  Str.split_delim (Str.regexp_string on) t
 
 
 let startsWith t ~prefix = Base.String.is_prefix ~prefix t
@@ -82,23 +77,23 @@ let endsWith t ~suffix = Base.String.is_suffix ~suffix t
 
 let ends_with = endsWith
 
-let toLowercase (s : string) = (String.lowercase_ascii s : string)
+let toLowercase (s : string) : string = String.lowercase_ascii s
 
 let to_lowercase = toLowercase
 
-let toUppercase (s : string) = (String.uppercase_ascii s : string)
+let toUppercase (s : string) : string = String.uppercase_ascii s
 
 let to_uppercase = toUppercase
 
-let uncapitalize (s : string) = (String.uncapitalize_ascii s : string)
+let uncapitalize (s : string) : string = String.uncapitalize_ascii s
 
-let capitalize (s : string) = (String.capitalize_ascii s : string)
+let capitalize (s : string) : string = String.capitalize_ascii s
 
-let isCapitalized (s : string) = (s = String.capitalize_ascii s : bool)
+let isCapitalized (s : string) : bool = s = String.capitalize_ascii s
 
 let is_capitalized = isCapitalized
 
-let includes t ~substring = (Base.String.is_substring t ~substring : bool)
+let includes t ~substring : bool = Base.String.is_substring t ~substring
 
 let reverse = Base.String.rev
 
@@ -123,14 +118,13 @@ let indexOfRight haystack needle =
 
 let index_of_right = indexOfRight
 
-let insertAt t ~(index : int) ~(value : string) =
-  ( let length = length t in
-    let startCount = index in
-    let endCount = length - index in
-    let start = dropRight ~count:endCount t in
-    let end_ = dropLeft ~count:startCount t in
-    String.concat "" [ start; value; end_ ]
-    : string )
+let insertAt t ~(index : int) ~(value : string) : string =
+  let length = length t in
+  let startCount = index in
+  let endCount = length - index in
+  let start = dropRight ~count:endCount t in
+  let end_ = dropLeft ~count:startCount t in
+  String.concat "" [ start; value; end_ ]
 
 
 let insert_at = insertAt

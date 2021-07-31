@@ -9,4 +9,4 @@ let suite =
             "custom index operators can be used in the ocaml syntax"
             (fun () ->
               let open Set in
-              expect (animals.?{"Bear"}) |> toEqual Eq.(bool) true)))
+              expect animals.?{"Bear"} |> toEqual Eq.(bool) true ) ) )

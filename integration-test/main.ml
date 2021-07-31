@@ -18,8 +18,7 @@ let () =
   assert (String.equal (String.fromList [ 'A'; 'B'; 'C' ]) "ABC") ;
 
   assert (
-    List.equal Int.equal (List.initialize 5 ~f:(fun _ -> 0)) [ 0; 0; 0; 0; 0 ]
-  ) ;
+    List.equal Int.equal (List.initialize 5 ~f:(fun _ -> 0)) [ 0; 0; 0; 0; 0 ] ) ;
 
   assert (Option.isSome (Some 1)) ;
 

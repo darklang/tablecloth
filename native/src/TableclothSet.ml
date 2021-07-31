@@ -25,8 +25,8 @@ let fromArray
 let from_array = fromArray
 
 let fromList
-    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list)
-    : ('a, 'identity) t =
+    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
+    ('a, 'identity) t =
   Base.Set.of_list (Internal.toBaseComparator comparator) elements
 
 
