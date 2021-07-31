@@ -46,12 +46,7 @@ end
 
 let book =
   let eq (a : Book.t) (b : Book.t) : bool = a = b in
-  let pp formatter ({ title; isbn } : Book.t) : unit =
-    Format.pp_print_string
-      formatter
-      ({|{ "title":"|} ^ title ^ {|", "isbn": "|} ^ isbn ^ {|" }|})
-  in
-  Eq.make eq pp
+  Eq.make eq
 
 
 let mobyDick : Book.t =

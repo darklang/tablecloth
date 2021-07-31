@@ -12,13 +12,7 @@ module Coordinate = {
 
 let coordinate = {
   let eq = (a: Coordinate.t, b: Coordinate.t): bool => a == b;
-  let pp = (formatter, (x, y)) =>
-    Format.pp_print_string(
-      formatter,
-      "(" ++ Int.toString(x) ++ ", " ++ Int.toString(y) ++ ")",
-    );
-
-  Eq.make(eq, pp);
+  Eq.make(eq);
 };
 
 let suite =
