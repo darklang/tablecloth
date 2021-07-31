@@ -49,6 +49,8 @@ jobs:
             - v2-native-dependencies-
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
+      # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
+      - run: git -C /home/opam/opam-repository pull origin master && opam update
       - run: make deps-native
       - run: make build-native
       - run: make test-native
@@ -74,6 +76,8 @@ jobs:
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
+      # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
+      - run: git -C /home/opam/opam-repository pull origin master && opam update
       - run: opam update && opam install ocamlformat reason -y
       - run: make check-format
       - save_cache:
@@ -97,6 +101,8 @@ jobs:
             - v2-native-dependencies-
       # m4 is a system dependency required lots of packages
       - run: sudo apt-get install -y m4
+      # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
+      - run: git -C /home/opam/opam-repository pull origin master && opam update
       - run: cd ocamldoc-json-generator && make deps
       - run: cd ocamldoc-json-generator && make doc
       # Check that model.json has been regenerated when there are changes in the interface files
@@ -108,7 +114,7 @@ jobs:
 
   website-build:
     docker:
-      - image: cimg/node:14.11.0
+      - image: cimg/node:16.6.0
     environment:
       CI: true
       NODE_ENV: production
