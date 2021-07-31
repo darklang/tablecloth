@@ -9,7 +9,6 @@ module Coordinate = {
   });
 };
 
-
 let suite =
   suite("Set", () => {
     test("creates a set from a list", () => {

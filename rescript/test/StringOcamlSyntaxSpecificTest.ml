@@ -11,6 +11,6 @@ let suite =
       describe ".?[]" (fun () ->
           let open String in
           test "in bounds index returns Some" (fun () ->
-              expect animal.?[1] |> toEqual Eq.(option char) (Some 'a')) ;
+              expect (animal.?[1]) |> toEqual Eq.(option char) (Some 'a')) ;
           test "out of bounds index returns None" (fun () ->
-              expect animal.?[9] |> toEqual Eq.(option char) None)))
+              expect (animal.?[9]) |> toEqual Eq.(option char) None)))

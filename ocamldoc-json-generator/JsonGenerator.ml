@@ -361,8 +361,8 @@ let bs s =
 (* TODO surely everything in this class is going to be deleted soon *)
 class virtual text =
   object (self)
-    (** Escape the strings which would clash with html syntax, and make some replacements (double newlines replaced by <br>). *)
     method escape s = Odoc_ocamlhtml.escape_base s
+    (** Escape the strings which would clash with html syntax, and make some replacements (double newlines replaced by <br>). *)
 
     method keep_alpha_num s =
       let len = String.length s in
@@ -376,9 +376,6 @@ class virtual text =
       done ;
       Buffer.contents buf
 
-    (** Create a label for the associated title.
-       Return the label specified by the user or a label created
-       from the title level and the first sentence of the title. *)
     method create_title_label
         ((n : int), (label_opt : string option), (t : text_element list)) =
       match label_opt with
@@ -390,11 +387,14 @@ class virtual text =
           let s = Odoc_info.string_of_text t2 in
           let label = self#keep_alpha_num s in
           Printf.sprintf "%d_%s" n label
+    (** Create a label for the associated title.
+       Return the label specified by the user or a label created
+       from the title level and the first sentence of the title. *)
 
-    (** Print the html code corresponding to the [text] parameter. *)
     method json_of_text (t : text_element list) : Json.t =
       let open Json in
       tagged "Text" (Json.array self#json_of_text_element t)
+    (** Print the html code corresponding to the [text] parameter. *)
 
     method json_of_text_element =
       Json.(
@@ -613,7 +613,6 @@ class json =
       in
       array f l
 
-    (** TODO Json for "see also" reference. *)
     method json_of_see ((see_ref : see_ref), (t : text_element list)) =
       let t_ref =
         match see_ref with
@@ -625,6 +624,7 @@ class json =
             Odoc_info.Italic [ Odoc_info.Raw s ] :: Odoc_info.Raw " " :: t
       in
       self#json_of_text t_ref
+    (** TODO Json for "see also" reference. *)
 
     method json_of_sees (l : (see_ref * text_element list) list) =
       Json.array self#json_of_see l
@@ -656,7 +656,8 @@ class json =
             ; ("before", self#json_of_before info.M.i_before)
             ; ("since", self#json_of_since_opt info.M.i_since)
             ; ( "exceptions"
-              , let json_of_exception ((name, description) : raised_exception) =
+              , let json_of_exception ((name, description) : raised_exception)
+                    =
                   obj
                     [ ("name", string name)
                     ; ("description", self#json_of_text description)
@@ -668,123 +669,121 @@ class json =
             ; ("custom", self#json_of_custom info.M.i_custom)
             ]
 
+    val mutable known_types_names = StringSet.empty
     (** The known types names.
       Used to know if we must create a link to a type
       when printing a type. *)
-    val mutable known_types_names = StringSet.empty
 
+    val mutable known_classes_names = StringSet.empty
     (** The known class and class type names.
       Used to know if we must create a link to a class
       or class type or not when printing a type. *)
-    val mutable known_classes_names = StringSet.empty
 
+    val mutable known_modules_names = StringSet.empty
     (** The known modules and module types names.
       Used to know if we must create a link to a type or not
       when printing a module type. *)
-    val mutable known_modules_names = StringSet.empty
 
     method index_prefix =
       if !Odoc_global.out_file = Odoc_messages.default_out_file
       then "index"
       else Filename.basename !Odoc_global.out_file
 
-    (** The main file. *)
     method index =
       let p = self#index_prefix in
       Printf.sprintf "%s.html" p
+    (** The main file. *)
 
-    (** The file for the index of values. *)
     method index_values = Printf.sprintf "%s_values.html" self#index_prefix
+    (** The file for the index of values. *)
 
-    (** The file for the index of types. *)
     method index_types = Printf.sprintf "%s_types.html" self#index_prefix
+    (** The file for the index of types. *)
 
-    (** The file for the index of extensions. *)
     method index_extensions =
       Printf.sprintf "%s_extensions.html" self#index_prefix
+    (** The file for the index of extensions. *)
 
-    (** The file for the index of exceptions. *)
     method index_exceptions =
       Printf.sprintf "%s_exceptions.html" self#index_prefix
+    (** The file for the index of exceptions. *)
 
-    (** The file for the index of attributes. *)
     method index_attributes =
       Printf.sprintf "%s_attributes.html" self#index_prefix
+    (** The file for the index of attributes. *)
 
-    (** The file for the index of methods. *)
     method index_methods = Printf.sprintf "%s_methods.html" self#index_prefix
+    (** The file for the index of methods. *)
 
-    (** The file for the index of classes. *)
     method index_classes = Printf.sprintf "%s_classes.html" self#index_prefix
+    (** The file for the index of classes. *)
 
-    (** The file for the index of class types. *)
     method index_class_types =
       Printf.sprintf "%s_class_types.html" self#index_prefix
+    (** The file for the index of class types. *)
 
-    (** The file for the index of modules. *)
     method index_modules = Printf.sprintf "%s_modules.html" self#index_prefix
+    (** The file for the index of modules. *)
 
-    (** The file for the index of module types. *)
     method index_module_types =
       Printf.sprintf "%s_module_types.html" self#index_prefix
+    (** The file for the index of module types. *)
 
-    (** The list of attributes. Filled in the [generate] method. *)
     val mutable list_attributes = []
+    (** The list of attributes. Filled in the [generate] method. *)
 
     method list_attributes = list_attributes
 
-    (** The list of methods. Filled in the [generate] method. *)
     val mutable list_methods = []
+    (** The list of methods. Filled in the [generate] method. *)
 
     method list_methods = list_methods
 
-    (** The list of values. Filled in the [generate] method. *)
     val mutable list_values = []
+    (** The list of values. Filled in the [generate] method. *)
 
     method list_values = list_values
 
-    (** The list of extensions. Filled in the [generate] method. *)
     val mutable list_extensions = []
+    (** The list of extensions. Filled in the [generate] method. *)
 
     method list_extensions = list_extensions
 
-    (** The list of exceptions. Filled in the [generate] method. *)
     val mutable list_exceptions = []
+    (** The list of exceptions. Filled in the [generate] method. *)
 
     method list_exceptions = list_exceptions
 
-    (** The list of types. Filled in the [generate] method. *)
     val mutable list_types = []
+    (** The list of types. Filled in the [generate] method. *)
 
     method list_types = list_types
 
-    (** The list of modules. Filled in the [generate] method. *)
     val mutable list_modules = []
+    (** The list of modules. Filled in the [generate] method. *)
 
     method list_modules = list_modules
 
-    (** The list of module types. Filled in the [generate] method. *)
     val mutable list_module_types = []
+    (** The list of module types. Filled in the [generate] method. *)
 
     method list_module_types = list_module_types
 
-    (** The list of classes. Filled in the [generate] method. *)
     val mutable list_classes = []
+    (** The list of classes. Filled in the [generate] method. *)
 
     method list_classes = list_classes
 
-    (** The list of class types. Filled in the [generate] method. *)
     val mutable list_class_types = []
+    (** The list of class types. Filled in the [generate] method. *)
 
     method list_class_types = list_class_types
 
     method init_style = ()
 
-    (** Get the title given by the user *)
     method title = ""
+    (** Get the title given by the user *)
 
-    (** Build the html code for the link tags in the header, defining section and
-       subsections for the titles found in the given comments.*)
     method html_sections_links comments =
       let titles =
         List.flatten (List.map Odoc_info.get_titles_in_text comments)
@@ -828,10 +827,9 @@ class json =
       in
       print_lines "Section" section_titles ;
       print_lines "Subsection" subsection_titles
+    (** Build the html code for the link tags in the header, defining section and
+       subsections for the titles found in the given comments.*)
 
-    (** Take a string and return the string where fully qualified
-       type (or class or class type) idents
-       have been replaced by links to the type referenced by the ident.*)
     method create_fully_qualified_idents_links m_name s : string =
       let ln = !Odoc_global.library_namespace in
       let f (str_t : string) =
@@ -866,9 +864,10 @@ class json =
            "\\([A-Z]\\([a-zA-Z_'0-9]\\)*\\.\\)+\\([a-z][a-zA-Z_'0-9]*\\)")
         f
         s
+    (** Take a string and return the string where fully qualified
+       type (or class or class type) idents
+       have been replaced by links to the type referenced by the ident.*)
 
-    (** Take a string and return the string where fully qualified module idents
-       have been replaced by links to the module referenced by the ident.*)
     method create_fully_qualified_module_idents_links m_name s : string =
       let f str_t =
         let match_s = Str.matched_string str_t in
@@ -894,6 +893,8 @@ class json =
            "\\([A-Z]\\([a-zA-Z_'0-9]\\)*\\)\\(\\.[A-Z][a-zA-Z_'0-9]*\\)*")
         f
         s
+    (** Take a string and return the string where fully qualified module idents
+       have been replaced by links to the module referenced by the ident.*)
 
     method json_of_ident (ident : Ident.t) : Json.t =
       Json.string (Ident.name ident)
@@ -1005,7 +1006,6 @@ class json =
       *)
       obj [ ("rendered", string rendered) (*      ("raw", raw) *) ]
 
-    (** Json to display a [Types.type_expr list]. *)
     method json_of_cstr_args
         ?(par : bool option)
         (m_name : string)
@@ -1028,13 +1028,14 @@ class json =
             ~father:m_name
             (Naming.inline_recfield_target m_name constructor_name)
             l
+    (** Json to display a [Types.type_expr list]. *)
 
-    (** Json to display a [Types.type_expr list] as type parameters
-       of a class of class type. *)
     method json_of_class_type_param_expr_list m_name l : Json.t =
       let s = Odoc_info.string_of_class_type_param_list l in
       let s2 = newline_to_indented_br s in
       Json.string (self#create_fully_qualified_idents_links m_name s2)
+    (** Json to display a [Types.type_expr list] as type parameters
+       of a class of class type. *)
 
     method json_of_class_parameter_list father c : Json.t =
       let s = Odoc_info.string_of_class_params c in
@@ -1042,11 +1043,11 @@ class json =
       let s2 = newline_to_indented_br s in
       Json.string (self#create_fully_qualified_idents_links father s2)
 
-    (** Json to display a list of type parameters for the given type.*)
     method json_of_type_expr_param_list m_name t : Json.t =
       let s = Odoc_info.string_of_type_param_list t in
       let s2 = newline_to_indented_br s in
       Json.string (self#create_fully_qualified_idents_links m_name s2)
+    (** Json to display a list of type parameters for the given type.*)
 
     method json_of_module_type ?code m_name t : Json.t =
       let s =
@@ -1055,7 +1056,6 @@ class json =
       in
       Json.string (self#create_fully_qualified_module_idents_links m_name s)
 
-    (** Json to display the given module kind. *)
     method json_of_module_kind (father : string) ?(modu : t_module option) kind
         : Json.t =
       let open Json in
@@ -1098,6 +1098,7 @@ class json =
       | Module_unpack (_code, _mta) ->
           print_endline "Encountered Module_unpack" ;
           null
+    (** Json to display the given module kind. *)
 
     method json_of_module_parameter father p : Json.t =
       let open Json in
@@ -1168,11 +1169,11 @@ class json =
       | Module_type_typeof (s : string) ->
           tagged "ModuleTypeTypeof" (string s)
 
-    (** Json to display the type of a module parameter.. *)
     method json_of_module_parameter_type m_name p : Json.t =
       Json.nullable
         (self#json_of_module_type m_name ~code:p.mp_type_code)
         p.mp_type
+    (** Json to display the type of a module parameter.. *)
 
     method json_of_value v : Json.t =
       let open Json in
@@ -1357,8 +1358,9 @@ class json =
                              constr.vc_text )
                        ]
                    in
-                   tagged "TypeVariant" (array constructor_to_json constructors)
-             )
+                   tagged
+                     "TypeVariant"
+                     (array constructor_to_json constructors) )
            ; ( "manifest"
              , match t.ty_manifest with
                | None ->
@@ -1380,6 +1382,7 @@ class json =
     method json_of_class_attribute (_a : t_attribute) : Json.t =
       print_DEBUG "json_of_class_attribute" ;
       Json.null
+
     (* let module_name = Name.father (Name.father a.att_value.val_name) in
        bp "<span id=\"%s\">" (Naming.attribute_target a);
        bs ( "val");
@@ -1407,11 +1410,10 @@ class json =
        self#json_of_type_expr module_name a.att_value.val_type;
        bs "</pre>";
        self#json_of_info a.att_value.val_info *)
-
-    (** Json for a class method. *)
     method json_of_method _m =
       print_DEBUG "json_of_method" ;
       Json.null
+    (** Json for a class method. *)
 
     (* let module_name = Name.father (Name.father m.met_value.val_name) in
        bs "\n<pre>";
@@ -1448,7 +1450,6 @@ class json =
       in
       Json.array json_of_parameter_name (Parameter.names p)
 
-    (** Json for a list of parameters. *)
     method json_of_parameter_list
         (_m_name : string) (l : Parameter.parameter list) =
       let json_of_parameter p =
@@ -1462,8 +1463,8 @@ class json =
             ])
       in
       Json.array json_of_parameter l
+    (** Json for a list of parameters. *)
 
-    (** Json for the parameters which have a name and description. *)
     method json_of_described_parameter_list (_m_name : string) l =
       let open Json in
       (* get the parameters which have a name, and at least one name described. *)
@@ -1478,12 +1479,13 @@ class json =
       tagged
         "DescribedParameterList"
         (array self#json_of_parameter_description l2)
+    (** Json for the parameters which have a name and description. *)
 
-    (** Json for a list of module parameters. *)
     method json_of_module_parameter_list
         (_m_name : string) (_l : module_parameter list) : Json.t =
       print_DEBUG "json_of_module_parameter_list" ;
       Json.null
+    (** Json for a list of module parameters. *)
 
     (* match l with
          [] ->
@@ -1536,7 +1538,8 @@ class json =
            [ ("name", string (Name.simple mt.mt_name))
            ; ("target", string (Naming.module_type_target mt))
            ; ( "kind"
-             , nullable (self#json_of_module_type_kind father ~mt) mt.mt_kind )
+             , nullable (self#json_of_module_type_kind father ~mt) mt.mt_kind
+             )
            ; ("info", self#json_of_info mt.mt_info)
            ; ( "signature"
              , nullable
@@ -1584,7 +1587,11 @@ class json =
       | Class_structure (inh, eles) ->
         ( match cl with
         | None ->
-            (match inh with [] -> () | _ -> self#generate_inheritance_info inh) ;
+            ( match inh with
+            | [] ->
+                ()
+            | _ ->
+                self#generate_inheritance_info inh ) ;
             Json.array self#json_of_class_element eles |> ignore
         | Some cl ->
             let html_file, _ = Naming.html_files cl.cl_name in
@@ -1615,6 +1622,7 @@ class json =
       ignore ct ;
       ignore kind ;
       failwith "json_of_class_type_kind"
+
     (* match kind with
          Class_type cta ->
            (
@@ -1645,13 +1653,13 @@ class json =
                 bp " <a href=\"%s\">..</a> " html_file
            );
            self#json_of_text [Code "end"] *)
-
-    (** Json for a class. *)
     method json_of_class ?(complete = true) ?(with_link = true) _c =
       print_DEBUG "json_of_class" ;
       ignore complete ;
       ignore with_link ;
       Json.null
+    (** Json for a class. *)
+
     (* let father = Name.father c.cl_name in
        Odoc_info.reset_type_names ();
        let (html_file, _) = Naming.html_files c.cl_name in
@@ -1696,13 +1704,13 @@ class json =
         else
           self#json_of_info_first_sentence
        ) c.cl_info *)
-
-    (** Json for a class type. *)
     method json_of_class_type ?(complete = true) ?(with_link = true) _ct =
       print_DEBUG "json_of_class_type" ;
       ignore complete ;
       ignore with_link ;
       Json.null
+    (** Json for a class type. *)
+
     (* Odoc_info.reset_type_names ();
        let father = Name.father ct.clt_name in
        let (html_file, _) = Naming.html_files ct.clt_name in
@@ -1740,10 +1748,9 @@ class json =
         else
           self#json_of_info_first_sentence
        ) ct.clt_info *)
-
-    (** represent a dag, represented as in Odoc_dag2html. *)
     method json_of_dag dag : Json.t =
       print_DEBUG "json_of_dag" ;
+
       (* Json.null *)
       let f n =
         let name, cct_opt = n.Odoc_dag2html.valu in
@@ -1771,16 +1778,17 @@ class json =
       in
       let a = Array.map f dag.Odoc_dag2html.dag in
       Json.string (Odoc_dag2html.html_of_dag { Odoc_dag2html.dag = a })
+    (** represent a dag, represented as in Odoc_dag2html. *)
 
     method json_of_module_comment text = self#json_of_text text
 
     method json_of_class_comment (text : text_element list) : Json.t =
       self#json_of_text text
 
-    (** Generate html code for the given list of inherited classes.*)
     method generate_inheritance_info (_inher_l : inherited_class list) : unit =
       print_DEBUG "generate_inheritance_info" ;
       ()
+    (** Generate html code for the given list of inherited classes.*)
 
     (* let f inh =
          match inh.ic_class with
@@ -1835,10 +1843,10 @@ class json =
           () ) ;
       failwith "generate_class_inheritance_info"
 
-    (** A method to create index files. *)
     method generate_elements_index
         : 'a.    'a list -> ('a -> Odoc_info.Name.t)
-          -> ('a -> Odoc_info.info option) -> ('a -> string) -> string -> unit =
+          -> ('a -> Odoc_info.info option) -> ('a -> string) -> string -> unit
+        =
       fun elements name _info target simple_file ->
         try
           let chanout =
@@ -1902,8 +1910,8 @@ class json =
         with
         | Sys_error s ->
             raise (Failure s)
+    (** A method to create index files. *)
 
-    (** A method to generate a list of module/class files. *)
     method generate_elements
         : 'a. ('a option -> 'a option -> 'a -> unit) -> 'a list -> unit =
       fun f_generate l ->
@@ -1917,12 +1925,14 @@ class json =
               iter (Some ele1) (ele2 :: q)
         in
         iter None l
+    (** A method to generate a list of module/class files. *)
 
-    (** Generate the code of the html page for the given class.*)
     method generate_for_class
         (_pre : t_class option) (_post : t_class option) (_cl : t_class) : unit
         =
       failwith "generate_for_class"
+    (** Generate the code of the html page for the given class.*)
+
     (* Odoc_info.reset_type_names ();
        let (html_file, _) = Naming.html_files cl.cl_name in
        let type_file = Naming.file_type_class_complete_target cl.cl_name in
@@ -1959,11 +1969,11 @@ class json =
        with
          Sys_error s ->
            raise (Failure s) *)
-
-    (** Generate the code of the html page for the given class type.*)
     method generate_for_class_type (_clt : t_class_type) : unit =
       Odoc_info.reset_type_names () ;
       failwith "generate_for_class_type"
+    (** Generate the code of the html page for the given class type.*)
+
     (* let (html_file, _) = Naming.html_files clt.clt_name in
        let type_file = Naming.file_type_class_complete_target clt.clt_name in
        try
@@ -1997,9 +2007,6 @@ class json =
        with
          Sys_error s ->
            raise (Failure s) *)
-
-    (** Generate the html file for the given module type.
-       @raise Failure if an error occurs.*)
     method json_for_module_type (mt : t_module_type) : Json.t =
       let open Json in
       obj
@@ -2018,6 +2025,8 @@ class json =
               (self#json_of_module_element mt.mt_name)
               (Module.module_type_elements mt) )
         ]
+    (** Generate the html file for the given module type.
+       @raise Failure if an error occurs.*)
 
     (* generate html files for submodules
        self#generate_elements
@@ -2044,6 +2053,7 @@ class json =
        ) *)
     (** Generate the html file for the given module.
        @raise Failure if an error occurs.*)
+
     (* method generate_for_module (modu: t_module) =
        try *)
     (* parameters for functors *)
@@ -2083,10 +2093,6 @@ class json =
              code *)
     (* with
        Sys_error s -> raise (Failure s) *)
-
-    (** Generate the [<index_prefix>.html] file corresponding to the given module list.
-       
-       @raise Failure if an error occurs.*)
     method generate_index module_list =
       try
         let chanout =
@@ -2114,8 +2120,10 @@ class json =
       with
       | Sys_error s ->
           raise (Failure s)
+    (** Generate the [<index_prefix>.html] file corresponding to the given module list.
+       
+       @raise Failure if an error occurs.*)
 
-    (** Generate the values index in the file [index_values.html]. *)
     method generate_values_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_values
@@ -2123,8 +2131,8 @@ class json =
         (fun v -> v.val_info)
         Naming.complete_value_target
         self#index_values
+    (** Generate the values index in the file [index_values.html]. *)
 
-    (** Generate the extensions index in the file [index_extensions.html]. *)
     method generate_extensions_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_extensions
@@ -2132,8 +2140,8 @@ class json =
         (fun x -> x.xt_type_extension.te_info)
         (fun x -> Naming.complete_extension_target x)
         self#index_extensions
+    (** Generate the extensions index in the file [index_extensions.html]. *)
 
-    (** Generate the exceptions index in the file [index_exceptions.html]. *)
     method generate_exceptions_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_exceptions
@@ -2141,8 +2149,8 @@ class json =
         (fun e -> e.ex_info)
         Naming.complete_exception_target
         self#index_exceptions
+    (** Generate the exceptions index in the file [index_exceptions.html]. *)
 
-    (** Generate the types index in the file [index_types.html]. *)
     method generate_types_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_types
@@ -2150,8 +2158,8 @@ class json =
         (fun t -> t.ty_info)
         Naming.complete_type_target
         self#index_types
+    (** Generate the types index in the file [index_types.html]. *)
 
-    (** Generate the attributes index in the file [index_attributes.html]. *)
     method generate_attributes_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_attributes
@@ -2159,8 +2167,8 @@ class json =
         (fun a -> a.att_value.val_info)
         Naming.complete_attribute_target
         self#index_attributes
+    (** Generate the attributes index in the file [index_attributes.html]. *)
 
-    (** Generate the methods index in the file [index_methods.html]. *)
     method generate_methods_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_methods
@@ -2168,8 +2176,8 @@ class json =
         (fun m -> m.met_value.val_info)
         Naming.complete_method_target
         self#index_methods
+    (** Generate the methods index in the file [index_methods.html]. *)
 
-    (** Generate the classes index in the file [index_classes.html]. *)
     method generate_classes_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_classes
@@ -2177,8 +2185,8 @@ class json =
         (fun c -> c.cl_info)
         (fun c -> fst (Naming.html_files c.cl_name))
         self#index_classes
+    (** Generate the classes index in the file [index_classes.html]. *)
 
-    (** Generate the class types index in the file [index_class_types.html]. *)
     method generate_class_types_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_class_types
@@ -2186,8 +2194,8 @@ class json =
         (fun ct -> ct.clt_info)
         (fun ct -> fst (Naming.html_files ct.clt_name))
         self#index_class_types
+    (** Generate the class types index in the file [index_class_types.html]. *)
 
-    (** Generate the modules index in the file [index_modules.html]. *)
     method generate_modules_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_modules
@@ -2195,8 +2203,8 @@ class json =
         (fun m -> m.m_info)
         (fun m -> fst (Naming.html_files m.m_name))
         self#index_modules
+    (** Generate the modules index in the file [index_modules.html]. *)
 
-    (** Generate the module types index in the file [index_module_types.html]. *)
     method generate_module_types_index (_module_list : t_module list) =
       self#generate_elements_index
         self#list_module_types
@@ -2204,9 +2212,8 @@ class json =
         (fun mt -> mt.mt_info)
         (fun mt -> fst (Naming.html_files mt.mt_name))
         self#index_module_types
+    (** Generate the module types index in the file [index_module_types.html]. *)
 
-    (** Generate all the html files from a module list. The main
-       file is [<index_prefix>.html]. *)
     method generate (module_list : t_module list) =
       (* init the lists of elements *)
       list_values <- Odoc_info.Search.values module_list ;
@@ -2264,7 +2271,6 @@ class json =
         open_out (Filename.concat !Global.target_dir "model.json")
       in
       let buffer = Buffer.create 1024 in
-
       module_list
       |> List.rev
       |> function
@@ -2291,6 +2297,8 @@ class json =
 
           Buffer.output_buffer chanout buffer ;
           close_out chanout
+    (** Generate all the html files from a module list. The main
+       file is [<index_prefix>.html]. *)
     (* try *)
     (* self#generate_index module_list; *)
     (* self#generate_values_index module_list ; *)

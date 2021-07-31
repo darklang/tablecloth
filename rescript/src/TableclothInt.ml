@@ -44,7 +44,9 @@ let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
 
 let power ~base ~exponent =
   let result =
-    Js.Math.pow_float ~base:(Js.Int.toFloat base) ~exp:(Js.Int.toFloat exponent)
+    Js.Math.pow_float
+      ~base:(Js.Int.toFloat base)
+      ~exp:(Js.Int.toFloat exponent)
   in
   let result =
     if result > TableclothFloat.maximumSafeInteger

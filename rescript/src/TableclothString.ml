@@ -22,7 +22,9 @@ let getAt (string : string) ~(index : int) =
 
 let get_at = getAt
 
-let ( .?[] ) (string : string) (index : int) : char option = getAt string ~index
+let ( .?[] ) (string : string) (index : int) : char option =
+  getAt string ~index
+
 
 let fromArray characters =
   Js.Array.joinWith

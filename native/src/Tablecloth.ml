@@ -1,33 +1,34 @@
-(** Functions for working with boolean ([true] or [false]) values. *)
 module Bool = TableclothBool
+(** Functions for working with boolean ([true] or [false]) values. *)
 
-(** Functions for working with single characters. *)
 module Char = TableclothChar
+(** Functions for working with single characters. *)
 
-(** Functions for working with ["strings"] *)
 module String = TableclothString
+(** Functions for working with ["strings"] *)
 
-(** Fixed precision integers *)
 module Int = TableclothInt
+(** Fixed precision integers *)
 
-(** Functions for working with floating point numbers. *)
 module Float = TableclothFloat
+(** Functions for working with floating point numbers. *)
 
-(** Interfaces for use with container types like {!Array} or {!List} *)
 module Container = TableclothContainer
+(** Interfaces for use with container types like {!Array} or {!List} *)
 
-(** A fixed lenfth collection of values *)
 module Array = TableclothArray
+(** A fixed lenfth collection of values *)
 
-(** Arbitrary length, singly linked lists *)
 module List = TableclothList
+(** Arbitrary length, singly linked lists *)
 
-(** Functions for working with optional values. *)
 module Option = TableclothOption
+(** Functions for working with optional values. *)
 
 (** Functions for working with computations which may fail. *)
 module Result = struct
   include TableclothResult
+
   let pp
       (okf : Format.formatter -> 'ok -> unit)
       (errf : Format.formatter -> 'error -> unit)
@@ -44,20 +45,19 @@ module Result = struct
         Format.pp_print_string fmt ">"
 end
 
-
-(** Functions for manipulating tuples of length two *)
 module Tuple2 = TableclothTuple2
+(** Functions for manipulating tuples of length two *)
 
-(** Functions for manipulating tuples of length three *)
 module Tuple3 = TableclothTuple3
+(** Functions for manipulating tuples of length three *)
 
 module Comparator = TableclothComparator
 
-(** A collection of unique values *)
 module Set = TableclothSet
+(** A collection of unique values *)
 
-(** A collection of key-value pairs *)
 module Map = TableclothMap
+(** A collection of key-value pairs *)
 
-(** Functions for working with functions. *)
 module Fun = TableclothFun
+(** Functions for working with functions. *)

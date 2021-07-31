@@ -10,7 +10,9 @@ end)
 
 let initialize length ~f = Base.List.init length ~f |> Base.String.of_char_list
 
-let repeat t ~count = Base.List.init count ~f:(fun _ -> t) |> Base.String.concat
+let repeat t ~count =
+  Base.List.init count ~f:(fun _ -> t) |> Base.String.concat
+
 
 let fromChar = Base.String.of_char
 
@@ -43,7 +45,9 @@ let getAt a ~index =
 
 let get_at = getAt
 
-let ( .?[] ) (string : string) (index : int) : char option = getAt string ~index
+let ( .?[] ) (string : string) (index : int) : char option =
+  getAt string ~index
+
 
 let uncons (s : string) =
   ( match s with

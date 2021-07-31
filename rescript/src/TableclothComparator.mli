@@ -57,8 +57,8 @@ end
 
 type ('a, 'identity) t
 
-(** This just is an alias for {!t}  *)
 type ('a, 'identity) comparator = ('a, 'identity) t
+(** This just is an alias for {!t}  *)
 
 module type S = sig
   (** The output type of {!Make}.  *)
@@ -70,10 +70,11 @@ module type S = sig
   val comparator : (t, identity) comparator
 end
 
-(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.fromArray} *)
 type ('a, 'identity) s =
   (module S with type identity = 'identity and type t = 'a)
+(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.fromArray} *)
 
+module Make (M : T) : S with type t := M.t
 (** Create a new comparator by providing a module which satisifies {!T}.
 
     {2 Examples}
@@ -96,4 +97,3 @@ type ('a, 'identity) s =
       let books = Set.empty (module Book)
     ]}
 *)
-module Make : functor (M : T) -> S with type t := M.t

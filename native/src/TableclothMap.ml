@@ -117,7 +117,8 @@ let forEach = Base.Map.iter
 let for_each = forEach
 
 let forEachWithIndex
-    (map : ('key, 'value, _) t) ~(f : key:'key -> value:'value -> unit) : unit =
+    (map : ('key, 'value, _) t) ~(f : key:'key -> value:'value -> unit) : unit
+    =
   Base.Map.iteri map ~f:(fun ~key ~data -> f ~key ~value:data)
 
 

@@ -11,8 +11,7 @@
 (rule
  (target TableclothContainer.ml)
  (action
-  (copy ../../rescript/src/TableclothContainer.ml
-    ./TableclothContainer.ml)))
+  (copy ../../rescript/src/TableclothContainer.ml ./TableclothContainer.ml)))
 
 (rule
  (target TableclothComparator.mli)

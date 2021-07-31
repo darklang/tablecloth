@@ -33,7 +33,9 @@ let last t = if length t < 1 then None else Some t.(length t - 1)
 let get = Base.Array.get
 
 let getAt a ~index =
-  if index >= 0 && index < length a then Some (Base.Array.get a index) else None
+  if index >= 0 && index < length a
+  then Some (Base.Array.get a index)
+  else None
 
 
 let get_at = getAt
@@ -181,7 +183,8 @@ let slice ?to_ array ~from =
   in
   if sliceFrom >= sliceTo
   then [||]
-  else Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
+  else
+    Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
 
 
 let sliding ?(step = 1) a ~size =
