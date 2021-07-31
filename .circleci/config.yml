@@ -33,7 +33,7 @@ jobs:
       ocaml-version: { type: string }
       base-version: { type: string }
     docker:
-      - image: ocaml/opam:ubuntu-ocaml-{{ parameters.ocaml-version }}
+      - image: ocaml/opam:ubuntu-ocaml-<< parameters.ocaml-version >>
     environment:
       CI: true
       TC_NATIVE_OCAML_SWITCH: << parameters.ocaml-version >>
