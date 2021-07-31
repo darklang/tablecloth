@@ -137,7 +137,6 @@ workflows:
             parameters:
               rescript-version:
                 - "9.1.4"
-                - "9.0.2"
                 # Pre version 6 not supported
       - native-build-and-test:
           matrix:
