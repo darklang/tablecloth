@@ -25,6 +25,14 @@ build:
 	@$(MAKE) build-native
 	@$(MAKE) build-rescript
 
+watch-native:
+	@printf "\n\e[31mBuilding rescript...\e[0m\n"
+	opam config exec -- dune build --watch
+
+watch-rescript:
+	@printf "\n\e[31mBuilding rescript...\e[0m\n"
+	npm run watch
+
 doc-native:
 	@printf "\n\e[31mBuilding native docs ...\e[0m\n"
 	opam config exec -- dune build @doc -f
