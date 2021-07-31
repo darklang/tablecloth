@@ -4,7 +4,7 @@ jobs:
     parameters:
       rescript-version: { type: string }
     docker:
-      - image: cimg/node:14.11.0
+      - image: cimg/node:16.6.0
     environment:
       CI: true
       NODE_ENV: test
@@ -18,11 +18,11 @@ jobs:
             - v1-rescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - v1-rescript-dependencies-{{ .Branch }}-
             - v1-rescript-dependencies-
-      - run: make deps-bs
-      - run: make build-bs
-      - run: make test-bs
-      - run: make doc-bs
-      - run: make integration-test-bs
+      - run: make deps-rescript
+      - run: make build-rescript
+      - run: make test-rescript
+      - run: make doc-rescript
+      - run: make integration-test-rescript
       - save_cache:
           key: v1-rescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
@@ -136,18 +136,13 @@ workflows:
           matrix:
             parameters:
               rescript-version:
-                - "8.2.0"
-                - "8.1.1"
-                - "8.0.3"
-                - "7.3.2"
-                - "7.2.2"
-                - "7.1.1"
-                - "7.0.1"
+                - "9.1.4"
+                - "9.0.2"
                 # Pre version 6 not supported
       - native-build-and-test:
           matrix:
             parameters:
-              # Contributions welcome for commente out versions, see README
+              # Contributions welcome for commented out versions, see README
               ocaml-version:
                  #- "4.06"
                  #- "4.07"
