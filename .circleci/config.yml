@@ -33,7 +33,7 @@ jobs:
       ocaml-version: { type: string }
       base-version: { type: string }
     docker:
-      - image: ocaml/opam2
+      - image: ocaml/opam:ubuntu-ocaml-{{ ocaml-version }}
     environment:
       CI: true
       TC_NATIVE_OCAML_SWITCH: << parameters.ocaml-version >>
@@ -49,8 +49,6 @@ jobs:
             - v2-native-dependencies-
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
-      # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
-      - run: git -C /home/opam/opam-repository pull origin master && opam update
       - run: make deps-native
       - run: make build-native
       - run: make test-native
@@ -63,7 +61,7 @@ jobs:
 
   source-code-formatting:
     docker:
-      - image: ocaml/opam2
+      - image: ocaml/opam:ubuntu-ocaml-4.08
     environment:
       CI: true
     working_directory: ~/repo
@@ -76,8 +74,6 @@ jobs:
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
-      # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
-      - run: git -C /home/opam/opam-repository pull origin master && opam update
       - run: make deps-format
       - run: make check-format
       - save_cache:
@@ -87,7 +83,7 @@ jobs:
 
   documentation-generator-build:
     docker:
-      - image: ocaml/opam2:4.08
+      - image: ocaml/opam:ubuntu-ocaml-4.08
     environment:
       CI: true
     working_directory: ~/repo
@@ -101,8 +97,6 @@ jobs:
             - v2-native-dependencies-
       # m4 is a system dependency required lots of packages
       - run: sudo apt-get install -y m4
-      # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
-      - run: git -C /home/opam/opam-repository pull origin master && opam update
       - run: cd ocamldoc-json-generator && make deps
       - run: cd ocamldoc-json-generator && make doc
       # Check that model.json has been regenerated when there are changes in the interface files
@@ -154,7 +148,7 @@ workflows:
                  - "4.08"
                  - "4.09"
                  #- "4.10" # separate config below
-                 #- "4.11" # no ocaml/opam2 version for this, probably works
+                 #- "4.11" # no ocaml/opam version for this, probably works
               base-version:
                  #- "v0.9.4"
                  #- "v0.10.0"
