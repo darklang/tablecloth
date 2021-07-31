@@ -21,6 +21,31 @@
               }
             },
             {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for working with boolean ("
+                },
+                {
+                  "tag": "Code",
+                  "value": "true"
+                },
+                {
+                  "tag": "Raw",
+                  "value": " or "
+                },
+                {
+                  "tag": "Code",
+                  "value": "false"
+                },
+                {
+                  "tag": "Raw",
+                  "value": ") values."
+                }
+              ]
+            },
+            {
               "tag": "Module",
               "value": {
                 "name": "Char",
@@ -31,30 +56,17 @@
                     "name": "TableclothChar"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for working with single characters."
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for working with single characters."
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -67,34 +79,21 @@
                     "name": "TableclothString"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for working with "
-                      },
-                      {
-                        "tag": "Code",
-                        "value": "\"strings\""
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for working with "
+                },
+                {
+                  "tag": "Code",
+                  "value": "\"strings\""
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -107,30 +106,17 @@
                     "name": "TableclothInt"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Fixed precision integers"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Fixed precision integers"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -143,30 +129,17 @@
                     "name": "TableclothFloat"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for working with floating point numbers."
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for working with floating point numbers."
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -179,66 +152,53 @@
                     "name": "TableclothContainer"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Interfaces for use with container types like "
-                      },
-                      {
-                        "tag": "Ref",
-                        "value": {
-                          "name": "Tablecloth.Array",
-                          "reference": {
-                            "kind": "MODULE",
-                            "target": "Tablecloth.Array",
-                            "content": [
-                              {
-                                "tag": "Code",
-                                "value": "Tablecloth.Array"
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "tag": "Raw",
-                        "value": " or "
-                      },
-                      {
-                        "tag": "Ref",
-                        "value": {
-                          "name": "Tablecloth.List",
-                          "reference": {
-                            "kind": "MODULE",
-                            "target": "Tablecloth.List",
-                            "content": [
-                              {
-                                "tag": "Code",
-                                "value": "Tablecloth.List"
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Interfaces for use with container types like "
+                },
+                {
+                  "tag": "Ref",
+                  "value": {
+                    "name": "Tablecloth.Array",
+                    "reference": {
+                      "kind": "MODULE",
+                      "target": "Tablecloth.Array",
+                      "content": [
+                        {
+                          "tag": "Code",
+                          "value": "Tablecloth.Array"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "tag": "Raw",
+                  "value": " or "
+                },
+                {
+                  "tag": "Ref",
+                  "value": {
+                    "name": "Tablecloth.List",
+                    "reference": {
+                      "kind": "MODULE",
+                      "target": "Tablecloth.List",
+                      "content": [
+                        {
+                          "tag": "Code",
+                          "value": "Tablecloth.List"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -251,30 +211,17 @@
                     "name": "TableclothArray"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "A fixed lenfth collection of values"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "A fixed lenfth collection of values"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -287,30 +234,17 @@
                     "name": "TableclothList"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Arbitrary length, singly linked lists"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Arbitrary length, singly linked lists"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -323,41 +257,53 @@
                     "name": "TableclothOption"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for working with optional values."
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for working with optional values."
+                }
+              ]
             },
             {
               "tag": "Module",
               "value": {
                 "name": "Result",
                 "kind": {
-                  "tag": "ModuleAlias",
-                  "value": {
-                    "father": "Tablecloth",
-                    "name": "TableclothResult"
-                  }
+                  "tag": "ModuleStruct",
+                  "value": [
+                    {
+                      "tag": "IncludedModule",
+                      "value": {
+                        "name": "TableclothResult",
+                        "info": null,
+                        "module": {
+                          "tag": "Module",
+                          "value": "TableclothResult"
+                        }
+                      }
+                    },
+                    {
+                      "tag": "Value",
+                      "value": {
+                        "name": "pp",
+                        "qualified_name": "Tablecloth.Result.pp",
+                        "type": {
+                          "rendered": "(Stdlib.Format.formatter -> 'ok -> unit) ->\n  (Stdlib.Format.formatter -> 'error -> unit) ->\n  Stdlib.Format.formatter -> ('ok, 'error) t -> unit"
+                        },
+                        "info": null,
+                        "parameters": {
+                          "tag": "DescribedParameterList",
+                          "value": [
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 },
                 "info": {
                   "deprecated": null,
@@ -395,30 +341,17 @@
                     "name": "TableclothTuple2"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for manipulating tuples of length two"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for manipulating tuples of length two"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -431,30 +364,17 @@
                     "name": "TableclothTuple3"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for manipulating tuples of length three"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for manipulating tuples of length three"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -481,30 +401,17 @@
                     "name": "TableclothSet"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "A collection of unique values"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "A collection of unique values"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -517,30 +424,17 @@
                     "name": "TableclothMap"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "A collection of key-value pairs"
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "A collection of key-value pairs"
+                }
+              ]
             },
             {
               "tag": "Module",
@@ -553,72 +447,21 @@
                     "name": "TableclothFun"
                   }
                 },
-                "info": {
-                  "deprecated": null,
-                  "description": {
-                    "tag": "Text",
-                    "value": [
-                      {
-                        "tag": "Raw",
-                        "value": "Functions for working with functions."
-                      }
-                    ]
-                  },
-                  "version": null,
-                  "before": [
-                  ],
-                  "since": null,
-                  "exceptions": [
-                  ],
-                  "return": null,
-                  "see": [
-                  ],
-                  "custom": [
-                  ]
-                }
+                "info": null
               }
+            },
+            {
+              "tag": "Text",
+              "value": [
+                {
+                  "tag": "Raw",
+                  "value": "Functions for working with functions."
+                }
+              ]
             }
           ]
         },
-        "info": {
-          "deprecated": null,
-          "description": {
-            "tag": "Text",
-            "value": [
-              {
-                "tag": "Raw",
-                "value": "Functions for working with boolean ("
-              },
-              {
-                "tag": "Code",
-                "value": "true"
-              },
-              {
-                "tag": "Raw",
-                "value": " or "
-              },
-              {
-                "tag": "Code",
-                "value": "false"
-              },
-              {
-                "tag": "Raw",
-                "value": ") values."
-              }
-            ]
-          },
-          "version": null,
-          "before": [
-          ],
-          "since": null,
-          "exceptions": [
-          ],
-          "return": null,
-          "see": [
-          ],
-          "custom": [
-          ]
-        }
+        "info": null
       }
     },
     "modules": {
@@ -12952,127 +12795,6 @@
                           "value": {
                             "ocaml": "Error \"Its gone bad\" >>| Int.add(1) = Error \"Its gone bad\"",
                             "reason": "Error(\"Its gone bad\") >>| Int.add(1) == Error(\"Its gone bad\");\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "pp",
-                  "qualified_name": "TableclothResult.pp",
-                  "type": {
-                    "rendered": "(Stdlib.Format.formatter -> 'ok -> unit) ->\n  (Stdlib.Format.formatter -> 'error -> unit) ->\n  Stdlib.Format.formatter -> ('ok, 'error) TableclothResult.t -> unit"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Code",
-                          "value": "Result.pp errFormat okFormat destFormat result"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " \"pretty-prints\"\n    the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "result"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": ", using "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "errFormat"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " if the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "result"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " is an "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "Error"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " value or\n    "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "okFormat"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " if the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "result"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " is an "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "Ok"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " value. "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "destFormat"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " is a formatter\n    that tells where to send the output."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "\n      let good: (int, string) Result.t = Ok 42 in\n      let not_good: (int, string) Tablecloth.Result.t = Error \"bad\" in\n      Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter good;\n      Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter not_good;\n      Format.pp_print_newline Format.std_formatter ();\n      (* prints <ok: 42><error: bad>*)\n    ",
-                            "reason": "{\n  let good: Result.t(int, string) = (Ok(42): Result.t(int, string));\n  let not_good: Tablecloth.Result.t(int, string) = (\n    Error(\"bad\"): Tablecloth.Result.t(int, string)\n  );\n  Result.pp(\n    Format.pp_print_int,\n    Format.pp_print_string,\n    Format.std_formatter,\n    good,\n  );\n  Result.pp(\n    Format.pp_print_int,\n    Format.pp_print_string,\n    Format.std_formatter,\n    not_good,\n  );\n  Format.pp_print_newline(Format.std_formatter, ());\n};\n/* prints <ok: 42><error: bad>*/\n"
                           }
                         }
                       ]
@@ -39156,8 +38878,19 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      String.indexOf \"Hello World World\" \"World\" = Some 6\n      String.indexOf \"Hello World World\" \"Bye\" = None \n    ",
-                            "reason": "\n      String.indexOf \"Hello World World\" \"World\" = Some 6\n      String.indexOf \"Hello World World\" \"Bye\" = None \n    "
+                            "ocaml": " String.indexOf \"Hello World World\" \"World\" = Some 6 ",
+                            "reason": "String.indexOf(\"Hello World World\", \"World\") == Some(6);\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": " String.indexOf \"Hello World World\" \"Bye\" = None ",
+                            "reason": "String.indexOf(\"Hello World World\", \"Bye\") == None;\n"
                           }
                         }
                       ]
@@ -39258,8 +38991,19 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      String.indexOfRight \"Hello World World\" \"World\" = Some 12\n      String.indexOfRight \"Hello World World\" \"Bye\" = None \n    ",
-                            "reason": "\n      String.indexOfRight \"Hello World World\" \"World\" = Some 12\n      String.indexOfRight \"Hello World World\" \"Bye\" = None \n    "
+                            "ocaml": " String.indexOfRight \"Hello World World\" \"World\" = Some 12 ",
+                            "reason": "String.indexOfRight(\"Hello World World\", \"World\") == Some(12);\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": " String.indexOfRight \"Hello World World\" \"Bye\" = None ",
+                            "reason": "String.indexOfRight(\"Hello World World\", \"Bye\") == None;\n"
                           }
                         }
                       ]
