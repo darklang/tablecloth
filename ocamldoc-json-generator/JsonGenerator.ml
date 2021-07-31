@@ -916,7 +916,7 @@ class json =
 
     method json_of_type_expr (t : Types.type_expr) : Json.t =
       let open Json in
-      let desc = t.desc in
+      (* let desc = t.desc in *)
       let rendered =
         Odoc_info.string_of_type_expr t |> Odoc_info.remove_ending_newline
       in
@@ -2121,7 +2121,7 @@ class json =
       | Sys_error s ->
           raise (Failure s)
     (** Generate the [<index_prefix>.html] file corresponding to the given module list.
-       
+
        @raise Failure if an error occurs.*)
 
     method generate_values_index (_module_list : t_module list) =
