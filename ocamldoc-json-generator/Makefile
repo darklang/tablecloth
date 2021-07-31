@@ -5,7 +5,7 @@ CMX=JsonGenerator.cmx
 CMXS=JsonGenerator.cmxs
 
 COMPFLAGS=-package menhirLib,ocamldoc,reason
-CMXA_DEPS=menhirLib.cmxa migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmxa
+CMXA_DEPS=menhirLib.cmxa reason_migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmxa
 
 opt: $(CMXS)
 
@@ -21,7 +21,7 @@ $(CMXS): $(CMX)
 deps:
 	@printf "\n\e[31mInstalling generator dependencies ...\e[0m\n"
 	opam update
-	opam install base reason menhir -y
+	opam install base.v0.13.2 reason.3.7.0 menhir.20210419 -y
 
 install: opt
 	mkdir -p `opam config exec -- ocamlfind ocamldoc -customdir`
