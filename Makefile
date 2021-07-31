@@ -11,6 +11,9 @@ ifndef TC_RESCRIPT_VERSION
 	TC_RESCRIPT_VERSION := 9.1.4
 endif
 
+# We should use something more recent, but opam keeps telling me they don't exist
+TC_OCAMLFORMAT_VERSION := 0.19.0
+
 build-native:
 	@printf "\n\e[31mBuilding tablecloth-native ...\e[0m\n"
 	opam config exec -- dune build
@@ -90,7 +93,7 @@ deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
 	opam update
 	opam switch set ${TC_NATIVE_OCAML_SWITCH}
-	opam install alcotest base.${TC_BASE_VERSION} dune.2.9.0 junit.2.0.2 junit_alcotest.2.0.2 odoc.1.5.3 reason.3.7.0 ocamlformat.0.10 -y
+	opam install alcotest base.${TC_BASE_VERSION} dune.2.9.0 junit.2.0.2 junit_alcotest.2.0.2 reason.3.7.0 ocamlformat.${TC_OCAMLFORMAT_VERSION} -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 deps-rescript:
@@ -99,12 +102,12 @@ deps-rescript:
 	npm install
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
-documentation:
-	@printf "\n\e[31mCompiling the documentation ...\e[0m\n"
-	opam exec -- dune build @doc
-	rm -rf ./docs
-	ln -s _build/default/_doc/_html ./docs
-	@printf "\n\e[31mCompiled! The docs are now viewable at ./docs/index.html\e[0m\n"
+deps-format:
+	@printf "\n\e[31mInstalling formatting dependencies ...\e[0m\n"
+	opam update
+	opam switch set ${TC_NATIVE_OCAML_SWITCH}
+	opam install reason.3.7.0 ocamlformat.${TC_OCAMLFORMAT_VERSION} -y
+	@printf "\n\e[31mInstalled!\e[0m\n"
 
 .PHONY: check-format format
 check-format:

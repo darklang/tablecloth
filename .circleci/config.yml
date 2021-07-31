@@ -78,7 +78,7 @@ jobs:
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
       # See https://github.com/ocaml/opam-repository/issues/18711#issuecomment-843664632
       - run: git -C /home/opam/opam-repository pull origin master && opam update
-      - run: opam update && opam install ocamlformat reason -y
+      - run: make deps-format
       - run: make check-format
       - save_cache:
           key: v0-source-dependencies-ocamlformat-0.14
