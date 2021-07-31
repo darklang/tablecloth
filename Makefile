@@ -29,9 +29,20 @@ watch-native:
 	@printf "\n\e[31mBuilding rescript...\e[0m\n"
 	opam config exec -- dune build --watch
 
+watch-test-native:
+	@printf "\n\e[31mBuilding rescript...\e[0m\n"
+	opam config exec -- dune test --watch
+
 watch-rescript:
 	@printf "\n\e[31mBuilding rescript...\e[0m\n"
-	npm run watch
+	npm run build:watch
+
+# Not enabled as you need to recompile for this to have any effect, while
+# native recompiles automatically.
+#watch-test-rescript:
+#	@printf "\n\e[31mBuilding rescript...\e[0m\n"
+#	npm run test:watch
+
 
 doc-native:
 	@printf "\n\e[31mBuilding native docs ...\e[0m\n"

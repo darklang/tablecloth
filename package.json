@@ -23,8 +23,8 @@
   "scripts": {
     "clean": "rescript clean",
     "build": "rescript build",
-    "watch": "rescript build -w",
-    "test": "jest"
+    "test": "jest",
+    "build:watch": "rescript build -w"
   },
   "jest": {
     "testMatch": [
@@ -32,7 +32,7 @@
       "<rootDir>/rescript/test/*Test.js"
     ],
     "testPathIgnorePatterns": [
-      "/node_modules/"
+      "<rootDir>/rescript/node_modules/"
     ]
   }
 }
