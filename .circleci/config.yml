@@ -61,7 +61,7 @@ jobs:
 
   source-code-formatting:
     docker:
-      - image: ocaml/opam:ubuntu-ocaml-4.08
+      - image: ocaml/opam:ubuntu-ocaml-4.10
     environment:
       CI: true
     working_directory: ~/repo
@@ -83,7 +83,7 @@ jobs:
 
   documentation-generator-build:
     docker:
-      - image: ocaml/opam:ubuntu-ocaml-4.08
+      - image: ocaml/opam:ubuntu-ocaml-4.10
     environment:
       CI: true
     working_directory: ~/repo
