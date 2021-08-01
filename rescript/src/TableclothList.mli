@@ -145,15 +145,19 @@ val cons : 'a t -> 'a -> 'a t
 val take : 'a t -> count:int -> 'a t
 (** Attempt to take the first [count] elements of a list.
 
-   If the list has fewer than [count] elements, returns [None].
+   If the list has fewer than [count] elements, returns the entire list.
+
+   If count is zero or negative, returns [].
 
    {2 Examples}
 
-   {[List.take [1;2;3] ~count:2 = Some [1;2]]}
+   {[List.take [1;2;3] ~count:2 = [1;2]]}
 
-   {[List.take [] ~count:2 = None]}
+   {[List.take [] ~count:2 = []]}
 
-   {[List.take [1;2;3;4] ~count:8 = None]}
+   {[List.take [1;2;3;4] ~count:8 = [1;2;3;4]]}
+
+   {[List.take [1;2;3;4] ~count:(-1) = []]}
 *)
 
 val takeWhile : 'a t -> f:('a -> bool) -> 'a t
@@ -173,11 +177,17 @@ val take_while : 'a t -> f:('a -> bool) -> 'a t
 val drop : 'a t -> count:int -> 'a t
 (** Drop the first [count] elements from the front of a list.
 
+    If the list has fewer than [count] elements, returns [].
+
+    If count is zero or negative, returns the entire list.
+
     {2 Examples}
 
     {[List.drop [1;2;3;4] ~count:2 = [3;4]]}
 
     {[List.drop [1;2;3;4] ~count:6 = []]}
+
+    {[List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]]}
 *)
 
 val dropWhile : 'a t -> f:('a -> bool) -> 'a t
@@ -736,11 +746,17 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
 
     Elements with an index greater than or equal to [index] will be in the second.
 
-    If [index] is outside of the bounds of the list, all elements will be in the first component of the tuple.
+    If [index] is zero or negative, all elements will be in the second component of the tuple.
+
+    If [index] is greater than the length of the list, all elements will be in the second component of the tuple.
 
     {2 Examples}
 
     {[List.splitAt [1;2;3;4;5] ~index:2 = ([1;2], [3;4;5])]}
+
+    {[List.splitAt [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])]}
+
+    {[List.splitAt [1;2;3;4;5] ~index:10 = ([1;2;3;4;5], 10)]}
 *)
 
 val split_at : 'a t -> index:int -> 'a t * 'a t

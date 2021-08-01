@@ -16,23 +16,40 @@ let suite =
       test("from an empty list", () =>
         expect(drop([], ~count=1)) |> toEqual(Eq.(list(int)), [])
       );
-
       test("zero elements", () =>
         expect(drop([1, 2, 3], ~count=0))
         |> toEqual(Eq.(list(int)), [1, 2, 3])
       );
-
       test("the first element", () =>
         expect(drop([1, 2, 3], ~count=1))
         |> toEqual(Eq.(list(int)), [2, 3])
       );
-
       test("all elements", () =>
         expect(drop([1, 2, 3], ~count=3)) |> toEqual(Eq.(list(int)), [])
       );
-
       test("greater than the number of elements", () =>
         expect(drop([1, 2, 3], ~count=4)) |> toEqual(Eq.(list(int)), [])
+      );
+      test("negative count", () =>
+        expect(drop([1, 2, 3], ~count=-1)) |> toEqual(Eq.(list(int)), [1,2,3])
+      );
+      test("zero count", () =>
+        expect(drop([1, 2, 3], ~count=-1)) |> toEqual(Eq.(list(int)), [1,2,3])
+      );
+    });
+
+    describe("take", () => {
+      test("normal", () =>
+        expect(take([1,2,3], ~count=2)) |> toEqual(Eq.(list(int)), [1,2])
+      );
+      test("from an empty list", () =>
+        expect(take([], ~count=2)) |> toEqual(Eq.(list(int)), [])
+      );
+      test("overflow", () =>
+        expect(take([1,2,3,4], ~count=8)) |> toEqual(Eq.(list(int)), [1,2,3,4])
+      );
+      test("overflow", () =>
+        expect(take([1,2,3,4], ~count=-1)) |> toEqual(Eq.(list(int)), [])
       );
     });
 
@@ -201,10 +218,13 @@ let suite =
         expect(splitAt(~index=3, [1, 3, 5]))
         |> toEqual(Eq.(pair(list(int), list(int))), ([1, 3, 5], []))
       });
-
       test("past end", () => {
         expect(splitAt(~index=6, [1, 3, 5]))
         |> toEqual(Eq.(pair(list(int), list(int))), ([1, 3, 5], []))
+      });
+      test("negative", () => {
+        expect(splitAt(~index=-1, [1, 3, 5]))
+        |> toEqual(Eq.(pair(list(int), list(int))), ([], [1, 3, 5]))
       });
     });
 
@@ -310,7 +330,6 @@ let suite =
         |> toEqual(Eq.int, -6)
       });
     });
-
     describe("insertAt", () => {
       test("empty list", () => {
         expect(insertAt(~index=0, ~value=1, []))
@@ -324,10 +343,33 @@ let suite =
         expect(insertAt(~index=0, ~value=2, [1, 3]))
         |> toEqual(Eq.(list(int)), [2, 1, 3])
       });
-
       test("after end of list", () => {
-        expect(insertAt(~index=4, ~value=2, [1, 3]) |> toArray)
-        |> toEqual(Eq.(array(int)), [|1, 3, 2|])
+        expect(insertAt(~index=4, ~value=2, [1, 3]))
+        |> toEqual(Eq.(list(int)), [1, 3, 2])
+      });
+      test("#216", () => {
+        expect(insertAt(~index=5, ~value=1, [0, 2, 3, 4, 5, 6, 7, 8, 9]))
+        |> toEqual(Eq.(list(int)), [0, 2, 3, 4, 5, 1, 6, 7, 8, 9])
+      });
+      test("doc 1", () => {
+        expect(insertAt(~index=2, ~value=999, [100, 101, 102, 103]))
+        |> toEqual(Eq.(list(int)), [100, 101, 999, 102, 103])
+      });
+      test("doc 2", () => {
+        expect(insertAt(~index=0, ~value=999, [100, 101, 102, 103]))
+        |> toEqual(Eq.(list(int)), [999, 100, 101, 102, 103])
+      });
+      test("doc 3", () => {
+        expect(insertAt(~index=4, ~value=999, [100, 101, 102, 103]))
+        |> toEqual(Eq.(list(int)), [100, 101, 102, 103, 999])
+      });
+      test("doc 4", () => {
+        expect(insertAt(~index=-1, ~value=999, [100, 101, 102, 103]))
+        |> toEqual(Eq.(list(int)), [999, 100, 101, 102, 103])
+      });
+      test("doc 5", () => {
+        expect(insertAt(~index=5, ~value=999, [100, 101, 102, 103]))
+        |> toEqual(Eq.(list(int)), [100, 101, 102, 103, 999])
       });
     });
 
