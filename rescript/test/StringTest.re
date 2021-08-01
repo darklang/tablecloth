@@ -150,7 +150,32 @@ let suite =
         |> toEqual(Eq.(list(string)), ["a", ""])
       });
     });
-
+    describe("insertAt", () => {
+      test("middle", () => {
+        expect(String.insertAt("abcde", ~value="**", ~index=2))
+        |> toEqual(Eq.(string), "ab**cde")
+      });
+      test("start", () => {
+        expect(String.insertAt("abcde", ~value="**", ~index=0))
+        |> toEqual(Eq.(string), "**abcde")
+      });
+      test("end", () => {
+        expect(String.insertAt("abcde", ~value="**", ~index=5))
+        |> toEqual(Eq.(string), "abcde**")
+      });
+      test("negative", () => {
+        expect(String.insertAt("abcde", ~value="**", ~index=-2))
+        |> toEqual(Eq.(string), "abc**de")
+      });
+      test("negative overflow", () => {
+        expect(String.insertAt("abcde", ~value="**", ~index=-9))
+        |> toEqual(Eq.(string), "**abcde")
+      });
+      test("overflow", () => {
+        expect(String.insertAt("abcde", ~value="**", ~index=9))
+        |> toEqual(Eq.(string), "abcde**")
+      });
+    });
     test("toArray", () => {
       expect(String.toArray("Standard"))
       |> toEqual(

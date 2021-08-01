@@ -120,6 +120,12 @@ let index_of_right = indexOfRight
 
 let insertAt t ~(index : int) ~(value : string) : string =
   let length = length t in
+  (* Handle overflow *)
+  let index = if index > length then length else index in
+  (* Negative is an index from the end *)
+  let index = if index < 0 then length + index else index in
+  (* Handle case where it's still less than zero *)
+  let index = if index < 0 then 0 else index in
   let startCount = index in
   let endCount = length - index in
   let start = dropRight ~count:endCount t in
