@@ -31,25 +31,30 @@ let suite =
         expect(drop([1, 2, 3], ~count=4)) |> toEqual(Eq.(list(int)), [])
       );
       test("negative count", () =>
-        expect(drop([1, 2, 3], ~count=-1)) |> toEqual(Eq.(list(int)), [1,2,3])
+        expect(drop([1, 2, 3], ~count=-1))
+        |> toEqual(Eq.(list(int)), [1, 2, 3])
       );
       test("zero count", () =>
-        expect(drop([1, 2, 3], ~count=-1)) |> toEqual(Eq.(list(int)), [1,2,3])
+        expect(drop([1, 2, 3], ~count=-1))
+        |> toEqual(Eq.(list(int)), [1, 2, 3])
       );
     });
 
     describe("take", () => {
       test("normal", () =>
-        expect(take([1,2,3], ~count=2)) |> toEqual(Eq.(list(int)), [1,2])
+        expect(take([1, 2, 3], ~count=2))
+        |> toEqual(Eq.(list(int)), [1, 2])
       );
       test("from an empty list", () =>
         expect(take([], ~count=2)) |> toEqual(Eq.(list(int)), [])
       );
       test("overflow", () =>
-        expect(take([1,2,3,4], ~count=8)) |> toEqual(Eq.(list(int)), [1,2,3,4])
+        expect(take([1, 2, 3, 4], ~count=8))
+        |> toEqual(Eq.(list(int)), [1, 2, 3, 4])
       );
       test("overflow", () =>
-        expect(take([1,2,3,4], ~count=-1)) |> toEqual(Eq.(list(int)), [])
+        expect(take([1, 2, 3, 4], ~count=-1))
+        |> toEqual(Eq.(list(int)), [])
       );
     });
 

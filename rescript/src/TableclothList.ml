@@ -68,13 +68,19 @@ let head l = Belt.List.head l
 
 let drop t ~count =
   match Belt.List.drop t count with
-  | None -> if count <= 0 then t else []
-  | Some v -> v
+  | None ->
+      if count <= 0 then t else []
+  | Some v ->
+      v
+
 
 let take t ~count =
   match Belt.List.take t count with
-  | None -> if count <= 0 then [] else t
-  | Some v -> v
+  | None ->
+      if count <= 0 then [] else t
+  | Some v ->
+      v
+
 
 let initial l =
   match reverse l with [] -> None | _ :: rest -> Some (reverse rest)
@@ -116,8 +122,7 @@ let findIndex list ~f =
 
 let find_index = findIndex
 
-let splitAt t ~index =
-  (take ~count:index t, drop ~count:index t)
+let splitAt t ~index = (take ~count:index t, drop ~count:index t)
 
 let split_at = splitAt
 
@@ -258,6 +263,7 @@ let group_while = groupWhile
 let insertAt t ~index ~value =
   let front, back = splitAt t ~index in
   append front (value :: back)
+
 
 let insert_at = insertAt
 
