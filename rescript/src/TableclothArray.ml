@@ -77,7 +77,7 @@ let maximum t ~compare =
         | true ->
             Some element
         | false ->
-            max ))
+            max ) )
 
 
 let minimum t ~compare =
@@ -90,7 +90,7 @@ let minimum t ~compare =
         | true ->
             Some element
         | false ->
-            min ))
+            min ) )
 
 
 let extent t ~compare =
@@ -109,11 +109,11 @@ let extent t ~compare =
               | true ->
                   element
               | false ->
-                  max ))
+                  max ) )
 
 
-let sum (type a) t (module M : TableclothContainer.Sum with type t = a) =
-  (Array.fold_left M.add M.zero t : a)
+let sum (type a) t (module M : TableclothContainer.Sum with type t = a) : a =
+  Array.fold_left M.add M.zero t
 
 
 let map t ~f = Belt.Array.map t f
@@ -122,7 +122,7 @@ let mapWithIndex t ~f = Belt.Array.mapWithIndex t f
 
 let map_with_index = mapWithIndex
 
-let map2 a b ~(f : 'a -> 'b -> 'c) = (Belt.Array.zipBy a b f : 'c array)
+let map2 a b ~(f : 'a -> 'b -> 'c) : 'c array = Belt.Array.zipBy a b f
 
 let map3 as_ bs (cs : 'c t) ~f =
   let minLength =
@@ -206,7 +206,7 @@ let slice ?to_ array ~from =
 
 let count t ~f =
   fold t ~initial:0 ~f:(fun total element ->
-      total + match f element with true -> 1 | false -> 0)
+      total + match f element with true -> 1 | false -> 0 )
 
 
 let chunksOf t ~size = sliding t ~step:size ~size
@@ -215,15 +215,14 @@ let chunks_of = chunksOf
 
 let reverse = Belt.Array.reverseInPlace
 
-let forEach t ~f = (Belt.Array.forEach t f : unit)
+let forEach t ~f : unit = Belt.Array.forEach t f
 
 let for_each = forEach
 
-let forEachWithIndex t ~f =
-  ( for i = 0 to length t - 1 do
-      f i t.(i)
-    done
-    : unit )
+let forEachWithIndex t ~f : unit =
+  for i = 0 to length t - 1 do
+    f i t.(i)
+  done
 
 
 let for_each_with_index = forEachWithIndex
@@ -233,7 +232,7 @@ let partition t ~f =
     foldRight t ~initial:([], []) ~f:(fun (lefts, rights) element ->
         if f element
         then (element :: lefts, rights)
-        else (lefts, element :: rights))
+        else (lefts, element :: rights) )
   in
   (fromList left, fromList right)
 
@@ -263,7 +262,7 @@ let repeat element ~length = Array.init (max length 0) (fun _ -> element)
 
 let filterMap t ~f =
   fold t ~initial:[] ~f:(fun results element ->
-      match f element with None -> results | Some value -> value :: results)
+      match f element with None -> results | Some value -> value :: results )
   |. fromList
 
 
@@ -273,7 +272,7 @@ let sort a ~compare = Array.sort compare a
 
 let values t =
   fold t ~initial:[] ~f:(fun results element ->
-      match element with None -> results | Some value -> value :: results)
+      match element with None -> results | Some value -> value :: results )
   |. fromList
 
 
@@ -286,7 +285,7 @@ let groupBy t comparator ~f =
           | None ->
               Some [ element ]
           | Some elements ->
-              Some (element :: elements)))
+              Some (element :: elements) ) )
 
 
 let group_by = groupBy

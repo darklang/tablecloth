@@ -7,89 +7,89 @@
 (rule
  (target ArrayTest.re)
  (action
-  (copy ../../bucklescript/test/ArrayTest.re ./ArrayTest.re)))
+  (copy ../../rescript/test/ArrayTest.re ./ArrayTest.re)))
 
 (rule
  (target BoolTest.re)
  (action
-  (copy ../../bucklescript/test/BoolTest.re ./BoolTest.re)))
+  (copy ../../rescript/test/BoolTest.re ./BoolTest.re)))
 
 (rule
  (target CharTest.re)
  (action
-  (copy ../../bucklescript/test/CharTest.re ./CharTest.re)))
+  (copy ../../rescript/test/CharTest.re ./CharTest.re)))
 
 (rule
  (target ComparatorTest.ml)
  (action
-  (copy ../../bucklescript/test/ComparatorTest.ml ./ComparatorTest.ml)))
+  (copy ../../rescript/test/ComparatorTest.ml ./ComparatorTest.ml)))
 
 (rule
  (target FloatTest.re)
  (action
-  (copy ../../bucklescript/test/FloatTest.re ./FloatTest.re)))
+  (copy ../../rescript/test/FloatTest.re ./FloatTest.re)))
 
 (rule
  (target FunTest.re)
  (action
-  (copy ../../bucklescript/test/FunTest.re ./FunTest.re)))
+  (copy ../../rescript/test/FunTest.re ./FunTest.re)))
 
 (rule
  (target IntTest.re)
  (action
-  (copy ../../bucklescript/test/IntTest.re ./IntTest.re)))
+  (copy ../../rescript/test/IntTest.re ./IntTest.re)))
 
 (rule
  (target OptionTest.re)
  (action
-  (copy ../../bucklescript/test/OptionTest.re ./OptionTest.re)))
+  (copy ../../rescript/test/OptionTest.re ./OptionTest.re)))
 
 (rule
  (target ResultTest.re)
  (action
-  (copy ../../bucklescript/test/ResultTest.re ./ResultTest.re)))
+  (copy ../../rescript/test/ResultTest.re ./ResultTest.re)))
 
 (rule
  (target ListTest.re)
  (action
-  (copy ../../bucklescript/test/ListTest.re ./ListTest.re)))
+  (copy ../../rescript/test/ListTest.re ./ListTest.re)))
 
 (rule
  (target MapTest.re)
  (action
-  (copy ../../bucklescript/test/MapTest.re ./MapTest.re)))
+  (copy ../../rescript/test/MapTest.re ./MapTest.re)))
 
 (rule
  (target MapOcamlSyntaxSpecificTest.ml)
  (action
-  (copy ../../bucklescript/test/MapOcamlSyntaxSpecificTest.ml
+  (copy ../../rescript/test/MapOcamlSyntaxSpecificTest.ml
     ./MapOcamlSyntaxSpecificTest.ml)))
 
 (rule
  (target SetTest.re)
  (action
-  (copy ../../bucklescript/test/SetTest.re ./SetTest.re)))
+  (copy ../../rescript/test/SetTest.re ./SetTest.re)))
 
 (rule
  (target SetOcamlSyntaxSpecificTest.ml)
  (action
-  (copy ../../bucklescript/test/SetOcamlSyntaxSpecificTest.ml
+  (copy ../../rescript/test/SetOcamlSyntaxSpecificTest.ml
     ./SetOcamlSyntaxSpecificTest.ml)))
 
 (rule
  (target StringTest.re)
  (action
-  (copy ../../bucklescript/test/StringTest.re ./StringTest.re)))
+  (copy ../../rescript/test/StringTest.re ./StringTest.re)))
 
 (rule
  (target Tuple2Test.re)
  (action
-  (copy ../../bucklescript/test/Tuple2Test.re ./Tuple2Test.re)))
+  (copy ../../rescript/test/Tuple2Test.re ./Tuple2Test.re)))
 
 (rule
  (target Tuple3Test.re)
  (action
-  (copy ../../bucklescript/test/Tuple3Test.re ./Tuple3Test.re)))
+  (copy ../../rescript/test/Tuple3Test.re ./Tuple3Test.re)))
 
 (rule
  (alias runtest)

@@ -46,7 +46,7 @@ type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
         Map.fromList (module String) [("Apple", 2); ("Pear", 0)]
     ]}
 *)
-module Of : functor (M : TableclothComparator.S) -> sig
+module Of (M : TableclothComparator.S) : sig
   type nonrec 'value t = (M.t, 'value, M.identity) t
 end
 

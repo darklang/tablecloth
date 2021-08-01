@@ -1,7 +1,7 @@
 {
   "name": "tablecloth-bucklescript",
-  "description": "A portable standard library enhancement for Reason and OCaml.",
-  "version": "0.0.7",
+  "description": "A portable standard library enhancement for Rescript and OCaml.",
+  "version": "0.0.8",
   "repository": "https://github.com/darklang/tablecloth",
   "private": false,
   "contributors": [
@@ -9,6 +9,8 @@
     "Dean Merchant <deanmerchant@gmail.com>"
   ],
   "keywords": [
+    "Rescript",
+    "OCaml",
     "BuckleScript",
     "ReasonML",
     "Utility"
@@ -16,22 +18,21 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "0.5.1",
-    "bs-platform": ">=7.0.1"
+    "rescript": "9.1.4"
   },
-  "dependencies": {},
   "scripts": {
-    "clean": "bsb -clean-world",
-    "build": "bsb -make-world",
-    "watch": "bsb -make-world -w",
-    "test": "jest"
+    "clean": "rescript clean",
+    "build": "rescript build",
+    "test": "jest",
+    "build:watch": "rescript build -w"
   },
   "jest": {
     "testMatch": [
-      "<rootDir>/bucklescript/test/*Test.bs.js",
-      "<rootDir>/bucklescript/test/*Test.js"
+      "<rootDir>/rescript/test/*Test.bs.js",
+      "<rootDir>/rescript/test/*Test.js"
     ],
     "testPathIgnorePatterns": [
-      "/node_modules/"
+      "<rootDir>/rescript/node_modules/"
     ]
   }
 }

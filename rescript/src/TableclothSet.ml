@@ -81,18 +81,17 @@ module Poly = struct
 
   type nonrec 'a t = ('a, identity) t
 
-  let fromArray (type a) (a : a array) =
-    ( Belt.Set.fromArray
-        a
-        ~id:
-          ( module struct
-            type t = a
+  let fromArray (type a) (a : a array) : a t =
+    Belt.Set.fromArray
+      a
+      ~id:
+        ( module struct
+          type t = a
 
-            type nonrec identity = identity
+          type nonrec identity = identity
 
-            let cmp = Pervasives.compare |. Obj.magic
-          end )
-      : a t )
+          let cmp = Pervasives.compare |. Obj.magic
+        end )
 
 
   let from_array = fromArray

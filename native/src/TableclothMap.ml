@@ -83,7 +83,7 @@ let merge m1 m2 ~f =
       | `Right v2 ->
           f key None (Some v2)
       | `Both (v1, v2) ->
-          f key (Some v1) (Some v2))
+          f key (Some v1) (Some v2) )
 
 
 let map = Base.Map.map
@@ -96,7 +96,7 @@ let filter = Base.Map.filter
 
 let partition m ~f =
   Base.Map.partition_mapi m ~f:(fun ~key ~data ->
-      if f ~key ~value:data then `Fst data else `Snd data)
+      if f ~key ~value:data then `Fst data else `Snd data )
 
 
 let find m ~f =
@@ -105,7 +105,7 @@ let find m ~f =
       | Some _ ->
           matching
       | None ->
-          if f ~key ~value:data then Some (key, data) else None)
+          if f ~key ~value:data then Some (key, data) else None )
 
 
 let any = Base.Map.exists
@@ -125,7 +125,7 @@ let for_each_with_index = forEachWithIndex
 
 let fold m ~initial ~f =
   Base.Map.fold m ~init:initial ~f:(fun ~key ~data acc ->
-      f acc ~key ~value:data)
+      f acc ~key ~value:data )
 
 
 let keys = Base.Map.keys

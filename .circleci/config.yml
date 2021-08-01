@@ -1,30 +1,30 @@
 version: 2.1
 jobs:
-  bucklescript-build-and-test:
+  rescript-build-and-test:
     parameters:
-      bucklescript-version: { type: string }
+      rescript-version: { type: string }
     docker:
-      - image: cimg/node:14.11.0
+      - image: cimg/node:16.6.0
     environment:
       CI: true
       NODE_ENV: test
-      TC_BUCKLESCRIPT_VERSION: << parameters.bucklescript-version >>
+      TC_RESCRIPT_VERSION: << parameters.rescript-version >>
     working_directory: ~/repo
     steps:
       - checkout:
           path: ~/repo
       - restore_cache:
           keys:
-            - v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-bucklescript-dependencies-{{ .Branch }}-
-            - v1-bucklescript-dependencies-
-      - run: make deps-bs
-      - run: make build-bs
-      - run: make test-bs
-      - run: make doc-bs
-      - run: make integration-test-bs
+            - v1-rescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-rescript-dependencies-{{ .Branch }}-
+            - v1-rescript-dependencies-
+      - run: make deps-rescript
+      - run: make build-rescript
+      - run: make test-rescript
+      - run: make doc-rescript
+      - run: make integration-test-rescript
       - save_cache:
-          key: v1-bucklescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: v1-rescript-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/repo/node_modules
 
@@ -33,7 +33,7 @@ jobs:
       ocaml-version: { type: string }
       base-version: { type: string }
     docker:
-      - image: ocaml/opam2
+      - image: ocaml/opam:ubuntu-ocaml-<< parameters.ocaml-version >>
     environment:
       CI: true
       TC_NATIVE_OCAML_SWITCH: << parameters.ocaml-version >>
@@ -61,7 +61,7 @@ jobs:
 
   source-code-formatting:
     docker:
-      - image: ocaml/opam2
+      - image: ocaml/opam:ubuntu-ocaml-4.10
     environment:
       CI: true
     working_directory: ~/repo
@@ -74,7 +74,7 @@ jobs:
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
-      - run: opam update && opam install ocamlformat reason -y
+      - run: make deps-format
       - run: make check-format
       - save_cache:
           key: v0-source-dependencies-ocamlformat-0.14
@@ -83,7 +83,7 @@ jobs:
 
   documentation-generator-build:
     docker:
-      - image: ocaml/opam2:4.08
+      - image: ocaml/opam:ubuntu-ocaml-4.10
     environment:
       CI: true
     working_directory: ~/repo
@@ -108,7 +108,7 @@ jobs:
 
   website-build:
     docker:
-      - image: cimg/node:14.11.0
+      - image: cimg/node:16.6.0
     environment:
       CI: true
       NODE_ENV: production
@@ -132,29 +132,23 @@ workflows:
   version: 2
   build:
     jobs:
-      - bucklescript-build-and-test:
+      - rescript-build-and-test:
           matrix:
             parameters:
-              bucklescript-version:
-                - "8.2.0"
-                - "8.1.1"
-                - "8.0.3"
-                - "7.3.2"
-                - "7.2.2"
-                - "7.1.1"
-                - "7.0.1"
+              rescript-version:
+                - "9.1.4"
                 # Pre version 6 not supported
       - native-build-and-test:
           matrix:
             parameters:
-              # Contributions welcome for commente out versions, see README
+              # Contributions welcome for commented out versions, see README
               ocaml-version:
                  #- "4.06"
                  #- "4.07"
                  - "4.08"
                  - "4.09"
                  #- "4.10" # separate config below
-                 #- "4.11" # no ocaml/opam2 version for this, probably works
+                 #- "4.11" # no ocaml/opam version for this, probably works
               base-version:
                  #- "v0.9.4"
                  #- "v0.10.0"

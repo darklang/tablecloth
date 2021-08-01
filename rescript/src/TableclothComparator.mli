@@ -96,4 +96,4 @@ type ('a, 'identity) s =
       let books = Set.empty (module Book)
     ]}
 *)
-module Make : functor (M : T) -> S with type t := M.t
+module Make (M : T) : S with type t := M.t

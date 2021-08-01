@@ -88,7 +88,7 @@ let clamp n ~lower ~upper =
          ( "~lower:"
          ^ Base.Float.to_string lower
          ^ " must be less than or equal to ~upper:"
-         ^ Base.Float.to_string upper ))
+         ^ Base.Float.to_string upper ) )
   else if Base.Float.is_nan lower
           || Base.Float.is_nan upper
           || Base.Float.is_nan n
@@ -105,7 +105,7 @@ let inRange n ~lower ~upper =
          ( "~lower:"
          ^ Base.Float.to_string lower
          ^ " must be less than or equal to ~upper:"
-         ^ Base.Float.to_string upper ))
+         ^ Base.Float.to_string upper ) )
   else n >= lower && n < upper
 
 

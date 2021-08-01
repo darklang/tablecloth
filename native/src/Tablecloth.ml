@@ -26,7 +26,38 @@ module List = TableclothList
 module Option = TableclothOption
 
 (** Functions for working with computations which may fail. *)
-module Result = TableclothResult
+module Result = struct
+  include TableclothResult
+
+  (** [Result.pp errFormat okFormat destFormat result] "pretty-prints"
+      the [result], using [errFormat] if the [result] is an [Error] value or
+      [okFormat] if the [result] is an [Ok] value. [destFormat] is a formatter
+      that tells where to send the output.
+
+      {[
+        let good: (int, string) Result.t = Ok 42 in
+        let not_good: (int, string) Tablecloth.Result.t = Error "bad" in
+        Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter good;
+        Result.pp Format.pp_print_int Format.pp_print_string Format.std_formatter not_good;
+        Format.pp_print_newline Format.std_formatter ();
+        (* prints <ok: 42><error: bad>*)
+      ]}
+    *)
+  let pp
+      (okf : Format.formatter -> 'ok -> unit)
+      (errf : Format.formatter -> 'error -> unit)
+      (fmt : Format.formatter)
+      (r : ('ok, 'error) t) : unit =
+    match r with
+    | Ok ok ->
+        Format.pp_print_string fmt "<ok: " ;
+        okf fmt ok ;
+        Format.pp_print_string fmt ">"
+    | Error err ->
+        Format.pp_print_string fmt "<error: " ;
+        errf fmt err ;
+        Format.pp_print_string fmt ">"
+end
 
 (** Functions for manipulating tuples of length two *)
 module Tuple2 = TableclothTuple2

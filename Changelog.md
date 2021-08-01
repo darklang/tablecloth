@@ -79,7 +79,7 @@ Array:
 List:
 - Add reverse (#9, @j-m-hoffmann)
 - Add tests (#9, #13, #28, @j-m-hoffmann, @jdeisenberg)
-- Convert bucklescript files to use Belt more (#9, #11, #12 @j-m-hoffmann)
+- Convert rescript files to use Belt more (#9, #11, #12 @j-m-hoffmann)
 - Add minimum (#21, #28, @jdeisenberg)
 - (Breaking) Make splitWhen consistent with splitAt (removed option return type) (#25, @jdeisenberg)
 - Add significant documentation (#16, @jdeisenberg)
@@ -136,7 +136,7 @@ Add a lot of new functions:
 - {StrStr,IntSet}.has
 - {StrDict,IntDict}.merge
 
-Add regex module to Bucklescript. The contract will probably change in future
+Add regex module to rescript. The contract will probably change in future
 versions because native regex uses an API that can't easily be made match.
 
 

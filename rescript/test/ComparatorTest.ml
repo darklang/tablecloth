@@ -46,12 +46,7 @@ end
 
 let book =
   let eq (a : Book.t) (b : Book.t) : bool = a = b in
-  let pp formatter ({ title; isbn } : Book.t) : unit =
-    Format.pp_print_string
-      formatter
-      ({|{ "title":"|} ^ title ^ {|", "isbn": "|} ^ isbn ^ {|" }|})
-  in
-  Eq.make eq pp
+  Eq.make eq
 
 
 let mobyDick : Book.t =
@@ -78,11 +73,11 @@ let suite =
                   [ frankenstein; frankensteinAlternateTitle ]
                 |> Set.toList
               in
-              expect result |> toEqual (Eq.list book) [ frankenstein ])) ;
+              expect result |> toEqual (Eq.list book) [ frankenstein ] ) ) ;
       describe "make" (fun () ->
           test "module documentation example" (fun () ->
               let result : Book.t list =
                 Set.fromList (module BookByTitle) [ mobyDick; mobyDickReissue ]
                 |> Set.toList
               in
-              expect result |> toEqual (Eq.list book) [ mobyDick ])))
+              expect result |> toEqual (Eq.list book) [ mobyDick ] ) ) )

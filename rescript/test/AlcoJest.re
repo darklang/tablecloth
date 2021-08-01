@@ -1,6 +1,10 @@
 open Jest;
 open Expect;
 
+module Coordinate = {
+  type t = (int, int);
+};
+
 module Eq: {
   /** This module is purely to make the API match the one provided in
       native/test/AlcoJest.re
@@ -11,12 +15,13 @@ module Eq: {
   */
   type result;
   type t('a) = ('a, 'a) => result;
-  let make: (('a, 'a) => bool, (Format.formatter, 'a) => unit) => t('a);
+  let make: (('a, 'a) => bool) => t('a);
   let bool: t(bool);
   let char: t(char);
   let int: t(int);
   // let integer: t(Standard.Integer.t);
   let float: t(float);
+  let coordinate: t(Coordinate.t);
   let string: t(string);
   let unit: t(unit);
   let array: t('a) => t(array('a));
@@ -28,12 +33,13 @@ module Eq: {
 } = {
   type result = unit;
   type t('a) = ('a, 'a) => unit;
-  let make = (_, _, _, _) => ();
+  let make = (_, _) => ignore;
   let ignore = _ => ignore;
   let bool = ignore;
   let char = ignore;
   let int = ignore;
   let float = ignore;
+  let coordinate = ignore;
   let string = ignore;
   let unit = ignore;
   let array = _ => ignore;

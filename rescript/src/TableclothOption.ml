@@ -37,8 +37,7 @@ let unwrapOrFailWith t ~exn =
 
 
 let unwrapUnsafe =
-  unwrapOrFailWith
-    ~exn:(Invalid_argument "Option.unwrapUnsafe called with None")
+  unwrapOrFailWith ~exn:(Invalid_argument "Option.unwrapUnsafe called with None")
 
 
 let unwrap_unsafe = unwrapUnsafe

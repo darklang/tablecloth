@@ -42,7 +42,7 @@ let clamp n ~lower ~upper =
          ( "~lower:"
          ^ Js.Float.toString lower
          ^ " must be less than or equal to ~upper:"
-         ^ Js.Float.toString upper ))
+         ^ Js.Float.toString upper ) )
   else if Js.Float.isNaN lower || Js.Float.isNaN upper || Js.Float.isNaN n
   then nan
   else max lower (min upper n)
@@ -56,7 +56,7 @@ let inRange n ~lower ~upper =
          ( "~lower:"
          ^ Js.Float.toString lower
          ^ " must be less than or equal to ~upper:"
-         ^ Js.Float.toString upper ))
+         ^ Js.Float.toString upper ) )
   else n >= lower && n < upper
 
 

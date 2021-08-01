@@ -40,7 +40,7 @@ type ('a, 'id) t = ('a, 'id) Base.Set.t
         Set.fromList (module String) ["Andrew"; "Tina"]
     ]}
 *)
-module Of : functor (M : TableclothComparator.S) -> sig
+module Of (M : TableclothComparator.S) : sig
   type nonrec t = (M.t, M.identity) t
 end
 

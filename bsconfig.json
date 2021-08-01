@@ -1,9 +1,9 @@
 {
   "name": "tablecloth-bucklescript",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "sources": [
     {
-      "dir": "bucklescript/src",
+      "dir": "rescript/src",
       "public": [
         "Tablecloth",
         "TableclothBool",
@@ -26,7 +26,7 @@
       "subdirs": false
     },
     {
-      "dir": "bucklescript/test",
+      "dir": "rescript/test",
       "type": "dev",
       "subdirs": false
     }
