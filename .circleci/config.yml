@@ -44,9 +44,9 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
-            - v2-native-dependencies-{{ .Branch }}-
-            - v2-native-dependencies-
+            - v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+            - v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-{{ .Branch }}-
+            - v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: make deps-native
@@ -55,7 +55,7 @@ jobs:
       - run: make doc-native
       - run: make integration-test-native
       - save_cache:
-          key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+          key: v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
             - ~/.opam
 
@@ -70,14 +70,14 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v0-source-dependencies-ocamlformat-0.14
+            - v0-source-dependencies-ocamlformat-0.19
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
       - run: make deps-format
       - run: make check-format
       - save_cache:
-          key: v0-source-dependencies-ocamlformat-0.14
+          key: v0-source-dependencies-ocamlformat-0.19
           paths:
             - ~/.opam
 
@@ -92,9 +92,9 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
-            - v2-native-dependencies-{{ .Branch }}-
-            - v2-native-dependencies-
+            - v3-docs-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+            - v3-docs-{{ .Branch }}-
+            - v3-docs-dependencies-
       # m4 is a system dependency required lots of packages
       - run: sudo apt-get install -y m4
       - run: cd ocamldoc-json-generator && make deps
@@ -102,7 +102,7 @@ jobs:
       # Check that model.json has been regenerated when there are changes in the interface files
       - run: git diff --exit-code website/model.json
       - save_cache:
-          key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+          key: v3-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
             - ~/.opam
 
@@ -132,36 +132,41 @@ workflows:
   version: 2
   build:
     jobs:
+      # Contributions welcome for commented out versions, see README
       - rescript-build-and-test:
           matrix:
             parameters:
               rescript-version:
+                # Pre version 9 not supported as the package was renamed to rescript in 9.1
                 - "9.1.4"
-                # Pre version 6 not supported
+
+      # --------------------
+      # OCaml version matrix
+      # --------------------
+      # We currently only support native OCaml > 4.08, as we use the Fun module
+      # which was only added in 4.08
+      # Base 0.9.4 requires ocaml < 4.07, which we don't support
+      # Base 0.10.0 requires ocaml < 4.07, which we don't support
+      # Base 0.11.1 requires ocaml < 4.07, which we don't support
+      # Base 0.12 requires ocaml < 4.10
       - native-build-and-test:
           matrix:
             parameters:
-              # Contributions welcome for commented out versions, see README
-              ocaml-version:
-                 #- "4.06"
-                 #- "4.07"
-                 - "4.08"
-                 - "4.09"
-                 #- "4.10" # separate config below
-                 #- "4.11" # no ocaml/opam version for this, probably works
-              base-version:
-                 #- "v0.9.4"
-                 #- "v0.10.0"
-                 #- "v0.11.1"
-                 - "v0.12.2"
-                 - "v0.13.2"
-                 #- "v0.14.0"
-      # Base 12 does not support OCaml 4.10
+              base-version: ["v0.12.2"]
+              ocaml-version: ["4.08", "4.09"]
+      # Base 0.13.2 requires ocaml < 4.12
       - native-build-and-test:
           matrix:
             parameters:
-              ocaml-version: ["4.10"]
               base-version: ["v0.13.2"]
+              ocaml-version: ["4.08", "4.09", "4.10", "4.11"]
+      # Base 0.14.1 requires ocaml >= 4.08
+      # Currently broken as due to Either definition
+      - native-build-and-test:
+          matrix:
+            parameters:
+              base-version: ["v0.14.1"]
+              ocaml-version: ["4.08", "4.09", "4.10", "4.11", "4.12"]
       - source-code-formatting
       - documentation-generator-build
       - website-build
