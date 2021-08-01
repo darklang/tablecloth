@@ -5,7 +5,7 @@ metaDescription: "Installing Tablecloth"
 order: "0"
 ---
 
-## Bucklescript
+## Rescript
 
 Install via npm by
 
@@ -19,7 +19,7 @@ Then add to your `bsconfig.json` file:
   "bs-dependencies" : ["tablecloth-bucklescript"]
 ```
 
-## OCaml native
+## OCaml
 
 ### Using Opam
 
@@ -30,7 +30,7 @@ opam install tablecloth-native
 Then update the libraries section in your `dune` file:
 
 ```clj
-(libraries (standard))
+(libraries (tablecloth))
 ```
 
 ### Using Esy
@@ -42,5 +42,5 @@ esy add @opam/tablecloth-native
 Then update the libraries section in your `dune` file:
 
 ```clj
-(libraries (standard))
+(libraries (tablecloth))
 ```
