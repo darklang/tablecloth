@@ -241,17 +241,17 @@ val insertAt : string -> index:int -> value:t -> string
 
     {2 Examples}
 
-    {[String.insertAt ~insert:"**" ~index:2 "abcde" = "ab**cde"]}
+    {[String.insertAt ~value:"**" ~index:2 "abcde" = "ab**cde"]}
 
-    {[String.insertAt ~insert:"**" ~index:0 "abcde" = "**abcde"]}
+    {[String.insertAt ~value:"**" ~index:0 "abcde" = "**abcde"]}
 
-    {[String.insertAt ~insert:"**" ~index:5 "abcde" = "abcde**"]}
+    {[String.insertAt ~value:"**" ~index:5 "abcde" = "abcde**"]}
 
-    {[String.insertAt ~insert:"**" ~index:(-2) "abcde" = "abc**de"]}
+    {[String.insertAt ~value:"**" ~index:(-2) "abcde" = "abc**de"]}
 
-    {[String.insertAt ~insert:"**" ~index:(-9) "abcde" = "**abcde"]}
+    {[String.insertAt ~value:"**" ~index:(-9) "abcde" = "**abcde"]}
 
-    {[String.insertAt ~insert:"**" ~index:9 "abcde" = "abcde**"]}
+    {[String.insertAt ~value:"**" ~index:9 "abcde" = "abcde**"]}
 *)
 
 val insert_at : string -> index:int -> value:t -> string
