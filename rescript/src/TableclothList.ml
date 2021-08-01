@@ -66,9 +66,21 @@ let any t ~f = List.exists f t
 
 let head l = Belt.List.head l
 
-let drop t ~count = Belt.List.drop t count |. Belt.Option.getWithDefault []
+let drop t ~count =
+  match Belt.List.drop t count with
+  | None ->
+      if count <= 0 then t else []
+  | Some v ->
+      v
 
-let take t ~count = Belt.List.take t count |. Belt.Option.getWithDefault []
+
+let take t ~count =
+  match Belt.List.take t count with
+  | None ->
+      if count <= 0 then [] else t
+  | Some v ->
+      v
+
 
 let initial l =
   match reverse l with [] -> None | _ :: rest -> Some (reverse rest)
@@ -110,20 +122,7 @@ let findIndex list ~f =
 
 let find_index = findIndex
 
-let splitAt t ~index =
-  if index < 0
-  then raise (Invalid_argument "List.splitAt called with negative index") ;
-  let rec loop front back i =
-    match back with
-    | [] ->
-        (t, [])
-    | element :: rest ->
-        if i = 0
-        then (reverse front, back)
-        else loop (element :: front) rest (i - 1)
-  in
-  loop [] t index
-
+let splitAt t ~index = (take ~count:index t, drop ~count:index t)
 
 let split_at = splitAt
 
@@ -262,18 +261,8 @@ let rec groupWhile t ~f =
 let group_while = groupWhile
 
 let insertAt t ~index ~value =
-  if index < 0
-  then raise (Invalid_argument "List.splitAt called with negative index") ;
-  let rec loop front back i =
-    match back with
-    | [] ->
-        reverse (value :: front)
-    | element :: rest ->
-        if i = 0
-        then append (reverse front) (value :: element :: rest)
-        else loop (element :: front) rest (index - 1)
-  in
-  loop [] t index
+  let front, back = splitAt t ~index in
+  append front (value :: back)
 
 
 let insert_at = insertAt
