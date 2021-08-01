@@ -143,25 +143,26 @@ workflows:
             parameters:
               # Contributions welcome for commented out versions, see README
               ocaml-version:
-                 #- "4.06"
-                 #- "4.07"
+                 - "4.06"
+                 - "4.07"
                  - "4.08"
                  - "4.09"
-                 #- "4.10" # separate config below
-                 #- "4.11" # no ocaml/opam version for this, probably works
+                 - "4.10" # separate config below
+                 - "4.11" # no ocaml/opam version for this, probably works
+                 - "4.12" # no ocaml/opam version for this, probably works
               base-version:
-                 #- "v0.9.4"
-                 #- "v0.10.0"
-                 #- "v0.11.1"
+                 - "v0.9.4"
+                 - "v0.10.0"
+                 - "v0.11.1"
                  - "v0.12.2"
                  - "v0.13.2"
-                 #- "v0.14.0"
+                 - "v0.14.1"
       # Base 12 does not support OCaml 4.10
-      - native-build-and-test:
-          matrix:
-            parameters:
-              ocaml-version: ["4.10"]
-              base-version: ["v0.13.2"]
+      # - native-build-and-test:
+      #     matrix:
+      #       parameters:
+      #         ocaml-version: ["4.10"]
+      #         base-version: ["v0.13.2"]
       - source-code-formatting
       - documentation-generator-build
       - website-build
