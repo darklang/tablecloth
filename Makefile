@@ -93,7 +93,7 @@ deps-native:
 	@printf "\n\e[31mInstalling native dependencies ...\e[0m\n"
 	opam update
 	opam switch set ${TC_NATIVE_OCAML_SWITCH}
-	opam install alcotest base.${TC_BASE_VERSION} dune.2.9.0 junit.2.0.2 junit_alcotest.2.0.2 odoc.1.5.3 reason.3.7.0 ocamlformat.${TC_OCAMLFORMAT_VERSION} -y
+	opam install alcotest base.${TC_BASE_VERSION} dune.2.9.0 junit.2.0.2 junit_alcotest.2.0.2 odoc.1.5.3 reason.3.7.0 -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
 
 deps-rescript:
@@ -111,7 +111,9 @@ deps-format:
 
 .PHONY: check-format format
 check-format:
+	opam install ocamlformat.0.19.0 -y
 	opam config exec -- dune build @fmt
 
 format:
+	opam install ocamlformat.0.19.0 -y
 	opam config exec -- dune build @fmt --auto-promote
