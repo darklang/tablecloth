@@ -157,7 +157,7 @@ a handful of useful, supported commands:
 - `make test`: Run the test suite. You may need to `make build` first.
 - `make check-format`: Check your code is formatted correctly.
 - `make format`: Format code.
-- `cd ocamldoc-json-generator && make deps && make build`: Build model.json for the website (needs to be updated and checked in whenever the APIs change.)
+- `cd ocamldoc-json-generator && make deps && make doc`: Build model.json for the website (needs to be updated and checked in whenever the APIs change.)
 
 ## License
 
