@@ -56,11 +56,11 @@ let () =
 
 ### Rescript
 
-Tablecloth for Rescript supports rescript 9. Older versions of Tablecloth supported older versions of bs-platform.
+Tablecloth supports Rescript 9. Older versions of Tablecloth supported older versions of bs-platform.
 
 ### Native
 
-Tablecloth for native OCaml/Reason supports OCaml 4.08-4.10 and Base
+Tablecloth for native OCaml supports OCaml 4.08-4.10 and Base
 v0.12.2/v0.13.2. We are open to supporting other versions:
 
 - OCaml 4.11 is believed to work but is not officially supported as there is no
@@ -74,7 +74,7 @@ v0.12.2/v0.13.2. We are open to supporting other versions:
 When developing Tablecloth, you can test it against different versions of
 rescript, OCaml (native) and Base, using the following commands:
 
-- `TC_RESCRIPT_VERSION=7.1.1 make deps-bs`
+- `TC_RESCRIPT_VERSION=7.1.1 make deps-rescript`
 - `TC_BASE_VERSION=v0.14.0 TC_NATIVE_OCAML_SWITCH=4.11.0 make deps-native`
 
 ## Design of Tablecloth
@@ -151,13 +151,13 @@ need to get started:
 Please refer to the `Makefile` for a complete list of supported actions. Here is
 a handful of useful, supported commands:
 
-- `make deps-native`: Install native dependencies.
-- `make deps-rescript`: Install rescript dependencies.
+- `make deps-native`: Install OCaml dependencies.
+- `make deps-rescript`: Install Rescript dependencies.
 - `make build`: Build the project.
 - `make test`: Run the test suite. You may need to `make build` first.
-- `make documentation`: Build the documentation to browse offline.
 - `make check-format`: Check your code is formatted correctly.
 - `make format`: Format code.
+- `cd ocamldoc-json-generator && make deps && make build`: Build model.json for the website (needs to be updated and checked in whenever the APIs change.)
 
 ## License
 
