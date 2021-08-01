@@ -14494,15 +14494,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " elements, returns "
+                          "value": " elements, returns the entire list."
                         },
                         {
-                          "tag": "Code",
-                          "value": "None"
+                          "tag": "Newline",
+                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
-                          "value": "."
+                          "value": "\n   If count is zero or negative, returns []."
                         },
                         {
                           "tag": "Newline",
@@ -14536,8 +14536,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.take [1;2;3] ~count:2 = Some [1;2]",
-                            "reason": "List.take([1, 2, 3], ~count=2) == Some([1, 2]);\n"
+                            "ocaml": "List.take [1;2;3] ~count:2 = [1;2]",
+                            "reason": "List.take([1, 2, 3], ~count=2) == [1, 2];\n"
                           }
                         },
                         {
@@ -14551,8 +14551,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.take [] ~count:2 = None",
-                            "reason": "List.take([], ~count=2) == None;\n"
+                            "ocaml": "List.take [] ~count:2 = []",
+                            "reason": "List.take([], ~count=2) == [];\n"
                           }
                         },
                         {
@@ -14566,8 +14566,23 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.take [1;2;3;4] ~count:8 = None",
-                            "reason": "List.take([1, 2, 3, 4], ~count=8) == None;\n"
+                            "ocaml": "List.take [1;2;3;4] ~count:8 = [1;2;3;4]",
+                            "reason": "List.take([1, 2, 3, 4], ~count=8) == [1, 2, 3, 4];\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n   "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "List.take [1;2;3;4] ~count:(-1) = []",
+                            "reason": "List.take([1, 2, 3, 4], ~count=-1) == [];\n"
                           }
                         }
                       ]
@@ -14724,6 +14739,30 @@
                         },
                         {
                           "tag": "Raw",
+                          "value": "\n    If the list has fewer than "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "count"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " elements, returns []."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    If count is zero or negative, returns the entire list."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
                           "value": "\n    "
                         },
                         {
@@ -14767,6 +14806,21 @@
                           "value": {
                             "ocaml": "List.drop [1;2;3;4] ~count:6 = []",
                             "reason": "List.drop([1, 2, 3, 4], ~count=6) == [];\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]",
+                            "reason": "List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]"
                           }
                         }
                       ]
@@ -19434,7 +19488,23 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is outside of the bounds of the list, all elements will be in the first component of the tuple."
+                          "value": " is zero or negative, all elements will be in the second component of the tuple."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    If "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "index"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " is greater than the length of the list, all elements will be in the second component of the tuple."
                         },
                         {
                           "tag": "Newline",
@@ -19470,6 +19540,36 @@
                           "value": {
                             "ocaml": "List.splitAt [1;2;3;4;5] ~index:2 = ([1;2], [3;4;5])",
                             "reason": "List.splitAt([1, 2, 3, 4, 5], ~index=2) == ([1, 2], [3, 4, 5]);\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "List.splitAt [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])",
+                            "reason": "List.splitAt [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "List.splitAt [1;2;3;4;5] ~index:10 = ([1;2;3;4;5], 10)",
+                            "reason": "List.splitAt([1, 2, 3, 4, 5], ~index=10) == ([1, 2, 3, 4, 5], 10);\n"
                           }
                         }
                       ]
