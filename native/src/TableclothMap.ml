@@ -95,8 +95,7 @@ let map_with_index = mapWithIndex
 let filter = Base.Map.filter
 
 let partition m ~f =
-  Base.Map.partitioni_tf m ~f:(fun ~key ~data ->
-      f ~key ~value:data )
+  Base.Map.partitioni_tf m ~f:(fun ~key ~data -> f ~key ~value:data)
 
 
 let find m ~f =

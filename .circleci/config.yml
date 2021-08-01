@@ -153,7 +153,7 @@ workflows:
           matrix:
             parameters:
               base-version: ["v0.12.2"]
-              ocaml-version: ["4.08", "4.09", "4.10"]
+              ocaml-version: ["4.08", "4.09"]
       # Base 0.13.2 requires ocaml < 4.12
       - native-build-and-test:
           matrix:
