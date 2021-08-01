@@ -70,14 +70,14 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v0-source-dependencies-ocamlformat-0.14
+            - v0-source-dependencies-ocamlformat-0.19
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: echo 'export PATH=/usr/lib/cargo/bin/fd:$PATH' >> ~/.bash_env
       - run: make deps-format
       - run: make check-format
       - save_cache:
-          key: v0-source-dependencies-ocamlformat-0.14
+          key: v0-source-dependencies-ocamlformat-0.19
           paths:
             - ~/.opam
 
@@ -92,9 +92,9 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
-            - v2-native-dependencies-{{ .Branch }}-
-            - v2-native-dependencies-
+            - v3-docs-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+            - v3-docs-{{ .Branch }}-
+            - v3-docs-dependencies-
       # m4 is a system dependency required lots of packages
       - run: sudo apt-get install -y m4
       - run: cd ocamldoc-json-generator && make deps
@@ -102,7 +102,7 @@ jobs:
       # Check that model.json has been regenerated when there are changes in the interface files
       - run: git diff --exit-code website/model.json
       - save_cache:
-          key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+          key: v3-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
             - ~/.opam
 
