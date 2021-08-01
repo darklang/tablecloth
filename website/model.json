@@ -21,31 +21,6 @@
               }
             },
             {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for working with boolean ("
-                },
-                {
-                  "tag": "Code",
-                  "value": "true"
-                },
-                {
-                  "tag": "Raw",
-                  "value": " or "
-                },
-                {
-                  "tag": "Code",
-                  "value": "false"
-                },
-                {
-                  "tag": "Raw",
-                  "value": ") values."
-                }
-              ]
-            },
-            {
               "tag": "Module",
               "value": {
                 "name": "Char",
@@ -56,17 +31,30 @@
                     "name": "TableclothChar"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for working with single characters."
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for working with single characters."
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -79,21 +67,34 @@
                     "name": "TableclothString"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for working with "
-                },
-                {
-                  "tag": "Code",
-                  "value": "\"strings\""
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for working with "
+                      },
+                      {
+                        "tag": "Code",
+                        "value": "\"strings\""
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -106,17 +107,30 @@
                     "name": "TableclothInt"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Fixed precision integers"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Fixed precision integers"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -129,17 +143,30 @@
                     "name": "TableclothFloat"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for working with floating point numbers."
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for working with floating point numbers."
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -152,53 +179,66 @@
                     "name": "TableclothContainer"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Interfaces for use with container types like "
-                },
-                {
-                  "tag": "Ref",
-                  "value": {
-                    "name": "Tablecloth.Array",
-                    "reference": {
-                      "kind": "MODULE",
-                      "target": "Tablecloth.Array",
-                      "content": [
-                        {
-                          "tag": "Code",
-                          "value": "Tablecloth.Array"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Interfaces for use with container types like "
+                      },
+                      {
+                        "tag": "Ref",
+                        "value": {
+                          "name": "Tablecloth.Array",
+                          "reference": {
+                            "kind": "MODULE",
+                            "target": "Tablecloth.Array",
+                            "content": [
+                              {
+                                "tag": "Code",
+                                "value": "Tablecloth.Array"
+                              }
+                            ]
+                          }
                         }
-                      ]
-                    }
-                  }
-                },
-                {
-                  "tag": "Raw",
-                  "value": " or "
-                },
-                {
-                  "tag": "Ref",
-                  "value": {
-                    "name": "Tablecloth.List",
-                    "reference": {
-                      "kind": "MODULE",
-                      "target": "Tablecloth.List",
-                      "content": [
-                        {
-                          "tag": "Code",
-                          "value": "Tablecloth.List"
+                      },
+                      {
+                        "tag": "Raw",
+                        "value": " or "
+                      },
+                      {
+                        "tag": "Ref",
+                        "value": {
+                          "name": "Tablecloth.List",
+                          "reference": {
+                            "kind": "MODULE",
+                            "target": "Tablecloth.List",
+                            "content": [
+                              {
+                                "tag": "Code",
+                                "value": "Tablecloth.List"
+                              }
+                            ]
+                          }
                         }
-                      ]
-                    }
-                  }
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -211,17 +251,30 @@
                     "name": "TableclothArray"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "A fixed lenfth collection of values"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "A fixed lenfth collection of values"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -234,17 +287,30 @@
                     "name": "TableclothList"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Arbitrary length, singly linked lists"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Arbitrary length, singly linked lists"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -257,17 +323,30 @@
                     "name": "TableclothOption"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for working with optional values."
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for working with optional values."
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -341,17 +420,30 @@
                     "name": "TableclothTuple2"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for manipulating tuples of length two"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for manipulating tuples of length two"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -364,17 +456,30 @@
                     "name": "TableclothTuple3"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for manipulating tuples of length three"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for manipulating tuples of length three"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -401,17 +506,30 @@
                     "name": "TableclothSet"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "A collection of unique values"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "A collection of unique values"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -424,17 +542,30 @@
                     "name": "TableclothMap"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "A collection of key-value pairs"
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "A collection of key-value pairs"
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             },
             {
               "tag": "Module",
@@ -447,21 +578,72 @@
                     "name": "TableclothFun"
                   }
                 },
-                "info": null
-              }
-            },
-            {
-              "tag": "Text",
-              "value": [
-                {
-                  "tag": "Raw",
-                  "value": "Functions for working with functions."
+                "info": {
+                  "deprecated": null,
+                  "description": {
+                    "tag": "Text",
+                    "value": [
+                      {
+                        "tag": "Raw",
+                        "value": "Functions for working with functions."
+                      }
+                    ]
+                  },
+                  "version": null,
+                  "before": [
+                  ],
+                  "since": null,
+                  "exceptions": [
+                  ],
+                  "return": null,
+                  "see": [
+                  ],
+                  "custom": [
+                  ]
                 }
-              ]
+              }
             }
           ]
         },
-        "info": null
+        "info": {
+          "deprecated": null,
+          "description": {
+            "tag": "Text",
+            "value": [
+              {
+                "tag": "Raw",
+                "value": "Functions for working with boolean ("
+              },
+              {
+                "tag": "Code",
+                "value": "true"
+              },
+              {
+                "tag": "Raw",
+                "value": " or "
+              },
+              {
+                "tag": "Code",
+                "value": "false"
+              },
+              {
+                "tag": "Raw",
+                "value": ") values."
+              }
+            ]
+          },
+          "version": null,
+          "before": [
+          ],
+          "since": null,
+          "exceptions": [
+          ],
+          "return": null,
+          "see": [
+          ],
+          "custom": [
+          ]
+        }
       }
     },
     "modules": {
