@@ -85,105 +85,27 @@ Functions which accept first class modules or functors need a way to label their
 
 In a similar way to modules primary type being [named `t`](#t-is-the-main-type-of-n-module)
 
-## Data comes first
+## Labels for all arguments except Data
 
-In almost all the functions that `Tablecloth` provides, the data structure the
-function is operating on will be the first positional argument.
+In OCaml, the convention is to have the data argument come last, as idiomatic
+OCaml uses pipes (`|>`) heavily. In Rescript, the convention is to have the
+data argument come first, as this makes type checking and error messages
+better. (The "data" argument is the "subject" of the function call, the list in
+List functions, the string in String functions, etc).
 
-This is the opposite the way standard libraries for related languages
+In Tablecloth, we get the best of both worlds by ensuring that all arguments
+apart from the data argument use labelled arguments. This way, it is in both
+first and last place, and improves type checking and error messages while also
+supporting both pipe-first and pipe-last.
+
+Note that this is the opposite the way standard libraries for related languages
 like
 [Elm](https://package.elm-lang.org/help/design-guidelines#the-data-structure-is-always-the-last-argument)
 or
 [Haskell](https://downloads.haskell.org/~ghc/latest/docs/html/libraries/base-4.13.0.0/GHC-List.html)
-tend to do things, but for some good reasons:
+tend to do things.
 
-### Better error messages
-
-Compare the error message for data last
-
-```reason
-let words = ["hi"]
-let res = List.map(n => n + 1, words)
-//                             ^^^^^
-// This expression has type string list
-// but an expression was expected of type int list
-// Type string is not compatible with type int
-```
-
-With the one returned for data first
-
-```reason
-open Tablecloth;
-
-let words = ["hi"];
-let res = List.map(words, ~f:n => n + 1 );
-//                                ^
-// This expression has type string but an expression
-// was expected of type int
-```
-
-### Better type inference
-
-Say we have a module `Book`
-
-```reason
-module Book = {
-  type t = {
-    isbn: string,
-    title: string,
-  };
-
-  let classics = [
-    { isbn: "9788460767923", title: "Moby Dick or The Whale" }
-  ];
-}
-```
-
-With a data-last approach we end up needing to provide additional annotations when we use [List.map](/api#List.map)
-
-```reason
-let isbns = List.map(book => book.isbn, Book.classics);
-/*
-  The record field isbn can't be found.
-  If it's defined in another module or file, bring it into scope by:
-    - Annotating it with said module name:
-    - Or specifying its type:
-*/
-```
-
-But with data-first
-
-```reason
-open Tablecloth;
-
-let isbns = List.map(Book.classics, ~f=book => book.isbn);
-/* 👍 */
-```
-
-### More intuitive, consistent APIs
-
-Consider appending one array to another.
-
-With data last
-
-```reason
-let append = (arrayToAppend, data) => /* ... */;
-
-append([|1, 2, 3|], [|4, 5, 6|]) = [|4, 5, 6, 1, 2, 3|]
-
-/* The standard library diverges from its usual data-last
-   convention and implements this function data-first */
-```
-
-With data first
-
-```reason
-open Tablecloth
-
-Array.append([|1, 2, 3|], [|4, 5, 6|]) = [|1, 2, 3, 4, 5, 6|]
-```
-
-This section was heavily inspired by [Javier Chavarri's excellent blog post](https://www.javierchavarri.com/data-first-and-data-last-a-comparison/) and the discussions on the [Bucklescript](https://github.com/BuckleScript/bucklescript/issues/2625) and [Reason](https://github.com/facebook/reason/issues/1452#issuecomment-350424873) GitHub issue trackers.
+See [Javier Chavarri's excellent blog post](https://www.javierchavarri.com/data-first-and-data-last-a-comparison/) and the discussions on the [Rescript](https://github.com/rescript-lang/rescript-compiler/issues/2625) and [Reason](https://github.com/facebook/reason/issues/1452#issuecomment-350424873) GitHub issue trackers.
 
 ## Check out the API
 
