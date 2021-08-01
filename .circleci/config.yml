@@ -44,9 +44,9 @@ jobs:
           path: ~/repo
       - restore_cache:
           keys:
-            - v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
-            - v2-native-dependencies-{{ .Branch }}-
-            - v2-native-dependencies-
+            - v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+            - v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-{{ .Branch }}-
+            - v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-
       # m4 is a system dependency required by conf-m4 -> ocamlfind -> fmt -> alcotest
       - run: sudo apt-get install -y m4
       - run: make deps-native
@@ -55,7 +55,7 @@ jobs:
       - run: make doc-native
       - run: make integration-test-native
       - save_cache:
-          key: v2-native-dependencies-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
+          key: v3-native-dependencies-<< parameters.ocaml-version >>-<< parameters.base-version >>-{{ .Branch }}-{{ checksum "tablecloth-native.opam" }}
           paths:
             - ~/.opam
 
