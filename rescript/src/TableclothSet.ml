@@ -105,34 +105,6 @@ module Poly = struct
   let singleton a = fromArray [| a |]
 end
 
-module Int = struct
-  type nonrec t = Of(TableclothInt).t
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
-
-  let from_array = fromArray
-
-  let empty = fromArray [||]
-
-  let singleton a = fromArray [| a |]
-
-  let fromList l = Array.of_list l |. fromArray
-
-  let from_list = fromList
-end
-
-module String = struct
-  type nonrec t = Of(TableclothString).t
-
-  let fromArray a = Poly.fromArray a |. Obj.magic
-
-  let from_array = fromArray
-
-  let empty = fromArray [||]
-
-  let singleton a = fromArray [| a |]
-
-  let fromList l = Array.of_list l |. fromArray
-
-  let from_list = fromList
-end
+module Int = TableclothSetInt
+module String = TableclothSetString

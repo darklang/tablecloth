@@ -44,27 +44,27 @@ module Of (M : TableclothComparator.S) : sig
   type nonrec t = (M.t, M.identity) t
 end
 
-(** {1 Create}  
-  
+(** {1 Create}
+
   You can create a Set by providing a module conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
 
   Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
 val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
-(** A set with nothing in it. 
+(** A set with nothing in it.
 
     Often used as an initial value for functions like {!Array.fold}
 
     {2 Examples}
 
     {[
-      Array.fold 
-        [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|] 
+      Array.fold
+        [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|]
         ~intial:(Set.empty (module Char))
         ~f:Set.add
       |> Set.toArray
-      = [|'i'; 'm'; 'p'; 's'|] 
+      = [|'i'; 'm'; 'p'; 's'|]
     ]}
 *)
 
@@ -326,74 +326,9 @@ module Poly : sig
   val from_list : 'a list -> 'a t
 end
 
+
 (** Construct sets of {!Int}s *)
-module Int : sig
-  type nonrec t = Of(TableclothInt).t
-
-  val empty : t
-  (** A set with nothing in it. *)
-
-  val singleton : int -> t
-  (** Create a set from a single {!Int}
-
-    {2 Examples}
-
-    {[Set.Int.singleton 5 |> Set.toList = [5]]}
-  *)
-
-  val fromArray : int array -> t
-  (** Create a set from an {!Array}
-
-      {2 Examples}
-
-      {[Set.Int.fromArray [|1;2;3;3;2;1;7|] |> Set.toArray = [|1;2;3;7|]]}
-  *)
-
-  val from_array : int array -> t
-
-  val fromList : int list -> t
-  (** Create a set from a {!List}
-
-      {2 Examples}
-
-      {[Set.Int.fromList [1;2;3;3;2;1;7] |> Set.toList = [1;2;3;7]]}
-  *)
-
-  val from_list : int list -> t
-end
+module Int = TableclothSetInt
 
 (** Construct sets of {!String}s *)
-module String : sig
-  type nonrec t = Of(TableclothString).t
-
-  val empty : t
-  (** A set with nothing in it. *)
-
-  val singleton : string -> t
-  (** Create a set of a single {!String}
-
-      {2 Examples}
-
-      {[Set.String.singleton "Bat" |> Set.toList = ["Bat"]]}
-  *)
-
-  val fromArray : string array -> t
-  (** Create a set from an {!Array}
-
-      {2 Examples}
-
-      {[Set.String.fromArray [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toArray = [|"a";"b";"g"|]]}
-  *)
-
-  val from_array : string array -> t
-
-  val fromList : string list -> t
-  (** Create a set from a {!List}
-
-      {2 Examples}
-
-      {[Set.String.fromList [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toList = ["a";"b";"g"]]}
-  *)
-
-  val from_list : string list -> t
-end
+module String = TableclothSetString
