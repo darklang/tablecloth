@@ -20,7 +20,11 @@
         "TableclothTuple3",
         "TableclothComparator",
         "TableclothSet",
+        "TableclothSetInt",
+        "TableclothSetString",
         "TableclothMap",
+        "TableclothMapString",
+        "TableclothMapInt",
         "TableclothFun"
       ],
       "subdirs": false
