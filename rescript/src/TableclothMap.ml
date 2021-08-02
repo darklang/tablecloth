@@ -124,34 +124,6 @@ module Poly = struct
   let singleton ~key ~value = fromArray [| (key, value) |]
 end
 
-module Int = struct
-  type nonrec 'value t = 'value Of(TableclothInt).t
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
-
-  let from_array = fromArray
-
-  let empty = fromArray [||]
-
-  let singleton ~key ~value = fromArray [| (key, value) |]
-
-  let fromList l = fromArray (Array.of_list l)
-
-  let from_list = fromList
-end
-
-module String = struct
-  type nonrec 'value t = 'value Of(TableclothString).t
-
-  let fromArray a = Poly.fromArray a |. Obj.magic
-
-  let from_array = fromArray
-
-  let empty = fromArray [||]
-
-  let singleton ~key ~value = fromArray [| (key, value) |]
-
-  let fromList l = fromArray (Array.of_list l)
-
-  let from_list = fromList
-end
+module Int = TableclothMapInt
+module String = TableclothMapString

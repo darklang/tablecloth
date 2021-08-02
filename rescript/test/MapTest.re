@@ -57,7 +57,7 @@ let suite =
     describe("Int.fromList", () => {
       test("creates a map from a list", () => {
         let map = Map.Int.fromList([(1, "Ant"), (2, "Bat")]);
-        expect(Map.get(map, 1))
+        expect(Map.Int.get(map, 1))
         |> toEqual(Eq.(option(string)), Some("Ant"));
       })
     });
@@ -65,7 +65,7 @@ let suite =
     describe("String.fromList", () => {
       test("creates a map from a list", () => {
         let map = Map.String.fromList([("Ant", 1), ("Bat", 1)]);
-        expect(Map.get(map, "Ant")) |> toEqual(Eq.(option(int)), Some(1));
+        expect(Map.String.get(map, "Ant")) |> toEqual(Eq.(option(int)), Some(1));
       })
     });
   });

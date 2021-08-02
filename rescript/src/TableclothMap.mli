@@ -18,12 +18,12 @@
         end)
       end
 
-      type animal = 
+      type animal =
         | Cow
         | Pig
         | Alpacca
 
-      let pointToAnimal : animal Map.Of(Point).t = 
+      let pointToAnimal : animal Map.Of(Point).t =
         Map.fromList (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
     ]}
 
@@ -543,53 +543,7 @@ module Poly : sig
 end
 
 (** Construct a Map with {!Int}s for keys. *)
-module Int : sig
-  type nonrec 'value t = 'value Of(TableclothInt).t
-
-  val empty : 'value t
-  (** A map with nothing in it. *)
-
-  val singleton : key:int -> value:'value -> 'value t
-  (** Create a map from a key and value
-
-      {2 Examples}
-
-      {[Map.Int.singleton ~key:1 ~value:"Ant" |> Map.toList = [(1, "Ant")]]}
-  *)
-
-  val fromArray : (int * 'value) array -> 'value t
-  (** Create a map from an {!Array} of key-value tuples *)
-
-  val from_array : (int * 'value) array -> 'value t
-
-  val fromList : (int * 'value) list -> 'value t
-  (** Create a map of a {!List} of key-value tuples *)
-
-  val from_list : (int * 'value) list -> 'value t
-end
+module Int = TableclothMapInt
 
 (** Construct a Map with {!String}s for keys. *)
-module String : sig
-  type nonrec 'value t = 'value Of(TableclothString).t
-
-  val empty : 'value t
-  (** A map with nothing in it. *)
-
-  val singleton : key:string -> value:'value -> 'value t
-  (** Create a map from a key and value
-
-      {2 Examples}
-
-      {[Map.String.singleton ~key:"Ant" ~value:1 |> Map.toList = [("Ant", 1)]]}
-  *)
-
-  val fromArray : (string * 'value) array -> 'value t
-  (** Create a map from an {!Array} of key-value tuples *)
-
-  val from_array : (string * 'value) array -> 'value t
-
-  val fromList : (string * 'value) list -> 'value t
-  (** Create a map from a {!List} of key-value tuples *)
-
-  val from_list : (string * 'value) list -> 'value t
-end
+module String = TableclothMapString
