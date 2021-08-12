@@ -1,19 +1,22 @@
 # CHANGELOG for Tablecloth v0.0.7-0.0.8
 
+
 ## Array
 ### Renamed
 fold - renamed from Array.foldLeft
 join - renamed from Array.concatenate
 ### Changed
 reverse - signature rewritten
-	Previously: val reverse : 'a array -> 'a array
-	Currently: val reverse : 'a t -> unit
+    Previously: val reverse : 'a array -> 'a array
+    Currently: val reverse : 'a t -> unit
+
 sum - signature rewritten; now includes float
-	Previously: val sum : int array -> int
-	Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
+    Previously: val sum : int array -> int
+    Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
+
 join - signature rewritten; renamed from Array.concatenate
-	Previously: val concatenate : 'a array array -> 'a array
-	Currently: val join : string t -> sep:string -> string
+    Previously: val concatenate : 'a array array -> 'a array
+    Currently: val join : string t -> sep:string -> string
 ### New
 clone
 last
@@ -41,6 +44,7 @@ Array.empty
 Array.floatSum - floats now part of sum
 ### TODO
    --
+   
 ## Bool
 ### Renamed
    --
@@ -128,7 +132,6 @@ times
    --
 ### TODO
    --
-
 ## Int
 ### Renamed
 ( /. ) - floating point division; renamed from ( // )
@@ -205,7 +208,6 @@ minimumBy - needs to be added
 maximumBy - needs to be added
 maximum_by - needs to be added
 List.uniqueBy 
-
 ## Map - Renamed from IntDict and StrDict, has a new type 
 ### Renamed
 add - renamed from IntDict.insert, StrDict.insert
@@ -215,7 +217,6 @@ merge - renamed from IntDict.merge, StrDict.merge
 map - renamed from IntDict.map, StrDict.map
 keys - renamed from IntDict.keys, StrDict.keys
 toList - renamed from IntDict.toList; StrDict.toList
-
 **Add note of Map to Dict change**
 
 ### Changed
