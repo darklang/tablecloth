@@ -121,7 +121,7 @@ compare
 
 ## Fun
 ### Renamed
-   	curry - renamed from Tuple2.curry
+curry - renamed from Tuple2.curry
 uncurry -  renamed from Tuple2.uncurry
 curry3 - renamed from Tuple3.curry
 uncurry3 - renamed from Tuple3.uncurry
