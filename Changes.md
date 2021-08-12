@@ -43,13 +43,13 @@ compare<br>
 Array.empty<br>
 Array.floatSum - floats now part of sum<br>
 ### TODO
-   --
+--
 
 ## Bool
 ### Renamed
-   --
+--
 ### Changed
-   --
+--
 ### New
 type t bool<br>
 fromInt<br>
@@ -63,26 +63,26 @@ toInt<br>
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## Char
 ### Renamed
-   --
+--
 ### Changed
-   --
+--
 ### New
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## Float
 ### Renamed
-   --
+--
 ### Changed
 **Changed to use new type Radians:**
 fromPolar<br>
@@ -115,9 +115,9 @@ toString<br>
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## Fun
 ### Renamed
@@ -126,29 +126,29 @@ uncurry -  renamed from Tuple2.uncurry<br>
 curry3 - renamed from Tuple3.curry<br>
 uncurry3 - renamed from Tuple3.uncurry<br>
 ### Changed
-   --
+--
 ### New
 negate<br>
 forever<br>
 times<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## Int
 ### Renamed
 ( /. ) - floating point division; renamed from ( // )<br>
 ### Changed
-   --
+--
 ### New
 mod<br>
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## List
 ### Renamed
@@ -278,13 +278,13 @@ IntDict.pp<br>
 StrDict.toString<br>
 StrDict.pp<br>
 ### TODO
-   --
+--
 
 ## Option
 ### Renamed
 unwrap - renamed from Option.withDefault<br>
 ### Changed
-   --
+--
 ### New
 and_<br>
 both<br>
@@ -302,7 +302,7 @@ compare<br>
 ### Removed
 Option.getExn<br>
 ### TODO
-   --
+--
 
 ## Result
 ### Renamed
@@ -351,14 +351,14 @@ Result.withDefault<br>
 Result.combine<br>
 Result.ppv
 ### TODO
-   --
+--
 
 ## Set - renamed from IntSet and StrSet
 ### Renamed
 includes - renamed from IntSet.member, StrSet.member, IntSet.has, StrSet.has<br>
 difference - renamed from IntSet.diff, StrSet.diff<br>
 ### Changed
-   --
+--
 ### New
 type (‘a, ‘id) <br>
 type identity<br>
@@ -399,14 +399,14 @@ StrSet.ofList<br>
 IntSet.pp<br>
 StrSet.pp<br>
 ### TODO
-   --
+--
 
 ## String
 ### Renamed
 toLowercase - renamed from String.toLower<br>
 toUppercase - renamed from String.toUpper<br>
 ### Changed
-   --
+--
 ### New
 fromArray<br>
 initialize<br>
@@ -428,15 +428,15 @@ toList<br>
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## Tuple2
 ### Renamed
 make - renamed from Tuple2.create<br>
 ### Changed
-	   --
+--
 ### New
 type (‘a, ‘b) t = ‘a * ‘b<br>
 fromArray<br>
@@ -444,9 +444,9 @@ fromList<br>
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
-   --
+--
 
 ## Tuple3
 ### Renamed
@@ -455,7 +455,7 @@ initial - renamed from Tuple3.init<br>
 Tuple3.curry - renamed curry3 and now in Fun<br>
 Tuple3.uncurry - renamed uncurry3 and now in Fun<br>
 ### Changed
-	   --
+--
 ### New
 type (‘a, ‘b, ‘c) t = ‘a * ‘b * ‘c<br>
 fromArray *no snake case version<br>
@@ -464,7 +464,7 @@ toArray *no snake case version<br>
 equal<br>
 compare<br>
 ### Removed
-   --
+--
 ### TODO
 from_array - add snake case version<br>
 from_list - add snake case version<br>
