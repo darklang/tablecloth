@@ -7,16 +7,16 @@ fold - renamed from Array.foldLeft
 join - renamed from Array.concatenate
 ### Changed
 reverse - signature rewritten<br>
-    Previously: val reverse : 'a array -> 'a array<br>
-    Currently: val reverse : 'a t -> unit<br>
+- Previously: val reverse : 'a array -> 'a array<br>
+- Currently: val reverse : 'a t -> unit<br>
 
 sum - signature rewritten; now includes float<br>
-    Previously: val sum : int array -> int<br>
-    Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a<br>
+- Previously: val sum : int array -> int<br>
+- Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a<br>
 
 join - signature rewritten; renamed from Array.concatenate<br>
-    Previously: val concatenate : 'a array array -> 'a array<br>
-    Currently: val join : string t -> sep:string -> string<br>
+- Previously: val concatenate : 'a array array -> 'a array<br>
+- Currently: val join : string t -> sep:string -> string<br>
 ### New
 clone
 last
@@ -66,6 +66,7 @@ compare
    --
 ### TODO
    --
+
 ## Char
 ### Renamed
    --
@@ -78,6 +79,7 @@ compare
    --
 ### TODO
    --
+
 ## Float
 ### Renamed
    --
@@ -116,6 +118,7 @@ compare
    --
 ### TODO
    --
+
 ## Fun
 ### Renamed
    	curry - renamed from Tuple2.curry
@@ -132,6 +135,7 @@ times
    --
 ### TODO
    --
+
 ## Int
 ### Renamed
 ( /. ) - floating point division; renamed from ( // )
@@ -145,6 +149,7 @@ compare
    --
 ### TODO
    --
+
 ## List
 ### Renamed
 initial - renamed from List.init
@@ -157,27 +162,33 @@ forEach - renamed from List.iter
 join -  renamed from List.concat
 mapWithIndex - renamed from List.indexedMap, List.mapi
 ### Changed
-repeat - signature parameter rewritten
-	Previously: val repeat : count:int -> 'a -> 'a list
-	Currently: val repeat : 'a -> times:int -> 'a t
-includes - signature rewritten; renamed from List.concat
-	Previously: val member : value:'a -> 'a list -> bool
-	Currently: val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
-minimum - signature rewritten
-	Previously: al minimum : 'comparable list -> 'comparable option
-	Currently: val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
-maximum - signature rewritten
-	Previously: al maximum : 'comparable list -> 'comparable option
-	Currently: val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
-sum - signature rewritten; now includes float
-Previously:  val sum : int list -> int
-	Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
-intersperse - signature rewritten
-	Previously: val intersperse : 'a -> 'a list -> 'a list
-	Currently: val intersperse : 'a t -> sep:'a -> 'a t
-join - signature rewritten; renamed from List. concat; 
-	Previously: val concat : string list -> string
-	Currently: val join : string t -> sep:string -> string
+repeat - signature parameter rewritten<br>
+- Previously: val repeat : count:int -> 'a -> 'a list<br>
+- Currently: val repeat : 'a -> times:int -> 'a t<br>
+
+includes - signature rewritten; renamed from List.concat<br>
+- Previously: val member : value:'a -> 'a list -> bool<br>
+- Currently: val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool<br>
+
+minimum - signature rewritten<br>
+- Previously: al minimum : 'comparable list -> 'comparable option<br>
+- Currently: val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option<br>
+
+maximum - signature rewritten<br>
+- Previously: al maximum : 'comparable list -> 'comparable option<br>
+- Currently: val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option<br>
+
+sum - signature rewritten; now includes float<br>
+- Previously:  val sum : int list -> int<br>
+- Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a<br>
+
+intersperse - signature rewritten<br>
+- Previously: val intersperse : 'a -> 'a list -> 'a list<br>
+- Currently: val intersperse : 'a t -> sep:'a -> 'a t<br>
+
+join - signature rewritten; renamed from List. concat; <br>
+- Previously: val concat : string list -> string<br>
+- Currently: val join : string t -> sep:string -> string<br>
 ### New
 empty
 singleton
@@ -208,6 +219,7 @@ minimumBy - needs to be added
 maximumBy - needs to be added
 maximum_by - needs to be added
 List.uniqueBy 
+
 ## Map - Renamed from IntDict and StrDict, has a new type 
 ### Renamed
 add - renamed from IntDict.insert, StrDict.insert
@@ -221,11 +233,12 @@ toList - renamed from IntDict.toList; StrDict.toList
 
 ### Changed
 Int.fromList - signature rewritten; renamed from IntDict.fromList
-	Previously: val fromList : (key * 'value) list -> 'value t
-	Currently: val fromList : (int * 'value) list -> 'value t
+- Previously: val fromList : (key * 'value) list -> 'value t
+- Currently: val fromList : (int * 'value) list -> 'value t
+
 Str.fromList - signature rewritten; renamed from StrDict.fromList
-Previously: val fromList : (key * 'value) list -> 'value t
-	Currently: val fromList : (string * 'value) list -> 'value t
+- Previously: val fromList : (key * 'value) list -> 'value t
+- Currently: val fromList : (string * 'value) list -> 'value t
 ### New
 Of()
 empty - unique from Poly.empty, Int.empty, String.empty 
@@ -267,6 +280,7 @@ StrDict.toString
 StrDict.pp
 ### TODO
    --
+
 ## Option
 ### Renamed
 unwrap - renamed from Option.withDefault
@@ -290,24 +304,26 @@ compare
 Option.getExn
 ### TODO
    --
+
 ## Result
 ### Renamed
 ok - renamed from Result.succeed
 error - renamed from Result.fail
 ### Changed
 type (‘ok, ‘error) t - changed from type (‘err, ‘ok) t
-fromOption - signature rewritten
-	Previously: val fromOption : error:'err -> 'ok option -> ('err, 'ok) t
-	Currently: val fromOption : 'ok option -> error:'error -> ('ok, 'error) t
-map - signature rewritten
-	Previously: val map : f:('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
-	Currently: val map : ('a, 'error) t -> f:('a -> 'b) -> ('b, 'error) t
-andThen - signature rewritten
-	Previously: val andThen : f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
-	Currently: val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
-toOption - signature rewritten
-	Previously: val toOption : ('err, 'ok) t -> 'ok option
-	Currently: val toOption : ('ok, _) t -> 'ok option
+
+fromOption - signature rewritten<br>
+- Previously: val fromOption : error:'err -> 'ok option -> ('err, 'ok) t<br>
+- Currently: val fromOption : 'ok option -> error:'error -> ('ok, 'error) t<br>
+map - signature rewritten<br>
+- Previously: val map : f:('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t<br>
+- Currently: val map : ('a, 'error) t -> f:('a -> 'b) -> ('b, 'error) t<br>
+andThen - signature rewritten<br>
+- Previously: val andThen : f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t<br>
+- Currently: val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t<br>
+toOption - signature rewritten<br>
+- Previously: val toOption : ('err, 'ok) t -> 'ok option<br>
+- Currently: val toOption : ('ok, _) t -> 'ok option<br>
 ### New
 attempt
 isOk
@@ -337,6 +353,7 @@ Result.combine
 Result.pp
 ### TODO
    --
+
 ## Set - renamed from IntSet and StrSet
 ### Renamed
 includes - renamed from IntSet.member, StrSet.member, IntSet.has, StrSet.has
@@ -384,6 +401,7 @@ IntSet.pp
 StrSet.pp
 ### TODO
    --
+
 ## String
 ### Renamed
 toLowercase - renamed from String.toLower
@@ -414,6 +432,7 @@ compare
    --
 ### TODO
    --
+
 ## Tuple2
 ### Renamed
 make - renamed from Tuple2.create
@@ -429,6 +448,7 @@ compare
    --
 ### TODO
    --
+
 ## Tuple3
 ### Renamed
 make - renamed from Tuple3.create
