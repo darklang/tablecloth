@@ -6,17 +6,17 @@
 fold - renamed from Array.foldLeft
 join - renamed from Array.concatenate
 ### Changed
-reverse - signature rewritten
-    Previously: val reverse : 'a array -> 'a array
-    Currently: val reverse : 'a t -> unit
+reverse - signature rewritten<br>
+    Previously: val reverse : 'a array -> 'a array<br>
+    Currently: val reverse : 'a t -> unit<br>
 
-sum - signature rewritten; now includes float
-    Previously: val sum : int array -> int
-    Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
+sum - signature rewritten; now includes float<br>
+    Previously: val sum : int array -> int<br>
+    Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a<br>
 
-join - signature rewritten; renamed from Array.concatenate
-    Previously: val concatenate : 'a array array -> 'a array
-    Currently: val join : string t -> sep:string -> string
+join - signature rewritten; renamed from Array.concatenate<br>
+    Previously: val concatenate : 'a array array -> 'a array<br>
+    Currently: val join : string t -> sep:string -> string<br>
 ### New
 clone
 last
@@ -44,7 +44,7 @@ Array.empty
 Array.floatSum - floats now part of sum
 ### TODO
    --
-   
+
 ## Bool
 ### Renamed
    --
