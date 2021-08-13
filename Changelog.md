@@ -1,6 +1,6 @@
 # 0.0.8
 
-**Array**
+**Array**  
 Renamed:
 - fold - renamed from Array.foldLeft
 
