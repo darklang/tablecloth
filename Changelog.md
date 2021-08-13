@@ -3,6 +3,7 @@
 **Array**  
 Renamed:
 - `fold` - renamed from `Array.foldLeft`
+- `sum` - renamed from `Array.floatSum`, floats are now part of `sum`
 
 Changed:  
 `reverse` - signature rewritten
@@ -42,7 +43,6 @@ New:
 
 Removed:
 - `Array.empty`
-- `Array.floatSum` - floats now part of `sum`
 
 
 **Bool**  
@@ -135,6 +135,7 @@ Renamed:
 - `forEach` - renamed from `List.iter`
 - `join` -  renamed from `List.concat`
 - `mapWithIndex` - renamed from `List.indexedMap`, `List.mapi`
+- `sum` - renamed from `List.floatSum`, floats are now part of `sum`
 
 Changed:  
 `repeat` - signature parameter rewritten
@@ -186,7 +187,6 @@ New:
 - `compare`
 
 Removed:
-- `List.floatSum` - now part of `sum`
 - `List.getBy` - was the same as `List.find`
 - `List.elemIndex`
 
@@ -262,14 +262,14 @@ Removed:
 
 **Option**  
 Renamed:
-`unwrap` - renamed from `Option.withDefault`
+- `unwrap` - renamed from `Option.withDefault`
+- `unwrapUnsafe` -  renamed from `Option.getExn`
 
 New:
 - `and_`
 - `both`
 - `flatten`
 - `map2`
-- `unwrapUnsafe`
 - `isNone`
 - `tap`
 - `toArray`
@@ -279,14 +279,12 @@ New:
 - ( >>| ) - `map`
 - ( >>| ) - `andThen`
 
-Removed:
-- `Option.getExn`
-
 
 **Result**  
 Renamed:
 - `ok` - renamed from Result.succeed
 - `error` - renamed from Result.fail
+- `unwrap` - renamed from `Result.withDefault`  
 
 Changed:  
 - type (‘ok, ‘error) t - changed from type (‘err, ‘ok) t  
@@ -313,7 +311,6 @@ New:
 - `or_`
 - `both`
 - `flatten`
-- `unwrap`
 - `unwrapUnsafe`
 - `unwrap_unsafe`
 - `unwrapError`
@@ -329,15 +326,15 @@ New:
 - ( >>| ) - operator version of `map`
 
 Removed:
-- `Result.withDefault`
-- `Result.combine`
 - `Result.pp`
 
 
 **Set - renamed from IntSet and StrSet**  
 Renamed:
+- `add` - renamed from `IntSet.set`, `StrSet.set`
 - `includes` - renamed from `IntSet.member`, `StrSet.member`, `IntSet.has`, `StrSet.has`
 - `difference` - renamed from `IntSet.diff`, `StrSet.diff`
+- `fromList` - renamed from `IntSet.ofList`, `StrSet.ofList`
 
 New:
 - type (‘a, ‘id) 
@@ -370,12 +367,6 @@ New:
 - `String.fromList` 
 
 Removed:
-- `IntSet.has`
-- `StrSet.has`
-- `IntSet.set`
-- `StrSet.set`
-- `IntSet.ofList`
-- `StrSet.ofList`
 - `IntSet.pp`
 - `StrSet.pp`
 
