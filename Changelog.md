@@ -45,7 +45,7 @@ Removed:
 - Array.floatSum - floats now part of sum
 
 
-**Bool**
+**Bool**  
 New:
 - type t bool
 - fromInt
@@ -60,13 +60,13 @@ New:
 - compare
 
 
-**Char**
+**Char**  
 New:
 - equal
 - compare
 
 
-**Float**
+**Float**  
 Changed:
 Use new type Radians:
 - fromPolar
@@ -101,7 +101,7 @@ New:
 - compare
 
 
-**Fun**
+**Fun**  
 Renamed:
 - curry - renamed from Tuple2.curry
 - uncurry -  renamed from Tuple2.uncurry
@@ -114,7 +114,7 @@ New:
 - times
 
 
-**Int**
+**Int**  
 Renamed:
 - ( /. ) - floating point division; renamed from ( // )
 
@@ -124,7 +124,7 @@ New:
 - compare
 
 
-**List**
+**List**  
 Renamed:
 - initial - renamed from List.init
 - sort - renamed from List.sortWith
@@ -198,7 +198,7 @@ TODO:
 - List.uniqueBy 
 
 
-**Map - Renamed from IntDict and StrDict, has a new type**
+**Map - Renamed from IntDict and StrDict, has a new type**  
 Renamed:
 - add - renamed from IntDict.insert, StrDict.insert
 - get - renamed from IntDict.get, StrDict.get
@@ -207,7 +207,7 @@ Renamed:
 - map - renamed from IntDict.map, StrDict.map
 - keys - renamed from IntDict.keys, StrDict.keys
 - toList - renamed from IntDict.toList; StrDict.toList
-**Add note of Map to Dict change**
+**Add note of Map to Dict change**  
 
 Changed:
 Int.fromList - signature rewritten; renamed from IntDict.fromList
@@ -260,7 +260,7 @@ Removed:
 - StrDict.pp
 
 
-**Option**
+**Option**  
 Renamed:
 unwrap - renamed from Option.withDefault
 
@@ -279,11 +279,11 @@ New:
 - ( >>| ) - map
 - ( >>| ) - andThen
 
-**Removed**
+Removed:
 Option.getExn
 
 
-**Result**
+**Result**  
 Renamed:
 - ok - renamed from Result.succeed
 - error - renamed from Result.fail
@@ -334,7 +334,7 @@ Removed:
 - Result.ppv
 
 
-**Set - renamed from IntSet and StrSet**
+**Set - renamed from IntSet and StrSet**  
 Renamed:
 - includes - renamed from IntSet.member, StrSet.member, IntSet.has, StrSet.has
 - difference - renamed from IntSet.diff, StrSet.diff
@@ -380,7 +380,7 @@ Removed:
 - StrSet.pp
 
 
-**String**
+**String**  
 Renamed:
 - toLowercase - renamed from String.toLower
 - toUppercase - renamed from String.toUpper
@@ -407,7 +407,7 @@ New:
 - compare
 
 
-**Tuple2**
+**Tuple2**  
 Renamed:
 - make - renamed from Tuple2.create
 
@@ -419,7 +419,7 @@ New:
 - compare
 
 
-**Tuple3**
+**Tuple3**  
 Renamed:
 - make - renamed from Tuple3.create
 - initial - renamed from Tuple3.init
