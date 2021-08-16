@@ -190,13 +190,6 @@ Removed:
 - `List.getBy` - was the same as `List.find`
 - `List.elemIndex`
 
-TODO:
-- `sortBy` - needs to be added
-- `minimumBy` - needs to be added
-- `maximumBy` - needs to be added
-- `maximum_by` - needs to be added
-- `List.uniqueBy `
-
 
 **Map - Renamed from IntDict and StrDict, has a new type**  
 Renamed:
@@ -422,19 +415,6 @@ New:
 - `toArray` *no snake case version
 - `equal`
 - `compare`
-
-TODO:
-- `from_array` - add snake case version
-- `from_list` - add snake case version
-- `to_array` - add snake case version
-- `Tuple3.rotate_left` - add snake case version
-- `Tuple3.roate_right` - add snake case version
-- `Tuple3.map_first` - add snake case version
-- `Tuple3.map_second` - add snake case version
-- `Tuple3.map_third` - add snake case version
-- `Tuple3.map_each` - add snake case version
-- `Tuple3.map_all` - add snake case version
-- `Tuple3.to_list` - add snake case version
 
 
 # 0.0.7
