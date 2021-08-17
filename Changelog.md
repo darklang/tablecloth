@@ -1,3 +1,422 @@
+# 0.0.8
+
+**Array**  
+Renamed:
+- `fold` - renamed from `Array.foldLeft`
+- `sum` - renamed from `Array.floatSum`, floats are now part of `sum`
+
+Changed:  
+`reverse` - signature rewritten
+- Previously: val reverse : 'a array -> 'a array 
+- Currently: val reverse : 'a t -> unit  
+
+`sum` - signature rewritten; now includes float
+- Previously: val sum : int array -> int
+- Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a  
+
+`join` - signature rewritten; renamed from Array.concatenate
+- Previously: val concatenate : 'a array array -> 'a array
+- Currently: val join : string t -> sep:string -> string  
+
+New:
+- `clone`
+- `last`
+- `sort`
+- `count` 
+- `includes` 
+- `minimum` 
+- `maximum` 
+- `extent` 
+- `filterMap` 
+- `flatten`
+- `zip`
+- `partition` 
+- `splitAt` 
+- `splitWhen` 
+- `unzip`
+- `forEachWithIndex`
+- `values`
+- `chunksOf` 
+- `groupBy`
+- `equal`
+- `compare`
+
+Removed:
+- `Array.empty`
+
+
+**Bool**  
+New:
+- `type t bool`
+- `fromInt`
+- `fromString`
+- ( && )
+- ( || )
+- `xor`
+- `not`
+- `toString`
+- `toInt`
+- `equal`
+- `compare`
+
+
+**Char**  
+New:
+- `equal`
+- `compare`
+
+
+**Float**  
+Changed:  
+Use new type Radians:
+- `fromPolar`
+- `from_polar`
+- `cos`
+- `acos`
+- `sin`
+- `asin`
+- `tan`
+- `atan`
+- `atan2`  
+
+Result in new type Radians:
+- `degrees`
+- `radians`
+- `turns`
+- `toPolar`
+- `to_polar`
+
+New:
+- type radians
+- `epsilon`
+- `largestValue`
+- `smallestValue`
+- `maximumSafeInteger`
+- `minimumSafeInteger`
+- `fromString`
+- `isInteger`
+- `isSafeInteger`
+- `toString`
+- `equal`
+- `compare`
+
+
+**Fun**  
+Renamed:
+- `curry` - renamed from `Tuple2.curry`
+- `uncurry` -  renamed from `Tuple2.uncurry`
+- `curry3` - renamed from `Tuple3.curry`
+- `uncurry3` - renamed from `Tuple3.uncurry`
+
+New:
+- `negate`
+- `forever`
+- `times`
+
+
+**Int**  
+Renamed:
+- ( /. ) - floating point division; renamed from ( // )
+
+New:
+- `mod`
+- `equal`
+- `compare`
+
+
+**List**  
+Renamed:
+- `initial` - renamed from `List.init`
+- `sort` - renamed from `List.sortWith`
+- `includes` - renamed from `List.member`
+- `findIndex` - replaces `List.elemIndex`
+- `fold` - renamed from `List.foldLeft`
+- `partition` - renamed from `List.span`
+- `forEach` - renamed from `List.iter`
+- `join` -  renamed from `List.concat`
+- `mapWithIndex` - renamed from `List.indexedMap`, `List.mapi`
+- `sum` - renamed from `List.floatSum`, floats are now part of `sum`
+
+Changed:  
+`repeat` - signature parameter rewritten
+- Previously: val repeat : count:int -> 'a -> 'a list
+- Currently: val repeat : 'a -> times:int -> 'a t  
+
+`includes` - signature rewritten; renamed from `List.concat`
+- Previously: val member : value:'a -> 'a list -> bool
+- Currently: val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool  
+
+`minimum` - signature rewritten
+- Previously: al minimum : 'comparable list -> 'comparable option
+- Currently: val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option  
+
+`maximum` - signature rewritten
+- Previously: al maximum : 'comparable list -> 'comparable option
+- Currently: val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option  
+
+`sum` - signature rewritten; now includes float
+- Previously:  val sum : int list -> int
+- Currently: val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a  
+
+`intersperse` - signature rewritten
+- Previously: val intersperse : 'a -> 'a list -> 'a list
+- Currently: val intersperse : 'a t -> sep:'a -> 'a t  
+
+`join` - signature rewritten; renamed from `List. concat`; 
+- Previously: val concat : string list -> string
+- Currently: val join : string t -> sep:string -> string
+
+New:
+- `empty`
+- `singleton`
+- `range`
+- `updateAt` 
+- `count`
+- `extent` 
+- `filterWithIndex`
+- `flatMap` 
+- `flatten` 
+- `zip`
+- `map3` 
+- `unzip`
+- `forEachWithIndex`
+- `chunksOf`
+- `groupBy`
+- `toArray`
+- `equal`
+- `compare`
+
+Removed:
+- `List.getBy` - was the same as `List.find`
+- `List.elemIndex`
+
+
+**Map - Renamed from IntDict and StrDict, has a new type**  
+Renamed:
+- `add` - renamed from `IntDict.insert`, `StrDict.insert`
+- `get` - renamed from `IntDict.get`, `StrDict.get`
+- `update` - renamed from `IntDict.update`, `StrDict.update`
+- `merge `- renamed from `IntDict.merge`, `StrDict.merge`
+- `map` - renamed from `IntDict.map`, `StrDict.map`
+- `keys` - renamed from `IntDict.keys`, `StrDict.keys`
+- `toList` - renamed from `IntDict.toList`, `StrDict.toList`
+**Add note of Map to Dict change**  
+
+Changed:  
+`Int.fromList` - signature rewritten; renamed from `IntDict.fromList`
+- Previously: val fromList : (key * 'value) list -> 'value t
+- Currently: val fromList : (int * 'value) list -> 'value t  
+
+`Str.fromList` - signature rewritten; renamed from `StrDict.fromList`
+- Previously: val fromList : (key * 'value) list -> 'value t
+- Currently: val fromList : (string * 'value) list -> 'value t
+
+New:
+- Of()
+- `empty` - unique from `Poly.empty`, `Int.empty`, `String.empty`
+- `singleton`
+- `fromArray`
+- `fromList` - unique from `Poly.fromList`, `Int.fromList`, `String.fromList `
+- (  .?{}<-  ) - `Map.add`
+- `remove`
+- (  .?{}  ) - `Map.get`
+- `isEmpty`
+- `length`
+- `any`
+- `all`
+- `find`
+- `includes`
+- `minimum`
+- `maximum`
+- `extent`
+- `mapWithIndex`
+- `filter`
+- `partition`
+- `fold`
+- `forEach`
+- `forEachWithIndex`
+- `values`
+- `toArray`
+- `Poly.empty`
+- `Poly.singleton`
+- `Poly.fromArray`
+- `Poly.fromList`
+- `Int.singleton`
+- `Int.fromArray`
+- `String.singleton`
+- `String.fromArray`
+
+Removed:
+- `IntDict.toString`
+- `IntDict.pp`
+- `StrDict.toString`
+- `StrDict.pp`
+
+
+**Option**  
+Renamed:
+- `unwrap` - renamed from `Option.withDefault`
+- `unwrapUnsafe` -  renamed from `Option.getExn`
+
+New:
+- `and_`
+- `both`
+- `flatten`
+- `map2`
+- `isNone`
+- `tap`
+- `toArray`
+- `equal`
+- `compare`
+- ( |? ) - `get`
+- ( >>| ) - `map`
+- ( >>| ) - `andThen`
+
+
+**Result**  
+Renamed:
+- `ok` - renamed from Result.succeed
+- `error` - renamed from Result.fail
+- `unwrap` - renamed from `Result.withDefault`  
+
+Changed:  
+- type (‘ok, ‘error) t - changed from type (‘err, ‘ok) t  
+
+`fromOption `- signature rewritten
+- Previously: val fromOption : error:'err -> 'ok option -> ('err, 'ok) t
+- Currently: val fromOption : 'ok option -> error:'error -> ('ok, 'error) t  
+`map `- signature rewritten
+- Previously: val map : f:('ok -> 'value) -> ('err, 'ok) t -> ('err, 'value) t
+- Currently: val map : ('a, 'error) t -> f:('a -> 'b) -> ('b, 'error) t  
+`andThen` - signature rewritten
+- Previously: val andThen : f:('ok -> ('err, 'value) t) -> ('err, 'ok) t -> ('err, 'value) t
+- Currently: val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t  
+`toOption` - signature rewritten
+- Previously: val toOption : ('err, 'ok) t -> 'ok option
+- Currently: val toOption : ('ok, _) t -> 'ok option  
+
+New:
+- `attempt`
+- `isOk`
+- `is_ok`
+- `is_error`
+- `and_`
+- `or_`
+- `both`
+- `flatten`
+- `unwrapUnsafe`
+- `unwrap_unsafe`
+- `unwrapError`
+- `unwrap_error`
+- `values`
+- `mapError`
+- `map_error`
+- `tap`
+- `equal`
+- `compare`
+- ( |? ) - operator version of `unwrap`
+- ( >>= ) - operator version of `andThen`
+- ( >>| ) - operator version of `map`
+
+Removed:
+- `Result.pp`
+
+
+**Set - renamed from IntSet and StrSet**  
+Renamed:
+- `add` - renamed from `IntSet.set`, `StrSet.set`
+- `includes` - renamed from `IntSet.member`, `StrSet.member`, `IntSet.has`, `StrSet.has`
+- `difference` - renamed from `IntSet.diff`, `StrSet.diff`
+- `fromList` - renamed from `IntSet.ofList`, `StrSet.ofList`
+
+New:
+- type (‘a, ‘id) 
+- type identity
+- `empty` - unique from `Poly.empty`, `Int.empty`, `String.empty`
+- `singleton`
+- `fromArray`
+- `length`
+- `find`
+- `any`
+- `all`
+- `intersection`
+- `filter`
+- `partition`
+- `fold`
+- `forEach`
+- `toArray`
+- `toList `
+- `Poly.empty`
+- `Poly.singleton`
+- `Poly.fromArray`
+- `Poly.fromList`
+- `Int.empty`
+- `Int.singleton`
+- `Int.fromArray`
+- `Int.fromList`
+- `String.empty` 
+- `String.singleton`
+- `String.fromArray`
+- `String.fromList` 
+
+Removed:
+- `IntSet.pp`
+- `StrSet.pp`
+
+
+**String**  
+Renamed:
+- `toLowercase` - renamed from `String.toLower`
+- `toUppercase` - renamed from `String.toUppe`r
+
+New:
+- `fromArray`
+- `initialize`
+- `get`
+- `getAt`
+- ( .?[] ) - `getAt`
+- `isEmpty`
+- `includes`
+- `indexOf`
+- `indexOfRight`
+- `trimLeft`
+- `trimRight`
+- `padLeft`
+- `padRight`
+- `forEach`
+- `fold`
+- `toArray`
+- `toList`
+- `equal`
+- `compare`
+
+
+**Tuple2**  
+Renamed:
+- `make` - renamed from `Tuple2.create`
+
+New:
+- type (‘a, ‘b) t = ‘a * ‘b
+- `fromArray`
+- `fromList`
+- `equal`
+- `compare`
+
+
+**Tuple3**  
+Renamed:
+- `make` - renamed from `Tuple3.create`
+- `initial` - renamed from `Tuple3.init`
+
+New:
+- type (‘a, ‘b, ‘c) t = ‘a * ‘b * ‘c
+- `fromArray` *no snake case version
+- `fromList` *no snake case version
+- `toArray` *no snake case version
+- `equal`
+- `compare`
+
+
 # 0.0.7
 
 Summary:
