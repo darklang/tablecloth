@@ -260,6 +260,14 @@ let group_while = groupWhile
 
 let sort = Base.List.sort
 
+let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
+    Base.List.sort l ~compare:(fun a b ->
+        let a' = f a in
+        let b' = f b in
+        if a' = b' then 0 else if a' < b' then -1 else 1)
+
+let sort_by = sortBy
+
 let join t ~sep = Stdlib.String.concat sep t
 
 let groupBy t comparator ~f =
