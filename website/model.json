@@ -16091,6 +16091,121 @@
                 }
               },
               {
+                "tag": "Value",
+                "value": {
+                  "name": "sortBy",
+                  "qualified_name": "TableclothList.sortBy",
+                  "type": {
+                    "rendered": "f:('a -> 'b) -> 'a TableclothList.t -> 'a TableclothList.t"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Same as "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "List.sort_by",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "List.sort_by",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "List.sort_by"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "sort_by",
+                  "qualified_name": "TableclothList.sort_by",
+                  "type": {
+                    "rendered": "f:('a -> 'b) -> 'a TableclothList.t -> 'a TableclothList.t"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Code",
+                          "value": "List.sort_by ~f:fcn xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " returns a new list sorted according to the values\n    returned by "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ". This is a stable sort; if two items have the same value,\n    they will appear in the same order that they appeared in the original list.\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n    List.sort_by ~f:(fun x -> x * x) [3; 2; 5; -2; 4] = [2; -2; 3; 4; 5]\n    ",
+                            "reason": "List.sort_by(~f=x => x * x, [3, 2, 5, (-2), 4]) == [2, (-2), 3, 4, 5];\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
                 "tag": "Text",
                 "value": [
                   {
