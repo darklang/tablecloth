@@ -249,7 +249,7 @@ let sortBy ~(f : 'a -> 'b) (l : 'a t) : 'a t =
   Belt.List.sort l (fun a b ->
       let a' = f a in
       let b' = f b in
-      if a' = b' then 0 else if a' < b' then -1 else 1)
+      if a' = b' then 0 else if a' < b' then -1 else 1 )
 
 
 let sort_by = sortBy
