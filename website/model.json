@@ -1063,6 +1063,22 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "from_array",
+                  "qualified_name": "TableclothTuple3.from_array",
+                  "type": {
+                    "rendered": "'a array -> ('a * 'a * 'a) option"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "fromList",
                   "qualified_name": "TableclothTuple3.fromList",
                   "type": {
@@ -1197,6 +1213,22 @@
                     "custom": [
                     ]
                   },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "from_list",
+                  "qualified_name": "TableclothTuple3.from_list",
+                  "type": {
+                    "rendered": "'a list -> ('a * 'a * 'a) option"
+                  },
+                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
@@ -1857,6 +1889,22 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "rotate_left",
+                  "qualified_name": "TableclothTuple3.rotate_left",
+                  "type": {
+                    "rendered": "'a * 'b * 'c -> 'b * 'c * 'a"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "rotateRight",
                   "qualified_name": "TableclothTuple3.rotateRight",
                   "type": {
@@ -1936,6 +1984,22 @@
                     "custom": [
                     ]
                   },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "rotate_right",
+                  "qualified_name": "TableclothTuple3.rotate_right",
+                  "type": {
+                    "rendered": "'a * 'b * 'c -> 'c * 'a * 'b"
+                  },
+                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
@@ -2053,6 +2117,22 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "map_first",
+                  "qualified_name": "TableclothTuple3.map_first",
+                  "type": {
+                    "rendered": "'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "mapSecond",
                   "qualified_name": "TableclothTuple3.mapSecond",
                   "type": {
@@ -2142,6 +2222,22 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "map_second",
+                  "qualified_name": "TableclothTuple3.map_second",
+                  "type": {
+                    "rendered": "'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "mapThird",
                   "qualified_name": "TableclothTuple3.mapThird",
                   "type": {
@@ -2206,6 +2302,22 @@
                     "custom": [
                     ]
                   },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "map_third",
+                  "qualified_name": "TableclothTuple3.map_third",
+                  "type": {
+                    "rendered": "'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z"
+                  },
+                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
@@ -2374,6 +2486,22 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "map_each",
+                  "qualified_name": "TableclothTuple3.map_each",
+                  "type": {
+                    "rendered": "'a * 'b * 'c -> f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'x * 'y * 'z"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "mapAll",
                   "qualified_name": "TableclothTuple3.mapAll",
                   "type": {
@@ -2469,6 +2597,22 @@
                     "custom": [
                     ]
                   },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "map_all",
+                  "qualified_name": "TableclothTuple3.map_all",
+                  "type": {
+                    "rendered": "'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b"
+                  },
+                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
@@ -2614,6 +2758,22 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "to_array",
+                  "qualified_name": "TableclothTuple3.to_array",
+                  "type": {
+                    "rendered": "'a * 'a * 'a -> 'a array"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "toList",
                   "qualified_name": "TableclothTuple3.toList",
                   "type": {
@@ -2721,6 +2881,22 @@
                     "custom": [
                     ]
                   },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "to_list",
+                  "qualified_name": "TableclothTuple3.to_list",
+                  "type": {
+                    "rendered": "'a * 'a * 'a -> 'a list"
+                  },
+                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
