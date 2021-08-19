@@ -245,6 +245,15 @@ let extent t ~compare =
 
 let sort t ~compare = Belt.List.sort t compare
 
+let sortBy ~(f : 'a -> 'b) (l : 'a t) : 'a t =
+  Belt.List.sort l (fun a b ->
+      let a' = f a in
+      let b' = f b in
+      if a' = b' then 0 else if a' < b' then -1 else 1 )
+
+
+let sort_by = sortBy
+
 let span t ~f =
   match t with [] -> ([], []) | _ -> (takeWhile t ~f, dropWhile t ~f)
 

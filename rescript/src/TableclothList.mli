@@ -337,6 +337,21 @@ val sort : 'a t -> compare:('a -> 'a -> int) -> 'a t
     {[List.sort [5;6;8;3;6] ~compare:Int.compare = [3;5;6;6;8]]}
 *)
 
+val sortBy : f:('a -> 'b) -> 'a t -> 'a t
+(**
+    Same as {!List.sort_by}.
+*)
+
+val sort_by : f:('a -> 'b) -> 'a t -> 'a t
+(**
+    [List.sort_by ~f:fcn xs] returns a new list sorted according to the values
+    returned by [fcn]. This is a stable sort; if two items have the same value,
+    they will appear in the same order that they appeared in the original list.
+    {[
+    List.sort_by ~f:(fun x -> x * x) [3; 2; 5; -2; 4] = [2; -2; 3; 4; 5]
+    ]}
+*)
+
 (** {1 Query} *)
 
 val isEmpty : _ t -> bool
