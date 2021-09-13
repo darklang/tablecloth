@@ -70,9 +70,11 @@ let values t =
 
 let combine (l : ('ok, 'error) result list) : ('ok list, 'error) result =
   (TableclothList.fold_right
-    ~f:(fun (accum : ('ok list, 'error) result) (value : ('ok, 'error) result) ->
-      ((map2 ~f:(fun (head : 'ok) (list : 'ok list) -> head :: list) value accum ) : ('ok list, 'error) result))
-    ~initial:(Ok []))
+     ~f:(fun (accum : ('ok list, 'error) result) (value : ('ok, 'error) result)
+             : ('ok list, 'error) result ->
+       map2 ~f:(fun (head : 'ok) (list : 'ok list) -> head :: list) value accum
+       )
+     ~initial:(Ok []) )
     l
 
 
