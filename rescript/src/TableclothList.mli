@@ -507,6 +507,27 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
     {[List.includes [] 5 ~equal:Int.equal = false]}
 *)
 
+val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+    Same as {!List.:minimum_by}.
+   *)
+
+val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+    [List.minimum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+    for which [fcn item] is a minimum. It is returned as [Some item].
+    If given an empty list, [List.minimumBy] returns [None]. If more than one value has
+    a minimum value for [fcn item], the first one is returned.
+    The function provided takes a list item as its parameter and must return a value
+    that can be compared---for example, a [string] or [int].
+    {[
+    let mod12 x = x mod 12
+    let hours = [7; 9; 15; 10; 3; 22]
+    List.minimum_by ~f:mod12 hours = Some 15
+    List.minimum_by ~f:mod12 [] = None
+    ]}
+   *)
+
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 (** Find the smallest element using the provided [compare] function.
 

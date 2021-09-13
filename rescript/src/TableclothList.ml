@@ -223,6 +223,22 @@ let removeAt t ~index =
 
 let remove_at = removeAt
 
+let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
+  let minBy (y, fy) x =
+    let fx = f x in
+    if fx < fy then (x, fx) else (y, fy)
+  in
+  match l with
+  | [] ->
+      None
+  | [ x ] ->
+      Some x
+  | x :: rest ->
+      Some (fst (fold ~f:minBy ~initial:(x, f x) rest))
+
+
+let minimum_by = minimumBy
+
 let minimum t ~compare =
   fold t ~initial:None ~f:(fun min element ->
       match min with

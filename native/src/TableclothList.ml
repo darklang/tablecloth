@@ -187,6 +187,22 @@ let removeAt (l : 'a list) ~(index : int) : 'a list =
 
 let remove_at = removeAt
 
+let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
+  let minBy (y, fy) x =
+    let fx = f x in
+    if fx < fy then (x, fx) else (y, fy)
+  in
+  match ls with
+  | [ l ] ->
+      Some l
+  | l1 :: lrest ->
+      Some (fst (fold ~f:minBy ~initial:(l1, f l1) lrest))
+  | _ ->
+      None
+
+
+let minimum_by = minimumBy
+
 let minimum = Base.List.min_elt
 
 let maximum = Base.List.max_elt
