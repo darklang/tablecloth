@@ -447,6 +447,25 @@ val count : 'a t -> f:('a -> bool) -> int
     {[List.count [7;5;8;6] ~f:Int.isEven = 2]}
  *)
 
+val uniqueBy : f:('a -> string) -> 'a list -> 'a list
+(**
+   Same as {!List.unique_by}.
+ *)
+
+val unique_by : f:('a -> string) -> 'a list -> 'a list
+(**
+   [List.unique_by ~f:fcn xs] returns a new list containing only those elements from [xs]
+   that have a unique value when [fcn] is applied to them.
+   The function [fcn] takes as its single parameter an item from the list
+   and returns a [string]. If the function generates the same string for two or more
+   list items, only the first of them is retained.
+   {[
+   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]
+   let abs_str x = string_of_int (abs x)
+   List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]
+   ]}
+ *)
+
 val find : 'a t -> f:('a -> bool) -> 'a option
 (** Returns, as an option, the first element for which [f] evaluates to true.
 

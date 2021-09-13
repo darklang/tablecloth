@@ -56,6 +56,31 @@ let unzip list =
 
 let includes t value ~equal = Belt.List.has t value equal
 
+let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
+  let rec uniqueHelper
+      (f : 'a -> string)
+      (existing : Belt.Set.String.t)
+      (remaining : 'a list)
+      (accumulator : 'a list) =
+    match remaining with
+    | [] ->
+        reverse accumulator
+    | first :: rest ->
+        let computedFirst = f first in
+        if Belt.Set.String.has existing computedFirst
+        then uniqueHelper f existing rest accumulator
+        else
+          uniqueHelper
+            f
+            (Belt.Set.String.add existing computedFirst)
+            rest
+            (first :: accumulator)
+  in
+  uniqueHelper f Belt.Set.String.empty l []
+
+
+let unique_by = uniqueBy
+
 let find t ~f = Belt.List.getBy t f
 
 let getAt t ~index = Belt.List.get t index
