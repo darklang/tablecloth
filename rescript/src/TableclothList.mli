@@ -528,6 +528,27 @@ val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
     ]}
    *)
 
+val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+     Same as {!List.maximum_by}.
+    *)
+
+val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+     [List.maximum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+     for which [fcn item] is a maximum. It is returned as [Some item].
+     If given an empty list, [List.maximumBy] returns [None]. If more than one value
+     has a maximum value for [fcn item], the first one is returned.
+     The function provided takes a list item as its parameter and must return a value
+     that can be compared---for example, a [string] or [int].
+     {[
+     let mod12 x = x mod 12
+     let hours = [7;9;15;10;3;22]
+     List.maximum_by ~f:mod12 hours = Some 10
+     List.maximum_by ~f:mod12 [] = None
+     ]}
+    *)
+
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 (** Find the smallest element using the provided [compare] function.
 

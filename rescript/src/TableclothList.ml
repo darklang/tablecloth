@@ -239,6 +239,22 @@ let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
 
 let minimum_by = minimumBy
 
+let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
+  let maxBy (y, fy) x =
+    let fx = f x in
+    if fx > fy then (x, fx) else (y, fy)
+  in
+  match l with
+  | [] ->
+      None
+  | [ x ] ->
+      Some x
+  | x :: rest ->
+      Some (fst (fold ~f:maxBy ~initial:(x, f x) rest))
+
+
+let maximum_by = maximumBy
+
 let minimum t ~compare =
   fold t ~initial:None ~f:(fun min element ->
       match min with
