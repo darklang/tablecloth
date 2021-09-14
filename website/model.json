@@ -11740,6 +11740,135 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "combine",
+                  "qualified_name": "TableclothResult.combine",
+                  "type": {
+                    "rendered": "('ok, 'error) Stdlib.result list -> ('ok list, 'error) Stdlib.result"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Code",
+                          "value": "Result.combine results"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " takes a list of "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Result"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " values. If all\n    the elements in "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "results"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " are of the form "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Ok x"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", then "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Result.combine"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    creates a list "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " of all the values extracted from their "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Ok"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "s, and returns\n    "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Ok xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    If any of the elements in "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "results"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " are of the form "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Error err"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ",\n    the first of them is returned as the result of "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Result.combine"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n    Result.combine [Ok 1; Ok 2; Ok 3; Ok 4] = Ok [1; 2; 3; 4]\n    Result.combine [Ok 1; Error \"two\"; Ok 3; Error \"four\"] = Error \"two\"\n    ",
+                            "reason": "\n    Result.combine [Ok 1; Ok 2; Ok 3; Ok 4] = Ok [1; 2; 3; 4]\n    Result.combine [Ok 1; Error \"two\"; Ok 3; Error \"four\"] = Error \"two\"\n    "
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "map",
                   "qualified_name": "TableclothResult.map",
                   "type": {
@@ -17112,6 +17241,145 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "uniqueBy",
+                  "qualified_name": "TableclothList.uniqueBy",
+                  "type": {
+                    "rendered": "f:('a -> string) -> 'a list -> 'a list"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Same as "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "List.unique_by",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "List.unique_by",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "List.unique_by"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "unique_by",
+                  "qualified_name": "TableclothList.unique_by",
+                  "type": {
+                    "rendered": "f:('a -> string) -> 'a list -> 'a list"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Code",
+                          "value": "List.unique_by ~f:fcn xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " returns a new list containing only those elements from "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n   that have a unique value when "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " is applied to them.\n   The function "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " takes as its single parameter an item from the list\n   and returns a "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ". If the function generates the same string for two or more\n   list items, only the first of them is retained.\n   "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]\n   let abs_str x = string_of_int (abs x)\n   List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]\n   ",
+                            "reason": "List.unique_by(~f=string_of_int, [1, 3, 4, 3, 7, 7, 6]) == [1, 3, 4, 7, 6];\nlet abs_str = x =>\n  string_of_int(\n    abs(x),\n    List.unique_by,\n    ~f=abs_str,\n    [1, 3, 4, (-3), (-7), 7, 6],\n  )\n  == [1, 3, 4, (-7), 6];\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "find",
                   "qualified_name": "TableclothList.find",
                   "type": {
@@ -17512,6 +17780,332 @@
                           "value": {
                             "ocaml": "List.includes [] 5 ~equal:Int.equal = false",
                             "reason": "List.includes([], 5, ~equal=Int.equal) == false;\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "minimumBy",
+                  "qualified_name": "TableclothList.minimumBy",
+                  "type": {
+                    "rendered": "f:('a -> 'comparable) -> 'a list -> 'a option"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Same as "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "List.:minimum_by",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "List.:minimum_by",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "List.:minimum_by"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "minimum_by",
+                  "qualified_name": "TableclothList.minimum_by",
+                  "type": {
+                    "rendered": "f:('a -> 'comparable) -> 'a list -> 'a option"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Code",
+                          "value": "List.minimum_by ~f:fcn, xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", when given a non-empty list, returns the item in the list\n    for which "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn item"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " is a minimum. It is returned as "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Some item"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n    If given an empty list, "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "List.minimumBy"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " returns "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ". If more than one value has\n    a minimum value for "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn item"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", the first one is returned.\n    The function provided takes a list item as its parameter and must return a value\n    that can be compared---for example, a "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " or "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "int"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n    let mod12 x = x mod 12\n    let hours = [7; 9; 15; 10; 3; 22]\n    List.minimum_by ~f:mod12 hours = Some 15\n    List.minimum_by ~f:mod12 [] = None\n    ",
+                            "reason": "\n    let mod12 x = x mod 12\n    let hours = [7; 9; 15; 10; 3; 22]\n    List.minimum_by ~f:mod12 hours = Some 15\n    List.minimum_by ~f:mod12 [] = None\n    "
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "maximumBy",
+                  "qualified_name": "TableclothList.maximumBy",
+                  "type": {
+                    "rendered": "f:('a -> 'comparable) -> 'a list -> 'a option"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Same as "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "List.maximum_by",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "List.maximum_by",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "List.maximum_by"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "maximum_by",
+                  "qualified_name": "TableclothList.maximum_by",
+                  "type": {
+                    "rendered": "f:('a -> 'comparable) -> 'a list -> 'a option"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Code",
+                          "value": "List.maximum_by ~f:fcn, xs"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", when given a non-empty list, returns the item in the list\n     for which "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn item"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " is a maximum. It is returned as "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Some item"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n     If given an empty list, "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "List.maximumBy"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " returns "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ". If more than one value\n     has a maximum value for "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fcn item"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", the first one is returned.\n     The function provided takes a list item as its parameter and must return a value\n     that can be compared---for example, a "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " or "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "int"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n     "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n     let mod12 x = x mod 12\n     let hours = [7;9;15;10;3;22]\n     List.maximum_by ~f:mod12 hours = Some 10\n     List.maximum_by ~f:mod12 [] = None\n     ",
+                            "reason": "\n     let mod12 x = x mod 12\n     let hours = [7;9;15;10;3;22]\n     List.maximum_by ~f:mod12 hours = Some 10\n     List.maximum_by ~f:mod12 [] = None\n     "
                           }
                         }
                       ]
