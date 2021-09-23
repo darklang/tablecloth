@@ -235,17 +235,31 @@ let suite =
           test "minimumBy non-empty list" (fun () ->
               expect
                 (List.minimumBy ~f:(fun x -> x mod 12) [ 7; 9; 15; 10; 3; 22 ])
-              |> toEqual (Some 15) ) ;
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 15) ) ;
           test "minimumBy empty list" (fun () ->
-              expect (List.minimumBy ~f:(fun x -> x mod 12) []) |> toEqual None ) ) ;
+              expect (List.minimumBy ~f:(fun x -> x mod 12) [])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
 
       describe "maximumBy" (fun () ->
           test "maximumBy non-empty list" (fun () ->
               expect
                 (List.maximumBy ~f:(fun x -> x mod 12) [ 7; 9; 15; 10; 3; 22 ])
-              |> toEqual (Some 10) ) ;
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 10) ) ;
           test "maximumBy empty list" (fun () ->
-              expect (List.maximumBy ~f:(fun x -> x mod 12) []) |> toEqual None ) ) ;
+              expect (List.maximumBy ~f:(fun x -> x mod 12) [])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
 
       describe "minimum" (fun () ->
           test "minimum non-empty list" (fun () ->
