@@ -23,7 +23,7 @@ let suite =
           test "has length one" (fun () ->
               expect (length [| 'a' |]) |> toEqual Eq.int 1 ) ;
           test "has length two" (fun () ->
-              expect (length [| "a" [ "a" ]; "b" [ "b" ] |]) |> toEqual Eq.int 2 ) ) ;
+              expect (length [| "a"; "b" |]) |> toEqual Eq.int 2 ) ) ;
       describe "isEmpty" (fun () ->
           test "returns true for empty array literals" (fun () ->
               expect (isEmpty [||]) |> toEqual Eq.bool true ) ;
@@ -145,7 +145,7 @@ let suite =
               expect (fun () -> [||].(0)) |> toThrow ) ) ;
       describe "getAt" (fun () ->
           test "returns Some for an in-bounds index" (fun () ->
-              expect (getAt ~index:2 [| "cat"; "dog"; "eel" [ "eel" ] |])
+              expect (getAt ~index:2 [| "cat"; "dog"; "eel" |])
               |> toEqual
                    (let open Eq in
                    option string)
@@ -477,68 +477,66 @@ let suite =
                    [||] ) ) ;
       describe "fold" (fun () ->
           test "works for an empty array" (fun () ->
-              expect (fold [||] ~f:( ^ ) ~initial:"" |> toEqual Eq.string "") ;
-              test "works for an ascociative operator" (fun () ->
-                  expect (fold ~f:( * ) ~initial:1 (repeat ~length:4 7))
-                  |> toEqual Eq.int 2401 ) ;
-              test "works the order of arguments to `f` is important" (fun () ->
-                  expect (fold [| "a"; "b"; "c" |] ~f:( ^ ) ~initial:"")
-                  |> toEqual Eq.string "abc" ) ;
-              test
-                ("works the order of arguments to `f` is important" (fun () ->
-                     expect
-                       (fold
-                          ~f:(fun list element -> element :: list)
-                          ~initial:[]
-                          [| 1; 2; 3 |] )
-                     |> toEqual
-                          (let open Eq in
-                          list int)
-                          [ 3; 2; 1 ] ) ) ) ;
-          describe "foldRight" (fun () ->
-              test "works for empty arrays" (fun () ->
-                  expect (foldRight [||] ~f:( ^ ) ~initial:"")
-                  |> toEqual Eq.string "" ) ;
-              test "foldRight" (fun () ->
-                  expect (foldRight ~f:( + ) ~initial:0 (repeat ~length:3 5))
-                  |> toEqual Eq.int 15 ) ;
-              test "works the order of arguments to `f` is important" (fun () ->
-                  expect (foldRight [| "a"; "b"; "c" |] ~f:( ^ ) ~initial:"")
-                  |> toEqual Eq.string "cba" ) ;
-              test "works the order of arguments to `f` is important" (fun () ->
-                  expect
-                    (foldRight
-                       ~f:(fun list element -> element :: list)
-                       ~initial:[]
-                       [| 1; 2; 3 |] )
-                  |> toEqual
-                       (let open Eq in
-                       list int)
-                       [ 1; 2; 3 ] ) ) ;
-          describe "reverse" (fun () ->
-              test "alters an array in-place" (fun () ->
-                  let numbers = [| 1; 2; 3 |] in
-                  reverse numbers ;
-                  expect numbers
-                  |> toEqual
-                       (let open Eq in
-                       array int)
-                       [| 3; 2; 1 |] ) ) ;
-          describe "groupBy" (fun () ->
-              test "returns an empty map for an empty array" (fun () ->
-                  expect
-                    ( Array.groupBy [||] (module Int) ~f:String.length
-                    |> Map.length )
-                  |> toEqual Eq.int 0 ) ;
-              test "example test case" (fun () ->
-                  let animals = [| "Ant"; "Bear"; "Cat"; "Dewgong" |] in
-                  expect
-                    ( Array.groupBy animals (module Int) ~f:String.length
-                    |> Map.toList )
-                  |> toEqual
-                       (let open Eq in
-                       list (pair int (list string)))
-                       [ (3, [ "Cat"; "Ant" ])
-                       ; (4, [ "Bear" ])
-                       ; (7, [ "Dewgong" ])
-                       ] ) ) ) )
+              expect (fold [||] ~f:( ^ ) ~initial:"") |> toEqual Eq.string "" ) ;
+          test "works for an ascociative operator" (fun () ->
+              expect (fold ~f:( * ) ~initial:1 (repeat ~length:4 7))
+              |> toEqual Eq.int 2401 ) ;
+          test "works the order of arguments to `f` is important" (fun () ->
+              expect (fold [| "a"; "b"; "c" |] ~f:( ^ ) ~initial:"")
+              |> toEqual Eq.string "abc" ) ;
+          test "works the order of arguments to `f` is important" (fun () ->
+              expect
+                (fold
+                   ~f:(fun list element -> element :: list)
+                   ~initial:[]
+                   [| 1; 2; 3 |] )
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3; 2; 1 ] ) ) ;
+      describe "foldRight" (fun () ->
+          test "works for empty arrays" (fun () ->
+              expect (foldRight [||] ~f:( ^ ) ~initial:"")
+              |> toEqual Eq.string "" ) ;
+          test "foldRight" (fun () ->
+              expect (foldRight ~f:( + ) ~initial:0 (repeat ~length:3 5))
+              |> toEqual Eq.int 15 ) ;
+          test "works the order of arguments to `f` is important" (fun () ->
+              expect (foldRight [| "a"; "b"; "c" |] ~f:( ^ ) ~initial:"")
+              |> toEqual Eq.string "cba" ) ;
+          test "works the order of arguments to `f` is important" (fun () ->
+              expect
+                (foldRight
+                   ~f:(fun list element -> element :: list)
+                   ~initial:[]
+                   [| 1; 2; 3 |] )
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 2; 3 ] ) ) ;
+      describe "reverse" (fun () ->
+          test "alters an array in-place" (fun () ->
+              let numbers = [| 1; 2; 3 |] in
+              reverse numbers ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 3; 2; 1 |] ) ) ;
+      describe "groupBy" (fun () ->
+          test "returns an empty map for an empty array" (fun () ->
+              expect
+                (Array.groupBy [||] (module Int) ~f:String.length |> Map.length)
+              |> toEqual Eq.int 0 ) ;
+          test "example test case" (fun () ->
+              let animals = [| "Ant"; "Bear"; "Cat"; "Dewgong" |] in
+              expect
+                ( Array.groupBy animals (module Int) ~f:String.length
+                |> Map.toList )
+              |> toEqual
+                   (let open Eq in
+                   list (pair int (list string)))
+                   [ (3, [ "Cat"; "Ant" ])
+                   ; (4, [ "Bear" ])
+                   ; (7, [ "Dewgong" ])
+                   ] ) ) )
