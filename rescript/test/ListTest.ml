@@ -231,6 +231,35 @@ let suite =
                    pair (list int) (list int))
                    ([ 2; 4 ], [ 1; 3 ]) ) ) ;
 
+      describe "uniqueBy" (fun () ->
+          test "int self" (fun () ->
+              expect
+                (uniqueBy
+                   ~f:(fun element -> string_of_int element)
+                   [ 1; 3; 4; 3; 7; 7; 6 ] )
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 3; 4; 7; 6 ] ) ;
+          test "math" (fun () ->
+              expect
+                (uniqueBy
+                   ~f:(fun element -> string_of_int (5 mod element))
+                   [ 1; 3; 4; 3; 7; 7; 6 ] )
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 3; 4; 7 ] ) ;
+          test "string self" (fun () ->
+              expect
+                (uniqueBy
+                   ~f:(fun element -> element)
+                   [ "hello"; "h"; "e"; "hello"; "l"; "l"; "o" ] )
+              |> toEqual
+                   (let open Eq in
+                   list string)
+                   [ "hello"; "h"; "e"; "l"; "o" ] ) ) ;
+
       describe "minimumBy" (fun () ->
           test "minimumBy non-empty list" (fun () ->
               expect
