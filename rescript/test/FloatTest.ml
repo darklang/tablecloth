@@ -186,9 +186,7 @@ let suite =
           test "cos" (fun () ->
               expect (cos (radians (pi / 3.))) |> toBeCloseTo 0.5 ) ) ;
       describe "acos" (fun () ->
-          test
-            ("1 / 2" [ "1 / 2" ])
-            (fun () -> expect (acos (1. / 2.)) |> toBeCloseTo 1.0472) ) ;
+          test "1 / 2" (fun () -> expect (acos (1. / 2.)) |> toBeCloseTo 1.0472) ) ;
       describe "sin" (fun () ->
           test "30 degrees" (fun () ->
               expect (sin (degrees 30.)) |> toBeCloseTo 0.5 ) ;
