@@ -447,6 +447,25 @@ val count : 'a t -> f:('a -> bool) -> int
     {[List.count [7;5;8;6] ~f:Int.isEven = 2]}
  *)
 
+val uniqueBy : f:('a -> string) -> 'a list -> 'a list
+(**
+   Same as {!List.unique_by}.
+ *)
+
+val unique_by : f:('a -> string) -> 'a list -> 'a list
+(**
+   [List.unique_by ~f:fcn xs] returns a new list containing only those elements from [xs]
+   that have a unique value when [fcn] is applied to them.
+   The function [fcn] takes as its single parameter an item from the list
+   and returns a [string]. If the function generates the same string for two or more
+   list items, only the first of them is retained.
+   {[
+   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]
+   let abs_str x = string_of_int (abs x)
+   List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]
+   ]}
+ *)
+
 val find : 'a t -> f:('a -> bool) -> 'a option
 (** Returns, as an option, the first element for which [f] evaluates to true.
 
@@ -487,6 +506,48 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 
     {[List.includes [] 5 ~equal:Int.equal = false]}
 *)
+
+val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+    Same as {!List.:minimum_by}.
+   *)
+
+val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+    [List.minimum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+    for which [fcn item] is a minimum. It is returned as [Some item].
+    If given an empty list, [List.minimumBy] returns [None]. If more than one value has
+    a minimum value for [fcn item], the first one is returned.
+    The function provided takes a list item as its parameter and must return a value
+    that can be compared---for example, a [string] or [int].
+    {[
+    let mod12 x = x mod 12
+    let hours = [7; 9; 15; 10; 3; 22]
+    List.minimum_by ~f:mod12 hours = Some 15
+    List.minimum_by ~f:mod12 [] = None
+    ]}
+   *)
+
+val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+     Same as {!List.maximum_by}.
+    *)
+
+val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
+(**
+     [List.maximum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+     for which [fcn item] is a maximum. It is returned as [Some item].
+     If given an empty list, [List.maximumBy] returns [None]. If more than one value
+     has a maximum value for [fcn item], the first one is returned.
+     The function provided takes a list item as its parameter and must return a value
+     that can be compared---for example, a [string] or [int].
+     {[
+     let mod12 x = x mod 12
+     let hours = [7;9;15;10;3;22]
+     List.maximum_by ~f:mod12 hours = Some 10
+     List.maximum_by ~f:mod12 [] = None
+     ]}
+    *)
 
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 (** Find the smallest element using the provided [compare] function.

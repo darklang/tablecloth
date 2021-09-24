@@ -68,6 +68,16 @@ let values t =
   Base.List.fold_right t ~f:(map2 ~f:(fun a b -> a :: b)) ~init:(Ok [])
 
 
+let combine (l : ('ok, 'error) result list) : ('ok list, 'error) result =
+  (TableclothList.fold_right
+     ~f:(fun (accum : ('ok list, 'error) result) (value : ('ok, 'error) result)
+             : ('ok list, 'error) result ->
+       map2 ~f:(fun (head : 'ok) (list : 'ok list) -> head :: list) value accum
+       )
+     ~initial:(Ok []) )
+    l
+
+
 let toOption r = match r with Ok v -> Some v | Error _ -> None
 
 let to_option = toOption

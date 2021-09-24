@@ -306,6 +306,20 @@ val values : ('ok, 'error) t list -> ('ok list, 'error) t
     {[Result.values [Ok 1; Error "two"; Ok 3; Error "four"] = Error "two"]}
 *)
 
+val combine : ('ok, 'error) result list -> ('ok list, 'error) result
+(**
+    [Result.combine results] takes a list of [Result] values. If all
+    the elements in [results] are of the form [Ok x], then [Result.combine]
+    creates a list [xs] of all the values extracted from their [Ok]s, and returns
+    [Ok xs]
+    If any of the elements in [results] are of the form [Error err],
+    the first of them is returned as the result of [Result.combine].
+    {[
+    Result.combine [Ok 1; Ok 2; Ok 3; Ok 4] = Ok [1; 2; 3; 4]
+    Result.combine [Ok 1; Error "two"; Ok 3; Error "four"] = Error "two"
+    ]}
+  *)
+
 val map : ('a, 'error) t -> f:('a -> 'b) -> ('b, 'error) t
 (** Transforms the ['ok] in a result using [f]. Leaves the ['error] untouched.
 

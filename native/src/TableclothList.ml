@@ -88,6 +88,31 @@ let flat_map = flatMap
 
 let includes = Base.List.mem
 
+let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
+  let rec uniqueHelper
+      ~(f : 'a -> string)
+      (existing : Base.Set.M(Base.String).t)
+      (remaining : 'a list)
+      (accumulator : 'a list) : 'a list =
+    match remaining with
+    | [] ->
+        reverse accumulator
+    | first :: rest ->
+        let computedFirst = f first in
+        if Base.Set.mem existing computedFirst
+        then uniqueHelper ~f existing rest accumulator
+        else
+          uniqueHelper
+            ~f
+            (Base.Set.add existing computedFirst)
+            rest
+            (first :: accumulator)
+  in
+  uniqueHelper ~f (Base.Set.empty (module Base.String)) l []
+
+
+let unique_by = uniqueBy
+
 let find = Base.List.find
 
 let findIndex = Base.List.findi
@@ -161,6 +186,38 @@ let removeAt (l : 'a list) ~(index : int) : 'a list =
 
 
 let remove_at = removeAt
+
+let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
+  let minBy (y, fy) x =
+    let fx = f x in
+    if fx < fy then (x, fx) else (y, fy)
+  in
+  match ls with
+  | [ l ] ->
+      Some l
+  | l1 :: lrest ->
+      Some (fst (fold ~f:minBy ~initial:(l1, f l1) lrest))
+  | _ ->
+      None
+
+
+let minimum_by = minimumBy
+
+let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
+  let maxBy (y, fy) x =
+    let fx = f x in
+    if fx > fy then (x, fx) else (y, fy)
+  in
+  match l with
+  | [] ->
+      None
+  | [ x ] ->
+      Some x
+  | x :: rest ->
+      Some (fst (fold ~f:maxBy ~initial:(x, f x) rest))
+
+
+let maximum_by = maximumBy
 
 let minimum = Base.List.min_elt
 

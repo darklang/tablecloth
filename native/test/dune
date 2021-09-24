@@ -5,19 +5,19 @@
  (libraries tablecloth alcotest))
 
 (rule
- (target ArrayTest.re)
+ (target ArrayTest.ml)
  (action
-  (copy ../../rescript/test/ArrayTest.re ./ArrayTest.re)))
+  (copy ../../rescript/test/ArrayTest.ml ./ArrayTest.ml)))
 
 (rule
- (target BoolTest.re)
+ (target BoolTest.ml)
  (action
-  (copy ../../rescript/test/BoolTest.re ./BoolTest.re)))
+  (copy ../../rescript/test/BoolTest.ml ./BoolTest.ml)))
 
 (rule
- (target CharTest.re)
+ (target CharTest.ml)
  (action
-  (copy ../../rescript/test/CharTest.re ./CharTest.re)))
+  (copy ../../rescript/test/CharTest.ml ./CharTest.ml)))
 
 (rule
  (target ComparatorTest.ml)
@@ -25,39 +25,39 @@
   (copy ../../rescript/test/ComparatorTest.ml ./ComparatorTest.ml)))
 
 (rule
- (target FloatTest.re)
+ (target FloatTest.ml)
  (action
-  (copy ../../rescript/test/FloatTest.re ./FloatTest.re)))
+  (copy ../../rescript/test/FloatTest.ml ./FloatTest.ml)))
 
 (rule
- (target FunTest.re)
+ (target FunTest.ml)
  (action
-  (copy ../../rescript/test/FunTest.re ./FunTest.re)))
+  (copy ../../rescript/test/FunTest.ml ./FunTest.ml)))
 
 (rule
- (target IntTest.re)
+ (target IntTest.ml)
  (action
-  (copy ../../rescript/test/IntTest.re ./IntTest.re)))
+  (copy ../../rescript/test/IntTest.ml ./IntTest.ml)))
 
 (rule
- (target OptionTest.re)
+ (target OptionTest.ml)
  (action
-  (copy ../../rescript/test/OptionTest.re ./OptionTest.re)))
+  (copy ../../rescript/test/OptionTest.ml ./OptionTest.ml)))
 
 (rule
- (target ResultTest.re)
+ (target ResultTest.ml)
  (action
-  (copy ../../rescript/test/ResultTest.re ./ResultTest.re)))
+  (copy ../../rescript/test/ResultTest.ml ./ResultTest.ml)))
 
 (rule
- (target ListTest.re)
+ (target ListTest.ml)
  (action
-  (copy ../../rescript/test/ListTest.re ./ListTest.re)))
+  (copy ../../rescript/test/ListTest.ml ./ListTest.ml)))
 
 (rule
- (target MapTest.re)
+ (target MapTest.ml)
  (action
-  (copy ../../rescript/test/MapTest.re ./MapTest.re)))
+  (copy ../../rescript/test/MapTest.ml ./MapTest.ml)))
 
 (rule
  (target MapOcamlSyntaxSpecificTest.ml)
@@ -66,9 +66,9 @@
     ./MapOcamlSyntaxSpecificTest.ml)))
 
 (rule
- (target SetTest.re)
+ (target SetTest.ml)
  (action
-  (copy ../../rescript/test/SetTest.re ./SetTest.re)))
+  (copy ../../rescript/test/SetTest.ml ./SetTest.ml)))
 
 (rule
  (target SetOcamlSyntaxSpecificTest.ml)
@@ -77,19 +77,19 @@
     ./SetOcamlSyntaxSpecificTest.ml)))
 
 (rule
- (target StringTest.re)
+ (target StringTest.ml)
  (action
-  (copy ../../rescript/test/StringTest.re ./StringTest.re)))
+  (copy ../../rescript/test/StringTest.ml ./StringTest.ml)))
 
 (rule
- (target Tuple2Test.re)
+ (target Tuple2Test.ml)
  (action
-  (copy ../../rescript/test/Tuple2Test.re ./Tuple2Test.re)))
+  (copy ../../rescript/test/Tuple2Test.ml ./Tuple2Test.ml)))
 
 (rule
- (target Tuple3Test.re)
+ (target Tuple3Test.ml)
  (action
-  (copy ../../rescript/test/Tuple3Test.re ./Tuple3Test.re)))
+  (copy ../../rescript/test/Tuple3Test.ml ./Tuple3Test.ml)))
 
 (rule
  (alias runtest)
