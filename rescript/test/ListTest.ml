@@ -231,6 +231,52 @@ let suite =
                    pair (list int) (list int))
                    ([ 2; 4 ], [ 1; 3 ]) ) ) ;
 
+      describe "sort" (fun () ->
+          test "empty list" (fun () ->
+              expect (sort ~compare:Int.compare [])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "one element" (fun () ->
+              expect (sort ~compare:Int.compare [ 5 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 5 ] ) ;
+          test "multiple elements" (fun () ->
+              expect (sort ~compare:Int.compare [ 5; 6; 8; 3; 6 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3; 5; 6; 6; 8 ] ) ;
+
+          test "with negative" (fun () ->
+              expect (sort ~compare:Int.compare [ 5; 6; -8; 3; 6 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ -8; 3; 5; 6; 6 ] ) ) ;
+
+      describe "sortBy" (fun () ->
+          test "empty list" (fun () ->
+              expect (sortBy ~f:(fun x -> x) [])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "one element" (fun () ->
+              expect (sortBy ~f:(fun x -> x) [ 5 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 5 ] ) ;
+          test "empty list" (fun () ->
+              expect (sortBy ~f:(fun x -> x * x) [ 3; 2; 5; -2; 4 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 2; -2; 3; 4; 5 ] ) ) ;
       describe "uniqueBy" (fun () ->
           test "int self" (fun () ->
               expect
