@@ -4,6 +4,26 @@ open AlcoJest
 let suite =
   suite "List" (fun () ->
       let open List in
+      describe "singleton" (fun () ->
+          test "is empty" (fun () ->
+              expect (List.singleton 1234)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1234 ] ) ;
+          test "with int" (fun () ->
+              expect (List.singleton 1234)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1234 ] ) ;
+          test "with string" (fun () ->
+              expect (List.singleton "hello")
+              |> toEqual
+                   (let open Eq in
+                   list string)
+                   [ "hello" ] ) ) ;
+
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
               expect (List.filterMap [ -1; 80; 99 ] ~f:Char.fromCode)
@@ -81,10 +101,7 @@ let suite =
                    [] ) ) ;
       describe "findIndex" (fun () ->
           test
-            ("returns the first (index, element) tuple which f returns true for"
-            [@reason.raw_literal
-              "returns the first (index, element) tuple which f returns true for"]
-            )
+            "returns the first (index, element) tuple which f returns true for"
             (fun () ->
               expect
                 (findIndex
