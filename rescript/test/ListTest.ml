@@ -4,6 +4,9 @@ open AlcoJest
 let suite =
   suite "List" (fun () ->
       let open List in
+      describe "empty" (fun () ->
+          test "is empty" (fun () ->
+              expect (List.length List.empty) |> toEqual Eq.int 0 ) ) ;
       describe "singleton" (fun () ->
           test "is empty" (fun () ->
               expect (List.singleton 1234)
