@@ -570,6 +570,26 @@ let suite =
                    option int)
                    None ) ) ;
 
+      describe "extent" (fun () ->
+          test "return tuple of min and max" (fun () ->
+              expect (extent [ 7; 5; 8; 6 ] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   (Some (5, 8)) ) ;
+          test "return tuple of min and max from single element list" (fun () ->
+              expect (extent [ 5 ] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   (Some (5, 5)) ) ;
+          test "return tuple of min and max from empty list" (fun () ->
+              expect (extent [] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   None ) ) ;
+
       describe "find" (fun () ->
           test "find first of 2 matches" (fun () ->
               expect (List.find ~f:Int.isEven [ 1; 3; 4; 8 ])
