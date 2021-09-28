@@ -680,6 +680,26 @@ let suite =
                    option char)
                    (Some 'b') ) ) ;
 
+      describe "getAt" (fun () ->
+          test "empty list" (fun () ->
+              expect (List.getAt [] ~index:2)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+          test "normal" (fun () ->
+              expect (List.getAt [ 1; 2; 3 ] ~index:1)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 2) ) ;
+          test "overflow" (fun () ->
+              expect (List.getAt [ 1; 2; 3 ] ~index:100)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
       describe "append" (fun () ->
           test "append empty lists" (fun () ->
               expect (append [] [])
