@@ -98,6 +98,26 @@ let suite =
                    list int)
                    [] ) ) ;
 
+      describe "fromArray" (fun () ->
+          test "from empty" (fun () ->
+              expect (List.fromArray [||])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "from string" (fun () ->
+              expect (List.fromArray [| 'h'; 'e'; 'l'; 'l'; 'o' |])
+              |> toEqual
+                   (let open Eq in
+                   list char)
+                   [ 'h'; 'e'; 'l'; 'l'; 'o' ] ) ;
+          test "with int" (fun () ->
+              expect (List.fromArray [| -1; 3; 2; 7 |])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ -1; 3; 2; 7 ] ) ) ;
+
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
               expect (List.filterMap [ -1; 80; 99 ] ~f:Char.fromCode)
