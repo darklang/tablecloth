@@ -206,6 +206,27 @@ let suite =
                    (let open Eq in
                    list int)
                    [ 1; 2; 3 ] ) ) ;
+
+      describe "dropWhile" (fun () ->
+          test "normal" (fun () ->
+              expect (dropWhile ~f:Int.isEven [ 2; 4; 6; 7; 8; 9 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 7; 8; 9 ] ) ;
+          test "drop all" (fun () ->
+              expect (dropWhile ~f:Int.isEven [ 2; 4; 6; 8 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "drop none" (fun () ->
+              expect (dropWhile ~f:Int.isEven [ 1; 3; 5; 7 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 3; 5; 7 ] ) ) ;
+
       describe "take" (fun () ->
           test "normal" (fun () ->
               expect (take [ 1; 2; 3 ] ~count:2)
