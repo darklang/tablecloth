@@ -581,6 +581,15 @@ let suite =
               expect (any [ 2; 3 ] ~f:Int.isEven) |> toEqual Eq.bool true ) ;
           test "from odd list" (fun () ->
               expect (any [ 1; 3 ] ~f:Int.isEven) |> toEqual Eq.bool false ) ) ;
+      describe "all" (fun () ->
+          test "from empty list" (fun () ->
+              expect (all [] ~f:Int.isEven) |> toEqual Eq.bool false ) ;
+          test "from even list" (fun () ->
+              expect (all [ 2; 3 ] ~f:Int.isEven) |> toEqual Eq.bool false ) ;
+          test "from all even list" (fun () ->
+              expect (all [ 2; 4 ] ~f:Int.isEven) |> toEqual Eq.bool true ) ;
+          test "from odd list" (fun () ->
+              expect (any [ 1; 3 ] ~f:Int.isEven) |> toEqual Eq.bool false ) ) ;
 
       describe "splitAt" (fun () ->
           test "empty list" (fun () ->
