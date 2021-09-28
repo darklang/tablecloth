@@ -568,6 +568,12 @@ let suite =
           test "from list with elements" (fun () ->
               expect (isEmpty [ 1; -4; 5; 6 ]) |> toEqual Eq.bool false ) ) ;
 
+      describe "length" (fun () ->
+          test "from empty list" (fun () ->
+              expect (length []) |> toEqual Eq.int 0 ) ;
+          test "from list with elements" (fun () ->
+              expect (length [ 1; -4; 5; 6 ]) |> toEqual Eq.int 4 ) ) ;
+
       describe "splitAt" (fun () ->
           test "empty list" (fun () ->
               expect (splitAt [] ~index:1)
