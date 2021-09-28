@@ -26,6 +26,25 @@ let suite =
                    (let open Eq in
                    list string)
                    [ "hello" ] ) ) ;
+      describe "repeat" (fun () ->
+          test "is empty" (fun () ->
+              expect (List.repeat ~times:0 7)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "with char" (fun () ->
+              expect (List.repeat ~times:5 'a')
+              |> toEqual
+                   (let open Eq in
+                   list char)
+                   [ 'a'; 'a'; 'a'; 'a'; 'a' ] ) ;
+          test "with negative" (fun () ->
+              expect (List.repeat ~times:(-1) "Why?")
+              |> toEqual
+                   (let open Eq in
+                   list string)
+                   [] ) ) ;
 
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
