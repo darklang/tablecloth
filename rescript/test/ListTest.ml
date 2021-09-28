@@ -659,6 +659,27 @@ let suite =
                    (let open Eq in
                    option (list char))
                    (Some [ 'a' ]) ) ) ;
+
+      describe "last" (fun () ->
+          test "empty list" (fun () ->
+              expect (last [])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+          test "one element" (fun () ->
+              expect (last [ 'a' ])
+              |> toEqual
+                   (let open Eq in
+                   option char)
+                   (Some 'a') ) ;
+          test "two elements" (fun () ->
+              expect (last [ 'a'; 'b' ])
+              |> toEqual
+                   (let open Eq in
+                   option char)
+                   (Some 'b') ) ) ;
+
       describe "append" (fun () ->
           test "append empty lists" (fun () ->
               expect (append [] [])
