@@ -136,6 +136,25 @@ let suite =
                    (let open Eq in
                    option string)
                    (Some "hi") ) ) ;
+      describe "cons" (fun () ->
+          test "from empty" (fun () ->
+              expect (List.cons [] 1)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1 ] ) ;
+          test "with int" (fun () ->
+              expect (List.cons [ 2; 3; 4 ] 1)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 2; 3; 4 ] ) ;
+          test "with string" (fun () ->
+              expect (List.cons [ 'e'; 'l'; 'l'; 'o' ] 'h')
+              |> toEqual
+                   (let open Eq in
+                   list char)
+                   [ 'h'; 'e'; 'l'; 'l'; 'o' ] ) ) ;
 
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
