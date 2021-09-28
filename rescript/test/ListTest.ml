@@ -559,6 +559,15 @@ let suite =
                    (let open Eq in
                    option int)
                    None ) ) ;
+
+      describe "isEmpty" (fun () ->
+          test "from empty list" (fun () ->
+              expect (isEmpty List.empty) |> toEqual Eq.bool true ) ;
+          test "from empty list" (fun () ->
+              expect (isEmpty []) |> toEqual Eq.bool true ) ;
+          test "from list with elements" (fun () ->
+              expect (isEmpty [ 1; -4; 5; 6 ]) |> toEqual Eq.bool false ) ) ;
+
       describe "splitAt" (fun () ->
           test "empty list" (fun () ->
               expect (splitAt [] ~index:1)
