@@ -590,6 +590,24 @@ let suite =
                    option (pair int int))
                    None ) ) ;
 
+      describe "sum" (fun () ->
+          test "sum of empty" (fun () ->
+              expect (sum [] (module Int)) |> toEqual Eq.int 0 ) ;
+          test "sum of ints" (fun () ->
+              expect (sum [ 1; 1; 2; 3 ] (module Int)) |> toEqual Eq.int 7 ) ;
+          test "sum with module struct" (fun () ->
+              expect
+                (sum
+                   [ "a"; "b"; "c" ]
+                   ( module struct
+                     type t = string
+
+                     let zero = ""
+
+                     let add = ( ^ )
+                   end ) )
+              |> toEqual Eq.string "abc" ) ) ;
+
       describe "find" (fun () ->
           test "find first of 2 matches" (fun () ->
               expect (List.find ~f:Int.isEven [ 1; 3; 4; 8 ])
