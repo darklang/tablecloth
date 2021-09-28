@@ -117,6 +117,25 @@ let suite =
                    (let open Eq in
                    list int)
                    [ -1; 3; 2; 7 ] ) ) ;
+      describe "head" (fun () ->
+          test "from empty" (fun () ->
+              expect (List.head [])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+          test "with int" (fun () ->
+              expect (List.head [ -3; 2; 3; 4; 6 ])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some (-3)) ) ;
+          test "with string" (fun () ->
+              expect (List.head [ "hi"; "hello"; "hi"; "bonjour" ])
+              |> toEqual
+                   (let open Eq in
+                   option string)
+                   (Some "hi") ) ) ;
 
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
