@@ -231,6 +231,33 @@ let suite =
                    (let open Eq in
                    list int)
                    [] ) ) ;
+
+      describe "takeWhile" (fun () ->
+          test "int isEven" (fun () ->
+              expect (takeWhile ~f:Int.isEven [ 2; 4; 6; 7; 8; 9 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 2; 4; 6 ] ) ;
+          test "int isEven" (fun () ->
+              expect (takeWhile ~f:Int.isEven [ 2; 4; 6 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 2; 4; 6 ] ) ;
+          test "empty" (fun () ->
+              expect (takeWhile ~f:Int.isEven [])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "none" (fun () ->
+              expect (takeWhile ~f:Int.isEven [ 1; 3; 5 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ) ;
+
       describe "findIndex" (fun () ->
           test
             "returns the first (index, element) tuple which f returns true for"
