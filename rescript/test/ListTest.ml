@@ -502,7 +502,6 @@ let suite =
                    (let open Eq in
                    list string)
                    [ "hello"; "h"; "e"; "l"; "o" ] ) ) ;
-
       describe "minimumBy" (fun () ->
           test "minimumBy non-empty list" (fun () ->
               expect
@@ -555,6 +554,26 @@ let suite =
                    (Some 15) ) ;
           test "maximum empty list" (fun () ->
               expect (maximum [] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
+      describe "find" (fun () ->
+          test "find first of 2 matches" (fun () ->
+              expect (List.find ~f:Int.isEven [ 1; 3; 4; 8 ])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 4) ) ;
+          test "find 0 of 0 matches" (fun () ->
+              expect (List.find ~f:Int.isOdd [ 0; 2; 4; 8 ])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+          test "empty list" (fun () ->
+              expect (List.find ~f:Int.isEven [])
               |> toEqual
                    (let open Eq in
                    option int)
