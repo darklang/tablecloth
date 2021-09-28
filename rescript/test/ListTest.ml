@@ -308,6 +308,17 @@ let suite =
                    (let open Eq in
                    option (pair int int))
                    None ) ) ;
+
+      describe "includes" (fun () ->
+          test "includes int" (fun () ->
+              expect (includes [ 1; 3; 5; 7 ] 3 ~equal:Int.equal)
+              |> toEqual Eq.bool true ) ;
+          test "does not includes int" (fun () ->
+              expect (includes [ 1; 3; 5; 7 ] 4 ~equal:Int.equal)
+              |> toEqual Eq.bool false ) ;
+          test "empty list" (fun () ->
+              expect (includes [] 5 ~equal:Int.equal) |> toEqual Eq.bool false ) ) ;
+
       describe "reverse" (fun () ->
           test "empty list" (fun () ->
               expect (reverse [])
