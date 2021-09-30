@@ -913,7 +913,7 @@ let suite =
                    (let open Eq in
                    list string)
                    [ "on"; "turtles" ] ) ) ;
-      describe "folds" (fun () ->
+      describe "fold" (fun () ->
           test "empty list" (fun () ->
               expect (fold ~f:cons ~initial:[] [])
               |> toEqual
