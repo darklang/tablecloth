@@ -608,6 +608,29 @@ let suite =
                    end ) )
               |> toEqual Eq.string "abc" ) ) ;
 
+      describe "map" (fun () ->
+          test "map sqrt" (fun () ->
+              expect (map ~f:Float.squareRoot [ 1.0; 4.0; 9.0 ])
+              |> toEqual
+                   (let open Eq in
+                   list float)
+                   [ 1.0; 2.0; 3.0 ] ) ;
+          test "list char" (fun () ->
+              expect
+                (map
+                   ~f:(fun element -> cons element 'h')
+                   [ [ 'i' ]; [ 'a' ]; [ 'o'; 'p' ] ] )
+              |> toEqual
+                   (let open Eq in
+                   list (list char))
+                   [ [ 'h'; 'i' ]; [ 'h'; 'a' ]; [ 'h'; 'o'; 'p' ] ] ) ;
+          test "empty list" (fun () ->
+              expect (map ~f:Float.squareRoot [])
+              |> toEqual
+                   (let open Eq in
+                   list float)
+                   [] ) ) ;
+
       describe "find" (fun () ->
           test "find first of 2 matches" (fun () ->
               expect (List.find ~f:Int.isEven [ 1; 3; 4; 8 ])
