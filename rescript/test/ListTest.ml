@@ -1137,12 +1137,14 @@ let suite =
                    [] ) ) ;
 
       describe "unzip" (fun () ->
-          test "unzip num and string" (fun () ->
+          test "unzip num and bool" (fun () ->
               expect (unzip [ (0, true); (17, false); (1337, true) ])
               |> toEqual
                    (let open Eq in
                    pair (list int) (list bool))
                    ([ 0; 17; 1337 ], [ true; false; true ]) ) ) ;
+
+                            
 
       describe "initialize" (fun () ->
           test "initialize length 0" (fun () ->
