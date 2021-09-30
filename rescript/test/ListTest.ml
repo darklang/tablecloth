@@ -411,6 +411,27 @@ let suite =
                    (let open Eq in
                    list int)
                    [ 0; 1 ] ) ) ;
+
+      describe "flatMap" (fun () ->
+          test "normal" (fun () ->
+              expect (flatMap ~f:(fun x -> [ x; x ]) [ 1; 2; 3 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 1; 2; 2; 3; 3 ] ) ;
+          test "on an empty list" (fun () ->
+              expect (flatMap ~f:(fun x -> [ x; x ]) [])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "deeper list" (fun () ->
+              expect (flatMap ~f:(fun x -> append x [1] ) [ [1; 1]; [2]; [3] ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 1; 1; 1; 2; 1; 3; 1 ] )) ;
+
       describe "sliding" (fun () ->
           test "size 1" (fun () ->
               expect (sliding [ 1; 2; 3; 4; 5 ] ~size:1)
