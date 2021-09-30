@@ -426,11 +426,14 @@ let suite =
                    list int)
                    [] ) ;
           test "deeper list" (fun () ->
-              expect (flatMap ~f:(fun x -> append x [1] ) [ [1; 1]; [2]; [3] ])
+              expect
+                (flatMap
+                   ~f:(fun x -> append x [ 1 ])
+                   [ [ 1; 1 ]; [ 2 ]; [ 3 ] ] )
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 1; 1; 1; 2; 1; 3; 1 ] )) ;
+                   [ 1; 1; 1; 2; 1; 3; 1 ] ) ) ;
 
       describe "sliding" (fun () ->
           test "size 1" (fun () ->
@@ -1085,6 +1088,21 @@ let suite =
                    (let open Eq in
                    list int)
                    [ 1; 2; 3 ] ) ) ;
+
+      describe "zip" (fun () ->
+          test "zip num and string" (fun () ->
+              expect (zip [ 1; 2; 3; 4; 5 ] [ "Dog"; "Eagle"; "Ferret" ])
+              |> toEqual
+                   (let open Eq in
+                   list (pair int string))
+                   [ (1, "Dog"); (2, "Eagle"); (3, "Ferret") ] ) ;
+          test "zip num and empty" (fun () ->
+              expect (zip [ 1; 2; 3; 4; 5 ] [])
+              |> toEqual
+                   (let open Eq in
+                   list (pair int int))
+                   [] ) ) ;
+
       describe "initialize" (fun () ->
           test "initialize length 0" (fun () ->
               expect (initialize 0 ~f:(fun i -> i))
