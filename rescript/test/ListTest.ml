@@ -163,6 +163,21 @@ let suite =
                    (let open Eq in
                    list char)
                    [ 'P'; 'c' ] ) ) ;
+
+      describe "filterWithIndex" (fun () ->
+          test "returns elements if index is greater than 1" (fun () ->
+              expect (filterWithIndex [ 2; 99; 0; 3 ] ~f:(fun i _ -> i > 1))
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 0; 3 ] ) ;
+          test "empty list" (fun () ->
+              expect (filterWithIndex [] ~f:(fun i _ -> i > 1))
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ) ;
+
       describe "drop" (fun () ->
           test "from an empty list" (fun () ->
               expect (drop [] ~count:1)
