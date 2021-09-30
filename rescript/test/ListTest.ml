@@ -407,13 +407,19 @@ let suite =
                    list int)
                    [ 3 ] ) ;
           test "map3 two elements" (fun () ->
-              expect (map3 ~f:(fun x y z -> x + y + z) [ 1; 2 ] [ 1; 2 ] [ 1; 2 ])
+              expect
+                (map3 ~f:(fun x y z -> x + y + z) [ 1; 2 ] [ 1; 2 ] [ 1; 2 ])
               |> toEqual
                    (let open Eq in
                    list int)
                    [ 3; 6 ] ) ;
           test "map3 different list length" (fun () ->
-              expect (map3 ~f:(fun x y z -> x + y + z) [ 1; 2; 3 ] [ 1; 2; 3 ] [ 1; 2 ])
+              expect
+                (map3
+                   ~f:(fun x y z -> x + y + z)
+                   [ 1; 2; 3 ]
+                   [ 1; 2; 3 ]
+                   [ 1; 2 ] )
               |> toEqual
                    (let open Eq in
                    list int)
@@ -1129,6 +1135,14 @@ let suite =
                    (let open Eq in
                    list (pair int int))
                    [] ) ) ;
+
+      describe "unzip" (fun () ->
+          test "unzip num and string" (fun () ->
+              expect (unzip [ (0, true); (17, false); (1337, true) ])
+              |> toEqual
+                   (let open Eq in
+                   pair (list int) (list bool))
+                   ([ 0; 17; 1337 ], [ true; false; true ]) ) ) ;
 
       describe "initialize" (fun () ->
           test "initialize length 0" (fun () ->
