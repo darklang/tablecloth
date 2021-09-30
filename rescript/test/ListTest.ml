@@ -392,6 +392,33 @@ let suite =
                    (let open Eq in
                    list int)
                    [ 2; 4 ] ) ) ;
+
+      describe "map3" (fun () ->
+          test "map3 empty lists" (fun () ->
+              expect (map3 ~f:(fun x y z -> x + y + z) [] [] [])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "map3 one element" (fun () ->
+              expect (map3 ~f:(fun x y z -> x + y + z) [ 1 ] [ 1 ] [ 1 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3 ] ) ;
+          test "map3 two elements" (fun () ->
+              expect (map3 ~f:(fun x y z -> x + y + z) [ 1; 2 ] [ 1; 2 ] [ 1; 2 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3; 6 ] ) ;
+          test "map3 different list length" (fun () ->
+              expect (map3 ~f:(fun x y z -> x + y + z) [ 1; 2; 3 ] [ 1; 2; 3 ] [ 1; 2 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3; 6 ] ) ) ;
+
       describe "mapWithIndex" (fun () ->
           test "on an empty list" (fun () ->
               expect (mapWithIndex ~f:(fun i _ -> i) [])
