@@ -511,6 +511,47 @@ let suite =
                    (let open Eq in
                    list (list int))
                    [] ) ) ;
+
+      describe "groupWhile" (fun () ->
+          test "normal int" (fun () ->
+              expect
+                (groupWhile
+                   ~f:(fun x y -> x mod 2 = y mod 2)
+                   [ 2; 4; 6; 5; 3; 1; 8; 7; 9 ] )
+              |> toEqual
+                   (let open Eq in
+                   list (list int))
+                   [ [ 2; 4; 6 ]; [ 5; 3; 1 ]; [ 8 ]; [ 7; 9 ] ] ) ;
+
+          test "normal char" (fun () ->
+              expect
+                (groupWhile
+                   ~f:String.equal
+                   [ "a"; "b"; "b"; "a"; "a"; "a"; "b"; "a" ] )
+              |> toEqual
+                   (let open Eq in
+                   list (list string))
+                   [ [ "a" ]
+                   ; [ "b"; "b" ]
+                   ; [ "a"; "a"; "a" ]
+                   ; [ "b" ]
+                   ; [ "a" ]
+                   ] ) ;
+
+          test "empty list" (fun () ->
+              expect (groupWhile ~f:String.equal [])
+              |> toEqual
+                   (let open Eq in
+                   list (list string))
+                   [] ) ) ;
+
+      describe "join" (fun () ->
+          test "normal" (fun () ->
+              expect (join [ "Ant"; "Bat"; "Cat" ] ~sep:", ")
+              |> toEqual Eq.string "Ant, Bat, Cat" ) ;
+          test "empty list" (fun () ->
+              expect (join [] ~sep:", ") |> toEqual Eq.string "" ) ) ;
+
       describe "partition" (fun () ->
           test "empty list" (fun () ->
               expect (partition ~f:Int.isEven [])
