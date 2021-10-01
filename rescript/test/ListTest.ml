@@ -1144,7 +1144,22 @@ let suite =
                    pair (list int) (list bool))
                    ([ 0; 17; 1337 ], [ true; false; true ]) ) ) ;
 
-                            
+      describe "chunksOf" (fun () ->
+          test "empty list" (fun () ->
+              expect (chunksOf ~size:2 [])
+              |> toEqual
+                   (let open Eq in
+                   list (list int))
+                   [] ) ;
+          test "normal" (fun () ->
+              expect
+                (chunksOf
+                   ~size:2
+                   [ "#FFBA49"; "#9984D4"; "#20A39E"; "#EF5B5B"; "#23001E" ] )
+              |> toEqual
+                   (let open Eq in
+                   list (list string))
+                   [ [ "#FFBA49"; "#9984D4" ]; [ "#20A39E"; "#EF5B5B" ] ] ) ) ;
 
       describe "initialize" (fun () ->
           test "initialize length 0" (fun () ->
