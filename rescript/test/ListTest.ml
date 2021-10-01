@@ -1274,4 +1274,24 @@ let suite =
                    [ (3, [ "Cat"; "Ant" ])
                    ; (4, [ "Bear" ])
                    ; (7, [ "Dewgong" ])
-                   ] ) ) )
+                   ] ) ) ;
+
+      describe "toArray" (fun () ->
+          test "returns an array of int" (fun () ->
+              expect (toArray [ 2; 4; 6; 8 ])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 2; 4; 6; 8 |] ) ;
+          test "empty" (fun () ->
+              expect (toArray [])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [||] ) ;
+          test "returns an array of char" (fun () ->
+              expect (toArray [ 'h'; 'i' ])
+              |> toEqual
+                   (let open Eq in
+                   array char)
+                   [| 'h'; 'i' |] ) ) )
