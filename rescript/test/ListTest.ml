@@ -1294,4 +1294,19 @@ let suite =
               |> toEqual
                    (let open Eq in
                    array char)
-                   [| 'h'; 'i' |] ) ) )
+                   [| 'h'; 'i' |] ) ) ;
+
+      describe "equal" (fun () ->
+          test "normal int" (fun () ->
+              expect (equal Int.equal [ 2; 5; 6; 11 ] [ 2; 5; 6; 11 ])
+              |> toEqual Eq.bool true ) ;
+          test "normal int" (fun () ->
+              expect (equal Int.equal [ 2; 5; -6; 11 ] [ 2; 5; 6; 11 ])
+              |> toEqual Eq.bool false ) ;
+          test "normal string" (fun () ->
+              expect
+                (equal
+                   String.equal
+                   [ "hi"; "hello"; "hey" ]
+                   [ "hi"; "hello"; "hey" ] )
+              |> toEqual Eq.bool true ) ) )
