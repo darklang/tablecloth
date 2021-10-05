@@ -1309,4 +1309,22 @@ let suite =
                    String.equal
                    [ "hi"; "hello"; "hey" ]
                    [ "hi"; "hello"; "hey" ] )
-              |> toEqual Eq.bool true ) ) )
+              |> toEqual Eq.bool true ) ) ;
+
+      describe "compare" (fun () ->
+          test "normal int" (fun () ->
+              expect (compare Int.compare [ 2; 5; 6; 11 ] [ 2; 5; 6; 11 ])
+              |> toEqual Eq.int 0 ) ;
+          test "normal int" (fun () ->
+              expect (compare Int.compare [ 2; 5; -6; 11 ] [ 2; 5; 6; 11 ])
+              |> toEqual Eq.int 1 ) ;
+          test "normal int" (fun () ->
+              expect (compare Int.compare [ 2; 5; 11 ] [ 2; 5; 6; 11 ])
+              |> toEqual Eq.int 1 ) ;
+          test "normal string" (fun () ->
+              expect
+                (compare
+                   String.compare
+                   [ "hi"; "hello"; "hey" ]
+                   [ "hi"; "hello"; "hey" ] )
+              |> toEqual Eq.int 0 ) ) )
