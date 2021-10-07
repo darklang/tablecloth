@@ -424,6 +424,17 @@ let suite =
                    (let open Eq in
                    option (pair int int))
                    None ) ) ;
+
+      describe "includes" (fun () ->
+          test "returns true if equal" (fun () ->
+              expect (includes [| 1; 2; 3 |] 2 ~equal:( = ))
+              |> toEqual Eq.bool true ) ;
+          test "returns false if not equal" (fun () ->
+              expect (includes [| 1; 5; 3 |] 2 ~equal:( = ))
+              |> toEqual Eq.bool false ) ;
+          test "returns false if empty" (fun () ->
+              expect (includes [||] 2 ~equal:( = )) |> toEqual Eq.bool false ) ) ;
+
       describe "any" (fun () ->
           test "returns false for empty arrays" (fun () ->
               expect (any [||] ~f:Int.isEven) |> toEqual Eq.bool false ) ;
