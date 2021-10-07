@@ -233,6 +233,20 @@ let suite =
                    option int)
                    None ) ) ;
 
+      describe "last" (fun () ->
+          test "return last element" (fun () ->
+              expect (last [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 3) ) ;
+          test "return none from empty array" (fun () ->
+              expect (last [||])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
       describe "sum" (fun () ->
           test "equals zero for an empty array" (fun () ->
               expect (sum [||] (module Int)) |> toEqual Eq.int 0 ) ;
