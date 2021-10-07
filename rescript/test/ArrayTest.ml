@@ -463,6 +463,26 @@ let suite =
                    option int)
                    None ) ) ;
 
+      describe "extent" (fun () ->
+          test "returns range" (fun () ->
+              expect (extent [| 1; -2; 3 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   (Some (-2, 3)) ) ;
+          test "returns range on single" (fun () ->
+              expect (extent [| 1 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   (Some (1, 1)) ) ;
+          test "returns none is empty" (fun () ->
+              expect (extent [||] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   None ) ) ;
+
       describe "any" (fun () ->
           test "returns false for empty arrays" (fun () ->
               expect (any [||] ~f:Int.isEven) |> toEqual Eq.bool false ) ;
