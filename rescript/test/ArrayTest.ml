@@ -360,6 +360,20 @@ let suite =
                    (let open Eq in
                    array (array int))
                    [||] ) ) ;
+
+      describe "count" (fun () ->
+          test
+            "returns the number of elements which `f` returns true for"
+            (fun () ->
+              expect (count ~f:Int.isEven [| 1; 3; 4; 8 |]) |> toEqual Eq.int 2 ) ;
+          test
+            "returns the number of elements which `f` returns true for"
+            (fun () ->
+              expect (count ~f:Int.isEven [| 1; 3 |]) |> toEqual Eq.int 0 ) ;
+          test
+            "returns the number of elements which `f` returns true for"
+            (fun () -> expect (count ~f:Int.isEven [||]) |> toEqual Eq.int 0) ) ;
+
       describe "find" (fun () ->
           test "returns the first element which `f` returns true for" (fun () ->
               expect (find ~f:Int.isEven [| 1; 3; 4; 8 |])
