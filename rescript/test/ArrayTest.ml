@@ -136,6 +136,33 @@ let suite =
                    (let open Eq in
                    list (pair int string))
                    [ (0, "cat"); (1, "dog") ] ) ) ;
+
+      describe "clone" (fun () ->
+          test "returns an int array" (fun () ->
+              let numbers = [| 1; 2; 3 |] in
+              let otherNumbers = clone numbers in
+              numbers.(1) <- 9 ;
+              expect otherNumbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 2; 3 |] ) ;
+          test "returns an array of int arrays" (fun () ->
+              let numberGrid =
+                [| [| 1; 2; 3 |]; [| 4; 5; 6 |]; [| 7; 8; 9 |] |]
+              in
+
+              let numberGridCopy = clone numberGrid in
+
+              numberGrid.(1).(1) <- 0 ;
+
+              numberGridCopy.(1).(1) <- 9 ;
+              expect numberGridCopy
+              |> toEqual
+                   (let open Eq in
+                   array (array int))
+                   [| [| 1; 2; 3 |]; [| 4; 9; 6 |]; [| 7; 8; 9 |] |] ) ) ;
+
       describe "get" (fun () ->
           test "returns Some for an in-bounds index" (fun () ->
               expect [| "cat"; "dog"; "eel" |].(2) |> toEqual Eq.string "eel" ) ;
@@ -191,6 +218,21 @@ let suite =
                    (let open Eq in
                    array string)
                    [| "antelope"; "bat"; "cat" |] ) ) ;
+
+      describe "first" (fun () ->
+          test "return first element" (fun () ->
+              expect (first [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 1) ) ;
+          test "return none from empty array" (fun () ->
+              expect (first [||])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
       describe "sum" (fun () ->
           test "equals zero for an empty array" (fun () ->
               expect (sum [||] (module Int)) |> toEqual Eq.int 0 ) ;
