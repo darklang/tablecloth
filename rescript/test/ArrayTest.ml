@@ -271,6 +271,16 @@ let suite =
                    array int)
                    [| 16; 36 |] ) ) ;
 
+      describe "flatMap" (fun () ->
+          test
+            "!map} [f] onto an array and {!flatten} the resulting arrays"
+            (fun () ->
+              expect (flatMap ~f:(fun n -> [| n; n |]) [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 1; 2; 2; 3; 3 |] ) ) ;
+
       describe "swap" (fun () ->
           test "switches values at the given indicies" (fun () ->
               let numbers = [| 1; 2; 3 |] in
