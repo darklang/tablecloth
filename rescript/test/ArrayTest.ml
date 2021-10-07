@@ -449,6 +449,20 @@ let suite =
                    option int)
                    None ) ) ;
 
+      describe "maximum" (fun () ->
+          test "returns largest element" (fun () ->
+              expect (maximum [| 1; -2; 3 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 3) ) ;
+          test "returns none is empty" (fun () ->
+              expect (maximum [||] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
       describe "any" (fun () ->
           test "returns false for empty arrays" (fun () ->
               expect (any [||] ~f:Int.isEven) |> toEqual Eq.bool false ) ;
