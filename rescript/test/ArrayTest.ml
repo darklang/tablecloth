@@ -579,6 +579,33 @@ let suite =
                    (let open Eq in
                    array int)
                    [| 3; 2; 1 |] ) ) ;
+
+      describe "sort" (fun () ->
+          test "empty list" (fun () ->
+              let numbers = [||] in
+              sort numbers ~compare:Int.compare ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [||] ) ;
+          test "one element" (fun () ->
+              let numbers = [| 5 |] in
+              sort numbers ~compare:Int.compare ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 5 |] ) ;
+          test "multiple elements" (fun () ->
+              let numbers = [| 5; 6; 8; 3; 6 |] in
+              sort numbers ~compare:Int.compare ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 3; 5; 6; 6; 8 |] ) ) ;
+
       describe "groupBy" (fun () ->
           test "returns an empty map for an empty array" (fun () ->
               expect
