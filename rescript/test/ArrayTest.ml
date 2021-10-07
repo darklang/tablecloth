@@ -259,6 +259,18 @@ let suite =
                    (let open Eq in
                    array int)
                    [| 2; 4; 6 |] ) ) ;
+
+      describe "filterMap" (fun () ->
+          test "keep elements that [f] returns [true] for" (fun () ->
+              expect
+                (filterMap [| 3; 4; 5; 6 |] ~f:(fun number ->
+                     if Int.isEven number then Some (number * number) else None )
+                )
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 16; 36 |] ) ) ;
+
       describe "swap" (fun () ->
           test "switches values at the given indicies" (fun () ->
               let numbers = [| 1; 2; 3 |] in
