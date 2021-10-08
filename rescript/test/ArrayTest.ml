@@ -542,6 +542,23 @@ let suite =
                    (let open Eq in
                    array int)
                    [| 1; 2; 3; 4; 5 |] ) ) ;
+
+      describe "zip" (fun () ->
+          test
+            "Combine two arrays by merging each pair of elements into a tuple"
+            (fun () ->
+              expect (zip [| 1; 2; 3; 4; 5 |] [| "Dog"; "Eagle"; "Ferret" |])
+              |> toEqual
+                   (let open Eq in
+                   array (pair int string))
+                   [| (1, "Dog"); (2, "Eagle"); (3, "Ferret") |] ) ;
+          test "Combine an empty array and another array" (fun () ->
+              expect (zip [||] [| "Dog"; "Eagle"; "Ferret" |])
+              |> toEqual
+                   (let open Eq in
+                   array (pair int string))
+                   [||] ) ) ;
+
       describe "intersperse" (fun () ->
           test "equals an array literal of the same value" (fun () ->
               expect
