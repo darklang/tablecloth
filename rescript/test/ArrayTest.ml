@@ -339,12 +339,32 @@ let suite =
                    |] ) ) ;
 
       describe "partition" (fun () ->
-          test "Split an array into a tuple of arrays" (fun () ->
+          test "Split an array into a Tuple of arrays" (fun () ->
               expect (partition [| 1; 2; 3; 4; 5; 6 |] ~f:Int.isOdd)
               |> toEqual
                    (let open Eq in
                    pair (array int) (array int))
-                   ([| 1; 3; 5 |], [| 2; 4; 6 |]) )) ;
+                   ([| 1; 3; 5 |], [| 2; 4; 6 |]) ) ) ;
+
+      describe "splitAt" (fun () ->
+          test "Divides an array into a Tuple of arrays" (fun () ->
+              expect (splitAt [| 1; 2; 3; 4; 5 |] ~index:2)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 1; 2 |], [| 3; 4; 5 |]) ) ;
+          test "Split array at array[0]" (fun () ->
+              expect (splitAt [| 1; 2; 3; 4; 5 |] ~index:0)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 1; 2; 3; 4; 5 |], [||]) ) ;
+          test "Split array at array[10]" (fun () ->
+              expect (splitAt [| 1; 2; 3; 4; 5 |] ~index:10)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([||], [| 1; 2; 3; 4; 5 |]) ) ) ;
 
       test "flatMap" (fun () ->
           let duplicate n = [| n; n |] in
