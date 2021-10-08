@@ -321,17 +321,31 @@ let suite =
                    (let open Eq in
                    array (pair string int))
                    [| ("alice", 2); ("bob", 5); ("chuck", 7) |] ) ) ;
-      test "map3" (fun () ->
-          expect
-            (map3
-               ~f:Tuple3.make
-               [| "alice"; "bob"; "chuck" |]
-               [| 2; 5; 7; 8 |]
-               [| true; false; true; false |] )
-          |> toEqual
-               (let open Eq in
-               array (trio string int bool))
-               [| ("alice", 2, true); ("bob", 5, false); ("chuck", 7, true) |] ) ;
+
+      describe "map3" (fun () ->
+          test "maps elements of 3 arrays" (fun () ->
+              expect
+                (map3
+                   ~f:Tuple3.make
+                   [| "alice"; "bob"; "chuck" |]
+                   [| 2; 5; 7; 8 |]
+                   [| true; false; true; false |] )
+              |> toEqual
+                   (let open Eq in
+                   array (trio string int bool))
+                   [| ("alice", 2, true)
+                    ; ("bob", 5, false)
+                    ; ("chuck", 7, true)
+                   |] ) ) ;
+
+      describe "partition" (fun () ->
+          test "Split an array into a tuple of arrays" (fun () ->
+              expect (partition [| 1; 2; 3; 4; 5; 6 |] ~f:Int.isOdd)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 1; 3; 5 |], [| 2; 4; 6 |]) )) ;
+
       test "flatMap" (fun () ->
           let duplicate n = [| n; n |] in
           expect (flatMap ~f:duplicate [| 1; 2; 3 |])
