@@ -527,18 +527,21 @@ let suite =
             "returns false if a single element fails returns false for [f]"
             (fun () ->
               expect (all ~f:Int.isEven [| 2; 3 |]) |> toEqual Eq.bool false ) ) ;
-      test "append" (fun () ->
-          expect (append (repeat ~length:2 42) (repeat ~length:3 81))
-          |> toEqual
-               (let open Eq in
-               array int)
-               [| 42; 42; 81; 81; 81 |] ) ;
-      test "flatten" (fun () ->
-          expect (flatten [| [| 1; 2 |]; [| 3 |]; [| 4; 5 |] |])
-          |> toEqual
-               (let open Eq in
-               array int)
-               [| 1; 2; 3; 4; 5 |] ) ;
+
+      describe "append" (fun () ->
+          test "append" (fun () ->
+              expect (append (repeat ~length:2 42) (repeat ~length:3 81))
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 42; 42; 81; 81; 81 |] ) ) ;
+      describe "flatten" (fun () ->
+          test "flatten" (fun () ->
+              expect (flatten [| [| 1; 2 |]; [| 3 |]; [| 4; 5 |] |])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 2; 3; 4; 5 |] ) ) ;
       describe "intersperse" (fun () ->
           test "equals an array literal of the same value" (fun () ->
               expect
