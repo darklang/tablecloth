@@ -366,13 +366,37 @@ let suite =
                    pair (array int) (array int))
                    ([||], [| 1; 2; 3; 4; 5 |]) ) ) ;
 
-      test "flatMap" (fun () ->
-          let duplicate n = [| n; n |] in
-          expect (flatMap ~f:duplicate [| 1; 2; 3 |])
-          |> toEqual
-               (let open Eq in
-               array int)
-               [| 1; 1; 2; 2; 3; 3 |] ) ;
+      describe "splitWhen" (fun () ->
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
+              expect (splitWhen [| 5; 7; 8; 6; 4 |] ~f:Int.isEven)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 5; 7 |], [| 8; 6; 4 |]) ) ;
+          test "divide array with no elements that return true" (fun () ->
+              expect
+                (splitWhen [| "Ant"; "Bat"; "Cat" |] ~f:(fun animal ->
+                     String.length animal > 3 ) )
+              |> toEqual
+                   (let open Eq in
+                   pair (array string) (array string))
+                   ([| "Ant"; "Bat"; "Cat" |], [||]) ) ;
+          test "divide array with no elements that return true" (fun () ->
+              expect (splitWhen [| 2.; Float.pi; 1.111 |] ~f:Float.isInteger)
+              |> toEqual
+                   (let open Eq in
+                   pair (array float) (array float))
+                   ([||], [| 2.; Float.pi; 1.111 |]) ) ) ;
+      describe "flatmap" (fun () ->
+          test "flatMap" (fun () ->
+              let duplicate n = [| n; n |] in
+              expect (flatMap ~f:duplicate [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 1; 2; 2; 3; 3 |] ) ) ;
       describe "sliding" (fun () ->
           test "size 1" (fun () ->
               expect (sliding [| 1; 2; 3; 4; 5 |] ~size:1)
