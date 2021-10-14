@@ -617,6 +617,16 @@ let suite =
                    array (pair int string))
                    [||] ) ) ;
 
+      describe "unzip" (fun () ->
+          test
+            "Decompose an array of {!Tuple}s into a tuple of arrays"
+            (fun () ->
+              expect (unzip [| (0, true); (17, false); (1337, true) |])
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array bool))
+                   ([| 0; 17; 1337 |], [| true; false; true |]) ) ) ;
+
       describe "intersperse" (fun () ->
           test "equals an array literal of the same value" (fun () ->
               expect
