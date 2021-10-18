@@ -653,6 +653,23 @@ let suite =
                    array string)
                    [||] ) ) ;
 
+      describe "compare" (fun () ->
+          test
+            "Compare two arrays using the provided function to compare pairs of elements and returns 1, 0, or -1"
+            (fun () ->
+              expect (compare Int.compare [| 1; 2; 3 |] [| 1; 2; 3; 4 |])
+              |> toEqual Eq.int (-1) ) ;
+          test
+            "Compare two arrays using the provided function to compare pairs of elements and returns 1, 0, or -1"
+            (fun () ->
+              expect (compare Int.compare [| 1; 2; 3 |] [| 1; 2; 3 |])
+              |> toEqual Eq.int 0 ) ;
+          test
+            "Compare two arrays using the provided function to compare pairs of elements and returns 1, 0, or -1"
+            (fun () ->
+              expect (compare Int.compare [| 1; 2; 5 |] [| 1; 2; 3 |])
+              |> toEqual Eq.int 1 ) ) ;
+
       describe "intersperse" (fun () ->
           test "equals an array literal of the same value" (fun () ->
               expect
