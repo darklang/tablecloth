@@ -25,4 +25,29 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option bool)
+                   None ) ) ;
+      describe "fromString" (fun () ->
+          test "converts string to Some(true)" (fun () ->
+              expect (fromString "true")
+              |> toEqual
+                   (let open Eq in
+                   option bool)
+                   (Some true) ) ;
+          test "converts string to Some(true)" (fun () ->
+              expect (fromString "false")
+              |> toEqual
+                   (let open Eq in
+                   option bool)
+                   (Some false) ) ;
+          test "converts string to Some(true)" (fun () ->
+              expect (fromString "True")
+              |> toEqual
+                   (let open Eq in
+                   option bool)
+                   None ) ;
+          test "converts string to Some(true)" (fun () ->
+              expect (fromString "1")
+              |> toEqual
+                   (let open Eq in
+                   option bool)
                    None ) ) )
