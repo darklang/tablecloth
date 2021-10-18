@@ -657,6 +657,35 @@ let suite =
                    (let open Eq in
                    array int)
                    [||] ) ) ;
+
+      describe "chunksOf" (fun () ->
+          test "Split an array into equally sized chunks" (fun () ->
+              expect
+                (chunksOf
+                   ~size:2
+                   [| "#FFBA49"; "#9984D4"; "#20A39E"; "#EF5B5B" |] )
+              |> toEqual
+                   (let open Eq in
+                   array (array string))
+                   [| [| "#FFBA49"; "#9984D4" |]; [| "#20A39E"; "#EF5B5B" |] |] ) ;
+          test
+            "Split an array into equally sized chunks ignoring partial chunks"
+            (fun () ->
+              expect
+                (chunksOf
+                   ~size:2
+                   [| "#FFBA49"; "#9984D4"; "#20A39E"; "#EF5B5B"; "#23001E" |] )
+              |> toEqual
+                   (let open Eq in
+                   array (array string))
+                   [| [| "#FFBA49"; "#9984D4" |]; [| "#20A39E"; "#EF5B5B" |] |] ) ;
+          test "Split an empty array into equally sized chunks" (fun () ->
+              expect (chunksOf ~size:2 [||])
+              |> toEqual
+                   (let open Eq in
+                   array (array string))
+                   [||] ) ) ;
+
       describe "slice" (fun () ->
           let numbers = [| 0; 1; 2; 3; 4 |] in
           let positiveArrayLengths =
