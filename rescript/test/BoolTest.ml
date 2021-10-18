@@ -33,21 +33,35 @@ let suite =
                    (let open Eq in
                    option bool)
                    (Some true) ) ;
-          test "converts string to Some(true)" (fun () ->
+          test "converts string to Some(false)" (fun () ->
               expect (fromString "false")
               |> toEqual
                    (let open Eq in
                    option bool)
                    (Some false) ) ;
-          test "converts string to Some(true)" (fun () ->
+          test "capital True returns None" (fun () ->
               expect (fromString "True")
               |> toEqual
                    (let open Eq in
                    option bool)
                    None ) ;
-          test "converts string to Some(true)" (fun () ->
+          test "non-string returns None" (fun () ->
               expect (fromString "1")
               |> toEqual
                    (let open Eq in
                    option bool)
-                   None ) ) )
+                   None ) ) ;
+
+      describe "xor" (fun () ->
+          test
+            "Returns [true] if {b exactly one} of its operands is [true]"
+            (fun () -> expect (xor true true) |> toEqual Eq.bool false) ;
+          test
+            "Returns [true] if {b exactly one} of its operands is [true]"
+            (fun () -> expect (xor true false) |> toEqual Eq.bool true) ;
+          test
+            "Returns [true] if {b exactly one} of its operands is [true]"
+            (fun () -> expect (xor false true) |> toEqual Eq.bool true) ;
+          test
+            "Returns [true] if {b exactly one} of its operands is [true]"
+            (fun () -> expect (xor false false) |> toEqual Eq.bool false) ) )
