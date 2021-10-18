@@ -441,6 +441,16 @@ let suite =
                    array (array int))
                    [||] ) ) ;
 
+      describe "join" (fun () ->
+          test
+            "Convert an array of strings into a String, placing [sep] between each string in the result"
+            (fun () ->
+              expect (join [| "Ant"; "Bat"; "Cat" |] ~sep:", ")
+              |> toEqual Eq.string "Ant, Bat, Cat" ) ;
+          test
+            "Convert an empty array of strings into a String, placing [sep] between each string in the result"
+            (fun () -> expect (join [||] ~sep:", ") |> toEqual Eq.string "") ) ;
+
       describe "count" (fun () ->
           test
             "returns the number of elements which `f` returns true for"
