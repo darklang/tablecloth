@@ -73,7 +73,13 @@ let suite =
               expect (not false) |> toEqual Eq.bool true ) ) ;
 
       describe "toString" (fun () ->
-          test "Returns negation" (fun () ->
+          test "Returns string of true bool" (fun () ->
               expect (toString true) |> toEqual Eq.string "true" ) ;
-          test "Returns negation" (fun () ->
-              expect (toString false) |> toEqual Eq.string "false" ) ) )
+          test "Returns string of false bool" (fun () ->
+              expect (toString false) |> toEqual Eq.string "false" ) ) ;
+
+      describe "toInt" (fun () ->
+          test "Returns 1 for true or 0 for false" (fun () ->
+              expect (toInt true) |> toEqual Eq.int 1 ) ;
+          test "Returns 1 for true or 0 for false" (fun () ->
+              expect (toInt false) |> toEqual Eq.int 0 ) ) )
