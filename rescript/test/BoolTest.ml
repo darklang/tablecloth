@@ -82,4 +82,12 @@ let suite =
           test "Returns 1 for true or 0 for false" (fun () ->
               expect (toInt true) |> toEqual Eq.int 1 ) ;
           test "Returns 1 for true or 0 for false" (fun () ->
-              expect (toInt false) |> toEqual Eq.int 0 ) ) )
+              expect (toInt false) |> toEqual Eq.int 0 ) ) ;
+      describe "equal" (fun () ->
+          test
+            "Returns true if bools are equal or false is they are not"
+            (fun () -> expect (equal true true) |> toEqual Eq.bool true) ;
+          test "Returns 1 for true or 0 for false" (fun () ->
+              expect (equal false false) |> toEqual Eq.bool true ) ;
+          test "Returns 1 for true or 0 for false" (fun () ->
+              expect (equal true false) |> toEqual Eq.bool false ) ) )
