@@ -70,4 +70,10 @@ let suite =
           test "Returns negation" (fun () ->
               expect (not true) |> toEqual Eq.bool false ) ;
           test "Returns negation" (fun () ->
-              expect (not false) |> toEqual Eq.bool true ) ) )
+              expect (not false) |> toEqual Eq.bool true ) ) ;
+
+      describe "toString" (fun () ->
+          test "Returns negation" (fun () ->
+              expect (toString true) |> toEqual Eq.string "true" ) ;
+          test "Returns negation" (fun () ->
+              expect (toString false) |> toEqual Eq.string "false" ) ) )
