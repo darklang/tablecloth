@@ -64,4 +64,10 @@ let suite =
             (fun () -> expect (xor false true) |> toEqual Eq.bool true) ;
           test
             "Returns [true] if {b exactly one} of its operands is [true]"
-            (fun () -> expect (xor false false) |> toEqual Eq.bool false) ) )
+            (fun () -> expect (xor false false) |> toEqual Eq.bool false) ) ;
+
+      describe "not" (fun () ->
+          test "Returns negation" (fun () ->
+              expect (not true) |> toEqual Eq.bool false ) ;
+          test "Returns negation" (fun () ->
+              expect (not false) |> toEqual Eq.bool true ) ) )
