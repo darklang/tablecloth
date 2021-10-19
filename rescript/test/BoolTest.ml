@@ -90,4 +90,18 @@ let suite =
           test "Returns 1 for true or 0 for false" (fun () ->
               expect (equal false false) |> toEqual Eq.bool true ) ;
           test "Returns 1 for true or 0 for false" (fun () ->
-              expect (equal true false) |> toEqual Eq.bool false ) ) )
+              expect (equal true false) |> toEqual Eq.bool false ) ) ;
+
+      describe "compare" (fun () ->
+          test
+            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            (fun () -> expect (compare true true) |> toEqual Eq.int 0) ;
+          test
+            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            (fun () -> expect (compare true false) |> toEqual Eq.int 1) ;
+          test
+            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            (fun () -> expect (compare false true) |> toEqual Eq.int (-1)) ;
+          test
+            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            (fun () -> expect (compare false false) |> toEqual Eq.int 0) ) )
