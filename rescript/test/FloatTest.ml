@@ -509,4 +509,8 @@ let suite =
           test "5.0" (fun () ->
               expect (isSafeInteger 5.0) |> toEqual Eq.bool true ) ;
           test "0.0" (fun () ->
-              expect (isSafeInteger pi) |> toEqual Eq.bool false ) ) )
+              expect (isSafeInteger pi) |> toEqual Eq.bool false ) ) ;
+
+      describe "isInteger" (fun () ->
+          test "5.0" (fun () -> expect (isInteger 5.0) |> toEqual Eq.bool true) ;
+          test "0.0" (fun () -> expect (isInteger pi) |> toEqual Eq.bool false) ) )
