@@ -469,4 +469,30 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
+                   None ) ) ;
+
+      describe "fromString" (fun () ->
+          test "5.0" (fun () ->
+              expect (fromString "5.0")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some 5.0) ) ;
+          test "0.0" (fun () ->
+              expect (fromString "0.0")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some 0.0) ) ;
+          test "-7.0" (fun () ->
+              expect (fromString "-7.0")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some (-7.0)) ) ;
+          test "None" (fun () ->
+              expect (fromString "Hamster")
+              |> toEqual
+                   (let open Eq in
+                   option float)
                    None ) ) )
