@@ -513,5 +513,17 @@ let suite =
 
       describe "isInteger" (fun () ->
           test "true" (fun () -> expect (isInteger 5.0) |> toEqual Eq.bool true) ;
-          test "false" (fun () -> expect (isInteger pi) |> toEqual Eq.bool false) ))
+          test "false" (fun () ->
+              expect (isInteger pi) |> toEqual Eq.bool false ) ) ;
 
+      describe "isInfinite" (fun () ->
+          test "false" (fun () ->
+              expect (isInfinite (0. / 0.)) |> toEqual Eq.bool false ) ;
+          test "false" (fun () ->
+              expect (isInfinite (squareRoot (-1.))) |> toEqual Eq.bool false ) ;
+          test "true" (fun () ->
+              expect (isInfinite (1. / 0.)) |> toEqual Eq.bool true ) ;
+          test "false" (fun () ->
+              expect (isInfinite 1.) |> toEqual Eq.bool false ) ;
+          test "false" (fun () ->
+              expect (isInfinite nan) |> toEqual Eq.bool false ) ) )
