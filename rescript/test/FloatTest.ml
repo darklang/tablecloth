@@ -526,12 +526,5 @@ let suite =
           test "false" (fun () ->
               expect (isInfinite 1.) |> toEqual Eq.bool false ) ;
           test "false" (fun () ->
-              expect (isInfinite nan) |> toEqual Eq.bool false ) ) ;
-
-      describe "isNaN" (fun () ->
-          test "false" (fun () ->
-              expect (isNaN (0. / 0.)) |> toEqual Eq.bool false ) ;
-          test "false" (fun () -> expect (isNaN 1.) |> toEqual Eq.bool false) ;
-          test "false" (fun () ->
-              expect (isNaN (-1.)) |> toEqual Eq.bool false ) ;
-          test "true" (fun () -> expect (isNaN nan) |> toEqual Eq.bool true) ) )
+              expect (isInfinite nan) |> toEqual Eq.bool false ) )
+ )
