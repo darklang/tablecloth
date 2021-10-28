@@ -526,5 +526,9 @@ let suite =
           test "false" (fun () ->
               expect (isInfinite 1.) |> toEqual Eq.bool false ) ;
           test "false" (fun () ->
-              expect (isInfinite nan) |> toEqual Eq.bool false ) )
- )
+              expect (isInfinite nan) |> toEqual Eq.bool false ) ) ;
+
+      describe "isInteger" (fun () ->
+          test "true" (fun () -> expect (isInteger 5.0) |> toEqual Eq.bool true) ;
+          test "false" (fun () ->
+              expect (isInteger pi) |> toEqual Eq.bool false ) ) )
