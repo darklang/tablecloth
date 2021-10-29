@@ -123,6 +123,15 @@ let suite =
           test "negative number" (fun () ->
               expect (Int.absolute (-7)) |> toEqual Eq.int 7 ) ;
           test "zero" (fun () -> expect (Int.absolute 0) |> toEqual Eq.int 0) ) ;
+
+      describe "isEven" (fun () ->
+          test "even number" (fun () ->
+              expect (Int.isEven 8) |> toEqual Eq.bool true ) ;
+          test "odd number" (fun () ->
+              expect (Int.isEven 9) |> toEqual Eq.bool false ) ;
+          test "zero even" (fun () ->
+              expect (Int.isEven 0) |> toEqual Eq.bool true ) ) ;
+
       describe "clamp" (fun () ->
           test "in range" (fun () ->
               expect (Int.clamp ~lower:0 ~upper:8 5) |> toEqual Eq.int 5 ) ;
