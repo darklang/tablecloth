@@ -42,6 +42,7 @@ let suite =
                (let open Eq in
                array int)
                [| 0; 2 |] ) ;
+
       test "curry" (fun () ->
           expect (Fun.curry (fun (a, b) -> a / b) 8 4)
           |> toEqual
