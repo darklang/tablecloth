@@ -8,11 +8,7 @@ end)
 
 let minimumValue = Js.Int.min
 
-let minimum_value = minimumValue
-
 let maximumValue = Js.Int.max
-
-let maximum_value = maximumValue
 
 let zero = 0
 
@@ -21,8 +17,6 @@ let one = 1
 let fromString s =
   match int_of_string s with i -> Some i | exception Failure _ -> None
 
-
-let from_string = fromString
 
 let add = ( + )
 
@@ -76,11 +70,7 @@ let absolute = abs
 
 let isEven n = n mod 2 = 0
 
-let is_even = isEven
-
 let isOdd n = n mod 2 <> 0
-
-let is_odd = isOdd
 
 let clamp n ~lower ~upper =
   if upper < lower
@@ -94,15 +84,9 @@ let inRange n ~lower ~upper =
   else n >= lower && n < upper
 
 
-let in_range = inRange
-
 let toFloat = Js.Int.toFloat
 
-let to_float = toFloat
-
 let toString = Js.Int.toString
-
-let to_string = toString
 
 let equal = ( = )
 

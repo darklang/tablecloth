@@ -49,14 +49,9 @@ val one : t
 val maximumValue : t
 (** The maximum representable [int] on the current platform *)
 
-val maximum_value : t
-
 val minimumValue : t
 (** The minimum representable [int] on the current platform *)
 
-val minimum_value : t
-
-(** {1 Create} *)
 
 val fromString : string -> t option
 (** Attempt to parse a [string] into a [int].
@@ -80,7 +75,6 @@ val fromString : string -> t option
     {[Int.fromString "NaN" = None]}
 *)
 
-val from_string : string -> t option
 
 (** {1 Operators}
 
@@ -291,8 +285,6 @@ val isEven : t -> bool
     {[Int.isEven 0 = true]}
 *)
 
-val is_even : t -> bool
-
 val isOdd : t -> bool
 (** Check if an [int] is odd
 
@@ -304,8 +296,6 @@ val isOdd : t -> bool
 
   {[Int.isOdd 0 = false]}
 *)
-
-val is_odd : t -> bool
 
 val clamp : t -> lower:t -> upper:t -> t
 (** Clamps [n] within the inclusive [lower] and [upper] bounds.
@@ -340,9 +330,6 @@ val inRange : t -> lower:t -> upper:t -> bool
 
 *)
 
-val in_range : t -> lower:t -> upper:t -> bool
-
-(** {1 Convert} *)
 
 val toFloat : t -> float
 (** Convert an integer into a float. Useful when mixing {!Int} and {!Float} values like this:
@@ -357,8 +344,6 @@ val toFloat : t -> float
       halfOf 7 = 3.5
     ]}
 *)
-
-val to_float : t -> float
 
 val toString : t -> string
 (** Convert an [int] into a [string] representation.
@@ -376,9 +361,6 @@ val toString : t -> string
     {[Int.to_sString 0 = "0"]}
 *)
 
-val to_string : t -> string
-
-(** {1 Compare} *)
 
 val equal : t -> t -> bool
 (** Test two [int]s for equality *)

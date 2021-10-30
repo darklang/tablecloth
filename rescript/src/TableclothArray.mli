@@ -66,8 +66,6 @@ val fromList : 'a list -> 'a t
     {[Array.fromList [1;2;3] = [|1;2;3|]]}
 *)
 
-val from_list : 'a list -> 'a t
-
 val clone : 'a t -> 'a t
 (** Create a shallow copy of an array.
 
@@ -137,8 +135,6 @@ val getAt : 'a t -> index:int -> 'a option
     {[Array.getAt [||] ~index:0 = None]}
 *)
 
-val get_at : 'a t -> index:int -> 'a option
-
 val ( .?() ) : 'element array -> int -> 'element option
 (** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!getAt}
 
@@ -177,8 +173,6 @@ val set : 'a t -> int -> 'a -> unit
 
 val setAt : 'a t -> index:int -> value:'a -> unit
 (** Like {!set} but with labelled arguments *)
-
-val set_at : 'a t -> index:int -> value:'a -> unit
 
 val first : 'a t -> 'a option
 (** Get the first element of an array.
@@ -281,8 +275,6 @@ val isEmpty : 'a t -> bool
     {[Array.isEmpty [||] = true]}
 *)
 
-val is_empty : 'a t -> bool
-
 val length : 'a t -> int
 (** Return the length of an array.
 
@@ -350,8 +342,6 @@ val findIndex : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
 
     {[Array.findIndex [|1; 3; 4; 8;|] ~f:(fun index number -> index > 2 && Int.isEven number) = Some (3, 8)]}
 *)
-
-val find_index : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
 
 val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 (** Test if an array contains the specified element using the provided [equal] to test for equality.
@@ -440,8 +430,6 @@ val mapWithIndex : 'a t -> f:(int -> 'a -> 'b) -> 'b t
     {[Array.mapWithIndex ~f:( * ) [|5; 5; 5|] = [|0; 5; 10|]]}
 *)
 
-val map_with_index : 'a t -> f:(int -> 'a -> 'b) -> 'b t
-
 val filter : 'a t -> f:('a -> bool) -> 'a t
 (** Keep elements that [f] returns [true] for.
 
@@ -478,8 +466,6 @@ val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
     ]}
 *)
 
-val filter_map : 'a t -> f:('a -> 'b option) -> 'b t
-
 val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
 (** {!map} [f] onto an array and {!flatten} the resulting arrays
 
@@ -487,8 +473,6 @@ val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
 
     {[Array.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]}
 *)
-
-val flat_map : 'a t -> f:('a -> 'b t) -> 'b t
 
 val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 (** Produce a new value from an array.
@@ -556,9 +540,6 @@ val foldRight : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     {[Array.foldRight ~f:List.cons ~initial:[] [|1; 2; 3|] = [1; 2; 3]]}
 *)
 
-val fold_right : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
-
-(** {1 Combine} *)
 
 val append : 'a t -> 'a t -> 'a t
 (** Creates a new array which is the result of appending the second array onto the end of the first.
@@ -662,8 +643,6 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
     {[Array.splitAt [|1;2;3;4;5|] ~index:0 = ([||], [|1;2;3;4;5|])]}
 *)
 
-val split_at : 'a t -> index:int -> 'a t * 'a t
-
 val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
 (** Divides an array at the first element [f] returns [true] for.
 
@@ -692,8 +671,6 @@ val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
     ]}
 *)
 
-val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
-
 val unzip : ('a * 'b) t -> 'a t * 'b t
 (** Decompose an array of {!Tuple}s into a {!Tuple} of arrays.
 
@@ -712,8 +689,6 @@ val forEach : 'a t -> f:('a -> unit) -> unit
     {[Array.forEach [|1; 2; 3|] ~f:(fun int -> print (Int.toString int))]}
 *)
 
-val for_each : 'a t -> f:('a -> unit) -> unit
-
 val forEachWithIndex : 'a t -> f:(int -> 'a -> unit) -> unit
 (** Iterates over the elements of invokes [f] for each element.
 
@@ -728,8 +703,6 @@ val forEachWithIndex : 'a t -> f:(int -> 'a -> unit) -> unit
       *)
     ]}
 *)
-
-val for_each_with_index : 'a t -> f:(int -> 'a -> unit) -> unit
 
 val values : 'a option t -> 'a t
 (** Return all of the [Some] values from an array of options
@@ -768,8 +741,6 @@ val chunksOf : 'a t -> size:int -> 'a t t
       |]
     ]}
  *)
-
-val chunks_of : 'a t -> size:int -> 'a t t
 
 val sliding : ?step:int -> 'a t -> size:int -> 'a t t
 (** Provides a sliding 'window' of sub-arrays over an array.
@@ -824,12 +795,6 @@ val groupBy :
     ]}
 *)
 
-val group_by :
-     'value t
-  -> ('key, 'id) TableclothComparator.s
-  -> f:('value -> 'key)
-  -> ('key, 'value list, 'id) TableclothMap.t
-
 val toList : 'a t -> 'a list
 (** Create a {!List} of elements from an array.
 
@@ -840,7 +805,6 @@ val toList : 'a t -> 'a list
     {[Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]]}
 *)
 
-val to_list : 'a t -> 'a list
 
 val toIndexedList : 'a t -> (int * 'a) list
 (** Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple}.
@@ -849,10 +813,6 @@ val toIndexedList : 'a t -> (int * 'a) list
 
     {[Array.toIndexedList [|"cat"; "dog"|] = [(0, "cat"); (1, "dog")]]}
 *)
-
-val to_indexed_list : 'a t -> (int * 'a) list
-
-(** {1 Compare} *)
 
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two arrays for equality using the provided function to test pairs of elements. *)

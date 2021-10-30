@@ -38,8 +38,6 @@ val fromInt : int -> bool option
     {[Bool.fromInt (-3) = None]}
 *)
 
-val from_int : int -> bool option
-
 val fromString : string -> bool option
 (** Convert a {!String} into a {!Bool}.
 
@@ -59,10 +57,6 @@ val fromString : string -> bool option
 
     {[Bool.fromString "Not even close" = None]}
 *)
-
-val from_string : string -> bool option
-
-(** {1 Basic operations} *)
 
 external ( && ) : bool -> bool -> bool = "%sequand"
 (** The lazy logical AND operator.
@@ -138,8 +132,6 @@ val toString : bool -> string
     {[Bool.toString false = "false"]}
 *)
 
-val to_string : bool -> string
-
 val toInt : bool -> int
 (** Convert a [bool] to an {!Int}.
 
@@ -149,10 +141,6 @@ val toInt : bool -> int
 
     {[Bool.toInt false = 0]}
 *)
-
-val to_int : bool -> int
-
-(** {1 Compare} *)
 
 val equal : bool -> bool -> bool
 (** Test for the equality of two [bool] values.

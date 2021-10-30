@@ -99,9 +99,6 @@ val fromArray : 'a array -> 'a t
     {[List.fromArray [|1;2;3|] = [1;2;3]]}
 *)
 
-val from_array : 'a array -> 'a t
-
-(** {1 Basic operations} *)
 
 val head : 'a t -> 'a option
 (** Returns, as an {!Option}, the first element of a list.
@@ -172,8 +169,6 @@ val takeWhile : 'a t -> f:('a -> bool) -> 'a t
     ]}
 *)
 
-val take_while : 'a t -> f:('a -> bool) -> 'a t
-
 val drop : 'a t -> count:int -> 'a t
 (** Drop the first [count] elements from the front of a list.
 
@@ -201,8 +196,6 @@ val dropWhile : 'a t -> f:('a -> bool) -> 'a t
 
     {[List.dropWhile ~f:Int.isEven [1; 2; 3] = [1; 2; 3]]}
 *)
-
-val drop_while : 'a t -> f:('a -> bool) -> 'a t
 
 val initial : 'a t -> 'a t option
 (** As an {!Option} get of all of the elements of a list except the last one.
@@ -248,8 +241,6 @@ val getAt : 'a t -> index:int -> 'a option
     {[List.getAt [1;2;3] ~index:100 = None]}
 *)
 
-val get_at : 'a t -> index:int -> 'a option
-
 val insertAt : 'a t -> index:int -> value:'a -> 'a t
 (** Insert a new element at the specified index.
 
@@ -280,8 +271,6 @@ val insertAt : 'a t -> index:int -> value:'a -> 'a t
     {[List.insertAt ~index:5 ~value:999 [100; 101; 102; 103] = [999]]}
 *)
 
-val insert_at : 'a t -> index:int -> value:'a -> 'a t
-
 val updateAt : 'a t -> index:int -> f:('a -> 'a) -> 'a t
 (** Returns a new list with the value at [index] updated to be the result of applying [f].
 
@@ -297,8 +286,6 @@ val updateAt : 'a t -> index:int -> f:('a -> 'a) -> 'a t
     ]}
 *)
 
-val update_at : 'a t -> index:int -> f:('a -> 'a) -> 'a t
-
 val removeAt : 'a t -> index:int -> 'a t
 (** Creates a new list without the element at [index].
 
@@ -313,8 +300,6 @@ val removeAt : 'a t -> index:int -> 'a t
       List.equal String.equal animals (List.removeAt animals ~index:4) = true
     ]}
 *)
-
-val remove_at : 'a t -> index:int -> 'a t
 
 val reverse : 'a t -> 'a t
 (** Reverse the elements in a list
@@ -339,16 +324,11 @@ val sort : 'a t -> compare:('a -> 'a -> int) -> 'a t
 
 val sortBy : f:('a -> 'b) -> 'a t -> 'a t
 (**
-    Same as {!List.sort_by}.
-*)
-
-val sort_by : f:('a -> 'b) -> 'a t -> 'a t
-(**
-    [List.sort_by ~f:fcn xs] returns a new list sorted according to the values
+    [List.sortBy ~f:fcn xs] returns a new list sorted according to the values
     returned by [fcn]. This is a stable sort; if two items have the same value,
     they will appear in the same order that they appeared in the original list.
     {[
-    List.sort_by ~f:(fun x -> x * x) [3; 2; 5; -2; 4] = [2; -2; 3; 4; 5]
+    List.sortBy ~f:(fun x -> x * x) [3; 2; 5; -2; 4] = [2; -2; 3; 4; 5]
     ]}
 *)
 
@@ -365,8 +345,6 @@ val isEmpty : _ t -> bool
 
     {[List.isEmpty [|1; 2; 3|] = false]}
 *)
-
-val is_empty : _ t -> bool
 
 val length : 'a t -> int
 (** Return the number of elements in a list.
@@ -449,20 +427,15 @@ val count : 'a t -> f:('a -> bool) -> int
 
 val uniqueBy : f:('a -> string) -> 'a list -> 'a list
 (**
-   Same as {!List.unique_by}.
- *)
-
-val unique_by : f:('a -> string) -> 'a list -> 'a list
-(**
-   [List.unique_by ~f:fcn xs] returns a new list containing only those elements from [xs]
+   [List.uniqueBy ~f:fcn xs] returns a new list containing only those elements from [xs]
    that have a unique value when [fcn] is applied to them.
    The function [fcn] takes as its single parameter an item from the list
    and returns a [string]. If the function generates the same string for two or more
    list items, only the first of them is retained.
    {[
-   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]
-   let abs_str x = string_of_int (abs x)
-   List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]
+   List.uniqueBy ~f:stringOfInt [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]
+   let absStr x = stringOfInt (abs x)
+   List.uniqueBy ~f:absStr [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]
    ]}
  *)
 
@@ -490,8 +463,6 @@ val findIndex : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
     {[List.findIndex ~f:(fun index number -> index > 2 && Int.isEven number) [|1; 3; 4; 8;|] = Some (3, 8)]}
 *)
 
-val find_index : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
-
 val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 (** Test if a list contains the specified element using the provided [equal] to test for equality.
 
@@ -509,12 +480,7 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 
 val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 (**
-    Same as {!List.:minimum_by}.
-   *)
-
-val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
-(**
-    [List.minimum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+    [List.minimumBy ~f:fcn, xs], when given a non-empty list, returns the item in the list
     for which [fcn item] is a minimum. It is returned as [Some item].
     If given an empty list, [List.minimumBy] returns [None]. If more than one value has
     a minimum value for [fcn item], the first one is returned.
@@ -523,19 +489,14 @@ val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
     {[
     let mod12 x = x mod 12
     let hours = [7; 9; 15; 10; 3; 22]
-    List.minimum_by ~f:mod12 hours = Some 15
-    List.minimum_by ~f:mod12 [] = None
+    List.minimumBy ~f:mod12 hours = Some 15
+    List.minimumBy ~f:mod12 [] = None
     ]}
    *)
 
 val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 (**
-     Same as {!List.maximum_by}.
-    *)
-
-val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
-(**
-     [List.maximum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+     [List.maximumBy ~f:fcn, xs], when given a non-empty list, returns the item in the list
      for which [fcn item] is a maximum. It is returned as [Some item].
      If given an empty list, [List.maximumBy] returns [None]. If more than one value
      has a maximum value for [fcn item], the first one is returned.
@@ -544,8 +505,8 @@ val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
      {[
      let mod12 x = x mod 12
      let hours = [7;9;15;10;3;22]
-     List.maximum_by ~f:mod12 hours = Some 10
-     List.maximum_by ~f:mod12 [] = None
+     List.maximumBy ~f:mod12 hours = Some 10
+     List.maximumBy ~f:mod12 [] = None
      ]}
     *)
 
@@ -626,8 +587,6 @@ val mapWithIndex : 'a t -> f:(int -> 'a -> 'b) -> 'b t
     ]}
 *)
 
-val map_with_index : 'a t -> f:(int -> 'a -> 'b) -> 'b t
-
 val filter : 'a t -> f:('a -> bool) -> 'a t
 (** Keep elements that [f] returns [true] for.
 
@@ -638,8 +597,6 @@ val filter : 'a t -> f:('a -> bool) -> 'a t
 
 val filterWithIndex : 'a t -> f:(int -> 'a -> bool) -> 'a t
 (** Like {!filter} but [f] is also called with each elements index. *)
-
-val filter_with_index : 'a t -> f:(int -> 'a -> bool) -> 'a t
 
 val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
 (** Allows you to combine {!map} and {!filter} into a single pass.
@@ -668,8 +625,6 @@ val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
     ]}
 *)
 
-val filter_map : 'a t -> f:('a -> 'b option) -> 'b t
-
 val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
 (** Apply a function [f] onto a list and {!flatten} the resulting list of lists.
 
@@ -679,8 +634,6 @@ val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
 
     {[List.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]}
 *)
-
-val flat_map : 'a t -> f:('a -> 'b t) -> 'b t
 
 val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 (** Transform a list into a value
@@ -733,10 +686,6 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
 val foldRight : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 (** This method is like {!fold} except that it iterates over the elements of the list from last to first. *)
-
-val fold_right : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
-
-(** {1 Combine} *)
 
 val append : 'a t -> 'a t -> 'a t
 (** Creates a new list which is the result of appending the second list onto the end of the first.
@@ -835,8 +784,6 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
     {[List.splitAt [1;2;3;4;5] ~index:10 = ([1;2;3;4;5], 10)]}
 *)
 
-val split_at : 'a t -> index:int -> 'a t * 'a t
-
 val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
 (** Divides a list into a {!Tuple} at the first element [f] returns [true] for.
 
@@ -850,8 +797,6 @@ val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
 
     {[List.splitWhen [2; 4; 5; 6; 7] ~f:(Fun.constant false) = ([2; 4; 5; 6; 7], [])]}
 *)
-
-val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
 
 val unzip : ('a * 'b) t -> 'a t * 'b t
 (** Decompose a list of {!Tuple} into a {!Tuple} of lists.
@@ -884,8 +829,6 @@ val forEach : 'a t -> f:('a -> unit) -> unit
     ]}
 *)
 
-val for_each : 'a t -> f:('a -> unit) -> unit
-
 val forEachWithIndex : 'a t -> f:(int -> 'a -> unit) -> unit
 (** Like {!forEach} but [f] is also called with the elements index.
 
@@ -901,8 +844,6 @@ val forEachWithIndex : 'a t -> f:(int -> 'a -> unit) -> unit
       *)
     ]}
 *)
-
-val for_each_with_index : 'a t -> f:(int -> 'a -> unit) -> unit
 
 val intersperse : 'a t -> sep:'a -> 'a t
 (** Places [sep] between all the elements of the given list.
@@ -928,8 +869,6 @@ val chunksOf : 'a t -> size:int -> 'a t t
       ]
     ]}
  *)
-
-val chunks_of : 'a t -> size:int -> 'a t t
 
 val sliding : ?step:int -> 'a t -> size:int -> 'a t t
 (** Provides a sliding 'window' of sub-lists over a list.
@@ -987,9 +926,6 @@ val groupWhile : 'a t -> f:('a -> 'a -> bool) -> 'a t t
     ]}
 *)
 
-val group_while : 'a t -> f:('a -> 'a -> bool) -> 'a t t
-
-(** {1 Convert} *)
 
 val join : string t -> sep:string -> string
 (** Converts a list of strings into a {!String}, placing [sep] between each string in the result.
@@ -1020,18 +956,9 @@ val groupBy :
     ]}
 *)
 
-val group_by :
-     'value t
-  -> ('key, 'id) TableclothComparator.s
-  -> f:('value -> 'key)
-  -> ('key, 'value list, 'id) TableclothMap.t
-
 val toArray : 'a t -> 'a array
 (** Converts a list to an {!Array}. *)
 
-val to_array : 'a t -> 'a array
-
-(** {1 Compare} *)
 
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two lists for equality using the provided function to test elements. *)

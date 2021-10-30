@@ -12,19 +12,13 @@ let fromArray
   Belt.Map.fromArray values ~id:(Internal.toBeltComparator comparator)
 
 
-let from_array = fromArray
-
 let empty comparator = fromArray comparator [||]
 
 let fromList comparator l = fromArray comparator (Array.of_list l)
 
-let from_list = fromList
-
 let singleton comparator ~key ~value = fromArray comparator [| (key, value) |]
 
 let isEmpty = Belt.Map.isEmpty
-
-let is_empty = isEmpty
 
 let includes = Belt.Map.has
 
@@ -53,8 +47,6 @@ let map m ~f = Belt.Map.map m (fun value -> f value)
 
 let mapWithIndex t ~f = Belt.Map.mapWithKey t f
 
-let map_with_index = mapWithIndex
-
 let filter m ~f = Belt.Map.keep m (fun _ value -> f value)
 
 let partition m ~f = Belt.Map.partition m (fun key value -> f ~key ~value)
@@ -67,11 +59,7 @@ let all m ~f = Belt.Map.every m (fun _ value -> f value)
 
 let forEach m ~f = Belt.Map.forEach m (fun _ value -> f value)
 
-let for_each = forEach
-
 let forEachWithIndex m ~f = Belt.Map.forEach m (fun key value -> f ~key ~value)
-
-let for_each_with_index = forEachWithIndex
 
 let fold m ~initial ~f =
   Belt.Map.reduce m initial (fun acc key data -> f acc ~key ~value:data)
@@ -89,11 +77,7 @@ let extent t = Option.both (minimum t) (maximum t)
 
 let toArray = Belt.Map.toArray
 
-let to_array = toArray
-
 let toList = Belt.Map.toList
-
-let to_list = toList
 
 module Poly = struct
   type identity
@@ -113,13 +97,9 @@ module Poly = struct
         end )
 
 
-  let from_array = fromArray
-
   let empty () = fromArray [||]
 
   let fromList l = fromArray (Array.of_list l)
-
-  let from_list = fromList
 
   let singleton ~key ~value = fromArray [| (key, value) |]
 end
@@ -129,15 +109,11 @@ module Int = struct
 
   let fromArray a = Poly.fromArray a |. Obj.magic
 
-  let from_array = fromArray
-
   let empty = fromArray [||]
 
   let singleton ~key ~value = fromArray [| (key, value) |]
 
   let fromList l = fromArray (Array.of_list l)
-
-  let from_list = fromList
 end
 
 module String = struct
@@ -145,13 +121,9 @@ module String = struct
 
   let fromArray a = Poly.fromArray a |. Obj.magic
 
-  let from_array = fromArray
-
   let empty = fromArray [||]
 
   let singleton ~key ~value = fromArray [| (key, value) |]
 
   let fromList l = fromArray (Array.of_list l)
-
-  let from_list = fromList
 end
