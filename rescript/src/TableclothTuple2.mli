@@ -146,7 +146,6 @@ val toList : 'a * 'a -> 'a list
     {[Tuple2.toList ("was", "stressed") = ["was"; "stressed"]]}
 *)
 
-
 val equal :
   ('a -> 'a -> bool) -> ('b -> 'b -> bool) -> ('a, 'b) t -> ('a, 'b) t -> bool
 (** Test two {!Tuple2}s for equality, using the provided functions to test the

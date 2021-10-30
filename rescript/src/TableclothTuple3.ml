@@ -11,7 +11,7 @@ let fromArray array =
   | _ ->
       None
 
-      
+
 let fromList list =
   match list with
   | [] | [ _ ] | [ _; _ ] ->

@@ -26,6 +26,7 @@ let fromString str : char option =
 let toDigit char =
   match char with '0' .. '9' -> Some (toCode char - toCode '0') | _ -> None
 
+
 let toLowercase char =
   match char with
   | 'A' .. 'Z' ->
@@ -33,12 +34,14 @@ let toLowercase char =
   | _ ->
       char
 
+
 let toUppercase char =
   match char with
   | 'a' .. 'z' ->
       Char.chr (toCode 'A' + (toCode char - toCode 'a'))
   | _ ->
       char
+
 
 let isLowercase = function 'a' .. 'z' -> true | _ -> false
 

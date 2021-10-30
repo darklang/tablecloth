@@ -95,7 +95,6 @@ val fromList :
     {[Set.fromList (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.toList = ['A';'B';'G']]}
 *)
 
-
 (** {1 Basic operations} *)
 
 val add : ('a, 'id) t -> 'a -> ('a, 'id) t
@@ -264,13 +263,11 @@ val fold : ('a, _) t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 val forEach : ('a, _) t -> f:('a -> unit) -> unit
 (** Runs a function [f] against each element of the set. *)
 
-
 val toArray : ('a, _) t -> 'a array
 (** Converts a set into an {!Array} *)
 
 val toList : ('a, _) t -> 'a list
 (** Converts a set into a {!List}. *)
-
 
 (** Construct sets which can hold any data type using the polymorphic [compare] function. *)
 module Poly : sig

@@ -70,7 +70,6 @@ val get : string -> int -> char
 val getAt : string -> index:int -> char option
 (** Get the character at [~index] *)
 
-
 val ( .?[] ) : string -> int -> char option
 (** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!getAt}
 
@@ -158,7 +157,6 @@ val isCapitalized : string -> bool
 
     {[String.isCapitalized "" = false]}
 *)
-
 
 val dropLeft : string -> count:int -> string
 (** Drop [count] characters from the left side of a string.
@@ -307,7 +305,6 @@ val padRight : string -> int -> with_:string -> string
 
     {[String.padRight "Ahh" 7 ~with_:"h" = "Ahhhhhh"]}
 *)
-
 
 val uncons : string -> (char * string) option
 (** Returns, as an {!Option}, a tuple containing the first {!Char} and the remaining String.

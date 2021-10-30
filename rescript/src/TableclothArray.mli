@@ -540,7 +540,6 @@ val foldRight : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     {[Array.foldRight ~f:List.cons ~initial:[] [|1; 2; 3|] = [1; 2; 3]]}
 *)
 
-
 val append : 'a t -> 'a t -> 'a t
 (** Creates a new array which is the result of appending the second array onto the end of the first.
 
@@ -804,7 +803,6 @@ val toList : 'a t -> 'a list
 
     {[Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]]}
 *)
-
 
 val toIndexedList : 'a t -> (int * 'a) list
 (** Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple}.

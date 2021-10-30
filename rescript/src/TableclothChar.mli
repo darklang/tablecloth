@@ -185,7 +185,6 @@ val isWhitespace : char -> bool
     {[Char.isWhitespace 'G' = false]}
 *)
 
-
 val toLowercase : char -> char
 (** Converts an ASCII character to lower case, preserving non alphabetic ASCII characters.
 
@@ -248,7 +247,6 @@ val toDigit : char -> int option
 
     {[Char.toDigit "" = None]}
 *)
-
 
 val equal : t -> t -> bool
 (** Test two {!Char}s for equality *)

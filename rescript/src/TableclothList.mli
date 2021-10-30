@@ -99,7 +99,6 @@ val fromArray : 'a array -> 'a t
     {[List.fromArray [|1;2;3|] = [1;2;3]]}
 *)
 
-
 val head : 'a t -> 'a option
 (** Returns, as an {!Option}, the first element of a list.
 
@@ -926,7 +925,6 @@ val groupWhile : 'a t -> f:('a -> 'a -> bool) -> 'a t t
     ]}
 *)
 
-
 val join : string t -> sep:string -> string
 (** Converts a list of strings into a {!String}, placing [sep] between each string in the result.
 
@@ -958,7 +956,6 @@ val groupBy :
 
 val toArray : 'a t -> 'a array
 (** Converts a list to an {!Array}. *)
-
 
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two lists for equality using the provided function to test elements. *)

@@ -83,10 +83,8 @@ external smallestValue : t = "MIN_VALUE" [@@bs.scope "Number"] [@@bs.val]
 external maximumSafeInteger : t = "MAX_SAFE_INTEGER"
   [@@bs.scope "Number"] [@@bs.val]
 
-
 external minimumSafeInteger : t = "MIN_SAFE_INTEGER"
   [@@bs.scope "Number"] [@@bs.val]
-
 
 let isNaN = Js.Float.isNaN
 
@@ -98,7 +96,6 @@ external isInteger : t -> bool = "isInteger" [@@bs.scope "Number"] [@@bs.val]
 
 external isSafeInteger : t -> bool = "isSafeInteger"
   [@@bs.scope "Number"] [@@bs.val]
-
 
 let maximum x y = if isNaN x || isNaN y then nan else if y > x then y else x
 

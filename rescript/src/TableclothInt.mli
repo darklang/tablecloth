@@ -52,7 +52,6 @@ val maximumValue : t
 val minimumValue : t
 (** The minimum representable [int] on the current platform *)
 
-
 val fromString : string -> t option
 (** Attempt to parse a [string] into a [int].
 
@@ -74,7 +73,6 @@ val fromString : string -> t option
 
     {[Int.fromString "NaN" = None]}
 *)
-
 
 (** {1 Operators}
 
@@ -330,7 +328,6 @@ val inRange : t -> lower:t -> upper:t -> bool
 
 *)
 
-
 val toFloat : t -> float
 (** Convert an integer into a float. Useful when mixing {!Int} and {!Float} values like this:
 
@@ -360,7 +357,6 @@ val toString : t -> string
 
     {[Int.to_sString 0 = "0"]}
 *)
-
 
 val equal : t -> t -> bool
 (** Test two [int]s for equality *)

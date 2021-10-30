@@ -51,7 +51,6 @@ val fromList : 'a list -> ('a * 'a * 'a) option
     {[Tuple3.fromList [4; 5; 6; 7] = Some (4, 5, 6)]}
 *)
 
-
 val first : 'a * 'b * 'c -> 'a
 (** Extract the first value from a tuple.
 
@@ -124,7 +123,6 @@ val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
     {[Tuple3.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]}
 *)
 
-
 val mapFirst : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
 (** Transform the first value in a tuple.
 
@@ -180,7 +178,6 @@ val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
     {[Tuple3.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]}
 *)
 
-
 val toArray : 'a * 'a * 'a -> 'a array
 (** Turns a tuple into a {!List} of length three.
 
@@ -204,7 +201,6 @@ val toList : 'a * 'a * 'a -> 'a list
 
     {[Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
 *)
-
 
 val equal :
      ('a -> 'a -> bool)

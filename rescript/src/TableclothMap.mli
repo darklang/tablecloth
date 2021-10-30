@@ -97,13 +97,11 @@ val fromArray :
   -> ('key, 'value, 'identity) t
 (** Create a map from an {!Array} of key-value tuples *)
 
-
 val fromList :
      ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
 (** Create a map of a {!List} of key-value tuples *)
-
 
 val add :
   ('key, 'value, 'id) t -> key:'key -> value:'value -> ('key, 'value, 'id) t
@@ -375,7 +373,6 @@ val mapWithIndex :
   ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
 (** Like {!map} but [f] is also called with each values corresponding key *)
 
-
 val filter :
   ('key, 'value, 'id) t -> f:('value -> bool) -> ('key, 'value, 'id) t
 (** Keep elements that [f] returns [true] for.
@@ -440,7 +437,6 @@ val forEach : (_, 'value, _) t -> f:('value -> unit) -> unit
 val forEachWithIndex :
   ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
 (** Like {!Map.forEach} except [~f] is also called with the corresponding key *)
-
 
 val keys : ('key, _, _) t -> 'key list
 (** Get a {!List} of all of the keys in a map.
