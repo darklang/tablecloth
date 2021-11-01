@@ -22,6 +22,23 @@ end
 
 let suite =
   suite "Map" (fun () ->
+      describe "fromArray" (fun () ->
+          test "has length zero" (fun () ->
+              expect (Tablecloth.Map.empty (module Char) |> Map.length)
+              |> toEqual Eq.int 0 ) ) ;
+
+      describe "singleton" (fun () ->
+          test "has length zero" (fun () ->
+              let singletonMap =
+                Map.singleton (module Int) ~key:1 ~value:"Ant"
+              in
+              let ans = Map.toList singletonMap in
+              expect ans
+              |> toEqual
+                   (let open Eq in
+                   list (pair int string))
+                   [ (1, "Ant") ] ) ) ;
+
       describe "empty" (fun () ->
           test "has length zero" (fun () ->
               expect (Tablecloth.Map.empty (module Char) |> Map.length)
