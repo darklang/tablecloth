@@ -95,4 +95,33 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
+                   None ) ) ;
+
+      describe "both" (fun () ->
+          test "returns both as pair" (fun () ->
+              expect (Option.both (Some 3004) (Some "Ant"))
+              |> toEqual
+                   (let open Eq in
+                   option (pair int string))
+                   (Some (3004, "Ant")) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.both None (Some "Ant"))
+              |> toEqual
+                   (let open Eq in
+                   option (pair int string))
+                   None ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.both (Some 3004) None)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int string))
+                   None ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.both None None)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int string))
                    None ) ) )
