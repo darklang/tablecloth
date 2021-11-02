@@ -9,4 +9,32 @@ let suite =
           test "raises for a None" (fun () ->
               expect (fun () -> ignore (Option.unwrapUnsafe None))
               |> toRaise
-                   (Invalid_argument "Option.unwrapUnsafe called with None") ) ) )
+                   (Invalid_argument "Option.unwrapUnsafe called with None") ) ) ;
+      describe "and_" (fun () ->
+          test "returns second argument" (fun () ->
+              expect (Option.and_ (Some 1) (Some 15))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 15) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.and_ None (Some 15))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.and_ (Some 15) None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.and_ None None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) )
