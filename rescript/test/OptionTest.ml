@@ -168,4 +168,25 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
+                   None ) ) ;
+
+      describe "map2" (fun () ->
+          test "returns transformed value from two option arg" (fun () ->
+              expect (Option.map2 (Some 3) (Some 4) ~f:Int.add)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 7) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.map2 (Some 3) None ~f:Int.add)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+          test "returns none" (fun () ->
+              expect (Option.map2 None (Some 4) ~f:Int.add)
+              |> toEqual
+                   (let open Eq in
+                   option int)
                    None ) ) )
