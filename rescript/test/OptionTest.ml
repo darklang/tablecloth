@@ -26,7 +26,7 @@ let suite =
                    None ) ;
 
           test "returns none" (fun () ->
-              expect (Option.and_ (Some 15) None)
+              expect (Option.and_ (Some 1) None)
               |> toEqual
                    (let open Eq in
                    option int)
@@ -34,6 +34,64 @@ let suite =
 
           test "returns none" (fun () ->
               expect (Option.and_ None None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
+      describe "or_" (fun () ->
+          test "returns first argument" (fun () ->
+              expect (Option.or_ (Some 1) (Some 15))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 1) ) ;
+
+          test "returns second argument some" (fun () ->
+              expect (Option.or_ None (Some 15))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 15) ) ;
+
+          test "returns first argument some" (fun () ->
+              expect (Option.or_ (Some 1) None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 1) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.or_ None None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
+      describe "orElse" (fun () ->
+          test "returns second argument" (fun () ->
+              expect (Option.orElse (Some 1) (Some 15))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 15) ) ;
+
+          test "returns second argument" (fun () ->
+              expect (Option.orElse None (Some 15))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 15) ) ;
+
+          test "returns first argument some" (fun () ->
+              expect (Option.orElse (Some 1) None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 1) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.orElse None None)
               |> toEqual
                    (let open Eq in
                    option int)
