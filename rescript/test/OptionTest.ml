@@ -124,4 +124,26 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option (pair int string))
+                   None ) ) ;
+
+      describe "flatten" (fun () ->
+          test "returns option layers as single option layer" (fun () ->
+              expect (Option.flatten (Some (Some 4)))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 4) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.flatten (Some None))
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.flatten None)
+              |> toEqual
+                   (let open Eq in
+                   option int)
                    None ) ) )
