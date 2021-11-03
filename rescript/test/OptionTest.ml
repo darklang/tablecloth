@@ -220,11 +220,6 @@ let suite =
                    (Map.get Map.String.empty "Tom") )
               |> toEqual Eq.string "unknown" ) ) ;
 
-      describe "unwrapUnsafe" (fun () ->
-          test "returns unwrapped [option('a)]" (fun () ->
-              let head = List.head [ 1; 2; 3 ] in
-              expect (Option.unwrapUnsafe head) |> toEqual Eq.int 1 ) ) ;
-
       describe "isSome" (fun () ->
           test "returns true if is a Some" (fun () ->
               expect (Option.isSome (Some 3004)) |> toEqual Eq.bool true ) ;
@@ -252,4 +247,19 @@ let suite =
               |> toEqual
                    (let open Eq in
                    array int)
-                   [||] ) ) )
+                   [||] ) ) ;
+
+      describe "toList" (fun () ->
+          test "returns option as list" (fun () ->
+              expect (Option.toList (Some 3004))
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3004 ] ) ;
+
+          test "returns empty list if None" (fun () ->
+              expect (Option.toList None)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ) )
