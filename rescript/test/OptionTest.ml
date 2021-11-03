@@ -223,4 +223,11 @@ let suite =
       describe "unwrapUnsafe" (fun () ->
           test "returns unwrapped [option('a)]" (fun () ->
               let head = List.head [ 1; 2; 3 ] in
-              expect (Option.unwrapUnsafe head) |> toEqual Eq.int 1 ) ) )
+              expect (Option.unwrapUnsafe head) |> toEqual Eq.int 1 ) ) ;
+
+      describe "isSome" (fun () ->
+          test "returns true if is a Some" (fun () ->
+              expect (Option.isSome (Some 3004)) |> toEqual Eq.bool true ) ;
+
+          test "returns false if is a None" (fun () ->
+              expect (Option.isSome None) |> toEqual Eq.bool false ) ) )
