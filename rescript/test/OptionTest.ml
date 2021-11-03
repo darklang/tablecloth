@@ -237,4 +237,19 @@ let suite =
               expect (Option.isNone (Some 3004)) |> toEqual Eq.bool false ) ;
 
           test "returns true if is a None" (fun () ->
-              expect (Option.isNone None) |> toEqual Eq.bool true ) ) )
+              expect (Option.isNone None) |> toEqual Eq.bool true ) ) ;
+
+      describe "toArray" (fun () ->
+          test "returns option as array" (fun () ->
+              expect (Option.toArray (Some 3004))
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 3004 |] ) ;
+
+          test "returns empty array if None" (fun () ->
+              expect (Option.toArray None)
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [||] ) ) )
