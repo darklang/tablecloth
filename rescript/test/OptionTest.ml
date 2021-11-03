@@ -262,4 +262,19 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [] ) ) )
+                   [] ) ) ;
+
+      describe "equal" (fun () ->
+          test "returns bool true if options are equal" (fun () ->
+              expect (Option.equal Int.equal (Some 1) (Some 1))
+              |> toEqual Eq.bool true ) ;
+
+          test "returns bool true if options are equal" (fun () ->
+              expect (Option.equal Int.equal (Some 1) (Some 3))
+              |> toEqual Eq.bool false ) ;
+
+          test "returns bool true if options are equal" (fun () ->
+              expect (Option.equal Int.equal (Some 1) None)
+              |> toEqual Eq.bool false ) ;
+          test "returns bool true if options are equal" (fun () ->
+              expect (Option.equal Int.equal None None) |> toEqual Eq.bool true ) ) )
