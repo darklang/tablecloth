@@ -189,4 +189,19 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
+                   None ) ) ;
+
+      describe "andThen" (fun () ->
+          test "returns " (fun () ->
+              expect (Option.andThen (Some [ 1; 2; 3 ]) ~f:List.head)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 1) ) ;
+
+          test "returns none" (fun () ->
+              expect (Option.andThen (Some []) ~f:List.head)
+              |> toEqual
+                   (let open Eq in
+                   option int)
                    None ) ) )
