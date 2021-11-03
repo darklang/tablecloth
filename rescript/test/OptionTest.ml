@@ -218,4 +218,9 @@ let suite =
                 (Option.unwrap
                    ~default:"unknown"
                    (Map.get Map.String.empty "Tom") )
-              |> toEqual Eq.string "unknown" ) ) )
+              |> toEqual Eq.string "unknown" ) ) ;
+
+      describe "unwrapUnsafe" (fun () ->
+          test "returns unwrapped [option('a)]" (fun () ->
+              let head = List.head [ 1; 2; 3 ] in
+              expect (Option.unwrapUnsafe head) |> toEqual Eq.int 1 ) ) )
