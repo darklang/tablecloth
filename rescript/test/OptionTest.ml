@@ -192,7 +192,7 @@ let suite =
                    None ) ) ;
 
       describe "andThen" (fun () ->
-          test "returns " (fun () ->
+          test "returns result of callback" (fun () ->
               expect (Option.andThen (Some [ 1; 2; 3 ]) ~f:List.head)
               |> toEqual
                    (let open Eq in
