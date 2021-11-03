@@ -204,4 +204,18 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
-                   None ) ) )
+                   None ) ) ;
+
+      describe "unwrap" (fun () ->
+          test "returns unwrapped [option('a)]" (fun () ->
+              expect (Option.unwrap ~default:99 (Some 42)) |> toEqual Eq.int 42 ) ;
+
+          test "returns default" (fun () ->
+              expect (Option.unwrap ~default:99 None) |> toEqual Eq.int 99 ) ;
+
+          test "returns default" (fun () ->
+              expect
+                (Option.unwrap
+                   ~default:"unknown"
+                   (Map.get Map.String.empty "Tom") )
+              |> toEqual Eq.string "unknown" ) ) )
