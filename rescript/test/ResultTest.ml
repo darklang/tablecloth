@@ -50,4 +50,10 @@ let suite =
           test "returns true if result is Ok" (fun () ->
               expect (Result.isOk (Ok 3)) |> toEqual Eq.bool true ) ;
           test "returns false if result is Error" (fun () ->
-              expect (Result.isOk (Error 3)) |> toEqual Eq.bool false ) ) )
+              expect (Result.isOk (Error 3)) |> toEqual Eq.bool false ) ) ;
+
+      describe "isError" (fun () ->
+          test "returns false if result is Ok" (fun () ->
+              expect (Result.isOk (Ok 3)) |> toEqual Eq.bool false ) ;
+          test "returns true if result is Error" (fun () ->
+              expect (Result.isOk (Error 3)) |> toEqual Eq.bool true ) ) )
