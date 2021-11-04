@@ -15,8 +15,23 @@ let suite =
               expect (List.map [ 1; 2; 3 ] ~f:Result.ok)
               |> toEqual
                    (let open Eq in
-                    list (result int string))
+                   list (result int string))
                    [ Ok 1; Ok 2; Ok 3 ] ) ) ;
+
+      describe "error" (fun () ->
+          test "returns error type" (fun () ->
+              expect (Int.negate 3 |> Result.error)
+              |> toEqual
+                   (let open Eq in
+                   result string int)
+                   (Error (-3)) ) ;
+          test "returns error type" (fun () ->
+              expect (List.map [ 1; 2; 3 ] ~f:Result.error)
+              |> toEqual
+                   (let open Eq in
+                   list (result string int))
+                   [ Error 1; Error 2; Error 3 ] ) ) ;
+
       describe "fromOption" (fun () ->
           test "maps None into Error" (fun () ->
               expect (fromOption ~error:"error message" None)
