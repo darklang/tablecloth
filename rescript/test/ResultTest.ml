@@ -84,4 +84,32 @@ let suite =
               |> toEqual
                    (let open Eq in
                    result string string)
-                   (Error "Honey bee") ) ) )
+                   (Error "Honey bee") ) ) ;
+
+      describe "or_" (fun () ->
+          test "returns first arg if both are Ok" (fun () ->
+              expect (Result.or_ (Ok "Boar") (Ok "Gecko"))
+              |> toEqual
+                   (let open Eq in
+                   result string string)
+                   (Ok "Boar") ) ;
+          test "returns second arg" (fun () ->
+              expect (Result.or_ (Error "Periwinkle") (Ok "Gecko"))
+              |> toEqual
+                   (let open Eq in
+                   result string string)
+                   (Ok "Gecko") ) ;
+
+          test "returns second arg" (fun () ->
+              expect (Result.or_ (Ok "Boar") (Error "Periwinkle"))
+              |> toEqual
+                   (let open Eq in
+                   result string string)
+                   (Error "Periwinkle") ) ;
+
+          test "returns second arg" (fun () ->
+              expect (Result.or_ (Error "Periwinkle") (Error "Robin"))
+              |> toEqual
+                   (let open Eq in
+                   result string string)
+                   (Error "Robin") ) ) )
