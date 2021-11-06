@@ -103,6 +103,7 @@ build-native: opt dummy
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-rescript: opt dummy
+	source ~/.profile
 	npm install
 	esy
 	esy build
