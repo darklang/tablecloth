@@ -7,4 +7,3 @@
  (target TableclothContainer.ml)
  (action
   (copy ../../rescript/src/TableclothContainer.ml ./TableclothContainer.ml)))
-

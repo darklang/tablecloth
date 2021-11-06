@@ -58,8 +58,6 @@ val from_string : string -> bool option
     {[Bool.from_string "Not even close" = None]}
 *)
 
-
-
 (** {1 Basic operations} *)
 
 external ( && ) : bool -> bool -> bool = "%sequand"
@@ -136,8 +134,6 @@ val to_string : bool -> string
     {[Bool.to_string false = "false"]}
 *)
 
-
-
 val to_int : bool -> int
 (** Convert a [bool] to an {!Int}.
 
@@ -147,7 +143,6 @@ val to_int : bool -> int
 
     {[Bool.to_int false = 0]}
 *)
-
 
 (** {1 Compare} *)
 

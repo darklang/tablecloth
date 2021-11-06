@@ -49,7 +49,6 @@ val one : t
 val maximum_value : t
 (** The maximum representable [int] on the current platform *)
 
-
 val minimum_value : t
 (** The minimum representable [int] on the current platform *)
 
@@ -331,7 +330,6 @@ val in_range : t -> lower:t -> upper:t -> bool
 
 *)
 
-
 (** {1 Convert} *)
 
 val to_float : t -> float
@@ -348,7 +346,6 @@ val to_float : t -> float
     ]}
 *)
 
-
 val to_string : t -> string
 (** Convert an [int] into a [string] representation.
 
@@ -364,7 +361,6 @@ val to_string : t -> string
 
     {[Int.to_string 0 = "0"]}
 *)
-
 
 (** {1 Compare} *)
 

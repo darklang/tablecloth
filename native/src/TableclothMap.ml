@@ -170,5 +170,4 @@ module String = struct
 
 
   let from_array a = Obj.magic (Base.Array.to_list a |> from_list)
-
 end

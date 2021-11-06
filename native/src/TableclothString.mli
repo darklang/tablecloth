@@ -158,7 +158,6 @@ val is_capitalized : string -> bool
     {[String.is_capitalized "" = false]}
 *)
 
-
 val drop_left : string -> count:int -> string
 (** Drop [count] characters from the left side of a string.
 

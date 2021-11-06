@@ -61,6 +61,7 @@ let all = Base.Set.for_all
 let any = Base.Set.exists
 
 let for_each = Base.Set.iter
+
 let fold s ~initial ~f = Base.Set.fold s ~init:initial ~f
 
 let to_array = Base.Set.to_array

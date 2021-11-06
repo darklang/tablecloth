@@ -32,7 +32,6 @@ let get_at a ~index =
   if index >= 0 && index < length a then Some (Base.Array.get a index) else None
 
 
-
 let ( .?() ) (array : 'element t) (index : int) : 'element option =
   get_at array ~index
 
@@ -52,7 +51,6 @@ let filter_map = Base.Array.filter_map
 let flat_map = Base.Array.concat_map
 
 let fold a ~initial ~f = Base.Array.fold a ~init:initial ~f
-
 
 let fold_right a ~initial ~f =
   Base.Array.fold_right a ~init:initial ~f:(Fun.flip f)
@@ -93,12 +91,9 @@ let map3
 
 let partition = Base.Array.partition_tf
 
-
-
-
-let split_at  a ~index =
-( Base.Array.init index ~f:(fun i -> a.(i))
-, Base.Array.init (length a - 1) ~f:(fun i -> a.(index + i)) )
+let split_at a ~index =
+  ( Base.Array.init index ~f:(fun i -> a.(i))
+  , Base.Array.init (length a - 1) ~f:(fun i -> a.(index + i)) )
 
 
 let split_when a ~f =
@@ -107,6 +102,7 @@ let split_when a ~f =
       (a, [||])
   | Some (index, _) ->
       split_at a ~index
+
 
 let unzip = Base.Array.unzip
 
@@ -145,6 +141,7 @@ let group_by t comparator ~f =
           | Some elements ->
               Some (element :: elements) ) )
 
+
 let slice ?to_ array ~from =
   let default_to = match to_ with None -> length array | Some i -> i in
   let slice_from =
@@ -159,7 +156,8 @@ let slice ?to_ array ~from =
   in
   if slice_from >= slice_to
   then [||]
-  else Base.Array.init (slice_to - slice_from) ~f:(fun i -> array.(i + slice_from))
+  else
+    Base.Array.init (slice_to - slice_from) ~f:(fun i -> array.(i + slice_from))
 
 
 let sliding ?(step = 1) a ~size =
@@ -207,13 +205,13 @@ let for_each_with_index a ~f = Base.Array.iteri a ~f
 
 let to_list (a : 'a array) : 'a list = Base.Array.to_list a
 
-
 let to_indexed_list a =
   Base.Array.fold_right
     a
     ~init:(length a - 1, [])
     ~f:(fun x (i, acc) -> (i - 1, (i, x) :: acc))
   |> Base.snd
+
 
 let equal equal a b =
   if length a <> length b

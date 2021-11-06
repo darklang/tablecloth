@@ -1,6 +1,7 @@
 type t = float
 
 type radians = t
+
 let from_int = Base.Float.of_int
 
 let from_string string =
@@ -88,6 +89,7 @@ let in_range n ~lower ~upper =
          ^ " must be less than or equal to ~upper:"
          ^ Base.Float.to_string upper ) )
   else n >= lower && n < upper
+
 
 let square_root = sqrt
 

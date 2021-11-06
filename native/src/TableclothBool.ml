@@ -2,8 +2,8 @@ type t = bool
 
 let from_int i = match i with 0 -> Some false | 1 -> Some true | _ -> None
 
-let from_string  string =
-match string with "false" -> Some false | "true" -> Some true | _ -> None
+let from_string string =
+  match string with "false" -> Some false | "true" -> Some true | _ -> None
 
 
 external ( && ) : bool -> bool -> bool = "%sequand"

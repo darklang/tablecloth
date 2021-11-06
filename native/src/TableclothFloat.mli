@@ -333,7 +333,6 @@ val is_nan : t -> bool
     {[Float.is_nan 1. = false]}
 *)
 
-
 val is_finite : t -> bool
 (** Determine whether a float is finite number. True for any float except [Infinity], [-Infinity] or [NaN]
 
@@ -368,7 +367,6 @@ val is_infinite : t -> bool
     {[Float.(is_infinite nan) = false]}
 *)
 
-
 val is_integer : t -> bool
 (** Determine whether the passed value is an integer.
 
@@ -378,7 +376,6 @@ val is_integer : t -> bool
 
     {[Float.is_integer Float.pi = false]}
 *)
-
 
 val is_safe_integer : t -> bool
 (** Determine whether the passed value is a safe integer (number between -(2**53 - 1) and 2**53 - 1).
@@ -391,7 +388,6 @@ val is_safe_integer : t -> bool
 
     {[Float.(is_safe_integer (maximum_safe_integer + 1.)) = false]}
 *)
-
 
 val in_range : t -> lower:t -> upper:t -> bool
 (** Checks if a float is between [lower] and up to, but not including, [upper].
@@ -410,7 +406,6 @@ val in_range : t -> lower:t -> upper:t -> bool
 
     {[Float.in_range ~lower:5.2 ~upper:7.9 9.6 = false]}
 *)
-
 
 (** {1 Angles} *)
 
@@ -473,7 +468,6 @@ val from_polar : float * radians -> float * float
     {[Float.(from_polar (square_root 2., degrees 45.)) = (1., 1.)]}
 *)
 
-
 val to_polar : float * float -> float * radians
 (** Convert {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } [(x, y)] to {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } [(radius, radians)].
 
@@ -485,7 +479,6 @@ val to_polar : float * float -> float * radians
 
     {[Float.to_polar (5.0, 12.0) = (13.0, 1.1760052070951352)]}
 *)
-
 
 val cos : radians -> t
 (** Figure out the cosine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
@@ -750,13 +743,11 @@ val to_int : t -> int option
     {[Float.(round 1.6 |> to_int) = Some 2]}
 *)
 
-
 val to_string : t -> string
 (** Convert a [float] to a {!String}
 
     The behaviour of this function is platform specific
 *)
-
 
 (** {1 Compare} *)
 

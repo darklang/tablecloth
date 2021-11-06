@@ -17,7 +17,6 @@ let sum (type a) (a : a t) (module M : TableclothContainer.Sum with type t = a)
   Base.List.fold a ~init:M.zero ~f:M.add
 
 
-
 let from_array = Base.Array.to_list
 
 let is_empty (l : 'a list) : bool = l = []
@@ -128,7 +127,6 @@ let fold_right t ~initial ~f =
 
 let split_at (l : 'a list) ~(index : int) : 'a list * 'a list =
   (take ~count:index l, drop ~count:index l)
-
 
 
 let split_when (l : 'a list) ~(f : 'a -> bool) : 'a list * 'a list =

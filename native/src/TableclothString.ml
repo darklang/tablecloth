@@ -18,6 +18,7 @@ let from_array characters =
   let open Base in
   Array.to_list characters |> String.of_char_list
 
+
 let from_list = Base.String.of_char_list
 
 let length = String.length
@@ -32,7 +33,9 @@ let get_at a ~index =
   else None
 
 
-let ( .?[] ) (string : string) (index : int) : char option = get_at string ~index
+let ( .?[] ) (string : string) (index : int) : char option =
+  get_at string ~index
+
 
 let uncons (s : string) : (char * string) option =
   match s with
@@ -102,6 +105,7 @@ let insert_at t ~(index : int) ~(value : string) : string =
   let start = drop_right ~count:end_count t in
   let end_ = drop_left ~count:start_count t in
   String.concat "" [ start; value; end_ ]
+
 
 let to_array string = Base.String.to_list string |> Array.of_list
 

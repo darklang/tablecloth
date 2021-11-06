@@ -71,7 +71,8 @@ let suite =
               expect (from_list [ 'K'; 'u'; 'b'; 'o' ])
               |> toEqual Eq.string "Kubo" ) ;
           test "creates a string of characters" (fun () ->
-              expect (from_list [ ' '; '\n'; '\t' ]) |> toEqual Eq.string " \n\t" ) ) ;
+              expect (from_list [ ' '; '\n'; '\t' ])
+              |> toEqual Eq.string " \n\t" ) ) ;
       describe "repeat" (fun () ->
           test "returns an empty string for count zero" (fun () ->
               expect (repeat "bun" ~count:0) |> toEqual Eq.string "" ) ;

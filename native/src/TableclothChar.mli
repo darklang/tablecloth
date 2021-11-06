@@ -57,7 +57,6 @@ val from_string : string -> char option
     {[Char.from_string " a" = None]}
 *)
 
-
 val is_lowercase : char -> bool
 (** Detect lower case ASCII characters.
 
@@ -208,7 +207,6 @@ val to_uppercase : char -> char
 
     {[to_uppercase '7' = '7']}
 *)
-
 
 val to_code : char -> int
 (** Convert to the corresponding ASCII [code point][cp].

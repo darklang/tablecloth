@@ -23,6 +23,7 @@ let from_string (str : string) : char option =
 let to_digit char =
   match char with '0' .. '9' -> Some (to_code char - to_code '0') | _ -> None
 
+
 let to_lowercase = Base.Char.lowercase
 
 let to_uppercase = Base.Char.uppercase
