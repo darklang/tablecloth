@@ -13,9 +13,6 @@
   ],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "rescript": "git+https://github.com/rescript-lang/rescript-compiler.git"
-  },
   "dependencies": {
     "tablecloth-bucklescript": "../"
   }

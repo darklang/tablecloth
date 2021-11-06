@@ -1,0 +1,18 @@
+{
+  "name": "melange-project",
+  "dependencies": {
+    "ocaml": "4.12.x",
+    "melange": "melange-re/melange",
+    "tablecloth-bucklescript": ".."
+  },
+  "esy": {
+    "buildsInSource": "unsafe",
+    "build": [
+      "ln -sfn #{melange.install} node_modules/bs-platform",
+      "bsb -make-world"
+    ]
+  },
+  "installConfig": {
+    "pnp": false
+  }
+}

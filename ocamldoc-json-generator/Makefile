@@ -104,6 +104,8 @@ build-native: opt dummy
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-rescript: opt dummy
 	npm install
+	esy
+	esy build
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
 	cp ../rescript/src/TableclothComparator.ml ./_rescript/TableclothComparator.ml
@@ -188,8 +190,8 @@ doc-rescript: build-rescript
 		`opam config exec -- ocamlfind query -i-format base` \
 		`opam config exec -- ocamlfind query -i-format str` \
 		-I ./_rescript \
-		-I node_modules/rescript/lib/ocaml \
-		-I node_modules/tablecloth-bucklescript/lib/ocaml \
+		-I node_modules/rescript/lib/melange \
+		-I node_modules/tablecloth-bucklescript/lib/melange \
 		-d ../website \
 		./_rescript/TableclothBool.mli \
 		./_rescript/TableclothBool.ml \

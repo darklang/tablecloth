@@ -15,3 +15,10 @@ _build
 /ocamldoc-json-generator/node_modules/
 /ocamldoc-json-generator/_rescript/*.ml
 /ocamldoc-json-generator/_rescript/*.mli
+esy.lock
+_esy
+.bsbuild
+.sourcedirs.json
+/ocamldoc-json-generator/dune.bsb
+/ocamldoc-json-generator/dune-project
+/ocamldoc-json-generator/dune
