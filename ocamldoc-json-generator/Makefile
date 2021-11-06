@@ -7,6 +7,8 @@ CMXS=JsonGenerator.cmxs
 COMPFLAGS=-package menhirLib,ocamldoc,reason
 CMXA_DEPS=menhirLib.cmxa reason_migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmxa
 
+ESY_TC=$(shell find ~/.esy/source/i/ -maxdepth 1 -type d | grep tablecloth_ | awk '{print $1"/lib/ocaml"}')
+
 opt: $(CMXS)
 
 $(CMO): JsonGenerator.ml
@@ -103,6 +105,10 @@ build-native: opt dummy
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-rescript: opt dummy
+	mkdir node_modules/tablecloth-bucklescript
+	cp ../package.json node_modules/tablecloth-bucklescript
+	cp ../bsconfig.json node_modules/tablecloth-bucklescript
+	cp -r ../rescript node_modules/tablecloth-bucklescript
 	~/.npm-global/bin/esy
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
@@ -188,6 +194,7 @@ doc-rescript: build-rescript
 		`opam config exec -- ocamlfind query -i-format base` \
 		`opam config exec -- ocamlfind query -i-format str` \
 		-I node_modules/bs-platform/lib/melange \
+		-I $(ESY_TC) \
 		-I ./_rescript \
 		-d ../website \
 		./_rescript/TableclothBool.mli \
