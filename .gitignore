@@ -13,3 +13,5 @@ _build
 /integration-test/bs/lib/
 /ocamldoc-json-generator/lib/
 /ocamldoc-json-generator/node_modules/
+/ocamldoc-json-generator/_rescript/*.ml
+/ocamldoc-json-generator/_rescript/*.mli
