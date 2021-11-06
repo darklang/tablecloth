@@ -17,13 +17,10 @@ let sum (type a) (a : a t) (module M : TableclothContainer.Sum with type t = a)
   Base.List.fold a ~init:M.zero ~f:M.add
 
 
-let fromArray = Base.Array.to_list
 
-let from_array = fromArray
+let from_array = Base.Array.to_list
 
-let isEmpty (l : 'a list) : bool = l = []
-
-let is_empty = isEmpty
+let is_empty (l : 'a list) : bool = l = []
 
 let head = Base.List.hd
 
@@ -33,26 +30,22 @@ let cons list element = element :: list
 
 let take t ~count = Base.List.take t count
 
-let takeWhile (l : 'a list) ~(f : 'a -> bool) : 'a list =
-  let rec takeWhileHelper acc l' =
+let take_while (l : 'a list) ~(f : 'a -> bool) : 'a list =
+  let rec take_while_helper acc l' =
     match l' with
     | [] ->
         Base.List.rev acc
     | x :: rest ->
-        if f x then takeWhileHelper (x :: acc) rest else Base.List.rev acc
+        if f x then take_while_helper (x :: acc) rest else Base.List.rev acc
   in
-  takeWhileHelper [] l
+  take_while_helper [] l
 
-
-let take_while = takeWhile
 
 let drop t ~count = Base.List.drop t count
 
-let rec dropWhile (l : 'a list) ~(f : 'a -> bool) : 'a list =
-  match l with [] -> [] | x :: rest -> if f x then dropWhile ~f rest else l
+let rec drop_while (l : 'a list) ~(f : 'a -> bool) : 'a list =
+  match l with [] -> [] | x :: rest -> if f x then drop_while ~f rest else l
 
-
-let drop_while = dropWhile
 
 let initial (l : 'a list) : 'a list option =
   match Base.List.rev l with
@@ -78,18 +71,14 @@ let reverse (l : 'a list) : 'a list = Base.List.rev l
 
 let map = Base.List.map
 
-let mapWithIndex = Base.List.mapi
+let map_with_index = Base.List.mapi
 
-let map_with_index = mapWithIndex
-
-let flatMap = Base.List.concat_map
-
-let flat_map = flatMap
+let flat_map = Base.List.concat_map
 
 let includes = Base.List.mem
 
-let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
-  let rec uniqueHelper
+let unique_by ~(f : 'a -> string) (l : 'a list) : 'a list =
+  let rec unique_helper
       ~(f : 'a -> string)
       (existing : Base.Set.M(Base.String).t)
       (remaining : 'a list)
@@ -98,44 +87,34 @@ let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
     | [] ->
         reverse accumulator
     | first :: rest ->
-        let computedFirst = f first in
-        if Base.Set.mem existing computedFirst
-        then uniqueHelper ~f existing rest accumulator
+        let computed_first = f first in
+        if Base.Set.mem existing computed_first
+        then unique_helper ~f existing rest accumulator
         else
-          uniqueHelper
+          unique_helper
             ~f
-            (Base.Set.add existing computedFirst)
+            (Base.Set.add existing computed_first)
             rest
             (first :: accumulator)
   in
-  uniqueHelper ~f (Base.Set.empty (module Base.String)) l []
+  unique_helper ~f (Base.Set.empty (module Base.String)) l []
 
-
-let unique_by = uniqueBy
 
 let find = Base.List.find
 
-let findIndex = Base.List.findi
-
-let find_index = findIndex
+let find_index = Base.List.findi
 
 let any = Base.List.exists
 
 let all = Base.List.for_all
 
-let getAt (l : 'a list) ~(index : int) : 'a option = Base.List.nth l index
+let get_at (l : 'a list) ~(index : int) : 'a option = Base.List.nth l index
 
-let get_at = getAt
-
-let filterMap = Base.List.filter_map
-
-let filter_map = filterMap
+let filter_map = Base.List.filter_map
 
 let filter t ~f = Base.List.filter t ~f
 
-let filterWithIndex t ~f = Base.List.filteri t ~f
-
-let filter_with_index = filterWithIndex
+let filter_with_index t ~f = Base.List.filteri t ~f
 
 let partition = Base.List.partition_tf
 
@@ -143,52 +122,43 @@ let fold t ~initial ~f = Base.List.fold t ~init:initial ~f
 
 let count = Base.List.count
 
-let foldRight t ~initial ~f =
+let fold_right t ~initial ~f =
   Base.List.fold_right t ~init:initial ~f:(Fun.flip f)
 
 
-let fold_right = foldRight
-
-let splitAt (l : 'a list) ~(index : int) : 'a list * 'a list =
+let split_at (l : 'a list) ~(index : int) : 'a list * 'a list =
   (take ~count:index l, drop ~count:index l)
 
 
-let split_at = splitAt
 
-let splitWhen (l : 'a list) ~(f : 'a -> bool) : 'a list * 'a list =
-  match findIndex ~f:(fun _ element -> f element) l with
+let split_when (l : 'a list) ~(f : 'a -> bool) : 'a list * 'a list =
+  match find_index ~f:(fun _ element -> f element) l with
   | Some (index, _) ->
-      splitAt ~index l
+      split_at ~index l
   | None ->
       (l, [])
 
 
-let split_when = splitWhen
-
-let updateAt (l : 'a list) ~(index : int) ~(f : 'a -> 'a) : 'a list =
+let update_at (l : 'a list) ~(index : int) ~(f : 'a -> 'a) : 'a list =
   if index < 0
   then l
   else
-    let front, back = splitAt ~index l in
+    let front, back = split_at ~index l in
     match back with [] -> l | x :: rest -> append front (f x :: rest)
 
 
-let update_at = updateAt
-
 let length (l : 'a list) : int = List.length l
 
-let removeAt (l : 'a list) ~(index : int) : 'a list =
+let remove_at (l : 'a list) ~(index : int) : 'a list =
   if index < 0
   then l
   else
-    let front, back = splitAt ~index l in
+    let front, back = split_at ~index l in
     match tail back with None -> l | Some t -> append front t
 
 
-let remove_at = removeAt
-
-let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
-  let minBy (y, fy) x =
+let minimum_by ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
+  let min_by (y, fy) x =
     let fx = f x in
     if fx < fy then (x, fx) else (y, fy)
   in
@@ -196,15 +166,13 @@ let minimumBy ~(f : 'a -> 'comparable) (ls : 'a list) : 'a option =
   | [ l ] ->
       Some l
   | l1 :: lrest ->
-      Some (fst (fold ~f:minBy ~initial:(l1, f l1) lrest))
+      Some (fst (fold ~f:min_by ~initial:(l1, f l1) lrest))
   | _ ->
       None
 
 
-let minimum_by = minimumBy
-
-let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
-  let maxBy (y, fy) x =
+let maximum_by ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
+  let max_by (y, fy) x =
     let fx = f x in
     if fx > fy then (x, fx) else (y, fy)
   in
@@ -214,10 +182,8 @@ let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
   | [ x ] ->
       Some x
   | x :: rest ->
-      Some (fst (fold ~f:maxBy ~initial:(x, f x) rest))
+      Some (fst (fold ~f:max_by ~initial:(x, f x) rest))
 
-
-let maximum_by = maximumBy
 
 let minimum = Base.List.min_elt
 
@@ -242,14 +208,12 @@ let extent t ~compare =
                   max ) )
 
 
-let insertAt (t : 'a list) ~(index : int) ~(value : 'a) : 'a list =
-  let front, back = splitAt t ~index in
+let insert_at (t : 'a list) ~(index : int) ~(value : 'a) : 'a list =
+  let front, back = split_at t ~index in
   append front (value :: back)
 
 
-let insert_at = insertAt
-
-let zip listA listB =
+let zip list_a list_b =
   let rec loop result xs ys =
     match (xs, ys) with
     | [], _ ->
@@ -259,13 +223,13 @@ let zip listA listB =
     | x :: xs, y :: ys ->
         loop ((x, y) :: result) xs ys
   in
-  loop [] listA listB
+  loop [] list_a list_b
 
 
 let unzip = Base.List.unzip
 
 let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
-  let rec takeAllOrEmpty t n (current, count) =
+  let rec take_all_or_empty t n (current, count) =
     if count = n
     then reverse current
     else
@@ -273,21 +237,19 @@ let sliding ?(step = 1) (t : 'a t) ~(size : int) : 'a t t =
       | [] ->
           []
       | x :: xs ->
-          takeAllOrEmpty xs n (x :: current, count + 1)
+          take_all_or_empty xs n (x :: current, count + 1)
   in
   let rec loop t =
-    if isEmpty t
+    if is_empty t
     then []
     else
-      let sample = takeAllOrEmpty t size ([], 0) in
-      if isEmpty sample then [] else sample :: loop (Base.List.drop t step)
+      let sample = take_all_or_empty t size ([], 0) in
+      if is_empty sample then [] else sample :: loop (Base.List.drop t step)
   in
   loop t
 
 
-let chunksOf t ~size = sliding t ~step:size ~size
-
-let chunks_of = chunksOf
+let chunks_of t ~size = sliding t ~step:size ~size
 
 let intersperse (l : 'a list) ~sep : 'a list =
   match l with
@@ -296,39 +258,29 @@ let intersperse (l : 'a list) ~sep : 'a list =
   | [ x ] ->
       [ x ]
   | x :: rest ->
-      x :: foldRight rest ~initial:[] ~f:(fun acc x -> sep :: x :: acc)
+      x :: fold_right rest ~initial:[] ~f:(fun acc x -> sep :: x :: acc)
 
 
-let forEach l ~f = Base.List.iter l ~f
+let for_each l ~f = Base.List.iter l ~f
 
-let for_each = forEach
+let for_each_with_index = Base.List.iteri
 
-let forEachWithIndex = Base.List.iteri
+let to_array = Base.List.to_array
 
-let for_each_with_index = forEachWithIndex
-
-let toArray = Base.List.to_array
-
-let to_array = toArray
-
-let groupWhile t ~f = Base.List.group t ~break:f
-
-let group_while = groupWhile
+let group_while t ~f = Base.List.group t ~break:f
 
 let sort = Base.List.sort
 
-let sortBy ~(f : 'a -> 'b) (l : 'a list) : 'a list =
+let sort_by ~(f : 'a -> 'b) (l : 'a list) : 'a list =
   Base.List.sort l ~compare:(fun a b ->
       let a' = f a in
       let b' = f b in
       if a' = b' then 0 else if a' < b' then -1 else 1 )
 
 
-let sort_by = sortBy
-
 let join t ~sep = Stdlib.String.concat sep t
 
-let groupBy t comparator ~f =
+let group_by t comparator ~f =
   fold t ~initial:(TableclothMap.empty comparator) ~f:(fun map element ->
       let key = f element in
       TableclothMap.update map ~key ~f:(function
@@ -338,19 +290,17 @@ let groupBy t comparator ~f =
               Some (element :: elements) ) )
 
 
-let group_by = groupBy
-
-let rec equal equalElement a b =
+let rec equal equal_element a b =
   match (a, b) with
   | [], [] ->
       true
   | x :: xs, y :: ys ->
-      equalElement x y && equal equalElement xs ys
+      equal_element x y && equal equal_element xs ys
   | _ ->
       false
 
 
-let rec compare compareElement a b =
+let rec compare compare_element a b =
   match (a, b) with
   | [], [] ->
       0
@@ -359,8 +309,8 @@ let rec compare compareElement a b =
   | _, [] ->
       1
   | x :: xs, y :: ys ->
-    ( match compareElement x y with
+    ( match compare_element x y with
     | 0 ->
-        compare compareElement xs ys
+        compare compare_element xs ys
     | result ->
         result )

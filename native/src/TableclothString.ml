@@ -12,38 +12,27 @@ let initialize length ~f = Base.List.init length ~f |> Base.String.of_char_list
 
 let repeat t ~count = Base.List.init count ~f:(fun _ -> t) |> Base.String.concat
 
-let fromChar = Base.String.of_char
+let from_char = Base.String.of_char
 
-let from_char = fromChar
-
-let fromArray characters =
+let from_array characters =
   let open Base in
   Array.to_list characters |> String.of_char_list
 
-
-let from_array = fromArray
-
-let fromList = Base.String.of_char_list
-
-let from_list = fromList
+let from_list = Base.String.of_char_list
 
 let length = String.length
 
-let isEmpty t = length t = 0
-
-let is_empty = isEmpty
+let is_empty t = length t = 0
 
 let get = Base.String.get
 
-let getAt a ~index =
+let get_at a ~index =
   if index >= 0 && index < length a
   then Some (Base.String.get a index)
   else None
 
 
-let get_at = getAt
-
-let ( .?[] ) (string : string) (index : int) : char option = getAt string ~index
+let ( .?[] ) (string : string) (index : int) : char option = get_at string ~index
 
 let uncons (s : string) : (char * string) option =
   match s with
@@ -53,45 +42,31 @@ let uncons (s : string) : (char * string) option =
       Some (s.[0], String.sub s 1 (String.length s - 1))
 
 
-let dropLeft (s : string) ~(count : int) : string =
+let drop_left (s : string) ~(count : int) : string =
   Base.String.drop_prefix s count
 
 
-let drop_left = dropLeft
-
-let dropRight (s : string) ~(count : int) : string =
+let drop_right (s : string) ~(count : int) : string =
   Base.String.drop_suffix s count
 
-
-let drop_right = dropRight
 
 let split t ~(on : string) : string list =
   Str.split_delim (Str.regexp_string on) t
 
 
-let startsWith t ~prefix = Base.String.is_prefix ~prefix t
+let starts_with t ~prefix = Base.String.is_prefix ~prefix t
 
-let starts_with = startsWith
+let ends_with t ~suffix = Base.String.is_suffix ~suffix t
 
-let endsWith t ~suffix = Base.String.is_suffix ~suffix t
+let to_lowercase (s : string) : string = String.lowercase_ascii s
 
-let ends_with = endsWith
-
-let toLowercase (s : string) : string = String.lowercase_ascii s
-
-let to_lowercase = toLowercase
-
-let toUppercase (s : string) : string = String.uppercase_ascii s
-
-let to_uppercase = toUppercase
+let to_uppercase (s : string) : string = String.uppercase_ascii s
 
 let uncapitalize (s : string) : string = String.uncapitalize_ascii s
 
 let capitalize (s : string) : string = String.capitalize_ascii s
 
-let isCapitalized (s : string) : bool = s = String.capitalize_ascii s
-
-let is_capitalized = isCapitalized
+let is_capitalized (s : string) : bool = s = String.capitalize_ascii s
 
 let includes t ~substring : bool = Base.String.is_substring t ~substring
 
@@ -99,16 +74,14 @@ let reverse = Base.String.rev
 
 let slice ?(to_ = 0) str ~from = String.sub str from (to_ - from)
 
-let indexOf haystack needle =
+let index_of haystack needle =
   Base.String.Search_pattern.index
     ~pos:0
     ~in_:haystack
     (Base.String.Search_pattern.create needle)
 
 
-let index_of = indexOf
-
-let indexOfRight haystack needle =
+let index_of_right haystack needle =
   Base.String.Search_pattern.index_all
     ~may_overlap:false
     ~in_:haystack
@@ -116,9 +89,7 @@ let indexOfRight haystack needle =
   |> Base.List.last
 
 
-let index_of_right = indexOfRight
-
-let insertAt t ~(index : int) ~(value : string) : string =
+let insert_at t ~(index : int) ~(value : string) : string =
   let length = length t in
   (* Handle overflow *)
   let index = if index > length then length else index in
@@ -126,60 +97,45 @@ let insertAt t ~(index : int) ~(value : string) : string =
   let index = if index < 0 then length + index else index in
   (* Handle case where it's still less than zero *)
   let index = if index < 0 then 0 else index in
-  let startCount = index in
-  let endCount = length - index in
-  let start = dropRight ~count:endCount t in
-  let end_ = dropLeft ~count:startCount t in
+  let start_count = index in
+  let end_count = length - index in
+  let start = drop_right ~count:end_count t in
+  let end_ = drop_left ~count:start_count t in
   String.concat "" [ start; value; end_ ]
 
+let to_array string = Base.String.to_list string |> Array.of_list
 
-let insert_at = insertAt
-
-let toArray string = Base.String.to_list string |> Array.of_list
-
-let to_array = toArray
-
-let toList = Base.String.to_list
-
-let to_list = toList
+let to_list = Base.String.to_list
 
 let trim string = Base.String.strip string
 
-let trimLeft string = Base.String.lstrip string
+let trim_left string = Base.String.lstrip string
 
-let trim_left = trimLeft
+let trim_right string = Base.String.rstrip string
 
-let trimRight string = Base.String.rstrip string
-
-let trim_right = trimRight
-
-let padLeft string targetLength ~with_ =
-  if length string >= targetLength
+let pad_left string target_length ~with_ =
+  if length string >= target_length
   then string
   else
-    let paddingLength = targetLength - length string in
-    let count = paddingLength / length with_ in
-    let padding = slice (repeat with_ ~count) ~from:0 ~to_:paddingLength in
+    let padding_length = target_length - length string in
+    let count = padding_length / length with_ in
+    let padding = slice (repeat with_ ~count) ~from:0 ~to_:padding_length in
     padding ^ string
 
 
-let pad_left = padLeft
-
-let padRight string targetLength ~with_ =
-  if length string >= targetLength
+let pad_right string target_length ~with_ =
+  if length string >= target_length
   then string
   else
-    let paddingLength = targetLength - length string in
-    let count = paddingLength / length with_ in
-    let padding = slice (repeat with_ ~count) ~from:0 ~to_:paddingLength in
+    let padding_length = target_length - length string in
+    let count = padding_length / length with_ in
+    let padding = slice (repeat with_ ~count) ~from:0 ~to_:padding_length in
     string ^ padding
 
 
-let pad_right = padRight
+let pad_right = pad_right
 
-let forEach = Base.String.iter
-
-let for_each = forEach
+let for_each = Base.String.iter
 
 let fold s ~initial ~f = Base.String.fold s ~init:initial ~f
 
