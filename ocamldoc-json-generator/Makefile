@@ -105,6 +105,7 @@ build-native: opt dummy
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-rescript: opt dummy
+	mkdir node_modules
 	mkdir node_modules/tablecloth-bucklescript
 	cp ../package.json node_modules/tablecloth-bucklescript
 	cp ../bsconfig.json node_modules/tablecloth-bucklescript
