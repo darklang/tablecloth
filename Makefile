@@ -80,7 +80,7 @@ integration-test-rescript:
 		npm install;\
 		npm run build;\
 		echo -e "\n\e[31mRunning generated js\e[0m";\
-		node main.bs.js
+		node rescript/main.bs.js
 
 integration-test-native:
 	echo -e "\n\e[31mBuilding native integration test\e[0m"
