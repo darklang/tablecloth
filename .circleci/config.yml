@@ -96,6 +96,8 @@ jobs:
             - v3-docs-{{ .Branch }}-
             - v3-docs-dependencies-
       # m4 is a system dependency required lots of packages
+      # nodejs and npm is needed to generate rescript ocamldoc
+      - run: sudo apt-get update
       - run: sudo apt-get install -y m4 nodejs npm
       - run: cd ocamldoc-json-generator && make deps
       - run: cd ocamldoc-json-generator && make doc
