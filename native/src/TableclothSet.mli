@@ -18,7 +18,7 @@
         end)
       end
 
-      let points : Set.Of(Point).t = Set.fromList (module Points) [(0, 0); (3, 4); (6, 7)]
+      let points : Set.Of(Point).t = Set.from_list (module Points) [(0, 0); (3, 4); (6, 7)]
     ]}
 
     See the {!Comparator} module for a more details.
@@ -30,14 +30,14 @@ type ('a, 'id) t = ('a, 'id) Base.Set.t
 
     {[
       let names : Set.Of(String).t =
-        Set.fromList (module String) ["Andrew"; "Tina"]
+        Set.from_list (module String) ["Andrew"; "Tina"]
     ]}
 
     Is the same as
 
     {[
       let names : (string, String.identity) Set.t =
-        Set.fromList (module String) ["Andrew"; "Tina"]
+        Set.from_list (module String) ["Andrew"; "Tina"]
     ]}
 *)
 module Of (M : TableclothComparator.S) : sig
@@ -46,9 +46,9 @@ end
 
 (** {1 Create}  
   
-  You can create a Set by providing a module conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
+  You can create a Set by providing a module conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!from_list} or {!from_array}.
 
-  Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
+  Specialised versions of the {!empty}, {!singleton}, {!from_list} and {!from_array} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
 val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
@@ -63,7 +63,7 @@ val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
         [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|] 
         ~intial:(Set.empty (module Char))
         ~f:Set.add
-      |> Set.toArray
+      |> Set.to_array
       = [|'i'; 'm'; 'p'; 's'|] 
     ]}
 *)
@@ -74,43 +74,35 @@ val singleton :
 
   {2 Examples}
 
-  {[Set.singleton (module Int) 7 |> Set.toList = [7]]}
+  {[Set.singleton (module Int) 7 |> Set.to_list = [7]]}
 *)
 
-val fromArray :
+val from_array :
   ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
 (** Create a set from an {!Array}
 
     {2 Examples}
 
-    {[Set.fromArray (module String) [|"Ant"; "Bat"; "Bat"; "Goldfish"|] |> Set.toArray = [|"Ant";"Bat";"Goldfish"|]]}
+    {[Set.from_array (module String) [|"Ant"; "Bat"; "Bat"; "Goldfish"|] |> Set.to_array = [|"Ant";"Bat";"Goldfish"|]]}
 *)
 
-val from_array :
-  ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
-
-val fromList :
+val from_list :
   ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 (** Create a set from a {!List}
 
     {2 Examples}
 
-    {[Set.fromList (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.toList = ['A';'B';'G']]}
+    {[Set.from_list (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.to_list = ['A';'B';'G']]}
 *)
-
-val from_list :
-  ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
-
-(** {1 Basic operations} *)
 
 val add : ('a, 'id) t -> 'a -> ('a, 'id) t
 (** Insert a value into a set.
 
     {2 Examples}
 
-    {[Set.add (Set.Int.fromList [1; 2]) 3 |> Set.toList = [1; 2; 3]]}
+    {[Set.add (Set.Int.from_list [1; 2]) 3 |> Set.to_list = [1; 2; 3]]}
 
-    {[Set.add (Set.Int.fromList [1; 2]) 2 |> Set.toList = [1; 2]]}
+    {[Set.add (Set.Int.from_list [1; 2]) 2 |> Set.to_list = [1; 2]]}
 *)
 
 val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
@@ -118,12 +110,12 @@ val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.remove (Set.Int.fromList [1; 2]) 2 |> Set.toList = [1]]}
+    {[Set.remove (Set.Int.from_list [1; 2]) 2 |> Set.to_list = [1]]}
 
     {[
-      let originalSet = Set.Int.fromList [1; 2] in
-      let newSet = Set.remove orignalSet 3 in
-      originalSet = newSet
+      let original_set = Set.Int.from_list [1; 2] in
+      let new_set = Set.remove orignal_set 3 in
+      original_set = new_set
     ]}
 *)
 
@@ -132,7 +124,7 @@ val includes : ('a, _) t -> 'a -> bool
 
     {2 Examples}
 
-   {[Set.includes (Set.String.fromList ["Ant"; "Bat"; "Cat"]) "Bat" = true]}
+   {[Set.includes (Set.String.from_list ["Ant"; "Bat"; "Cat"]) "Bat" = true]}
 *)
 
 val ( .?{} ) : ('element, _) t -> 'element -> bool
@@ -143,7 +135,7 @@ val ( .?{} ) : ('element, _) t -> 'element -> bool
     {2 Examples}
 
     {[
-      let animals = Set.String.fromList ["Ant"; "Bat"; "Cat"] in
+      let animals = Set.String.from_list ["Ant"; "Bat"; "Cat"] in
 
       animals.Set.?{"Emu"} = false
     ]}
@@ -154,7 +146,7 @@ val length : (_, _) t -> int
 
     {2 Examples}
 
-    {[Set.length (Set.Int.fromList [1; 2; 3]) = 3]}
+    {[Set.length (Set.Int.from_list [1; 2; 3]) = 3]}
 *)
 
 val find : ('value, _) t -> f:('value -> bool) -> 'value option
@@ -162,37 +154,35 @@ val find : ('value, _) t -> f:('value -> bool) -> 'value option
 
     {2 Examples}
 
-    {[Set.find ~f:Int.isEven (Set.Int.fromList [1; 3; 4; 8]) = Some 4]}
+    {[Set.find ~f:Int.is_even (Set.Int.from_list [1; 3; 4; 8]) = Some 4]}
 
-    {[Set.find ~f:Int.isOdd (Set.Int.fromList [0; 2; 4; 8]) = None]}
+    {[Set.find ~f:Int.is_odd (Set.Int.from_list [0; 2; 4; 8]) = None]}
 
-    {[Set.find ~f:Int.isEven Set.Int.empty = None]}
+    {[Set.find ~f:Int.is_even Set.Int.empty = None]}
 *)
 
 (** {1 Query} *)
 
-val isEmpty : (_, _) t -> bool
+val is_empty : (_, _) t -> bool
 (** Check if a set is empty.
 
     {2 Examples}
 
-    {[Set.isEmpty (Set.Int.empty) = true]}
+    {[Set.is_empty (Set.Int.empty) = true]}
 
-    {[Set.isEmpty (Set.Int.singleton 4) = false]}
+    {[Set.is_empty (Set.Int.singleton 4) = false]}
 *)
-
-val is_empty : (_, _) t -> bool
 
 val any : ('value, _) t -> f:('value -> bool) -> bool
 (** Determine if [f] returns true for [any] values in a set.
 
     {2 Examples}
 
-    {[Set.any (Set.Int.fromArray [|2;3|]) ~f:Int.isEven = true]}
+    {[Set.any (Set.Int.from_array [|2;3|]) ~f:Int.is_even = true]}
 
-    {[Set.any (Set.Int.fromList [1;3]) ~f:Int.isEven = false]}
+    {[Set.any (Set.Int.from_list [1;3]) ~f:Int.is_even = false]}
 
-    {[Set.any (Set.Int.fromList []) ~f:Int.isEven = false]}
+    {[Set.any (Set.Int.from_list []) ~f:Int.is_even = false]}
 *)
 
 val all : ('value, _) t -> f:('value -> bool) -> bool
@@ -200,11 +190,11 @@ val all : ('value, _) t -> f:('value -> bool) -> bool
 
     {2 Examples}
 
-    {[Set.all ~f:Int.isEven (Set.Int.fromArray [|2;4|]) = true]}
+    {[Set.all ~f:Int.is_even (Set.Int.from_array [|2;4|]) = true]}
 
-    {[Set.all ~f:Int.isEven (Set.Int.fromLis [2;3]) = false]}
+    {[Set.all ~f:Int.is_even (Set.Int.from_list [2;3]) = false]}
 
-    {[Set.all ~f:Int.isEven Set.Int.empty = true]}
+    {[Set.all ~f:Int.is_even Set.Int.empty = true]}
 *)
 
 (** {1 Combine} *)
@@ -214,9 +204,9 @@ val difference : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.difference (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList = [1;5]]}
+    {[Set.difference (Set.Int.from_list [1;2;5]) (Set.Int.from_list [2;3;4]) |> Set.to_list = [1;5]]}
 
-    {[Set.difference (Set.Int.fromList [2;3;4]) (Set.Int.fromList [1;2;5]) |> Set.toList = [3;4]]}
+    {[Set.difference (Set.Int.from_list [2;3;4]) (Set.Int.from_list [1;2;5]) |> Set.to_list = [3;4]]}
 *)
 
 val intersection : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
@@ -224,7 +214,7 @@ val intersection : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.intersection (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList= [2]]}
+    {[Set.intersection (Set.Int.from_list [1;2;5]) (Set.Int.from_list [2;3;4]) |> Set.to_list= [2]]}
 *)
 
 val union : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
@@ -232,7 +222,7 @@ val union : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.union (Set.Int.fromList [1;2;5]) (Set.Int.fromList [2;3;4]) |> Set.toList = [1;2;3;4;5]]}
+    {[Set.union (Set.Int.from_list [1;2;5]) (Set.Int.from_list [2;3;4]) |> Set.to_list = [1;2;3;4;5]]}
 *)
 
 (** {1 Transform} *)
@@ -242,7 +232,7 @@ val filter : ('a, 'id) t -> f:('a -> bool) -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.filter (Set.Int.fromList [1;2;3]) ~f:Int.isEven |> Set.toList = [2]]}
+    {[Set.filter (Set.Int.from_list [1;2;3]) ~f:Int.is_even |> Set.to_list = [2]]}
 *)
 
 val partition : ('a, 'id) t -> f:('a -> bool) -> ('a, 'id) t * ('a, 'id) t
@@ -251,10 +241,10 @@ val partition : ('a, 'id) t -> f:('a -> bool) -> ('a, 'id) t * ('a, 'id) t
     {2 Examples}
 
     {[
-      let numbers = Set.Int.fromList [1; 1; 5; 6; 5; 7; 9; 8] in
-      let (evens, odds) = Set.partition numbers ~f:Int.isEven in
-      Set.toList evens = [6; 8]
-      Set.toList odds = [1; 5; 7; 9]
+      let numbers = Set.Int.from_list [1; 1; 5; 6; 5; 7; 9; 8] in
+      let (evens, odds) = Set.partition numbers ~f:Int.is_even in
+      Set.to_list evens = [6; 8]
+      Set.to_list odds = [1; 5; 7; 9]
     ]}
 *)
 
@@ -265,25 +255,19 @@ val fold : ('a, _) t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
   {2 Examples}
 
-  {[Set.fold ~f:( * ) ~initial:1 (Set.Int.fromList [1;2;3;4]) = 24]}
+  {[Set.fold ~f:( * ) ~initial:1 (Set.Int.from_list [1;2;3;4]) = 24]}
 *)
 
-val forEach : ('a, _) t -> f:('a -> unit) -> unit
-(** Runs a function [f] against each element of the set. *)
-
 val for_each : ('a, _) t -> f:('a -> unit) -> unit
+(** Runs a function [f] against each element of the set. *)
 
 (** {1 Convert} *)
 
-val toArray : ('a, _) t -> 'a array
+val to_array : ('a, _) t -> 'a array
 (** Converts a set into an {!Array} *)
 
-val to_array : ('a, _) t -> 'a array
-
-val toList : ('a, _) t -> 'a list
-(** Converts a set into a {!List}. *)
-
 val to_list : ('a, _) t -> 'a list
+(** Converts a set into a {!List}. *)
 
 (** Construct sets which can hold any data type using the polymorphic [compare] function. *)
 module Poly : sig
@@ -302,28 +286,24 @@ module Poly : sig
 
       {2 Examples}
 
-      {[Set.Int.singleton (5, "Emu") |> Set.toList = [(5, "Emu")]]}
+      {[Set.Int.singleton (5, "Emu") |> Set.to_list = [(5, "Emu")]]}
   *)
 
-  val fromArray : 'a array -> 'a t
+  val from_array : 'a array -> 'a t
   (** Create a set from an {!Array}
 
       {2 Examples}
 
-      {[Set.Poly.fromArray [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.toList = [(1, "Ant"); (2, "Bat")]]}
+      {[Set.Poly.from_array [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.to_list = [(1, "Ant"); (2, "Bat")]]}
   *)
 
-  val from_array : 'a array -> 'a t
-
-  val fromList : 'a list -> 'a t
+  val from_list : 'a list -> 'a t
   (** Create a set from a {!List}
 
     {2 Examples}
 
-    {[Set.Poly.fromList [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.toList = [(1, "Ant"); (2, "Bat")]]}
+    {[Set.Poly.from_list [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.to_list = [(1, "Ant"); (2, "Bat")]]}
   *)
-
-  val from_list : 'a list -> 'a t
 end
 
 (** Construct sets of {!Int}s *)
@@ -338,28 +318,24 @@ module Int : sig
 
     {2 Examples}
 
-    {[Set.Int.singleton 5 |> Set.toList = [5]]}
+    {[Set.Int.singleton 5 |> Set.to_list = [5]]}
   *)
 
-  val fromArray : int array -> t
+  val from_array : int array -> t
   (** Create a set from an {!Array}
 
       {2 Examples}
 
-      {[Set.Int.fromArray [|1;2;3;3;2;1;7|] |> Set.toArray = [|1;2;3;7|]]}
+      {[Set.Int.from_array [|1;2;3;3;2;1;7|] |> Set.to_array = [|1;2;3;7|]]}
   *)
 
-  val from_array : int array -> t
-
-  val fromList : int list -> t
+  val from_list : int list -> t
   (** Create a set from a {!List}
 
       {2 Examples}
 
-      {[Set.Int.fromList [1;2;3;3;2;1;7] |> Set.toList = [1;2;3;7]]}
+      {[Set.Int.from_list [1;2;3;3;2;1;7] |> Set.to_list = [1;2;3;7]]}
   *)
-
-  val from_list : int list -> t
 end
 
 (** Construct sets of {!String}s *)
@@ -374,26 +350,22 @@ module String : sig
 
       {2 Examples}
 
-      {[Set.String.singleton "Bat" |> Set.toList = ["Bat"]]}
+      {[Set.String.singleton "Bat" |> Set.to_list = ["Bat"]]}
   *)
 
-  val fromArray : string array -> t
+  val from_array : string array -> t
   (** Create a set from an {!Array}
 
       {2 Examples}
 
-      {[Set.String.fromArray [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toArray = [|"a";"b";"g"|]]}
+      {[Set.String.from_array [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.to_array = [|"a";"b";"g"|]]}
   *)
 
-  val from_array : string array -> t
-
-  val fromList : string list -> t
+  val from_list : string list -> t
   (** Create a set from a {!List}
 
       {2 Examples}
 
-      {[Set.String.fromList [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toList = ["a";"b";"g"]]}
+      {[Set.String.from_list [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.to_list = ["a";"b";"g"]]}
   *)
-
-  val from_list : string list -> t
 end

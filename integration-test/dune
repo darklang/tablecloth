@@ -1,5 +1,5 @@
 (executable
- (name main)
+ (name main_native)
  (flags
   (-warn-error +A))
  (libraries tablecloth-native))

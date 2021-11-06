@@ -8,67 +8,38 @@ include TableclothComparator.Make (struct
   let compare = compare
 end)
 
-let toCode (c : char) : int = Base.Char.to_int c
+let to_code (c : char) : int = Base.Char.to_int c
 
-let to_code = toCode
-
-let fromCode (i : int) : char option =
+let from_code (i : int) : char option =
   if 0 <= i && i <= 255 then Some (Char.chr i) else None
 
 
-let from_code = fromCode
+let to_string = Base.Char.to_string
 
-let toString = Base.Char.to_string
-
-let to_string = toString
-
-let fromString (str : string) : char option =
+let from_string (str : string) : char option =
   match String.length str with 1 -> Some str.[0] | _ -> None
 
 
-let from_string = fromString
+let to_digit char =
+  match char with '0' .. '9' -> Some (to_code char - to_code '0') | _ -> None
 
-let toDigit char =
-  match char with '0' .. '9' -> Some (toCode char - toCode '0') | _ -> None
+let to_lowercase = Base.Char.lowercase
 
+let to_uppercase = Base.Char.uppercase
 
-let to_digit = toDigit
+let is_lowercase = Base.Char.is_lowercase
 
-let toLowercase = Base.Char.lowercase
+let is_uppercase = Base.Char.is_uppercase
 
-let to_lowercase = toLowercase
+let is_letter = Base.Char.is_alpha
 
-let toUppercase = Base.Char.uppercase
+let is_digit = Base.Char.is_digit
 
-let to_uppercase = toUppercase
+let is_alphanumeric = Base.Char.is_alphanum
 
-let isLowercase = Base.Char.is_lowercase
+let is_printable = Base.Char.is_print
 
-let is_lowercase = isLowercase
-
-let isUppercase = Base.Char.is_uppercase
-
-let is_uppercase = isUppercase
-
-let isLetter = Base.Char.is_alpha
-
-let is_letter = isLetter
-
-let isDigit = Base.Char.is_digit
-
-let is_digit = isDigit
-
-let isAlphanumeric = Base.Char.is_alphanum
-
-let is_alphanumeric = isAlphanumeric
-
-let isPrintable = Base.Char.is_print
-
-let is_printable = isPrintable
-
-let isWhitespace = Base.Char.is_whitespace
-
-let is_whitespace = isWhitespace
+let is_whitespace = Base.Char.is_whitespace
 
 let equal : char -> char -> bool = ( = )
 

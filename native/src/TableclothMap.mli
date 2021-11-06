@@ -23,8 +23,8 @@
         | Pig
         | Alpacca
 
-      let pointToAnimal : animal Map.Of(Point).t = 
-        Map.fromList (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
+      let point_to_animal : animal Map.Of(Point).t = 
+        Map.from_list (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
     ]}
 
     See the {!Comparator} module for a more details.
@@ -35,15 +35,15 @@ type ('key, +'value, 'id) t = ('key, 'value, 'id) Base.Map.t
 (** This functor lets you describe the type of Maps a little more concisely.
 
     {[
-      let stringToInt : int Map.Of(String).t =
-        Map.fromList (module String) [("Apple", 2); ("Pear", 0)]
+      let string_to_int : int Map.Of(String).t =
+        Map.from_list (module String) [("Apple", 2); ("Pear", 0)]
     ]}
 
     Is the same as
 
     {[
-      let stringToInt : (string, int, String.identity) Map.t =
-        Map.fromList (module String) [("Apple", 2); ("Pear", 0)]
+      let string_to_int : (string, int, String.identity) Map.t =
+        Map.from_list (module String) [("Apple", 2); ("Pear", 0)]
     ]}
 *)
 module Of (M : TableclothComparator.S) : sig
@@ -52,9 +52,9 @@ end
 
 (** {1 Create}
 
-    You can create sets of modules types which conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!fromList} or {!fromArray}.
+    You can create sets of modules types which conform to the {!Comparator.S} signature by using {!empty}, {!singleton}, {!from_list} or {!from_array}.
 
-    Specialised versions of the {!empty}, {!singleton}, {!fromList} and {!fromArray} functions available in the {!Set.Int} and {!Set.String} sub-modules.
+    Specialised versions of the {!empty}, {!singleton}, {!from_list} and {!from_array} functions available in the {!Set.Int} and {!Set.String} sub-modules.
 *)
 
 val empty :
@@ -69,14 +69,14 @@ val empty :
       Array.fold
         [|"Pear", "Orange", "Grapefruit"|]
         ~initial:(Map.empty (module Int))
-        ~f:(fun lengthToFruit fruit ->
-          Map.add lengthToFruit (String.length fruit) fruit
+        ~f:(fun length_to_fruit fruit ->
+          Map.add length_to_fruit (String.length fruit) fruit
         )
-      |> Map.toArray
+      |> Map.to_array
       = [|(4, "Pear"); (6, "Orange"), (10, "Grapefruit")|]
     ]}
 
-    In this particular case you might want to use {!Array.groupBy}
+    In this particular case you might want to use {!Array.group_by}
 *)
 
 val singleton :
@@ -88,30 +88,20 @@ val singleton :
 
     {2 Examples}
 
-    {[Map.singleton (module Int) ~key:1 ~value:"Ant" |> Map.toList = [(1, "Ant")]]}
+    {[Map.singleton (module Int) ~key:1 ~value:"Ant" |> Map.to_list = [(1, "Ant")]]}
 *)
-
-val fromArray :
-     ('key, 'identity) TableclothComparator.s
-  -> ('key * 'value) array
-  -> ('key, 'value, 'identity) t
-(** Create a map from an {!Array} of key-value tuples *)
 
 val from_array :
      ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) array
   -> ('key, 'value, 'identity) t
-
-val fromList :
-     ('key, 'identity) TableclothComparator.s
-  -> ('key * 'value) list
-  -> ('key, 'value, 'identity) t
-(** Create a map of a {!List} of key-value tuples *)
+(** Create a map from an {!Array} of key-value tuples *)
 
 val from_list :
      ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
+(** Create a map of a {!List} of key-value tuples *)
 
 (** {1 Basic operations} *)
 
@@ -123,13 +113,13 @@ val add :
 
     {[
       Map.add
-        (Map.Int.fromList [(1, "Ant"); (2, "Bat")])
+        (Map.Int.from_list [(1, "Ant"); (2, "Bat")])
         ~key:3
         ~value:"Cat"
-      |> Map.toList = [(1, "Ant"); (2, "Bat"); (3, "Cat")]
+      |> Map.to_list = [(1, "Ant"); (2, "Bat"); (3, "Cat")]
     ]}
 
-    {[Map.add (Map.Int.fromList [(1, "Ant"); (2, "Bat")]) ~key:2 ~value:"Bug" |> Map.toList = [(1, "Ant"); (2, "Bug")]]}
+    {[Map.add (Map.Int.from_list [(1, "Ant"); (2, "Bat")]) ~key:2 ~value:"Bug" |> Map.to_list = [(1, "Ant"); (2, "Bug")]]}
 *)
 
 val ( .?{}<- ) :
@@ -141,9 +131,9 @@ val ( .?{}<- ) :
     {2 Examples}
 
     {[
-      let indexToAnimal = Map.Int.fromList [(1, "Ant");(2, "Bat");(3, "Cat")] in
-      let indexToAnimal = numbers.Map.?{4} <- "Dog" in
-      indexToAnimal.Map.?{4} = Some "Dog"
+      let index_to_animal = Map.Int.from_list [(1, "Ant");(2, "Bat");(3, "Cat")] in
+      let index_to_animal = numbers.Map.?{4} <- "Dog" in
+      index_to_animal.Map.?{4} = Some "Dog"
     ]}
  *)
 
@@ -152,13 +142,13 @@ val remove : ('key, 'value, 'id) t -> 'key -> ('key, 'value, 'id) t
 
     {2 Examples}
     {[
-      let animalPopulations = Map.String.fromList [
+      let animal_populations = Map.String.from_list [
         ("Elephant", 3_156);
         ("Mosquito", 56_123_156);
         ("Rhino", 3);
         ("Shrew", 56_423);
       ] in
-      Map.remove animalPopulations "Mosquito" |> Map.toList = [
+      Map.remove animal_populations "Mosquito" |> Map.to_list = [
         ("Elephant", 3_156);
         ("Rhino", 3);
         ("Shrew", 56_423);
@@ -171,13 +161,13 @@ val get : ('key, 'value, 'id) t -> 'key -> 'value option
 
     {2 Examples}
 
-    let animalPopulations = Map.String.fromList [
+    let animal_populations = Map.String.from_list [
       ("Elephant", 3_156);
       ("Mosquito", 56_123_156);
       ("Rhino", 3);
       ("Shrew", 56_423);
     ] in
-    Map.get animalPopulations "Shrew" = Some 56_423;
+    Map.get animal_populations "Shrew" = Some 56_423;
 *)
 
 val ( .?{} ) : ('key, 'value, _) t -> 'key -> 'value option
@@ -188,8 +178,8 @@ val ( .?{} ) : ('key, 'value, _) t -> 'key -> 'value option
     {2 Examples}
 
     {[
-      let indexToAnimal = Map.Int.fromList [(1, "Ant");(2, "Bat");(3, "Cat")] in
-      indexToAnimal.Map.?{3} = Some "Cat"
+      let index_to_animal = Map.Int.from_list [(1, "Ant");(2, "Bat");(3, "Cat")] in
+      index_to_animal.Map.?{3} = Some "Cat"
     ]}
  *)
 
@@ -203,19 +193,19 @@ val update :
     {2 Examples}
 
     {[
-      let animalPopulations = Map.String.fromList [
+      let animal_populations = Map.String.from_list [
         ("Elephant", 3_156);
         ("Mosquito", 56_123_156);
         ("Rhino", 3);
         ("Shrew", 56_423);
       ] in
 
-      Map.update animalPopulations ~key:"Hedgehog" ~f:(fun population ->
+      Map.update animal_populations ~key:"Hedgehog" ~f:(fun population ->
         match population with
         | None -> Some 1
         | Some count -> Some (count + 1)
       )
-      |> Map.toList = [
+      |> Map.to_list = [
         ("Elephant", 3_156);
         ("Hedgehog", 1);
         ("Mosquito", 56_123_156);
@@ -227,10 +217,8 @@ val update :
 
 (** {1 Query} *)
 
-val isEmpty : (_, _, _) t -> bool
-(** Determine if a map is empty. *)
-
 val is_empty : (_, _, _) t -> bool
+(** Determine if a map is empty. *)
 
 val length : (_, _, _) t -> int
 (** Returns the number of key-value pairs present in the map.
@@ -238,7 +226,7 @@ val length : (_, _, _) t -> int
     {2 Examples}
 
     {[
-      Map.Int.fromList [(1, "Hornet"); (3, "Marmot")]
+      Map.Int.from_list [(1, "Hornet"); (3, "Marmot")]
       |> Map.length = 2
     ]}
 *)
@@ -262,7 +250,7 @@ val find :
     {2 Examples}
 
     {[
-      Map.String.fromList [
+      Map.String.from_list [
         ("Elephant", 3_156);
         ("Mosquito", 56_123_156);
         ("Rhino", 3);
@@ -284,7 +272,7 @@ val minimum : ('key, _, _) t -> 'key option
     {2 Examples}
 
     {[
-      Map.Int.fromList [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
+      Map.Int.from_list [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
       |> Map.minimum = Some 1
     ]}
 *)
@@ -297,7 +285,7 @@ val maximum : ('key, _, _) t -> 'key option
     {2 Examples}
 
     {[
-      Map.Int.fromList [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
+      Map.Int.from_list [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
       |> Map.maximum = Some 8
     ]}
 *)
@@ -310,7 +298,7 @@ val extent : ('key, _, _) t -> ('key * 'key) option
     {2 Examples}
 
     {[
-      Map.Int.fromList [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
+      Map.Int.from_list [(8, "Pigeon"); (1, "Hornet"); (3, "Marmot")]
       |> Map.extent = Some (1, 8)
     ]}
 *)
@@ -336,28 +324,28 @@ val merge :
     {2 Examples}
 
     {[
-      let animalToPopulation =
-        Map.String.fromList [
+      let animal_to_population =
+        Map.String.from_list [
           ("Elephant", 3_156);
           ("Shrew", 56_423);
         ]
       in
-      let animalToPopulationGrowthRate = Map.String.fromList [
+      let animal_to_population_growth_rate = Map.String.from_list [
         ("Elephant", 0.88);
         ("Squirrel", 1.2);
         ("Python", 4.0);
       ] in
 
       Map.merge
-        animalToPopulation
-        animalToPopulationGrowthRate
+        animal_to_population
+        animal_to_population_growth_rate
         ~f:(fun _animal population growth ->
           match (Option.both population growth) with
           | Some (population, growth) ->
-              Some Float.((ofInt population) * growth)
+              Some Float.((of_int population) * growth)
           | None -> None
         )
-      |> Map.toList
+      |> Map.to_list
         = [("Elephant", 2777.28)]
     ]}
 *)
@@ -370,12 +358,12 @@ val map : ('key, 'value, 'id) t -> f:('value -> 'b) -> ('key, 'b, 'id) t
     {2 Examples}
 
     {[
-      Map.String.fromList [
+      Map.String.from_list [
         ("Elephant", 3_156);
         ("Shrew", 56_423);
       ]
-      |> Map.map ~f:Int.toString
-      |> Map.toList
+      |> Map.map ~f:Int.to_string
+      |> Map.to_list
         = [
         ("Elephant", "3156");
         ("Shrew", "56423");
@@ -383,12 +371,9 @@ val map : ('key, 'value, 'id) t -> f:('value -> 'b) -> ('key, 'b, 'id) t
     ]}
 *)
 
-val mapWithIndex :
-  ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
-(** Like {!map} but [f] is also called with each values corresponding key *)
-
 val map_with_index :
   ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
+(** Like {!map} but [f] is also called with each values corresponding key *)
 
 val filter :
   ('key, 'value, 'id) t -> f:('value -> bool) -> ('key, 'value, 'id) t
@@ -397,12 +382,12 @@ val filter :
     {2 Examples}
 
     {[
-      Map.String.fromList [
+      Map.String.from_list [
         ("Elephant", 3_156);
         ("Shrew", 56_423);
       ]
       |> Map.map ~f:(fun population -> population > 10_000)
-      |> Map.toList
+      |> Map.to_list
         = [
         ("Shrew", "56423");
       ]
@@ -418,7 +403,7 @@ val partition :
     {2 Examples}
 
     {[
-      let (endangered, notEndangered) = Map.String.fromList [
+      let (endangered, not_endangered) = Map.String.from_list [
         ("Elephant", 3_156);
         ("Mosquito", 56_123_156);
         ("Rhino", 3);
@@ -427,12 +412,12 @@ val partition :
       |> Map.partition ~f:(fun population -> population < 10_000)
       in
 
-      Map.toList endangered = [
+      Map.to_list endangered = [
         ("Elephant", 3_156);
         ("Rhino", 3);
       ];
 
-      Map.toList notEndangered = [
+      Map.to_list not_endangered = [
         ("Mosquito", 56_123_156);
         ("Shrew", 56_423);
       ];
@@ -448,17 +433,12 @@ val fold :
 
 (** {1 Iterate} *)
 
-val forEach : (_, 'value, _) t -> f:('value -> unit) -> unit
-(** Runs a function [f] against each {b value} in the map. *)
-
 val for_each : (_, 'value, _) t -> f:('value -> unit) -> unit
-
-val forEachWithIndex :
-  ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
-(** Like {!Map.forEach} except [~f] is also called with the corresponding key *)
+(** Runs a function [f] against each {b value} in the map. *)
 
 val for_each_with_index :
   ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
+(** Like {!Map.for_each} except [~f] is also called with the corresponding key *)
 
 (** {1 Convert} *)
 
@@ -468,7 +448,7 @@ val keys : ('key, _, _) t -> 'key list
     {2 Examples}
 
     {[
-      Map.String.fromList [
+      Map.String.from_list [
         ("Elephant", 3_156);
         ("Mosquito", 56_123_156);
         ("Rhino", 3);
@@ -489,7 +469,7 @@ val values : (_, 'value, _) t -> 'value list
     {2 Examples}
 
     {[
-      Map.String.fromList [
+      Map.String.from_list [
         ("Elephant", 3_156);
         ("Mosquito", 56_123_156);
         ("Rhino", 3);
@@ -504,15 +484,11 @@ val values : (_, 'value, _) t -> 'value list
     ]}
 *)
 
-val toArray : ('key, 'value, _) t -> ('key * 'value) array
+val to_array : ('key, 'value, _) t -> ('key * 'value) array
 (** Get an {!Array} of all of the key-value pairs in a map. *)
 
-val to_array : ('key, 'value, _) t -> ('key * 'value) array
-
-val toList : ('key, 'value, _) t -> ('key * 'value) list
-(** Get a {!List} of all of the key-value pairs in a map. *)
-
 val to_list : ('key, 'value, _) t -> ('key * 'value) list
+(** Get a {!List} of all of the key-value pairs in a map. *)
 
 (** Construct a Map which can be keyed by any data type using the polymorphic [compare] function. *)
 module Poly : sig
@@ -528,18 +504,14 @@ module Poly : sig
 
       {2 Examples}
 
-      {[Map.Poly.singleton ~key:false ~value:1 |> Map.toList = [(false, 1)]]}
+      {[Map.Poly.singleton ~key:false ~value:1 |> Map.to_list = [(false, 1)]]}
   *)
 
-  val fromArray : ('key * 'value) array -> ('key, 'value) t
+  val from_array : ('key * 'value) array -> ('key, 'value) t
   (** Create a map from an {!Array} of key-value tuples *)
 
-  val from_array : ('key * 'value) array -> ('key, 'value) t
-
-  val fromList : ('key * 'value) list -> ('key, 'value) t
-  (** Create a map from a {!List} of key-value tuples *)
-
   val from_list : ('key * 'value) list -> ('key, 'value) t
+  (** Create a map from a {!List} of key-value tuples *)
 end
 
 (** Construct a Map with {!Int}s for keys. *)
@@ -554,18 +526,14 @@ module Int : sig
 
       {2 Examples}
 
-      {[Map.Int.singleton ~key:1 ~value:"Ant" |> Map.toList = [(1, "Ant")]]}
+      {[Map.Int.singleton ~key:1 ~value:"Ant" |> Map.to_list = [(1, "Ant")]]}
   *)
 
-  val fromArray : (int * 'value) array -> 'value t
+  val from_array : (int * 'value) array -> 'value t
   (** Create a map from an {!Array} of key-value tuples *)
 
-  val from_array : (int * 'value) array -> 'value t
-
-  val fromList : (int * 'value) list -> 'value t
-  (** Create a map of a {!List} of key-value tuples *)
-
   val from_list : (int * 'value) list -> 'value t
+  (** Create a map of a {!List} of key-value tuples *)
 end
 
 (** Construct a Map with {!String}s for keys. *)
@@ -580,16 +548,12 @@ module String : sig
 
       {2 Examples}
 
-      {[Map.String.singleton ~key:"Ant" ~value:1 |> Map.toList = [("Ant", 1)]]}
+      {[Map.String.singleton ~key:"Ant" ~value:1 |> Map.to_list = [("Ant", 1)]]}
   *)
 
-  val fromArray : (string * 'value) array -> 'value t
+  val from_array : (string * 'value) array -> 'value t
   (** Create a map from an {!Array} of key-value tuples *)
 
-  val from_array : (string * 'value) array -> 'value t
-
-  val fromList : (string * 'value) list -> 'value t
-  (** Create a map from a {!List} of key-value tuples *)
-
   val from_list : (string * 'value) list -> 'value t
+  (** Create a map from a {!List} of key-value tuples *)
 end

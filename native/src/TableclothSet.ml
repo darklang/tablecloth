@@ -6,37 +6,33 @@ module Of (M : TableclothComparator.S) = struct
   type nonrec t = (M.t, M.identity) t
 end
 
-let empty comparator = Base.Set.empty (Internal.toBaseComparator comparator)
+let empty comparator = Base.Set.empty (Internal.to_base_comparator comparator)
 
 let singleton
     (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
     ('a, 'identity) t =
-  Base.Set.of_list (Internal.toBaseComparator comparator) [ element ]
+  Base.Set.of_list (Internal.to_base_comparator comparator) [ element ]
 
 
-let fromArray
+let from_array
     (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
     : ('a, 'identity) t =
   Base.Set.of_list
-    (Internal.toBaseComparator comparator)
+    (Internal.to_base_comparator comparator)
     (Array.to_list elements)
 
 
-let from_array = fromArray
+let from_array = from_array
 
-let fromList
+let from_list
     (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
     ('a, 'identity) t =
-  Base.Set.of_list (Internal.toBaseComparator comparator) elements
+  Base.Set.of_list (Internal.to_base_comparator comparator) elements
 
-
-let from_list = fromList
 
 let length = Base.Set.length
 
-let isEmpty = Base.Set.is_empty
-
-let is_empty = isEmpty
+let is_empty = Base.Set.is_empty
 
 let includes = Base.Set.mem
 
@@ -64,19 +60,12 @@ let all = Base.Set.for_all
 
 let any = Base.Set.exists
 
-let forEach = Base.Set.iter
-
-let for_each = forEach
-
+let for_each = Base.Set.iter
 let fold s ~initial ~f = Base.Set.fold s ~init:initial ~f
 
-let toArray = Base.Set.to_array
+let to_array = Base.Set.to_array
 
-let to_array = toArray
-
-let toList = Base.Set.to_list
-
-let to_list = toList
+let to_list = Base.Set.to_list
 
 module Poly = struct
   type identity = Base.Comparator.Poly.comparator_witness
@@ -87,13 +76,9 @@ module Poly = struct
 
   let singleton = Base.Set.Poly.singleton
 
-  let fromArray = Base.Set.Poly.of_array
+  let from_array = Base.Set.Poly.of_array
 
-  let from_array = fromArray
-
-  let fromList = Base.Set.Poly.of_list
-
-  let from_list = fromList
+  let from_list = Base.Set.Poly.of_list
 end
 
 module Int = struct
@@ -103,13 +88,9 @@ module Int = struct
 
   let singleton = singleton (module TableclothInt)
 
-  let fromArray = fromArray (module TableclothInt)
+  let from_array = from_array (module TableclothInt)
 
-  let from_array = fromArray
-
-  let fromList = fromList (module TableclothInt)
-
-  let from_list = fromList
+  let from_list = from_list (module TableclothInt)
 end
 
 module String = struct
@@ -119,11 +100,7 @@ module String = struct
 
   let singleton = singleton (module TableclothString)
 
-  let fromArray = fromArray (module TableclothString)
+  let from_array = from_array (module TableclothString)
 
-  let from_array = fromArray
-
-  let fromList = fromList (module TableclothString)
-
-  let from_list = fromList
+  let from_list = from_list (module TableclothString)
 end

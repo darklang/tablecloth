@@ -4,19 +4,13 @@ let ok value = Ok value
 
 let error value = Error value
 
-let fromOption ma ~error =
+let from_option ma ~error =
   match ma with None -> Error error | Some right -> Result.Ok right
 
 
-let from_option = fromOption
+let is_ok = Result.is_ok
 
-let isOk = Result.is_ok
-
-let is_ok = isOk
-
-let isError = Result.is_error
-
-let is_error = isError
+let is_error = Result.is_error
 
 let both a b =
   match (a, b) with
@@ -36,15 +30,11 @@ let and_ a b = match a with Ok _ -> b | _ -> a
 
 let unwrap = Result.value
 
-let unwrapUnsafe = Result.get_ok
+let unwrap_unsafe = Result.get_ok
 
-let unwrap_unsafe = unwrapUnsafe
-
-let unwrapError t ~default =
+let unwrap_error t ~default =
   match t with Ok _ -> default | Error error -> error
 
-
-let unwrap_error = unwrapError
 
 let map t ~f = Result.map f t
 
@@ -58,11 +48,8 @@ let map2 a b ~f =
       Error b
 
 
-let mapError t ~f =
+let map_error t ~f =
   match t with Error error -> Error (f error) | Ok value -> Ok value
-
-
-let map_error = mapError
 
 let values t =
   Base.List.fold_right t ~f:(map2 ~f:(fun a b -> a :: b)) ~init:(Ok [])
@@ -78,13 +65,9 @@ let combine (l : ('ok, 'error) result list) : ('ok list, 'error) result =
     l
 
 
-let toOption r = match r with Ok v -> Some v | Error _ -> None
+let to_option r = match r with Ok v -> Some v | Error _ -> None
 
-let to_option = toOption
-
-let andThen t ~f = Result.bind t f
-
-let and_then = andThen
+let and_then t ~f = Result.bind t f
 
 let attempt f =
   match f () with value -> Ok value | exception error -> Error error
@@ -92,26 +75,26 @@ let attempt f =
 
 let tap t ~f = match t with Ok a -> f a | _ -> ()
 
-let equal equalOk equalError a b =
+let equal equal_ok equal_error a b =
   match (a, b) with
   | Error a', Error b' ->
-      equalError a' b'
+      equal_error a' b'
   | Ok a', Ok b' ->
-      equalOk a' b'
+      equal_ok a' b'
   | _ ->
       false
 
 
 let compare
-    (compareOk : 'ok -> 'ok -> int)
-    (compareError : 'error -> 'error -> int)
+    (compare_ok : 'ok -> 'ok -> int)
+    (compare_error : 'error -> 'error -> int)
     (a : ('ok, 'error) t)
     (b : ('ok, 'error) t) : int =
   match (a, b) with
   | Error a', Error b' ->
-      compareError a' b'
+      compare_error a' b'
   | Ok a', Ok b' ->
-      compareOk a' b'
+      compare_ok a' b'
   | Error _, Ok _ ->
       -1
   | Ok _, Error _ ->
@@ -122,4 +105,4 @@ let ( |? ) t default = unwrap t ~default
 
 let ( >>| ) t f = map t ~f
 
-let ( >>= ) t f = andThen t ~f
+let ( >>= ) t f = and_then t ~f
