@@ -12,8 +12,5 @@
     "Rescript"
   ],
   "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "tablecloth-bucklescript": "../"
-  }
+  "license": "MIT"
 }

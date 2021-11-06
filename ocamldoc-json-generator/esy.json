@@ -2,8 +2,7 @@
   "name": "melange-project",
   "dependencies": {
     "ocaml": "4.12.x",
-    "melange": "melange-re/melange",
-    "tablecloth-bucklescript": ".."
+    "melange": "melange-re/melange"
   },
   "esy": {
     "buildsInSource": "unsafe",
