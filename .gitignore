@@ -11,3 +11,5 @@ _build
 /integration-test/native/_build
 /integration-test/bs/node_modules
 /integration-test/bs/lib/
+/ocamldoc-json-generator/lib/
+/ocamldoc-json-generator/node_modules/

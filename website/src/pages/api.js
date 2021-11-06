@@ -644,7 +644,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
         }
         let content =
           value.reference.content.length === 1 &&
-          value.reference.content[0].tag === 'Code'
+            value.reference.content[0].tag === 'Code'
             ? stripTableclothPrefix(value.reference.content[0].value)
             : renderTextElements(value.reference.content, parentPath);
         return (
@@ -864,7 +864,7 @@ function generateModuleElements(
                     <code>
                       type {moduleElement.value.name}
                       {moduleElement.value.parameters.length > 0 &&
-                      `(${moduleElement.value.parameters})`}
+                        `(${moduleElement.value.parameters})`}
                       {moduleElement.value.manifest ? ' = ' : ''}
                     </code>
                   </pre>
@@ -1088,6 +1088,8 @@ let Header = ({ title }) => {
 
 export default ({ data }) => {
   let [isOpen, setIsOpen] = React.useState(false);
+  let [isRescript, setRescript] = React.useState(false);
+
   let cache = React.useRef(
     new CellMeasurerCache({
       fixedWidth: true,
@@ -1100,7 +1102,16 @@ export default ({ data }) => {
     list,
   } = React.useMemo(() => {
     const { odocModel } = data;
-    let model = JSON.parse(odocModel.internal.content);
+
+    let content = JSON.parse(odocModel.internal.content);
+    // reset initial state
+    initialState = {
+      path: [],
+      elements: [],
+      idToIndex: {},
+    };
+
+    let model = isRescript ? content.rescript : content.native;
     let moduleByModulePath = _.fromPairs(
       _.map(moduleIndex(_.values(model.modules)), ([path, module]) => [
         path.join('.'),
@@ -1121,7 +1132,8 @@ export default ({ data }) => {
       idToIndex,
       list: elements,
     };
-  }, [data]);
+  }, [isRescript, data]);
+
   let listScroll = React.useRef();
   let scrollToId = id => {
     // console.info(id);
@@ -1204,6 +1216,10 @@ export default ({ data }) => {
                   >
                     <PageTitle>API</PageTitle>
                     <div>
+                      <input id="model-selector" name="Show Rescript api" type="checkbox" checked={isRescript} onChange={e => { setRescript(e.target.checked) }} />
+                      <label htmlFor="model-selector">Show Rescript API</label>
+                    </div>
+                    <div>
                       <SyntaxToggle/>
                     </div>
                   </div>
@@ -1234,10 +1250,10 @@ export default ({ data }) => {
                                       className="row"
                                       css={css`
                                         padding-left: ${spacing.pageMargin
-                                        .mobile}px;
+                                          .mobile}px;
                                         @media (min-width: ${breakpoints.desktop}px) {
                                           padding-left: ${spacing.pageMargin
-                                        .desktop}px;
+                                          .desktop}px;
                                         }
                                       `}
                                     >
