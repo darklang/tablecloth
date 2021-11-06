@@ -7,8 +7,6 @@ CMXS=JsonGenerator.cmxs
 COMPFLAGS=-package menhirLib,ocamldoc,reason
 CMXA_DEPS=menhirLib.cmxa reason_migrate_parsetree.cmxa ReasonEasyFormat.cmxa reason.cmxa
 
-ESY_TC=$(shell find ~/.esy/source/i/ -maxdepth 1 -type d | grep tablecloth_ | awk '{print $1"/lib/ocaml"}')
-
 opt: $(CMXS)
 
 $(CMO): JsonGenerator.ml
@@ -190,6 +188,7 @@ doc-native: build-native
 
 doc-rescript: build-rescript
 	DESTINATION_JSON=model-rescript.json \
+	ESY_TC=$(shell find ~/.esy/source/i/ -maxdepth 1 -type d | grep tablecloth_ | awk '{print $1"/lib/ocaml"}') \
 	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
 		`opam config exec -- ocamlfind query -i-format base` \
