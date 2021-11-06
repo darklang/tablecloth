@@ -357,7 +357,8 @@ let bs s =
   print_string "bs encounterd: " ;
   print_endline s
 
-let destination_json = Sys.getenv("DESTINATION_JSON")
+
+let destination_json = Sys.getenv "DESTINATION_JSON"
 
 (* TODO surely everything in this class is going to be deleted soon *)
 class virtual text =
@@ -2328,14 +2329,12 @@ module JsonGenerator = struct
         print_endline "Generating" ;
         for i = 0 to Array.length Sys.argv - 1 do
           Printf.printf "[%i] %s\n" i Sys.argv.(i)
-        done;
-        print_endline destination_json;
+        done ;
+        print_endline destination_json ;
 
         let jsonGenerator = new json in
         jsonGenerator#generate
     end
 end
-
-
 
 let _ = Odoc_args.set_generator (Base (module JsonGenerator))
