@@ -21,7 +21,7 @@ $(CMXS): $(CMX)
 deps:
 	@printf "\n\e[31mInstalling generator dependencies ...\e[0m\n"
 	opam update
-	opam install base.v0.13.2 reason.3.7.0 menhir.20210419 -y
+	opam install base.v0.14.1 reason.3.7.0 menhir.20210419 -y
 
 install: opt
 	mkdir -p `opam config exec -- ocamlfind ocamldoc -customdir`
