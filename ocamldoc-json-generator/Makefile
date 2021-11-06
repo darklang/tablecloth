@@ -104,7 +104,6 @@ build-native: opt dummy
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-rescript: opt dummy
 	~/.npm-global/bin/esy
-	~/.npm-global/bin/esy build
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
 	cp ../rescript/src/TableclothComparator.ml ./_rescript/TableclothComparator.ml
@@ -138,7 +137,7 @@ build-rescript: opt dummy
 	cp ../rescript/src/TableclothTuple3.ml ./_rescript/TableclothTuple3.ml
 	cp ../rescript/src/TableclothTuple3.mli ./_rescript/TableclothTuple3.mli
 	cp ../rescript/src/Tablecloth.ml ./_rescript/Tablecloth.ml
-	esy build
+	~/.npm-global/bin/esy build
 
 doc-native: build-native
 	DESTINATION_JSON=model.json \
