@@ -181,8 +181,8 @@ doc-native: build-native
 		./_native/Tablecloth.ml
 
 doc-rescript: build-rescript
-	DESTINATION_JSON=model-rescript.json \
-	echo "Ignore rescript build error" \
+	# dash to ignore compilation error
+	-DESTINATION_JSON=model-rescript.json \
 	~/.npm-global/bin/esy ocamldoc.opt \
 		-g $(CMXS) \
 		-I node_modules/bs-platform/lib/melange \
@@ -220,7 +220,7 @@ doc-rescript: build-rescript
 		./_rescript/TableclothTuple2.ml \
 		./_rescript/TableclothTuple3.mli \
 		./_rescript/TableclothTuple3.ml \
-		./_rescript/Tablecloth.ml
+		./_rescript/Tablecloth.ml 
 
 doc: doc-native doc-rescript
 
