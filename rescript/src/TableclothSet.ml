@@ -50,7 +50,7 @@ let filter s ~f = Belt.Set.keep s f
 
 let partition s ~f = Belt.Set.partition s f
 
-let find s ~f = (Belt.Set.toArray s |. Belt.Array.getBy) f
+let find s ~f = (Belt.Set.toArray s |> Belt.Array.getBy) f
 
 let all s ~f = Belt.Set.every s f
 
@@ -78,11 +78,11 @@ module Poly = struct
 
           type nonrec identity = identity
 
-          let cmp = Pervasives.compare |. Obj.magic
+          let cmp = Pervasives.compare |> Obj.magic
         end )
 
 
-  let fromList l = Array.of_list l |. fromArray
+  let fromList l = Array.of_list l |> fromArray
 
   let empty () = fromArray [||]
 
@@ -92,23 +92,23 @@ end
 module Int = struct
   type nonrec t = Of(TableclothInt).t
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
+  let fromArray a = Poly.fromArray a |> Obj.magic
 
   let empty = fromArray [||]
 
   let singleton a = fromArray [| a |]
 
-  let fromList l = Array.of_list l |. fromArray
+  let fromList l = Array.of_list l |> fromArray
 end
 
 module String = struct
   type nonrec t = Of(TableclothString).t
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
+  let fromArray a = Poly.fromArray a |> Obj.magic
 
   let empty = fromArray [||]
 
   let singleton a = fromArray [| a |]
 
-  let fromList l = Array.of_list l |. fromArray
+  let fromList l = Array.of_list l |> fromArray
 end

@@ -2327,10 +2327,6 @@ module JsonGenerator = struct
     object
       method generate =
         print_endline "Generating" ;
-        for i = 0 to Array.length Sys.argv - 1 do
-          Printf.printf "[%i] %s\n" i Sys.argv.(i)
-        done ;
-        print_endline destination_json ;
 
         let jsonGenerator = new json in
         jsonGenerator#generate

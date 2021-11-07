@@ -65,9 +65,9 @@ let fold m ~initial ~f =
   Belt.Map.reduce m initial (fun acc key data -> f acc ~key ~value:data)
 
 
-let keys m = Belt.Map.keysToArray m |. Array.to_list
+let keys m = Array.to_list (Belt.Map.keysToArray m)
 
-let values m = Belt.Map.valuesToArray m |. Array.to_list
+let values m = Array.to_list (Belt.Map.valuesToArray m)
 
 let maximum = Belt.Map.maxKey
 
@@ -93,7 +93,7 @@ module Poly = struct
 
           type nonrec identity = identity
 
-          let cmp = Pervasives.compare |. Obj.magic
+          let cmp = Pervasives.compare |> Obj.magic
         end )
 
 
@@ -107,7 +107,7 @@ end
 module Int = struct
   type nonrec 'value t = 'value Of(TableclothInt).t
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
+  let fromArray a = Poly.fromArray a |> Obj.magic
 
   let empty = fromArray [||]
 
@@ -119,7 +119,7 @@ end
 module String = struct
   type nonrec 'value t = 'value Of(TableclothString).t
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
+  let fromArray a = Poly.fromArray a |> Obj.magic
 
   let empty = fromArray [||]
 

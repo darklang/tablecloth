@@ -125,12 +125,12 @@ exports.sourceNodes = ({ actions }) => {
   log.info('nativeModelPath', nativeModelPath);
   log.info('rescriptModelPath', rescriptModelPath);
 
-  let unitedModel = JSON.stringify({
+  let makeUnitedModel = () => JSON.stringify({
     native : JSON.parse(fs.readFileSync(nativeModelPath).toString()),
     rescript: JSON.parse(fs.readFileSync(rescriptModelPath).toString()),
   });
 
-  let node = createNodeFromModel(unitedModel);
+  let node = createNodeFromModel(makeUnitedModel());
   createNode(node);
 
   if (inDevelopMode) {
@@ -140,12 +140,7 @@ exports.sourceNodes = ({ actions }) => {
       if (event == 'unlink') {
         return
       }
-      fs.readFile(nativeModelPath, (error, data) => {
-        if (error) {
-          return log.error(error);
-        }
-        createNode(createNodeFromModel(data.toString()));
-      });
+      createNode(createNodeFromModel(makeUnitedModel()));
     });
   }
 

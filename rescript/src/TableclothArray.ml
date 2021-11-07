@@ -21,7 +21,7 @@ let toIndexedList (array : 'a array) : (int * 'a) list =
     array
     (length array - 1, [])
     (fun (i, acc) x -> (i - 1, (i, x) :: acc))
-  |. snd
+  |> snd
 
 
 let get = Belt.Array.getExn
@@ -117,7 +117,7 @@ let map3 as_ bs (cs : 'c t) ~f =
 
 let zip = map2 ~f:(fun a b -> (a, b))
 
-let flatMap t ~f = Belt.Array.map t f |. Belt.Array.concatMany
+let flatMap t ~f = Belt.Array.map t f |> Belt.Array.concatMany
 
 let sliding ?(step = 1) a ~size =
   let n = Array.length a in
@@ -233,7 +233,7 @@ let repeat element ~length = Array.init (max length 0) (fun _ -> element)
 let filterMap t ~f =
   fold t ~initial:[] ~f:(fun results element ->
       match f element with None -> results | Some value -> value :: results )
-  |. fromList
+  |> fromList
 
 
 let sort a ~compare = Array.sort compare a
@@ -241,7 +241,7 @@ let sort a ~compare = Array.sort compare a
 let values t =
   fold t ~initial:[] ~f:(fun results element ->
       match element with None -> results | Some value -> value :: results )
-  |. fromList
+  |> fromList
 
 
 let join t ~sep = Js.Array.joinWith sep t

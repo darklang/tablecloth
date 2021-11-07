@@ -27,7 +27,7 @@ let fromArray characters =
     ""
     (Array.map
        (fun character ->
-         TableclothChar.toCode character |. Js.String.fromCharCode )
+         TableclothChar.toCode character |> Js.String.fromCharCode )
        characters )
 
 
@@ -36,11 +36,11 @@ let fromList t =
     ""
     (Array.map
        (fun character ->
-         TableclothChar.toCode character |. Js.String.fromCharCode )
+         TableclothChar.toCode character |> Js.String.fromCharCode )
        (Array.of_list t) )
 
 
-let fromChar c = TableclothChar.toCode c |. Js.String.fromCharCode
+let fromChar c = TableclothChar.toCode c |> Js.String.fromCharCode
 
 let indexOf haystack needle : int option =
   let result = Js.String.indexOf needle haystack in
@@ -110,9 +110,9 @@ let reverse s =
 
 let toArray (t : string) : char array =
   Js.String.castToArrayLike t
-  |. Js.Array.from
+  |> Js.Array.from
   |> Js.Array.map (fun characterString ->
-         TableclothChar.fromString characterString |. Belt.Option.getExn )
+         TableclothChar.fromString characterString |> Belt.Option.getExn )
 
 
 let toList (s : string) : char list = toArray s |> Belt.List.fromArray
