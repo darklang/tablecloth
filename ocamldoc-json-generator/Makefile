@@ -109,7 +109,7 @@ build-rescript: opt dummy
 	cp ../bsconfig.json node_modules/tablecloth-bucklescript
 	cp -r ../rescript node_modules/tablecloth-bucklescript
 	~/.npm-global/bin/esy
-	echo $(shell (find ~/.esy/source/i/ -maxdepth 1 -type d ; echo "/lib/ocaml") | tr -d '\n' )
+	echo $(shell (find /home -name TableclothComparator.cmj )
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
 	cp ../rescript/src/TableclothComparator.ml ./_rescript/TableclothComparator.ml
