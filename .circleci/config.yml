@@ -101,7 +101,9 @@ jobs:
       - run: sudo apt-get install -y m4 nodejs npm
       - run: mkdir ~/.npm-global
       - run: npm config set prefix '~/.npm-global'
+      - run: mkdir node_modules
       - run: npm install -g esy
+      - run: mkdir node_modules/tablecloth-bucklescript && cp ../package.json node_modules/tablecloth-bucklescript && cp ../bsconfig.json node_modules/tablecloth-bucklescript && cp -r ../rescript node_modules/tablecloth-bucklescript/rescript
       - run: cd ocamldoc-json-generator && ~/.npm-global/bin/esy && make doc
       # Check that model.json has been regenerated when there are changes in the interface files
       - run: git diff --exit-code website/model.json
