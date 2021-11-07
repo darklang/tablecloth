@@ -2,11 +2,14 @@
   "name": "melange-project",
   "dependencies": {
     "ocaml": "4.12.x",
-    "melange": "melange-re/melange"
+    "melange": "melange-re/melange",
+    "@opam/base": "v0.14.1",
+    "@opam/menhir": "20210419"
   },
   "esy": {
     "buildsInSource": "unsafe",
     "build": [
+      "rm -rf node_modules/bs-platform",
       "ln -sfn #{melange.install} node_modules/bs-platform",
       "bsb -make-world"
     ]

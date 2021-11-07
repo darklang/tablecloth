@@ -1,9 +1,9 @@
 {
   "name": "bucklescript-integration-test",
   "version": "0.1.0",
-  "sources": [
-    "_rescript"
-  ],
+  "sources": {
+    "dir" : "src"
+  },
   "package-specs": {
     "module": "commonjs",
     "in-source": true

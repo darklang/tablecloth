@@ -10,24 +10,13 @@ CMXA_DEPS=menhirLib.cmxa reason_migrate_parsetree.cmxa ReasonEasyFormat.cmxa rea
 opt: $(CMXS)
 
 $(CMO): JsonGenerator.ml
-	opam config exec -- ocamlfind ocamlc $(COMPFLAGS) -c $<
+	~/.npm-global/bin/esy ocamlfind ocamlc $(COMPFLAGS) -c $<
 
 $(CMX): JsonGenerator.ml
-	opam config exec -- ocamlfind ocamlopt $(COMPFLAGS) -c $<
+	~/.npm-global/bin/esy ocamlfind ocamlopt $(COMPFLAGS) -c $<
 
 $(CMXS): $(CMX)
-	opam config exec -- ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
-
-opt-rescript: $(CMXS)
-
-$(CMO): JsonGenerator.ml
-	esy ocamlfind ocamlc $(COMPFLAGS) -c $<
-
-$(CMX): JsonGenerator.ml
-	esy ocamlfind ocamlopt $(COMPFLAGS) -c $<
-
-$(CMXS): $(CMX)
-	esy ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
+	~/.npm-global/bin/esy ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
 
 deps:
 	@printf "\n\e[31mInstalling generator dependencies ...\e[0m\n"
@@ -35,8 +24,8 @@ deps:
 	opam install base.v0.14.1 reason.3.7.0 menhir.20210419 -y
 
 install: opt
-	mkdir -p `opam config exec -- ocamlfind ocamldoc -customdir`
-	cp -f JsonGenerator.cmxs `opam config exec -- ocamlfind ocamldoc -customdir`/
+	mkdir -p `~/.npm-global/bin/esy ocamlfind ocamldoc -customdir`
+	cp -f JsonGenerator.cmxs `~/.npm-global/bin/esy ocamlfind ocamldoc -customdir`/
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-native: opt dummy
@@ -73,7 +62,7 @@ build-native: opt dummy
 	cp ../native/src/TableclothTuple3.ml ./_native/TableclothTuple3.ml
 	cp ../native/src/TableclothTuple3.mli ./_native/TableclothTuple3.mli
 	cp ../native/src/Tablecloth.ml ./_native/Tablecloth.ml
-	opam config exec -- ocamlfind ocamlc \
+	~/.npm-global/bin/esy ocamlfind ocamlc \
 		-package base,str \
 		-linkpkg \
 		-I ./_native \
@@ -113,12 +102,12 @@ build-native: opt dummy
 		./_native/Tablecloth.ml
 
 # We need to build tablecloth to create the cmi files for ocamldoc
-build-rescript: opt-rescript dummy
-	# mkdir node_modules
-	# mkdir node_modules/tablecloth-bucklescript
-	# cp ../package.json node_modules/tablecloth-bucklescript
-	# cp ../bsconfig.json node_modules/tablecloth-bucklescript
-	# cp -r ../rescript node_modules/tablecloth-bucklescript
+build-rescript: opt dummy
+	mkdir node_modules
+	mkdir node_modules/tablecloth-bucklescript
+	cp ../package.json node_modules/tablecloth-bucklescript
+	cp ../bsconfig.json node_modules/tablecloth-bucklescript
+	cp -r ../rescript node_modules/tablecloth-bucklescript/rescript
 	~/.npm-global/bin/esy
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
@@ -157,10 +146,10 @@ build-rescript: opt-rescript dummy
 
 doc-native: build-native
 	DESTINATION_JSON=model.json \
-	opam config exec -- ocamldoc.opt \
+	~/.npm-global/bin/esy ocamldoc.opt \
 		-g $(CMXS) \
-		`opam config exec -- ocamlfind query -i-format base` \
-		`opam config exec -- ocamlfind query -i-format str` \
+		`~/.npm-global/bin/esy ocamlfind query -i-format base` \
+		`~/.npm-global/bin/esy ocamlfind query -i-format str` \
 		-I ./_native \
 		-d ../website \
 		./_native/TableclothBool.mli \
@@ -199,10 +188,11 @@ doc-native: build-native
 
 doc-rescript: build-rescript
 	DESTINATION_JSON=model-rescript.json \
-	esy ocamldoc.opt \
+	echo "Ignore rescript build error" \
+	~/.npm-global/bin/esy ocamldoc.opt \
 		-g $(CMXS) \
 		-I node_modules/bs-platform/lib/melange \
-		-I ../../melange-basic-template/_build/default/node_modules/tablecloth-bucklescript/rescript/src/ \
+		-I ../_build/default/ocamldoc-json-generator/node_modules/tablecloth-bucklescript/rescript/src/ \
 		-d ../website \
 		./_rescript/TableclothComparator.mli \
 		./_rescript/TableclothComparator.ml \
