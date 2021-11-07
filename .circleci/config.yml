@@ -99,6 +99,8 @@ jobs:
       # nodejs and npm is needed to generate rescript ocamldoc
       - run: sudo apt-get update
       - run: sudo apt-get install -y m4 nodejs npm
+      - run: mkdir ~/.npm-global
+      - run: npm config set prefix '~/.npm-global'
       - run: npm install -g esy
       - run: cd ocamldoc-json-generator && make deps
       - run: cd ocamldoc-json-generator && esy && make doc
