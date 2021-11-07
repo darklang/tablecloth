@@ -102,13 +102,14 @@ build-native: opt dummy
 		./_build/Tablecloth.ml
 
 # We need to build tablecloth to create the cmi files for ocamldoc
-build-rescript: opt dummy debug-esy
+build-rescript: opt dummy
 	mkdir node_modules
 	mkdir node_modules/tablecloth-bucklescript
 	cp ../package.json node_modules/tablecloth-bucklescript
 	cp ../bsconfig.json node_modules/tablecloth-bucklescript
 	cp -r ../rescript node_modules/tablecloth-bucklescript
 	~/.npm-global/bin/esy
+	echo $(shell (find ~/.esy/source/i/ -maxdepth 1 -type d ; echo "/lib/ocaml") | tr -d '\n' )
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
 	cp ../rescript/src/TableclothComparator.ml ./_rescript/TableclothComparator.ml
