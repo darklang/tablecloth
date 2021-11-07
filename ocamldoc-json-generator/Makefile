@@ -109,7 +109,7 @@ build-rescript: opt dummy
 	cp ../bsconfig.json node_modules/tablecloth-bucklescript
 	cp -r ../rescript node_modules/tablecloth-bucklescript
 	~/.npm-global/bin/esy
-	echo $(shell (find /home -name TableclothComparator.cmj )
+	echo $(shell (find /home -name TableclothComparator.cmj ))
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
 	cp ../rescript/src/TableclothComparator.ml ./_rescript/TableclothComparator.ml
@@ -194,7 +194,6 @@ doc-rescript: build-rescript
 		`opam config exec -- ocamlfind query -i-format base` \
 		`opam config exec -- ocamlfind query -i-format str` \
 		-I node_modules/bs-platform/lib/melange \
-		-I $(shell (find ~/.esy/source/i/ -maxdepth 1 -type d | grep tablecloth_; echo "/lib/ocaml") | tr -d '\n' ) \
 		-I ./_rescript \
 		-d ../website \
 		./_rescript/TableclothBool.mli \
