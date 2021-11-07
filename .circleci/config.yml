@@ -102,7 +102,6 @@ jobs:
       - run: mkdir ~/.npm-global
       - run: npm config set prefix '~/.npm-global'
       - run: npm install -g esy
-      - run: cd ocamldoc-json-generator && make deps
       - run: cd ocamldoc-json-generator && esy && make doc
       # Check that model.json has been regenerated when there are changes in the interface files
       - run: git diff --exit-code website/model.json
