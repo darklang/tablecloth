@@ -188,13 +188,12 @@ doc-native: build-native
 
 doc-rescript: build-rescript
 	DESTINATION_JSON=model-rescript.json \
-	ESY_TC=$(shell find ~/.esy/source/i/ -maxdepth 1 -type d | grep tablecloth_ | awk '{print $1"/lib/ocaml"}') \
 	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
 		`opam config exec -- ocamlfind query -i-format base` \
 		`opam config exec -- ocamlfind query -i-format str` \
 		-I node_modules/bs-platform/lib/melange \
-		-I $(ESY_TC) \
+		-I $(shell (find ~/.esy/source/i/ -maxdepth 1 -type d | grep tablecloth_; echo "/lib/ocaml") | tr -d '\n' ) \
 		-I ./_rescript \
 		-d ../website \
 		./_rescript/TableclothBool.mli \
@@ -233,6 +232,8 @@ doc-rescript: build-rescript
 
 doc: doc-native doc-rescript
 
+pepega:
+	echo $(ESY_TC)
 clean:
 	rm -f _rescript/* *.cm* *.o *.a
 	rm -f _build/* *.cm* *.o *.a
