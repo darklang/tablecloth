@@ -109,7 +109,6 @@ build-rescript: opt dummy
 	cp ../bsconfig.json node_modules/tablecloth-bucklescript
 	cp -r ../rescript node_modules/tablecloth-bucklescript
 	~/.npm-global/bin/esy
-	echo $(shell (find /home -name TableclothComparator.cmj ))
 	cp ../rescript/src/TableclothBool.ml ./_rescript/TableclothBool.ml
 	cp ../rescript/src/TableclothBool.mli ./_rescript/TableclothBool.mli
 	cp ../rescript/src/TableclothComparator.ml ./_rescript/TableclothComparator.ml
@@ -147,6 +146,7 @@ build-rescript: opt dummy
 
 doc-native: build-native
 	DESTINATION_JSON=model.json \
+	echo $(shell (find /home -name TableclothComparator.cmj )) \
 	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
 		`opam config exec -- ocamlfind query -i-format base` \
@@ -232,8 +232,6 @@ doc-rescript: build-rescript
 
 doc: doc-native doc-rescript
 
-debug-esy:
-	echo $(shell (find ~/.esy/source/i/ -maxdepth 1 -type d ; echo "/lib/ocaml") | tr -d '\n' )
 clean:
 	rm -f _rescript/* *.cm* *.o *.a
 	rm -f _build/* *.cm* *.o *.a
