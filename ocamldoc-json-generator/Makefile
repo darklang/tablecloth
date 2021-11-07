@@ -146,7 +146,6 @@ build-rescript: opt dummy
 
 doc-native: build-native
 	DESTINATION_JSON=model.json \
-	echo $(shell (find /home -name TableclothComparator.cmj )) \
 	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
 		`opam config exec -- ocamlfind query -i-format base` \
@@ -189,6 +188,7 @@ doc-native: build-native
 
 doc-rescript: build-rescript
 	DESTINATION_JSON=model-rescript.json \
+	echo $(shell (find /home -name TableclothComparator.cmj )) \
 	opam config exec -- ocamldoc.opt \
 		-g $(CMXS) \
 		`opam config exec -- ocamlfind query -i-format base` \
