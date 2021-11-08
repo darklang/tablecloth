@@ -112,4 +112,4 @@ let suite =
               |> toEqual
                    (let open Eq in
                    result string string)
-                   (Error "Robin") ) ) )
+                   (Error "Robin") ) ) ;

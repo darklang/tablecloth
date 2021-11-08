@@ -111,7 +111,7 @@ let partition = Base.Array.partition_tf
 
 let splitAt a ~index =
   ( Base.Array.init index ~f:(fun i -> a.(i))
-  , Base.Array.init (length a - 1) ~f:(fun i -> a.(index + i)) )
+  , Base.Array.init (length a - index) ~f:(fun i -> a.(index + i)) )
 
 
 let split_at = splitAt
