@@ -358,12 +358,6 @@ let suite =
               |> toEqual
                    (let open Eq in
                    pair (array int) (array int))
-                   ([| 1; 2; 3; 4; 5 |], [||]) ) ;
-          test "Split array at array[10]" (fun () ->
-              expect (splitAt [| 1; 2; 3; 4; 5 |] ~index:10)
-              |> toEqual
-                   (let open Eq in
-                   pair (array int) (array int))
                    ([||], [| 1; 2; 3; 4; 5 |]) ) ) ;
 
       describe "splitWhen" (fun () ->
