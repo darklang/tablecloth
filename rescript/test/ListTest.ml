@@ -216,7 +216,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 2; 4; 8 ] ) ;
+                   [ 2; 4; 6;8 ] ) ;
           test "filter none" (fun () ->
               expect (filter ~f:Int.isEven [ 5; 7; 9 ])
               |> toEqual
@@ -400,18 +400,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 3; 6 ] ) ;
-          test "map3 different list length" (fun () ->
-              expect
-                (map3
-                   ~f:(fun x y z -> x + y + z)
-                   [ 1; 2; 3 ]
-                   [ 1; 2; 3 ]
-                   [ 1; 2 ] )
-              |> toEqual
-                   (let open Eq in
-                   list int)
-                   [ 3; 6 ] ) ) ;
+                   [ 3; 6 ] )) ;
 
       describe "mapWithIndex" (fun () ->
           test "on an empty list" (fun () ->
