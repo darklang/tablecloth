@@ -1146,7 +1146,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list (pair int string))
-                   [ (1, "Dog"); (2, "Eagle"); (3, "Ferret") ] ) ;
+                   [ (3, "Ferret"); (2, "Eagle"); (1, "Dog") ] ) ;
           test "zip num and empty" (fun () ->
               expect (zip [ 1; 2; 3; 4; 5 ] [])
               |> toEqual
