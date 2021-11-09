@@ -40,7 +40,7 @@ let suite =
                    list char)
                    [ 'a'; 'a'; 'a'; 'a'; 'a' ] ) ;
       describe "range" (fun () ->
-          test "is zero" (fun () ->
+          test "returns empty when is zero" (fun () ->
               expect (List.range 0)
               |> toEqual
                    (let open Eq in
@@ -84,13 +84,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 0; 1; 4; 9 ] ) ;
-          test "with negative" (fun () ->
-              expect (List.initialize (-1) ~f:(fun index -> index))
-              |> toEqual
-                   (let open Eq in
-                   list int)
-                   [] ) ) ;
+                   [ 0; 1; 4; 9 ] )) ;
 
       describe "fromArray" (fun () ->
           test "from empty" (fun () ->
