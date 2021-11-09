@@ -54,9 +54,9 @@ let suite =
 
       describe "isError" (fun () ->
           test "returns false if result is Ok" (fun () ->
-              expect (Result.isOk (Ok 3)) |> toEqual Eq.bool false ) ;
+              expect (Result.isError (Ok 3)) |> toEqual Eq.bool false ) ;
           test "returns true if result is Error" (fun () ->
-              expect (Result.isOk (Error 3)) |> toEqual Eq.bool true ) ) ;
+              expect (Result.isError (Error 3)) |> toEqual Eq.bool true ) ) ;
 
       describe "and_" (fun () ->
           test "returns second arg if both are Ok" (fun () ->
@@ -112,4 +112,4 @@ let suite =
               |> toEqual
                    (let open Eq in
                    result string string)
-                   (Error "Robin") ) ) ;
+                   (Error "Robin") ) ) )
