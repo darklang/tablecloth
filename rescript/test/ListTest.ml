@@ -32,13 +32,13 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [] ) );
-          test "with char" (fun () ->
-              expect (List.repeat ~times:5 'a')
-              |> toEqual
-                   (let open Eq in
-                   list char)
-                   [ 'a'; 'a'; 'a'; 'a'; 'a' ] ) ;
+                   [] ) ) ;
+      test "with char" (fun () ->
+          expect (List.repeat ~times:5 'a')
+          |> toEqual
+               (let open Eq in
+               list char)
+               [ 'a'; 'a'; 'a'; 'a'; 'a' ] ) ;
       describe "range" (fun () ->
           test "returns empty when is zero" (fun () ->
               expect (List.range 0)
@@ -84,7 +84,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 0; 1; 4; 9 ] )) ;
+                   [ 0; 1; 4; 9 ] ) ) ;
 
       describe "fromArray" (fun () ->
           test "from empty" (fun () ->
@@ -216,7 +216,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 2; 4; 6;8 ] ) ;
+                   [ 2; 4; 6; 8 ] ) ;
           test "filter none" (fun () ->
               expect (filter ~f:Int.isEven [ 5; 7; 9 ])
               |> toEqual
@@ -400,7 +400,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 3; 6 ] )) ;
+                   [ 3; 6 ] ) ) ;
 
       describe "mapWithIndex" (fun () ->
           test "on an empty list" (fun () ->
@@ -490,20 +490,17 @@ let suite =
                    [] ) ) ;
 
       describe "groupWhile" (fun () ->
-          test "normal int" (fun () ->
-              expect
-                (groupWhile
-                   ~f:(fun x y -> x mod 2 = y mod 2)
-                   [ 2; 4; 6; 5; 3; 1; 8; 7; 9 ] )
+          test "empty list" (fun () ->
+              expect (groupWhile ~f:String.equal [])
               |> toEqual
                    (let open Eq in
-                   list (list int))
-                   [ [ 2; 4; 6 ]; [ 5; 3; 1 ]; [ 8 ]; [ 7; 9 ] ] ) ;
+                   list (list string))
+                   [] ) ;
 
           test "normal char" (fun () ->
               expect
                 (groupWhile
-                   ~f:String.equal
+                   ~f:(<>)
                    [ "a"; "b"; "b"; "a"; "a"; "a"; "b"; "a" ] )
               |> toEqual
                    (let open Eq in
@@ -515,12 +512,15 @@ let suite =
                    ; [ "a" ]
                    ] ) ;
 
-          test "empty list" (fun () ->
-              expect (groupWhile ~f:String.equal [])
+          test "normal int" (fun () ->
+              expect
+                (groupWhile
+                   ~f:(fun x y -> x mod 2 != y mod 2)
+                   [ 2; 4; 6; 5; 3; 1; 8; 7; 9 ] )
               |> toEqual
                    (let open Eq in
-                   list (list string))
-                   [] ) ) ;
+                   list (list int))
+                   [ [ 2; 4; 6 ]; [ 5; 3; 1 ]; [ 8 ]; [ 7; 9 ] ] ) ) ;
 
       describe "join" (fun () ->
           test "normal" (fun () ->
