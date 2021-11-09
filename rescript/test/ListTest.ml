@@ -500,7 +500,7 @@ let suite =
           test "normal char" (fun () ->
               expect
                 (groupWhile
-                   ~f:(<>)
+                   ~f:( <> )
                    [ "a"; "b"; "b"; "a"; "a"; "a"; "b"; "a" ] )
               |> toEqual
                    (let open Eq in
@@ -1292,10 +1292,10 @@ let suite =
           test "normal int" (fun () ->
               expect (compare Int.compare [ 2; 5; 6; 11 ] [ 2; 5; 6; 11 ])
               |> toEqual Eq.int 0 ) ;
-          test "normal int" (fun () ->
+          test "normal int with different element" (fun () ->
               expect (compare Int.compare [ 2; 5; -6; 11 ] [ 2; 5; 6; 11 ])
-              |> toEqual Eq.int 1 ) ;
-          test "normal int" (fun () ->
+              |> toEqual Eq.int (-1) ) ;
+          test "normal int with shorter and longer array" (fun () ->
               expect (compare Int.compare [ 2; 5; 11 ] [ 2; 5; 6; 11 ])
               |> toEqual Eq.int 1 ) ;
           test "normal string" (fun () ->
