@@ -45,7 +45,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 0 ] ) ;
+                   [] ) ;
           test "with single" (fun () ->
               expect (List.range 5)
               |> toEqual
@@ -65,12 +65,12 @@ let suite =
                    list int)
                    [ -2; -1; 0; 1 ] ) ;
 
-          test "with count down" (fun () ->
+          test "returns empty with count down" (fun () ->
               expect (List.range ~from:5 2)
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 5; 3; 4 ] ) ) ;
+                   [] ) ) ;
 
       describe "initalize" (fun () ->
           test "with identity" (fun () ->
