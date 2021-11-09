@@ -499,11 +499,11 @@ let suite =
 
       describe "toString" (fun () ->
           test "5.0" (fun () ->
-              expect (toString 5.0) |> toEqual Eq.string "5.0" ) ;
+              expect (toString 5.0) |> toEqual Eq.string "5." ) ;
           test "0.0" (fun () ->
-              expect (toString 0.0) |> toEqual Eq.string "0.0" ) ;
+              expect (toString 0.0) |> toEqual Eq.string "0." ) ;
           test "-7.0" (fun () ->
-              expect (toString (-7.0)) |> toEqual Eq.string "-7.0" ) ) ;
+              expect (toString (-7.0)) |> toEqual Eq.string "-7." ) ) ;
 
       describe "isSafeInteger" (fun () ->
           test "true" (fun () ->
