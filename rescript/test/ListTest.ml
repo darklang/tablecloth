@@ -33,6 +33,12 @@ let suite =
                    (let open Eq in
                    list int)
                    [] ) ) ;
+      test "is negative" (fun () ->
+          expect (List.repeat ~times:(-10) 7)
+          |> toEqual
+               (let open Eq in
+               list int)
+               [] ) ;
       test "with char" (fun () ->
           expect (List.repeat ~times:5 'a')
           |> toEqual
@@ -379,6 +385,12 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
+                   [ 2; 4 ] ) ;
+          test "map2 with lists of different lengths" (fun () ->
+              expect (map2 ~f:( + ) [ 1; 2; 3 ] [ 1; 2 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
                    [ 2; 4 ] ) ) ;
 
       describe "map3" (fun () ->
@@ -397,6 +409,18 @@ let suite =
           test "map3 two elements" (fun () ->
               expect
                 (map3 ~f:(fun x y z -> x + y + z) [ 1; 2 ] [ 1; 2 ] [ 1; 2 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 3; 6 ] ) ;
+
+          test "map3 elements on lists of different lengths" (fun () ->
+              expect
+                (map3
+                   ~f:(fun x y z -> x + y + z)
+                   [ 1; 2; 3 ]
+                   [ 1; 2; 3 ]
+                   [ 1; 2 ] )
               |> toEqual
                    (let open Eq in
                    list int)
@@ -1146,7 +1170,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list (pair int string))
-                   [ (3, "Ferret"); (2, "Eagle"); (1, "Dog") ] ) ;
+                   [ (1, "Dog"); (2, "Eagle"); (3, "Ferret") ] ) ;
           test "zip num and empty" (fun () ->
               expect (zip [ 1; 2; 3; 4; 5 ] [])
               |> toEqual
