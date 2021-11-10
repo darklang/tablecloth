@@ -277,4 +277,16 @@ let suite =
               expect (Option.equal Int.equal (Some 1) None)
               |> toEqual Eq.bool false ) ;
           test "returns bool true if options are equal" (fun () ->
-              expect (Option.equal Int.equal None None) |> toEqual Eq.bool true ) ) )
+              expect (Option.equal Int.equal None None) |> toEqual Eq.bool true ) ) ;
+
+      describe "compare" (fun () ->
+          test "returns comparative value -1, 0, or 1" (fun () ->
+              expect (Option.compare Int.compare (Some 1) (Some 3))
+              |> toEqual Eq.int (-1) ) ;
+
+          test "returns comparative value -1, 0, or 1" (fun () ->
+              expect (Option.compare Int.compare (Some 1) None)
+              |> toEqual Eq.int 1 ) ;
+
+          test "returns comparative value -1, 0, or 1" (fun () ->
+              expect (Option.compare Int.compare None None) |> toEqual Eq.int 0 ) ) )
