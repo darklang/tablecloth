@@ -146,10 +146,16 @@ let all = Base.Array.for_all
 
 let includes = Base.Array.mem
 
+let reverse = Base.Array.rev_inplace
+
 let values t =
-  fold t ~initial:[] ~f:(fun results element ->
-      match element with None -> results | Some value -> value :: results )
-  |> fromList
+  let result =
+    fold t ~initial:[] ~f:(fun results element ->
+        match element with None -> results | Some value -> value :: results )
+    |> fromList
+  in
+  reverse result ;
+  result
 
 
 let join t ~sep = Stdlib.String.concat sep (Array.to_list t)
@@ -221,8 +227,6 @@ let extent t ~compare =
 
 
 let sort t = Base.Array.sort t
-
-let reverse = Base.Array.rev_inplace
 
 let forEach a ~f = Base.Array.iter a ~f
 
