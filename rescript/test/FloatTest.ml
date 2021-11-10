@@ -471,63 +471,6 @@ let suite =
                    option int)
                    None ) ) ;
 
-      describe "fromString" (fun () ->
-          test "5.0" (fun () ->
-              expect (fromString "5.0")
-              |> toEqual
-                   (let open Eq in
-                   option float)
-                   (Some 5.0) ) ;
-          test "0.0" (fun () ->
-              expect (fromString "0.0")
-              |> toEqual
-                   (let open Eq in
-                   option float)
-                   (Some 0.0) ) ;
-          test "-7.0" (fun () ->
-              expect (fromString "-7.0")
-              |> toEqual
-                   (let open Eq in
-                   option float)
-                   (Some (-7.0)) ) ;
-          test "None" (fun () ->
-              expect (fromString "Hamster")
-              |> toEqual
-                   (let open Eq in
-                   option float)
-                   None ) ) ;
-
-      describe "toString" (fun () ->
-          test "5.0" (fun () ->
-              expect (toString 5.0) |> toEqual Eq.string "5." ) ;
-          test "0.0" (fun () ->
-              expect (toString 0.0) |> toEqual Eq.string "0." ) ;
-          test "-7.0" (fun () ->
-              expect (toString (-7.0)) |> toEqual Eq.string "-7." ) ) ;
-
-      describe "isSafeInteger" (fun () ->
-          test "true" (fun () ->
-              expect (isSafeInteger 5.0) |> toEqual Eq.bool true ) ;
-          test "false" (fun () ->
-              expect (isSafeInteger pi) |> toEqual Eq.bool false ) ) ;
-
-      describe "isInteger" (fun () ->
-          test "true" (fun () -> expect (isInteger 5.0) |> toEqual Eq.bool true) ;
-          test "false" (fun () ->
-              expect (isInteger pi) |> toEqual Eq.bool false ) ) ;
-
-      describe "isInfinite" (fun () ->
-          test "false" (fun () ->
-              expect (isInfinite (0. / 0.)) |> toEqual Eq.bool false ) ;
-          test "false" (fun () ->
-              expect (isInfinite (squareRoot (-1.))) |> toEqual Eq.bool false ) ;
-          test "true" (fun () ->
-              expect (isInfinite (1. / 0.)) |> toEqual Eq.bool true ) ;
-          test "false" (fun () ->
-              expect (isInfinite 1.) |> toEqual Eq.bool false ) ;
-          test "false" (fun () ->
-              expect (isInfinite nan) |> toEqual Eq.bool false ) ) ;
-
       describe "isInteger" (fun () ->
           test "true" (fun () -> expect (isInteger 5.0) |> toEqual Eq.bool true) ;
           test "false" (fun () ->
