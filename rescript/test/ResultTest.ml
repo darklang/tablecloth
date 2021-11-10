@@ -93,19 +93,19 @@ let suite =
                    (let open Eq in
                    result string string)
                    (Ok "Boar") ) ;
-          test "returns second arg" (fun () ->
+          test "returns ok arg" (fun () ->
               expect (Result.or_ (Error "Periwinkle") (Ok "Gecko"))
               |> toEqual
                    (let open Eq in
                    result string string)
                    (Ok "Gecko") ) ;
 
-          test "returns second arg" (fun () ->
+          test "returns ok arg" (fun () ->
               expect (Result.or_ (Ok "Boar") (Error "Periwinkle"))
               |> toEqual
                    (let open Eq in
                    result string string)
-                   (Error "Periwinkle") ) ;
+                   (Ok "Boar") ) ;
 
           test "returns second arg" (fun () ->
               expect (Result.or_ (Error "Periwinkle") (Error "Robin"))
