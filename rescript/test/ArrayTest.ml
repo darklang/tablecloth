@@ -637,7 +637,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    array string)
-                   [| "Cat"; "Ant" |] ) ;
+                   [| "Ant"; "Cat" |] ) ;
           test
             "Return all of the [Some] values from an empty array of options"
             (fun () ->
