@@ -1320,7 +1320,7 @@ let suite =
               expect (compare Int.compare [ 2; 5; -6; 11 ] [ 2; 5; 6; 11 ])
               |> toEqual Eq.int (-1) ) ;
           test "normal int with shorter and longer array" (fun () ->
-              expect (compare Int.compare [ 2; 5; 6; 11 ] [ 2; 5; 11 ])
+              expect (compare Int.compare [ 2; 5; 6; 11 ] [ 2; 5; 6 ])
               |> toEqual Eq.int 1 ) ;
           test "normal string" (fun () ->
               expect
