@@ -28,7 +28,7 @@ let suite =
               |> toEqual Eq.int 0 ) ) ;
 
       describe "singleton" (fun () ->
-          test "has length zero" (fun () ->
+          test "key value pair" (fun () ->
               let singletonMap =
                 Map.singleton (module Int) ~key:1 ~value:"Ant"
               in
