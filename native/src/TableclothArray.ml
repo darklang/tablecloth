@@ -114,7 +114,6 @@ let splitAt a ~index =
   , Base.Array.init (length a - index) ~f:(fun i -> a.(index + i)) )
 
 
-  
 let split_at = splitAt
 
 let splitWhen a ~f =
@@ -158,7 +157,6 @@ let values t =
   reverse result ;
   result
 
-  
 
 let join t ~sep = Stdlib.String.concat sep (Array.to_list t)
 

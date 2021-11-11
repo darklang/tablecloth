@@ -82,7 +82,6 @@ let map2 listA listB ~f =
   reverse mapped
 
 
-  
 let map3 listA listB listC ~f =
   let mapped, _, _ =
     Base.List.fold listA ~init:([], listB, listC) ~f:(fun (result, lb, lc) a ->
