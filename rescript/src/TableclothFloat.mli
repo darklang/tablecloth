@@ -779,7 +779,6 @@ val to_int : t -> int option
 
 val toString : t -> string
 (** Convert a [float] to a {!String}
-
     The behaviour of this function is platform specific
 *)
 
