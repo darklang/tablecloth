@@ -454,7 +454,7 @@ let suite =
               expect (join [| "Ant"; "Bat"; "Cat" |] ~sep:", ")
               |> toEqual Eq.string "Ant, Bat, Cat" ) ;
           test
-            "Convert an empty array of strings into a String, placing [sep] between each string in the result"
+            "Convert an empty array of strings into a String, returns an empty string"
             (fun () -> expect (join [||] ~sep:", ") |> toEqual Eq.string "") ) ;
 
       describe "count" (fun () ->
