@@ -273,7 +273,7 @@ let suite =
 
       describe "flatMap" (fun () ->
           test
-            "!map} [f] onto an array and {!flatten} the resulting arrays"
+            "{!map} [f] onto an array and {!flatten} the resulting arrays"
             (fun () ->
               expect (flatMap ~f:(fun n -> [| n; n |]) [| 1; 2; 3 |])
               |> toEqual
