@@ -377,7 +377,9 @@ let suite =
                    (let open Eq in
                    pair (array int) (array int))
                    ([| 5; 7 |], [| 8; 7; 4 |]) ) ;
-          test "divide array with no elements that return true" (fun () ->
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
               expect
                 (splitWhen [| "Ant"; "Bat"; "Cat" |] ~f:(fun animal ->
                      String.length animal > 3 ) )
@@ -385,7 +387,9 @@ let suite =
                    (let open Eq in
                    pair (array string) (array string))
                    ([| "Ant"; "Bat"; "Cat" |], [||]) ) ;
-          test "divide array with no elements that return true" (fun () ->
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
               expect (splitWhen [| 2.; Float.pi; 1.111 |] ~f:Float.isInteger)
               |> toEqual
                    (let open Eq in
