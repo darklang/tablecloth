@@ -290,6 +290,12 @@ let suite =
                    list int)
                    [ 2; 4; 6 ] ) ;
           test "int isEven" (fun () ->
+              expect (takeWhile ~f:Int.isEven [ 2; 6; 7; 15; 10; 9; 8 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 2; 6 ] ) ;
+          test "int isEven" (fun () ->
               expect (takeWhile ~f:Int.isEven [ 2; 4; 6 ])
               |> toEqual
                    (let open Eq in
