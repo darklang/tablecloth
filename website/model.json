@@ -35472,6 +35472,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "equal",

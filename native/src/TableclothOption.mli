@@ -293,6 +293,8 @@ val to_list : 'a t -> 'a list
     {[Option.to_list (None) = []]}
 *)
 
+(** {1 Compare} *)
+
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two optional values for equality using the provided function
 
