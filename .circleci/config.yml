@@ -83,7 +83,7 @@ jobs:
 
   documentation-generator-build:
     docker:
-      - image: ocaml/opam:ubuntu-ocaml-4.10
+      - image: ocaml/opam:ubuntu-ocaml-4.12
     environment:
       CI: true
     working_directory: ~/repo
@@ -96,8 +96,14 @@ jobs:
             - v3-docs-{{ .Branch }}-
             - v3-docs-dependencies-
       # m4 is a system dependency required lots of packages
-      - run: sudo apt-get install -y m4
-      - run: cd ocamldoc-json-generator && make deps
+      # nodejs and npm is needed to generate rescript ocamldoc
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y m4 nodejs npm
+      - run: mkdir ~/.npm-global
+      - run: npm config set prefix '~/.npm-global'
+      - run: npm install -g esy
+      - run: cd ocamldoc-json-generator && make init-node
+      - run: cd ocamldoc-json-generator && ~/.npm-global/bin/esy
       - run: cd ocamldoc-json-generator && make doc
       # Check that model.json has been regenerated when there are changes in the interface files
       - run: git diff --exit-code website/model.json

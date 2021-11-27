@@ -6,8 +6,6 @@ let singleton x = [ x ]
 
 let fromArray array = List.init (Array.length array) (fun i -> array.(i))
 
-let from_array = fromArray
-
 let range ?(from = 0) to_ = List.init (to_ - from) (fun i -> i + from)
 
 let rec repeat element ~times =
@@ -28,11 +26,7 @@ let map t ~f = Belt.List.map t f
 
 let flatMap t ~f = flatten (map t ~f)
 
-let flat_map = flatMap
-
 let mapWithIndex list ~f = Belt.List.mapWithIndex list f
-
-let map_with_index = mapWithIndex
 
 let map2 a b ~f = Belt.List.zipBy a b f
 
@@ -79,13 +73,9 @@ let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
   uniqueHelper f Belt.Set.String.empty l []
 
 
-let unique_by = uniqueBy
-
 let find t ~f = Belt.List.getBy t f
 
 let getAt t ~index = Belt.List.get t index
-
-let get_at = getAt
 
 let any t ~f = List.exists f t
 
@@ -113,13 +103,9 @@ let initial l =
 
 let filterMap t ~f = Belt.List.keepMap t f
 
-let filter_map = filterMap
-
 let filter t ~f = Belt.List.keep t f
 
 let filterWithIndex t ~f = Belt.List.keepWithIndex t (fun e i -> f i e)
-
-let filter_with_index = filterWithIndex
 
 let partition t ~f = Belt.List.partition t f
 
@@ -132,8 +118,6 @@ let count t ~f =
 
 let foldRight t ~initial ~f = Belt.List.reduceReverse t initial f
 
-let fold_right = foldRight
-
 let findIndex list ~f =
   let rec loop i l =
     match l with
@@ -145,11 +129,7 @@ let findIndex list ~f =
   loop 0 list
 
 
-let find_index = findIndex
-
 let splitAt t ~index = (take ~count:index t, drop ~count:index t)
-
-let split_at = splitAt
 
 let updateAt =
   ( fun t ~index ~f ->
@@ -158,19 +138,13 @@ let updateAt =
     : 'a t -> index:int -> f:('a -> 'a) -> 'a t )
 
 
-let update_at = updateAt
-
 let length l = Belt.List.length l
 
 let rec dropWhile t ~f =
   match t with [] -> [] | x :: rest -> if f x then dropWhile rest ~f else t
 
 
-let drop_while = dropWhile
-
 let isEmpty t = t = []
-
-let is_empty = isEmpty
 
 let sliding ?(step = 1) t ~size =
   let rec loop t =
@@ -192,8 +166,6 @@ let sliding ?(step = 1) t ~size =
 
 let chunksOf t ~size = sliding t ~step:size ~size
 
-let chunks_of = chunksOf
-
 let cons t element = element :: t
 
 let takeWhile t ~f =
@@ -207,8 +179,6 @@ let takeWhile t ~f =
   takeWhileHelper [] t
 
 
-let take_while = takeWhile
-
 let all t ~f = Belt.List.every t f
 
 let tail t = match t with [] -> None | _ :: rest -> Some rest
@@ -220,8 +190,6 @@ let removeAt t ~index =
     let (front, back) : 'a t * 'a t = splitAt t ~index in
     match tail back with None -> t | Some t -> append front t
 
-
-let remove_at = removeAt
 
 let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
   let minBy (y, fy) x =
@@ -237,8 +205,6 @@ let minimumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
       Some (fst (fold ~f:minBy ~initial:(x, f x) rest))
 
 
-let minimum_by = minimumBy
-
 let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
   let maxBy (y, fy) x =
     let fx = f x in
@@ -252,8 +218,6 @@ let maximumBy ~(f : 'a -> 'comparable) (l : 'a list) : 'a option =
   | x :: rest ->
       Some (fst (fold ~f:maxBy ~initial:(x, f x) rest))
 
-
-let maximum_by = maximumBy
 
 let minimum t ~compare =
   fold t ~initial:None ~f:(fun min element ->
@@ -309,8 +273,6 @@ let sortBy ~(f : 'a -> 'b) (l : 'a t) : 'a t =
       if a' = b' then 0 else if a' < b' then -1 else 1 )
 
 
-let sort_by = sortBy
-
 let span t ~f =
   match t with [] -> ([], []) | _ -> (takeWhile t ~f, dropWhile t ~f)
 
@@ -324,14 +286,10 @@ let rec groupWhile t ~f =
       (x :: ys) :: groupWhile zs ~f
 
 
-let group_while = groupWhile
-
 let insertAt t ~index ~value =
   let front, back = splitAt t ~index in
   append front (value :: back)
 
-
-let insert_at = insertAt
 
 let splitWhen t ~f =
   let rec loop front back =
@@ -345,8 +303,6 @@ let splitWhen t ~f =
   in
   loop [] t
 
-
-let split_when = splitWhen
 
 let intersperse t ~sep =
   match t with
@@ -362,15 +318,9 @@ let initialize length ~f = Belt.List.makeBy length f
 
 let forEach t ~f : unit = Belt.List.forEach t f
 
-let for_each = forEach
-
 let forEachWithIndex t ~f : unit = Belt.List.forEachWithIndex t f
 
-let for_each_with_index = forEachWithIndex
-
 let toArray = Array.of_list
-
-let to_array = toArray
 
 let join strings ~sep = Js.Array.joinWith sep (toArray strings)
 
@@ -383,8 +333,6 @@ let groupBy t comparator ~f =
           | Some elements ->
               Some (element :: elements) ) )
 
-
-let group_by = groupBy
 
 let rec equal equalElement a b =
   match (a, b) with

@@ -2,9 +2,7 @@
   "name": "bucklescript-integration-test",
   "version": "0.1.0",
   "sources": [
-    {
-      "dir": "."
-    }
+    "rescript"
   ],
   "package-specs": {
     "module": "commonjs",

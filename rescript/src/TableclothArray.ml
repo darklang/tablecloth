@@ -8,35 +8,25 @@ let length = Belt.Array.length
 
 let isEmpty a = length a = 0
 
-let is_empty = isEmpty
-
 let initialize length ~f = Belt.Array.makeBy length f
 
 let range ?(from = 0) to_ = Belt.Array.makeBy (to_ - from) (fun i -> i + from)
 
 let fromList = Belt.List.toArray
 
-let from_list = fromList
-
 let toList : 'a array -> 'a list = Belt.List.fromArray
-
-let to_list = toList
 
 let toIndexedList (array : 'a array) : (int * 'a) list =
   Belt.Array.reduceReverse
     array
     (length array - 1, [])
     (fun (i, acc) x -> (i - 1, (i, x) :: acc))
-  |. snd
+  |> snd
 
-
-let to_indexed_list = toIndexedList
 
 let get = Belt.Array.getExn
 
 let getAt t ~index = Belt.Array.get t index
-
-let get_at = getAt
 
 let ( .?() ) (array : 'element t) (index : int) : 'element option =
   getAt array ~index
@@ -50,8 +40,6 @@ let set t index value = t.(index) <- value
 
 let setAt t ~index ~value = t.(index) <- value
 
-let set_at = setAt
-
 let filter t ~f = Belt.Array.keep t f
 
 let swap t i j =
@@ -64,8 +52,6 @@ let swap t i j =
 let fold t ~initial ~f = Belt.Array.reduce t initial f
 
 let foldRight t ~initial ~f = Belt.Array.reduceReverse t initial f
-
-let fold_right = foldRight
 
 let maximum t ~compare =
   fold t ~initial:None ~f:(fun max element ->
@@ -120,8 +106,6 @@ let map t ~f = Belt.Array.map t f
 
 let mapWithIndex t ~f = Belt.Array.mapWithIndex t f
 
-let map_with_index = mapWithIndex
-
 let map2 a b ~(f : 'a -> 'b -> 'c) : 'c array = Belt.Array.zipBy a b f
 
 let map3 as_ bs (cs : 'c t) ~f =
@@ -133,9 +117,7 @@ let map3 as_ bs (cs : 'c t) ~f =
 
 let zip = map2 ~f:(fun a b -> (a, b))
 
-let flatMap t ~f = Belt.Array.map t f |. Belt.Array.concatMany
-
-let flat_map = flatMap
+let flatMap t ~f = Belt.Array.map t f |> Belt.Array.concatMany
 
 let sliding ?(step = 1) a ~size =
   let n = Array.length a in
@@ -168,8 +150,6 @@ let findIndex array ~f =
   in
   loop 0
 
-
-let find_index = findIndex
 
 let any t ~f = Belt.Array.some t f
 
@@ -211,21 +191,15 @@ let count t ~f =
 
 let chunksOf t ~size = sliding t ~step:size ~size
 
-let chunks_of = chunksOf
-
 let reverse = Belt.Array.reverseInPlace
 
 let forEach t ~f : unit = Belt.Array.forEach t f
-
-let for_each = forEach
 
 let forEachWithIndex t ~f : unit =
   for i = 0 to length t - 1 do
     f i t.(i)
   done
 
-
-let for_each_with_index = forEachWithIndex
 
 let partition t ~f =
   let left, right =
@@ -241,8 +215,6 @@ let splitAt t ~index =
   (slice t ~from:0 ~to_:index, slice t ~from:index ~to_:(length t))
 
 
-let split_at = splitAt
-
 let splitWhen t ~f =
   match findIndex t ~f:(fun _ e -> f e) with
   | None ->
@@ -250,8 +222,6 @@ let splitWhen t ~f =
   | Some (index, _) ->
       splitAt t ~index
 
-
-let split_when = splitWhen
 
 let unzip t =
   ( Array.init (length t) (fun i -> fst t.(i))
@@ -263,17 +233,15 @@ let repeat element ~length = Array.init (max length 0) (fun _ -> element)
 let filterMap t ~f =
   fold t ~initial:[] ~f:(fun results element ->
       match f element with None -> results | Some value -> value :: results )
-  |. fromList
+  |> fromList
 
-
-let filter_map = filterMap
 
 let sort a ~compare = Array.sort compare a
 
 let values t =
   fold t ~initial:[] ~f:(fun results element ->
       match element with None -> results | Some value -> value :: results )
-  |. fromList
+  |> fromList
 
 
 let join t ~sep = Js.Array.joinWith sep t
@@ -287,8 +255,6 @@ let groupBy t comparator ~f =
           | Some elements ->
               Some (element :: elements) ) )
 
-
-let group_by = groupBy
 
 let equal equal a b =
   if length a <> length b

@@ -86,9 +86,6 @@ val fromArray :
     {[Set.fromArray (module String) [|"Ant"; "Bat"; "Bat"; "Goldfish"|] |> Set.toArray = [|"Ant";"Bat";"Goldfish"|]]}
 *)
 
-val from_array :
-  ('a, 'identity) TableclothComparator.s -> 'a array -> ('a, 'identity) t
-
 val fromList :
   ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 (** Create a set from a {!List}
@@ -97,9 +94,6 @@ val fromList :
 
     {[Set.fromList (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.toList = ['A';'B';'G']]}
 *)
-
-val from_list :
-  ('a, 'identity) TableclothComparator.s -> 'a list -> ('a, 'identity) t
 
 (** {1 Basic operations} *)
 
@@ -180,8 +174,6 @@ val isEmpty : (_, _) t -> bool
 
     {[Set.isEmpty (Set.Int.singleton 4) = false]}
 *)
-
-val is_empty : (_, _) t -> bool
 
 val any : ('value, _) t -> f:('value -> bool) -> bool
 (** Determine if [f] returns true for [any] values in a set.
@@ -271,19 +263,13 @@ val fold : ('a, _) t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 val forEach : ('a, _) t -> f:('a -> unit) -> unit
 (** Runs a function [f] against each element of the set. *)
 
-val for_each : ('a, _) t -> f:('a -> unit) -> unit
-
 (** {1 Convert} *)
 
 val toArray : ('a, _) t -> 'a array
 (** Converts a set into an {!Array} *)
 
-val to_array : ('a, _) t -> 'a array
-
 val toList : ('a, _) t -> 'a list
 (** Converts a set into a {!List}. *)
-
-val to_list : ('a, _) t -> 'a list
 
 (** Construct sets which can hold any data type using the polymorphic [compare] function. *)
 module Poly : sig
@@ -313,8 +299,6 @@ module Poly : sig
       {[Set.Poly.fromArray [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.toList = [(1, "Ant"); (2, "Bat")]]}
   *)
 
-  val from_array : 'a array -> 'a t
-
   val fromList : 'a list -> 'a t
   (** Create a set from a {!List}
 
@@ -322,8 +306,6 @@ module Poly : sig
 
     {[Set.Poly.fromList [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.toList = [(1, "Ant"); (2, "Bat")]]}
   *)
-
-  val from_list : 'a list -> 'a t
 end
 
 (** Construct sets of {!Int}s *)
@@ -349,8 +331,6 @@ module Int : sig
       {[Set.Int.fromArray [|1;2;3;3;2;1;7|] |> Set.toArray = [|1;2;3;7|]]}
   *)
 
-  val from_array : int array -> t
-
   val fromList : int list -> t
   (** Create a set from a {!List}
 
@@ -358,8 +338,6 @@ module Int : sig
 
       {[Set.Int.fromList [1;2;3;3;2;1;7] |> Set.toList = [1;2;3;7]]}
   *)
-
-  val from_list : int list -> t
 end
 
 (** Construct sets of {!String}s *)
@@ -385,8 +363,6 @@ module String : sig
       {[Set.String.fromArray [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toArray = [|"a";"b";"g"|]]}
   *)
 
-  val from_array : string array -> t
-
   val fromList : string list -> t
   (** Create a set from a {!List}
 
@@ -394,6 +370,4 @@ module String : sig
 
       {[Set.String.fromList [|"a";"b";"g";"b";"g";"a";"a"|] |> Set.toList = ["a";"b";"g"]]}
   *)
-
-  val from_list : string list -> t
 end

@@ -87,8 +87,6 @@ val fromOption : 'ok option -> error:'error -> ('ok, 'error) t
     ]}
 *)
 
-val from_option : 'ok option -> error:'error -> ('ok, 'error) t
-
 val isOk : (_, _) t -> bool
 (** Check if a {!Result} is an [Ok].
 
@@ -107,8 +105,6 @@ val isOk : (_, _) t -> bool
     {[Result.isOk (Error 3) = false]}
 *)
 
-val is_ok : (_, _) t -> bool
-
 val isError : (_, _) t -> bool
 (** Check if a {!Result} is an [Error].
 
@@ -126,8 +122,6 @@ val isError : (_, _) t -> bool
 
     {[Result.isError (Error 3) = true]}
 *)
-
-val is_error : (_, _) t -> bool
 
 val and_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 (** Returns the first argument if it {!isError}, otherwise return the second argument.
@@ -251,8 +245,6 @@ val unwrapUnsafe : ('ok, _) t -> 'ok
     {[Result.unwrapUnsafe (Error "bad") ]}
 *)
 
-val unwrap_unsafe : ('ok, _) t -> 'ok
-
 val unwrapError : ('ok, 'error) t -> default:'error -> 'error
 (** Like {!Result.unwrap} but unwraps an [Error] value instead
 
@@ -272,8 +264,6 @@ val unwrapError : ('ok, 'error) t -> default:'error -> 'error
           `UnexpectedInvertabrate "Ladybird"
     ]}
 *)
-
-val unwrap_error : ('ok, 'error) t -> default:'error -> 'error
 
 val map2 :
   ('a, 'error) t -> ('b, 'error) t -> f:('a -> 'b -> 'c) -> ('c, 'error) t
@@ -340,8 +330,6 @@ val mapError : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
     {[Result.mapError (Error "bad") ~f:(Int.add 1)  = Error "bad"]}
 *)
 
-val map_error : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
-
 val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
 (** Run a function which may fail on a result.
 
@@ -380,8 +368,6 @@ val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
     {[Result.andThen (Ok 0.0) ~f:root |> Result.andThen ~f:reciprical = Error "Divide by zero"]}
 *)
 
-val and_then : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
-
 val tap : ('ok, _) t -> f:('ok -> unit) -> unit
 (** Run a function against an [(Ok value)], ignores [Error]s.
 
@@ -408,8 +394,6 @@ val toOption : ('ok, _) t -> 'ok option
 
     {[Result.toOption (Error "Missing number!") = None]}
 *)
-
-val to_option : ('ok, _) t -> 'ok option
 
 (** {1 Compare} *)
 

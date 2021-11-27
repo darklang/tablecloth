@@ -4,23 +4,15 @@ let some a = Some a
 
 let isSome = Belt.Option.isSome
 
-let is_some = isSome
-
 let isNone = Belt.Option.isNone
-
-let is_none = isNone
 
 let or_ ta tb = match isSome ta with true -> ta | false -> tb
 
 let orElse ta tb = match isSome tb with true -> tb | false -> ta
 
-let or_else = orElse
-
 let and_ ta tb = match isSome ta with true -> tb | false -> ta
 
 let andThen t ~f = match t with None -> None | Some x -> f x
-
-let and_then = andThen
 
 let flatten = function Some option -> option | None -> None
 
@@ -40,15 +32,9 @@ let unwrapUnsafe =
   unwrapOrFailWith ~exn:(Invalid_argument "Option.unwrapUnsafe called with None")
 
 
-let unwrap_unsafe = unwrapUnsafe
-
 let toArray t = match t with None -> [||] | Some value -> [| value |]
 
-let to_array = toArray
-
 let toList t = match t with None -> [] | Some value -> [ value ]
-
-let to_list = toList
 
 let tap t ~f = match t with None -> () | Some x -> f x
 

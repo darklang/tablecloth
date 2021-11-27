@@ -358,6 +358,8 @@ let bs s =
   print_endline s
 
 
+let destination_json = Sys.getenv "DESTINATION_JSON"
+
 (* TODO surely everything in this class is going to be deleted soon *)
 class virtual text =
   object (self)
@@ -2273,7 +2275,7 @@ class json =
           module_types ;
 
       let chanout =
-        open_out (Filename.concat !Global.target_dir "model.json")
+        open_out (Filename.concat !Global.target_dir destination_json)
       in
       let buffer = Buffer.create 1024 in
       module_list
@@ -2325,6 +2327,7 @@ module JsonGenerator = struct
     object
       method generate =
         print_endline "Generating" ;
+
         let jsonGenerator = new json in
         jsonGenerator#generate
     end

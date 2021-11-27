@@ -32,8 +32,6 @@ val fromArray : 'a array -> ('a * 'a) option
     {[Tuple2.fromArray [|4; 5; 6|] = Some (4, 5)]}
 *)
 
-val from_array : 'a array -> ('a * 'a) option
-
 val fromList : 'a list -> ('a * 'a) option
 (** Create a tuple from the first two elements of a {!List}.
 
@@ -49,8 +47,6 @@ val fromList : 'a list -> ('a * 'a) option
 
     {[Tuple2.fromList [4; 5; 6] = Some (4, 5)]}
 *)
-
-val from_list : 'a list -> ('a * 'a) option
 
 val first : 'a * 'b -> 'a
 (** Extract the first value from a tuple.
@@ -84,8 +80,6 @@ val mapFirst : 'a * 'b -> f:('a -> 'x) -> 'x * 'b
     {[Tuple2.mapFirst ~f:String.length ("stressed", 16) = (8, 16)]}
 *)
 
-val map_first : 'a * 'b -> f:('a -> 'x) -> 'x * 'b
-
 val mapSecond : 'a * 'b -> f:('b -> 'c) -> 'a * 'c
 (** Transform the second value in a tuple.
 
@@ -96,8 +90,6 @@ val mapSecond : 'a * 'b -> f:('b -> 'c) -> 'a * 'c
     {[Tuple2.mapSecond ~f:(~-) ("stressed", 16) = ("stressed", -16)]}
 *)
 
-val map_second : 'a * 'b -> f:('b -> 'c) -> 'a * 'c
-
 val mapEach : 'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y
 (** Transform both values of a tuple, using [f] for the first value and [g] for the second.
 
@@ -107,8 +99,6 @@ val mapEach : 'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y
 
     {[Tuple2.mapEach ~f:String.length ~g:(~-) ("stressed", 16) = (8, -16)]}
 *)
-
-val map_each : 'a * 'b -> f:('a -> 'x) -> g:('b -> 'y) -> 'x * 'y
 
 val mapAll : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
 (** Transform both of the values of a tuple using the same function.
@@ -121,8 +111,6 @@ val mapAll : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
 
     {[Tuple2.mapAll ~f:String.length ("was", "stressed") = (3, 8)]}
 *)
-
-val map_all : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
 
 val swap : 'a * 'b -> 'b * 'a
 (** Switches the first and second values of a tuple.
@@ -148,8 +136,6 @@ val toArray : 'a * 'a -> 'a array
     {[Tuple2.toArray ("was", "stressed") = [|"was"; "stressed"|]]}
 *)
 
-val to_array : 'a * 'a -> 'a array
-
 val toList : 'a * 'a -> 'a list
 (** Turns a tuple into a list of length two. This function can only be used on tuples which have the same type for each value.
 
@@ -159,10 +145,6 @@ val toList : 'a * 'a -> 'a list
 
     {[Tuple2.toList ("was", "stressed") = ["was"; "stressed"]]}
 *)
-
-val to_list : 'a * 'a -> 'a list
-
-(** {1 Compare} *)
 
 val equal :
   ('a -> 'a -> bool) -> ('b -> 'b -> bool) -> ('a, 'b) t -> ('a, 'b) t -> bool

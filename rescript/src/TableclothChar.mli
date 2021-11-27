@@ -41,8 +41,6 @@ val fromCode : int -> char option
     The full range of extended ASCII is from [0] to [255]. For numbers outside that range, you get [None].
 *)
 
-val from_code : int -> char option
-
 val fromString : string -> char option
 (** Converts a string to character. Returns None when the string isn't of length one.
 
@@ -58,10 +56,6 @@ val fromString : string -> char option
 
     {[Char.fromString " a" = None]}
 *)
-
-val from_string : string -> char option
-
-(** {1 Query}  *)
 
 val isLowercase : char -> bool
 (** Detect lower case ASCII characters.
@@ -81,8 +75,6 @@ val isLowercase : char -> bool
     {[Char.isLowercase '-' = false]}
 *)
 
-val is_lowercase : char -> bool
-
 val isUppercase : char -> bool
 (** Detect upper case ASCII characters.
 
@@ -100,8 +92,6 @@ val isUppercase : char -> bool
 
     {[Char.isUppercase '-' = false]}
 *)
-
-val is_uppercase : char -> bool
 
 val isLetter : char -> bool
 (** Detect upper and lower case ASCII alphabetic characters.
@@ -121,8 +111,6 @@ val isLetter : char -> bool
     {[Char.isLetter '-' = false]}
 *)
 
-val is_letter : char -> bool
-
 val isDigit : char -> bool
 (** Detect when a character is a number
 
@@ -138,8 +126,6 @@ val isDigit : char -> bool
 
     {[Char.isDigit 'b' = false]}
 *)
-
-val is_digit : char -> bool
 
 val isAlphanumeric : char -> bool
 (** Detect upper case, lower case and digit ASCII characters.
@@ -161,8 +147,6 @@ val isAlphanumeric : char -> bool
     {[Char.isAlphanumeric '-' = false]}
 *)
 
-val is_alphanumeric : char -> bool
-
 val isPrintable : char -> bool
 (** Detect if a character is a {{: https://en.wikipedia.org/wiki/ASCII#Printable_characters } printable } character
 
@@ -180,8 +164,6 @@ val isPrintable : char -> bool
 
     {[Char.isPrintable '\007' = false]}
 *)
-
-val is_printable : char -> bool
 
 val isWhitespace : char -> bool
 (** Detect one of the following characters:
@@ -203,10 +185,6 @@ val isWhitespace : char -> bool
     {[Char.isWhitespace 'G' = false]}
 *)
 
-val is_whitespace : char -> bool
-
-(** {1 Modify} *)
-
 val toLowercase : char -> char
 (** Converts an ASCII character to lower case, preserving non alphabetic ASCII characters.
 
@@ -217,8 +195,6 @@ val toLowercase : char -> char
     {[Char.toLowercase 'B' = 'b']}
 
     {[Char.toLowercase '7' = '7']} *)
-
-val to_lowercase : char -> char
 
 val toUppercase : char -> char
 (** Convert an ASCII character to upper case, preserving non alphabetic ASCII characters.
@@ -232,10 +208,6 @@ val toUppercase : char -> char
     {[toUppercase '7' = '7']}
 *)
 
-val to_uppercase : char -> char
-
-(** {1 Convert} *)
-
 val toCode : char -> int
 (** Convert to the corresponding ASCII [code point][cp].
 
@@ -248,8 +220,6 @@ val toCode : char -> int
     {[Char.toCode 'B' = 66]}
 *)
 
-val to_code : char -> int
-
 val toString : char -> string
 (** Convert a character into a string.
 
@@ -261,8 +231,6 @@ val toString : char -> string
 
     {[Char.toString '7' = "7"]}
 *)
-
-val to_string : char -> string
 
 val toDigit : char -> int option
 (** Converts a digit character to its corresponding {!Int}.
@@ -279,10 +247,6 @@ val toDigit : char -> int option
 
     {[Char.toDigit "" = None]}
 *)
-
-val to_digit : char -> int option
-
-(** {1 Compare} *)
 
 val equal : t -> t -> bool
 (** Test two {!Char}s for equality *)

@@ -35,8 +35,6 @@ val fromArray : 'a array -> ('a * 'a * 'a) option
     {[Tuple3.fromArray [|4;5;6;7|] = Some (4, 5, 6)]}
 *)
 
-val from_array : 'a array -> ('a * 'a * 'a) option
-
 val fromList : 'a list -> ('a * 'a * 'a) option
 (** Create a tuple from the first two elements of a {!List}.
 
@@ -52,10 +50,6 @@ val fromList : 'a list -> ('a * 'a * 'a) option
 
     {[Tuple3.fromList [4; 5; 6; 7] = Some (4, 5, 6)]}
 *)
-
-val from_list : 'a list -> ('a * 'a * 'a) option
-
-(** {1 Basic operations} *)
 
 val first : 'a * 'b * 'c -> 'a
 (** Extract the first value from a tuple.
@@ -119,8 +113,6 @@ val rotateLeft : 'a * 'b * 'c -> 'b * 'c * 'a
     {[Tuple3.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]}
 *)
 
-val rotate_left : 'a * 'b * 'c -> 'b * 'c * 'a
-
 val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
 (** Move each value in the tuple one position to the right, moving the value in the last position into the first position.
 
@@ -130,10 +122,6 @@ val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
 
     {[Tuple3.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]}
 *)
-
-val rotate_right : 'a * 'b * 'c -> 'c * 'a * 'b
-
-(** {1 Transform} *)
 
 val mapFirst : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
 (** Transform the first value in a tuple.
@@ -145,8 +133,6 @@ val mapFirst : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
     {[Tuple3.mapFirst ~f:String.length ("stressed", 16, false) = (8, 16, false)]}
 *)
 
-val map_first : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
-
 val mapSecond : 'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c
 (** Transform the second value in a tuple.
 
@@ -157,8 +143,6 @@ val mapSecond : 'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c
     {[Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) = ("stressed", -16, false)]}
 *)
 
-val map_second : 'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c
-
 val mapThird : 'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z
 (** Transform the third value in a tuple.
 
@@ -166,8 +150,6 @@ val mapThird : 'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z
 
     {[Tuple3.mapThird ~f:not ("stressed", 16, false) ("stressed", 16, true)]}
 *)
-
-val map_third : 'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z
 
 val mapEach :
   'a * 'b * 'c -> f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'x * 'y * 'z
@@ -184,9 +166,6 @@ val mapEach :
     ]}
 *)
 
-val map_each :
-  'a * 'b * 'c -> f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'x * 'y * 'z
-
 val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
 (** Transform all the values of a tuple using the same function.
 
@@ -198,10 +177,6 @@ val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
 
     {[Tuple3.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]}
 *)
-
-val map_all : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
-
-(** {1 Convert} *)
 
 val toArray : 'a * 'a * 'a -> 'a array
 (** Turns a tuple into a {!List} of length three.
@@ -215,8 +190,6 @@ val toArray : 'a * 'a * 'a -> 'a array
     {[Tuple3.toArray ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
 *)
 
-val to_array : 'a * 'a * 'a -> 'a array
-
 val toList : 'a * 'a * 'a -> 'a list
 (** Turns a tuple into a {!List} of length three.
 
@@ -228,10 +201,6 @@ val toList : 'a * 'a * 'a -> 'a list
 
     {[Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
 *)
-
-val to_list : 'a * 'a * 'a -> 'a list
-
-(** {1 Compare} *)
 
 val equal :
      ('a -> 'a -> bool)

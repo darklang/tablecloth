@@ -64,8 +64,6 @@ val infinity : t
 val negativeInfinity : t
 (** Negative infinity, see {!Float.infinity} *)
 
-val negative_infinity : t
-
 val e : t
 (** An approximation of {{: https://en.wikipedia.org/wiki/E_(mathematical_constant) } Euler's number }. *)
 
@@ -78,22 +76,14 @@ val epsilon : t
 val largestValue : t
 (** The largest (furthest from zero) representable positive [float] *)
 
-val largest_value : t
-
 val smallestValue : t
 (** The smallest representable positive [float]. The closest to zero without actually being zero. *)
-
-val smallest_value : t
 
 val maximumSafeInteger : t
 (** For floats greater than [maximumSafeInteger], it no longer holds that [Float.(n + 1.) > n]  *)
 
-val maximum_safe_integer : t
-
 val minimumSafeInteger : t
 (** For floats less than [minimumSafeInteger], it no longer holds that [Float.(n - 1.) < n]  *)
-
-val minimum_safe_integer : t
 
 (** {1 Create} *)
 
@@ -108,8 +98,6 @@ val fromInt : int -> t
       Float.fromInt -7 = -7.0
     ]}
 *)
-
-val from_int : int -> t
 
 val fromString : string -> t option
 (** Convert a {!String} to a [float].
@@ -130,8 +118,6 @@ val fromString : string -> t option
 
     {[Float.fromString "Infinity" = Some Float.infinity]}
 *)
-
-val from_string : string -> t option
 
 (** {1 Basic arithmetic and operators} *)
 
@@ -317,8 +303,6 @@ val squareRoot : t -> t
     {[Float.squareRoot 9.0 = 3.0]}
 *)
 
-val square_root : t -> t
-
 val log : t -> base:t -> t
 (** Calculate the logarithm of a number with a given base.
 
@@ -349,8 +333,6 @@ val isNaN : t -> bool
     {[Float.isNaN 1. = false]}
 *)
 
-val is_nan : t -> bool
-
 val isFinite : t -> bool
 (** Determine whether a float is finite number. True for any float except [Infinity], [-Infinity] or [NaN]
 
@@ -369,8 +351,6 @@ val isFinite : t -> bool
     {[Float.(isFinite nan) = false]}
 *)
 
-val is_finite : t -> bool
-
 val isInfinite : t -> bool
 (** Determine whether a float is positive or negative infinity.
 
@@ -387,8 +367,6 @@ val isInfinite : t -> bool
     {[Float.(isInfinite nan) = false]}
 *)
 
-val is_infinite : t -> bool
-
 val isInteger : t -> bool
 (** Determine whether the passed value is an integer.
 
@@ -398,8 +376,6 @@ val isInteger : t -> bool
 
     {[Float.isInteger Float.pi = false]}
 *)
-
-val is_integer : t -> bool
 
 val isSafeInteger : t -> bool
 (** Determine whether the passed value is a safe integer (number between -(2**53 - 1) and 2**53 - 1).
@@ -412,8 +388,6 @@ val isSafeInteger : t -> bool
 
     {[Float.(isSafeInteger (maximumSafeInteger + 1.)) = false]}
 *)
-
-val is_safe_integer : t -> bool
 
 val inRange : t -> lower:t -> upper:t -> bool
 (** Checks if a float is between [lower] and up to, but not including, [upper].
@@ -432,8 +406,6 @@ val inRange : t -> lower:t -> upper:t -> bool
 
     {[Float.inRange ~lower:5.2 ~upper:7.9 9.6 = false]}
 *)
-
-val in_range : t -> lower:t -> upper:t -> bool
 
 (** {1 Angles} *)
 
@@ -496,8 +468,6 @@ val fromPolar : float * radians -> float * float
     {[Float.(fromPolar (squareRoot 2., degrees 45.)) = (1., 1.)]}
 *)
 
-val from_polar : float * radians -> float * float
-
 val toPolar : float * float -> float * radians
 (** Convert {{: https://en.wikipedia.org/wiki/Cartesian_coordinate_system } Cartesian coordinates } [(x, y)] to {{: https://en.wikipedia.org/wiki/Polar_coordinate_system } polar coordinates } [(radius, radians)].
 
@@ -509,8 +479,6 @@ val toPolar : float * float -> float * radians
 
     {[Float.toPolar (5.0, 12.0) = (13.0, 1.1760052070951352)]}
 *)
-
-val to_polar : float * float -> float * radians
 
 val cos : radians -> t
 (** Figure out the cosine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
@@ -775,15 +743,11 @@ val toInt : t -> int option
     {[Float.(round 1.6 |> toInt) = Some 2]}
 *)
 
-val to_int : t -> int option
-
 val toString : t -> string
 (** Convert a [float] to a {!String}
 
     The behaviour of this function is platform specific
 *)
-
-val to_string : t -> string
 
 (** {1 Compare} *)
 

@@ -117,27 +117,30 @@ const inDevelopMode = process.env.gatsby_executing_command === 'develop';
 
 exports.sourceNodes = ({ actions }) => {
   const { createNode } = actions;
-  let modelPath = path.resolve(__dirname, `./model.json`);
-  if (modelPath == null) {
+  let nativeModelPath = path.resolve(__dirname, `./model.json`);
+  let rescriptModelPath = path.resolve(__dirname, `./model-rescript.json`);
+  if (nativeModelPath == null || rescriptModelPath == null) {
     throw new Error(`Invalid model path`);
   }
-  log.info('path', modelPath);
-  let node = createNodeFromModel(fs.readFileSync(modelPath).toString());
+  log.info('nativeModelPath', nativeModelPath);
+  log.info('rescriptModelPath', rescriptModelPath);
+
+  let makeUnitedModel = () => JSON.stringify({
+    native : JSON.parse(fs.readFileSync(nativeModelPath).toString()),
+    rescript: JSON.parse(fs.readFileSync(rescriptModelPath).toString()),
+  });
+
+  let node = createNodeFromModel(makeUnitedModel());
   createNode(node);
 
   if (inDevelopMode) {
     log.info('watch mode enabled, listening for changes');
-    chokidar.watch(modelPath).on('all', (event, path) => {
+    chokidar.watch(nativeModelPath).on('all', (event, path) => {
       log.info(event);
       if (event == 'unlink') {
         return
       }
-      fs.readFile(modelPath, (error, data) => {
-        if (error) {
-          return log.error(error);
-        }
-        createNode(createNodeFromModel(data.toString()));
-      });
+      createNode(createNodeFromModel(makeUnitedModel()));
     });
   }
 
