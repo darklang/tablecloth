@@ -364,6 +364,8 @@ val to_list : string -> char list
     {[String.to_list "abc" = ['a'; 'b'; 'c']]}
 *)
 
+(** {1 Compare} *)
+
 val equal : string -> string -> bool
 (** Test two string for equality *)
 

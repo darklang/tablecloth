@@ -263,6 +263,8 @@ val fold : ('a, _) t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 val forEach : ('a, _) t -> f:('a -> unit) -> unit
 (** Runs a function [f] against each element of the set. *)
 
+(** {1 Convert} *)
+
 val toArray : ('a, _) t -> 'a array
 (** Converts a set into an {!Array} *)
 

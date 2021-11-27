@@ -5503,6 +5503,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Basic operations"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "add",
@@ -11885,6 +11903,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",
@@ -39701,6 +39737,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",

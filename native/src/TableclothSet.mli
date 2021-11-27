@@ -95,6 +95,8 @@ val from_list :
     {[Set.from_list (module Char) ['A'; 'B'; 'B'; 'G'] |> Set.to_list = ['A';'B';'G']]}
 *)
 
+(** {1 Basic operations} *)
+
 val add : ('a, 'id) t -> 'a -> ('a, 'id) t
 (** Insert a value into a set.
 

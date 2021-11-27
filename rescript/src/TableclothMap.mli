@@ -103,6 +103,8 @@ val fromList :
   -> ('key, 'value, 'identity) t
 (** Create a map of a {!List} of key-value tuples *)
 
+(** {1 Basic operations} *)
+
 val add :
   ('key, 'value, 'id) t -> key:'key -> value:'value -> ('key, 'value, 'id) t
 (** Adds a new entry to a map. If [key] is allready present, its previous value is replaced with [value].
@@ -437,6 +439,8 @@ val forEach : (_, 'value, _) t -> f:('value -> unit) -> unit
 val forEachWithIndex :
   ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
 (** Like {!Map.forEach} except [~f] is also called with the corresponding key *)
+
+(** {1 Convert} *)
 
 val keys : ('key, _, _) t -> 'key list
 (** Get a {!List} of all of the keys in a map.

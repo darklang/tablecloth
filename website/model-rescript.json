@@ -6996,6 +6996,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Convert"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "toArray",
@@ -13503,6 +13521,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Basic operations"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "head",
@@ -18344,6 +18380,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Combine"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "append",
@@ -20188,6 +20242,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Convert"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "join",
@@ -20468,6 +20540,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",
@@ -28888,6 +28978,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Basic operations"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "add",
@@ -31039,6 +31147,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Convert"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",
@@ -33335,22 +33461,6 @@
               {
                 "tag": "Value",
                 "value": {
-                  "name": "or_else",
-                  "qualified_name": "TableclothOption.or_else",
-                  "type": {
-                    "rendered": "'a TableclothOption.t -> 'a TableclothOption.t -> 'a TableclothOption.t"
-                  },
-                  "info": null,
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
                   "name": "both",
                   "qualified_name": "TableclothOption.both",
                   "type": {
@@ -34168,22 +34278,6 @@
               {
                 "tag": "Value",
                 "value": {
-                  "name": "and_then",
-                  "qualified_name": "TableclothOption.and_then",
-                  "type": {
-                    "rendered": "'a TableclothOption.t ->\n  f:('a -> 'b TableclothOption.t) -> 'b TableclothOption.t"
-                  },
-                  "info": null,
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
                   "name": "unwrap",
                   "qualified_name": "TableclothOption.unwrap",
                   "type": {
@@ -34696,22 +34790,6 @@
               {
                 "tag": "Value",
                 "value": {
-                  "name": "unwrap_unsafe",
-                  "qualified_name": "TableclothOption.unwrap_unsafe",
-                  "type": {
-                    "rendered": "'a TableclothOption.t -> 'a"
-                  },
-                  "info": null,
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
                   "name": "isSome",
                   "qualified_name": "TableclothOption.isSome",
                   "type": {
@@ -34837,22 +34915,6 @@
               {
                 "tag": "Value",
                 "value": {
-                  "name": "is_some",
-                  "qualified_name": "TableclothOption.is_some",
-                  "type": {
-                    "rendered": "'a TableclothOption.t -> bool"
-                  },
-                  "info": null,
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
                   "name": "isNone",
                   "qualified_name": "TableclothOption.isNone",
                   "type": {
@@ -34968,22 +35030,6 @@
                     "custom": [
                     ]
                   },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "is_none",
-                  "qualified_name": "TableclothOption.is_none",
-                  "type": {
-                    "rendered": "'a TableclothOption.t -> bool"
-                  },
-                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
@@ -35165,22 +35211,6 @@
               {
                 "tag": "Value",
                 "value": {
-                  "name": "to_array",
-                  "qualified_name": "TableclothOption.to_array",
-                  "type": {
-                    "rendered": "'a TableclothOption.t -> 'a array"
-                  },
-                  "info": null,
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
                   "name": "toList",
                   "qualified_name": "TableclothOption.toList",
                   "type": {
@@ -35304,22 +35334,6 @@
                     "custom": [
                     ]
                   },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "to_list",
-                  "qualified_name": "TableclothOption.to_list",
-                  "type": {
-                    "rendered": "'a TableclothOption.t -> 'a list"
-                  },
-                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
@@ -42992,6 +43006,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Create"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "fromString",
@@ -45861,6 +45893,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Convert"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "toFloat",
@@ -46116,6 +46166,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",
@@ -49112,6 +49180,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Create"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",
@@ -55438,6 +55524,24 @@
                 }
               },
               {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "tag": "Value",
                 "value": {
                   "name": "equal",
@@ -56138,6 +56242,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Basic operations"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",
@@ -56957,6 +57079,24 @@
                     ]
                   }
                 }
+              },
+              {
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Title",
+                    "value": {
+                      "size": 1,
+                      "label": null,
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": "Compare"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
                 "tag": "Value",

@@ -102,8 +102,6 @@ val orElse : 'a t -> 'a t -> 'a t
     {[Option.orElse None None = None]}
 *)
 
-val or_else : 'a t -> 'a t -> 'a t
-
 val both : 'a t -> 'b t -> ('a * 'b) t
 (** Transform two options into an option of a {!Tuple}.
 
@@ -209,8 +207,6 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
     {[Option.andThen (Some []) ~f:List.head = None]}
 *)
 
-val and_then : 'a t -> f:('a -> 'b t) -> 'b t
-
 val unwrap : 'a t -> default:'a -> 'a
 (** Unwrap an [option('a)] returning [default] if called with [None].
 
@@ -246,8 +242,6 @@ val unwrapUnsafe : 'a t -> 'a
     {[List.head [] |> Option.unwrapUnsafe]}
 *)
 
-val unwrap_unsafe : 'a t -> 'a
-
 val isSome : 'a t -> bool
 (** Check if an {!Option} is a [Some].
 
@@ -260,8 +254,6 @@ val isSome : 'a t -> bool
     {[Option.isSome None = false]}
 *)
 
-val is_some : 'a t -> bool
-
 val isNone : 'a t -> bool
 (** Check if an {!Option} is a [None].
 
@@ -273,8 +265,6 @@ val isNone : 'a t -> bool
 
     {[Option.isNone None = true]}
 *)
-
-val is_none : 'a t -> bool
 
 val tap : 'a t -> f:('a -> unit) -> unit
 (** Run a function against a value, if it is present. *)
@@ -291,8 +281,6 @@ val toArray : 'a t -> 'a array
     {[Option.toArray (None) = [||]]}
 *)
 
-val to_array : 'a t -> 'a array
-
 val toList : 'a t -> 'a list
 (** Convert an option to a {!List}.
 
@@ -304,8 +292,6 @@ val toList : 'a t -> 'a list
 
     {[Option.toList (None) = []]}
 *)
-
-val to_list : 'a t -> 'a list
 
 (** {1 Compare} *)
 

@@ -85,6 +85,8 @@ val maximumSafeInteger : t
 val minimumSafeInteger : t
 (** For floats less than [minimumSafeInteger], it no longer holds that [Float.(n - 1.) < n]  *)
 
+(** {1 Create} *)
+
 val fromInt : int -> t
 (** Convert an {!Int} to a [float]
 
@@ -746,6 +748,8 @@ val toString : t -> string
 
     The behaviour of this function is platform specific
 *)
+
+(** {1 Compare} *)
 
 val equal : t -> t -> bool
 (** Test two floats for equality *)

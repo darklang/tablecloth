@@ -395,6 +395,8 @@ val to_option : ('ok, _) t -> 'ok option
     {[Result.to_option (Error "Missing number!") = None]}
 *)
 
+(** {1 Compare} *)
+
 val equal :
      ('ok -> 'ok -> bool)
   -> ('error -> 'error -> bool)

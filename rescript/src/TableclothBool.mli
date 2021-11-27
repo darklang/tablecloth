@@ -58,6 +58,8 @@ val fromString : string -> bool option
     {[Bool.fromString "Not even close" = None]}
 *)
 
+(** {1 Basic operations} *)
+
 external ( && ) : bool -> bool -> bool = "%sequand"
 (** The lazy logical AND operator.
 
@@ -141,6 +143,8 @@ val toInt : bool -> int
 
     {[Bool.toInt false = 0]}
 *)
+
+(** {1 Compare} *)
 
 val equal : bool -> bool -> bool
 (** Test for the equality of two [bool] values.
