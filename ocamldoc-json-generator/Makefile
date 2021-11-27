@@ -18,6 +18,15 @@ $(CMX): JsonGenerator.ml
 $(CMXS): $(CMX)
 	~/.npm-global/bin/esy ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
 
+init-node:
+	mkdir node_modules
+	mkdir node_modules/tablecloth-bucklescript
+	cp ../package.json node_modules/tablecloth-bucklescript
+	cp ../bsconfig.json node_modules/tablecloth-bucklescript
+	cp -r ../rescript node_modules/tablecloth-bucklescript/rescript
+
+purge-node:
+	rm -r node_modules
 deps:
 	@printf "\n\e[31mInstalling generator dependencies ...\e[0m\n"
 	opam update

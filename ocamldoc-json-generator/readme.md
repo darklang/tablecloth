@@ -4,14 +4,10 @@ JsonGenerator.ml is responsible for taking the `/native` and `/rescript` source 
 
 ## Setup
 To generate both native and rescript versions we'll need (esy)[https://esy.sh/docs/en/getting-started.html]. 
-Since esy can't link local npm projects (`tablecloth-bucklescript`) we should copy the files ourselves.
+Since esy can't link local npm projects (our `rescript` folder with `tablecloth-bucklescript` lib) we should copy the files ourselves. To do this, run:
 
 ```
-mkdir ocamldoc-json-generator/node_modules
-mkdir ocamldoc-json-generator/node_modules/tablecloth-bucklescript
-cp package.json ocamldoc-json-generator/node_modules/tablecloth-bucklescript
-cp bsconfig.json ocamldoc-json-generator/node_modules/tablecloth-bucklescript
-cp -r ./rescript ocamldoc-json-generator/node_modules/tablecloth-bucklescript/rescript
+make init-node
 ```
 
 Next, install dependancies
