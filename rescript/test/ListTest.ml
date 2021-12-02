@@ -236,13 +236,13 @@ let suite =
                    list int)
                    [ 7; 8; 9 ] ) ;
           test
-            "drops items dispersed throughout list if item isEven, returns list of only odd items"
+            "drops none despite items dispersed throughout list because first item returns false for isEven, returns list without changes"
             (fun () ->
               expect (dropWhile ~f:Int.isEven [ 3; 4; 7; 8; 9 ])
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 7; 8; 9 ] ) ;
+                   [ 3; 4; 7; 8; 9 ] ) ;
           test
             "drops all because all items are even, returns empty list"
             (fun () ->
