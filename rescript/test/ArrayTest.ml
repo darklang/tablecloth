@@ -459,15 +459,15 @@ let suite =
 
       describe "count" (fun () ->
           test
-            "returns the number of elements which `f` returns true for"
+            "returns the number of elements in array of odd and even numbers that isEven returns true for, returns int 2"
             (fun () ->
               expect (count ~f:Int.isEven [| 1; 3; 4; 8 |]) |> toEqual Eq.int 2 ) ;
           test
-            "returns the number of elements which `f` returns true for"
+            "returns the number of elements in array of odd numbers that isEven returns true for, returns int 0"
             (fun () ->
               expect (count ~f:Int.isEven [| 1; 3 |]) |> toEqual Eq.int 0 ) ;
           test
-            "returns the number of elements which `f` returns true for"
+            "returns the number of elements in an empty array that isEven returns true for, returns int 0"
             (fun () -> expect (count ~f:Int.isEven [||]) |> toEqual Eq.int 0) ) ;
 
       describe "find" (fun () ->
