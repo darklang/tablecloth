@@ -67,9 +67,9 @@ let suite =
             (fun () -> expect (xor false false) |> toEqual Eq.bool false) ) ;
 
       describe "not" (fun () ->
-          test "Returns negation" (fun () ->
+          test "Returns negation of true, returns false" (fun () ->
               expect (not true) |> toEqual Eq.bool false ) ;
-          test "Returns negation" (fun () ->
+          test "Returns negation of false, returns true" (fun () ->
               expect (not false) |> toEqual Eq.bool true ) ) ;
 
       describe "toString" (fun () ->
