@@ -14,13 +14,13 @@ let suite =
                    (let open Eq in
                    list string)
                    [ "" ] ) ;
-          test "with int" (fun () ->
+          test "returns array singleton of int arg" (fun () ->
               expect (List.singleton 1234)
               |> toEqual
                    (let open Eq in
                    list int)
                    [ 1234 ] ) ;
-          test "with string" (fun () ->
+          test "returns array singleton of string arg" (fun () ->
               expect (List.singleton "hello")
               |> toEqual
                    (let open Eq in
