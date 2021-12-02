@@ -54,16 +54,16 @@ let suite =
 
       describe "xor" (fun () ->
           test
-            "Returns [true] if {b exactly one} of its operands is [true]"
+            "Returns [true] for xor of args true true"
             (fun () -> expect (xor true true) |> toEqual Eq.bool false) ;
           test
-            "Returns [true] if {b exactly one} of its operands is [true]"
+            "Returns [true] for xor of args true false]"
             (fun () -> expect (xor true false) |> toEqual Eq.bool true) ;
           test
-            "Returns [true] if {b exactly one} of its operands is [true]"
+            "Returns [true] for xor of args false true"
             (fun () -> expect (xor false true) |> toEqual Eq.bool true) ;
           test
-            "Returns [true] if {b exactly one} of its operands is [true]"
+            "Returns [false] for xor of args false false"
             (fun () -> expect (xor false false) |> toEqual Eq.bool false) ) ;
 
       describe "not" (fun () ->
