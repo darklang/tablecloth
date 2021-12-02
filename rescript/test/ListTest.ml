@@ -125,13 +125,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
-                   (Some (-3)) ) ;
-          test "with string" (fun () ->
-              expect (List.head [ "hi"; "hello"; "hi"; "bonjour" ])
-              |> toEqual
-                   (let open Eq in
-                   option string)
-                   (Some "hi") ) ) ;
+                   (Some (-3)) )) ;
       describe "cons" (fun () ->
           test "from empty" (fun () ->
               expect (List.cons [] 1)
