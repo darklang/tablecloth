@@ -8,7 +8,9 @@ let suite =
           test "returns int 0 for empty list arg" (fun () ->
               expect (List.length List.empty) |> toEqual Eq.int 0 ) ) ;
       describe "singleton" (fun () ->
-          test "returns array singleton of empty string from arg empty string" (fun () ->
+          test
+            "returns array singleton of empty string from arg empty string"
+            (fun () ->
               expect (List.singleton "")
               |> toEqual
                    (let open Eq in
@@ -32,19 +34,19 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [] ) ) ;
-      test "returns empty list from negative repeat arg -10" (fun () ->
-          expect (List.repeat ~times:(-10) 7)
-          |> toEqual
-               (let open Eq in
-               list int)
-               [] ) ;
-      test "returns list of char 'a' repeated 5 times" (fun () ->
-          expect (List.repeat ~times:5 'a')
-          |> toEqual
-               (let open Eq in
-               list char)
-               [ 'a'; 'a'; 'a'; 'a'; 'a' ] ) ;
+                   [] ) ;
+          test "returns empty list from negative repeat arg -10" (fun () ->
+              expect (List.repeat ~times:(-10) 7)
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test "returns list of char 'a' repeated 5 times" (fun () ->
+              expect (List.repeat ~times:5 'a')
+              |> toEqual
+                   (let open Eq in
+                   list char)
+                   [ 'a'; 'a'; 'a'; 'a'; 'a' ] ) ) ;
       describe "range" (fun () ->
           test "returns empty when is zero" (fun () ->
               expect (List.range 0)

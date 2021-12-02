@@ -53,18 +53,14 @@ let suite =
                    None ) ) ;
 
       describe "xor" (fun () ->
-          test
-            "Returns [true] for xor of args true true"
-            (fun () -> expect (xor true true) |> toEqual Eq.bool false) ;
-          test
-            "Returns [true] for xor of args true false]"
-            (fun () -> expect (xor true false) |> toEqual Eq.bool true) ;
-          test
-            "Returns [true] for xor of args false true"
-            (fun () -> expect (xor false true) |> toEqual Eq.bool true) ;
-          test
-            "Returns [false] for xor of args false false"
-            (fun () -> expect (xor false false) |> toEqual Eq.bool false) ) ;
+          test "Returns [true] for xor of args true true" (fun () ->
+              expect (xor true true) |> toEqual Eq.bool false ) ;
+          test "Returns [true] for xor of args true false]" (fun () ->
+              expect (xor true false) |> toEqual Eq.bool true ) ;
+          test "Returns [true] for xor of args false true" (fun () ->
+              expect (xor false true) |> toEqual Eq.bool true ) ;
+          test "Returns [false] for xor of args false false" (fun () ->
+              expect (xor false false) |> toEqual Eq.bool false ) ) ;
 
       describe "not" (fun () ->
           test "Returns negation of true, returns false" (fun () ->
@@ -84,9 +80,8 @@ let suite =
           test "Returns 0 for arg false" (fun () ->
               expect (toInt false) |> toEqual Eq.int 0 ) ) ;
       describe "equal" (fun () ->
-          test
-            "Returns true for equal args true true"
-            (fun () -> expect (equal true true) |> toEqual Eq.bool true) ;
+          test "Returns true for equal args true true" (fun () ->
+              expect (equal true true) |> toEqual Eq.bool true ) ;
           test "Returns true equal for args false false" (fun () ->
               expect (equal false false) |> toEqual Eq.bool true ) ;
           test "Returns false for inqueal args true false" (fun () ->
