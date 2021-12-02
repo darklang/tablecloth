@@ -661,17 +661,17 @@ let suite =
 
       describe "compare" (fun () ->
           test
-            "Compare two arrays using the provided function to compare pairs of elements and returns 1, 0, or -1"
+            "Compare two arrays of unequal length using provided function Int.compare to compare pairs of elements and returns -1"
             (fun () ->
               expect (compare Int.compare [| 1; 2; 3 |] [| 1; 2; 3; 4 |])
               |> toEqual Eq.int (-1) ) ;
           test
-            "Compare two arrays using the provided function to compare pairs of elements and returns 1, 0, or -1"
+            "Compare two identical arrays using provided function Int.compare to compare pairs of elements and returns 0"
             (fun () ->
               expect (compare Int.compare [| 1; 2; 3 |] [| 1; 2; 3 |])
               |> toEqual Eq.int 0 ) ;
           test
-            "Compare two arrays using the provided function to compare pairs of elements and returns 1, 0, or -1"
+            "Compare two arrays with of the same length and differing elements using provided function Int.compare to compare pairs of elements and returns 1"
             (fun () ->
               expect (compare Int.compare [| 1; 2; 5 |] [| 1; 2; 3 |])
               |> toEqual Eq.int 1 ) ) ;
