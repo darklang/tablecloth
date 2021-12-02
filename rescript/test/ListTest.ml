@@ -287,31 +287,47 @@ let suite =
                    [] ) ) ;
 
       describe "takeWhile" (fun () ->
-          test "int isEven" (fun () ->
+          test
+            "takes items until isEven returns false, returns list of items until first odd item"
+            (fun () ->
               expect (takeWhile ~f:Int.isEven [ 2; 4; 6; 7; 8; 9 ])
               |> toEqual
                    (let open Eq in
                    list int)
                    [ 2; 4; 6 ] ) ;
-          test "int isEven" (fun () ->
+          test
+            "takes items in list of dispersed items until isEven returns false, returns list of items until first odd item"
+            (fun () ->
               expect (takeWhile ~f:Int.isEven [ 2; 6; 7; 15; 10; 9; 8 ])
               |> toEqual
                    (let open Eq in
                    list int)
                    [ 2; 6 ] ) ;
-          test "int isEven" (fun () ->
+          test
+            "takes no items as first item returns false to isEven, returns empty list"
+            (fun () ->
+              expect (takeWhile ~f:Int.isEven [ 1; 6; 7; 15; 10; 9; 8 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [] ) ;
+          test
+            "takes all items as all items return true to isEven, returns list without changes"
+            (fun () ->
               expect (takeWhile ~f:Int.isEven [ 2; 4; 6 ])
               |> toEqual
                    (let open Eq in
                    list int)
                    [ 2; 4; 6 ] ) ;
-          test "empty" (fun () ->
+          test "returns empty list from arg empty list" (fun () ->
               expect (takeWhile ~f:Int.isEven [])
               |> toEqual
                    (let open Eq in
                    list int)
                    [] ) ;
-          test "none" (fun () ->
+          test
+            "takes no items as all items return false to isEven, returns empty list"
+            (fun () ->
               expect (takeWhile ~f:Int.isEven [ 1; 3; 5 ])
               |> toEqual
                    (let open Eq in
