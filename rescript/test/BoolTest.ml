@@ -73,23 +73,23 @@ let suite =
               expect (not false) |> toEqual Eq.bool true ) ) ;
 
       describe "toString" (fun () ->
-          test "Returns string of true bool" (fun () ->
+          test "Returns string of bool, returns true as string" (fun () ->
               expect (toString true) |> toEqual Eq.string "true" ) ;
-          test "Returns string of false bool" (fun () ->
+          test "Returns string of bool, returns false as string" (fun () ->
               expect (toString false) |> toEqual Eq.string "false" ) ) ;
 
       describe "toInt" (fun () ->
-          test "Returns 1 for true or 0 for false" (fun () ->
+          test "Returns 1 for arg true" (fun () ->
               expect (toInt true) |> toEqual Eq.int 1 ) ;
-          test "Returns 1 for true or 0 for false" (fun () ->
+          test "Returns 0 for arg false" (fun () ->
               expect (toInt false) |> toEqual Eq.int 0 ) ) ;
       describe "equal" (fun () ->
           test
-            "Returns true if bools are equal or false is they are not"
+            "Returns true for equal args true true"
             (fun () -> expect (equal true true) |> toEqual Eq.bool true) ;
-          test "Returns 1 for true or 0 for false" (fun () ->
+          test "Returns true equal for args false false" (fun () ->
               expect (equal false false) |> toEqual Eq.bool true ) ;
-          test "Returns 1 for true or 0 for false" (fun () ->
+          test "Returns false for inqueal args true false" (fun () ->
               expect (equal true false) |> toEqual Eq.bool false ) ) ;
 
       describe "compare" (fun () ->
