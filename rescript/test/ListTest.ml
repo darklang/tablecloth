@@ -27,19 +27,19 @@ let suite =
                    list string)
                    [ "hello" ] ) ) ;
       describe "repeat" (fun () ->
-          test "is empty" (fun () ->
+          test "returns empty list from repeat arg 0" (fun () ->
               expect (List.repeat ~times:0 7)
               |> toEqual
                    (let open Eq in
                    list int)
                    [] ) ) ;
-      test "is negative" (fun () ->
+      test "returns empty list from negative repeat arg -10" (fun () ->
           expect (List.repeat ~times:(-10) 7)
           |> toEqual
                (let open Eq in
                list int)
                [] ) ;
-      test "with char" (fun () ->
+      test "returns list of char 'a' repeated 5 times" (fun () ->
           expect (List.repeat ~times:5 'a')
           |> toEqual
                (let open Eq in
