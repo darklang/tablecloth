@@ -211,7 +211,7 @@ let suite =
               expect (Option.unwrap ~default:99 (Some 42)) |> toEqual Eq.int 42 ) ;
 
           test "returns default" (fun () ->
-              expect (Option.unwrap ~default:99 None) |> toEqual Eq.int 99 )) ;
+              expect (Option.unwrap ~default:99 None) |> toEqual Eq.int 99 ) ) ;
 
       describe "isSome" (fun () ->
           test "returns true if is a Some" (fun () ->
