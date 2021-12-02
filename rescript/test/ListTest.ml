@@ -125,7 +125,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
-                   (Some (-3)) )) ;
+                   (Some (-3)) ) ) ;
       describe "cons" (fun () ->
           test "from empty" (fun () ->
               expect (List.cons [] 1)
@@ -138,7 +138,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 1; 2; 3; 4 ] )) ;
+                   [ 1; 2; 3; 4 ] ) ) ;
 
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
@@ -227,19 +227,33 @@ let suite =
                    [ 2; 4; 6 ] ) ) ;
 
       describe "dropWhile" (fun () ->
-          test "normal" (fun () ->
+          test
+            "drops item from list if isEven, returns list of only odd items"
+            (fun () ->
               expect (dropWhile ~f:Int.isEven [ 2; 4; 6; 7; 8; 9 ])
               |> toEqual
                    (let open Eq in
                    list int)
                    [ 7; 8; 9 ] ) ;
-          test "drop all" (fun () ->
+          test
+            "drops items dispersed throughout list if item isEven, returns list of only odd items"
+            (fun () ->
+              expect (dropWhile ~f:Int.isEven [ 3; 4; 7; 8; 9 ])
+              |> toEqual
+                   (let open Eq in
+                   list int)
+                   [ 7; 8; 9 ] ) ;
+          test
+            "drops all because all items are even, returns empty list"
+            (fun () ->
               expect (dropWhile ~f:Int.isEven [ 2; 4; 6; 8 ])
               |> toEqual
                    (let open Eq in
                    list int)
                    [] ) ;
-          test "drop none" (fun () ->
+          test
+            "drops none because all items are odd, returns list without changes"
+            (fun () ->
               expect (dropWhile ~f:Int.isEven [ 1; 3; 5; 7 ])
               |> toEqual
                    (let open Eq in
