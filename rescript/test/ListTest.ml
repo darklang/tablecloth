@@ -1009,6 +1009,12 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
+                   None ) ;
+          test "negative index" (fun () ->
+              expect (List.getAt [ 1; 2; 3 ] ~index:(-2))
+              |> toEqual
+                   (let open Eq in
+                   option int)
                    None ) ) ;
 
       describe "append" (fun () ->
