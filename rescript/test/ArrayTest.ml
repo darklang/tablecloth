@@ -449,7 +449,7 @@ let suite =
 
       describe "join" (fun () ->
           test
-            "Convert an array of strings into a String, placing [sep] between each string in the result"
+            "Convert an array of strings into a single String, placing [sep] comma between each string in the result"
             (fun () ->
               expect (join [| "Ant"; "Bat"; "Cat" |] ~sep:", ")
               |> toEqual Eq.string "Ant, Bat, Cat" ) ;
