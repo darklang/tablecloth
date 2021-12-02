@@ -23,9 +23,31 @@ end
 let suite =
   suite "Map" (fun () ->
       describe "fromArray" (fun () ->
-          test "has length zero" (fun () ->
-              expect (Tablecloth.Map.empty (module Char) |> Map.length)
-              |> toEqual Eq.int 0 ) ) ;
+          test
+            "returns map as list of key value pairs from array of pairs"
+            (fun () ->
+              let fromArrayMap =
+                Map.fromArray
+                  (module String)
+                  [| ("Cat", 4); ("Owl", 2); ("Fox", 5) |]
+              in
+
+              let ansList = Map.toList fromArrayMap in
+              expect ansList
+              |> toEqual
+                   (let open Eq in
+                   list (pair string int))
+                   [ ("Cat", 4); ("Owl", 2); ("Fox", 5) ] ) ;
+          test
+            "returns empty map as empty list of key value pairs from empty array"
+            (fun () ->
+              let fromArrayMap = Map.fromArray (module String) [||] in
+              let ansList = Map.toList fromArrayMap in
+              expect ansList
+              |> toEqual
+                   (let open Eq in
+                   list (pair string int))
+                   [] ) ) ;
 
       describe "singleton" (fun () ->
           test "key value pair" (fun () ->
