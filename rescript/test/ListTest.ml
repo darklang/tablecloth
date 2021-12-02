@@ -8,12 +8,12 @@ let suite =
           test "returns int 0 for empty list arg" (fun () ->
               expect (List.length List.empty) |> toEqual Eq.int 0 ) ) ;
       describe "singleton" (fun () ->
-          test "is empty" (fun () ->
-              expect (List.singleton 1234)
+          test "returns array singleton of empty string from arg empty string" (fun () ->
+              expect (List.singleton "")
               |> toEqual
                    (let open Eq in
-                   list int)
-                   [ 1234 ] ) ;
+                   list string)
+                   [ "" ] ) ;
           test "with int" (fun () ->
               expect (List.singleton 1234)
               |> toEqual
