@@ -5,7 +5,7 @@ let suite =
   suite "List" (fun () ->
       let open List in
       describe "empty" (fun () ->
-          test "is empty" (fun () ->
+          test "returns int 0 for empty list arg" (fun () ->
               expect (List.length List.empty) |> toEqual Eq.int 0 ) ) ;
       describe "singleton" (fun () ->
           test "is empty" (fun () ->
