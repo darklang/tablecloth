@@ -94,14 +94,14 @@ let suite =
 
       describe "compare" (fun () ->
           test
-            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            "Returns int 0 to describe comparison of args true true"
             (fun () -> expect (compare true true) |> toEqual Eq.int 0) ;
           test
-            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            "Returns int 1 to describe comparison of args true false"
             (fun () -> expect (compare true false) |> toEqual Eq.int 1) ;
           test
-            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            "Returns int -1 to describe comparison of args false true"
             (fun () -> expect (compare false true) |> toEqual Eq.int (-1)) ;
           test
-            "Returns int 1, 0, or -1 to describe comparison of 2 bools"
+            "Returns int 0 to describe comparison of args false false"
             (fun () -> expect (compare false false) |> toEqual Eq.int 0) ) )
