@@ -138,13 +138,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list int)
-                   [ 1; 2; 3; 4 ] ) ;
-          test "with string" (fun () ->
-              expect (List.cons [ 'e'; 'l'; 'l'; 'o' ] 'h')
-              |> toEqual
-                   (let open Eq in
-                   list char)
-                   [ 'h'; 'e'; 'l'; 'l'; 'o' ] ) ) ;
+                   [ 1; 2; 3; 4 ] )) ;
 
       describe "filterMap" (fun () ->
           test "keeps elements which return Some" (fun () ->
