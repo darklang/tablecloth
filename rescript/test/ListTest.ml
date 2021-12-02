@@ -619,6 +619,25 @@ let suite =
                    (let open Eq in
                    list int)
                    [ 5 ] ) ;
+          test "sort records" (fun () ->
+              let s1 =
+                { AlcoJest.Student.id = 200; AlcoJest.Student.name = "Syd" }
+              in
+              let s2 =
+                { AlcoJest.Student.id = 53; AlcoJest.Student.name = "Bill" }
+              in
+              let s3 =
+                { AlcoJest.Student.id = 30; AlcoJest.Student.name = "Carmen" }
+              in
+              let studentList = [ s1; s2; s3 ] in
+              let sortedRecs =
+                sortBy ~f:(fun x -> x.AlcoJest.Student.id) studentList
+              in
+              expect sortedRecs
+              |> toEqual
+                   (let open Eq in
+                   list student)
+                   [ s3; s2; s1 ] ) ;
           test "empty list" (fun () ->
               expect (sortBy ~f:(fun x -> x * x) [ 3; 2; 5; -2; 4 ])
               |> toEqual
