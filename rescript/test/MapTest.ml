@@ -24,12 +24,12 @@ let suite =
   suite "Map" (fun () ->
       describe "fromArray" (fun () ->
           test
-            "returns map as list of key value pairs from array of pairs"
+            "returns map of key value pairs from array of pairs with ordered type key String"
             (fun () ->
               let fromArrayMap =
                 Map.fromArray
                   (module String)
-                  [| ("Cat", 4); ("Owl", 2); ("Fox", 5) |]
+                  [| ("Cat", 4); ("Owl", 2); ("Fox", 5); ("Frog", 12); ("Camel", 2)|]
               in
 
               let ansList = Map.toList fromArrayMap in
@@ -37,9 +37,9 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list (pair string int))
-                   [ ("Cat", 4); ("Owl", 2); ("Fox", 5) ] ) ;
+                   [ ("Camel", 2); ("Cat", 4); ("Fox", 5); ("Frog", 12); ("Owl", 2) ] ) ;
           test
-            "returns empty map as empty list of key value pairs from empty array"
+            "returns empty map from empty array of key value pairs"
             (fun () ->
               let fromArrayMap = Map.fromArray (module String) [||] in
               let ansList = Map.toList fromArrayMap in
