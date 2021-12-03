@@ -29,7 +29,12 @@ let suite =
               let fromArrayMap =
                 Map.fromArray
                   (module String)
-                  [| ("Cat", 4); ("Owl", 2); ("Fox", 5); ("Frog", 12); ("Camel", 2)|]
+                  [| ("Cat", 4)
+                   ; ("Owl", 2)
+                   ; ("Fox", 5)
+                   ; ("Frog", 12)
+                   ; ("Camel", 2)
+                  |]
               in
 
               let ansList = Map.toList fromArrayMap in
@@ -37,7 +42,12 @@ let suite =
               |> toEqual
                    (let open Eq in
                    list (pair string int))
-                   [ ("Camel", 2); ("Cat", 4); ("Fox", 5); ("Frog", 12); ("Owl", 2) ] ) ;
+                   [ ("Camel", 2)
+                   ; ("Cat", 4)
+                   ; ("Fox", 5)
+                   ; ("Frog", 12)
+                   ; ("Owl", 2)
+                   ] ) ;
           test
             "returns empty map from empty array of key value pairs"
             (fun () ->
