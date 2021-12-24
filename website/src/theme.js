@@ -50,7 +50,7 @@ export let spacing = {
 
 export let dimensions = {
   navbar: 56,
-  maxContentWidth: 740,
+  maxContentWidth: 1200,
   leftSideBar: 240,
   rightSideBar: 224,
 };

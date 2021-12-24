@@ -23317,10 +23317,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23404,10 +23400,6 @@
                             "ocaml": "Array.length [|1; 2, 3|] = 3",
                             "reason": "Array.length([|1, (2, 3)|]) == 3;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -23531,10 +23523,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23544,10 +23532,6 @@
                             "ocaml": "Array.any ~f:Int.is_even [|1;3;5;7|] = false",
                             "reason": "Array.any(~f=Int.is_even, [|1, 3, 5, 7|]) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -23671,10 +23655,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23684,10 +23664,6 @@
                             "ocaml": "Array.all ~f:Int.is_even [|2;3|] = false",
                             "reason": "Array.all(~f=Int.is_even, [|2, 3|]) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",

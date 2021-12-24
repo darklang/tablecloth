@@ -82,17 +82,21 @@ export const Main = styled.main`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: ${dimensions.maxContentWidth}px;
-  padding: 0 ${spacing.pageMargin.mobile}px;
-  width: 100%;
+ // max-width: ${dimensions.maxContentWidth}px;
+  margin-left: 240px!important;
+ padding: 0 ${spacing.pageMargin.mobile}px;
+  width:  calc(100% - 240px);
   @media (min-width: ${breakpoints.desktop}px) {
     padding: 0 ${spacing.pageMargin.desktop}px;
   }
+  background: #efebeb;
+  scroll-padding-top: 64px;
 `;
 
 export const NavBarContainer = styled.div`
-  position: absolute;
+  position: sticky;
   top: 0;
+  z-index: 5;
   width: 100%;
 `;
 
@@ -131,7 +135,7 @@ export const NavBar = () => {
           flex-direction: row;
           flex-shrink: 0;
           justify-content: space-between;
-          max-width: ${dimensions.maxContentWidth}px;
+        //  max-width: ${dimensions.maxContentWidth}px;
           padding-left: ${spacing.pageMargin.mobile}px;
           padding-right: ${spacing.pageMargin.mobile}px;
           width: 100%;

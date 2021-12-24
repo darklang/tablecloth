@@ -271,7 +271,6 @@ val is_empty : 'a t -> bool
     {2 Examples}
 
     {[Array.is_empty [|1; 2, 3|] = false]}
-
     {[Array.is_empty [||] = true]}
 *)
 
@@ -281,7 +280,6 @@ val length : 'a t -> int
     {2 Examples}
 
     {[Array.length [|1; 2, 3|] = 3]}
-
     {[Array.length [||] = 0]}
 *)
 
@@ -293,9 +291,7 @@ val any : 'a t -> f:('a -> bool) -> bool
     {2 Examples}
 
     {[Array.any ~f:Int.is_even [|1;2;3;5|] = true]}
-
     {[Array.any ~f:Int.is_even [|1;3;5;7|] = false]}
-
     {[Array.any ~f:Int.is_even [||] = false]}
 *)
 
@@ -307,9 +303,7 @@ val all : 'a t -> f:('a -> bool) -> bool
     {2 Examples}
 
     {[Array.all ~f:Int.is_even [|2;4|] = true]}
-
     {[Array.all ~f:Int.is_even [|2;3|] = false]}
-
     {[Array.all ~f:Int.is_even [||] = true]}
 *)
 

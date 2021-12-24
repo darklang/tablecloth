@@ -430,6 +430,7 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
           font-size: 16px;
           margin: 8px;
           padding: 10px;
+          margin-top: 64px;
         `}
       />
       <div
@@ -472,7 +473,7 @@ const PageAnchor = ({ id, children }) => {
         display: flex;
         flex-shrink: 0;
         flex-direction: row;
-        margin-left: -${spacing.pageMargin.laptop}px;
+        margin-left: -${spacing.pageMargin.desktop*1.5}px;
 
         .link {
           display: none;
@@ -509,7 +510,7 @@ const PageAnchor = ({ id, children }) => {
         }
 
         @media (min-width: ${breakpoints.desktop}px) {
-          margin-left: -${spacing.pageMargin.desktop}px;
+          margin-left: -${spacing.pageMargin.desktop*1.5}px;
           .link {
             width: ${spacing.pageMargin.desktop}px;
           }
@@ -743,7 +744,14 @@ let TextElement = ({ elements, path }) => {
 
 let TypeSignature = ({ signature }) => {
   return (
-    <pre>
+    <pre
+    css={css`
+    background: #efebeb;
+    display: inline;
+    font-weight: bold;
+  `}
+    >
+
       <code children={stripTableclothPrefix(signature.rendered)}/>
     </pre>
   );
@@ -753,8 +761,10 @@ let ValueContainer = props => (
   <div
     className="ValueContainer"
     css={css`
-      padding-bottom: 25px;
-      padding-top: 15px;
+      margin-bottom: 25px;
+      margin-top: 15px;
+      background: white;
+      padding: 0 15px;
     `}
     {...props}
   />
@@ -775,19 +785,20 @@ let ValueWrapper = styled.div`
   padding-right: ${spacing.medium}px;
   width: 100%;
   overflow-x: auto;
+  margin-bottom:${spacing.small}px;
 `;
 
 let Value = ({ id, path, name, type, info, parameters, ...value }) => {
   return (
     <ValueContainer>
       <PageAnchor id={id}>
+      
         <ValueWrapper>
-          <pre>
-            <code>let {name}: </code>
-          </pre>
-          <TypeSignature signature={type}/>
+        <h2>{id}</h2>
+      
         </ValueWrapper>
       </PageAnchor>
+      <TypeSignature signature={type}/>
       {info && (
         <div
           css={css`
@@ -1093,8 +1104,9 @@ export default ({ data }) => {
     list,
   } = React.useMemo(() => {
     const { odocModel } = data;
-
     let content = JSON.parse(odocModel.internal.content);
+    console.log("odocModel",content);
+
     // reset initial state
     initialState = {
       path: [],
@@ -1246,6 +1258,7 @@ export default ({ data }) => {
                                           padding-left: ${spacing.pageMargin
                                           .desktop}px;
                                         }
+                                     
                                       `}
                                     >
                                       {list[index]}

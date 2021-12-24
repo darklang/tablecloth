@@ -168,7 +168,7 @@ const CallToAction = () => (
           align-items: center;
           display: flex;
           flex-direction: column;
-          max-width: ${dimensions.maxContentWidth}px;
+       //   max-width: ${dimensions.maxContentWidth}px;
 
           a {
             background-color: ${({ theme }) => theme.navbar.background};
