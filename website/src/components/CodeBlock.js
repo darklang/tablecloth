@@ -1,8 +1,8 @@
 import {dropWhile, dropRightWhile} from 'lodash'
 import * as React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import prismLightTheme from 'prism-react-renderer/themes/nightOwlLight';
-import prismDarkTheme from 'prism-react-renderer/themes/nightOwl';
+import prismLightTheme from 'prism-react-renderer/themes/nightOwl';
+import prismDarkTheme from 'prism-react-renderer/themes/oceanicNext';
 import { useSyntax } from './Syntax';
 import { useTheme, colors, spacing } from '../theme';
 
@@ -31,7 +31,7 @@ export const CodeBlock = ({ code, ...props }) => {
     <Highlight
       {...defaultProps}
       code={content}
-      theme={prismDarkTheme}
+      theme={theme === 'light' ? prismLightTheme : prismDarkTheme}
       language={props.language || syntax}
       {...props}
     >

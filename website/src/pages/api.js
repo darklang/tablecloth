@@ -430,7 +430,6 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
           font-size: 16px;
           margin: 8px;
           padding: 10px;
-          margin-top: 64px;
         `}
       />
       <div
@@ -511,6 +510,7 @@ const PageAnchor = ({ id, children }) => {
 
         @media (min-width: ${breakpoints.desktop}px) {
           margin-left: -${spacing.pageMargin.desktop*1.5}px;
+          width: calc(100% + 108px);
           .link {
             width: ${spacing.pageMargin.desktop}px;
           }
@@ -744,16 +744,30 @@ let TextElement = ({ elements, path }) => {
 
 let TypeSignature = ({ signature }) => {
   return (
-    <pre
+
+      <React.Fragment children={stripTableclothPrefix(signature.rendered)}/>
+  );
+};
+
+let TypeDefinition = ({ name, type }) => {
+  return (
+    <code
     css={css`
-    background: #efebeb;
     display: inline;
     font-weight: bold;
+    display: inline-flex;
+    background-color: ${({ theme }) => theme.typeDefinition.background};
+    color: ${({ theme }) => theme.typeDefinition.text};
+    border-radius: 3px;
+    border-left: 4px solid ${({ theme }) => theme.typeDefinition.borderLeft};
+    padding: 8px;
+    margin:${spacing.small}px 0;
   `}
     >
 
-      <code children={stripTableclothPrefix(signature.rendered)}/>
-    </pre>
+ 
+let {name}: <TypeSignature signature={type}/>
+    </code>
   );
 };
 
@@ -763,8 +777,9 @@ let ValueContainer = props => (
     css={css`
       margin-bottom: 25px;
       margin-top: 15px;
-      background: white;
       padding: 0 15px;
+      background: ${({ theme }) => theme.block.background};
+
     `}
     {...props}
   />
@@ -774,9 +789,10 @@ let ValueWrapper = styled.div`
   align-items: flex-start;
   display: flex;
   background-color: ${colors.blue.lightest};
+  background-color: ${({ theme }) => theme.blockHeader.background};
+  color: ${({ theme }) => theme.blockHeader.text};
   border-radius: 3px;
-  border-left: 4px solid ${colors.blue.base};
-  color: black;
+  border-left: 4px solid ${({ theme }) => theme.blockHeader.borderLeft};
   flex: 1;
   flex-direction: row;
   padding-top: ${spacing.small}px;
@@ -785,26 +801,26 @@ let ValueWrapper = styled.div`
   padding-right: ${spacing.medium}px;
   width: 100%;
   overflow-x: auto;
-  margin-bottom:${spacing.small}px;
 `;
 
 let Value = ({ id, path, name, type, info, parameters, ...value }) => {
   return (
-    <ValueContainer>
+    <ValueContainer
+    
+   
+    >
       <PageAnchor id={id}>
       
         <ValueWrapper>
         <h2>{id}</h2>
-      
         </ValueWrapper>
       </PageAnchor>
-      <TypeSignature signature={type}/>
+      <TypeDefinition name={name} type={type} />
+ 
+      
       {info && (
         <div
-          css={css`
-            padding-top: 10px;
-            padding-bottom: 10px;
-          `}
+      
         >
           <TextElement
             elements={info.description.value}
@@ -955,11 +971,14 @@ function generateModuleElements(
               let id = idFor(state.path, 'ModuleStruct', stripTableclothPrefix(module.value.name));
               registerId(state, id);
               state.elements.push(
+                <div css={css`
+                padding: 0px 15px;
+              `}>
                 <PageAnchor id={id}>
                   <Identifiers.module
                     name={stripTableclothPrefix(moduleElement.value.kind.value.name)}
                   />
-                </PageAnchor>,
+                </PageAnchor></div>,
               );
               generateModuleElements(module.value.kind.value, modulesByName, {
                 ...state,
@@ -1186,7 +1205,6 @@ export default ({ data }) => {
               css={css`
                 display: flex;
                 flex-direction: row;
-                margin-top: ${dimensions.navbar}px;
               `}
             >
               <SidebarContainer isOpen={isOpen}>
@@ -1199,6 +1217,8 @@ export default ({ data }) => {
               <Main>
                 <Container
                   css={css`
+                  background-color: ${({ theme }) => theme.body};
+
                     margin-left: -${spacing.pageMargin.mobile}px;
                     @media (min-width: ${breakpoints.desktop}px) {
                       margin-left: -${spacing.pageMargin.desktop}px;

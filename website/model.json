@@ -41506,11 +41506,11 @@
                   {
                     "tag": "Link",
                     "value": {
-                      "target": " Ints are 32 bits",
+                      "target": " https://bucklescript.github.io/docs/en/common-data-types.html#int ",
                       "content": [
                         {
                           "tag": "Raw",
-                          "value": " https://bucklescript.github.io/docs/en/common-data-types.html#int "
+                          "value": "  Ints are 32 bits"
                         }
                       ]
                     }

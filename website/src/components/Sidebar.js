@@ -60,7 +60,6 @@ export const Sidebar = ({ location }) => {
       css={css`
         background-color: ${({ theme }) => theme.sidebar.background};
         color: ${({ theme }) => theme.navbar.background};
-        padding-top: 3rem;
         padding-bottom: 3rem;
         width: 100%;
         height: 100vh;

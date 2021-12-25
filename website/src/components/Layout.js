@@ -49,10 +49,10 @@ export const SidebarContainer = ({ children, isOpen }) => {
           border-right: 1px solid ${colors.grey.light};
           display: flex;
           flex-shrink: 0;
-          position: sticky;
+          position: fixed;
           overflow-y: auto;
           transform: translateY(0);
-          top: 0;
+          top: 56px;
           height: 100vh;
           width: ${dimensions.leftSideBar}px;
           z-index: 1;
@@ -75,7 +75,6 @@ export const Main = styled.main`
   flex: 1;
   flex-direction: column;
   padding-bottom: 3rem;
-  padding-top: 3rem;
   width: 100%;
 `;
 
@@ -89,7 +88,6 @@ export const Container = styled.div`
   @media (min-width: ${breakpoints.desktop}px) {
     padding: 0 ${spacing.pageMargin.desktop}px;
   }
-  background: #efebeb;
   scroll-padding-top: 64px;
 `;
 

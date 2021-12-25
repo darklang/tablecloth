@@ -24,7 +24,7 @@ export let colors = {
       end: '#ec670f',
     },
   },
-  black: 'hsl(212.3, 15.3%, 16.7%)',
+  black: hsl(212.3, 15.3, 16.7),
   grey: hsl(0, 10, 91.1),
   white: '#FFFFFF',
   yellow: hsl(50.3, 94.2, 72.9),
@@ -66,8 +66,8 @@ export let themes = {
       icon32: require('./assets/favicon_light/favicon-32x32.png'),
       icon16: require('./assets/favicon_light/favicon-16x16.png'),
     },
-    body: colors.white,
-    text: colors.black,
+    body: colors.grey.lighter,
+    text: colors.black.darkest,
     link: colors.red.dark,
     navbar: {
       background: colors.red.base,
@@ -84,12 +84,25 @@ export let themes = {
     card: {
       background: colors.grey.lighter,
       border: colors.grey.light,
-      text: colors.black,
+      text: colors.black.darkest,
+    },
+    blockHeader: {
+      background: colors.blue.lightest,
+      borderLeft: colors.blue.base,
+      text: colors.black.darkest,
+    },
+    block: {
+      background: colors.white,
+    },
+    typeDefinition: {
+     background: colors.grey.lighter,
+     borderLeft: colors.grey.base,
+     text:  colors.black.darkest,
     },
     code: {
       background: colors.grey.lighter,
       border: colors.grey.light,
-      text: colors.black,
+      text: colors.black.darkest,
     },
     toggle: {
       background: colors.grey.lightest,
@@ -109,7 +122,7 @@ export let themes = {
       icon32: require('./assets/favicon_dark/favicon-32x32.png'),
       icon16: require('./assets/favicon_dark/favicon-16x16.png'),
     },
-    body: colors.black,
+    body: colors.black.darkest,
     text: colors.white,
     link: colors.red.base,
     navbar: {
@@ -118,7 +131,7 @@ export let themes = {
       text: colors.white,
     },
     sidebar: {
-      background: colors.black,
+      background: colors.black.darkest,
       text: colors.white,
       activeBackground: colors.purple.base,
       activeText: colors.white,
@@ -129,6 +142,19 @@ export let themes = {
       border: colors.grey.dark,
       text: colors.white,
     },
+    block: {
+      background: colors.black.dark,
+    },
+    blockHeader: {
+      background: colors.black.darker,
+      borderLeft: colors.black.base,
+      text: colors.white,
+    },
+    typeDefinition: {
+      background: colors.grey.darkest,
+      borderLeft: colors.grey.dark,
+      text: colors.white,
+     },
     code: {
       background: colors.grey.darkest,
       border: colors.grey.dark,
@@ -139,7 +165,7 @@ export let themes = {
       border: colors.red.dark,
     },
     githubEditButton: {
-      background: colors.black,
+      background: colors.black.darkest,
       backgroundHover: 'rgb(36, 42, 49)',
       border: colors.grey.base,
       text: colors.white,
