@@ -103,7 +103,6 @@ val add : ('a, 'id) t -> 'a -> ('a, 'id) t
     {2 Examples}
 
     {[Set.add (Set.Int.from_list [1; 2]) 3 |> Set.to_list = [1; 2; 3]]}
-
     {[Set.add (Set.Int.from_list [1; 2]) 2 |> Set.to_list = [1; 2]]}
 *)
 
@@ -113,7 +112,6 @@ val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
     {2 Examples}
 
     {[Set.remove (Set.Int.from_list [1; 2]) 2 |> Set.to_list = [1]]}
-
     {[
       let original_set = Set.Int.from_list [1; 2] in
       let new_set = Set.remove orignal_set 3 in
@@ -157,9 +155,7 @@ val find : ('value, _) t -> f:('value -> bool) -> 'value option
     {2 Examples}
 
     {[Set.find ~f:Int.is_even (Set.Int.from_list [1; 3; 4; 8]) = Some 4]}
-
     {[Set.find ~f:Int.is_odd (Set.Int.from_list [0; 2; 4; 8]) = None]}
-
     {[Set.find ~f:Int.is_even Set.Int.empty = None]}
 *)
 
@@ -171,7 +167,6 @@ val is_empty : (_, _) t -> bool
     {2 Examples}
 
     {[Set.is_empty (Set.Int.empty) = true]}
-
     {[Set.is_empty (Set.Int.singleton 4) = false]}
 *)
 
@@ -181,9 +176,7 @@ val any : ('value, _) t -> f:('value -> bool) -> bool
     {2 Examples}
 
     {[Set.any (Set.Int.from_array [|2;3|]) ~f:Int.is_even = true]}
-
     {[Set.any (Set.Int.from_list [1;3]) ~f:Int.is_even = false]}
-
     {[Set.any (Set.Int.from_list []) ~f:Int.is_even = false]}
 *)
 
@@ -193,9 +186,7 @@ val all : ('value, _) t -> f:('value -> bool) -> bool
     {2 Examples}
 
     {[Set.all ~f:Int.is_even (Set.Int.from_array [|2;4|]) = true]}
-
     {[Set.all ~f:Int.is_even (Set.Int.from_list [2;3]) = false]}
-
     {[Set.all ~f:Int.is_even Set.Int.empty = true]}
 *)
 
@@ -207,7 +198,6 @@ val difference : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
     {2 Examples}
 
     {[Set.difference (Set.Int.from_list [1;2;5]) (Set.Int.from_list [2;3;4]) |> Set.to_list = [1;5]]}
-
     {[Set.difference (Set.Int.from_list [2;3;4]) (Set.Int.from_list [1;2;5]) |> Set.to_list = [3;4]]}
 *)
 

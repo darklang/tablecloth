@@ -41,7 +41,6 @@ val empty : 'a t
     {2 Examples}
 
     {[List.empty = []]}
-
     {[List.length List.empty = 0]}
 *)
 
@@ -51,7 +50,6 @@ val singleton : 'a -> 'a t
     {2 Examples}
 
     {[List.singleton 1234 = [1234]]}
-
     {[List.singleton "hi" = ["hi"]]}
 *)
 
@@ -61,9 +59,7 @@ val repeat : 'a -> times:int -> 'a t
     {2 Examples}
 
     {[List.repeat ~times:5 'a' = ['a'; 'a'; 'a'; 'a'; 'a']]}
-
     {[List.repeat ~times:0 7 = []]}
-
     {[List.repeat ~times:(-1) "Why?" = []]}
 *)
 
@@ -73,9 +69,7 @@ val range : ?from:int -> int -> int t
     {2 Examples}
 
     {[List.range 5 = [0; 1; 2; 3; 4] ]}
-
     {[List.range ~from:2 5 = [2; 3; 4] ]}
-
     {[List.range ~from:(-2) 3 = [-2; -1; 0; 1; 2] ]}
 *)
 
@@ -87,7 +81,6 @@ val initialize : int -> f:(int -> 'a) -> 'a t
     {2 Examples}
 
     {[List.initialize 4 ~f:identity = [0; 1; 2; 3]]}
-
     {[List.initialize 4 ~f:(fun index -> index * index) = [0; 1; 4; 9]]}
 *)
 
@@ -109,7 +102,6 @@ val head : 'a t -> 'a option
     {2 Examples}
 
     {[List.head [1;2;3] = Some 1]}
-
     {[List.head [] = None]}
 *)
 
@@ -121,9 +113,7 @@ val tail : 'a t -> 'a t option
     {2 Examples}
 
     {[List.tail [1;2;3] = Some [2;3]]}
-
     {[List.tail [1] = Some []]}
-
     {[List.tail [] = None]}
 *)
 
@@ -136,7 +126,6 @@ val cons : 'a t -> 'a -> 'a t
     {2 Examples}
 
     {[List.cons [2;3;4] 1 = [1;2;3;4]]}
-
     {[1 :: [2;3;4] = [1;2;3;4]]}
 *)
 
@@ -150,11 +139,8 @@ val take : 'a t -> count:int -> 'a t
    {2 Examples}
 
    {[List.take [1;2;3] ~count:2 = [1;2]]}
-
    {[List.take [] ~count:2 = []]}
-
    {[List.take [1;2;3;4] ~count:8 = [1;2;3;4]]}
-
    {[List.take [1;2;3;4] ~count:(-1) = []]}
 *)
 
@@ -180,9 +166,7 @@ val drop : 'a t -> count:int -> 'a t
     {2 Examples}
 
     {[List.drop [1;2;3;4] ~count:2 = [3;4]]}
-
     {[List.drop [1;2;3;4] ~count:6 = []]}
-
     {[List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]]}
 *)
 
@@ -192,9 +176,7 @@ val dropWhile : 'a t -> f:('a -> bool) -> 'a t
     {2 Examples}
 
     {[List.dropWhile ~f:Int.isEven [2; 4; 6; 7; 8; 9] = [7; 8; 9]]}
-
     {[List.dropWhile ~f:Int.isEven [2; 4; 6; 8] = []]}
-
     {[List.dropWhile ~f:Int.isEven [1; 2; 3] = [1; 2; 3]]}
 *)
 
@@ -206,9 +188,7 @@ val initial : 'a t -> 'a t option
     {2 Examples}
 
     {[List.initial [1;2;3] = Some [1;2]]}
-
     {[List.initial [1] = Some []]}
-
     {[List.initial [] = None]}
 *)
 
@@ -222,9 +202,7 @@ val last : 'a t -> 'a option
     {2 Examples}
 
     {[List.last [1;2;3] = Some 3]}
-
     {[List.last [1] = Some 1]}
-
     {[List.last [] = None]}
 *)
 
@@ -236,9 +214,7 @@ val getAt : 'a t -> index:int -> 'a option
     {2 Examples}
 
     {[List.getAt [1;2;3] ~index:1 = Some 2]}
-
     {[List.getAt [] ~index:2 = None]}
-
     {[List.getAt [1;2;3] ~index:100 = None]}
 *)
 
@@ -262,13 +238,9 @@ val insertAt : 'a t -> index:int -> value:'a -> 'a t
         [100; 101; 102; 103] =
           [100; 101; 999; 102; 103]
     ]}
-
     {[List.insertAt ~index:0 ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]]}
-
     {[List.insertAt ~index:4 ~value:999 [100; 101; 102; 103] = [100; 101; 102; 103; 999]]}
-
     {[List.insertAt ~index:(-1) ~value:999 [100; 101; 102; 103] = [999]]}
-
     {[List.insertAt ~index:5 ~value:999 [100; 101; 102; 103] = [999]]}
 *)
 
@@ -280,7 +252,6 @@ val updateAt : 'a t -> index:int -> f:('a -> 'a) -> 'a t
     {2 Examples}
 
     {[List.updateAt [1; 2; 3] ~index:1 ~f:(Int.add 3) = [1; 5; 3]]}
-
     {[
       let animals = ["Ant"; "Bat"; "Cat"] in
       animals = List.updateAt animals ~index:4 ~f:String.reverse
@@ -295,7 +266,6 @@ val removeAt : 'a t -> index:int -> 'a t
     {2 Examples}
 
     {[List.removeAt [1; 2; 3] ~index:2 = [1; 2]]}
-
     {[
       let animals = ["Ant"; "Bat"; "Cat"] in
       List.equal String.equal animals (List.removeAt animals ~index:4) = true
@@ -341,9 +311,7 @@ val isEmpty : _ t -> bool
     {2 Examples}
 
     {[List.isEmpty List.empty = true]}
-
     {[List.isEmpty [||] = true]}
-
     {[List.isEmpty [|1; 2; 3|] = false]}
 *)
 
@@ -386,7 +354,6 @@ val length : 'a t -> int
     {2 Examples}
 
     {[List.length [] = 0]}
-
     {[List.length [7; 8; 9] = 3]}
 *)
 
@@ -398,9 +365,7 @@ val any : 'a t -> f:('a -> bool) -> bool
     {2 Examples}
 
     {[List.any ~f:isEven [|2;3|] = true]}
-
     {[List.any ~f:isEven [|1;3|] = false]}
-
     {[List.any ~f:isEven [||] = false]}
 *)
 
@@ -412,9 +377,7 @@ val all : 'a t -> f:('a -> bool) -> bool
     {2 Examples}
 
     {[List.all ~f:Int.isEven [|2;4|] = true]}
-
     {[List.all ~f:Int.isEven [|2;3|] = false]}
-
     {[List.all ~f:Int.isEven [||] = true]}
 *)
 
@@ -448,9 +411,7 @@ val find : 'a t -> f:('a -> bool) -> 'a option
   {2 Examples}
 
   {[List.find ~f:Int.isEven [|1; 3; 4; 8;|] = Some 4]}
-
   {[List.find ~f:Int.isOdd [|0; 2; 4; 8;|] = None]}
-
   {[List.find ~f:Int.isEven [||] = None]}
 *)
 
@@ -473,9 +434,7 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
     {2 Examples}
 
     {[List.includes [1; 3; 5; 7] 3 ~equal:Int.equal = true]}
-
     {[List.includes [1; 3; 5; 7] 4 ~equal:Int.equal = false]}
-
     {[List.includes [] 5 ~equal:Int.equal = false]}
 *)
 
@@ -547,9 +506,7 @@ val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
     {2 Examples}
 
     {[List.sum [1;2;3] (module Int) = 6]}
-
     {[List.sum [4.0;4.5;5.0] (module Float) = 13.5]}
-
     {[
       List.sum
         ["a"; "b"; "c"]
@@ -615,7 +572,6 @@ val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
       let characters = ['a'; '9'; '6'; ' '; '2'; 'z'] in
       List.filterMap characters ~f:Char.toDigit = [9; 6; 2]
     ]}
-
     {[
       List.filterMap [3; 4; 5; 6] ~f:(fun number ->
         if Int.isEven number then
@@ -632,7 +588,6 @@ val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
     {2 Examples}
 
     {[List.flatMap ~f xs = List.map ~f xs |> List.flatten]}
-
     {[List.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]}
 *)
 
@@ -671,7 +626,6 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
       in
       unique [|1; 1; 2; 3; 2|] = [|1; 2; 3|]
     ]}
-
     {[
       let lastEven integers =
         List.fold integers ~initial:None ~f:(fun last int ->
@@ -730,7 +684,6 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
     {2 Examples}
 
     {[List.map2 [|1;2;3|] [|4;5;6|] ~f:(+) = [|5;7;9|]]}
-
     {[
       List.map2
         [|"alice"; "bob"; "chuck"|]
@@ -781,9 +734,7 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
     {2 Examples}
 
     {[List.splitAt [1;2;3;4;5] ~index:2 = ([1;2], [3;4;5])]}
-
     {[List.splitAt [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])]}
-
     {[List.splitAt [1;2;3;4;5] ~index:10 = ([1;2;3;4;5], 10)]}
 *)
 
@@ -797,7 +748,6 @@ val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
     {2 Examples}
 
     {[List.splitWhen [2; 4; 5; 6; 7] ~f:Int.isEven = ([2; 4], [5; 6; 7])]}
-
     {[List.splitWhen [2; 4; 5; 6; 7] ~f:(Fun.constant false) = ([2; 4; 5; 6; 7], [])]}
 *)
 
@@ -854,7 +804,6 @@ val intersperse : 'a t -> sep:'a -> 'a t
     {2 Examples}
 
     {[List.intersperse ~sep:"on" [|"turtles"; "turtles"; "turtles"|] = [|"turtles"; "on"; "turtles"; "on"; "turtles"|]]}
-
     {[List.intersperse ~sep:0 [||] = [||]]}
 *)
 
@@ -885,17 +834,11 @@ val sliding : ?step:int -> 'a t -> size:int -> 'a t t
     {2 Examples}
 
     {[List.sliding [1;2;3;4;5] ~size:1 = [[1]; [2]; [3]; [4]; [5]] ]}
-
     {[List.sliding [1;2;3;4;5] ~size:2 = [[1;2]; [2;3]; [3;4]; [4;5]] ]}
-
     {[List.sliding [1;2;3;4;5] ~size:3 = [[1;2;3]; [2;3;4]; [3;4;5]] ]}
-
     {[List.sliding [1;2;3;4;5] ~size:2 ~step:2 = [[1;2]; [3;4]] ]}
-
     {[List.sliding [1;2;3;4;5] ~size:1 ~step:3 = [[1]; [4]] ]}
-
     {[List.sliding [1;2;3;4;5] ~size:2 ~step:3 = [[1; 2]; [4; 5]]]}
-
     {[List.sliding [1;2;3;4;5] ~size:7 = []]}
 *)
 
@@ -909,18 +852,15 @@ val groupWhile : 'a t -> f:('a -> 'a -> bool) -> 'a t t
     {[
       List.groupWhile [1; 2; 3;] ~f:(Fun.constant false) = [[1]; [2]; [3]]
     ]}
-
     {[
       List.groupWhile [1; 2; 3;] ~f:(Fun.constant true) = [[1; 2; 3]]
     ]}
-
     {[
       List.groupWhile
         ~f:String.equal
         ["a"; "b"; "b"; "a"; "a"; "a"; "b"; "a"] =
           [["a"]; ["b"; "b"]; ["a"; "a"; "a";] ["b"]; ["a"]]
     ]}
-
     {[
       List.groupWhile
         ~f:(fun x y -> x mod 2 = y mod 2)
@@ -976,8 +916,6 @@ val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
     {2 Examples}
 
     {[List.compare Int.compare [1;2;3] [1;2;3;4] = -1]}
-
     {[List.compare Int.compare [1;2;3] [1;2;3] = 0]}
-
     {[List.compare Int.compare [1;2;5] [1;2;3] = 1]}
 *)

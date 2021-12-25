@@ -118,7 +118,6 @@ val add :
         ~value:"Cat"
       |> Map.toList = [(1, "Ant"); (2, "Bat"); (3, "Cat")]
     ]}
-
     {[Map.add (Map.Int.fromList [(1, "Ant"); (2, "Bat")]) ~key:2 ~value:"Bug" |> Map.toList = [(1, "Ant"); (2, "Bug")]]}
 *)
 

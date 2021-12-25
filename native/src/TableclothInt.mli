@@ -60,19 +60,12 @@ val from_string : string -> t option
     {2 Examples}
 
     {[Int.from_string "0" = Some 0.]}
-
     {[Int.from_string "42" = Some 42.]}
-
     {[Int.from_string "-3" = Some (-3)]}
-
     {[Int.from_string "123_456" = Some 123_456]}
-
     {[Int.from_string "0xFF" = Some 255]}
-
     {[Int.from_string "0x00A" = Some 10]}
-
     {[Int.from_string "Infinity" = None]}
-
     {[Int.from_string "NaN" = None]}
 *)
 
@@ -138,7 +131,6 @@ val divide : t -> by:t -> t
     {2 Examples}
 
     {[Int.divide 3 ~by:2 = 1]}
-
     {[27 / 5 = 5]}
 *)
 
@@ -151,9 +143,7 @@ val ( /. ) : t -> t -> float
     {2 Examples}
 
     {[Int.(3 /. 2) = 1.5]}
-
     {[Int.(27 /. 5) = 5.25]}
-
     {[Int.(8 /. 4) = 2.0]}
 *)
 
@@ -178,9 +168,7 @@ val negate : t -> t
     {2 Examples}
 
     {[Int.negate 8 = (-8)]}
-
     {[Int.negate (-7) = 7]}
-
     {[Int.negate 0 = 0]}
 
     Alternatively the [~-] operator can be used:
@@ -197,9 +185,7 @@ val absolute : t -> t
     {2 Examples}
 
     {[Int.absolute 8 = 8]}
-
     {[Int.absolute (-7) = 7]}
-
     {[Int.absolute 0 = 0]}
 *)
 
@@ -215,21 +201,13 @@ val modulo : t -> by:t -> t
     {2 Examples}
 
     {[Int.modulo ~by:3 (-4) = 1]}
-
     {[Int.modulo ~by:3 (-3 )= 0]}
-
     {[Int.modulo ~by:3 (-2) = 2]}
-
     {[Int.modulo ~by:3 (-1) = 1]}
-
     {[Int.modulo ~by:3 0 = 0]}
-
     {[Int.modulo ~by:3 1 = 1]}
-
     {[Int.modulo ~by:3 2 = 2]}
-
     {[Int.modulo ~by:3 3 = 0]}
-
     {[Int.modulo ~by:3 4 = 1]}
 *)
 
@@ -257,7 +235,6 @@ val maximum : t -> t -> t
     {2 Examples}
 
     {[Int.maximum 7 9 = 9]}
-
     {[Int.maximum (-4) (-1) = (-1)]}
 *)
 
@@ -267,7 +244,6 @@ val minimum : t -> t -> t
     {2 Examples}
 
     {[Int.minimum 7 9 = 7]}
-
     {[Int.minimum (-4) (-1) = (-4)]}
 *)
 
@@ -279,9 +255,7 @@ val is_even : t -> bool
     {2 Examples}
 
     {[Int.is_even 8 = true]}
-
     {[Int.is_even 7 = false]}
-
     {[Int.is_even 0 = true]}
 *)
 
@@ -291,9 +265,7 @@ val is_odd : t -> bool
   {2 Examples}
 
   {[Int.is_odd 7 = true]}
-
   {[Int.is_odd 8 = false]}
-
   {[Int.is_odd 0 = false]}
 *)
 
@@ -307,9 +279,7 @@ val clamp : t -> lower:t -> upper:t -> t
   {2 Examples}
 
   {[Int.clamp ~lower:0 ~upper:8 5 = 5]}
-
   {[Int.clamp ~lower:0 ~upper:8 9 = 8]}
-
   {[Int.clamp ~lower:(-10) ~upper:(-5) 5 = (-5)]}
 *)
 
@@ -323,9 +293,7 @@ val in_range : t -> lower:t -> upper:t -> bool
     {2 Examples}
 
     {[Int.in_range ~lower:2 ~upper:4 3 = true]}
-
     {[Int.in_range ~lower:5 ~upper:8 4 = false]}
-
     {[Int.in_range ~lower:(-6) ~upper:(-2) (-3) = true]}
 
 *)
@@ -356,9 +324,7 @@ val to_string : t -> string
     {2 Examples}
 
     {[Int.to_string 3 = "3"]}
-
     {[Int.to_string (-3) = "-3"]}
-
     {[Int.to_string 0 = "0"]}
 *)
 

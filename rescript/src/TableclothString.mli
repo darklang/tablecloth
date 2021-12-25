@@ -20,7 +20,6 @@ val fromArray : char array -> string
     {2 Examples}
 
     {[String.fromArray [||] = ""]}
-
     {[String.fromArray [|'a'; 'b'; 'c'|] = "abc"]}
 *)
 
@@ -32,7 +31,6 @@ val fromList : char list -> string
     {2 Examples}
 
     {[String.fromList [] = ""]}
-
     {[String.fromList ['a'; 'b'; 'c'] = "abc"]}
 *)
 
@@ -46,9 +44,7 @@ val repeat : string -> count:int -> string
     {2 Examples}
 
     {[String.repeat ~count:3 "ok" = "okokok"]}
-
     {[String.repeat ~count:3 "" = ""]}
-
     {[String.repeat ~count:0 "ok" = ""]}
 *)
 
@@ -78,7 +74,6 @@ val ( .?[] ) : string -> int -> char option
     {2 Examples}
 
     {[("Doggie".String.?[3]) = Some 'g']}
-
     {[String.("Doggie".?[9]) = None]}
  *)
 
@@ -120,7 +115,6 @@ val startsWith : string -> prefix:string -> bool
     {2 Examples}
 
     {[String.startsWith ~prefix:"the" "theory" = true]}
-
     {[String.startsWith ~prefix:"ory" "theory" = false]}
 *)
 
@@ -130,7 +124,6 @@ val endsWith : string -> suffix:string -> bool
     {2 Examples}
 
     {[String.endsWith ~suffix:"the" "theory" = false]}
-
     {[String.endsWith ~suffix:"ory" "theory" = true]}
 *)
 
@@ -140,9 +133,7 @@ val includes : string -> substring:string -> bool
     {2 Examples}
 
     {[String.includes "team" ~substring:"tea" = true]}
-
     {[String.includes "team" ~substring:"i" = false]}
-
     {[String.includes "ABC" ~substring:"" = true]}
 *)
 
@@ -154,7 +145,6 @@ val isCapitalized : string -> bool
     {2 Examples}
 
     {[String.isCapitalized "Anastasia" = true]}
-
     {[String.isCapitalized "" = false]}
 *)
 
@@ -164,13 +154,9 @@ val dropLeft : string -> count:int -> string
     {2 Examples}
 
     {[String.dropLeft ~count:3 "abcdefg" = "defg"]}
-
     {[String.dropLeft ~count:0 "abcdefg" = "abcdefg"]}
-
     {[String.dropLeft ~count:7 "abcdefg" = ""]}
-
     {[String.dropLeft ~count:(-2) "abcdefg" = "fg"]}
-
     {[String.dropLeft ~count:8 "abcdefg" = ""]}
 *)
 
@@ -180,13 +166,9 @@ val dropRight : string -> count:int -> string
     {2 Examples}
 
     {[String.dropRight ~count:3 "abcdefg" = "abcd"]}
-
     {[String.dropRight ~count:0 "abcdefg" = "abcdefg"]}
-
     {[String.dropRight ~count:7 "abcdefg" = ""]}
-
     {[String.dropRight ~count:(-2) "abcdefg" = "abcdefg"]}
-
     {[String.dropRight ~count:8 "abcdefg" = ""]}
 *)
 
@@ -216,15 +198,10 @@ val insertAt : string -> index:int -> value:t -> string
     {2 Examples}
 
     {[String.insertAt ~value:"**" ~index:2 "abcde" = "ab**cde"]}
-
     {[String.insertAt ~value:"**" ~index:0 "abcde" = "**abcde"]}
-
     {[String.insertAt ~value:"**" ~index:5 "abcde" = "abcde**"]}
-
     {[String.insertAt ~value:"**" ~index:(-2) "abcde" = "abc**de"]}
-
     {[String.insertAt ~value:"**" ~index:(-9) "abcde" = "**abcde"]}
-
     {[String.insertAt ~value:"**" ~index:9 "abcde" = "abcde**"]}
 *)
 
@@ -274,9 +251,7 @@ val trim : string -> string
     {2 Examples}
 
     {[String.trim "  abc  " = "abc"]}
-
     {[String.trim "  abc def  " = "abc def"]}
-
     {[String.trim "\r\n\t abc \n\n" = "abc"]}
 *)
 
@@ -314,9 +289,7 @@ val uncons : string -> (char * string) option
     {2 Examples}
 
     {[String.uncons "abcde" = Some ('a', "bcde")]}
-
     {[String.uncons "a" = Some ('a', "")]}
-
     {[String.uncons "" = None]}
 *)
 
@@ -350,7 +323,6 @@ val toArray : string -> char array
     {2 Examples}
 
     {[String.toArray "" = [||]]}
-
     {[String.toArray "abc" = [|'a'; 'b'; 'c'|]]}
 *)
 
@@ -360,7 +332,6 @@ val toList : string -> char list
     {2 Examples}
 
     {[String.toList "" = []]}
-
     {[String.toList "abc" = ['a'; 'b'; 'c']]}
 *)
 
@@ -377,11 +348,8 @@ val compare : string -> string -> int
     {2 Examples}
 
     {[String.compare "Z" "A" = 1]}
-
     {[String.compare "Be" "Bee" = -1]}
-
     {[String.compare "Pear" "pear" = 1]}
-
     {[String.compare "Peach" "Peach" = 0]}
 *)
 

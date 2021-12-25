@@ -20,7 +20,6 @@ val singleton : 'a -> 'a t
     {2 Examples}
 
     {[Array.singleton 1234 = [|1234|]]}
-
     {[Array.singleton "hi" = [|"hi"|]]}
 *)
 
@@ -30,9 +29,7 @@ val repeat : 'a -> length:int -> 'a t
     {2 Examples}
 
     {[Array.repeat ~length:5 'a' = [|'a'; 'a'; 'a'; 'a'; 'a'|]]}
-
     {[Array.repeat ~length:0 7 = [||]]}
-
     {[Array.repeat ~length:(-1) "Why?" = [||]]}
 *)
 
@@ -42,9 +39,7 @@ val range : ?from:int -> int -> int t
     {2 Examples}
 
     {[Array.range 5 = [|0; 1; 2; 3; 4|] ]}
-
     {[Array.range ~from:2 5 = [|2; 3; 4|] ]}
-
     {[Array.range ~from:(-2) 3 = [|-2; -1; 0; 1; 2|] ]}
 *)
 
@@ -55,7 +50,6 @@ val initialize : int -> f:(int -> 'a) -> 'a t
     {2 Examples}
 
     {[Array.initialize 4 ~f:identity = [|0; 1; 2; 3|]]}
-
     {[Array.initialize 4 ~f:(fun n -> n * n) = [|0; 1; 4; 9|]]} *)
 
 val fromList : 'a list -> 'a t
@@ -78,7 +72,6 @@ val clone : 'a t -> 'a t
       numbers = [|1;9;3|];
       otherNumbers = [|1;2;3|];
     ]}
-
     {[
       let numberGrid = [|
         [|1;2;3|];
@@ -116,7 +109,6 @@ val get : 'a t -> int -> 'a
     {2 Examples}
 
     {[[|1; 2; 3; 2; 1|].(3) = 2]}
-
     {[
       let animals = [|"cat"; "dog"; "eel"|] in
       animals.(2) = "eel"
@@ -131,7 +123,6 @@ val getAt : 'a t -> index:int -> 'a option
     {2 Examples}
 
     {[Array.getAt [|0; 1; 2|] ~index:5 = None]}
-
     {[Array.getAt [||] ~index:0 = None]}
 *)
 
@@ -143,7 +134,6 @@ val ( .?() ) : 'element array -> int -> 'element option
     {2 Examples}
 
     {[Array.([||].?(3)) = Some 'g']}
-
     {[Array.([||].?(9)) = None]}
  *)
 
@@ -182,9 +172,7 @@ val first : 'a t -> 'a option
     {2 Examples}
 
     {[Array.first [1;2;3] = Some 1]}
-
     {[Array.first [1] = Some 1]}
-
     {[Array.first [] = None]}
 *)
 
@@ -196,9 +184,7 @@ val last : 'a t -> 'a option
     {2 Examples}
 
     {[Array.last [1;2;3] = Some 3]}
-
     {[Array.last [1] = Some 1]}
-
     {[Array.last [] = None]}
 *)
 
@@ -214,15 +200,10 @@ val slice : ?to_:int -> 'a t -> from:int -> 'a t
     {2 Examples}
 
     {[Array.slice ~from:0 ~to_:3 [0; 1; 2; 3; 4] = [0; 1; 2]]}
-
     {[Array.slice ~from:1 ~to_:4 [0; 1; 2; 3; 4] = [1; 2; 3]]}
-
     {[Array.slice ~from:5 ~to_:3 [0; 1; 2; 3; 4] = []]}
-
     {[Array.slice ~from:1 ~to_:(-1) [0; 1; 2; 3; 4] = [1; 2; 3]]}
-
     {[Array.slice ~from:(-2) ~to_:5 [0; 1; 2; 3; 4] = [3; 4]]}
-
     {[Array.slice ~from:(-2) ~to_:(-1) [0; 1; 2; 3; 4] = [3]]}
 *)
 
@@ -271,7 +252,6 @@ val isEmpty : 'a t -> bool
     {2 Examples}
 
     {[Array.isEmpty [|1; 2, 3|] = false]}
-
     {[Array.isEmpty [||] = true]}
 *)
 
@@ -281,7 +261,6 @@ val length : 'a t -> int
     {2 Examples}
 
     {[Array.length [|1; 2, 3|] = 3]}
-
     {[Array.length [||] = 0]}
 *)
 
@@ -293,9 +272,7 @@ val any : 'a t -> f:('a -> bool) -> bool
     {2 Examples}
 
     {[Array.any ~f:Int.isEven [|1;2;3;5|] = true]}
-
     {[Array.any ~f:Int.isEven [|1;3;5;7|] = false]}
-
     {[Array.any ~f:Int.isEven [||] = false]}
 *)
 
@@ -307,9 +284,7 @@ val all : 'a t -> f:('a -> bool) -> bool
     {2 Examples}
 
     {[Array.all ~f:Int.isEven [|2;4|] = true]}
-
     {[Array.all ~f:Int.isEven [|2;3|] = false]}
-
     {[Array.all ~f:Int.isEven [||] = true]}
 *)
 
@@ -329,9 +304,7 @@ val find : 'a t -> f:('a -> bool) -> 'a option
     {2 Examples}
 
     {[Array.find ~f:Int.isEven [|1; 3; 4; 8;|] = Some 4]}
-
     {[Array.find ~f:Int.isOdd [|0; 2; 4; 8;|] = None]}
-
     {[Array.find ~f:Int.isEven [||] = None]}
 *)
 
@@ -359,7 +332,6 @@ val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
     {2 Examples}
 
     {[Array.minimum [|7;5;8;6|] ~compare:Int.compare = Some 5]}
-
     {[Array.minimum [||] ~compare:Int.compare = None]}
 *)
 
@@ -371,7 +343,6 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
     {2 Examples}
 
     {[Array.maximum [|7;5;8;6|] ~compare:Int.compare = Some 8]}
-
     {[Array.maximum [||] ~compare:Int.compare = None]}
 *)
 
@@ -383,9 +354,7 @@ val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
     {2 Examples}
 
     {[Array.extent [|7;5;8;6|] ~compare:Int.compare = Some (5, 8)]}
-
     {[Array.extent [|7|] ~compare:Int.compare = Some (7, 7)]}
-
     {[Array.extent [||] ~compare:Int.compare = None]}
 *)
 
@@ -395,9 +364,7 @@ val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
     {2 Examples}
 
     {[Array.sum [|1; 2; 3|] (module Int) = 6]}
-
     {[Array.sum [|4.0; 4.5; 5.0|] (module Float) = 13.5]}
-
     {[
       Array.sum
         [|"a"; "b"; "c"|]
@@ -455,7 +422,6 @@ val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
       let characters = [|'a'; '9'; '6'; ' '; '2'; 'z' |] in
       Array.filterMap characters ~f:Char.toDigit = [|9; 6; 2|]
     ]}
-
     {[
       Array.filterMap [|3; 4; 5; 6|] ~f:(fun number ->
         if Int.isEven number then
@@ -512,11 +478,9 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     {2 Examples}
 
     {[Array.fold [|1; 2; 3|] ~initial:[] ~f:(List.cons) = [3; 2; 1]]}
-
     {[
       Array.fold [|1; 1; 2; 2; 3|] ~initial:Set.Int.empty ~f:Set.add |> Set.toArray = [|1; 2; 3|]
     ]}
-
     {[
       let lastEven integers =
         Array.fold integers ~initial:None ~f:(fun last int ->
@@ -536,7 +500,6 @@ val foldRight : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     {2 Examples}
 
     {[Array.foldRight ~f:(+) ~initial:0 (Array.repeat ~length:3 5) = 15]}
-
     {[Array.foldRight ~f:List.cons ~initial:[] [|1; 2; 3|] = [1; 2; 3]]}
 *)
 
@@ -585,7 +548,6 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
 
       totals [|1;2;3|] [|4;5;6|] = [|5;7;9|]
     ]}
-
     {[
       Array.map2
         ~f:Tuple.create
@@ -636,9 +598,7 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
     {2 Examples}
 
     {[Array.splitAt [|1;2;3;4;5|] ~index:2 = ([|1;2|], [|3;4;5|])]}
-
     {[Array.splitAt [|1;2;3;4;5|] ~index:10 = ([|1;2;3;4;5|], [||])]}
-
     {[Array.splitAt [|1;2;3;4;5|] ~index:0 = ([||], [|1;2;3;4;5|])]}
 *)
 
@@ -656,14 +616,12 @@ val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
         ~f:Int.isEven =
         ([|5; 7|], [|8; 6; 4|])
     ]}
-
     {[
       Array.splitWhen
         [|"Ant"; "Bat"; "Cat"|]
         ~f:(fun animal -> String.length animal > 3) =
           ([|"Ant"; "Bat"; "Cat"|], [||])
     ]}
-
     {[
       Array.splitWhen [|2.; Float.pi; 1.111|] ~f:Float.isInteger =
         ([||], [|2.; Float.pi; 1.111|])
@@ -709,7 +667,6 @@ val values : 'a option t -> 'a t
     {2 Examples}
 
     {[Array.values [|(Some "Ant"); None; (Some "Cat")|] = [|"Ant"; "Cat"|]]}
-
     {[Array.values [|None; None; None|] = [||]]}
 *)
 
@@ -722,7 +679,6 @@ val intersperse : 'a t -> sep:'a -> 'a t
       Array.intersperse ~sep:"on" [|"turtles"; "turtles"; "turtles"|] =
       [|"turtles"; "on"; "turtles"; "on"; "turtles"|]
     ]}
-
     {[Array.intersperse ~sep:0 [||] = [||]]}
 *)
 
@@ -753,13 +709,9 @@ val sliding : ?step:int -> 'a t -> size:int -> 'a t t
     {2 Examples}
 
     {[Array.sliding [|1;2;3;4;5|] ~size:1 = [|[|1|]; [|2|]; [|3|]; [|4|]; [|5|]|] ]}
-
     {[Array.sliding [|1;2;3;4;5|] ~size:2 = [|[|1;2|]; [|2;3|]; [|3;4|]; [|4;5|]|] ]}
-
     {[Array.sliding [|1;2;3;4;5|] ~size:3 = [|[|1;2;3|]; [|2;3;4|]; [|3;4;5|]|] ]}
-
     {[Array.sliding [|1;2;3;4;5|] ~size:2 ~step:2 = [|[|1;2|]; [|3;4|]|] ]}
-
     {[Array.sliding [|1;2;3;4;5|] ~size:1 ~step:3 = [|[|1|]; [|4|]|] ]}
 *)
 
@@ -800,7 +752,6 @@ val toList : 'a t -> 'a list
     {2 Examples}
 
     {[Array.toList [|1;2;3|] = [1;2;3]]}
-
     {[Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]]}
 *)
 
@@ -823,8 +774,6 @@ val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
     {2 Examples}
 
     {[Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = -1]}
-
     {[Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0]}
-
     {[Array.compare Int.compare [|1;2;5|] [|1;2;3|] = 1]}
 *)
