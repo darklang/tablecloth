@@ -32,13 +32,9 @@ export const SidebarContainer = ({ children, isOpen }) => {
     <aside
       className="SidebarContainer"
       css={css`
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
+
         display: flex;
         flex-direction: column;
-        position: fixed;
         z-index: ${isOpen ? 2 : -1};
         opacity: ${isOpen ? 1 : 0};
         transform: ${isOpen ? 'translateY(0)' : 'translateY(60px)'};
@@ -47,20 +43,13 @@ export const SidebarContainer = ({ children, isOpen }) => {
         @media (min-width: ${dimensions.maxContentWidth +
             dimensions.leftSideBar}px) {
           border-right: 1px solid ${colors.grey.light};
-          display: flex;
-          flex-shrink: 0;
-          position: fixed;
-          overflow-y: auto;
-          transform: translateY(0);
-          top: 56px;
-          height: 100vh;
-          width: ${dimensions.leftSideBar}px;
+           width: ${dimensions.leftSideBar}px;
           z-index: 1;
           opacity: 1;
         }
         @media (min-width: ${dimensions.maxContentWidth +
             dimensions.leftSideBar * 2}px) {
-          margin-right: -${dimensions.leftSideBar}px;
+       //   margin-right: -${dimensions.leftSideBar}px;
         }
       `}
     >
@@ -82,9 +71,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
  // max-width: ${dimensions.maxContentWidth}px;
-  margin-left: 240px!important;
+ // margin-left: 240px!important;
  padding: 0 ${spacing.pageMargin.mobile}px;
-  width:  calc(100% - 240px);
+  width:  100%;
   @media (min-width: ${breakpoints.desktop}px) {
     padding: 0 ${spacing.pageMargin.desktop}px;
   }
@@ -138,6 +127,7 @@ export const NavBar = () => {
           padding-right: ${spacing.pageMargin.mobile}px;
           width: 100%;
           z-index: 1;
+          max-width: 1200px;
 
           .navBarHeader {
             align-items: center;
@@ -146,6 +136,7 @@ export const NavBar = () => {
             font-size: 22px;
             font-weight: 400;
             line-height: 1.5;
+            font-weight: bold;
             &:hover {
               text-decoration: none;
               opacity: 0.8;

@@ -416,6 +416,9 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
         flex-direction: column;
         height: 100vh;
         width: 100%;
+        position: sticky;
+        top: 0;
+        left: 0;
       `}
     >
       <input
@@ -510,7 +513,7 @@ const PageAnchor = ({ id, children }) => {
 
         @media (min-width: ${breakpoints.desktop}px) {
           margin-left: -${spacing.pageMargin.desktop*1.5}px;
-          width: calc(100% + 108px);
+          width: calc(100% + 70px);
           .link {
             width: ${spacing.pageMargin.desktop}px;
           }
@@ -758,7 +761,6 @@ let TypeDefinition = ({ name, type }) => {
     display: inline-flex;
     background-color: ${({ theme }) => theme.typeDefinition.background};
     color: ${({ theme }) => theme.typeDefinition.text};
-    border-radius: 3px;
     border-left: 4px solid ${({ theme }) => theme.typeDefinition.borderLeft};
     padding: 8px;
     margin:${spacing.small}px 0;
@@ -779,6 +781,9 @@ let ValueContainer = props => (
       margin-top: 15px;
       padding: 0 15px;
       background: ${({ theme }) => theme.block.background};
+      border-bottom: 1px solid ${({ theme }) => theme.block.outline};
+      border-right: 1px solid ${({ theme }) => theme.block.outline};
+      border-left: 1px solid ${({ theme }) => theme.block.outline};
 
     `}
     {...props}
@@ -801,6 +806,9 @@ let ValueWrapper = styled.div`
   padding-right: ${spacing.medium}px;
   width: 100%;
   overflow-x: auto;
+  border-top: 1px solid ${({ theme }) => theme.typeDefinition.outline};
+  border-right: 1px solid ${({ theme }) => theme.typeDefinition.outline};
+ 
 `;
 
 let Value = ({ id, path, name, type, info, parameters, ...value }) => {
@@ -1196,6 +1204,8 @@ export default ({ data }) => {
             css={css`
               display: flex;
               flex-direction: column;
+              justify-content: center;
+              align-items: center;
             `}
           >
             <NavBarContainer>
@@ -1205,6 +1215,9 @@ export default ({ data }) => {
               css={css`
                 display: flex;
                 flex-direction: row;
+                width: 1200px;
+           
+    
               `}
             >
               <SidebarContainer isOpen={isOpen}>

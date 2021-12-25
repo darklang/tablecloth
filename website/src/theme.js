@@ -51,7 +51,7 @@ export let spacing = {
 export let dimensions = {
   navbar: 56,
   maxContentWidth: 1200,
-  leftSideBar: 240,
+  leftSideBar: 260,
   rightSideBar: 224,
 };
 
@@ -93,11 +93,13 @@ export let themes = {
     },
     block: {
       background: colors.white,
+      outline: '#e3e3e3'
     },
     typeDefinition: {
      background: colors.grey.lighter,
      borderLeft: colors.grey.base,
      text:  colors.black.darkest,
+     outline: '#d0e6ef'
     },
     code: {
       background: colors.grey.lighter,
@@ -144,6 +146,7 @@ export let themes = {
     },
     block: {
       background: colors.black.dark,
+      outline: '#3a3a3a'
     },
     blockHeader: {
       background: colors.black.darker,
@@ -154,6 +157,7 @@ export let themes = {
       background: colors.grey.darkest,
       borderLeft: colors.grey.dark,
       text: colors.white,
+      outline: '#1f2429'
      },
     code: {
       background: colors.grey.darkest,
