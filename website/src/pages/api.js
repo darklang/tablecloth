@@ -508,7 +508,7 @@ const PageAnchor = ({ id, children }) => {
         .content {
           width: calc(100% + ${spacing.pageMargin.laptop}px);
           width: 100%;
-          overflow-x: auto;
+          overflow: hidden;
         }
 
         @media (min-width: ${breakpoints.desktop}px) {
@@ -544,9 +544,11 @@ let Identifiers = {
         .keyword {
           font-family: ${fonts.monospace};
           margin-right: 10px;
+          line-height: 30px;
         }
         .name {
           color: ${colors.red.base};
+          line-height: 42px;
         }
       `}
     >
@@ -568,9 +570,11 @@ let Identifiers = {
         .keyword {
           font-family: ${fonts.monospace};
           margin-right: 10px;
+          line-height: 30px;
         }
         .name {
           color: ${colors.red.base};
+          line-height: 42px;
         }
       `}
     >
@@ -933,9 +937,13 @@ function generateModuleElements(
           );
           registerId(state, moduleTypeId);
           state.elements.push(
+            <div css={css`
+            padding: 0px 15px;
+          `}>
             <PageAnchor id={moduleTypeId}>
               <Identifiers.moduleType name={moduleTypeId}/>
-            </PageAnchor>,
+            </PageAnchor>
+            </div>,
           );
           generateModuleElements(moduleElement.value.elements, modulesByName, {
             ...state,
