@@ -77,9 +77,9 @@ export let themes = {
     sidebar: {
       background: colors.white,
       text: colors.red.base,
-      activeBackground: colors.red.base,
+      activeBackground: colors.red.light,
       activeText: colors.white,
-      hover: colors.red.dark,
+      hover: colors.red.base,
     },
     card: {
       background: colors.grey.lighter,

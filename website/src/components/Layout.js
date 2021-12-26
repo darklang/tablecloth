@@ -20,10 +20,11 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-top: ${dimensions.navbar}px;
   width: 100%;
+  flex-direction: column;
+  align-items: center;
   @media (min-width: ${dimensions.maxContentWidth + dimensions.leftSideBar}px) {
-    justify-content: flex-start;
+    justify-content: center;
   }
 `;
 
@@ -35,10 +36,9 @@ export const SidebarContainer = ({ children, isOpen }) => {
 
         display: flex;
         flex-direction: column;
-        z-index: ${isOpen ? 2 : -1};
-        opacity: ${isOpen ? 1 : 0};
-        transform: ${isOpen ? 'translateY(0)' : 'translateY(60px)'};
         transition: all 0.2s ease;
+        width: 260px;
+        z-index: 1;
 
         @media (min-width: ${dimensions.maxContentWidth +
             dimensions.leftSideBar}px) {
@@ -47,9 +47,17 @@ export const SidebarContainer = ({ children, isOpen }) => {
           z-index: 1;
           opacity: 1;
         }
-        @media (min-width: ${dimensions.maxContentWidth +
-            dimensions.leftSideBar * 2}px) {
-       //   margin-right: -${dimensions.leftSideBar}px;
+        @media (max-width: ${dimensions.maxContentWidth-
+          dimensions.leftSideBar}px) {
+              display: ${isOpen ? "flex" : "none"};
+              
+              ${isOpen ? `
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              ` : ``};
         }
       `}
     >
@@ -63,8 +71,9 @@ export const Main = styled.main`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding-bottom: 3rem;
+  padding: 5rem 0;
   width: 100%;
+  max-width: 1200px;
 `;
 
 export const Container = styled.div`
@@ -122,7 +131,6 @@ export const NavBar = () => {
           flex-direction: row;
           flex-shrink: 0;
           justify-content: space-between;
-        //  max-width: ${dimensions.maxContentWidth}px;
           padding-left: ${spacing.pageMargin.mobile}px;
           padding-right: ${spacing.pageMargin.mobile}px;
           width: 100%;
@@ -185,10 +193,10 @@ export const NavBar = () => {
             <ThemeToggle theme={themeName} toggleTheme={toggleTheme} />
           </div>
           <div className="navLink">
-            <Link to="/documentation">docs</Link>
+            <Link to="/documentation">Get Started</Link>
           </div>
           <div className="navLink">
-            <Link to="/api">api</Link>
+            <Link to="/api">Documentation</Link>
           </div>
           <div className="navLink">
             <Link
@@ -244,7 +252,7 @@ export const MenuButtonContainer = styled.div`
   right: 24px;
   z-index: 3;
 
-  @media (min-width: ${dimensions.maxContentWidth + dimensions.leftSideBar}px) {
+  @media (min-width: ${dimensions.maxContentWidth - dimensions.leftSideBar}px) {
     display: none;
   }
 `;

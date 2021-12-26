@@ -411,13 +411,13 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
   return (
     <div
       css={css`
-        background-color: ${({ theme }) => theme.body};
+        background-color: ${({ theme }) => theme.block.background};
         display: flex;
         flex-direction: column;
         height: 100vh;
         width: 100%;
         position: sticky;
-        top: 0;
+        top: 56px;
         left: 0;
       `}
     >
@@ -902,12 +902,12 @@ function generateModuleElements(
                         `(${moduleElement.value.parameters})`}
                       {moduleElement.value.manifest ? ' = ' : ''}
                     </code>
-                  </pre>
-                  {moduleElement.value.manifest && (
+                    {moduleElement.value.manifest && (
                     <TypeSignature
                       signature={moduleElement.value.manifest.value}
                     />
                   )}
+                  </pre>
                 </ValueWrapper>
               </PageAnchor>
               {moduleElement.value.info && (
@@ -962,9 +962,12 @@ function generateModuleElements(
               let path = [...state.path, moduleElement.value.name];
               registerId(state, moduleStructId);
               state.elements.push(
+                <div css={css`
+            padding: 0px 15px;
+          `}>
                 <PageAnchor id={moduleStructId}>
                   <Identifiers.module name={moduleStructId}/>
-                </PageAnchor>,
+                </PageAnchor></div>,
               );
               generateModuleElements(
                 moduleElement.value.kind.value,
@@ -1223,8 +1226,10 @@ export default ({ data }) => {
               css={css`
                 display: flex;
                 flex-direction: row;
-                width: 1200px;
-           
+                max-width: 1200px;
+                justify-content: stretch;
+                align-items: stretch;
+                width: 100%;
     
               `}
             >

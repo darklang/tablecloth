@@ -62,8 +62,10 @@ export const Sidebar = ({ location }) => {
         color: ${({ theme }) => theme.navbar.background};
         padding-bottom: 3rem;
         width: 100%;
-        height: 100vh;
+        height: calc(100vh - 56px);
         overflow-y: auto;
+        position: sticky;
+        top: 56px;
 
         .sideBarItems {
           padding: 0;
