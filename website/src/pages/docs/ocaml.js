@@ -5,13 +5,13 @@ import { Helmet } from 'react-helmet';
 import { SyntaxProvider } from '../../components/Syntax';
 import DocsView from '../../views/docs-view';
 
-export default ({ data }) => {
+export default ({ data, location }) => {
   return (
     <SyntaxProvider defaultSyntax="ocaml">
       <Helmet>
         <title>Tablecloth: Ocaml Documentation</title>
       </Helmet>
-      <DocsView language="ocaml" data={data} />
+      <DocsView language="ocaml" location={location} data={data} />
     </SyntaxProvider>
   );
 };

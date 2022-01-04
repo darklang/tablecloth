@@ -1119,7 +1119,7 @@ let Header = ({ title }) => {
 
 let links = [{url: "/docs/rescript", name: "Rescript"}, {url: "/docs/ocaml", name:"Ocaml"}, {url: "/docs/reason", name: "Reason"}, {url: "/docs/fsharp", name: "F#"}]
 
-const navLink = ({url, name}) =>   {
+const navLink = ({url, name}, location) =>   {
 let isCurrentLocation = location.pathname === url;
 
 return <Link key={url} to={url}   css={css`
@@ -1132,7 +1132,7 @@ pointer-events: ${isCurrentLocation ? "none": "all"};
 {name}
 </Link>}
 
-export default ({ data, language }) => {
+export default ({ data, language, location }) => {
   let [isOpen, setIsOpen] = React.useState(false);
 
 
@@ -1276,7 +1276,7 @@ export default ({ data, language }) => {
                     >
                     <PageTitle>{title}</PageTitle>
                     <div>
-                      {links.map(navLink)}
+                      {links.map(link => navLink(link, location))}
                     </div>
                     </div>
                     <LanguageIcon  language={language}/>

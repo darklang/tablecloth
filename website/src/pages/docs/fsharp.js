@@ -5,13 +5,13 @@ import { Helmet } from 'react-helmet';
 import { SyntaxProvider } from '../../components/Syntax';
 import DocsView from '../../views/docs-view';
 
-export default ({ data }) => {
+export default ({ data, location }) => {
   return (
     <SyntaxProvider defaultSyntax="reason">
       <Helmet>
         <title>Tablecloth: F# Documentation</title>
       </Helmet>
-      <DocsView language="fsharp" data={data} />
+      <DocsView language="fsharp" location={location} data={data} />
     </SyntaxProvider>
   );
 };

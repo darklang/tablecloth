@@ -43,7 +43,6 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         result.data.allMdx.edges.forEach(({ node }) => {
-          console.log("node.fields.url", node.fields);
           createPage({
             path: node.fields.url,
             component: path.resolve("./src/templates/get-started.js"),
