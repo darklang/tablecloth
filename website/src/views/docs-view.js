@@ -33,7 +33,7 @@ import {
   SidebarContainer,
 } from '../components/Layout';
 import { CodeBlock } from '../components/CodeBlock';
-import { SyntaxProvider, SyntaxToggle } from '../components/Syntax';
+import LanguageIcon from '../components/Languages';
 import * as lzString from 'lz-string';
 
 let stripTableclothPrefix = path => path.replace(/Tablecloth/g, '');
@@ -140,7 +140,7 @@ function renderSidebarElements(
             <div key={typeId}>
               <a
                 onClick={() => scrollToId(typeId)}
-                href={`/api#${typeId}`}
+                href={`#${typeId}`}
               >
                 type {moduleElement.value.name}
               </a>
@@ -164,7 +164,7 @@ function renderSidebarElements(
           return (
             <div key={valueLink}>
               <a
-                href={`/api#${valueLink}`}
+                href={`#${valueLink}`}
                 onClick={() => scrollToId(valueLink)}>
                 {moduleElement.value.name}
               </a>
@@ -181,7 +181,7 @@ function renderSidebarElements(
           }
           return (
             <a
-              href={`/api#${moduleTypeId}`}
+              href={`#${moduleTypeId}`}
               onClick={() => scrollToId(moduleTypeId)} key={moduleTypeId}>
               module type {moduleElement.value.name}
             </a>
@@ -202,7 +202,7 @@ function renderSidebarElements(
               }
               return (
                 <a
-                  href={`/api#${moduleFunctorId}`}
+                  href={`#${moduleFunctorId}`}
                   onClick={() => scrollToId(moduleFunctorId)}
                   key={moduleFunctorId}
                 >
@@ -388,7 +388,7 @@ function renderSidebarModule(
         </div>
 
         <a
-          href={`/api#${moduleId}`}
+          href={`#${moduleId}`}
           onClick={() => scrollToId(moduleId)}
         >module {qualifiedModuleName}</a>
       </div>
@@ -472,10 +472,11 @@ const PageAnchor = ({ id, children }) => {
       id={id}
       css={css`
         align-items: center;
-        display: flex;
+        display: inline-flex;
         flex-shrink: 0;
         flex-direction: row;
         margin-left: -${spacing.pageMargin.desktop*1.5}px;
+        width: calc(100% + 70px);
 
         .link {
           display: none;
@@ -497,17 +498,16 @@ const PageAnchor = ({ id, children }) => {
           height: 100%;
           text-align: center;
           user-select: none;
-          width: ${spacing.pageMargin.laptop}px;
+          width: ${spacing.pageMargin.desktop}px;
           display: flex;
           justify-content: center;
 
           span {
-            width: 17px;
+            width: 7px;
           }
         }
         .content {
-          width: calc(100% + ${spacing.pageMargin.laptop}px);
-          width: 100%;
+          width: calc(100% + ${spacing.pageMargin.desktop}px);
           overflow: hidden;
         }
 
@@ -520,13 +520,15 @@ const PageAnchor = ({ id, children }) => {
 
           .content {
             width: calc(100% + ${spacing.pageMargin.desktop}px);
-            width: 100%;
+          }
+          .link span {
+            width: 17px;
           }
         }
       `}
     >
-      <a href={`/api#${id}`} className="link">
-        <span>🔗</span>
+      <a href={`#${id}`} className="link">
+        <span className="linkIcon">🔗</span>
       </a>
       <div className="content">{children}</div>
     </div>
@@ -654,7 +656,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
         return (
           <a
             key={index}
-            href={`/api#${stripTableclothPrefix(value.reference.target)}`}
+            href={`#${stripTableclothPrefix(value.reference.target)}`}
           >
             {content}
           </a>
@@ -1066,22 +1068,9 @@ function generateModuleElements(
   return state;
 }
 
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        docsLocation
-      }
-    }
-    odocModel {
-      internal {
-        content
-      }
-    }
-  }
-`;
 
-let title = 'API';
+
+let title = 'Documentation';
 
 let moduleIndex = (moduleElements, parentPath = []) => {
   return moduleElements
@@ -1101,7 +1090,6 @@ let Header = ({ title }) => {
   let [_themeName, _toggle, theme] = useTheme();
   return (
     <Helmet>
-      <title>{title}</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -1126,9 +1114,27 @@ let Header = ({ title }) => {
   );
 };
 
-export default ({ data }) => {
+
+
+
+let links = [{url: "/docs/rescript", name: "Rescript"}, {url: "/docs/ocaml", name:"Ocaml"}, {url: "/docs/reason", name: "Reason"}, {url: "/docs/fsharp", name: "F#"}]
+
+const navLink = ({url, name}) =>   {
+let isCurrentLocation = location.pathname === url;
+
+return <Link key={url} to={url}   css={css`
+margin-right: 1rem;
+padding-bottom: 0.5rem;
+
+font-weight: ${isCurrentLocation ? "700": "400"};
+pointer-events: ${isCurrentLocation ? "none": "all"};
+`}>
+{name}
+</Link>}
+
+export default ({ data, language }) => {
   let [isOpen, setIsOpen] = React.useState(false);
-  let [isRescript, setRescript] = React.useState(false);
+
 
   let cache = React.useRef(
     new CellMeasurerCache({
@@ -1142,8 +1148,7 @@ export default ({ data }) => {
     list,
   } = React.useMemo(() => {
     const { odocModel } = data;
-    let content = JSON.parse(odocModel.internal.content);
-    console.log("odocModel",content);
+    let model = JSON.parse(odocModel.internal.content);
 
     // reset initial state
     initialState = {
@@ -1152,7 +1157,6 @@ export default ({ data }) => {
       idToIndex: {},
     };
 
-    let model = isRescript ? content.rescript : content.native;
     let moduleByModulePath = _.fromPairs(
       _.map(moduleIndex(_.values(model.modules)), ([path, module]) => [
         path.join('.'),
@@ -1173,7 +1177,8 @@ export default ({ data }) => {
       idToIndex,
       list: elements,
     };
-  }, [isRescript, data]);
+
+  }, [data]);
 
   let listScroll = React.useRef();
   let scrollToId = id => {
@@ -1207,7 +1212,6 @@ export default ({ data }) => {
 
   return (
     <ThemeProvider>
-      <SyntaxProvider>
         <GlobalStyles/>
         <Header title={title}/>
         <AppWrapper>
@@ -1245,7 +1249,6 @@ export default ({ data }) => {
                   css={css`
                   background-color: ${({ theme }) => theme.body};
 
-                    margin-left: -${spacing.pageMargin.mobile}px;
                     @media (min-width: ${breakpoints.desktop}px) {
                       margin-left: -${spacing.pageMargin.desktop}px;
                     }
@@ -1257,20 +1260,27 @@ export default ({ data }) => {
                       flex-direction: row;
                       justify-content: space-between;
                       width: 100%;
-                      margin-left: ${spacing.pageMargin.mobile}px;
+                      height: 25vh;
                       @media (min-width: ${breakpoints.desktop}px) {
                         margin-left: ${spacing.pageMargin.desktop}px;
                       }
                     `}
                   >
-                    <PageTitle>API</PageTitle>
+                    <div
+                      css={css`
+                      display: flex;
+                      justify-content: center;
+                      align-items: start;
+                      flex-direction: column;
+                    `}
+                    >
+                    <PageTitle>{title}</PageTitle>
                     <div>
-                      <input id="model-selector" name="Show Rescript api" type="checkbox" checked={isRescript} onChange={e => { setRescript(e.target.checked) }} />
-                      <label htmlFor="model-selector">Show Rescript API</label>
+                      {links.map(navLink)}
                     </div>
-                    <div>
-                      <SyntaxToggle/>
                     </div>
+                    <LanguageIcon  language={language}/>
+
                   </div>
                   <WindowScroller>
                     {({ height, onChildScroll, scrollTop }) => (
@@ -1331,7 +1341,6 @@ export default ({ data }) => {
             </MenuButtonContainer>
           </div>
         </AppWrapper>
-      </SyntaxProvider>
     </ThemeProvider>
   );
 };

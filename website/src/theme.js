@@ -117,6 +117,10 @@ export let themes = {
       text: '#555',
       shadow: 'rgba(116, 129, 141, 0.1)',
     },
+    syntaxLogo: {
+      background: 'rgb(0, 0, 0)',
+      border: colors.red.base,
+    }
   },
   dark: {
     favicon: {
@@ -175,6 +179,10 @@ export let themes = {
       text: colors.white,
       shadow: colors.grey.darkest,
     },
+    syntaxLogo: {
+      background: 'rgb(255, 255, 255)',
+      border: colors.red.base,
+    }
   },
 };
 

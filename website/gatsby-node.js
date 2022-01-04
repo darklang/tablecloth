@@ -7,8 +7,13 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
 
   createRedirect({
-    fromPath: '/documentation',
-    toPath: '/documentation/installation',
+    fromPath: '/get-started',
+    toPath: '/get-started/installation',
+    redirectInBrowser: true,
+  })
+  createRedirect({
+    fromPath: '/docs',
+    toPath: '/docs/rescript',
     redirectInBrowser: true,
   })
 
@@ -38,9 +43,10 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         result.data.allMdx.edges.forEach(({ node }) => {
+          console.log("node.fields.url", node.fields);
           createPage({
             path: node.fields.url,
-            component: path.resolve("./src/templates/documentation.js"),
+            component: path.resolve("./src/templates/get-started.js"),
             context: {
               id: node.fields.id
             }
@@ -59,7 +65,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       name: `url`,
       node,
-      value: `/documentation/${parent.relativePath.replace(parent.ext, "")}`
+      value: `/get-started/${parent.relativePath.replace(parent.ext, "")}`
     });
 
     createNodeField({
@@ -98,9 +104,7 @@ let log = {
   info: (...rest) => console.info('[odoc]', ...rest),
 };
 
-let id = 'odoc-model';
-
-let createNodeFromModel = model => ({
+let createNodeFromModel = (id, model) => ({
   id,
   internal: {
     type: 'OdocModel',
@@ -125,13 +129,14 @@ exports.sourceNodes = ({ actions }) => {
   log.info('nativeModelPath', nativeModelPath);
   log.info('rescriptModelPath', rescriptModelPath);
 
-  let makeUnitedModel = () => JSON.stringify({
-    native : JSON.parse(fs.readFileSync(nativeModelPath).toString()),
-    rescript: JSON.parse(fs.readFileSync(rescriptModelPath).toString()),
-  });
+  let readModel = (name) =>  fs.readFileSync(name).toString();
+  
 
-  let node = createNodeFromModel(makeUnitedModel());
-  createNode(node);
+  let nativeNode = () => createNodeFromModel("odoc-model-native", readModel(nativeModelPath));
+  let resciptNode = () => createNodeFromModel("odoc-model-rescript", readModel(rescriptModelPath));
+
+  createNode(nativeNode());
+  createNode(resciptNode());
 
   if (inDevelopMode) {
     log.info('watch mode enabled, listening for changes');
@@ -140,7 +145,8 @@ exports.sourceNodes = ({ actions }) => {
       if (event == 'unlink') {
         return
       }
-      createNode(createNodeFromModel(makeUnitedModel()));
+      createNode(nativeNode());
+      createNode(resciptNode());
     });
   }
 

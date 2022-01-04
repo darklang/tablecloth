@@ -16,8 +16,8 @@ export const NextPrevious = ({ nav, currentUrl }) => {
     previous = null;
   } else if (currentIndex === nav.length - 1) {
     next = {
-      title: 'API',
-      url: '/api',
+      title: 'Documentation',
+      url: '/docs/rescript',
     };
     previous = nav[currentIndex - 1];
   } else if (currentIndex) {

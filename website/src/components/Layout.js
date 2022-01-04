@@ -57,6 +57,7 @@ export const SidebarContainer = ({ children, isOpen }) => {
               left: 0;
               bottom: 0;
               right: 0;
+              width: 100%;
               ` : ``};
         }
       `}
@@ -79,8 +80,6 @@ export const Main = styled.main`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
- // max-width: ${dimensions.maxContentWidth}px;
- // margin-left: 240px!important;
  padding: 0 ${spacing.pageMargin.mobile}px;
   width:  100%;
   @media (min-width: ${breakpoints.desktop}px) {
@@ -149,18 +148,22 @@ export const NavBar = () => {
               text-decoration: none;
               opacity: 0.8;
             }
+            @media (max-width: ${breakpoints.desktop-dimensions.leftSideBar}px) {
+              font-size: 16px;
+            }
           }
 
           .navLinks {
             align-items: center;
             display: flex;
             flex-direction: row;
-
+           
             .navLink {
               margin-left: ${spacing.small}px;
+              font-size: 16px;
+             
               a {
                 color: ${({ theme }) => theme.navbar.text};
-                font-size: 16px;
                 font-weight: 500;
                 line-height: 1em;
                 opacity: 1;
@@ -170,6 +173,12 @@ export const NavBar = () => {
                 &:hover {
                   opacity: 0.7;
                 }
+              }
+              @media (max-width: ${breakpoints.desktop-dimensions.leftSideBar}px) {
+                font-size: 12px;
+                button {
+                  width: 3rem; 
+                 }
               }
             }
           }
@@ -185,9 +194,14 @@ export const NavBar = () => {
           }
         `}
       >
+        <span  css={css`
+                display: flex;
+                
+              `}>
         <Link to={'/'} className="navBarHeader">
           Tablecloth
         </Link>
+        </span>
         <div className="navLinks">
           <div className="navLink">
             <ThemeToggle theme={themeName} toggleTheme={toggleTheme} />
@@ -196,7 +210,7 @@ export const NavBar = () => {
             <Link to="/documentation">Get Started</Link>
           </div>
           <div className="navLink">
-            <Link to="/api">Documentation</Link>
+            <Link to="/docs/rescript">Docs</Link>
           </div>
           <div className="navLink">
             <Link
@@ -213,7 +227,7 @@ export const NavBar = () => {
               `}
             >
               <GitHub />
-              <span>github</span>
+              <span>Github</span>
             </Link>
           </div>
         </div>
