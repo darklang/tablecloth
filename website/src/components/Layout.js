@@ -196,7 +196,6 @@ export const NavBar = () => {
       >
         <span  css={css`
                 display: flex;
-                
               `}>
         <Link to={'/'} className="navBarHeader">
           Tablecloth
@@ -207,7 +206,7 @@ export const NavBar = () => {
             <ThemeToggle theme={themeName} toggleTheme={toggleTheme} />
           </div>
           <div className="navLink">
-            <Link to="/documentation">Get Started</Link>
+            <Link to="/get-started">Get Started</Link>
           </div>
           <div className="navLink">
             <Link to="/docs/rescript">Docs</Link>

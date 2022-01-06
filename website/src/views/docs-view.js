@@ -33,7 +33,7 @@ import {
   SidebarContainer,
 } from '../components/Layout';
 import { CodeBlock } from '../components/CodeBlock';
-import LanguageIcon from '../components/Languages';
+import LanguageIcon from '../components/LanguageLogos';
 import * as lzString from 'lz-string';
 
 let stripTableclothPrefix = path => path.replace(/Tablecloth/g, '');
@@ -753,7 +753,6 @@ let TextElement = ({ elements, path }) => {
 
 let TypeSignature = ({ signature }) => {
   return (
-
       <React.Fragment children={stripTableclothPrefix(signature.rendered)}/>
   );
 };
@@ -819,19 +818,14 @@ let ValueWrapper = styled.div`
 
 let Value = ({ id, path, name, type, info, parameters, ...value }) => {
   return (
-    <ValueContainer
-    
-   
-    >
+    <ValueContainer>
       <PageAnchor id={id}>
-      
         <ValueWrapper>
         <h2>{id}</h2>
         </ValueWrapper>
       </PageAnchor>
       <TypeDefinition name={name} type={type} />
- 
-      
+       
       {info && (
         <div
       
@@ -965,8 +959,8 @@ function generateModuleElements(
               registerId(state, moduleStructId);
               state.elements.push(
                 <div css={css`
-            padding: 0px 15px;
-          `}>
+                          padding: 0px 15px;
+                        `}>
                 <PageAnchor id={moduleStructId}>
                   <Identifiers.module name={moduleStructId}/>
                 </PageAnchor></div>,
@@ -1117,7 +1111,11 @@ let Header = ({ title }) => {
 
 
 
-let links = [{url: "/docs/rescript", name: "Rescript"}, {url: "/docs/ocaml", name:"Ocaml"}, {url: "/docs/reason", name: "Reason"}, {url: "/docs/fsharp", name: "F#"}]
+let links = [
+  {url: "/docs/rescript", name: "Rescript"},
+  {url: "/docs/ocaml", name:"Ocaml"},
+  {url: "/docs/fsharp", name: "F#"}
+];
 
 const navLink = ({url, name}, location) =>   {
 let isCurrentLocation = location.pathname === url;

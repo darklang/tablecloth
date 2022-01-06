@@ -40,8 +40,6 @@ export const CodeBlock = ({ code, ...props }) => {
           className={'CodeBlock ' + className}
           style={style}
           css={css`
-         //   border: 1px solid ${({ theme }) => theme.card.border};
-          //  border-radius: 3px;
             font-size: 13px;
             padding: ${spacing.smaller}px ${spacing.small}px;
             width: 100%;

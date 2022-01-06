@@ -36,20 +36,21 @@ const Icon = ({ icon }) => {
   );
 };
 
-const LanguageIcon = ({language}) => {
-  const selectedLanguage = icons.find(({name}) => name===language) || icons[0];
+const LanguageIcon = ({ language }) => {
+  const selectedLanguage = icons.find(({ name }) => name === language) || icons[0];
 
   return (
-      <div
-        css={css`
+    <div
+      css={css`
           display: flex;
-          @media (max-width: ${breakpoints.desktop+dimensions.leftSideBar}px) {
+          margin-right: 36px;
+          @media (max-width: ${breakpoints.desktop + dimensions.leftSideBar}px) {
             display: none;
           }
         `}
-      >
-         <Icon  icon={selectedLanguage.icon} />
-      </div>
+    >
+      <Icon icon={selectedLanguage.icon} />
+    </div>
   );
 };
 

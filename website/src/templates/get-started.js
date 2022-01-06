@@ -275,16 +275,12 @@ export default ({ data, location }) => {
               <NavBar />
             </NavBarContainer>
             <div
-
               css={css`
-justify-content: center;
-    align-items: stretch;
-display: flex;
-max-width: 1200px;
-min-width: 100%;
-`}
-
-
+                    justify-content: center;
+                    align-items: stretch;
+                    display: flex;
+                    min-width: 100%;
+                `}
             >
               <SidebarContainer isOpen={isOpen}>
                 <Sidebar location={location} />

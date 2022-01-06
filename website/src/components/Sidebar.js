@@ -27,7 +27,7 @@ let generateItems = (baseUrl, items = []) =>
     return {
       title: item.title,
       url,
-      items: generateItems(url, item.items),
+      items: generateItems(baseUrl, item.items),
     };
   });
 

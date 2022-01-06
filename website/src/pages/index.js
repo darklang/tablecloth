@@ -21,14 +21,15 @@ import {
   NavBarContainer,
 } from '../components/Layout';
 import { CodeBlock } from '../components/CodeBlock';
-import { OCaml, Reason } from '../components/Icon';
+import { OCaml, Rescript, FSharp } from '../components/Icon';
 import { SyntaxProvider } from '../components/Syntax';
 import { BookLover } from '../components/Illustration';
 
 let AnimatedOCaml = animated(OCaml);
-let AnimatedReason = animated(Reason);
+let AnimatedRescript = animated(Rescript);
+let AnimatedFSharp = animated(FSharp);
 
-let logoSize = 180;
+let logoSize = 300;
 
 let sellingPointPadding = 40;
 const Section = ({ tell, show, flip }) => {
@@ -168,7 +169,6 @@ const CallToAction = () => (
           align-items: center;
           display: flex;
           flex-direction: column;
-       //   max-width: ${dimensions.maxContentWidth}px;
 
           a {
             background-color: ${({ theme }) => theme.navbar.background};
@@ -176,14 +176,19 @@ const CallToAction = () => (
             border-radius: 3px;
             color: ${({ theme }) => theme.navbar.text};
             padding: 12px 16px;
+            margin: 0 16px;
             letter-spacing: 1px;
             font-size: 16px;
             text-transform: uppercase;
+            &:hover {
+
+            }
           }
         `}
       >
         <div>
-          <Link to="/documentation">Get started</Link>
+          <Link to="/get-started">Get started</Link>
+          <Link to="/docs">Documentation</Link>
         </div>
       </div>
     </Container>
@@ -248,33 +253,44 @@ let Header = () => {
   );
 };
 
+let logoTransformations = [
+
+   {
+    background: `linear-gradient(${colors.orange.ocaml.start}, ${colors.orange.ocaml.end})`,
+    borderRadius: 40,
+    resTransform: `translate3d(${logoSize}px,0px,0)`,
+    camlTransform: `translate3d(0px, 0px, 0)`,
+    fsTransform: `translate3d(${logoSize*2}px, 0px, 0)`,
+  },
+  {
+    // Using hsl colors with useSpring throws an exception during interpolation, so we can't use the ones defined in 'theme'
+    background: `linear-gradient(#e74f4f, #c53939)`,
+    borderRadius: 60,
+    padding: 50,
+    resTransform: `translate3d(0px,0px,0)`,
+    camlTransform: `translate3d(-${logoSize}px, 0px, 0)`,
+    fsTransform: `translate3d(${logoSize}px, 0px, 0)`,
+  },
+  {
+    background: `linear-gradient(#3587b4, #2eb3d4)`,
+    borderRadius: 20,
+    resTransform: `translate3d(-${logoSize*2}px,0px,0)`,
+    camlTransform: `translate3d(-${logoSize}px, 0px, 0)`,
+    fsTransform: `translate3d(0px, 0px, 0)`,
+  },
+]
 export default () => {
-  let [logo, setLogo] = React.useState('reason');
+  let [logo, setLogo] = React.useState(0);
   useEffect(() => {
-    let toggleLogo = setInterval(() => {
-      setLogo(current => (current === 'reason' ? 'ocaml' : 'reason'));
+    let nextLogo = setInterval(() => {
+      setLogo(current => (current > 1 ? 0 : current +1 ));
     }, 3000);
-    return () => {
-      clearInterval(toggleLogo);
+    return () => { 
+      clearInterval(nextLogo);
     };
   });
-
   const logoStyles = useSpring(
-    logo === 'reason'
-      ? {
-        // Using hsl colors with useSpring throws an exception during interpolation, so we can't use the ones defined in 'theme'
-        background: `linear-gradient(#d44f3a, #d44f3a)`,
-        borderRadius: 0,
-        reTransform: `translate3d(${logoSize / 7}px,${-logoSize / 2.25}px,0)`,
-        camlTransform: `translate3d(-${logoSize}px, ${-logoSize /
-        1.12}px, 0)`,
-      }
-      : {
-        background: `linear-gradient(${colors.orange.ocaml.start}, ${colors.orange.ocaml.end})`,
-        borderRadius: 40,
-        reTransform: `translate3d(${logoSize}px, ${-logoSize / 2.25}px, 0)`,
-        camlTransform: `translate3d(${0}px, ${-logoSize / 1.12}px,0)`,
-      },
+    logoTransformations[logo]
   );
   return (
     <ThemeProvider>
@@ -404,14 +420,15 @@ String.toList("Tablecloth")
                         position: 'relative',
                       }}
                     >
-                      <AnimatedReason
+                      <AnimatedRescript
                         style={{
-                          transform: logoStyles.reTransform,
+                          padding: "60px",
+                          transform: logoStyles.resTransform,
                           position: 'absolute',
                           fill: 'white',
                         }}
-                        height={logoSize * 2}
-                        width={logoSize * 2}
+                        height={logoSize }
+                        width={logoSize }
                       />
                       <AnimatedOCaml
                         style={{
@@ -419,8 +436,18 @@ String.toList("Tablecloth")
                           position: 'absolute',
                           fill: 'white',
                         }}
-                        height={logoSize * 3}
-                        width={logoSize * 3}
+                        height={logoSize }
+                        width={logoSize }
+                      />
+                       <AnimatedFSharp
+                        style={{
+                          padding: "40px",
+                          transform: logoStyles.fsTransform,
+                          position: 'absolute',
+                          fill: 'white',
+                        }}
+                        height={logoSize }
+                        width={logoSize }
                       />
                     </animated.div>
                   )}
