@@ -401,11 +401,6 @@ String.toList("Tablecloth")
                   flip={true}
                   show={() => (
                     <animated.div
-                      onClick={() =>
-                        setLogo(current =>
-                          current === 'ocaml' ? 'reason' : 'ocaml',
-                        )
-                      }
                       style={{
                         display: 'block',
                         flexShrink: 0,

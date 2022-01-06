@@ -285,7 +285,10 @@ export default ({ data, location }) => {
               <SidebarContainer isOpen={isOpen}>
                 <Sidebar location={location} />
               </SidebarContainer>
-              <Main>
+              <Main
+                css={css`
+                      max-width: 960px;
+                  `}>
                 <Container>
                   <PageTitle>{mdx.fields.title}</PageTitle>
                   <GithubEditButton
