@@ -4,7 +4,9 @@ let empty = []
 
 let singleton = Base.List.return
 
-let repeat element ~times = Base.List.init times ~f:(fun _ -> element)
+let repeat element ~times =
+  if times < 0 then [] else Base.List.init times ~f:(fun _ -> element)
+
 
 let rec range ?(from = 0) to_ =
   if from >= to_ then [] else from :: range ~from:(from + 1) to_
@@ -70,11 +72,31 @@ let append (l1 : 'a list) (l2 : 'a list) : 'a list = Base.List.append l1 l2
 
 let flatten = Base.List.concat
 
-let map2 = Base.List.map2_exn
-
-let map3 = Base.List.map3_exn
-
 let reverse (l : 'a list) : 'a list = Base.List.rev l
+
+let map2 listA listB ~f =
+  let mapped, _ =
+    Base.List.fold listA ~init:([], listB) ~f:(fun (result, lb) a ->
+        match lb with b :: rest -> (f a b :: result, rest) | [] -> (result, []) )
+  in
+  reverse mapped
+
+
+let map3 listA listB listC ~f =
+  let mapped, _, _ =
+    Base.List.fold listA ~init:([], listB, listC) ~f:(fun (result, lb, lc) a ->
+        match lb with
+        | b :: rest1 ->
+          ( match lc with
+          | c :: rest2 ->
+              (f a b c :: result, rest1, rest2)
+          | [] ->
+              (result, [], []) )
+        | [] ->
+            (result, [], []) )
+  in
+  reverse mapped
+
 
 let map = Base.List.map
 
@@ -249,18 +271,7 @@ let insertAt (t : 'a list) ~(index : int) ~(value : 'a) : 'a list =
 
 let insert_at = insertAt
 
-let zip listA listB =
-  let rec loop result xs ys =
-    match (xs, ys) with
-    | [], _ ->
-        result
-    | _, [] ->
-        result
-    | x :: xs, y :: ys ->
-        loop ((x, y) :: result) xs ys
-  in
-  loop [] listA listB
-
+let zip listA listB = map2 listA listB ~f:(fun x y -> (x, y))
 
 let unzip = Base.List.unzip
 

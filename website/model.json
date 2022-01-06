@@ -52318,15 +52318,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    Parses "
+                          "value": ".\n    The behaviour of this function is platform specific.\n    Parses "
                         },
                         {
                           "tag": "Code",
@@ -58647,10 +58639,6 @@
                               ]
                             }
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
