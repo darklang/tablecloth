@@ -180,9 +180,6 @@ const CallToAction = () => (
             letter-spacing: 1px;
             font-size: 16px;
             text-transform: uppercase;
-            &:hover {
-
-            }
           }
         `}
       >
