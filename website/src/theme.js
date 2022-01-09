@@ -24,7 +24,7 @@ export let colors = {
       end: '#ec670f',
     },
   },
-  black: 'hsl(212.3, 15.3%, 16.7%)',
+  black: hsl(212.3, 15.3, 16.7),
   grey: hsl(0, 10, 91.1),
   white: '#FFFFFF',
   yellow: hsl(50.3, 94.2, 72.9),
@@ -50,8 +50,8 @@ export let spacing = {
 
 export let dimensions = {
   navbar: 56,
-  maxContentWidth: 740,
-  leftSideBar: 240,
+  maxContentWidth: 1200,
+  leftSideBar: 260,
   rightSideBar: 224,
 };
 
@@ -66,8 +66,8 @@ export let themes = {
       icon32: require('./assets/favicon_light/favicon-32x32.png'),
       icon16: require('./assets/favicon_light/favicon-16x16.png'),
     },
-    body: colors.white,
-    text: colors.black,
+    body: colors.grey.lighter,
+    text: colors.black.darkest,
     link: colors.red.dark,
     navbar: {
       background: colors.red.base,
@@ -77,19 +77,34 @@ export let themes = {
     sidebar: {
       background: colors.white,
       text: colors.red.base,
-      activeBackground: colors.red.base,
+      activeBackground: colors.red.light,
       activeText: colors.white,
-      hover: colors.red.dark,
+      hover: colors.red.base,
     },
     card: {
       background: colors.grey.lighter,
       border: colors.grey.light,
-      text: colors.black,
+      text: colors.black.darkest,
+    },
+    blockHeader: {
+      background: colors.blue.lightest,
+      borderLeft: colors.blue.base,
+      text: colors.black.darkest,
+    },
+    block: {
+      background: colors.white,
+      outline: '#e3e3e3'
+    },
+    typeDefinition: {
+     background: colors.grey.lighter,
+     borderLeft: colors.grey.base,
+     text:  colors.black.darkest,
+     outline: '#d0e6ef'
     },
     code: {
       background: colors.grey.lighter,
       border: colors.grey.light,
-      text: colors.black,
+      text: colors.black.darkest,
     },
     toggle: {
       background: colors.grey.lightest,
@@ -102,6 +117,10 @@ export let themes = {
       text: '#555',
       shadow: 'rgba(116, 129, 141, 0.1)',
     },
+    syntaxLogo: {
+      background: 'rgb(0, 0, 0)',
+      border: colors.red.base,
+    }
   },
   dark: {
     favicon: {
@@ -109,7 +128,7 @@ export let themes = {
       icon32: require('./assets/favicon_dark/favicon-32x32.png'),
       icon16: require('./assets/favicon_dark/favicon-16x16.png'),
     },
-    body: colors.black,
+    body: colors.black.darkest,
     text: colors.white,
     link: colors.red.base,
     navbar: {
@@ -118,7 +137,7 @@ export let themes = {
       text: colors.white,
     },
     sidebar: {
-      background: colors.black,
+      background: colors.black.darkest,
       text: colors.white,
       activeBackground: colors.purple.base,
       activeText: colors.white,
@@ -129,6 +148,21 @@ export let themes = {
       border: colors.grey.dark,
       text: colors.white,
     },
+    block: {
+      background: colors.black.dark,
+      outline: '#3a3a3a'
+    },
+    blockHeader: {
+      background: colors.black.darker,
+      borderLeft: colors.black.base,
+      text: colors.white,
+    },
+    typeDefinition: {
+      background: colors.grey.darkest,
+      borderLeft: colors.grey.dark,
+      text: colors.white,
+      outline: '#1f2429'
+     },
     code: {
       background: colors.grey.darkest,
       border: colors.grey.dark,
@@ -139,12 +173,16 @@ export let themes = {
       border: colors.red.dark,
     },
     githubEditButton: {
-      background: colors.black,
+      background: colors.black.darkest,
       backgroundHover: 'rgb(36, 42, 49)',
       border: colors.grey.base,
       text: colors.white,
       shadow: colors.grey.darkest,
     },
+    syntaxLogo: {
+      background: 'rgb(255, 255, 255)',
+      border: colors.red.base,
+    }
   },
 };
 
@@ -254,6 +292,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-size: 15px;
+    line-height: 24px;
   }
 
   a  {

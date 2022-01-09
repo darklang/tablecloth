@@ -61,11 +61,8 @@ val and_ : 'a t -> 'a t -> 'a t
   {2 Examples}
 
   {[Option.and_ (Some 11) (Some 22) = Some 22]}
-
   {[Option.and_ None (Some 22) = None]}
-
   {[Option.and_ (Some 11) None = None]}
-
   {[Option.and_ None None = None]}
 *)
 
@@ -78,11 +75,8 @@ val or_ : 'a t -> 'a t -> 'a t
     {2 Examples}
 
     {[Option.or_ (Some 11) (Some 22) = Some 11]}
-
     {[Option.or_ None (Some 22) = Some 22]}
-
     {[Option.or_ (Some 11) None = Some 11]}
-
     {[Option.or_ None None = None]}
 *)
 
@@ -94,11 +88,8 @@ val orElse : 'a t -> 'a t -> 'a t
     {2 Examples}
 
     {[Option.orElse (Some 11) (Some 22) = Some 22]}
-
     {[Option.orElse None (Some 22) = Some 22]}
-
     {[Option.orElse (Some 11) None = Some 11]}
-
     {[Option.orElse None None = None]}
 *)
 
@@ -110,11 +101,8 @@ val both : 'a t -> 'b t -> ('a * 'b) t
     {2 Examples}
 
     {[Option.both (Some 3004) (Some "Ant") = Some (3004, "Ant")]}
-
     {[Option.both (Some 3004) None = None]}
-
     {[Option.both None (Some "Ant") = None]}
-
     {[Option.both None None = None]}
 *)
 
@@ -124,9 +112,7 @@ val flatten : 'a t t -> 'a t
     {2 Examples}
 
     {[Option.flatten (Some (Some 4)) = Some 4]}
-
     {[Option.flatten (Some None) = None]}
-
     {[Option.flatten (None) = None]}
 *)
 
@@ -140,9 +126,7 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
     {2 Examples}
 
     {[Option.map ~f:(fun x -> x * x) (Some 9) = Some 81]}
-
     {[Option.map ~f:Int.toString (Some 9) = Some "9"]}
-
     {[Option.map ~f:(fun x -> x * x) None = None]}
 *)
 
@@ -156,11 +140,8 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
     {2 Examples}
 
     {[Option.map2 (Some 3) (Some 4) ~f:Int.add = Some 7]}
-
     {[Option.map2 (Some 3) (Some 4) ~f:Tuple.make = Some (3, 4)]}
-
     {[Option.map2 (Some 3) None ~f:Int.add = None]}
-
     {[Option.map2 None (Some 4) ~f:Int.add = None]}
 *)
 
@@ -203,7 +184,6 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
     {2 Examples}
 
     {[Option.andThen (Some [1, 2, 3]) ~f:List.head = Some 1]}
-
     {[Option.andThen (Some []) ~f:List.head = None]}
 *)
 
@@ -219,9 +199,7 @@ val unwrap : 'a t -> default:'a -> 'a
     {2 Examples}
 
     {[Option.unwrap ~default:99 (Some 42) = 42]}
-
     {[Option.unwrap ~default:99 None = 99]}
-
     {[Option.unwrap ~default:"unknown" (Map.get Map.String.empty "Tom") = "unknown"]}
 *)
 
@@ -238,7 +216,6 @@ val unwrapUnsafe : 'a t -> 'a
     {2 Examples}
 
     {[List.head [1;2;3] |> Option.unwrapUnsafe = 1]}
-
     {[List.head [] |> Option.unwrapUnsafe]}
 *)
 
@@ -250,7 +227,6 @@ val isSome : 'a t -> bool
     {2 Examples}
 
     {[Option.isSome (Some 3004) = true]}
-
     {[Option.isSome None = false]}
 *)
 
@@ -262,7 +238,6 @@ val isNone : 'a t -> bool
     {2 Examples}
 
     {[Option.isNone (Some 3004) = false]}
-
     {[Option.isNone None = true]}
 *)
 
@@ -277,7 +252,6 @@ val toArray : 'a t -> 'a array
     {2 Examples}
 
     {[Option.toArray (Some 3004) = [|3004|]]}
-
     {[Option.toArray (None) = [||]]}
 *)
 
@@ -289,7 +263,6 @@ val toList : 'a t -> 'a list
     {2 Examples}
 
     {[Option.toList (Some 3004) = [3004]]}
-
     {[Option.toList (None) = []]}
 *)
 
@@ -301,11 +274,8 @@ val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
     {2 Examples}
 
     {[Option.equal Int.equal (Some 1) (Some 1) = true]}
-
     {[Option.equal Int.equal (Some 1) (Some 3) = false]}
-
     {[Option.equal Int.equal (Some 1) None = false]}
-
     {[Option.equal Int.equal None None = true]}
 *)
 
@@ -317,9 +287,7 @@ val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
     {2 Examples}
 
     {[Option.compare Int.compare (Some 1) (Some 3) = -1]}
-
     {[Option.compare Int.compare (Some 1) None = 1]}
-
     {[Option.compare Int.compare None None = 0]}
 *)
 
@@ -356,7 +324,6 @@ val ( |? ) : 'a t -> 'a -> 'a
     {2 Examples}
 
     {[Some 3004 |? 8 = 3004]}
-
     {[None |? 8 = 8]}
 *)
 
@@ -366,7 +333,6 @@ val ( >>| ) : 'a t -> ('a -> 'b) -> 'b t
     {2 Examples}
 
     {[Some "desserts" >>| String.reverse = Some "stressed"]}
-
     {[None >>| String.reverse = None]}
 *)
 
@@ -376,6 +342,5 @@ val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
     {2 Examples}
 
     {[Some [1, 2, 3] >>= List.head = Some 1]}
-
     {[Some [] >>= List.head = None]}
 *)

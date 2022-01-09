@@ -60,7 +60,6 @@ val constant : 'a -> 'b -> 'a
     {2 Examples}
 
     {[List.map ~f:(Fun.constant 0) [1;2;3;4;5] = [0;0;0;0;0]]}
-
     {[Array.initialize 6 ~f:(Fun.constant 0) = [|0;0;0;0;0;0|]]}
 *)
 
@@ -179,7 +178,6 @@ val tap : 'a -> f:('a -> unit) -> 'a
         |> Fun.tap ~f:(fun trimmed_string -> print_endline trimmed_string)
         |> Int.from_string
     ]}
-
     {[
       Array.filter [|1;3;2;5;4;|] ~f:Int.is_even
       |> Fun.tap ~f:(fun numbers -> numbers.(0) <- 0)

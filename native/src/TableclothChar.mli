@@ -31,11 +31,8 @@ val from_code : int -> char option
     {2 Examples}
 
     {[Char.from_code 65 = Some 'A']}
-
     {[Char.from_code 66 = Some 'B']}
-
     {[Char.from_code 3000 = None]}
-
     {[Char.from_code (-1) = None]}
 
     The full range of extended ASCII is from [0] to [255]. For numbers outside that range, you get [None].
@@ -47,13 +44,9 @@ val from_string : string -> char option
     {2 Examples}
 
     {[Char.from_string "A" = Some 'A']}
-
     {[Char.from_string " " = Some ' ']}
-
     {[Char.from_string "" = None]}
-
     {[Char.from_string "abc" = None]}
-
     {[Char.from_string " a" = None]}
 *)
 
@@ -63,15 +56,10 @@ val is_lowercase : char -> bool
     {2 Examples}
 
     {[Char.is_lowercase 'a' = true]}
-
     {[Char.is_lowercase 'b' = true]}
-
     {[Char.is_lowercase 'z' = true]}
-
     {[Char.is_lowercase '0' = false]}
-
     {[Char.is_lowercase 'A' = false]}
-
     {[Char.is_lowercase '-' = false]}
 *)
 
@@ -81,15 +69,10 @@ val is_uppercase : char -> bool
     {2 Examples}
 
     {[Char.is_uppercase 'A' = true]}
-
     {[Char.is_uppercase 'B' = true]}
-
     {[Char.is_uppercase 'Z' = true]}
-
     {[Char.is_uppercase 'h' = false]}
-
     {[Char.is_uppercase '0' = false]}
-
     {[Char.is_uppercase '-' = false]}
 *)
 
@@ -99,15 +82,10 @@ val is_letter : char -> bool
     {2 Examples}
 
     {[Char.is_letter 'a' = true]}
-
     {[Char.is_letter 'b' = true]}
-
     {[Char.is_letter 'E' = true]}
-
     {[Char.is_letter 'Y' = true]}
-
     {[Char.is_letter '0' = false]}
-
     {[Char.is_letter '-' = false]}
 *)
 
@@ -117,13 +95,9 @@ val is_digit : char -> bool
     {2 Examples}
 
     {[Char.is_digit '0' = true]}
-
     {[Char.is_digit '1' = true]}
-
     {[Char.is_digit '9' = true]}
-
     {[Char.is_digit 'a' = false]}
-
     {[Char.is_digit 'b' = false]}
 *)
 
@@ -133,17 +107,11 @@ val is_alphanumeric : char -> bool
     {2 Examples}
 
     {[Char.is_alphanumeric 'a' = true]}
-
     {[Char.is_alphanumeric 'b' = true]}
-
     {[Char.is_alphanumeric 'E' = true]}
-
     {[Char.is_alphanumeric 'Y' = true]}
-
     {[Char.is_alphanumeric '0' = true]}
-
     {[Char.is_alphanumeric '7' = true]}
-
     {[Char.is_alphanumeric '-' = false]}
 *)
 
@@ -155,13 +123,9 @@ val is_printable : char -> bool
     {2 Examples}
 
     {[Char.is_printable 'G' = true]}
-
     {[Char.is_printable '%' = true]}
-
     {[Char.is_printable ' ' = true]}
-
     {[Char.is_printable '\t' = false]}
-
     {[Char.is_printable '\007' = false]}
 *)
 
@@ -177,11 +141,8 @@ val is_whitespace : char -> bool
     {2 Examples}
 
     {[Char.is_whitespace '\t' = true]}
-
     {[Char.is_whitespace ' ' = true]}
-
     {[Char.is_whitespace '?' = false]}
-
     {[Char.is_whitespace 'G' = false]}
 *)
 
@@ -191,9 +152,7 @@ val to_lowercase : char -> char
     {2 Examples}
 
     {[Char.to_lowercase 'A' = 'a']}
-
     {[Char.to_lowercase 'B' = 'b']}
-
     {[Char.to_lowercase '7' = '7']} *)
 
 val to_uppercase : char -> char
@@ -202,9 +161,7 @@ val to_uppercase : char -> char
     {2 Examples}
 
     {[to_uppercase 'a' = 'A']}
-
     {[to_uppercase 'b' = 'B']}
-
     {[to_uppercase '7' = '7']}
 *)
 
@@ -216,7 +173,6 @@ val to_code : char -> int
     {2 Examples}
 
     {[Char.to_code 'A' = 65]}
-
     {[Char.to_code 'B' = 66]}
 *)
 
@@ -226,9 +182,7 @@ val to_string : char -> string
     {2 Examples}
 
     {[Char.to_string 'A' = "A"]}
-
     {[Char.to_string '{' = "{"]}
-
     {[Char.to_string '7' = "7"]}
 *)
 
@@ -240,11 +194,8 @@ val to_digit : char -> int option
     {2 Examples}
 
     {[Char.to_digit "7" = Some 7]}
-
     {[Char.to_digit "0" = Some 0]}
-
     {[Char.to_digit "A" = None]}
-
     {[Char.to_digit "" = None]}
 *)
 

@@ -12,7 +12,6 @@ val make : 'a -> 'b -> 'c -> 'a * 'b * 'c
     {2 Examples}
 
     {[Tuple3.create 3 "cat" false = (3, "cat", false)]}
-
     {[
       List.map3 ~f:Tuple3.create [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =
         [(1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.)]
@@ -29,9 +28,7 @@ val fromArray : 'a array -> ('a * 'a * 'a) option
     {2 Examples}
 
     {[Tuple3.fromArray [|1; 2;3 |] = Some (1, 2, 3)]}
-
     {[Tuple3.fromArray [|1; 2|] = None]}
-
     {[Tuple3.fromArray [|4;5;6;7|] = Some (4, 5, 6)]}
 *)
 
@@ -45,9 +42,7 @@ val fromList : 'a list -> ('a * 'a * 'a) option
     {2 Examples}
 
     {[Tuple3.fromList [1; 2; 3] = Some (1, 2, 3)]}
-
     {[Tuple3.fromList [1; 2] = None]}
-
     {[Tuple3.fromList [4; 5; 6; 7] = Some (4, 5, 6)]}
 *)
 
@@ -57,7 +52,6 @@ val first : 'a * 'b * 'c -> 'a
     {2 Examples}
 
     {[Tuple3.first (3, 4, 5) = 3]}
-
     {[Tuple3.first ("john", "danger", "doe") = "john"]}
 *)
 
@@ -67,7 +61,6 @@ val second : 'a * 'b * 'c -> 'b
     {2 Examples}
 
     {[Tuple3.second (3, 4, 5) = 4]}
-
     {[Tuple3.second ("john", "danger", "doe") = "danger"]}
 *)
 
@@ -77,7 +70,6 @@ val third : 'a * 'b * 'c -> 'c
     {2 Examples}
 
     {[Tuple3.third (3, 4, 5) = 5]}
-
     {[Tuple3.third ("john", "danger", "doe") = "doe"]}
 *)
 
@@ -87,7 +79,6 @@ val initial : 'a * 'b * 'c -> 'a * 'b
     {2 Examples}
 
     {[Tuple3.initial (3, "stressed", false) = (3, "stressed")]}
-
     {[Tuple3.initial ("john", 16, true) = ("john", 16)]}
 *)
 
@@ -97,7 +88,6 @@ val tail : 'a * 'b * 'c -> 'b * 'c
     {2 Examples}
 
     {[Tuple3.tail (3, "stressed", false) = ("stressed", false)]}
-
     {[Tuple3.tail ("john", 16, true) = (16, true)]}
 *)
 
@@ -109,7 +99,6 @@ val rotateLeft : 'a * 'b * 'c -> 'b * 'c * 'a
     {2 Examples}
 
     {[Tuple3.rotateLeft (3, 4, 5) = (4, 5, 3)]}
-
     {[Tuple3.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]}
 *)
 
@@ -119,7 +108,6 @@ val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
     {2 Examples}
 
     {[Tuple3.rotateRight (3, 4, 5) = (5, 3, 4)]}
-
     {[Tuple3.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]}
 *)
 
@@ -129,7 +117,6 @@ val mapFirst : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
     {2 Examples}
 
     {[Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false) = ("desserts", 16, false)]}
-
     {[Tuple3.mapFirst ~f:String.length ("stressed", 16, false) = (8, 16, false)]}
 *)
 
@@ -139,7 +126,6 @@ val mapSecond : 'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c
     {2 Examples}
 
     {[Tuple3.mapSecond ~f:Float.squareRoot ("stressed", 16., false) = ("stressed", 4., false)]}
-
     {[Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) = ("stressed", -16, false)]}
 *)
 
@@ -174,7 +160,6 @@ val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
     {2 Examples}
 
     {[Tuple3.mapAll ~f:Float.squareRoot (9., 16., 25.) = (3., 4., 5.)]}
-
     {[Tuple3.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]}
 *)
 
@@ -186,7 +171,6 @@ val toArray : 'a * 'a * 'a -> 'a array
     {2 Examples}
 
     {[Tuple3.toArray (3, 4, 5) = [3; 4; 5]]}
-
     {[Tuple3.toArray ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
 *)
 
@@ -198,7 +182,6 @@ val toList : 'a * 'a * 'a -> 'a list
     {2 Examples}
 
     {[Tuple3.toList (3, 4, 5) = [3; 4; 5]]}
-
     {[Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
 *)
 
@@ -215,7 +198,6 @@ val equal :
     {2 Examples}
 
     {[Tuple3.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (1, "Fox", 'k') = true]}
-
     {[Tuple3.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (2, "Hen", 'j') = false]}
  *)
 
@@ -233,8 +215,6 @@ val compare :
     {2 Examples}
 
     {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
-
     {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
-
     {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
  *)

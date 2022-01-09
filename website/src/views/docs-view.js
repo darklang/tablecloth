@@ -33,7 +33,7 @@ import {
   SidebarContainer,
 } from '../components/Layout';
 import { CodeBlock } from '../components/CodeBlock';
-import { SyntaxProvider, SyntaxToggle } from '../components/Syntax';
+import LanguageIcon from '../components/LanguageLogos';
 import * as lzString from 'lz-string';
 
 let stripTableclothPrefix = path => path.replace(/Tablecloth/g, '');
@@ -140,7 +140,7 @@ function renderSidebarElements(
             <div key={typeId}>
               <a
                 onClick={() => scrollToId(typeId)}
-                href={`/api#${typeId}`}
+                href={`#${typeId}`}
               >
                 type {moduleElement.value.name}
               </a>
@@ -164,7 +164,7 @@ function renderSidebarElements(
           return (
             <div key={valueLink}>
               <a
-                href={`/api#${valueLink}`}
+                href={`#${valueLink}`}
                 onClick={() => scrollToId(valueLink)}>
                 {moduleElement.value.name}
               </a>
@@ -181,7 +181,7 @@ function renderSidebarElements(
           }
           return (
             <a
-              href={`/api#${moduleTypeId}`}
+              href={`#${moduleTypeId}`}
               onClick={() => scrollToId(moduleTypeId)} key={moduleTypeId}>
               module type {moduleElement.value.name}
             </a>
@@ -202,7 +202,7 @@ function renderSidebarElements(
               }
               return (
                 <a
-                  href={`/api#${moduleFunctorId}`}
+                  href={`#${moduleFunctorId}`}
                   onClick={() => scrollToId(moduleFunctorId)}
                   key={moduleFunctorId}
                 >
@@ -388,7 +388,7 @@ function renderSidebarModule(
         </div>
 
         <a
-          href={`/api#${moduleId}`}
+          href={`#${moduleId}`}
           onClick={() => scrollToId(moduleId)}
         >module {qualifiedModuleName}</a>
       </div>
@@ -411,11 +411,14 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
   return (
     <div
       css={css`
-        background-color: ${({ theme }) => theme.body};
+        background-color: ${({ theme }) => theme.block.background};
         display: flex;
         flex-direction: column;
         height: 100vh;
         width: 100%;
+        position: sticky;
+        top: 56px;
+        left: 0;
       `}
     >
       <input
@@ -469,10 +472,11 @@ const PageAnchor = ({ id, children }) => {
       id={id}
       css={css`
         align-items: center;
-        display: flex;
+        display: inline-flex;
         flex-shrink: 0;
         flex-direction: row;
-        margin-left: -${spacing.pageMargin.laptop}px;
+        margin-left: -${spacing.pageMargin.desktop*1.5}px;
+        width: calc(100% + 70px);
 
         .link {
           display: none;
@@ -494,35 +498,37 @@ const PageAnchor = ({ id, children }) => {
           height: 100%;
           text-align: center;
           user-select: none;
-          width: ${spacing.pageMargin.laptop}px;
+          width: ${spacing.pageMargin.desktop}px;
           display: flex;
           justify-content: center;
 
           span {
-            width: 17px;
+            width: 7px;
           }
         }
         .content {
-          width: calc(100% + ${spacing.pageMargin.laptop}px);
-          width: 100%;
-          overflow-x: auto;
+          width: calc(100% + ${spacing.pageMargin.desktop}px);
+          overflow: hidden;
         }
 
         @media (min-width: ${breakpoints.desktop}px) {
-          margin-left: -${spacing.pageMargin.desktop}px;
+          margin-left: -${spacing.pageMargin.desktop*1.5}px;
+          width: calc(100% + 70px);
           .link {
             width: ${spacing.pageMargin.desktop}px;
           }
 
           .content {
             width: calc(100% + ${spacing.pageMargin.desktop}px);
-            width: 100%;
+          }
+          .link span {
+            width: 17px;
           }
         }
       `}
     >
-      <a href={`/api#${id}`} className="link">
-        <span>🔗</span>
+      <a href={`#${id}`} className="link">
+        <span className="linkIcon">🔗</span>
       </a>
       <div className="content">{children}</div>
     </div>
@@ -540,9 +546,11 @@ let Identifiers = {
         .keyword {
           font-family: ${fonts.monospace};
           margin-right: 10px;
+          line-height: 30px;
         }
         .name {
           color: ${colors.red.base};
+          line-height: 42px;
         }
       `}
     >
@@ -564,9 +572,11 @@ let Identifiers = {
         .keyword {
           font-family: ${fonts.monospace};
           margin-right: 10px;
+          line-height: 30px;
         }
         .name {
           color: ${colors.red.base};
+          line-height: 42px;
         }
       `}
     >
@@ -646,7 +656,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
         return (
           <a
             key={index}
-            href={`/api#${stripTableclothPrefix(value.reference.target)}`}
+            href={`#${stripTableclothPrefix(value.reference.target)}`}
           >
             {content}
           </a>
@@ -743,9 +753,28 @@ let TextElement = ({ elements, path }) => {
 
 let TypeSignature = ({ signature }) => {
   return (
-    <pre>
-      <code children={stripTableclothPrefix(signature.rendered)}/>
-    </pre>
+      <React.Fragment children={stripTableclothPrefix(signature.rendered)}/>
+  );
+};
+
+let TypeDefinition = ({ name, type }) => {
+  return (
+    <code
+    css={css`
+    display: inline;
+    font-weight: bold;
+    display: inline-flex;
+    background-color: ${({ theme }) => theme.typeDefinition.background};
+    color: ${({ theme }) => theme.typeDefinition.text};
+    border-left: 4px solid ${({ theme }) => theme.typeDefinition.borderLeft};
+    padding: 8px;
+    margin:${spacing.small}px 0;
+  `}
+    >
+
+ 
+let {name}: <TypeSignature signature={type}/>
+    </code>
   );
 };
 
@@ -753,8 +782,14 @@ let ValueContainer = props => (
   <div
     className="ValueContainer"
     css={css`
-      padding-bottom: 25px;
-      padding-top: 15px;
+      margin-bottom: 25px;
+      margin-top: 15px;
+      padding: 0 15px;
+      background: ${({ theme }) => theme.block.background};
+      border-bottom: 1px solid ${({ theme }) => theme.block.outline};
+      border-right: 1px solid ${({ theme }) => theme.block.outline};
+      border-left: 1px solid ${({ theme }) => theme.block.outline};
+
     `}
     {...props}
   />
@@ -764,9 +799,10 @@ let ValueWrapper = styled.div`
   align-items: flex-start;
   display: flex;
   background-color: ${colors.blue.lightest};
+  background-color: ${({ theme }) => theme.blockHeader.background};
+  color: ${({ theme }) => theme.blockHeader.text};
   border-radius: 3px;
-  border-left: 4px solid ${colors.blue.base};
-  color: black;
+  border-left: 4px solid ${({ theme }) => theme.blockHeader.borderLeft};
   flex: 1;
   flex-direction: row;
   padding-top: ${spacing.small}px;
@@ -775,6 +811,9 @@ let ValueWrapper = styled.div`
   padding-right: ${spacing.medium}px;
   width: 100%;
   overflow-x: auto;
+  border-top: 1px solid ${({ theme }) => theme.typeDefinition.outline};
+  border-right: 1px solid ${({ theme }) => theme.typeDefinition.outline};
+ 
 `;
 
 let Value = ({ id, path, name, type, info, parameters, ...value }) => {
@@ -782,18 +821,14 @@ let Value = ({ id, path, name, type, info, parameters, ...value }) => {
     <ValueContainer>
       <PageAnchor id={id}>
         <ValueWrapper>
-          <pre>
-            <code>let {name}: </code>
-          </pre>
-          <TypeSignature signature={type}/>
+        <h2>{id}</h2>
         </ValueWrapper>
       </PageAnchor>
+      <TypeDefinition name={name} type={type} />
+       
       {info && (
         <div
-          css={css`
-            padding-top: 10px;
-            padding-bottom: 10px;
-          `}
+      
         >
           <TextElement
             elements={info.description.value}
@@ -863,12 +898,12 @@ function generateModuleElements(
                         `(${moduleElement.value.parameters})`}
                       {moduleElement.value.manifest ? ' = ' : ''}
                     </code>
-                  </pre>
-                  {moduleElement.value.manifest && (
+                    {moduleElement.value.manifest && (
                     <TypeSignature
                       signature={moduleElement.value.manifest.value}
                     />
                   )}
+                  </pre>
                 </ValueWrapper>
               </PageAnchor>
               {moduleElement.value.info && (
@@ -898,9 +933,13 @@ function generateModuleElements(
           );
           registerId(state, moduleTypeId);
           state.elements.push(
+            <div css={css`
+            padding: 0px 15px;
+          `}>
             <PageAnchor id={moduleTypeId}>
               <Identifiers.moduleType name={moduleTypeId}/>
-            </PageAnchor>,
+            </PageAnchor>
+            </div>,
           );
           generateModuleElements(moduleElement.value.elements, modulesByName, {
             ...state,
@@ -919,9 +958,12 @@ function generateModuleElements(
               let path = [...state.path, moduleElement.value.name];
               registerId(state, moduleStructId);
               state.elements.push(
+                <div css={css`
+                          padding: 0px 15px;
+                        `}>
                 <PageAnchor id={moduleStructId}>
                   <Identifiers.module name={moduleStructId}/>
-                </PageAnchor>,
+                </PageAnchor></div>,
               );
               generateModuleElements(
                 moduleElement.value.kind.value,
@@ -944,11 +986,14 @@ function generateModuleElements(
               let id = idFor(state.path, 'ModuleStruct', stripTableclothPrefix(module.value.name));
               registerId(state, id);
               state.elements.push(
+                <div css={css`
+                padding: 0px 15px;
+              `}>
                 <PageAnchor id={id}>
                   <Identifiers.module
                     name={stripTableclothPrefix(moduleElement.value.kind.value.name)}
                   />
-                </PageAnchor>,
+                </PageAnchor></div>,
               );
               generateModuleElements(module.value.kind.value, modulesByName, {
                 ...state,
@@ -1017,22 +1062,9 @@ function generateModuleElements(
   return state;
 }
 
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        docsLocation
-      }
-    }
-    odocModel {
-      internal {
-        content
-      }
-    }
-  }
-`;
 
-let title = 'API';
+
+let title = 'Documentation';
 
 let moduleIndex = (moduleElements, parentPath = []) => {
   return moduleElements
@@ -1052,7 +1084,6 @@ let Header = ({ title }) => {
   let [_themeName, _toggle, theme] = useTheme();
   return (
     <Helmet>
-      <title>{title}</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -1077,9 +1108,31 @@ let Header = ({ title }) => {
   );
 };
 
-export default ({ data }) => {
+
+
+
+let links = [
+  {url: "/docs/rescript", name: "Rescript"},
+  {url: "/docs/ocaml", name:"Ocaml"},
+  {url: "/docs/fsharp", name: "F#"}
+];
+
+const navLink = ({url, name}, location) =>   {
+let isCurrentLocation = location.pathname === url;
+
+return <Link key={url} to={url}   css={css`
+margin-right: 1rem;
+padding-bottom: 0.5rem;
+
+font-weight: ${isCurrentLocation ? "700": "400"};
+pointer-events: ${isCurrentLocation ? "none": "all"};
+`}>
+{name}
+</Link>}
+
+export default ({ data, language, location }) => {
   let [isOpen, setIsOpen] = React.useState(false);
-  let [isRescript, setRescript] = React.useState(false);
+
 
   let cache = React.useRef(
     new CellMeasurerCache({
@@ -1093,8 +1146,8 @@ export default ({ data }) => {
     list,
   } = React.useMemo(() => {
     const { odocModel } = data;
+    let model = JSON.parse(odocModel.internal.content);
 
-    let content = JSON.parse(odocModel.internal.content);
     // reset initial state
     initialState = {
       path: [],
@@ -1102,7 +1155,6 @@ export default ({ data }) => {
       idToIndex: {},
     };
 
-    let model = isRescript ? content.rescript : content.native;
     let moduleByModulePath = _.fromPairs(
       _.map(moduleIndex(_.values(model.modules)), ([path, module]) => [
         path.join('.'),
@@ -1123,7 +1175,8 @@ export default ({ data }) => {
       idToIndex,
       list: elements,
     };
-  }, [isRescript, data]);
+
+  }, [data]);
 
   let listScroll = React.useRef();
   let scrollToId = id => {
@@ -1157,7 +1210,6 @@ export default ({ data }) => {
 
   return (
     <ThemeProvider>
-      <SyntaxProvider>
         <GlobalStyles/>
         <Header title={title}/>
         <AppWrapper>
@@ -1165,6 +1217,8 @@ export default ({ data }) => {
             css={css`
               display: flex;
               flex-direction: column;
+              justify-content: center;
+              align-items: center;
             `}
           >
             <NavBarContainer>
@@ -1174,7 +1228,11 @@ export default ({ data }) => {
               css={css`
                 display: flex;
                 flex-direction: row;
-                margin-top: ${dimensions.navbar}px;
+                max-width: 1200px;
+                justify-content: stretch;
+                align-items: stretch;
+                width: 100%;
+    
               `}
             >
               <SidebarContainer isOpen={isOpen}>
@@ -1187,7 +1245,8 @@ export default ({ data }) => {
               <Main>
                 <Container
                   css={css`
-                    margin-left: -${spacing.pageMargin.mobile}px;
+                  background-color: ${({ theme }) => theme.body};
+
                     @media (min-width: ${breakpoints.desktop}px) {
                       margin-left: -${spacing.pageMargin.desktop}px;
                     }
@@ -1199,20 +1258,27 @@ export default ({ data }) => {
                       flex-direction: row;
                       justify-content: space-between;
                       width: 100%;
-                      margin-left: ${spacing.pageMargin.mobile}px;
+                      height: 25vh;
                       @media (min-width: ${breakpoints.desktop}px) {
                         margin-left: ${spacing.pageMargin.desktop}px;
                       }
                     `}
                   >
-                    <PageTitle>API</PageTitle>
+                    <div
+                      css={css`
+                      display: flex;
+                      justify-content: center;
+                      align-items: start;
+                      flex-direction: column;
+                    `}
+                    >
+                    <PageTitle>{title}</PageTitle>
                     <div>
-                      <input id="model-selector" name="Show Rescript api" type="checkbox" checked={isRescript} onChange={e => { setRescript(e.target.checked) }} />
-                      <label htmlFor="model-selector">Show Rescript API</label>
+                      {links.map(link => navLink(link, location))}
                     </div>
-                    <div>
-                      <SyntaxToggle/>
                     </div>
+                    <LanguageIcon  language={language}/>
+
                   </div>
                   <WindowScroller>
                     {({ height, onChildScroll, scrollTop }) => (
@@ -1246,6 +1312,7 @@ export default ({ data }) => {
                                           padding-left: ${spacing.pageMargin
                                           .desktop}px;
                                         }
+                                     
                                       `}
                                     >
                                       {list[index]}
@@ -1272,7 +1339,6 @@ export default ({ data }) => {
             </MenuButtonContainer>
           </div>
         </AppWrapper>
-      </SyntaxProvider>
     </ThemeProvider>
   );
 };

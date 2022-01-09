@@ -20,10 +20,11 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-top: ${dimensions.navbar}px;
   width: 100%;
+  flex-direction: column;
+  align-items: center;
   @media (min-width: ${dimensions.maxContentWidth + dimensions.leftSideBar}px) {
-    justify-content: flex-start;
+    justify-content: center;
   }
 `;
 
@@ -32,35 +33,32 @@ export const SidebarContainer = ({ children, isOpen }) => {
     <aside
       className="SidebarContainer"
       css={css`
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
+
         display: flex;
         flex-direction: column;
-        position: fixed;
-        z-index: ${isOpen ? 2 : -1};
-        opacity: ${isOpen ? 1 : 0};
-        transform: ${isOpen ? 'translateY(0)' : 'translateY(60px)'};
         transition: all 0.2s ease;
+        width: 260px;
+        z-index: 1;
 
         @media (min-width: ${dimensions.maxContentWidth +
             dimensions.leftSideBar}px) {
           border-right: 1px solid ${colors.grey.light};
-          display: flex;
-          flex-shrink: 0;
-          position: sticky;
-          overflow-y: auto;
-          transform: translateY(0);
-          top: 0;
-          height: 100vh;
-          width: ${dimensions.leftSideBar}px;
+           width: ${dimensions.leftSideBar}px;
           z-index: 1;
           opacity: 1;
         }
-        @media (min-width: ${dimensions.maxContentWidth +
-            dimensions.leftSideBar * 2}px) {
-          margin-right: -${dimensions.leftSideBar}px;
+        @media (max-width: ${dimensions.maxContentWidth-
+          dimensions.leftSideBar}px) {
+              display: ${isOpen ? "flex" : "none"};
+              
+              ${isOpen ? `
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              width: 100%;
+              ` : ``};
         }
       `}
     >
@@ -74,25 +72,26 @@ export const Main = styled.main`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
+  padding: 5rem 0;
   width: 100%;
+  max-width: 1200px;
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: ${dimensions.maxContentWidth}px;
-  padding: 0 ${spacing.pageMargin.mobile}px;
-  width: 100%;
+ padding: 0 ${spacing.pageMargin.mobile}px;
+  width:  100%;
   @media (min-width: ${breakpoints.desktop}px) {
     padding: 0 ${spacing.pageMargin.desktop}px;
   }
+  scroll-padding-top: 64px;
 `;
 
 export const NavBarContainer = styled.div`
-  position: absolute;
+  position: sticky;
   top: 0;
+  z-index: 5;
   width: 100%;
 `;
 
@@ -131,11 +130,11 @@ export const NavBar = () => {
           flex-direction: row;
           flex-shrink: 0;
           justify-content: space-between;
-          max-width: ${dimensions.maxContentWidth}px;
           padding-left: ${spacing.pageMargin.mobile}px;
           padding-right: ${spacing.pageMargin.mobile}px;
           width: 100%;
           z-index: 1;
+          max-width: 1200px;
 
           .navBarHeader {
             align-items: center;
@@ -144,9 +143,13 @@ export const NavBar = () => {
             font-size: 22px;
             font-weight: 400;
             line-height: 1.5;
+            font-weight: bold;
             &:hover {
               text-decoration: none;
               opacity: 0.8;
+            }
+            @media (max-width: ${breakpoints.desktop-dimensions.leftSideBar}px) {
+              font-size: 16px;
             }
           }
 
@@ -154,12 +157,13 @@ export const NavBar = () => {
             align-items: center;
             display: flex;
             flex-direction: row;
-
+           
             .navLink {
               margin-left: ${spacing.small}px;
+              font-size: 16px;
+             
               a {
                 color: ${({ theme }) => theme.navbar.text};
-                font-size: 16px;
                 font-weight: 500;
                 line-height: 1em;
                 opacity: 1;
@@ -169,6 +173,12 @@ export const NavBar = () => {
                 &:hover {
                   opacity: 0.7;
                 }
+              }
+              @media (max-width: ${breakpoints.desktop-dimensions.leftSideBar}px) {
+                font-size: 12px;
+                button {
+                  width: 3rem; 
+                 }
               }
             }
           }
@@ -184,18 +194,22 @@ export const NavBar = () => {
           }
         `}
       >
+        <span  css={css`
+                display: flex;
+              `}>
         <Link to={'/'} className="navBarHeader">
           Tablecloth
         </Link>
+        </span>
         <div className="navLinks">
           <div className="navLink">
             <ThemeToggle theme={themeName} toggleTheme={toggleTheme} />
           </div>
           <div className="navLink">
-            <Link to="/documentation">docs</Link>
+            <Link to="/get-started">Get Started</Link>
           </div>
           <div className="navLink">
-            <Link to="/api">api</Link>
+            <Link to="/docs/rescript">Docs</Link>
           </div>
           <div className="navLink">
             <Link
@@ -212,7 +226,7 @@ export const NavBar = () => {
               `}
             >
               <GitHub />
-              <span>github</span>
+              <span>Github</span>
             </Link>
           </div>
         </div>
@@ -251,7 +265,7 @@ export const MenuButtonContainer = styled.div`
   right: 24px;
   z-index: 3;
 
-  @media (min-width: ${dimensions.maxContentWidth + dimensions.leftSideBar}px) {
+  @media (min-width: ${dimensions.maxContentWidth - dimensions.leftSideBar}px) {
     display: none;
   }
 `;

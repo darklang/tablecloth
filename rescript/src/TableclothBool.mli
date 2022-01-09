@@ -30,11 +30,8 @@ val fromInt : int -> bool option
     {2 Examples}
 
     {[Bool.fromInt 0 = Some false]}
-
     {[Bool.fromInt 1 = Some true]}
-
     {[Bool.fromInt 8 = None]}
-
     {[Bool.fromInt (-3) = None]}
 *)
 
@@ -44,17 +41,11 @@ val fromString : string -> bool option
     {2 Examples}
 
     {[Bool.fromString "true" = Some true]}
-
     {[Bool.fromString "false" = Some false]}
-
     {[Bool.fromString "True" = None]}
-
     {[Bool.fromString "False" = None]}
-
     {[Bool.fromString "0" = None]}
-
     {[Bool.fromString "1" = None]}
-
     {[Bool.fromString "Not even close" = None]}
 *)
 
@@ -70,11 +61,8 @@ external ( && ) : bool -> bool -> bool = "%sequand"
     {2 Examples}
 
     {[Bool.(true && true) = true]}
-
     {[Bool.(true && false) = false]}
-
     {[Bool.(false && true) = false]}
-
     {[Bool.(false && false) = false]}
 *)
 
@@ -88,11 +76,8 @@ external ( || ) : bool -> bool -> bool = "%sequor"
     {2 Examples}
 
     {[Bool.(true || true) = true]}
-
     {[Bool.(true || false) = true]}
-
     {[Bool.(false || true) = true]}
-
     {[Bool.(false || false) = false]}
 *)
 
@@ -104,11 +89,8 @@ val xor : bool -> bool -> bool
     {2 Examples}
 
     {[Bool.xor true true  = false]}
-
     {[Bool.xor true false = true]}
-
     {[Bool.xor false true  = true]}
-
     {[Bool.xor false false = false]}
 *)
 
@@ -118,7 +100,6 @@ val not : t -> bool
     {2 Examples}
 
     {[Bool.not false = true]}
-
     {[Bool.not true = false]}
 *)
 
@@ -130,7 +111,6 @@ val toString : bool -> string
     {2 Examples}
 
     {[Bool.toString true = "true"]}
-
     {[Bool.toString false = "false"]}
 *)
 
@@ -140,7 +120,6 @@ val toInt : bool -> int
     {2 Examples}
 
     {[Bool.toInt true = 1]}
-
     {[Bool.toInt false = 0]}
 *)
 
@@ -152,9 +131,7 @@ val equal : bool -> bool -> bool
     {2 Examples}
 
     {[Bool.equal true true = true]}
-
     {[Bool.equal false false = true]}
-
     {[Bool.equal false true = false]}
 *)
 
@@ -164,10 +141,7 @@ val compare : bool -> bool -> int
     {2 Examples}
 
     {[Bool.compare true false = 1]}
-
     {[Bool.compare false true = -1]}
-
     {[Bool.compare true true = 0]}
-
     {[Bool.compare false false = 0]}
 *)

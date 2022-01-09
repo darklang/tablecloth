@@ -107,15 +107,10 @@ val from_string : string -> t option
     {2 Examples}
 
     {[Float.from_string "4.667" = Some 4.667]}
-
     {[Float.from_string "-4.667" = Some (-4.667)]}
-
     {[Float.from_string "Hamster" = None]}
-
     {[Float.from_string "NaN" = Some Float.nan]}
-
     {[Float.from_string "nan" = Some Float.nan]}
-
     {[Float.from_string "Infinity" = Some Float.infinity]}
 *)
 
@@ -162,7 +157,6 @@ val subtract : t -> t -> t
     {2 Examples}
 
     {[Float.subtract 4.0 3.0 = 1.0]}
-
     {[Float.(4.0 - 3.0) = 1.0]}
 *)
 
@@ -177,7 +171,6 @@ val multiply : t -> t -> t
     {2 Examples}
 
     {[Float.multiply 2.0 7.0 = 14.0]}
-
     {[Float.(2.0 * 7.0) = 14.0]}
 *)
 
@@ -192,7 +185,6 @@ val divide : t -> by:t -> t
     {2 Examples}
 
     {[Float.divide 3.14 ~by:2.0 = 1.57]}
-
     {[Float.(3.14 / 2.0) = 1.57]}
 *)
 
@@ -207,7 +199,6 @@ val power : base:t -> exponent:t -> t
     {2 Examples}
 
     {[Float.power ~base:7.0 ~exponent:3.0 = 343.0]}
-
     {[Float.(7.0 ** 3.0) = 343.0]}
 *)
 
@@ -222,7 +213,6 @@ val negate : t -> t
     {2 Examples}
 
     {[Float.(~- 4.0) = (-4.0)]}
-
     {[
       Float.negate 8 = (-8)
       Float.negate (-7) = 7
@@ -253,9 +243,7 @@ val maximum : t -> t -> t
     {2 Examples}
 
     {[Float.maximum 7. 9. = 9.]}
-
     {[Float.maximum (-4.) (-1.) = (-1.)]}
-
     {[Float.(is_nan (maximum 7. nan)) = true]}
 *)
 
@@ -267,9 +255,7 @@ val minimum : t -> t -> t
     {2 Examples}
 
     {[Float.minimum 7.0 9.0 = 7.0]}
-
     {[Float.minimum (-4.0) (-1.0) = (-4.0)]}
-
     {[Float.(is_nan (minimum 7. nan)) = true]}
 *)
 
@@ -283,9 +269,7 @@ val clamp : t -> lower:t -> upper:t -> t
     {2 Examples}
 
     {[Float.clamp ~lower:0. ~upper:8. 5. = 5.]}
-
     {[Float.clamp ~lower:0. ~upper:8. 9. = 8.]}
-
     {[Float.clamp ~lower:(-10.) ~upper:(-5.) 5. = -5.]}
 *)
 
@@ -299,7 +283,6 @@ val square_root : t -> t
     {2 Examples}
 
     {[Float.square_root 4.0 = 2.0]}
-
     {[Float.square_root 9.0 = 3.0]}
 *)
 
@@ -309,7 +292,6 @@ val log : t -> base:t -> t
     {2 Examples}
 
     {[Float.log ~base:10. 100. = 2.]}
-
     {[Float.log ~base:2. 256. = 8.]}
 *)
 
@@ -325,11 +307,8 @@ val is_nan : t -> bool
     {2 Examples}
 
     {[Float.is_nan (0.0 / 0.0) = true]}
-
     {[Float.(is_nan (square_root (-1.0))) = true]}
-
     {[Float.is_nan (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)]}
-
     {[Float.is_nan 1. = false]}
 *)
 
@@ -341,13 +320,9 @@ val is_finite : t -> bool
     {2 Examples}
 
     {[Float.is_finite (0. / 0.) = false]}
-
     {[Float.(is_finite (square_root (-1.))) = false]}
-
     {[Float.is_finite (1. / 0.) = false]}
-
     {[Float.is_finite 1. = true]}
-
     {[Float.(is_finite nan) = false]}
 *)
 
@@ -357,13 +332,9 @@ val is_infinite : t -> bool
     {2 Examples}
 
     {[Float.is_infinite (0. / 0.) = false]}
-
     {[Float.(is_infinite (square_root (-1.))) = false]}
-
     {[Float.is_infinite (1. / 0.) = true]}
-
     {[Float.is_infinite 1. = false]}
-
     {[Float.(is_infinite nan) = false]}
 *)
 
@@ -373,7 +344,6 @@ val is_integer : t -> bool
     {2 Examples}
 
     {[Float.is_integer 4.0 = true]}
-
     {[Float.is_integer Float.pi = false]}
 *)
 
@@ -383,9 +353,7 @@ val is_safe_integer : t -> bool
     {2 Examples}
 
     {[Float.is_safe_integer 4.0 = true]}
-
     {[Float.is_safe_integer Float.pi = false]}
-
     {[Float.(is_safe_integer (maximum_safe_integer + 1.)) = false]}
 *)
 
@@ -401,9 +369,7 @@ val in_range : t -> lower:t -> upper:t -> bool
     {2 Examples}
 
     {[Float.in_range ~lower:2. ~upper:4. 3. = true]}
-
     {[Float.in_range ~lower:1. ~upper:2. 2. = false]}
-
     {[Float.in_range ~lower:5.2 ~upper:7.9 9.6 = false]}
 *)
 
@@ -430,9 +396,7 @@ val degrees : t -> radians
     {2 Examples}
 
     {[Float.degrees 180. = Float.pi]}
-
     {[Float.degrees 360. = Float.pi * 2.]}
-
     {[Float.degrees 90. = Float.pi /. 2.]}
 *)
 
@@ -454,7 +418,6 @@ val turns : t -> radians
     {2 Examples}
 
     {[Float.(turns (1. / 2.)) = pi]}
-
     {[Float.(turns 1. = degrees 360.)]}
 *)
 
@@ -474,9 +437,7 @@ val to_polar : float * float -> float * radians
     {2 Examples}
 
     {[Float.to_polar (-1.0, 0.0) = (1.0, Float.pi)]}
-
     {[Float.to_polar (3.0, 4.0) = (5.0, 0.9272952180016122)]}
-
     {[Float.to_polar (5.0, 12.0) = (13.0, 1.1760052070951352)]}
 *)
 
@@ -486,7 +447,6 @@ val cos : radians -> t
     {2 Examples}
 
     {[Float.(cos (degrees 60.)) = 0.5000000000000001]}
-
     {[Float.(cos (radians (pi / 3.))) = 0.5000000000000001]}
 *)
 
@@ -504,7 +464,6 @@ val sin : radians -> t
     {2 Examples}
 
     {[Float.(sin (degrees 30.)) = 0.49999999999999994]}
-
     {[Float.(sin (radians (pi / 6.))) = 0.49999999999999994]}
 *)
 
@@ -522,9 +481,7 @@ val tan : radians -> t
     {2 Examples}
 
     {[Float.(tan (degrees 45.)) = 0.9999999999999999]}
-
     {[Float.(tan (radians (pi / 4.))) = 0.9999999999999999]}
-
     {[Float.(tan (pi / 4.)) = 0.9999999999999999]}
 *)
 
@@ -546,11 +503,8 @@ val atan : t -> radians
     {2 Examples}
 
     {[Float.atan (1. /. 1.) = 0.7853981633974483  (* 45 degrees or pi/4 radians *)]}
-
     {[Float.atan (1. /. -1.) = -0.7853981633974483  (* 315 degrees or 7 * pi / 4 radians *)]}
-
     {[Float.atan (-1. /. -1.) = 0.7853981633974483 (* 45 degrees or pi/4 radians *)]}
-
     {[Float.atan (-1. /.  1.) = -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)]}
 *)
 
@@ -562,11 +516,8 @@ val atan2 : y:t -> x:t -> radians
     {2 Examples}
 
     {[Float.atan2 ~y:1. ~x:1. = 0.7853981633974483  (* 45 degrees or pi/4 radians *)]}
-
     {[Float.atan2 ~y:1. ~x:(-1.) = 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)]}
-
     {[Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225 degrees or 5 * pi/4 radians *)]}
-
     {[Float.atan2 ~y:(-1.) ~x:1. = -(0.7853981633974483) (* 315 degrees or 7 * pi/4 radians *)]}
 *)
 
@@ -731,15 +682,10 @@ val to_int : t -> int option
     {2 Examples}
 
     {[Float.(to_int 1.6) = (Some 1)]}
-
     {[Float.(to_int 2.0) = (Some 2)]}
-
     {[Float.(to_int 5.683) = (Some 5)]}
-
     {[Float.(to_int nan) = None]}
-
     {[Float.(to_int infinity) = None]}
-
     {[Float.(round 1.6 |> to_int) = Some 2]}
 *)
 

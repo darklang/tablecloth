@@ -274,34 +274,45 @@ export default ({ data, location }) => {
             <NavBarContainer>
               <NavBar />
             </NavBarContainer>
-            <SidebarContainer isOpen={isOpen}>
-              <Sidebar location={location} />
-            </SidebarContainer>
-            <Main>
-              <Container>
-                <PageTitle>{mdx.fields.title}</PageTitle>
-                <GithubEditButton
-                  link={`${docsLocation}/${mdx.parent.relativePath}`}
-                />
-                <div
-                  className={css`
+            <div
+              css={css`
+                    justify-content: center;
+                    align-items: stretch;
+                    display: flex;
+                    min-width: 100%;
+                `}
+            >
+              <SidebarContainer isOpen={isOpen}>
+                <Sidebar location={location} />
+              </SidebarContainer>
+              <Main
+                css={css`
+                      max-width: 960px;
+                  `}>
+                <Container>
+                  <PageTitle>{mdx.fields.title}</PageTitle>
+                  <GithubEditButton
+                    link={`${docsLocation}/${mdx.parent.relativePath}`}
+                  />
+                  <div
+                    className={css`
                     display: flex;
                     flex: 1;
                   `}
-                >
-                  <MDXProvider components={mdxComponents}>
-                    <MDXRenderer>{mdx.body}</MDXRenderer>
-                  </MDXProvider>
-                </div>
-                <div
-                  css={css`
+                  >
+                    <MDXProvider components={mdxComponents}>
+                      <MDXRenderer>{mdx.body}</MDXRenderer>
+                    </MDXProvider>
+                  </div>
+                  <div
+                    css={css`
                     padding: 50px 0;
                   `}
-                >
-                  <NextPrevious currentUrl={mdx.fields.url} nav={nav} />
-                </div>
-              </Container>
-            </Main>
+                  >
+                    <NextPrevious currentUrl={mdx.fields.url} nav={nav} />
+                  </div>
+                </Container>
+              </Main> </div>
             <MenuButtonContainer>
               <MenuButton
                 onClick={() => setIsOpen(open => !open)}

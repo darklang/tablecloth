@@ -37,7 +37,6 @@ val ok : 'ok -> ('ok, 'error) t
     {2 Examples}
 
     {[String.reverse "desserts" |> Result.ok = Ok "stressed"]}
-
     {[List.map [1; 2; 3] ~f:Result.ok = [Ok 1; Ok 2; Ok 3]]}
 *)
 
@@ -56,7 +55,6 @@ val error : 'error -> ('ok, 'error) t
     {2 Examples}
 
     {[Int.negate 3 |> Result.error 3 = Error (-3)]}
-
     {[List.map [1; 2; 3] ~f:Result.error = [Error 1; Error 2; Error 3]]}
 *)
 
@@ -66,7 +64,6 @@ val attempt : (unit -> 'ok) -> ('ok, exn) t
     {2 Examples}
 
     {[Result.attempt (fun () -> 5 / 0) = Error Division_by_zero]}
-
     {[
       let numbers = [|1,2,3|] in
       Result.attempt (fun () -> numbers.(3)) =
@@ -80,7 +77,6 @@ val fromOption : 'ok option -> error:'error -> ('ok, 'error) t
     {2 Examples}
 
     {[Result.fromOption (Some 84) ~error:"Greater than 100" = Ok 8]}
-
     {[
       Result.fromOption None ~error:"Greater than 100" =
         Error "Greater than 100"
@@ -101,7 +97,6 @@ val isOk : (_, _) t -> bool
     {2 Examples}
 
     {[Result.isOk (Ok 3) = true]}
-
     {[Result.isOk (Error 3) = false]}
 *)
 
@@ -119,7 +114,6 @@ val isError : (_, _) t -> bool
     {2 Examples}
 
     {[Result.isError (Ok 3) = false]}
-
     {[Result.isError (Error 3) = true]}
 *)
 
@@ -132,21 +126,18 @@ val and_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
     {2 Examples}
 
     {[Result.and_ (Ok "Antelope") (Ok "Salmon") = Ok "Salmon"]}
-
     {[
       Result.and_
         (Error (`UnexpectedBird "Finch"))
         (Ok "Salmon")
         = Error (`UnexpectedBird "Finch")
     ]}
-
     {[
       Result.and_
         (Ok "Antelope")
         (Error (`UnexpectedBird "Finch"))
           = Error (`UnexpectedBird "Finch")
     ]}
-
     {[
       Result.and_
         (Error (`UnexpectedInvertabrate "Honey bee"))
@@ -164,11 +155,8 @@ val or_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
   {2 Examples}
 
   {[Result.or_ (Ok "Boar") (Ok "Gecko") = (Ok "Boar")]}
-
   {[Result.or_ (Error (`UnexpectedInvertabrate "Periwinkle")) (Ok "Gecko") = (Ok "Gecko")]}
-
   {[Result.or_ (Ok "Boar") (Error (`UnexpectedInvertabrate "Periwinkle")) = (Ok "Boar") ]}
-
   {[Result.or_ (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedBird "Robin"))]}
 *)
 
@@ -182,19 +170,16 @@ val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
     {2 Examples}
 
     {[Result.both (Ok "Badger") (Ok "Rhino") = Ok ("Dog", "Rhino")]}
-
     {[
       Result.both (Error (`UnexpectedBird "Flamingo")) (Ok "Rhino") =
         (Error (`UnexpectedBird "Flamingo"))
     ]}
-
     {[
       Result.both
         (Ok "Badger")
         (Error (`UnexpectedInvertabrate "Blue ringed octopus")) =
           (Error (`UnexpectedInvertabrate "Blue ringed octopus"))
     ]}
-
     {[
       Result.both
         (Error (`UnexpectedBird "Flamingo"))
@@ -209,12 +194,10 @@ val flatten : (('ok, 'error) t, 'error) t -> ('ok, 'error) t
     {2 Examples}
 
     {[Result.flatten (Ok (Ok 2)) = Ok 2]}
-
     {[
       Result.flatten (Ok (Error (`UnexpectedBird "Peregrin falcon"))) =
         (Error (`UnexpectedBird "Peregrin falcon"))
     ]}
-
     {[
       Result.flatten (Error (`UnexpectedInvertabrate "Woodlouse")) =
         (Error (`UnexpectedInvertabrate "Woodlouse"))
@@ -227,7 +210,6 @@ val unwrap : ('ok, 'error) t -> default:'ok -> 'ok
     {2 Examples}
 
     {[Result.unwrap ~default:0 (Ok 12) = 12]}
-
     {[Result.unwrap ~default:0 ((Error (`UnexpectedBird "Ostrich"))) = 0]}
 *)
 
@@ -241,7 +223,6 @@ val unwrapUnsafe : ('ok, _) t -> 'ok
     {2 Examples}
 
     {[Result.unwrapUnsafe (Ok 12) = 12]}
-
     {[Result.unwrapUnsafe (Error "bad") ]}
 *)
 
@@ -256,7 +237,6 @@ val unwrapError : ('ok, 'error) t -> default:'error -> 'error
         ~default:(`UnexpectedInvertabrate "Ladybird") =
           `UnexpectedBird "Swallow"
     ]}
-
     {[
       Result.unwrapError
         (Ok 5)
@@ -276,11 +256,8 @@ val map2 :
     {2 Examples}
 
     {[Result.map2 (Ok 7) (Ok 3) ~f:Int.add = Ok 10]}
-
     {[Result.map2 (Error "A") (Ok 3) ~f:Int.add = Error "A"]}
-
     {[Result.map2 (Ok 7) (Error "B") ~f:Int.add = Error "B"]}
-
     {[Result.map2 (Error "A") (Error "B") ~f:Int.add = Error "A"]}
 *)
 
@@ -292,7 +269,6 @@ val values : ('ok, 'error) t list -> ('ok list, 'error) t
     {2 Examples}
 
     {[Result.values [Ok 1; Ok 2; Ok 3; Ok 4] = Ok [1; 2; 3; 4]]}
-
     {[Result.values [Ok 1; Error "two"; Ok 3; Error "four"] = Error "two"]}
 *)
 
@@ -316,7 +292,6 @@ val map : ('a, 'error) t -> f:('a -> 'b) -> ('b, 'error) t
     {2 Examples}
 
     {[Result.map (Ok 3) ~f:(Int.add 1) = Ok 9]}
-
     {[Result.map (Error "three") ~f:(Int.add 1) = Error "three"]}
 *)
 
@@ -326,7 +301,6 @@ val mapError : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
     {2 Examples}
 
     {[Result.mapError (Ok 3) ~f:String.reverse = Ok 3]}
-
     {[Result.mapError (Error "bad") ~f:(Int.add 1)  = Error "bad"]}
 *)
 
@@ -356,15 +330,10 @@ val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
     {2 Examples}
 
     {[Result.andThen ~f:reciprical (Ok 4.0) = Ok 0.25]}
-
     {[Result.andThen ~f:reciprical (Error "Missing number!") = Error "Missing number!"]}
-
     {[Result.andThen ~f:reciprical (Ok 0.0) = Error "Divide by zero"]}
-
     {[Result.andThen (Ok 4.0) ~f:root  |> Result.andThen ~f:reciprical = Ok 0.5]}
-
     {[Result.andThen (Ok -2.0) ~f:root |> Result.andThen ~f:reciprical = Error "Cannot be negative"]}
-
     {[Result.andThen (Ok 0.0) ~f:root |> Result.andThen ~f:reciprical = Error "Divide by zero"]}
 *)
 
@@ -391,7 +360,6 @@ val toOption : ('ok, _) t -> 'ok option
     {2 Examples}
 
     {[Result.toOption (Ok 42) = Some 42]}
-
     {[Result.toOption (Error "Missing number!") = None]}
 *)
 
@@ -408,13 +376,9 @@ val equal :
     {2 Examples}
 
     {[Result.equal String.equal Int.equal (Ok 3) (Ok 3) = true]}
-
     {[Result.equal String.equal Int.equal (Ok 3) (Ok 4) = false]}
-
     {[Result.equal String.equal Int.equal (Error "Fail") (Error "Fail") = true]}
-
     {[Result.equal String.equal Int.equal (Error "Expected error") (Error "Unexpected error") = false]}
-
     {[Result.equal String.equal Int.equal (Error "Fail") (Ok 4) = false]}
 *)
 
@@ -431,15 +395,10 @@ val compare :
     {2 Examples}
 
     {[Result.compare String.compare Int.compare (Ok 3) (Ok 3) = 0]}
-
     {[Result.compare String.compare Int.compare (Ok 3) (Ok 4) = -1]}
-
     {[Result.compare String.compare Int.compare (Error "Fail") (Error "Fail") = 0]}
-
     {[Result.compare String.compare Int.compare (Error "Fail") (Ok 4) = -1]}
-
     {[Result.compare String.compare Int.compare (Ok 4) (Error "Fail") = 1]}
-
     {[Result.compare String.compare Int.compare (Error "Expected error") (Error "Unexpected error") = -1]}
 *)
 
@@ -457,7 +416,6 @@ val ( |? ) : ('a, 'error) t -> 'a -> 'a
     The following eamples assume [open Result.Infix] is in scope.
 
     {[Ok 4 |? 8 = 4]}
-
     {[Error "Missing number!" |? 8 = 8]}
 *)
 
@@ -481,9 +439,7 @@ val ( >>= ) : ('ok, 'error) t -> ('ok -> ('b, 'error) t) -> ('b, 'error) t
     Is in scope.
 
     {[Ok 4. >>= reciprical = Ok 0.25]}
-
     {[Error "Missing number!" >>= reciprical = Error "Missing number!"]}
-
     {[Ok 0. >>= reciprical = Error "Divide by zero"]}
 *)
 
@@ -495,6 +451,5 @@ val ( >>| ) : ('a, 'error) t -> ('a -> 'b) -> ('b, 'error) t
     The following examples assume [open Result.Infix] is in scope.
 
     {[Ok 4 >>| Int.add(1) = Ok 5]}
-
     {[Error "Its gone bad" >>| Int.add(1) = Error "Its gone bad"]}
 *)

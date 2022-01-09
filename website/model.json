@@ -881,10 +881,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1010,10 +1006,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1023,10 +1015,6 @@
                             "ocaml": "Tuple3.from_array [|1; 2|] = None",
                             "reason": "Tuple3.from_array([|1, 2|]) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -1154,10 +1142,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1167,10 +1151,6 @@
                             "ocaml": "Tuple3.from_list [1; 2] = None",
                             "reason": "Tuple3.from_list([1, 2]) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -1258,10 +1238,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1347,10 +1323,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1434,10 +1406,6 @@
                             "ocaml": "Tuple3.third (3, 4, 5) = 5",
                             "reason": "Tuple3.third((3, 4, 5)) == 5;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -1565,10 +1533,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1694,10 +1658,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1801,10 +1761,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -1888,10 +1844,6 @@
                             "ocaml": "Tuple3.rotate_right (3, 4, 5) = (5, 3, 4)",
                             "reason": "Tuple3.rotate_right((3, 4, 5)) == (5, 3, 4);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -1979,10 +1931,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -2066,10 +2014,6 @@
                             "ocaml": "Tuple3.map_second ~f:Float.square_root (\"stressed\", 16., false) = (\"stressed\", 4., false)",
                             "reason": "Tuple3.map_second(~f=Float.square_root, (\"stressed\", 16., false))\n== (\"stressed\", 4., false);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -2522,10 +2466,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -2639,10 +2579,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -2746,10 +2682,6 @@
                             "ocaml": "Tuple3.equal Int.equal String.equal Char.equal (1, \"Fox\", 'j') (1, \"Fox\", 'k') = true",
                             "reason": "Tuple3.equal(\n  Int.equal,\n  String.equal,\n  Char.equal,\n  (1, \"Fox\", 'j'),\n  (1, \"Fox\", 'k'),\n)\n== true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -2857,10 +2789,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -2870,10 +2798,6 @@
                             "ocaml": "Tuple3.compare Int.compare String.compare Char.compare (1, \"Fox\", 'j') (1, \"Eel\", 'j') = 1",
                             "reason": "Tuple3.compare(\n  Int.compare,\n  String.compare,\n  Char.compare,\n  (1, \"Fox\", 'j'),\n  (1, \"Eel\", 'j'),\n)\n== 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -3157,10 +3081,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -3170,10 +3090,6 @@
                             "ocaml": "Tuple2.from_array [|1|] = None",
                             "reason": "Tuple2.from_array([|1|]) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -3301,10 +3217,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -3314,10 +3226,6 @@
                             "ocaml": "Tuple2.from_list [1] = None",
                             "reason": "Tuple2.from_list([1]) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -3405,10 +3313,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -3492,10 +3396,6 @@
                             "ocaml": "Tuple2.second (3, 4) = 4",
                             "reason": "Tuple2.second((3, 4)) == 4;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -3621,10 +3521,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -3708,10 +3604,6 @@
                             "ocaml": "Tuple2.map_second ~f:Float.square_root (\"stressed\", 16.) = (\"stressed\", 4.)",
                             "reason": "Tuple2.map_second(~f=Float.square_root, (\"stressed\", 16.))\n== (\"stressed\", 4.);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -3815,10 +3707,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -3920,10 +3808,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -4007,10 +3891,6 @@
                             "ocaml": "Tuple2.swap (3, 4) = (4, 3)",
                             "reason": "Tuple2.swap((3, 4)) == (4, 3);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -4144,10 +4024,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -4231,10 +4107,6 @@
                             "ocaml": "Tuple2.to_list (3, 4) = [3; 4]",
                             "reason": "Tuple2.to_list((3, 4)) == [3, 4];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -4342,10 +4214,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -4451,10 +4319,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -4464,10 +4328,6 @@
                             "ocaml": "Tuple2.compare Int.compare String.compare (1, \"Fox\") (1, \"Eel\") = 1",
                             "reason": "Tuple2.compare(Int.compare, String.compare, (1, \"Fox\"), (1, \"Eel\")) == 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -5574,10 +5434,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -5661,10 +5517,6 @@
                             "ocaml": "Set.remove (Set.Int.from_list [1; 2]) 2 |> Set.to_list = [1]",
                             "reason": "Set.remove(Set.Int.from_list([1, 2]), 2) |> Set.to_list == [1];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -6095,10 +5947,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -6108,10 +5956,6 @@
                             "ocaml": "Set.find ~f:Int.is_odd (Set.Int.from_list [0; 2; 4; 8]) = None",
                             "reason": "Set.find(~f=Int.is_odd, Set.Int.from_list([0, 2, 4, 8])) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -6217,10 +6061,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -6322,10 +6162,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -6335,10 +6171,6 @@
                             "ocaml": "Set.any (Set.Int.from_list [1;3]) ~f:Int.is_even = false",
                             "reason": "Set.any(Set.Int.from_list([1, 3]), ~f=Int.is_even) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -6442,10 +6274,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -6455,10 +6283,6 @@
                             "ocaml": "Set.all ~f:Int.is_even (Set.Int.from_list [2;3]) = false",
                             "reason": "Set.all(~f=Int.is_even, Set.Int.from_list([2, 3])) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -6562,10 +6386,6 @@
                             "ocaml": "Set.difference (Set.Int.from_list [1;2;5]) (Set.Int.from_list [2;3;4]) |> Set.to_list = [1;5]",
                             "reason": "Set.difference(Set.Int.from_list([1, 2, 5]), Set.Int.from_list([2, 3, 4]))\n|> Set.to_list == [1, 5];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -8826,10 +8646,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -9040,10 +8856,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -9147,10 +8959,6 @@
                             "ocaml": "Result.attempt (fun () -> 5 / 0) = Error Division_by_zero",
                             "reason": "Result.attempt(() => 5 / 0) == Error(Division_by_zero);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -9308,10 +9116,6 @@
                             "ocaml": "Result.from_option (Some 84) ~error:\"Greater than 100\" = Ok 8",
                             "reason": "Result.from_option(Some(84), ~error=\"Greater than 100\") == Ok(8);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -9526,10 +9330,6 @@
                             "ocaml": "Result.is_ok (Ok 3) = true",
                             "reason": "Result.is_ok(Ok(3)) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -9758,10 +9558,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -9911,10 +9707,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -9926,10 +9718,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -9939,10 +9727,6 @@
                             "ocaml": "\n      Result.and_\n        (Ok \"Antelope\")\n        (Error (`UnexpectedBird \"Finch\"))\n          = Error (`UnexpectedBird \"Finch\")\n    ",
                             "reason": "Result.and_(Ok(\"Antelope\"), Error(`UnexpectedBird(\"Finch\")))\n== Error(`UnexpectedBird(\"Finch\"));\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -10082,10 +9866,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -10097,10 +9877,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -10110,10 +9886,6 @@
                             "ocaml": "Result.or_ (Ok \"Boar\") (Error (`UnexpectedInvertabrate \"Periwinkle\")) = (Ok \"Boar\") ",
                             "reason": "Result.or_(Ok(\"Boar\"), Error(`UnexpectedInvertabrate(\"Periwinkle\")))\n== Ok(\"Boar\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -10273,10 +10045,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -10286,10 +10054,6 @@
                             "ocaml": "\n      Result.both (Error (`UnexpectedBird \"Flamingo\")) (Ok \"Rhino\") =\n        (Error (`UnexpectedBird \"Flamingo\"))\n    ",
                             "reason": "Result.both(Error(`UnexpectedBird(\"Flamingo\")), Ok(\"Rhino\"))\n== Error(`UnexpectedBird(\"Flamingo\"));\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -10392,10 +10156,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -10405,10 +10165,6 @@
                             "ocaml": "\n      Result.flatten (Ok (Error (`UnexpectedBird \"Peregrin falcon\"))) =\n        (Error (`UnexpectedBird \"Peregrin falcon\"))\n    ",
                             "reason": "Result.flatten(Ok(Error(`UnexpectedBird(\"Peregrin falcon\"))))\n== Error(`UnexpectedBird(\"Peregrin falcon\"));\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -10506,10 +10262,6 @@
                             "ocaml": "Result.unwrap ~default:0 (Ok 12) = 12",
                             "reason": "Result.unwrap(~default=0, Ok(12)) == 12;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -10634,10 +10386,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -10749,10 +10497,6 @@
                             "ocaml": "\n      Result.unwrap_error\n        (Error (`UnexpectedBird \"Swallow\"))\n        ~default:(`UnexpectedInvertabrate \"Ladybird\") =\n          `UnexpectedBird \"Swallow\"\n    ",
                             "reason": "Result.unwrap_error(\n  Error(`UnexpectedBird(\"Swallow\")),\n  ~default=`UnexpectedInvertabrate(\"Ladybird\"),\n)\n== `UnexpectedBird(\"Swallow\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -10872,10 +10616,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -10887,10 +10627,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -10900,10 +10636,6 @@
                             "ocaml": "Result.map2 (Ok 7) (Error \"B\") ~f:Int.add = Error \"B\"",
                             "reason": "Result.map2(Ok(7), Error(\"B\"), ~f=Int.add) == Error(\"B\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11034,10 +10766,6 @@
                             "ocaml": "Result.values [Ok 1; Ok 2; Ok 3; Ok 4] = Ok [1; 2; 3; 4]",
                             "reason": "Result.values([Ok(1), Ok(2), Ok(3), Ok(4)]) == Ok([1, 2, 3, 4]);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11278,10 +11006,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -11389,10 +11113,6 @@
                             "ocaml": "Result.map_error (Ok 3) ~f:String.reverse = Ok 3",
                             "reason": "Result.map_error(Ok(3), ~f=String.reverse) == Ok(3);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11532,10 +11252,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -11545,10 +11261,6 @@
                             "ocaml": "Result.and_then ~f:reciprical (Error \"Missing number!\") = Error \"Missing number!\"",
                             "reason": "Result.and_then(~f=reciprical, Error(\"Missing number!\"))\n== Error(\"Missing number!\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11562,10 +11274,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -11577,10 +11285,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -11590,10 +11294,6 @@
                             "ocaml": "Result.and_then (Ok -2.0) ~f:root |> Result.and_then ~f:reciprical = Error \"Cannot be negative\"",
                             "reason": "Result.and_then(Ok - 2.0, ~f=root)\n|> Result.and_then(~f=reciprical) == Error(\"Cannot be negative\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11869,10 +11569,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -11976,10 +11672,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -11989,10 +11681,6 @@
                             "ocaml": "Result.equal String.equal Int.equal (Ok 3) (Ok 4) = false",
                             "reason": "Result.equal(String.equal, Int.equal, Ok(3), Ok(4)) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -12006,10 +11694,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -12019,10 +11703,6 @@
                             "ocaml": "Result.equal String.equal Int.equal (Error \"Expected error\") (Error \"Unexpected error\") = false",
                             "reason": "Result.equal(\n  String.equal,\n  Int.equal,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -12150,10 +11830,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -12163,10 +11839,6 @@
                             "ocaml": "Result.compare String.compare Int.compare (Ok 3) (Ok 4) = -1",
                             "reason": "Result.compare(String.compare, Int.compare, Ok(3), Ok(4)) == (-1);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -12180,10 +11852,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -12195,10 +11863,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -12208,10 +11872,6 @@
                             "ocaml": "Result.compare String.compare Int.compare (Ok 4) (Error \"Fail\") = 1",
                             "reason": "Result.compare(String.compare, Int.compare, Ok(4), Error(\"Fail\")) == 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -12389,10 +12049,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -12525,10 +12181,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -12538,10 +12190,6 @@
                             "ocaml": "Error \"Missing number!\" >>= reciprical = Error \"Missing number!\"",
                             "reason": "Error(\"Missing number!\") >>= reciprical == Error(\"Missing number!\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -12659,10 +12307,6 @@
                             "ocaml": "Ok 4 >>| Int.add(1) = Ok 5",
                             "reason": "Ok(4) >>| Int.add(1) == Ok(5);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -13059,10 +12703,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -13146,10 +12786,6 @@
                             "ocaml": "List.singleton 1234 = [1234]",
                             "reason": "List.singleton(1234) == [1234];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -13253,10 +12889,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -13266,10 +12898,6 @@
                             "ocaml": "List.repeat ~times:0 7 = []",
                             "reason": "List.repeat(~times=0, 7) == [];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -13377,10 +13005,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -13390,10 +13014,6 @@
                             "ocaml": "List.range ~from:2 5 = [2; 3; 4] ",
                             "reason": "List.range(~from=2, 5) == [2, 3, 4];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -13519,10 +13139,6 @@
                             "ocaml": "List.initialize 4 ~f:identity = [0; 1; 2; 3]",
                             "reason": "List.initialize(4, ~f=identity) == [0, 1, 2, 3];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -13754,10 +13370,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -13875,10 +13487,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -13888,10 +13496,6 @@
                             "ocaml": "List.tail [1] = Some []",
                             "reason": "List.tail([1]) == Some([]);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -13993,10 +13597,6 @@
                             "ocaml": "List.cons [2;3;4] 1 = [1;2;3;4]",
                             "reason": "List.cons([2, 3, 4], 1) == [1, 2, 3, 4];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -14116,10 +13716,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n   "
                         },
@@ -14131,10 +13727,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n   "
                         },
@@ -14144,10 +13736,6 @@
                             "ocaml": "List.take [1;2;3;4] ~count:8 = [1;2;3;4]",
                             "reason": "List.take([1, 2, 3, 4], ~count=8) == [1, 2, 3, 4];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -14353,10 +13941,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -14366,10 +13950,6 @@
                             "ocaml": "List.drop [1;2;3;4] ~count:6 = []",
                             "reason": "List.drop([1, 2, 3, 4], ~count=6) == [];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -14469,10 +14049,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -14482,10 +14058,6 @@
                             "ocaml": "List.drop_while ~f:Int.is_even [2; 4; 6; 8] = []",
                             "reason": "List.drop_while(~f=Int.is_even, [2, 4, 6, 8]) == [];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -14609,10 +14181,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -14622,10 +14190,6 @@
                             "ocaml": "List.initial [1] = Some []",
                             "reason": "List.initial([1]) == Some([]);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -14750,10 +14314,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -14763,10 +14323,6 @@
                             "ocaml": "List.last [1] = Some 1",
                             "reason": "List.last([1]) == Some(1);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -14886,10 +14442,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -14899,10 +14451,6 @@
                             "ocaml": "List.get_at [] ~index:2 = None",
                             "reason": "List.get_at([], ~index=2) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -15067,10 +14615,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -15080,10 +14624,6 @@
                             "ocaml": "List.insert_at ~index:0 ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]",
                             "reason": "List.insert_at(~index=0, ~value=999, [100, 101, 102, 103])\n== [999, 100, 101, 102, 103];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -15097,10 +14637,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -15110,10 +14646,6 @@
                             "ocaml": "List.insert_at ~index:(-1) ~value:999 [100; 101; 102; 103] = [999]",
                             "reason": "List.insert_at(~index=-1, ~value=999, [100, 101, 102, 103]) == [999];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -15233,10 +14765,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -15344,10 +14872,6 @@
                             "ocaml": "List.remove_at [1; 2; 3] ~index:2 = [1; 2]",
                             "reason": "List.remove_at([1, 2, 3], ~index=2) == [1, 2];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -15698,10 +15222,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -15711,10 +15231,6 @@
                             "ocaml": "List.is_empty [||] = true",
                             "reason": "List.is_empty([||]) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -15941,10 +15457,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -16062,10 +15574,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -16075,10 +15583,6 @@
                             "ocaml": "List.any ~f:is_even [|1;3|] = false",
                             "reason": "List.any(~f=is_even, [|1, 3|]) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -16198,10 +15702,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -16211,10 +15711,6 @@
                             "ocaml": "List.all ~f:Int.is_even [|2;3|] = false",
                             "reason": "List.all(~f=Int.is_even, [|2, 3|]) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -16517,10 +16013,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -16530,10 +16022,6 @@
                             "ocaml": "List.find ~f:Int.is_odd [|0; 2; 4; 8;|] = None",
                             "reason": "List.find(~f=Int.is_odd, [|0, 2, 4, 8|]) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -16779,10 +16267,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -16792,10 +16276,6 @@
                             "ocaml": "List.includes [1; 3; 5; 7] 4 ~equal:Int.equal = false",
                             "reason": "List.includes([1, 3, 5, 7], 4, ~equal=Int.equal) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -17431,10 +16911,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -17444,10 +16920,6 @@
                             "ocaml": "List.sum [4.0;4.5;5.0] (module Float) = 13.5",
                             "reason": "List.sum([4.0, 4.5, 5.0], (module Float)) == 13.5;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -18069,10 +17541,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -18184,10 +17652,6 @@
                             "ocaml": "List.flat_map ~f xs = List.map ~f xs |> List.flatten",
                             "reason": "List.flat_map(~f, xs) == List.map(~f, xs) |> List.flatten;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -19258,10 +18722,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -19271,10 +18731,6 @@
                             "ocaml": "List.split_at [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])",
                             "reason": "List.split_at [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -19420,10 +18876,6 @@
                             "ocaml": "List.split_when [2; 4; 5; 6; 7] ~f:Int.is_even = ([2; 4], [5; 6; 7])",
                             "reason": "List.split_when([2, 4, 5, 6, 7], ~f=Int.is_even) == ([2, 4], [5, 6, 7]);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -19883,10 +19335,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20110,10 +19558,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20123,10 +19567,6 @@
                             "ocaml": "List.sliding [1;2;3;4;5] ~size:2 = [[1;2]; [2;3]; [3;4]; [4;5]] ",
                             "reason": "List.sliding([1, 2, 3, 4, 5], ~size=2)\n== [[1, 2], [2, 3], [3, 4], [4, 5]];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -20140,10 +19580,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20153,10 +19589,6 @@
                             "ocaml": "List.sliding [1;2;3;4;5] ~size:2 ~step:2 = [[1;2]; [3;4]] ",
                             "reason": "List.sliding([1, 2, 3, 4, 5], ~size=2, ~step=2) == [[1, 2], [3, 4]];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -20170,10 +19602,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20183,10 +19611,6 @@
                             "ocaml": "List.sliding [1;2;3;4;5] ~size:2 ~step:3 = [[1; 2]; [4; 5]]",
                             "reason": "List.sliding([1, 2, 3, 4, 5], ~size=2, ~step=3) == [[1, 2], [4, 5]];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -20306,10 +19730,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20321,10 +19741,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20334,10 +19750,6 @@
                             "ocaml": "\n      List.group_while\n        ~f:String.equal\n        [\"a\"; \"b\"; \"b\"; \"a\"; \"a\"; \"a\"; \"b\"; \"a\"] =\n          [[\"a\"]; [\"b\"; \"b\"]; [\"a\"; \"a\"; \"a\";] [\"b\"]; [\"a\"]]\n    ",
                             "reason": "List.group_while(~f=String.equal, [\"a\", \"b\", \"b\", \"a\", \"a\", \"a\", \"b\", \"a\"])\n== [[\"a\"], [\"b\", \"b\"], [\"a\", \"a\", \"a\"]([\"b\"]), [\"a\"]];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -20789,10 +20201,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -20802,10 +20210,6 @@
                             "ocaml": "List.compare Int.compare [1;2;3] [1;2;3] = 0",
                             "reason": "List.compare(Int.compare, [1, 2, 3], [1, 2, 3]) == 0;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -21087,10 +20491,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -21192,10 +20592,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -21205,10 +20601,6 @@
                             "ocaml": "Array.repeat ~length:0 7 = [||]",
                             "reason": "Array.repeat(~length=0, 7) == [||];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -21316,10 +20708,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -21329,10 +20717,6 @@
                             "ocaml": "Array.range ~from:2 5 = [|2; 3; 4|] ",
                             "reason": "Array.range(~from=2, 5) == [|2, 3, 4|];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -21450,10 +20834,6 @@
                             "ocaml": "Array.initialize 4 ~f:identity = [|0; 1; 2; 3|]",
                             "reason": "Array.initialize(4, ~f=identity) == [|0, 1, 2, 3|];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -21633,10 +21013,6 @@
                             "ocaml": "\n      let numbers = [|1;2;3|] in\n      let other_numbers = Array.copy numbers in\n      numbers.(1) <- 9;\n      numbers = [|1;9;3|];\n      other_numbers = [|1;2;3|];\n    ",
                             "reason": "{\n  let numbers = [|1, 2, 3|];\n  let other_numbers = Array.copy(numbers);\n  numbers[1] = 9;\n  numbers == [|1, 9, 3|];\n  other_numbers == [|1, 2, 3|];\n};\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -21870,10 +21246,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22035,10 +21407,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22175,10 +21543,6 @@
                             "ocaml": "Array.([||].?(3)) = Some 'g'",
                             "reason": "Array.(.?()([||], 3)) == Some('g');\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -22542,10 +21906,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22555,10 +21915,6 @@
                             "ocaml": "Array.first [1] = Some 1",
                             "reason": "Array.first([1]) == Some(1);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -22662,10 +22018,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22675,10 +22027,6 @@
                             "ocaml": "Array.last [1] = Some 1",
                             "reason": "Array.last([1]) == Some(1);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -22830,10 +22178,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22843,10 +22187,6 @@
                             "ocaml": "Array.slice ~from:1 ~to_:4 [0; 1; 2; 3; 4] = [1; 2; 3]",
                             "reason": "Array.slice(~from=1, ~to_=4, [0, 1, 2, 3, 4]) == [1, 2, 3];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -22860,10 +22200,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22875,10 +22211,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -22888,10 +22220,6 @@
                             "ocaml": "Array.slice ~from:(-2) ~to_:5 [0; 1; 2; 3; 4] = [3; 4]",
                             "reason": "Array.slice(~from=-2, ~to_=5, [0, 1, 2, 3, 4]) == [3, 4];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -23317,10 +22645,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23404,10 +22728,6 @@
                             "ocaml": "Array.length [|1; 2, 3|] = 3",
                             "reason": "Array.length([|1, (2, 3)|]) == 3;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -23531,10 +22851,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23544,10 +22860,6 @@
                             "ocaml": "Array.any ~f:Int.is_even [|1;3;5;7|] = false",
                             "reason": "Array.any(~f=Int.is_even, [|1, 3, 5, 7|]) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -23671,10 +22983,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23684,10 +22992,6 @@
                             "ocaml": "Array.all ~f:Int.is_even [|2;3|] = false",
                             "reason": "Array.all(~f=Int.is_even, [|2, 3|]) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -23937,10 +23241,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -23950,10 +23250,6 @@
                             "ocaml": "Array.find ~f:Int.is_odd [|0; 2; 4; 8;|] = None",
                             "reason": "Array.find(~f=Int.is_odd, [|0, 2, 4, 8|]) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -24249,10 +23545,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -24360,10 +23652,6 @@
                             "ocaml": "Array.maximum [|7;5;8;6|] ~compare:Int.compare = Some 8",
                             "reason": "Array.maximum([|7, 5, 8, 6|], ~compare=Int.compare) == Some(8);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -24527,10 +23815,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -24540,10 +23824,6 @@
                             "ocaml": "Array.extent [|7|] ~compare:Int.compare = Some (7, 7)",
                             "reason": "Array.extent([|7|], ~compare=Int.compare) == Some((7, 7));\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -24647,10 +23927,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -24660,10 +23936,6 @@
                             "ocaml": "Array.sum [|4.0; 4.5; 5.0|] (module Float) = 13.5",
                             "reason": "Array.sum([|4.0, 4.5, 5.0|], (module Float)) == 13.5;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -25235,10 +24507,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -25668,10 +24936,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -25681,10 +24945,6 @@
                             "ocaml": "\n      Array.fold [|1; 1; 2; 2; 3|] ~initial:Set.Int.empty ~f:Set.add |> Set.to_array = [|1; 2; 3|]\n    ",
                             "reason": "Array.fold([|1, 1, 2, 2, 3|], ~initial=Set.Int.empty, ~f=Set.add)\n|> Set.to_array == [|1, 2, 3|];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -25790,10 +25050,6 @@
                             "ocaml": "Array.fold_right ~f:(+) ~initial:0 (Array.repeat ~length:3 5) = 15",
                             "reason": "Array.fold_right(~f=(+), ~initial=0, Array.repeat(~length=3, 5)) == 15;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -26153,10 +25409,6 @@
                             "ocaml": "\n      let totals (xs : int array) (ys : int array) : int array =\n        Array.map2 ~f:(+) xs ys in\n\n      totals [|1;2;3|] [|4;5;6|] = [|5;7;9|]\n    ",
                             "reason": "{\n  let totals = (xs: array(int), ys: array(int)): array(int) =>\n    Array.map2(~f=(+), xs, ys);\n\n  totals([|1, 2, 3|], [|4, 5, 6|]) == [|5, 7, 9|];\n};\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -26571,10 +25823,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -26584,10 +25832,6 @@
                             "ocaml": "Array.split_at [|1;2;3;4;5|] ~index:10 = ([|1;2;3;4;5|], [||])",
                             "reason": "Array.split_at([|1, 2, 3, 4, 5|], ~index=10) == ([|1, 2, 3, 4, 5|], [||]);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -26743,10 +25987,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -26756,10 +25996,6 @@
                             "ocaml": "\n      Array.split_when\n        [|\"Ant\"; \"Bat\"; \"Cat\"|]\n        ~f:(fun animal -> String.length animal > 3) =\n          ([|\"Ant\"; \"Bat\"; \"Cat\"|], [||])\n    ",
                             "reason": "Array.split_when([|\"Ant\", \"Bat\", \"Cat\"|], ~f=animal =>\n  String.length(animal) > 3\n)\n== ([|\"Ant\", \"Bat\", \"Cat\"|], [||]);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -27151,10 +26387,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -27246,10 +26478,6 @@
                             "ocaml": "\n      Array.intersperse ~sep:\"on\" [|\"turtles\"; \"turtles\"; \"turtles\"|] =\n      [|\"turtles\"; \"on\"; \"turtles\"; \"on\"; \"turtles\"|]\n    ",
                             "reason": "Array.intersperse(~sep=\"on\", [|\"turtles\", \"turtles\", \"turtles\"|])\n== [|\"turtles\", \"on\", \"turtles\", \"on\", \"turtles\"|];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -27483,10 +26711,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -27496,10 +26720,6 @@
                             "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:2 = [|[|1;2|]; [|2;3|]; [|3;4|]; [|4;5|]|] ",
                             "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=2)\n== [|[|1, 2|], [|2, 3|], [|3, 4|], [|4, 5|]|];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -27513,10 +26733,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -27526,10 +26742,6 @@
                             "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:2 ~step:2 = [|[|1;2|]; [|3;4|]|] ",
                             "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=2, ~step=2)\n== [|[|1, 2|], [|3, 4|]|];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -27879,10 +27091,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -28128,10 +27336,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -28141,10 +27345,6 @@
                             "ocaml": "Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0",
                             "reason": "Array.compare(Int.compare, [|1, 2, 3|], [|1, 2, 3|]) == 0;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -33177,10 +32377,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -33192,10 +32388,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -33205,10 +32397,6 @@
                             "ocaml": "Option.and_ (Some 11) None = None",
                             "reason": "Option.and_(Some(11), None) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -33348,10 +32536,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33363,10 +32547,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33376,10 +32556,6 @@
                             "ocaml": "Option.or_ (Some 11) None = Some 11",
                             "reason": "Option.or_(Some(11), None) == Some(11);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -33523,10 +32699,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33538,10 +32710,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33551,10 +32719,6 @@
                             "ocaml": "Option.or_else (Some 11) None = Some 11",
                             "reason": "Option.or_else(Some(11), None) == Some(11);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -33670,10 +32834,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33685,10 +32845,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33698,10 +32854,6 @@
                             "ocaml": "Option.both None (Some \"Ant\") = None",
                             "reason": "Option.both(None, Some(\"Ant\")) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -33789,10 +32941,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33802,10 +32950,6 @@
                             "ocaml": "Option.flatten (Some None) = None",
                             "reason": "Option.flatten(Some(None)) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -33937,10 +33081,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -33950,10 +33090,6 @@
                             "ocaml": "Option.map ~f:Int.to_string (Some 9) = Some \"9\"",
                             "reason": "Option.map(~f=Int.to_string, Some(9)) == Some(\"9\");\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -34113,10 +33249,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -34128,10 +33260,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -34141,10 +33269,6 @@
                             "ocaml": "Option.map2 (Some 3) None ~f:Int.add = None",
                             "reason": "Option.map2(Some(3), None, ~f=Int.add) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -34368,10 +33492,6 @@
                             "ocaml": "Option.and_then (Some [1, 2, 3]) ~f:List.head = Some 1",
                             "reason": "Option.and_then(Some([(1, 2, 3)]), ~f=List.head) == Some(1);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -34640,10 +33760,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -34653,10 +33769,6 @@
                             "ocaml": "Option.unwrap ~default:99 None = 99",
                             "reason": "Option.unwrap(~default=99, None) == 99;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -34882,10 +33994,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35007,10 +34115,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35130,10 +34234,6 @@
                             "ocaml": "Option.is_none (Some 3004) = false",
                             "reason": "Option.is_none(Some(3004)) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -35303,10 +34403,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35436,10 +34532,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35543,10 +34635,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35558,10 +34646,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35571,10 +34655,6 @@
                             "ocaml": "Option.equal Int.equal (Some 1) None = false",
                             "reason": "Option.equal(Int.equal, Some(1), None) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -35682,10 +34762,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35695,10 +34771,6 @@
                             "ocaml": "Option.compare Int.compare (Some 1) None = 1",
                             "reason": "Option.compare(Int.compare, Some(1), None) == 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -35863,10 +34935,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -35968,10 +35036,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -36071,10 +35135,6 @@
                             "ocaml": "Some [1, 2, 3] >>= List.head = Some 1",
                             "reason": "Some([(1, 2, 3)]) >>= List.head == Some(1);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -36322,10 +35382,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -36437,10 +35493,6 @@
                             "ocaml": "String.from_list [] = \"\"",
                             "reason": "String.from_list([]) == \"\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -36589,10 +35641,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -36602,10 +35650,6 @@
                             "ocaml": "String.repeat ~count:3 \"\" = \"\"",
                             "reason": "String.repeat(~count=3, \"\") == \"\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -36924,10 +35968,6 @@
                             "ocaml": "(\"Doggie\".String.?[3]) = Some 'g'",
                             "reason": "String..?[](\"Doggie\", 3) == Some('g');\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -37339,10 +36379,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37436,10 +36472,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37525,10 +36557,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37538,10 +36566,6 @@
                             "ocaml": "String.includes \"team\" ~substring:\"i\" = false",
                             "reason": "String.includes(\"team\", ~substring=\"i\") == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -37650,10 +36674,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37747,10 +36767,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37760,10 +36776,6 @@
                             "ocaml": "String.drop_left ~count:0 \"abcdefg\" = \"abcdefg\"",
                             "reason": "String.drop_left(~count=0, \"abcdefg\") == \"abcdefg\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -37777,10 +36789,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37790,10 +36798,6 @@
                             "ocaml": "String.drop_left ~count:(-2) \"abcdefg\" = \"fg\"",
                             "reason": "String.drop_left(~count=-2, \"abcdefg\") == \"fg\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -37889,10 +36893,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37902,10 +36902,6 @@
                             "ocaml": "String.drop_right ~count:0 \"abcdefg\" = \"abcdefg\"",
                             "reason": "String.drop_right(~count=0, \"abcdefg\") == \"abcdefg\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -37919,10 +36915,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -37932,10 +36924,6 @@
                             "ocaml": "String.drop_right ~count:(-2) \"abcdefg\" = \"abcdefg\"",
                             "reason": "String.drop_right(~count=-2, \"abcdefg\") == \"abcdefg\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -38233,10 +37221,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -38246,10 +37230,6 @@
                             "ocaml": "String.insert_at ~value:\"**\" ~index:0 \"abcde\" = \"**abcde\"",
                             "reason": "String.insert_at(~value=\"**\", ~index=0, \"abcde\") == \"**abcde\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -38263,10 +37243,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -38278,10 +37254,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -38291,10 +37263,6 @@
                             "ocaml": "String.insert_at ~value:\"**\" ~index:(-9) \"abcde\" = \"**abcde\"",
                             "reason": "String.insert_at(~value=\"**\", ~index=-9, \"abcde\") == \"**abcde\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -38790,10 +37758,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -38803,10 +37767,6 @@
                             "ocaml": "String.trim \"  abc def  \" = \"abc def\"",
                             "reason": "String.trim(\"  abc def  \") == \"abc def\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -39246,10 +38206,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -39259,10 +38215,6 @@
                             "ocaml": "String.uncons \"a\" = Some ('a', \"\")",
                             "reason": "String.uncons(\"a\") == Some(('a', \"\"));\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -39612,10 +38564,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -39719,10 +38667,6 @@
                             "ocaml": "String.to_list \"\" = []",
                             "reason": "String.to_list(\"\") == [];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -39882,10 +38826,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -39897,10 +38837,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -39910,10 +38846,6 @@
                             "ocaml": "String.compare \"Pear\" \"pear\" = 1",
                             "reason": "String.compare(\"Pear\", \"pear\") == 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40318,10 +39250,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40333,10 +39261,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40346,10 +39270,6 @@
                             "ocaml": "Char.from_code 3000 = None",
                             "reason": "Char.from_code(3000) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40469,10 +39389,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40482,10 +39398,6 @@
                             "ocaml": "Char.from_string \" \" = Some ' '",
                             "reason": "Char.from_string(\" \") == Some(' ');\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40499,10 +39411,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40512,10 +39420,6 @@
                             "ocaml": "Char.from_string \"abc\" = None",
                             "reason": "Char.from_string(\"abc\") == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40603,10 +39507,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40616,10 +39516,6 @@
                             "ocaml": "Char.is_lowercase 'b' = true",
                             "reason": "Char.is_lowercase('b') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40633,10 +39529,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40648,10 +39540,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40661,10 +39549,6 @@
                             "ocaml": "Char.is_lowercase 'A' = false",
                             "reason": "Char.is_lowercase('A') == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40752,10 +39636,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40765,10 +39645,6 @@
                             "ocaml": "Char.is_uppercase 'B' = true",
                             "reason": "Char.is_uppercase('B') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40782,10 +39658,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40797,10 +39669,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40810,10 +39678,6 @@
                             "ocaml": "Char.is_uppercase '0' = false",
                             "reason": "Char.is_uppercase('0') == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40901,10 +39765,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40914,10 +39774,6 @@
                             "ocaml": "Char.is_letter 'b' = true",
                             "reason": "Char.is_letter('b') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -40931,10 +39787,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40946,10 +39798,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -40959,10 +39807,6 @@
                             "ocaml": "Char.is_letter '0' = false",
                             "reason": "Char.is_letter('0') == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41050,10 +39894,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41063,10 +39903,6 @@
                             "ocaml": "Char.is_digit '1' = true",
                             "reason": "Char.is_digit('1') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41080,10 +39916,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41093,10 +39925,6 @@
                             "ocaml": "Char.is_digit 'a' = false",
                             "reason": "Char.is_digit('a') == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41184,10 +40012,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41197,10 +40021,6 @@
                             "ocaml": "Char.is_alphanumeric 'b' = true",
                             "reason": "Char.is_alphanumeric('b') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41214,10 +40034,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41227,10 +40043,6 @@
                             "ocaml": "Char.is_alphanumeric 'Y' = true",
                             "reason": "Char.is_alphanumeric('Y') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41244,10 +40056,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41257,10 +40065,6 @@
                             "ocaml": "Char.is_alphanumeric '7' = true",
                             "reason": "Char.is_alphanumeric('7') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41408,10 +40212,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41421,10 +40221,6 @@
                             "ocaml": "Char.is_printable '%' = true",
                             "reason": "Char.is_printable('%') == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41438,10 +40234,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41451,10 +40243,6 @@
                             "ocaml": "Char.is_printable '\\t' = false",
                             "reason": "Char.is_printable('\\t') == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41603,10 +40391,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41618,10 +40402,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41631,10 +40411,6 @@
                             "ocaml": "Char.is_whitespace '?' = false",
                             "reason": "Char.is_whitespace('?') == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41722,10 +40498,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41735,10 +40507,6 @@
                             "ocaml": "Char.to_lowercase 'B' = 'b'",
                             "reason": "Char.to_lowercase('B') == 'b';\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41826,10 +40594,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -41839,10 +40603,6 @@
                             "ocaml": "to_uppercase 'b' = 'B'",
                             "reason": "to_uppercase('b') == 'B';\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -41958,10 +40718,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -42047,10 +40803,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -42060,10 +40812,6 @@
                             "ocaml": "Char.to_string '{' = \"{\"",
                             "reason": "Char.to_string('{') == \"{\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -42187,10 +40935,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -42202,10 +40946,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -42215,10 +40955,6 @@
                             "ocaml": "Char.to_digit \"A\" = None",
                             "reason": "Char.to_digit(\"A\") == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -42770,11 +41506,11 @@
                   {
                     "tag": "Link",
                     "value": {
-                      "target": " Ints are 32 bits",
+                      "target": " https://bucklescript.github.io/docs/en/common-data-types.html#int ",
                       "content": [
                         {
                           "tag": "Raw",
-                          "value": " https://bucklescript.github.io/docs/en/common-data-types.html#int "
+                          "value": "  Ints are 32 bits"
                         }
                       ]
                     }
@@ -43237,10 +41973,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -43250,10 +41982,6 @@
                             "ocaml": "Int.from_string \"42\" = Some 42.",
                             "reason": "Int.from_string(\"42\") == Some(42.);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -43267,10 +41995,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -43280,10 +42004,6 @@
                             "ocaml": "Int.from_string \"123_456\" = Some 123_456",
                             "reason": "Int.from_string(\"123_456\") == Some(123_456);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -43297,10 +42017,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -43312,10 +42028,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -43325,10 +42037,6 @@
                             "ocaml": "Int.from_string \"Infinity\" = None",
                             "reason": "Int.from_string(\"Infinity\") == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -44135,10 +42843,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -44278,10 +42982,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -44291,10 +42991,6 @@
                             "ocaml": "Int.(27 /. 5) = 5.25",
                             "reason": "Int.(27 /. 5) == 5.25;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -44541,10 +43237,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -44554,10 +43246,6 @@
                             "ocaml": "Int.negate (-7) = 7",
                             "reason": "Int.negate(-7) == 7;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -44746,10 +43434,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -44759,10 +43443,6 @@
                             "ocaml": "Int.absolute (-7) = 7",
                             "reason": "Int.absolute(-7) == 7;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -44966,10 +43646,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -44979,10 +43655,6 @@
                             "ocaml": "Int.modulo ~by:3 (-3 )= 0",
                             "reason": "Int.modulo(~by=3, -3) == 0;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -44996,10 +43668,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -45009,10 +43677,6 @@
                             "ocaml": "Int.modulo ~by:3 (-1) = 1",
                             "reason": "Int.modulo(~by=3, -1) == 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45026,10 +43690,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -45039,10 +43699,6 @@
                             "ocaml": "Int.modulo ~by:3 1 = 1",
                             "reason": "Int.modulo(~by=3, 1) == 1;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45056,10 +43712,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -45069,10 +43721,6 @@
                             "ocaml": "Int.modulo ~by:3 3 = 0",
                             "reason": "Int.modulo(~by=3, 3) == 0;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45324,10 +43972,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -45419,10 +44063,6 @@
                             "ocaml": "Int.minimum 7 9 = 7",
                             "reason": "Int.minimum(7, 9) == 7;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45536,10 +44176,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -45549,10 +44185,6 @@
                             "ocaml": "Int.is_even 7 = false",
                             "reason": "Int.is_even(7) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45648,10 +44280,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -45661,10 +44289,6 @@
                             "ocaml": "Int.is_odd 8 = false",
                             "reason": "Int.is_odd(8) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45817,10 +44441,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n  "
                         },
@@ -45830,10 +44450,6 @@
                             "ocaml": "Int.clamp ~lower:0 ~upper:8 9 = 8",
                             "reason": "Int.clamp(~lower=0, ~upper=8, 9) == 8;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -45986,10 +44602,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -45999,10 +44611,6 @@
                             "ocaml": "Int.in_range ~lower:5 ~upper:8 4 = false",
                             "reason": "Int.in_range(~lower=5, ~upper=8, 4) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -46261,10 +44869,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -46274,10 +44878,6 @@
                             "ocaml": "Int.to_string (-3) = \"-3\"",
                             "reason": "Int.to_string(-3) == \"-3\";\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -46887,10 +45487,6 @@
                             "ocaml": "List.map ~f:(Fun.constant 0) [1;2;3;4;5] = [0;0;0;0;0]",
                             "reason": "List.map(~f=Fun.constant(0), [1, 2, 3, 4, 5]) == [0, 0, 0, 0, 0];\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -47916,10 +46512,6 @@
                             "ocaml": "\n      let sanitize (input: string) : int option =\n        input\n        |> String.trim\n        |> Fun.tap ~f:(fun trimmed_string -> print_endline trimmed_string)\n        |> Int.from_string\n    ",
                             "reason": "let sanitize = (input: string): option(int) =>\n  input\n  |> String.trim\n  |> Fun.tap(~f=trimmed_string => print_endline(trimmed_string))\n  |> Int.from_string;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -49547,10 +48139,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -49560,10 +48148,6 @@
                             "ocaml": "Float.from_string \"-4.667\" = Some (-4.667)",
                             "reason": "Float.from_string(\"-4.667\") == Some(-4.667);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -49577,10 +48161,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -49592,10 +48172,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -49605,10 +48181,6 @@
                             "ocaml": "Float.from_string \"nan\" = Some Float.nan",
                             "reason": "Float.from_string(\"nan\") == Some(Float.nan);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -50045,10 +48617,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -50202,10 +48770,6 @@
                             "ocaml": "Float.multiply 2.0 7.0 = 14.0",
                             "reason": "Float.multiply(2.0, 7.0) == 14.0;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -50363,10 +48927,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -50522,10 +49082,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -50679,10 +49235,6 @@
                             "ocaml": "Float.(~- 4.0) = (-4.0)",
                             "reason": "Float.(- 4.0) == (-4.0);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -50942,10 +49494,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -50955,10 +49503,6 @@
                             "ocaml": "Float.maximum (-4.) (-1.) = (-1.)",
                             "reason": "Float.maximum(-4., -1.) == (-1.);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51074,10 +49618,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51087,10 +49627,6 @@
                             "ocaml": "Float.minimum (-4.0) (-1.0) = (-4.0)",
                             "reason": "Float.minimum(-4.0, -1.0) == (-4.0);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51243,10 +49779,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51256,10 +49788,6 @@
                             "ocaml": "Float.clamp ~lower:0. ~upper:8. 9. = 8.",
                             "reason": "Float.clamp(~lower=0., ~upper=8., 9.) == 8.;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51409,10 +49937,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51496,10 +50020,6 @@
                             "ocaml": "Float.log ~base:10. 100. = 2.",
                             "reason": "Float.log(~base=10., 100.) == 2.;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51670,10 +50190,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51685,10 +50201,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51698,10 +50210,6 @@
                             "ocaml": "Float.is_nan (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)",
                             "reason": "Float.is_nan(1.0 / 0.0) == false; /* Float.infinity {b is} a number */\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51825,10 +50333,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51838,10 +50342,6 @@
                             "ocaml": "Float.(is_finite (square_root (-1.))) = false",
                             "reason": "Float.(is_finite(square_root(-1.))) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51855,10 +50355,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51868,10 +50364,6 @@
                             "ocaml": "Float.is_finite 1. = true",
                             "reason": "Float.is_finite(1.) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51959,10 +50451,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -51972,10 +50460,6 @@
                             "ocaml": "Float.(is_infinite (square_root (-1.))) = false",
                             "reason": "Float.(is_infinite(square_root(-1.))) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -51989,10 +50473,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -52002,10 +50482,6 @@
                             "ocaml": "Float.is_infinite 1. = false",
                             "reason": "Float.is_infinite(1.) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -52093,10 +50569,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -52182,10 +50654,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -52195,10 +50663,6 @@
                             "ocaml": "Float.is_safe_integer Float.pi = false",
                             "reason": "Float.is_safe_integer(Float.pi) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -52367,10 +50831,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -52380,10 +50840,6 @@
                             "ocaml": "Float.in_range ~lower:1. ~upper:2. 2. = false",
                             "reason": "Float.in_range(~lower=1., ~upper=2., 2.) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -52732,10 +51188,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -52745,10 +51197,6 @@
                             "ocaml": "Float.degrees 360. = Float.pi * 2.",
                             "reason": "Float.degrees(360.) == Float.pi * 2.;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -53011,10 +51459,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -53272,10 +51716,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -53285,10 +51725,6 @@
                             "ocaml": "Float.to_polar (3.0, 4.0) = (5.0, 0.9272952180016122)",
                             "reason": "Float.to_polar((3.0, 4.0)) == (5.0, 0.9272952180016122);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -53390,10 +51826,6 @@
                             "ocaml": "Float.(cos (degrees 60.)) = 0.5000000000000001",
                             "reason": "Float.(cos(degrees(60.))) == 0.5000000000000001;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -53595,10 +52027,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -53782,10 +52210,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -53795,10 +52219,6 @@
                             "ocaml": "Float.(tan (radians (pi / 4.))) = 0.9999999999999999",
                             "reason": "Float.(tan(radians(pi / 4.))) == 0.9999999999999999;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -54043,10 +52463,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -54058,10 +52474,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -54071,10 +52483,6 @@
                             "ocaml": "Float.atan (-1. /. -1.) = 0.7853981633974483 (* 45 degrees or pi/4 radians *)",
                             "reason": "Float.atan((-1.) /. (-1.)) == 0.7853981633974483; /* 45 degrees or pi/4 radians */\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -54194,10 +52602,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -54209,10 +52613,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -54222,10 +52622,6 @@
                             "ocaml": "Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225 degrees or 5 * pi/4 radians *)",
                             "reason": "Float.atan2(~y=-1., ~x=-1.) == (-2.3561944901923449); /* 225 degrees or 5 * pi/4 radians */\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -55502,10 +53898,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -55515,10 +53907,6 @@
                             "ocaml": "Float.(to_int 2.0) = (Some 2)",
                             "reason": "Float.(to_int(2.0)) == Some(2);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -55532,10 +53920,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -55547,10 +53931,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -55560,10 +53940,6 @@
                             "ocaml": "Float.(to_int infinity) = None",
                             "reason": "Float.(to_int(infinity)) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -56866,10 +55242,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -56881,10 +55253,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -56894,10 +55262,6 @@
                             "ocaml": "Bool.from_int 8 = None",
                             "reason": "Bool.from_int(8) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57025,10 +55389,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57038,10 +55398,6 @@
                             "ocaml": "Bool.from_string \"false\" = Some false",
                             "reason": "Bool.from_string(\"false\") == Some(false);\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57055,10 +55411,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57068,10 +55420,6 @@
                             "ocaml": "Bool.from_string \"False\" = None",
                             "reason": "Bool.from_string(\"False\") == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57085,10 +55433,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57098,10 +55442,6 @@
                             "ocaml": "Bool.from_string \"1\" = None",
                             "reason": "Bool.from_string(\"1\") == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57247,10 +55587,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57262,10 +55598,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57275,10 +55607,6 @@
                             "ocaml": "Bool.(false && true) = false",
                             "reason": "Bool.(false && true) == false;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57406,10 +55734,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57421,10 +55745,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57434,10 +55754,6 @@
                             "ocaml": "Bool.(false || true) = true",
                             "reason": "Bool.(false || true) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57562,10 +55878,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57577,10 +55889,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57590,10 +55898,6 @@
                             "ocaml": "Bool.xor false true  = true",
                             "reason": "Bool.xor(false, true) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57687,10 +55991,6 @@
                             "ocaml": "Bool.not false = true",
                             "reason": "Bool.(!)(false) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -57820,10 +56120,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -57937,10 +56233,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -58052,10 +56344,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -58065,10 +56353,6 @@
                             "ocaml": "Bool.equal false false = true",
                             "reason": "Bool.equal(false, false) == true;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -58156,10 +56440,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -58171,10 +56451,6 @@
                           }
                         },
                         {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
                           "tag": "Raw",
                           "value": "\n    "
                         },
@@ -58184,10 +56460,6 @@
                             "ocaml": "Bool.compare true true = 0",
                             "reason": "Bool.compare(true, true) == 0;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
