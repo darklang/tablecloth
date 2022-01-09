@@ -683,7 +683,7 @@
                   "name": "make",
                   "qualified_name": "TableclothTuple3.make",
                   "type": {
-                    "rendered": "let make: ('a, 'b, 'c) => ('a, 'b, 'c)"
+                    "rendered": "('a, 'b, 'c) => ('a, 'b, 'c)"
                   },
                   "info": {
                     "deprecated": null,
@@ -788,7 +788,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothTuple3.fromArray",
                   "type": {
-                    "rendered": "let fromArray: array<'a> => option<('a, 'a, 'a)>"
+                    "rendered": "array<'a> => option<('a, 'a, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -924,7 +924,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothTuple3.fromList",
                   "type": {
-                    "rendered": "let fromList: list<'a> => option<('a, 'a, 'a)>"
+                    "rendered": "list<'a> => option<('a, 'a, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -1060,7 +1060,7 @@
                   "name": "first",
                   "qualified_name": "TableclothTuple3.first",
                   "type": {
-                    "rendered": "let first: (('a, 'b, 'c)) => 'a"
+                    "rendered": "(('a, 'b, 'c)) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -1145,7 +1145,7 @@
                   "name": "second",
                   "qualified_name": "TableclothTuple3.second",
                   "type": {
-                    "rendered": "let second: (('a, 'b, 'c)) => 'b"
+                    "rendered": "(('a, 'b, 'c)) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -1230,7 +1230,7 @@
                   "name": "third",
                   "qualified_name": "TableclothTuple3.third",
                   "type": {
-                    "rendered": "let third: (('a, 'b, 'c)) => 'c"
+                    "rendered": "(('a, 'b, 'c)) => 'c"
                   },
                   "info": {
                     "deprecated": null,
@@ -1315,7 +1315,7 @@
                   "name": "initial",
                   "qualified_name": "TableclothTuple3.initial",
                   "type": {
-                    "rendered": "let initial: (('a, 'b, 'c)) => ('a, 'b)"
+                    "rendered": "(('a, 'b, 'c)) => ('a, 'b)"
                   },
                   "info": {
                     "deprecated": null,
@@ -1440,7 +1440,7 @@
                   "name": "tail",
                   "qualified_name": "TableclothTuple3.tail",
                   "type": {
-                    "rendered": "let tail: (('a, 'b, 'c)) => ('b, 'c)"
+                    "rendered": "(('a, 'b, 'c)) => ('b, 'c)"
                   },
                   "info": {
                     "deprecated": null,
@@ -1583,7 +1583,7 @@
                   "name": "rotateLeft",
                   "qualified_name": "TableclothTuple3.rotateLeft",
                   "type": {
-                    "rendered": "let rotateLeft: (('a, 'b, 'c)) => ('b, 'c, 'a)"
+                    "rendered": "(('a, 'b, 'c)) => ('b, 'c, 'a)"
                   },
                   "info": {
                     "deprecated": null,
@@ -1668,7 +1668,7 @@
                   "name": "rotateRight",
                   "qualified_name": "TableclothTuple3.rotateRight",
                   "type": {
-                    "rendered": "let rotateRight: (('a, 'b, 'c)) => ('c, 'a, 'b)"
+                    "rendered": "(('a, 'b, 'c)) => ('c, 'a, 'b)"
                   },
                   "info": {
                     "deprecated": null,
@@ -2256,7 +2256,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothTuple3.toArray",
                   "type": {
-                    "rendered": "let toArray: (('a, 'a, 'a)) => array<'a>"
+                    "rendered": "(('a, 'a, 'a)) => array<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -2369,7 +2369,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothTuple3.toList",
                   "type": {
-                    "rendered": "let toList: (('a, 'a, 'a)) => list<'a>"
+                    "rendered": "(('a, 'a, 'a)) => list<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -2482,7 +2482,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothTuple3.equal",
                   "type": {
-                    "rendered": "let equal: (\n  ('a, 'a) => bool,\n  ('b, 'b) => bool,\n  ('c, 'c) => bool,\n  t<'a, 'b, 'c>,\n  t<'a, 'b, 'c>,\n) => bool"
+                    "rendered": "(\n  ('a, 'a) => bool,\n  ('b, 'b) => bool,\n  ('c, 'c) => bool,\n  t<'a, 'b, 'c>,\n  t<'a, 'b, 'c>,\n) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -2587,7 +2587,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothTuple3.compare",
                   "type": {
-                    "rendered": "let compare: (\n  ('a, 'a) => int,\n  ('b, 'b) => int,\n  ('c, 'c) => int,\n  t<'a, 'b, 'c>,\n  t<'a, 'b, 'c>,\n) => int"
+                    "rendered": "(\n  ('a, 'a) => int,\n  ('b, 'b) => int,\n  ('c, 'c) => int,\n  t<'a, 'b, 'c>,\n  t<'a, 'b, 'c>,\n) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -2777,7 +2777,7 @@
                   "name": "make",
                   "qualified_name": "TableclothTuple2.make",
                   "type": {
-                    "rendered": "let make: ('a, 'b) => ('a, 'b)"
+                    "rendered": "('a, 'b) => ('a, 'b)"
                   },
                   "info": {
                     "deprecated": null,
@@ -2859,7 +2859,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothTuple2.fromArray",
                   "type": {
-                    "rendered": "let fromArray: array<'a> => option<('a, 'a)>"
+                    "rendered": "array<'a> => option<('a, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -2995,7 +2995,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothTuple2.fromList",
                   "type": {
-                    "rendered": "let fromList: list<'a> => option<('a, 'a)>"
+                    "rendered": "list<'a> => option<('a, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -3131,7 +3131,7 @@
                   "name": "first",
                   "qualified_name": "TableclothTuple2.first",
                   "type": {
-                    "rendered": "let first: (('a, 'b)) => 'a"
+                    "rendered": "(('a, 'b)) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -3216,7 +3216,7 @@
                   "name": "second",
                   "qualified_name": "TableclothTuple2.second",
                   "type": {
-                    "rendered": "let second: (('a, 'b)) => 'b"
+                    "rendered": "(('a, 'b)) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -3711,7 +3711,7 @@
                   "name": "swap",
                   "qualified_name": "TableclothTuple2.swap",
                   "type": {
-                    "rendered": "let swap: (('a, 'b)) => ('b, 'a)"
+                    "rendered": "(('a, 'b)) => ('b, 'a)"
                   },
                   "info": {
                     "deprecated": null,
@@ -3814,7 +3814,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothTuple2.toArray",
                   "type": {
-                    "rendered": "let toArray: (('a, 'a)) => array<'a>"
+                    "rendered": "(('a, 'a)) => array<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -3927,7 +3927,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothTuple2.toList",
                   "type": {
-                    "rendered": "let toList: (('a, 'a)) => list<'a>"
+                    "rendered": "(('a, 'a)) => list<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -4012,7 +4012,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothTuple2.equal",
                   "type": {
-                    "rendered": "let equal: (('a, 'a) => bool, ('b, 'b) => bool, t<'a, 'b>, t<'a, 'b>) => bool"
+                    "rendered": "(('a, 'a) => bool, ('b, 'b) => bool, t<'a, 'b>, t<'a, 'b>) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -4117,7 +4117,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothTuple2.compare",
                   "type": {
-                    "rendered": "let compare: (('a, 'a) => int, ('b, 'b) => int, t<'a, 'b>, t<'a, 'b>) => int"
+                    "rendered": "(('a, 'a) => int, ('b, 'b) => int, t<'a, 'b>, t<'a, 'b>) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -4866,7 +4866,7 @@
                   "name": "empty",
                   "qualified_name": "TableclothSet.empty",
                   "type": {
-                    "rendered": "let empty: TableclothComparator.s<'a, 'identity> => t<'a, 'identity>"
+                    "rendered": "TableclothComparator.s<'a, 'identity> => t<'a, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -4964,7 +4964,7 @@
                   "name": "singleton",
                   "qualified_name": "TableclothSet.singleton",
                   "type": {
-                    "rendered": "let singleton: (TableclothComparator.s<'a, 'identity>, 'a) => t<'a, 'identity>"
+                    "rendered": "(TableclothComparator.s<'a, 'identity>, 'a) => t<'a, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -5054,7 +5054,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothSet.fromArray",
                   "type": {
-                    "rendered": "let fromArray: (TableclothComparator.s<'a, 'identity>, array<'a>) => t<'a, 'identity>"
+                    "rendered": "(TableclothComparator.s<'a, 'identity>, array<'a>) => t<'a, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -5144,7 +5144,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothSet.fromList",
                   "type": {
-                    "rendered": "let fromList: (TableclothComparator.s<'a, 'identity>, list<'a>) => t<'a, 'identity>"
+                    "rendered": "(TableclothComparator.s<'a, 'identity>, list<'a>) => t<'a, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -5252,7 +5252,7 @@
                   "name": "add",
                   "qualified_name": "TableclothSet.add",
                   "type": {
-                    "rendered": "let add: (t<'a, 'id>, 'a) => t<'a, 'id>"
+                    "rendered": "(t<'a, 'id>, 'a) => t<'a, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -5337,7 +5337,7 @@
                   "name": "remove",
                   "qualified_name": "TableclothSet.remove",
                   "type": {
-                    "rendered": "let remove: (t<'a, 'id>, 'a) => t<'a, 'id>"
+                    "rendered": "(t<'a, 'id>, 'a) => t<'a, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -5422,7 +5422,7 @@
                   "name": "includes",
                   "qualified_name": "TableclothSet.includes",
                   "type": {
-                    "rendered": "let includes: (t<'a, _>, 'a) => bool"
+                    "rendered": "(t<'a, _>, 'a) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -5623,7 +5623,7 @@
                   "name": "length",
                   "qualified_name": "TableclothSet.length",
                   "type": {
-                    "rendered": "let length: t<_, _> => int"
+                    "rendered": "t<_, _> => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -5879,7 +5879,7 @@
                   "name": "isEmpty",
                   "qualified_name": "TableclothSet.isEmpty",
                   "type": {
-                    "rendered": "let isEmpty: t<_, _> => bool"
+                    "rendered": "t<_, _> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -6206,7 +6206,7 @@
                   "name": "difference",
                   "qualified_name": "TableclothSet.difference",
                   "type": {
-                    "rendered": "let difference: (t<'a, 'id>, t<'a, 'id>) => t<'a, 'id>"
+                    "rendered": "(t<'a, 'id>, t<'a, 'id>) => t<'a, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -6291,7 +6291,7 @@
                   "name": "intersection",
                   "qualified_name": "TableclothSet.intersection",
                   "type": {
-                    "rendered": "let intersection: (t<'a, 'id>, t<'a, 'id>) => t<'a, 'id>"
+                    "rendered": "(t<'a, 'id>, t<'a, 'id>) => t<'a, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -6365,7 +6365,7 @@
                   "name": "union",
                   "qualified_name": "TableclothSet.union",
                   "type": {
-                    "rendered": "let union: (t<'a, 'id>, t<'a, 'id>) => t<'a, 'id>"
+                    "rendered": "(t<'a, 'id>, t<'a, 'id>) => t<'a, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -6835,7 +6835,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothSet.toArray",
                   "type": {
-                    "rendered": "let toArray: t<'a, _> => array<'a>"
+                    "rendered": "t<'a, _> => array<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -6889,7 +6889,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothSet.toList",
                   "type": {
-                    "rendered": "let toList: t<'a, _> => list<'a>"
+                    "rendered": "t<'a, _> => list<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -8448,7 +8448,7 @@
                   "name": "ok",
                   "qualified_name": "TableclothResult.ok",
                   "type": {
-                    "rendered": "let ok: 'ok => t<'ok, 'error>"
+                    "rendered": "'ok => t<'ok, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -8581,7 +8581,7 @@
                   "name": "error",
                   "qualified_name": "TableclothResult.error",
                   "type": {
-                    "rendered": "let error: 'error => t<'ok, 'error>"
+                    "rendered": "'error => t<'ok, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -8791,7 +8791,7 @@
                   "name": "attempt",
                   "qualified_name": "TableclothResult.attempt",
                   "type": {
-                    "rendered": "let attempt: (unit => 'ok) => t<'ok, exn>"
+                    "rendered": "(unit => 'ok) => t<'ok, exn>"
                   },
                   "info": {
                     "deprecated": null,
@@ -9053,7 +9053,7 @@
                   "name": "isOk",
                   "qualified_name": "TableclothResult.isOk",
                   "type": {
-                    "rendered": "let isOk: t<_, _> => bool"
+                    "rendered": "t<_, _> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -9267,7 +9267,7 @@
                   "name": "isError",
                   "qualified_name": "TableclothResult.isError",
                   "type": {
-                    "rendered": "let isError: t<_, _> => bool"
+                    "rendered": "t<_, _> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -9493,7 +9493,7 @@
                   "name": "and_",
                   "qualified_name": "TableclothResult.and_",
                   "type": {
-                    "rendered": "let and_: (t<'ok, 'error>, t<'ok, 'error>) => t<'ok, 'error>"
+                    "rendered": "(t<'ok, 'error>, t<'ok, 'error>) => t<'ok, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -9664,7 +9664,7 @@
                   "name": "or_",
                   "qualified_name": "TableclothResult.or_",
                   "type": {
-                    "rendered": "let or_: (t<'ok, 'error>, t<'ok, 'error>) => t<'ok, 'error>"
+                    "rendered": "(t<'ok, 'error>, t<'ok, 'error>) => t<'ok, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -9823,7 +9823,7 @@
                   "name": "both",
                   "qualified_name": "TableclothResult.both",
                   "type": {
-                    "rendered": "let both: (t<'a, 'error>, t<'b, 'error>) => t<('a, 'b), 'error>"
+                    "rendered": "(t<'a, 'error>, t<'b, 'error>) => t<('a, 'b), 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -10002,7 +10002,7 @@
                   "name": "flatten",
                   "qualified_name": "TableclothResult.flatten",
                   "type": {
-                    "rendered": "let flatten: t<t<'ok, 'error>, 'error> => t<'ok, 'error>"
+                    "rendered": "t<t<'ok, 'error>, 'error> => t<'ok, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -10195,7 +10195,7 @@
                   "name": "unwrapUnsafe",
                   "qualified_name": "TableclothResult.unwrapUnsafe",
                   "type": {
-                    "rendered": "let unwrapUnsafe: t<'ok, _> => 'ok"
+                    "rendered": "t<'ok, _> => 'ok"
                   },
                   "info": {
                     "deprecated": null,
@@ -10569,7 +10569,7 @@
                   "name": "values",
                   "qualified_name": "TableclothResult.values",
                   "type": {
-                    "rendered": "let values: list<t<'ok, 'error>> => t<list<'ok>, 'error>"
+                    "rendered": "list<t<'ok, 'error>> => t<list<'ok>, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -10699,7 +10699,7 @@
                   "name": "combine",
                   "qualified_name": "TableclothResult.combine",
                   "type": {
-                    "rendered": "let combine: list<result<'ok, 'error>> => result<list<'ok>, 'error>"
+                    "rendered": "list<result<'ok, 'error>> => result<list<'ok>, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -11335,7 +11335,7 @@
                   "name": "toOption",
                   "qualified_name": "TableclothResult.toOption",
                   "type": {
-                    "rendered": "let toOption: t<'ok, _> => option<'ok>"
+                    "rendered": "t<'ok, _> => option<'ok>"
                   },
                   "info": {
                     "deprecated": null,
@@ -11518,7 +11518,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothResult.equal",
                   "type": {
-                    "rendered": "let equal: (('ok, 'ok) => bool, ('error, 'error) => bool, t<'ok, 'error>, t<'ok, 'error>) => bool"
+                    "rendered": "(('ok, 'ok) => bool, ('error, 'error) => bool, t<'ok, 'error>, t<'ok, 'error>) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -11636,7 +11636,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothResult.compare",
                   "type": {
-                    "rendered": "let compare: (('ok, 'ok) => int, ('error, 'error) => int, t<'ok, 'error>, t<'ok, 'error>) => int"
+                    "rendered": "(('ok, 'ok) => int, ('error, 'error) => int, t<'ok, 'error>, t<'ok, 'error>) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -12549,7 +12549,7 @@
                   "name": "empty",
                   "qualified_name": "TableclothList.empty",
                   "type": {
-                    "rendered": "let empty: t<'a>"
+                    "rendered": "t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -12634,7 +12634,7 @@
                   "name": "singleton",
                   "qualified_name": "TableclothList.singleton",
                   "type": {
-                    "rendered": "let singleton: 'a => t<'a>"
+                    "rendered": "'a => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13072,7 +13072,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothList.fromArray",
                   "type": {
-                    "rendered": "let fromArray: array<'a> => t<'a>"
+                    "rendered": "array<'a> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13184,7 +13184,7 @@
                   "name": "head",
                   "qualified_name": "TableclothList.head",
                   "type": {
-                    "rendered": "let head: t<'a> => option<'a>"
+                    "rendered": "t<'a> => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13301,7 +13301,7 @@
                   "name": "tail",
                   "qualified_name": "TableclothList.tail",
                   "type": {
-                    "rendered": "let tail: t<'a> => option<t<'a>>"
+                    "rendered": "t<'a> => option<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13429,7 +13429,7 @@
                   "name": "cons",
                   "qualified_name": "TableclothList.cons",
                   "type": {
-                    "rendered": "let cons: (t<'a>, 'a) => t<'a>"
+                    "rendered": "(t<'a>, 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14123,7 +14123,7 @@
                   "name": "last",
                   "qualified_name": "TableclothList.last",
                   "type": {
-                    "rendered": "let last: t<'a> => option<'a>"
+                    "rendered": "t<'a> => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14805,7 +14805,7 @@
                   "name": "reverse",
                   "qualified_name": "TableclothList.reverse",
                   "type": {
-                    "rendered": "let reverse: t<'a> => t<'a>"
+                    "rendered": "t<'a> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -15068,7 +15068,7 @@
                   "name": "isEmpty",
                   "qualified_name": "TableclothList.isEmpty",
                   "type": {
-                    "rendered": "let isEmpty: t<_> => bool"
+                    "rendered": "t<_> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -15164,7 +15164,7 @@
                   "name": "length",
                   "qualified_name": "TableclothList.length",
                   "type": {
-                    "rendered": "let length: t<'a> => int"
+                    "rendered": "t<'a> => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -16741,7 +16741,7 @@
                   "name": "sum",
                   "qualified_name": "TableclothList.sum",
                   "type": {
-                    "rendered": "let sum: (t<'a>, module(TableclothContainer.Sum with type t = 'a)) => 'a"
+                    "rendered": "(t<'a>, module(TableclothContainer.Sum with type t = 'a)) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -17887,7 +17887,7 @@
                   "name": "append",
                   "qualified_name": "TableclothList.append",
                   "type": {
-                    "rendered": "let append: (t<'a>, t<'a>) => t<'a>"
+                    "rendered": "(t<'a>, t<'a>) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -17961,7 +17961,7 @@
                   "name": "flatten",
                   "qualified_name": "TableclothList.flatten",
                   "type": {
-                    "rendered": "let flatten: t<t<'a>> => t<'a>"
+                    "rendered": "t<t<'a>> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -18035,7 +18035,7 @@
                   "name": "zip",
                   "qualified_name": "TableclothList.zip",
                   "type": {
-                    "rendered": "let zip: (t<'a>, t<'b>) => t<('a, 'b)>"
+                    "rendered": "(t<'a>, t<'b>) => t<('a, 'b)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -18801,7 +18801,7 @@
                   "name": "unzip",
                   "qualified_name": "TableclothList.unzip",
                   "type": {
-                    "rendered": "let unzip: t<('a, 'b)> => (t<'a>, t<'b>)"
+                    "rendered": "t<('a, 'b)> => (t<'a>, t<'b>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -19917,7 +19917,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothList.toArray",
                   "type": {
-                    "rendered": "let toArray: t<'a> => array<'a>"
+                    "rendered": "t<'a> => array<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -19993,7 +19993,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothList.equal",
                   "type": {
-                    "rendered": "let equal: (('a, 'a) => bool, t<'a>, t<'a>) => bool"
+                    "rendered": "(('a, 'a) => bool, t<'a>, t<'a>) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -20031,7 +20031,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothList.compare",
                   "type": {
-                    "rendered": "let compare: (('a, 'a) => int, t<'a>, t<'a>) => int"
+                    "rendered": "(('a, 'a) => int, t<'a>, t<'a>) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -20329,7 +20329,7 @@
                   "name": "singleton",
                   "qualified_name": "TableclothArray.singleton",
                   "type": {
-                    "rendered": "let singleton: 'a => t<'a>"
+                    "rendered": "'a => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -20759,7 +20759,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothArray.fromList",
                   "type": {
-                    "rendered": "let fromList: list<'a> => t<'a>"
+                    "rendered": "list<'a> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -20853,7 +20853,7 @@
                   "name": "clone",
                   "qualified_name": "TableclothArray.clone",
                   "type": {
-                    "rendered": "let clone: t<'a> => t<'a>"
+                    "rendered": "t<'a> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -20956,7 +20956,7 @@
                   "name": "get",
                   "qualified_name": "TableclothArray.get",
                   "type": {
-                    "rendered": "let get: (t<'a>, int) => 'a"
+                    "rendered": "(t<'a>, int) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -21468,7 +21468,7 @@
                   "name": "set",
                   "qualified_name": "TableclothArray.set",
                   "type": {
-                    "rendered": "let set: (t<'a>, int, 'a) => unit"
+                    "rendered": "(t<'a>, int, 'a) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -21728,7 +21728,7 @@
                   "name": "first",
                   "qualified_name": "TableclothArray.first",
                   "type": {
-                    "rendered": "let first: t<'a> => option<'a>"
+                    "rendered": "t<'a> => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -21840,7 +21840,7 @@
                   "name": "last",
                   "qualified_name": "TableclothArray.last",
                   "type": {
-                    "rendered": "let last: t<'a> => option<'a>"
+                    "rendered": "t<'a> => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -22145,7 +22145,7 @@
                   "name": "swap",
                   "qualified_name": "TableclothArray.swap",
                   "type": {
-                    "rendered": "let swap: (t<'a>, int, int) => unit"
+                    "rendered": "(t<'a>, int, int) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -22256,7 +22256,7 @@
                   "name": "reverse",
                   "qualified_name": "TableclothArray.reverse",
                   "type": {
-                    "rendered": "let reverse: t<'a> => unit"
+                    "rendered": "t<'a> => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -22483,7 +22483,7 @@
                   "name": "isEmpty",
                   "qualified_name": "TableclothArray.isEmpty",
                   "type": {
-                    "rendered": "let isEmpty: t<'a> => bool"
+                    "rendered": "t<'a> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -22568,7 +22568,7 @@
                   "name": "length",
                   "qualified_name": "TableclothArray.length",
                   "type": {
-                    "rendered": "let length: t<'a> => int"
+                    "rendered": "t<'a> => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -23749,7 +23749,7 @@
                   "name": "sum",
                   "qualified_name": "TableclothArray.sum",
                   "type": {
-                    "rendered": "let sum: (t<'a>, module(TableclothContainer.Sum with type t = 'a)) => 'a"
+                    "rendered": "(t<'a>, module(TableclothContainer.Sum with type t = 'a)) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -24975,7 +24975,7 @@
                   "name": "append",
                   "qualified_name": "TableclothArray.append",
                   "type": {
-                    "rendered": "let append: (t<'a>, t<'a>) => t<'a>"
+                    "rendered": "(t<'a>, t<'a>) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -25049,7 +25049,7 @@
                   "name": "flatten",
                   "qualified_name": "TableclothArray.flatten",
                   "type": {
-                    "rendered": "let flatten: t<t<'a>> => t<'a>"
+                    "rendered": "t<t<'a>> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -25123,7 +25123,7 @@
                   "name": "zip",
                   "qualified_name": "TableclothArray.zip",
                   "type": {
-                    "rendered": "let zip: (t<'a>, t<'b>) => t<('a, 'b)>"
+                    "rendered": "(t<'a>, t<'b>) => t<('a, 'b)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -25921,7 +25921,7 @@
                   "name": "unzip",
                   "qualified_name": "TableclothArray.unzip",
                   "type": {
-                    "rendered": "let unzip: t<('a, 'b)> => (t<'a>, t<'b>)"
+                    "rendered": "t<('a, 'b)> => (t<'a>, t<'b>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -26217,7 +26217,7 @@
                   "name": "values",
                   "qualified_name": "TableclothArray.values",
                   "type": {
-                    "rendered": "let values: t<option<'a>> => t<'a>"
+                    "rendered": "t<option<'a>> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -26909,7 +26909,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothArray.toList",
                   "type": {
-                    "rendered": "let toList: t<'a> => list<'a>"
+                    "rendered": "t<'a> => list<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -27014,7 +27014,7 @@
                   "name": "toIndexedList",
                   "qualified_name": "TableclothArray.toIndexedList",
                   "type": {
-                    "rendered": "let toIndexedList: t<'a> => list<(int, 'a)>"
+                    "rendered": "t<'a> => list<(int, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -27128,7 +27128,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothArray.equal",
                   "type": {
-                    "rendered": "let equal: (('a, 'a) => bool, t<'a>, t<'a>) => bool"
+                    "rendered": "(('a, 'a) => bool, t<'a>, t<'a>) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -27166,7 +27166,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothArray.compare",
                   "type": {
-                    "rendered": "let compare: (('a, 'a) => int, t<'a>, t<'a>) => int"
+                    "rendered": "(('a, 'a) => int, t<'a>, t<'a>) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -27887,7 +27887,7 @@
                   "name": "empty",
                   "qualified_name": "TableclothMap.empty",
                   "type": {
-                    "rendered": "let empty: TableclothComparator.s<'key, 'identity> => t<'key, 'value, 'identity>"
+                    "rendered": "TableclothComparator.s<'key, 'identity> => t<'key, 'value, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28083,7 +28083,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothMap.fromArray",
                   "type": {
-                    "rendered": "let fromArray: (\n  TableclothComparator.s<'key, 'identity>,\n  array<('key, 'value)>,\n) => t<'key, 'value, 'identity>"
+                    "rendered": "(\n  TableclothComparator.s<'key, 'identity>,\n  array<('key, 'value)>,\n) => t<'key, 'value, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28141,7 +28141,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothMap.fromList",
                   "type": {
-                    "rendered": "let fromList: (\n  TableclothComparator.s<'key, 'identity>,\n  list<('key, 'value)>,\n) => t<'key, 'value, 'identity>"
+                    "rendered": "(\n  TableclothComparator.s<'key, 'identity>,\n  list<('key, 'value)>,\n) => t<'key, 'value, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28445,7 +28445,7 @@
                   "name": "remove",
                   "qualified_name": "TableclothMap.remove",
                   "type": {
-                    "rendered": "let remove: (t<'key, 'value, 'id>, 'key) => t<'key, 'value, 'id>"
+                    "rendered": "(t<'key, 'value, 'id>, 'key) => t<'key, 'value, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28515,7 +28515,7 @@
                   "name": "get",
                   "qualified_name": "TableclothMap.get",
                   "type": {
-                    "rendered": "let get: (t<'key, 'value, 'id>, 'key) => option<'value>"
+                    "rendered": "(t<'key, 'value, 'id>, 'key) => option<'value>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28849,7 +28849,7 @@
                   "name": "isEmpty",
                   "qualified_name": "TableclothMap.isEmpty",
                   "type": {
-                    "rendered": "let isEmpty: t<_, _, _> => bool"
+                    "rendered": "t<_, _, _> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -28887,7 +28887,7 @@
                   "name": "length",
                   "qualified_name": "TableclothMap.length",
                   "type": {
-                    "rendered": "let length: t<_, _, _> => int"
+                    "rendered": "t<_, _, _> => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -29244,7 +29244,7 @@
                   "name": "includes",
                   "qualified_name": "TableclothMap.includes",
                   "type": {
-                    "rendered": "let includes: (t<'key, _, _>, 'key) => bool"
+                    "rendered": "(t<'key, _, _>, 'key) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -29290,7 +29290,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothMap.minimum",
                   "type": {
-                    "rendered": "let minimum: t<'key, _, _> => option<'key>"
+                    "rendered": "t<'key, _, _> => option<'key>"
                   },
                   "info": {
                     "deprecated": null,
@@ -29413,7 +29413,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothMap.maximum",
                   "type": {
-                    "rendered": "let maximum: t<'key, _, _> => option<'key>"
+                    "rendered": "t<'key, _, _> => option<'key>"
                   },
                   "info": {
                     "deprecated": null,
@@ -29516,7 +29516,7 @@
                   "name": "extent",
                   "qualified_name": "TableclothMap.extent",
                   "type": {
-                    "rendered": "let extent: t<'key, _, _> => option<('key, 'key)>"
+                    "rendered": "t<'key, _, _> => option<('key, 'key)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -30384,7 +30384,7 @@
                   "name": "keys",
                   "qualified_name": "TableclothMap.keys",
                   "type": {
-                    "rendered": "let keys: t<'key, _, _> => list<'key>"
+                    "rendered": "t<'key, _, _> => list<'key>"
                   },
                   "info": {
                     "deprecated": null,
@@ -30478,7 +30478,7 @@
                   "name": "values",
                   "qualified_name": "TableclothMap.values",
                   "type": {
-                    "rendered": "let values: t<_, 'value, _> => list<'value>"
+                    "rendered": "t<_, 'value, _> => list<'value>"
                   },
                   "info": {
                     "deprecated": null,
@@ -30572,7 +30572,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothMap.toArray",
                   "type": {
-                    "rendered": "let toArray: t<'key, 'value, _> => array<('key, 'value)>"
+                    "rendered": "t<'key, 'value, _> => array<('key, 'value)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -30630,7 +30630,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothMap.toList",
                   "type": {
-                    "rendered": "let toList: t<'key, 'value, _> => list<('key, 'value)>"
+                    "rendered": "t<'key, 'value, _> => list<('key, 'value)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -32028,7 +32028,7 @@
                   "name": "some",
                   "qualified_name": "TableclothOption.some",
                   "type": {
-                    "rendered": "let some: 'a => option<'a>"
+                    "rendered": "'a => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -32187,7 +32187,7 @@
                   "name": "and_",
                   "qualified_name": "TableclothOption.and_",
                   "type": {
-                    "rendered": "let and_: (t<'a>, t<'a>) => t<'a>"
+                    "rendered": "(t<'a>, t<'a>) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -32350,7 +32350,7 @@
                   "name": "or_",
                   "qualified_name": "TableclothOption.or_",
                   "type": {
-                    "rendered": "let or_: (t<'a>, t<'a>) => t<'a>"
+                    "rendered": "(t<'a>, t<'a>) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -32509,7 +32509,7 @@
                   "name": "orElse",
                   "qualified_name": "TableclothOption.orElse",
                   "type": {
-                    "rendered": "let orElse: (t<'a>, t<'a>) => t<'a>"
+                    "rendered": "(t<'a>, t<'a>) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -32672,7 +32672,7 @@
                   "name": "both",
                   "qualified_name": "TableclothOption.both",
                   "type": {
-                    "rendered": "let both: (t<'a>, t<'b>) => t<('a, 'b)>"
+                    "rendered": "(t<'a>, t<'b>) => t<('a, 'b)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -32807,7 +32807,7 @@
                   "name": "flatten",
                   "qualified_name": "TableclothOption.flatten",
                   "type": {
-                    "rendered": "let flatten: t<t<'a>> => t<'a>"
+                    "rendered": "t<t<'a>> => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -33722,7 +33722,7 @@
                   "name": "unwrapUnsafe",
                   "qualified_name": "TableclothOption.unwrapUnsafe",
                   "type": {
-                    "rendered": "let unwrapUnsafe: t<'a> => 'a"
+                    "rendered": "t<'a> => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -33945,7 +33945,7 @@
                   "name": "isSome",
                   "qualified_name": "TableclothOption.isSome",
                   "type": {
-                    "rendered": "let isSome: t<'a> => bool"
+                    "rendered": "t<'a> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -34066,7 +34066,7 @@
                   "name": "isNone",
                   "qualified_name": "TableclothOption.isNone",
                   "type": {
-                    "rendered": "let isNone: t<'a> => bool"
+                    "rendered": "t<'a> => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -34225,7 +34225,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothOption.toArray",
                   "type": {
-                    "rendered": "let toArray: t<'a> => array<'a>"
+                    "rendered": "t<'a> => array<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -34354,7 +34354,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothOption.toList",
                   "type": {
-                    "rendered": "let toList: t<'a> => list<'a>"
+                    "rendered": "t<'a> => list<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -34501,7 +34501,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothOption.equal",
                   "type": {
-                    "rendered": "let equal: (('a, 'a) => bool, t<'a>, t<'a>) => bool"
+                    "rendered": "(('a, 'a) => bool, t<'a>, t<'a>) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -34608,7 +34608,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothOption.compare",
                   "type": {
-                    "rendered": "let compare: (('a, 'a) => int, t<'a>, t<'a>) => int"
+                    "rendered": "(('a, 'a) => int, t<'a>, t<'a>) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -35182,7 +35182,7 @@
                   "name": "fromChar",
                   "qualified_name": "TableclothString.fromChar",
                   "type": {
-                    "rendered": "let fromChar: char => string"
+                    "rendered": "char => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -35220,7 +35220,7 @@
                   "name": "fromArray",
                   "qualified_name": "TableclothString.fromArray",
                   "type": {
-                    "rendered": "let fromArray: array<char> => string"
+                    "rendered": "array<char> => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -35333,7 +35333,7 @@
                   "name": "fromList",
                   "qualified_name": "TableclothString.fromList",
                   "type": {
-                    "rendered": "let fromList: list<char> => string"
+                    "rendered": "list<char> => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -35703,7 +35703,7 @@
                   "name": "get",
                   "qualified_name": "TableclothString.get",
                   "type": {
-                    "rendered": "let get: (string, int) => char"
+                    "rendered": "(string, int) => char"
                   },
                   "info": {
                     "deprecated": null,
@@ -35921,7 +35921,7 @@
                   "name": "reverse",
                   "qualified_name": "TableclothString.reverse",
                   "type": {
-                    "rendered": "let reverse: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -36100,7 +36100,7 @@
                   "name": "isEmpty",
                   "qualified_name": "TableclothString.isEmpty",
                   "type": {
-                    "rendered": "let isEmpty: string => bool"
+                    "rendered": "string => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -36138,7 +36138,7 @@
                   "name": "length",
                   "qualified_name": "TableclothString.length",
                   "type": {
-                    "rendered": "let length: string => int"
+                    "rendered": "string => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -36519,7 +36519,7 @@
                   "name": "isCapitalized",
                   "qualified_name": "TableclothString.isCapitalized",
                   "type": {
-                    "rendered": "let isCapitalized: string => bool"
+                    "rendered": "string => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -36877,7 +36877,7 @@
                   "name": "indexOf",
                   "qualified_name": "TableclothString.indexOf",
                   "type": {
-                    "rendered": "let indexOf: (string, string) => option<int>"
+                    "rendered": "(string, string) => option<int>"
                   },
                   "info": {
                     "deprecated": null,
@@ -36974,7 +36974,7 @@
                   "name": "indexOfRight",
                   "qualified_name": "TableclothString.indexOfRight",
                   "type": {
-                    "rendered": "let indexOfRight: (string, string) => option<int>"
+                    "rendered": "(string, string) => option<int>"
                   },
                   "info": {
                     "deprecated": null,
@@ -37216,7 +37216,7 @@
                   "name": "toLowercase",
                   "qualified_name": "TableclothString.toLowercase",
                   "type": {
-                    "rendered": "let toLowercase: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37311,7 +37311,7 @@
                   "name": "toUppercase",
                   "qualified_name": "TableclothString.toUppercase",
                   "type": {
-                    "rendered": "let toUppercase: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37406,7 +37406,7 @@
                   "name": "uncapitalize",
                   "qualified_name": "TableclothString.uncapitalize",
                   "type": {
-                    "rendered": "let uncapitalize: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37501,7 +37501,7 @@
                   "name": "capitalize",
                   "qualified_name": "TableclothString.capitalize",
                   "type": {
-                    "rendered": "let capitalize: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37604,7 +37604,7 @@
                   "name": "trim",
                   "qualified_name": "TableclothString.trim",
                   "type": {
-                    "rendered": "let trim: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37720,7 +37720,7 @@
                   "name": "trimLeft",
                   "qualified_name": "TableclothString.trimLeft",
                   "type": {
-                    "rendered": "let trimLeft: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37778,7 +37778,7 @@
                   "name": "trimRight",
                   "qualified_name": "TableclothString.trimRight",
                   "type": {
-                    "rendered": "let trimRight: string => string"
+                    "rendered": "string => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -38016,7 +38016,7 @@
                   "name": "uncons",
                   "qualified_name": "TableclothString.uncons",
                   "type": {
-                    "rendered": "let uncons: string => option<(char, string)>"
+                    "rendered": "string => option<(char, string)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -38410,7 +38410,7 @@
                   "name": "toArray",
                   "qualified_name": "TableclothString.toArray",
                   "type": {
-                    "rendered": "let toArray: string => array<char>"
+                    "rendered": "string => array<char>"
                   },
                   "info": {
                     "deprecated": null,
@@ -38515,7 +38515,7 @@
                   "name": "toList",
                   "qualified_name": "TableclothString.toList",
                   "type": {
-                    "rendered": "let toList: string => list<char>"
+                    "rendered": "string => list<char>"
                   },
                   "info": {
                     "deprecated": null,
@@ -38638,7 +38638,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothString.equal",
                   "type": {
-                    "rendered": "let equal: (string, string) => bool"
+                    "rendered": "(string, string) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -38676,7 +38676,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothString.compare",
                   "type": {
-                    "rendered": "let compare: (string, string) => int"
+                    "rendered": "(string, string) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -38891,7 +38891,7 @@
                   "name": "comparator",
                   "qualified_name": "TableclothString.comparator",
                   "type": {
-                    "rendered": "let comparator: TableclothComparator.t<t, identity>"
+                    "rendered": "TableclothComparator.t<t, identity>"
                   },
                   "info": null,
                   "parameters": {
@@ -39084,7 +39084,7 @@
                   "name": "fromCode",
                   "qualified_name": "TableclothChar.fromCode",
                   "type": {
-                    "rendered": "let fromCode: int => option<char>"
+                    "rendered": "int => option<char>"
                   },
                   "info": {
                     "deprecated": null,
@@ -39255,7 +39255,7 @@
                   "name": "fromString",
                   "qualified_name": "TableclothChar.fromString",
                   "type": {
-                    "rendered": "let fromString: string => option<char>"
+                    "rendered": "string => option<char>"
                   },
                   "info": {
                     "deprecated": null,
@@ -39373,7 +39373,7 @@
                   "name": "isLowercase",
                   "qualified_name": "TableclothChar.isLowercase",
                   "type": {
-                    "rendered": "let isLowercase: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -39502,7 +39502,7 @@
                   "name": "isUppercase",
                   "qualified_name": "TableclothChar.isUppercase",
                   "type": {
-                    "rendered": "let isUppercase: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -39631,7 +39631,7 @@
                   "name": "isLetter",
                   "qualified_name": "TableclothChar.isLetter",
                   "type": {
-                    "rendered": "let isLetter: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -39760,7 +39760,7 @@
                   "name": "isDigit",
                   "qualified_name": "TableclothChar.isDigit",
                   "type": {
-                    "rendered": "let isDigit: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -39878,7 +39878,7 @@
                   "name": "isAlphanumeric",
                   "qualified_name": "TableclothChar.isAlphanumeric",
                   "type": {
-                    "rendered": "let isAlphanumeric: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -40018,7 +40018,7 @@
                   "name": "isPrintable",
                   "qualified_name": "TableclothChar.isPrintable",
                   "type": {
-                    "rendered": "let isPrintable: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -40196,7 +40196,7 @@
                   "name": "isWhitespace",
                   "qualified_name": "TableclothChar.isWhitespace",
                   "type": {
-                    "rendered": "let isWhitespace: char => bool"
+                    "rendered": "char => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -40364,7 +40364,7 @@
                   "name": "toLowercase",
                   "qualified_name": "TableclothChar.toLowercase",
                   "type": {
-                    "rendered": "let toLowercase: char => char"
+                    "rendered": "char => char"
                   },
                   "info": {
                     "deprecated": null,
@@ -40460,7 +40460,7 @@
                   "name": "toUppercase",
                   "qualified_name": "TableclothChar.toUppercase",
                   "type": {
-                    "rendered": "let toUppercase: char => char"
+                    "rendered": "char => char"
                   },
                   "info": {
                     "deprecated": null,
@@ -40556,7 +40556,7 @@
                   "name": "toCode",
                   "qualified_name": "TableclothChar.toCode",
                   "type": {
-                    "rendered": "let toCode: char => int"
+                    "rendered": "char => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -40669,7 +40669,7 @@
                   "name": "toString",
                   "qualified_name": "TableclothChar.toString",
                   "type": {
-                    "rendered": "let toString: char => string"
+                    "rendered": "char => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -40765,7 +40765,7 @@
                   "name": "toDigit",
                   "qualified_name": "TableclothChar.toDigit",
                   "type": {
-                    "rendered": "let toDigit: char => option<int>"
+                    "rendered": "char => option<int>"
                   },
                   "info": {
                     "deprecated": null,
@@ -40908,7 +40908,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothChar.equal",
                   "type": {
-                    "rendered": "let equal: (t, t) => bool"
+                    "rendered": "(t, t) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -40966,7 +40966,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothChar.compare",
                   "type": {
-                    "rendered": "let compare: (t, t) => int"
+                    "rendered": "(t, t) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -41116,7 +41116,7 @@
                   "name": "comparator",
                   "qualified_name": "TableclothChar.comparator",
                   "type": {
-                    "rendered": "let comparator: TableclothComparator.t<t, identity>"
+                    "rendered": "TableclothComparator.t<t, identity>"
                   },
                   "info": null,
                   "parameters": {
@@ -41607,7 +41607,7 @@
                   "name": "zero",
                   "qualified_name": "TableclothInt.zero",
                   "type": {
-                    "rendered": "let zero: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -41653,7 +41653,7 @@
                   "name": "one",
                   "qualified_name": "TableclothInt.one",
                   "type": {
-                    "rendered": "let one: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -41699,7 +41699,7 @@
                   "name": "maximumValue",
                   "qualified_name": "TableclothInt.maximumValue",
                   "type": {
-                    "rendered": "let maximumValue: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -41745,7 +41745,7 @@
                   "name": "minimumValue",
                   "qualified_name": "TableclothInt.minimumValue",
                   "type": {
-                    "rendered": "let minimumValue: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -41809,7 +41809,7 @@
                   "name": "fromString",
                   "qualified_name": "TableclothInt.fromString",
                   "type": {
-                    "rendered": "let fromString: string => option<t>"
+                    "rendered": "string => option<t>"
                   },
                   "info": {
                     "deprecated": null,
@@ -42159,7 +42159,7 @@
                   "name": "add",
                   "qualified_name": "TableclothInt.add",
                   "type": {
-                    "rendered": "let add: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -42374,7 +42374,7 @@
                   "name": "subtract",
                   "qualified_name": "TableclothInt.subtract",
                   "type": {
-                    "rendered": "let subtract: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -42504,7 +42504,7 @@
                   "name": "multiply",
                   "qualified_name": "TableclothInt.multiply",
                   "type": {
-                    "rendered": "let multiply: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43089,7 +43089,7 @@
                   "name": "negate",
                   "qualified_name": "TableclothInt.negate",
                   "type": {
-                    "rendered": "let negate: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43270,7 +43270,7 @@
                   "name": "absolute",
                   "qualified_name": "TableclothInt.absolute",
                   "type": {
-                    "rendered": "let absolute: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43816,7 +43816,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothInt.maximum",
                   "type": {
-                    "rendered": "let maximumValue: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43909,7 +43909,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothInt.minimum",
                   "type": {
-                    "rendered": "let minimumValue: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44020,7 +44020,7 @@
                   "name": "isEven",
                   "qualified_name": "TableclothInt.isEven",
                   "type": {
-                    "rendered": "let isEven: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -44124,7 +44124,7 @@
                   "name": "isOdd",
                   "qualified_name": "TableclothInt.isOdd",
                   "type": {
-                    "rendered": "let isOdd: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -44568,7 +44568,7 @@
                   "name": "toFloat",
                   "qualified_name": "TableclothInt.toFloat",
                   "type": {
-                    "rendered": "let toFloat: t => float"
+                    "rendered": "t => float"
                   },
                   "info": {
                     "deprecated": null,
@@ -44682,7 +44682,7 @@
                   "name": "toString",
                   "qualified_name": "TableclothInt.toString",
                   "type": {
-                    "rendered": "let toString: t => string"
+                    "rendered": "t => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -44835,7 +44835,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothInt.equal",
                   "type": {
-                    "rendered": "let equal: (t, t) => bool"
+                    "rendered": "(t, t) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -44881,7 +44881,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothInt.compare",
                   "type": {
-                    "rendered": "let compare: (t, t) => int"
+                    "rendered": "(t, t) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -45019,7 +45019,7 @@
                   "name": "comparator",
                   "qualified_name": "TableclothInt.comparator",
                   "type": {
-                    "rendered": "let comparator: TableclothComparator.t<t, identity>"
+                    "rendered": "TableclothComparator.t<t, identity>"
                   },
                   "info": null,
                   "parameters": {
@@ -45284,7 +45284,7 @@
                   "name": "constant",
                   "qualified_name": "TableclothFun.constant",
                   "type": {
-                    "rendered": "let constant: ('a, 'b) => 'a"
+                    "rendered": "('a, 'b) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -45426,7 +45426,7 @@
                   "name": "sequence",
                   "qualified_name": "TableclothFun.sequence",
                   "type": {
-                    "rendered": "let sequence: ('a, 'b) => 'b"
+                    "rendered": "('a, 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -45464,7 +45464,7 @@
                   "name": "flip",
                   "qualified_name": "TableclothFun.flip",
                   "type": {
-                    "rendered": "let flip: (('a, 'b) => 'c, 'b, 'a) => 'c"
+                    "rendered": "(('a, 'b) => 'c, 'b, 'a) => 'c"
                   },
                   "info": {
                     "deprecated": null,
@@ -45558,7 +45558,7 @@
                   "name": "negate",
                   "qualified_name": "TableclothFun.negate",
                   "type": {
-                    "rendered": "let negate: ('a => bool, 'a) => bool"
+                    "rendered": "('a => bool, 'a) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -45716,7 +45716,7 @@
                   "name": "apply",
                   "qualified_name": "TableclothFun.apply",
                   "type": {
-                    "rendered": "let apply: ('a => 'b, 'a) => 'b"
+                    "rendered": "('a => 'b, 'a) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -46062,7 +46062,7 @@
                   "name": "compose",
                   "qualified_name": "TableclothFun.compose",
                   "type": {
-                    "rendered": "let compose: ('b => 'c, 'a => 'b, 'a) => 'c"
+                    "rendered": "('b => 'c, 'a => 'b, 'a) => 'c"
                   },
                   "info": {
                     "deprecated": null,
@@ -46223,7 +46223,7 @@
                   "name": "composeRight",
                   "qualified_name": "TableclothFun.composeRight",
                   "type": {
-                    "rendered": "let composeRight: ('a => 'b, 'b => 'c, 'a) => 'c"
+                    "rendered": "('a => 'b, 'b => 'c, 'a) => 'c"
                   },
                   "info": {
                     "deprecated": null,
@@ -46451,7 +46451,7 @@
                   "name": "forever",
                   "qualified_name": "TableclothFun.forever",
                   "type": {
-                    "rendered": "let forever: (unit => unit) => exn"
+                    "rendered": "(unit => unit) => exn"
                   },
                   "info": {
                     "deprecated": null,
@@ -46571,7 +46571,7 @@
                   "name": "curry",
                   "qualified_name": "TableclothFun.curry",
                   "type": {
-                    "rendered": "let curry: ((('a, 'b)) => 'c, 'a, 'b) => 'c"
+                    "rendered": "((('a, 'b)) => 'c, 'a, 'b) => 'c"
                   },
                   "info": {
                     "deprecated": null,
@@ -46661,7 +46661,7 @@
                   "name": "uncurry",
                   "qualified_name": "TableclothFun.uncurry",
                   "type": {
-                    "rendered": "let uncurry: (('a, 'b) => 'c, ('a, 'b)) => 'c"
+                    "rendered": "(('a, 'b) => 'c, ('a, 'b)) => 'c"
                   },
                   "info": {
                     "deprecated": null,
@@ -46735,7 +46735,7 @@
                   "name": "curry3",
                   "qualified_name": "TableclothFun.curry3",
                   "type": {
-                    "rendered": "let curry3: ((('a, 'b, 'c)) => 'd, 'a, 'b, 'c) => 'd"
+                    "rendered": "((('a, 'b, 'c)) => 'd, 'a, 'b, 'c) => 'd"
                   },
                   "info": {
                     "deprecated": null,
@@ -46809,7 +46809,7 @@
                   "name": "uncurry3",
                   "qualified_name": "TableclothFun.uncurry3",
                   "type": {
-                    "rendered": "let uncurry3: (('a, 'b, 'c) => 'd, ('a, 'b, 'c)) => 'd"
+                    "rendered": "(('a, 'b, 'c) => 'd, ('a, 'b, 'c)) => 'd"
                   },
                   "info": {
                     "deprecated": null,
@@ -47095,7 +47095,7 @@
                   "name": "zero",
                   "qualified_name": "TableclothFloat.zero",
                   "type": {
-                    "rendered": "let zero: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47141,7 +47141,7 @@
                   "name": "one",
                   "qualified_name": "TableclothFloat.one",
                   "type": {
-                    "rendered": "let one: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47187,7 +47187,7 @@
                   "name": "nan",
                   "qualified_name": "TableclothFloat.nan",
                   "type": {
-                    "rendered": "let nan: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47370,7 +47370,7 @@
                   "name": "infinity",
                   "qualified_name": "TableclothFloat.infinity",
                   "type": {
-                    "rendered": "let infinity: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47435,7 +47435,7 @@
                   "name": "negativeInfinity",
                   "qualified_name": "TableclothFloat.negativeInfinity",
                   "type": {
-                    "rendered": "let negativeInfinity: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47489,7 +47489,7 @@
                   "name": "e",
                   "qualified_name": "TableclothFloat.e",
                   "type": {
-                    "rendered": "let e: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47543,7 +47543,7 @@
                   "name": "pi",
                   "qualified_name": "TableclothFloat.pi",
                   "type": {
-                    "rendered": "let pi: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47597,7 +47597,7 @@
                   "name": "epsilon",
                   "qualified_name": "TableclothFloat.epsilon",
                   "type": {
-                    "rendered": "let epsilon: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47635,7 +47635,7 @@
                   "name": "largestValue",
                   "qualified_name": "TableclothFloat.largestValue",
                   "type": {
-                    "rendered": "let largestValue: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47677,7 +47677,7 @@
                   "name": "smallestValue",
                   "qualified_name": "TableclothFloat.smallestValue",
                   "type": {
-                    "rendered": "let smallestValue: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47723,7 +47723,7 @@
                   "name": "maximumSafeInteger",
                   "qualified_name": "TableclothFloat.maximumSafeInteger",
                   "type": {
-                    "rendered": "let maximumSafeInteger: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47773,7 +47773,7 @@
                   "name": "minimumSafeInteger",
                   "qualified_name": "TableclothFloat.minimumSafeInteger",
                   "type": {
-                    "rendered": "let minimumSafeInteger: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47841,7 +47841,7 @@
                   "name": "fromInt",
                   "qualified_name": "TableclothFloat.fromInt",
                   "type": {
-                    "rendered": "let fromInt: int => t"
+                    "rendered": "int => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47939,7 +47939,7 @@
                   "name": "fromString",
                   "qualified_name": "TableclothFloat.fromString",
                   "type": {
-                    "rendered": "let fromString: string => option<t>"
+                    "rendered": "string => option<t>"
                   },
                   "info": {
                     "deprecated": null,
@@ -48138,7 +48138,7 @@
                   "name": "add",
                   "qualified_name": "TableclothFloat.add",
                   "type": {
-                    "rendered": "let add: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -48453,7 +48453,7 @@
                   "name": "subtract",
                   "qualified_name": "TableclothFloat.subtract",
                   "type": {
-                    "rendered": "let subtract: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -48608,7 +48608,7 @@
                   "name": "multiply",
                   "qualified_name": "TableclothFloat.multiply",
                   "type": {
-                    "rendered": "let multiply: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49073,7 +49073,7 @@
                   "name": "negate",
                   "qualified_name": "TableclothFloat.negate",
                   "type": {
-                    "rendered": "let negate: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49228,7 +49228,7 @@
                   "name": "absolute",
                   "qualified_name": "TableclothFloat.absolute",
                   "type": {
-                    "rendered": "let absolute: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49318,7 +49318,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothFloat.maximum",
                   "type": {
-                    "rendered": "let maximumSafeInteger: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49442,7 +49442,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothFloat.minimum",
                   "type": {
-                    "rendered": "let minimumSafeInteger: t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49745,7 +49745,7 @@
                   "name": "squareRoot",
                   "qualified_name": "TableclothFloat.squareRoot",
                   "type": {
-                    "rendered": "let squareRoot: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49977,7 +49977,7 @@
                   "name": "isNaN",
                   "qualified_name": "TableclothFloat.isNaN",
                   "type": {
-                    "rendered": "let isNaN: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -50149,7 +50149,7 @@
                   "name": "isFinite",
                   "qualified_name": "TableclothFloat.isFinite",
                   "type": {
-                    "rendered": "let isFinite: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -50303,7 +50303,7 @@
                   "name": "isInfinite",
                   "qualified_name": "TableclothFloat.isInfinite",
                   "type": {
-                    "rendered": "let isInfinite: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -50421,7 +50421,7 @@
                   "name": "isInteger",
                   "qualified_name": "TableclothFloat.isInteger",
                   "type": {
-                    "rendered": "let isInteger: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -50506,7 +50506,7 @@
                   "name": "isSafeInteger",
                   "qualified_name": "TableclothFloat.isSafeInteger",
                   "type": {
-                    "rendered": "let isSafeInteger: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -50894,7 +50894,7 @@
                   "name": "hypotenuse",
                   "qualified_name": "TableclothFloat.hypotenuse",
                   "type": {
-                    "rendered": "let hypotenuse: (t, t) => t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51004,7 +51004,7 @@
                   "name": "degrees",
                   "qualified_name": "TableclothFloat.degrees",
                   "type": {
-                    "rendered": "let degrees: t => radians"
+                    "rendered": "t => radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -51136,7 +51136,7 @@
                   "name": "radians",
                   "qualified_name": "TableclothFloat.radians",
                   "type": {
-                    "rendered": "let radians: t => radians"
+                    "rendered": "t => radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -51267,7 +51267,7 @@
                   "name": "turns",
                   "qualified_name": "TableclothFloat.turns",
                   "type": {
-                    "rendered": "let turns: t => radians"
+                    "rendered": "t => radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -51414,7 +51414,7 @@
                   "name": "fromPolar",
                   "qualified_name": "TableclothFloat.fromPolar",
                   "type": {
-                    "rendered": "let fromPolar: ((float, radians)) => (float, float)"
+                    "rendered": "((float, radians)) => (float, float)"
                   },
                   "info": {
                     "deprecated": null,
@@ -51520,7 +51520,7 @@
                   "name": "toPolar",
                   "qualified_name": "TableclothFloat.toPolar",
                   "type": {
-                    "rendered": "let toPolar: ((float, float)) => (float, radians)"
+                    "rendered": "((float, float)) => (float, radians)"
                   },
                   "info": {
                     "deprecated": null,
@@ -51664,7 +51664,7 @@
                   "name": "cos",
                   "qualified_name": "TableclothFloat.cos",
                   "type": {
-                    "rendered": "let cos: radians => t"
+                    "rendered": "radians => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51765,7 +51765,7 @@
                   "name": "acos",
                   "qualified_name": "TableclothFloat.acos",
                   "type": {
-                    "rendered": "let acos: radians => t"
+                    "rendered": "radians => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51863,7 +51863,7 @@
                   "name": "sin",
                   "qualified_name": "TableclothFloat.sin",
                   "type": {
-                    "rendered": "let sin: radians => t"
+                    "rendered": "radians => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -51964,7 +51964,7 @@
                   "name": "asin",
                   "qualified_name": "TableclothFloat.asin",
                   "type": {
-                    "rendered": "let asin: radians => t"
+                    "rendered": "radians => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52062,7 +52062,7 @@
                   "name": "tan",
                   "qualified_name": "TableclothFloat.tan",
                   "type": {
-                    "rendered": "let tan: radians => t"
+                    "rendered": "radians => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -52158,7 +52158,7 @@
                   "name": "atan",
                   "qualified_name": "TableclothFloat.atan",
                   "type": {
-                    "rendered": "let atan: t => radians"
+                    "rendered": "t => radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -53325,7 +53325,7 @@
                   "name": "floor",
                   "qualified_name": "TableclothFloat.floor",
                   "type": {
-                    "rendered": "let floor: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -53407,7 +53407,7 @@
                   "name": "ceiling",
                   "qualified_name": "TableclothFloat.ceiling",
                   "type": {
-                    "rendered": "let ceiling: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -53489,7 +53489,7 @@
                   "name": "truncate",
                   "qualified_name": "TableclothFloat.truncate",
                   "type": {
-                    "rendered": "let truncate: t => t"
+                    "rendered": "t => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -53589,7 +53589,7 @@
                   "name": "toInt",
                   "qualified_name": "TableclothFloat.toInt",
                   "type": {
-                    "rendered": "let toInt: t => option<int>"
+                    "rendered": "t => option<int>"
                   },
                   "info": {
                     "deprecated": null,
@@ -53879,7 +53879,7 @@
                   "name": "toString",
                   "qualified_name": "TableclothFloat.toString",
                   "type": {
-                    "rendered": "let toString: t => string"
+                    "rendered": "t => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -53967,7 +53967,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothFloat.equal",
                   "type": {
-                    "rendered": "let equal: (t, t) => bool"
+                    "rendered": "(t, t) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -54005,7 +54005,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothFloat.compare",
                   "type": {
-                    "rendered": "let compare: (t, t) => int"
+                    "rendered": "(t, t) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -54306,7 +54306,7 @@
                   "name": "fromInt",
                   "qualified_name": "TableclothBool.fromInt",
                   "type": {
-                    "rendered": "let fromInt: int => option<bool>"
+                    "rendered": "int => option<bool>"
                   },
                   "info": {
                     "deprecated": null,
@@ -54453,7 +54453,7 @@
                   "name": "fromString",
                   "qualified_name": "TableclothBool.fromString",
                   "type": {
-                    "rendered": "let fromString: string => option<bool>"
+                    "rendered": "string => option<bool>"
                   },
                   "info": {
                     "deprecated": null,
@@ -54945,7 +54945,7 @@
                   "name": "xor",
                   "qualified_name": "TableclothBool.xor",
                   "type": {
-                    "rendered": "let xor: (bool, bool) => bool"
+                    "rendered": "(bool, bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -55089,7 +55089,7 @@
                   "name": "not",
                   "qualified_name": "TableclothBool.not",
                   "type": {
-                    "rendered": "let not: t => bool"
+                    "rendered": "t => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -55200,7 +55200,7 @@
                   "name": "toString",
                   "qualified_name": "TableclothBool.toString",
                   "type": {
-                    "rendered": "let toString: bool => string"
+                    "rendered": "bool => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -55309,7 +55309,7 @@
                   "name": "toInt",
                   "qualified_name": "TableclothBool.toInt",
                   "type": {
-                    "rendered": "let toInt: bool => int"
+                    "rendered": "bool => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -55440,7 +55440,7 @@
                   "name": "equal",
                   "qualified_name": "TableclothBool.equal",
                   "type": {
-                    "rendered": "let equal: (bool, bool) => bool"
+                    "rendered": "(bool, bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -55544,7 +55544,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothBool.compare",
                   "type": {
-                    "rendered": "let compare: (bool, bool) => int"
+                    "rendered": "(bool, bool) => int"
                   },
                   "info": {
                     "deprecated": null,

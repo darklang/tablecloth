@@ -922,89 +922,89 @@ class json =
         Odoc_info.string_of_type_expr t |> Odoc_info.remove_ending_newline
       in
       (*
-                let raw =
-                  match desc with
-                  | Tvar tvar ->
-                      tagged "Var" (nullable string tvar)
-                  | Tnil ->
-                      tagged "Nil" null
-                  | Ttuple components ->
-                      tagged "Tuple" (array self#json_of_type_expr components)
-                  | Tarrow (label, from, to_, _commutable) ->
-                      tagged
-                        "Arrow"
-                        (obj
-                           [ ( "label"
-                             , match label with
-                               | Nolabel ->
-                                   tagged "Nolabel" null
-                               | Labelled label ->
-                                   tagged "Labelled" (string label)
-                               | Optional label ->
-                                   tagged "Optional" (string label) )
-                           ; ("from", self#json_of_type_expr from)
-                           ; ("to", self#json_of_type_expr to_)
-                             (* ("commutable",
-                                  match commutable with
-                                  | Cok -> tagged "Ok" null
-                                  | Cunknown -> tagged "Unknown" null
-                                  | Clink (link : Types.commutable ref) -> tagged "Link" null
-                                ) *)
+      let raw =
+        match desc with
+        | Tvar tvar ->
+            tagged "Var" (nullable string tvar)
+        | Tnil ->
+            tagged "Nil" null
+        | Ttuple components ->
+            tagged "Tuple" (array self#json_of_type_expr components)
+        | Tarrow (label, from, to_, _commutable) ->
+            tagged
+              "Arrow"
+              (obj
+                 [ ( "label"
+                   , match label with
+                     | Nolabel ->
+                         tagged "Nolabel" null
+                     | Labelled label ->
+                         tagged "Labelled" (string label)
+                     | Optional label ->
+                         tagged "Optional" (string label) )
+                 ; ("from", self#json_of_type_expr from)
+                 ; ("to", self#json_of_type_expr to_)
+                   (* ("commutable",
+                        match commutable with
+                        | Cok -> tagged "Ok" null
+                        | Cunknown -> tagged "Unknown" null
+                        | Clink (link : Types.commutable ref) -> tagged "Link" null
+                      ) *)
+                 ])
+        | Tconstr
+            ( (path : Path.t)
+            , (ts : Types.type_expr list)
+            , (_am : Types.abbrev_memo ref) ) ->
+            tagged
+              "Constr"
+              (obj
+                 [ ("path", self#json_of_path path)
+                 ; ("expressions", array self#json_of_type_expr ts)
+                 ])
+        | Tobject
+            ( (_expression : Types.type_expr)
+            , (_b : (Path.t * Types.type_expr list) option ref) ) ->
+            tagged "Object" (obj [])
+        | Tfield
+            ( _string
+            , _field_kind
+            , (_a : Types.type_expr)
+            , (_b : Types.type_expr) ) ->
+            tagged "Field" null
+        | Tlink type_expr ->
+            tagged "Link" (self#json_of_type_expr type_expr)
+        | Tsubst type_expr ->
+            tagged "Subst" (self#json_of_type_expr type_expr)
+        | Tvariant row_desc ->
+            tagged
+              "Variant"
+              (obj
+                 [ ("fields", null)
+                 ; ("more", self#json_of_type_expr row_desc.row_more)
+                 ; ("bound", null)
+                 ; ("closed", bool row_desc.row_closed)
+                 ; ("fixed", bool row_desc.row_fixed)
+                 ; ( "name"
+                   , nullable
+                       (fun ((_path : Path.t), expressions) ->
+                         obj
+                           [ ( "expressions"
+                             , array self#json_of_type_expr expressions )
                            ])
-                  | Tconstr
-                      ( (path : Path.t)
-                      , (ts : Types.type_expr list)
-                      , (_am : Types.abbrev_memo ref) ) ->
-                      tagged
-                        "Constr"
-                        (obj
-                           [ ("path", self#json_of_path path)
-                           ; ("expressions", array self#json_of_type_expr ts)
-                           ])
-                  | Tobject
-                      ( (_expression : Types.type_expr)
-                      , (_b : (Path.t * Types.type_expr list) option ref) ) ->
-                      tagged "Object" (obj [])
-                  | Tfield
-                      ( _string
-                      , _field_kind
-                      , (_a : Types.type_expr)
-                      , (_b : Types.type_expr) ) ->
-                      tagged "Field" null
-                  | Tlink type_expr ->
-                      tagged "Link" (self#json_of_type_expr type_expr)
-                  | Tsubst type_expr ->
-                      tagged "Subst" (self#json_of_type_expr type_expr)
-                  | Tvariant row_desc ->
-                      tagged
-                        "Variant"
-                        (obj
-                           [ ("fields", null)
-                           ; ("more", self#json_of_type_expr row_desc.row_more)
-                           ; ("bound", null)
-                           ; ("closed", bool row_desc.row_closed)
-                           ; ("fixed", bool row_desc.row_fixed)
-                           ; ( "name"
-                             , nullable
-                                 (fun ((_path : Path.t), expressions) ->
-                                   obj
-                                     [ ( "expressions"
-                                       , array self#json_of_type_expr expressions )
-                                     ])
-                                 row_desc.row_name )
-                           ])
-                  | Tunivar (univar : string option) ->
-                      tagged "Univar" (nullable string univar)
-                  | Tpoly ((_ex : Types.type_expr), (_expressions : Types.type_expr list))
-                    ->
-                      tagged "Poly" null
-                  | Tpackage
-                      ( (_path : Path.t)
-                      , (_idents : Longident.t list)
-                      , (_expressions : Types.type_expr list) ) ->
-                      tagged "Package" null
-                in
-                *)
+                       row_desc.row_name )
+                 ])
+        | Tunivar (univar : string option) ->
+            tagged "Univar" (nullable string univar)
+        | Tpoly ((_ex : Types.type_expr), (_expressions : Types.type_expr list))
+          ->
+            tagged "Poly" null
+        | Tpackage
+            ( (_path : Path.t)
+            , (_idents : Longident.t list)
+            , (_expressions : Types.type_expr list) ) ->
+            tagged "Package" null
+      in
+      *)
       obj [ ("rendered", string rendered) (*      ("raw", raw) *) ]
 
     method json_of_rescript_type_expr (moduleName : string) (funcName : string)
@@ -1032,6 +1032,13 @@ class json =
         let r = Str.regexp ("^" ^ "let " ^ funcName) in
         Str.string_match r line 0
       in
+      let trim_name line =
+        match String.split_on_char ':' line with
+        | [ _; result ] ->
+            result |> String.trim
+        | _ ->
+            line
+      in
       let fetch_rescript_type ~moduleName ~funcName =
         let filename = "./_rescript/" ^ moduleName ^ ".resi" in
         let result = ref [ "" ] in
@@ -1054,7 +1061,7 @@ class json =
           | None ->
               ()
         in
-        !result |> List.rev |> String.concat ""
+        !result |> List.rev |> String.concat "" |> trim_name
       in
       try
         let rendered =
