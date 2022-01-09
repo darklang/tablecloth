@@ -105,7 +105,9 @@ module Poly = struct
 end
 
 module Int = struct
-  type nonrec 'value t = 'value Of(TableclothInt).t
+  type identity
+
+  type nonrec 'value t = (TableclothInt.t, 'value, identity) t
 
   let fromArray a = Poly.fromArray a |> Obj.magic
 
@@ -117,7 +119,9 @@ module Int = struct
 end
 
 module String = struct
-  type nonrec 'value t = 'value Of(TableclothString).t
+  type identity
+
+  type nonrec 'value t = (TableclothString.t, 'value, identity) t
 
   let fromArray a = Poly.fromArray a |> Obj.magic
 

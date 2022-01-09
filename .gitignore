@@ -22,3 +22,4 @@ _esy
 /ocamldoc-json-generator/dune.bsb
 /ocamldoc-json-generator/dune-project
 /ocamldoc-json-generator/dune
+_opam/
