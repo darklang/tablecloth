@@ -1753,7 +1753,7 @@
                   "name": "mapFirst",
                   "qualified_name": "TableclothTuple3.mapFirst",
                   "type": {
-                    "rendered": "let mapFirst: (('a, 'b, 'c), ~f: 'a => 'x) => ('x, 'b, 'c)"
+                    "rendered": "(('a, 'b, 'c), ~f: 'a => 'x) => ('x, 'b, 'c)"
                   },
                   "info": {
                     "deprecated": null,
@@ -1838,7 +1838,7 @@
                   "name": "mapSecond",
                   "qualified_name": "TableclothTuple3.mapSecond",
                   "type": {
-                    "rendered": "let mapSecond: (('a, 'b, 'c), ~f: 'b => 'y) => ('a, 'y, 'c)"
+                    "rendered": "(('a, 'b, 'c), ~f: 'b => 'y) => ('a, 'y, 'c)"
                   },
                   "info": {
                     "deprecated": null,
@@ -1923,7 +1923,7 @@
                   "name": "mapThird",
                   "qualified_name": "TableclothTuple3.mapThird",
                   "type": {
-                    "rendered": "let mapThird: (('a, 'b, 'c), ~f: 'c => 'z) => ('a, 'b, 'z)"
+                    "rendered": "(('a, 'b, 'c), ~f: 'c => 'z) => ('a, 'b, 'z)"
                   },
                   "info": {
                     "deprecated": null,
@@ -1997,7 +1997,7 @@
                   "name": "mapEach",
                   "qualified_name": "TableclothTuple3.mapEach",
                   "type": {
-                    "rendered": "let mapEach: (('a, 'b, 'c), ~f: 'a => 'x, ~g: 'b => 'y, ~h: 'c => 'z) => ('x, 'y, 'z)"
+                    "rendered": "(('a, 'b, 'c), ~f: 'a => 'x, ~g: 'b => 'y, ~h: 'c => 'z) => ('x, 'y, 'z)"
                   },
                   "info": {
                     "deprecated": null,
@@ -2155,7 +2155,7 @@
                   "name": "mapAll",
                   "qualified_name": "TableclothTuple3.mapAll",
                   "type": {
-                    "rendered": "let mapAll: (('a, 'a, 'a), ~f: 'a => 'b) => ('b, 'b, 'b)"
+                    "rendered": "(('a, 'a, 'a), ~f: 'a => 'b) => ('b, 'b, 'b)"
                   },
                   "info": {
                     "deprecated": null,
@@ -3319,7 +3319,7 @@
                   "name": "mapFirst",
                   "qualified_name": "TableclothTuple2.mapFirst",
                   "type": {
-                    "rendered": "let mapFirst: (('a, 'b), ~f: 'a => 'x) => ('x, 'b)"
+                    "rendered": "(('a, 'b), ~f: 'a => 'x) => ('x, 'b)"
                   },
                   "info": {
                     "deprecated": null,
@@ -3424,7 +3424,7 @@
                   "name": "mapSecond",
                   "qualified_name": "TableclothTuple2.mapSecond",
                   "type": {
-                    "rendered": "let mapSecond: (('a, 'b), ~f: 'b => 'c) => ('a, 'c)"
+                    "rendered": "(('a, 'b), ~f: 'b => 'c) => ('a, 'c)"
                   },
                   "info": {
                     "deprecated": null,
@@ -3509,7 +3509,7 @@
                   "name": "mapEach",
                   "qualified_name": "TableclothTuple2.mapEach",
                   "type": {
-                    "rendered": "let mapEach: (('a, 'b), ~f: 'a => 'x, ~g: 'b => 'y) => ('x, 'y)"
+                    "rendered": "(('a, 'b), ~f: 'a => 'x, ~g: 'b => 'y) => ('x, 'y)"
                   },
                   "info": {
                     "deprecated": null,
@@ -3610,7 +3610,7 @@
                   "name": "mapAll",
                   "qualified_name": "TableclothTuple2.mapAll",
                   "type": {
-                    "rendered": "let mapAll: (('a, 'a), ~f: 'a => 'b) => ('b, 'b)"
+                    "rendered": "(('a, 'a), ~f: 'a => 'b) => ('b, 'b)"
                   },
                   "info": {
                     "deprecated": null,
@@ -5697,7 +5697,7 @@
                   "name": "find",
                   "qualified_name": "TableclothSet.find",
                   "type": {
-                    "rendered": "let find: (t<'value, _>, ~f: 'value => bool) => option<'value>"
+                    "rendered": "(t<'value, _>, ~f: 'value => bool) => option<'value>"
                   },
                   "info": {
                     "deprecated": null,
@@ -5964,7 +5964,7 @@
                   "name": "any",
                   "qualified_name": "TableclothSet.any",
                   "type": {
-                    "rendered": "let any: (t<'value, _>, ~f: 'value => bool) => bool"
+                    "rendered": "(t<'value, _>, ~f: 'value => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -6076,7 +6076,7 @@
                   "name": "all",
                   "qualified_name": "TableclothSet.all",
                   "type": {
-                    "rendered": "let all: (t<'value, _>, ~f: 'value => bool) => bool"
+                    "rendered": "(t<'value, _>, ~f: 'value => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -6457,7 +6457,7 @@
                   "name": "filter",
                   "qualified_name": "TableclothSet.filter",
                   "type": {
-                    "rendered": "let filter: (t<'a, 'id>, ~f: 'a => bool) => t<'a, 'id>"
+                    "rendered": "(t<'a, 'id>, ~f: 'a => bool) => t<'a, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -6547,7 +6547,7 @@
                   "name": "partition",
                   "qualified_name": "TableclothSet.partition",
                   "type": {
-                    "rendered": "let partition: (t<'a, 'id>, ~f: 'a => bool) => (t<'a, 'id>, t<'a, 'id>)"
+                    "rendered": "(t<'a, 'id>, ~f: 'a => bool) => (t<'a, 'id>, t<'a, 'id>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -6661,7 +6661,7 @@
                   "name": "fold",
                   "qualified_name": "TableclothSet.fold",
                   "type": {
-                    "rendered": "let fold: (t<'a, _>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
+                    "rendered": "(t<'a, _>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -6771,7 +6771,7 @@
                   "name": "forEach",
                   "qualified_name": "TableclothSet.forEach",
                   "type": {
-                    "rendered": "let forEach: (t<'a, _>, ~f: 'a => unit) => unit"
+                    "rendered": "(t<'a, _>, ~f: 'a => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -8896,7 +8896,7 @@
                   "name": "fromOption",
                   "qualified_name": "TableclothResult.fromOption",
                   "type": {
-                    "rendered": "let fromOption: (option<'ok>, ~error: 'error) => t<'ok, 'error>"
+                    "rendered": "(option<'ok>, ~error: 'error) => t<'ok, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -10098,7 +10098,7 @@
                   "name": "unwrap",
                   "qualified_name": "TableclothResult.unwrap",
                   "type": {
-                    "rendered": "let unwrap: (t<'ok, 'error>, ~default: 'ok) => 'ok"
+                    "rendered": "(t<'ok, 'error>, ~default: 'ok) => 'ok"
                   },
                   "info": {
                     "deprecated": null,
@@ -10317,7 +10317,7 @@
                   "name": "unwrapError",
                   "qualified_name": "TableclothResult.unwrapError",
                   "type": {
-                    "rendered": "let unwrapError: (t<'ok, 'error>, ~default: 'error) => 'error"
+                    "rendered": "(t<'ok, 'error>, ~default: 'error) => 'error"
                   },
                   "info": {
                     "deprecated": null,
@@ -10430,7 +10430,7 @@
                   "name": "map2",
                   "qualified_name": "TableclothResult.map2",
                   "type": {
-                    "rendered": "let map2: (t<'a, 'error>, t<'b, 'error>, ~f: ('a, 'b) => 'c) => t<'c, 'error>"
+                    "rendered": "(t<'a, 'error>, t<'b, 'error>, ~f: ('a, 'b) => 'c) => t<'c, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -10828,7 +10828,7 @@
                   "name": "map",
                   "qualified_name": "TableclothResult.map",
                   "type": {
-                    "rendered": "let map2: (t<'a, 'error>, t<'b, 'error>, ~f: ('a, 'b) => 'c) => t<'c, 'error>"
+                    "rendered": "(t<'a, 'error>, t<'b, 'error>, ~f: ('a, 'b) => 'c) => t<'c, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -10937,7 +10937,7 @@
                   "name": "mapError",
                   "qualified_name": "TableclothResult.mapError",
                   "type": {
-                    "rendered": "let mapError: (t<'ok, 'a>, ~f: 'a => 'b) => t<'ok, 'b>"
+                    "rendered": "(t<'ok, 'a>, ~f: 'a => 'b) => t<'ok, 'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -11046,7 +11046,7 @@
                   "name": "andThen",
                   "qualified_name": "TableclothResult.andThen",
                   "type": {
-                    "rendered": "let andThen: (t<'a, 'error>, ~f: 'a => t<'b, 'error>) => t<'b, 'error>"
+                    "rendered": "(t<'a, 'error>, ~f: 'a => t<'b, 'error>) => t<'b, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -11227,7 +11227,7 @@
                   "name": "tap",
                   "qualified_name": "TableclothResult.tap",
                   "type": {
-                    "rendered": "let tap: (t<'ok, _>, ~f: 'ok => unit) => unit"
+                    "rendered": "(t<'ok, _>, ~f: 'ok => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -12719,7 +12719,7 @@
                   "name": "repeat",
                   "qualified_name": "TableclothList.repeat",
                   "type": {
-                    "rendered": "let repeat: ('a, ~times: int) => t<'a>"
+                    "rendered": "('a, ~times: int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -12831,7 +12831,7 @@
                   "name": "range",
                   "qualified_name": "TableclothList.range",
                   "type": {
-                    "rendered": "let range: (~from: int=?, int) => t<int>"
+                    "rendered": "(~from: int=?, int) => t<int>"
                   },
                   "info": {
                     "deprecated": null,
@@ -12947,7 +12947,7 @@
                   "name": "initialize",
                   "qualified_name": "TableclothList.initialize",
                   "type": {
-                    "rendered": "let initialize: (int, ~f: int => 'a) => t<'a>"
+                    "rendered": "(int, ~f: int => 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13530,7 +13530,7 @@
                   "name": "take",
                   "qualified_name": "TableclothList.take",
                   "type": {
-                    "rendered": "let take: (t<'a>, ~count: int) => t<'a>"
+                    "rendered": "(t<'a>, ~count: int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13669,7 +13669,7 @@
                   "name": "takeWhile",
                   "qualified_name": "TableclothList.takeWhile",
                   "type": {
-                    "rendered": "let takeWhile: (t<'a>, ~f: 'a => bool) => t<'a>"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13755,7 +13755,7 @@
                   "name": "drop",
                   "qualified_name": "TableclothList.drop",
                   "type": {
-                    "rendered": "let drop: (t<'a>, ~count: int) => t<'a>"
+                    "rendered": "(t<'a>, ~count: int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13883,7 +13883,7 @@
                   "name": "dropWhile",
                   "qualified_name": "TableclothList.dropWhile",
                   "type": {
-                    "rendered": "let dropWhile: (t<'a>, ~f: 'a => bool) => t<'a>"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13991,7 +13991,7 @@
                   "name": "initial",
                   "qualified_name": "TableclothList.initial",
                   "type": {
-                    "rendered": "let initialize: (int, ~f: int => 'a) => t<'a>"
+                    "rendered": "(int, ~f: int => 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14256,7 +14256,7 @@
                   "name": "getAt",
                   "qualified_name": "TableclothList.getAt",
                   "type": {
-                    "rendered": "let getAt: (t<'a>, ~index: int) => option<'a>"
+                    "rendered": "(t<'a>, ~index: int) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14384,7 +14384,7 @@
                   "name": "insertAt",
                   "qualified_name": "TableclothList.insertAt",
                   "type": {
-                    "rendered": "let insertAt: (t<'a>, ~index: int, ~value: 'a) => t<'a>"
+                    "rendered": "(t<'a>, ~index: int, ~value: 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14579,7 +14579,7 @@
                   "name": "updateAt",
                   "qualified_name": "TableclothList.updateAt",
                   "type": {
-                    "rendered": "let updateAt: (t<'a>, ~index: int, ~f: 'a => 'a) => t<'a>"
+                    "rendered": "(t<'a>, ~index: int, ~f: 'a => 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14696,7 +14696,7 @@
                   "name": "removeAt",
                   "qualified_name": "TableclothList.removeAt",
                   "type": {
-                    "rendered": "let removeAt: (t<'a>, ~index: int) => t<'a>"
+                    "rendered": "(t<'a>, ~index: int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14879,7 +14879,7 @@
                   "name": "sort",
                   "qualified_name": "TableclothList.sort",
                   "type": {
-                    "rendered": "let sort: (t<'a>, ~compare: ('a, 'a) => int) => t<'a>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -14993,7 +14993,7 @@
                   "name": "sortBy",
                   "qualified_name": "TableclothList.sortBy",
                   "type": {
-                    "rendered": "let sortBy: (~f: 'a => 'b, t<'a>) => t<'a>"
+                    "rendered": "(~f: 'a => 'b, t<'a>) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -15388,7 +15388,7 @@
                   "name": "any",
                   "qualified_name": "TableclothList.any",
                   "type": {
-                    "rendered": "let any: (t<'a>, ~f: 'a => bool) => bool"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -15516,7 +15516,7 @@
                   "name": "all",
                   "qualified_name": "TableclothList.all",
                   "type": {
-                    "rendered": "let all: (t<'a>, ~f: 'a => bool) => bool"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -15644,7 +15644,7 @@
                   "name": "count",
                   "qualified_name": "TableclothList.count",
                   "type": {
-                    "rendered": "let count: (t<'a>, ~f: 'a => bool) => int"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -15734,7 +15734,7 @@
                   "name": "uniqueBy",
                   "qualified_name": "TableclothList.uniqueBy",
                   "type": {
-                    "rendered": "let uniqueBy: (~f: 'a => string, list<'a>) => list<'a>"
+                    "rendered": "(~f: 'a => string, list<'a>) => list<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -15815,7 +15815,7 @@
                   "name": "find",
                   "qualified_name": "TableclothList.find",
                   "type": {
-                    "rendered": "let find: (t<'a>, ~f: 'a => bool) => option<'a>"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -15955,7 +15955,7 @@
                   "name": "findIndex",
                   "qualified_name": "TableclothList.findIndex",
                   "type": {
-                    "rendered": "let findIndex: (t<'a>, ~f: (int, 'a) => bool) => option<(int, 'a)>"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => bool) => option<(int, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16077,7 +16077,7 @@
                   "name": "includes",
                   "qualified_name": "TableclothList.includes",
                   "type": {
-                    "rendered": "let includes: (t<'a>, 'a, ~equal: ('a, 'a) => bool) => bool"
+                    "rendered": "(t<'a>, 'a, ~equal: ('a, 'a) => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -16209,7 +16209,7 @@
                   "name": "minimumBy",
                   "qualified_name": "TableclothList.minimumBy",
                   "type": {
-                    "rendered": "let minimumBy: (~f: 'a => 'comparable, list<'a>) => option<'a>"
+                    "rendered": "(~f: 'a => 'comparable, list<'a>) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16314,7 +16314,7 @@
                   "name": "maximumBy",
                   "qualified_name": "TableclothList.maximumBy",
                   "type": {
-                    "rendered": "let maximumBy: (~f: 'a => 'comparable, list<'a>) => option<'a>"
+                    "rendered": "(~f: 'a => 'comparable, list<'a>) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16419,7 +16419,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothList.minimum",
                   "type": {
-                    "rendered": "let minimumBy: (~f: 'a => 'comparable, list<'a>) => option<'a>"
+                    "rendered": "(~f: 'a => 'comparable, list<'a>) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16517,7 +16517,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothList.maximum",
                   "type": {
-                    "rendered": "let maximumBy: (~f: 'a => 'comparable, list<'a>) => option<'a>"
+                    "rendered": "(~f: 'a => 'comparable, list<'a>) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16615,7 +16615,7 @@
                   "name": "extent",
                   "qualified_name": "TableclothList.extent",
                   "type": {
-                    "rendered": "let extent: (t<'a>, ~compare: ('a, 'a) => int) => option<('a, 'a)>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => option<('a, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16871,7 +16871,7 @@
                   "name": "map",
                   "qualified_name": "TableclothList.map",
                   "type": {
-                    "rendered": "let map: (t<'a>, ~f: 'a => 'b) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => 'b) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16953,7 +16953,7 @@
                   "name": "mapWithIndex",
                   "qualified_name": "TableclothList.mapWithIndex",
                   "type": {
-                    "rendered": "let mapWithIndex: (t<'a>, ~f: (int, 'a) => 'b) => t<'b>"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => 'b) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -17035,7 +17035,7 @@
                   "name": "filter",
                   "qualified_name": "TableclothList.filter",
                   "type": {
-                    "rendered": "let filter: (t<'a>, ~f: 'a => bool) => t<'a>"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -17125,7 +17125,7 @@
                   "name": "filterWithIndex",
                   "qualified_name": "TableclothList.filterWithIndex",
                   "type": {
-                    "rendered": "let filterWithIndex: (t<'a>, ~f: (int, 'a) => bool) => t<'a>"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => bool) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -17191,7 +17191,7 @@
                   "name": "filterMap",
                   "qualified_name": "TableclothList.filterMap",
                   "type": {
-                    "rendered": "let filterMap: (t<'a>, ~f: 'a => option<'b>) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => option<'b>) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -17472,7 +17472,7 @@
                   "name": "flatMap",
                   "qualified_name": "TableclothList.flatMap",
                   "type": {
-                    "rendered": "let flatMap: (t<'a>, ~f: 'a => t<'b>) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => t<'b>) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -17585,7 +17585,7 @@
                   "name": "fold",
                   "qualified_name": "TableclothList.fold",
                   "type": {
-                    "rendered": "let fold: (t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
+                    "rendered": "(t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -17811,7 +17811,7 @@
                   "name": "foldRight",
                   "qualified_name": "TableclothList.foldRight",
                   "type": {
-                    "rendered": "let foldRight: (t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
+                    "rendered": "(t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -18145,7 +18145,7 @@
                   "name": "map2",
                   "qualified_name": "TableclothList.map2",
                   "type": {
-                    "rendered": "let map2: (t<'a>, t<'b>, ~f: ('a, 'b) => 'c) => t<'c>"
+                    "rendered": "(t<'a>, t<'b>, ~f: ('a, 'b) => 'c) => t<'c>"
                   },
                   "info": {
                     "deprecated": null,
@@ -18246,7 +18246,7 @@
                   "name": "map3",
                   "qualified_name": "TableclothList.map3",
                   "type": {
-                    "rendered": "let map3: (t<'a>, t<'b>, t<'c>, ~f: ('a, 'b, 'c) => 'd) => t<'d>"
+                    "rendered": "(t<'a>, t<'b>, t<'c>, ~f: ('a, 'b, 'c) => 'd) => t<'d>"
                   },
                   "info": {
                     "deprecated": null,
@@ -18354,7 +18354,7 @@
                   "name": "partition",
                   "qualified_name": "TableclothList.partition",
                   "type": {
-                    "rendered": "let partition: (t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -18476,7 +18476,7 @@
                   "name": "splitAt",
                   "qualified_name": "TableclothList.splitAt",
                   "type": {
-                    "rendered": "let splitAt: (t<'a>, ~index: int) => (t<'a>, t<'a>)"
+                    "rendered": "(t<'a>, ~index: int) => (t<'a>, t<'a>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -18656,7 +18656,7 @@
                   "name": "splitWhen",
                   "qualified_name": "TableclothList.splitWhen",
                   "type": {
-                    "rendered": "let splitWhen: (t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -18933,7 +18933,7 @@
                   "name": "forEach",
                   "qualified_name": "TableclothList.forEach",
                   "type": {
-                    "rendered": "let forEach: (t<'a>, ~f: 'a => unit) => unit"
+                    "rendered": "(t<'a>, ~f: 'a => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -19063,7 +19063,7 @@
                   "name": "forEachWithIndex",
                   "qualified_name": "TableclothList.forEachWithIndex",
                   "type": {
-                    "rendered": "let forEachWithIndex: (t<'a>, ~f: (int, 'a) => unit) => unit"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -19165,7 +19165,7 @@
                   "name": "intersperse",
                   "qualified_name": "TableclothList.intersperse",
                   "type": {
-                    "rendered": "let intersperse: (t<'a>, ~sep: 'a) => t<'a>"
+                    "rendered": "(t<'a>, ~sep: 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -19258,7 +19258,7 @@
                   "name": "chunksOf",
                   "qualified_name": "TableclothList.chunksOf",
                   "type": {
-                    "rendered": "let chunksOf: (t<'a>, ~size: int) => t<t<'a>>"
+                    "rendered": "(t<'a>, ~size: int) => t<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -19340,7 +19340,7 @@
                   "name": "sliding",
                   "qualified_name": "TableclothList.sliding",
                   "type": {
-                    "rendered": "let sliding: (~step: int=?, t<'a>, ~size: int) => t<t<'a>>"
+                    "rendered": "(~step: int=?, t<'a>, ~size: int) => t<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -19536,7 +19536,7 @@
                   "name": "groupWhile",
                   "qualified_name": "TableclothList.groupWhile",
                   "type": {
-                    "rendered": "let groupWhile: (t<'a>, ~f: ('a, 'a) => bool) => t<t<'a>>"
+                    "rendered": "(t<'a>, ~f: ('a, 'a) => bool) => t<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -19693,7 +19693,7 @@
                   "name": "join",
                   "qualified_name": "TableclothList.join",
                   "type": {
-                    "rendered": "let join: (t<string>, ~sep: string) => string"
+                    "rendered": "(t<string>, ~sep: string) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -19795,7 +19795,7 @@
                   "name": "groupBy",
                   "qualified_name": "TableclothList.groupBy",
                   "type": {
-                    "rendered": "let groupBy: (\n  t<'value>,\n  TableclothComparator.s<'key, 'id>,\n  ~f: 'value => 'key,\n) => TableclothMap.t<'key, list<'value>, 'id>"
+                    "rendered": "(\n  t<'value>,\n  TableclothComparator.s<'key, 'id>,\n  ~f: 'value => 'key,\n) => TableclothMap.t<'key, list<'value>, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -20414,7 +20414,7 @@
                   "name": "repeat",
                   "qualified_name": "TableclothArray.repeat",
                   "type": {
-                    "rendered": "let repeat: ('a, ~length: int) => t<'a>"
+                    "rendered": "('a, ~length: int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -20526,7 +20526,7 @@
                   "name": "range",
                   "qualified_name": "TableclothArray.range",
                   "type": {
-                    "rendered": "let range: (~from: int=?, int) => t<int>"
+                    "rendered": "(~from: int=?, int) => t<int>"
                   },
                   "info": {
                     "deprecated": null,
@@ -20642,7 +20642,7 @@
                   "name": "initialize",
                   "qualified_name": "TableclothArray.initialize",
                   "type": {
-                    "rendered": "let initialize: (int, ~f: int => 'a) => t<'a>"
+                    "rendered": "(int, ~f: int => 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -21169,7 +21169,7 @@
                   "name": "getAt",
                   "qualified_name": "TableclothArray.getAt",
                   "type": {
-                    "rendered": "let getAt: (t<'a>, ~index: int) => option<'a>"
+                    "rendered": "(t<'a>, ~index: int) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -21670,7 +21670,7 @@
                   "name": "setAt",
                   "qualified_name": "TableclothArray.setAt",
                   "type": {
-                    "rendered": "let setAt: (t<'a>, ~index: int, ~value: 'a) => unit"
+                    "rendered": "(t<'a>, ~index: int, ~value: 'a) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -21952,7 +21952,7 @@
                   "name": "slice",
                   "qualified_name": "TableclothArray.slice",
                   "type": {
-                    "rendered": "let slice: (~to_: int=?, t<'a>, ~from: int) => t<'a>"
+                    "rendered": "(~to_: int=?, t<'a>, ~from: int) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -22343,7 +22343,7 @@
                   "name": "sort",
                   "qualified_name": "TableclothArray.sort",
                   "type": {
-                    "rendered": "let sort: (t<'a>, ~compare: ('a, 'a) => int) => unit"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -22653,7 +22653,7 @@
                   "name": "any",
                   "qualified_name": "TableclothArray.any",
                   "type": {
-                    "rendered": "let any: (t<'a>, ~f: 'a => bool) => bool"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -22785,7 +22785,7 @@
                   "name": "all",
                   "qualified_name": "TableclothArray.all",
                   "type": {
-                    "rendered": "let all: (t<'a>, ~f: 'a => bool) => bool"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -22917,7 +22917,7 @@
                   "name": "count",
                   "qualified_name": "TableclothArray.count",
                   "type": {
-                    "rendered": "let count: (t<'a>, ~f: 'a => bool) => int"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => int"
                   },
                   "info": {
                     "deprecated": null,
@@ -23007,7 +23007,7 @@
                   "name": "find",
                   "qualified_name": "TableclothArray.find",
                   "type": {
-                    "rendered": "let find: (t<'a>, ~f: 'a => bool) => option<'a>"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -23175,7 +23175,7 @@
                   "name": "findIndex",
                   "qualified_name": "TableclothArray.findIndex",
                   "type": {
-                    "rendered": "let findIndex: (t<'a>, ~f: (int, 'a) => bool) => option<(int, 'a)>"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => bool) => option<(int, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -23277,7 +23277,7 @@
                   "name": "includes",
                   "qualified_name": "TableclothArray.includes",
                   "type": {
-                    "rendered": "let includes: (t<'a>, 'a, ~equal: ('a, 'a) => bool) => bool"
+                    "rendered": "(t<'a>, 'a, ~equal: ('a, 'a) => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -23359,7 +23359,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothArray.minimum",
                   "type": {
-                    "rendered": "let minimum: (t<'a>, ~compare: ('a, 'a) => int) => option<'a>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -23468,7 +23468,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothArray.maximum",
                   "type": {
-                    "rendered": "let maximum: (t<'a>, ~compare: ('a, 'a) => int) => option<'a>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -23577,7 +23577,7 @@
                   "name": "extent",
                   "qualified_name": "TableclothArray.extent",
                   "type": {
-                    "rendered": "let extent: (t<'a>, ~compare: ('a, 'a) => int) => option<('a, 'a)>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => option<('a, 'a)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -23879,7 +23879,7 @@
                   "name": "map",
                   "qualified_name": "TableclothArray.map",
                   "type": {
-                    "rendered": "let map: (t<'a>, ~f: 'a => 'b) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => 'b) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -23961,7 +23961,7 @@
                   "name": "mapWithIndex",
                   "qualified_name": "TableclothArray.mapWithIndex",
                   "type": {
-                    "rendered": "let mapWithIndex: (t<'a>, ~f: (int, 'a) => 'b) => t<'b>"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => 'b) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -24043,7 +24043,7 @@
                   "name": "filter",
                   "qualified_name": "TableclothArray.filter",
                   "type": {
-                    "rendered": "let filter: (t<'a>, ~f: 'a => bool) => t<'a>"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -24133,7 +24133,7 @@
                   "name": "filterMap",
                   "qualified_name": "TableclothArray.filterMap",
                   "type": {
-                    "rendered": "let filterMap: (t<'a>, ~f: 'a => option<'b>) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => option<'b>) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -24430,7 +24430,7 @@
                   "name": "flatMap",
                   "qualified_name": "TableclothArray.flatMap",
                   "type": {
-                    "rendered": "let flatMap: (t<'a>, ~f: 'a => t<'b>) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => t<'b>) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -24548,7 +24548,7 @@
                   "name": "fold",
                   "qualified_name": "TableclothArray.fold",
                   "type": {
-                    "rendered": "let fold: (t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
+                    "rendered": "(t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -24870,7 +24870,7 @@
                   "name": "foldRight",
                   "qualified_name": "TableclothArray.foldRight",
                   "type": {
-                    "rendered": "let foldRight: (t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
+                    "rendered": "(t<'a>, ~initial: 'b, ~f: ('b, 'a) => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -25233,7 +25233,7 @@
                   "name": "map2",
                   "qualified_name": "TableclothArray.map2",
                   "type": {
-                    "rendered": "let map2: (t<'a>, t<'b>, ~f: ('a, 'b) => 'c) => t<'c>"
+                    "rendered": "(t<'a>, t<'b>, ~f: ('a, 'b) => 'c) => t<'c>"
                   },
                   "info": {
                     "deprecated": null,
@@ -25334,7 +25334,7 @@
                   "name": "map3",
                   "qualified_name": "TableclothArray.map3",
                   "type": {
-                    "rendered": "let map3: (t<'a>, t<'b>, t<'c>, ~f: ('a, 'b, 'c) => 'd) => t<'d>"
+                    "rendered": "(t<'a>, t<'b>, t<'c>, ~f: ('a, 'b, 'c) => 'd) => t<'d>"
                   },
                   "info": {
                     "deprecated": null,
@@ -25442,7 +25442,7 @@
                   "name": "partition",
                   "qualified_name": "TableclothArray.partition",
                   "type": {
-                    "rendered": "let partition: (t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -25564,7 +25564,7 @@
                   "name": "splitAt",
                   "qualified_name": "TableclothArray.splitAt",
                   "type": {
-                    "rendered": "let splitAt: (t<'a>, ~index: int) => (t<'a>, t<'a>)"
+                    "rendered": "(t<'a>, ~index: int) => (t<'a>, t<'a>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -25757,7 +25757,7 @@
                   "name": "splitWhen",
                   "qualified_name": "TableclothArray.splitWhen",
                   "type": {
-                    "rendered": "let splitWhen: (t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
+                    "rendered": "(t<'a>, ~f: 'a => bool) => (t<'a>, t<'a>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -26053,7 +26053,7 @@
                   "name": "forEach",
                   "qualified_name": "TableclothArray.forEach",
                   "type": {
-                    "rendered": "let forEach: (t<'a>, ~f: 'a => unit) => unit"
+                    "rendered": "(t<'a>, ~f: 'a => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -26135,7 +26135,7 @@
                   "name": "forEachWithIndex",
                   "qualified_name": "TableclothArray.forEachWithIndex",
                   "type": {
-                    "rendered": "let forEachWithIndex: (t<'a>, ~f: (int, 'a) => unit) => unit"
+                    "rendered": "(t<'a>, ~f: (int, 'a) => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -26310,7 +26310,7 @@
                   "name": "intersperse",
                   "qualified_name": "TableclothArray.intersperse",
                   "type": {
-                    "rendered": "let intersperse: (t<'a>, ~sep: 'a) => t<'a>"
+                    "rendered": "(t<'a>, ~sep: 'a) => t<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -26403,7 +26403,7 @@
                   "name": "chunksOf",
                   "qualified_name": "TableclothArray.chunksOf",
                   "type": {
-                    "rendered": "let chunksOf: (t<'a>, ~size: int) => t<t<'a>>"
+                    "rendered": "(t<'a>, ~size: int) => t<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -26485,7 +26485,7 @@
                   "name": "sliding",
                   "qualified_name": "TableclothArray.sliding",
                   "type": {
-                    "rendered": "let sliding: (~step: int=?, t<'a>, ~size: int) => t<t<'a>>"
+                    "rendered": "(~step: int=?, t<'a>, ~size: int) => t<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -26685,7 +26685,7 @@
                   "name": "join",
                   "qualified_name": "TableclothArray.join",
                   "type": {
-                    "rendered": "let join: (t<string>, ~sep: string) => string"
+                    "rendered": "(t<string>, ~sep: string) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -26787,7 +26787,7 @@
                   "name": "groupBy",
                   "qualified_name": "TableclothArray.groupBy",
                   "type": {
-                    "rendered": "let groupBy: (\n  t<'value>,\n  TableclothComparator.s<'key, 'id>,\n  ~f: 'value => 'key,\n) => TableclothMap.t<'key, list<'value>, 'id>"
+                    "rendered": "(\n  t<'value>,\n  TableclothComparator.s<'key, 'id>,\n  ~f: 'value => 'key,\n) => TableclothMap.t<'key, list<'value>, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28009,7 +28009,7 @@
                   "name": "singleton",
                   "qualified_name": "TableclothMap.singleton",
                   "type": {
-                    "rendered": "let singleton: (\n  TableclothComparator.s<'key, 'identity>,\n  ~key: 'key,\n  ~value: 'value,\n) => t<'key, 'value, 'identity>"
+                    "rendered": "(\n  TableclothComparator.s<'key, 'identity>,\n  ~key: 'key,\n  ~value: 'value,\n) => t<'key, 'value, 'identity>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28217,7 +28217,7 @@
                   "name": "add",
                   "qualified_name": "TableclothMap.add",
                   "type": {
-                    "rendered": "let add: (t<'key, 'value, 'id>, ~key: 'key, ~value: 'value) => t<'key, 'value, 'id>"
+                    "rendered": "(t<'key, 'value, 'id>, ~key: 'key, ~value: 'value) => t<'key, 'value, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28725,7 +28725,7 @@
                   "name": "update",
                   "qualified_name": "TableclothMap.update",
                   "type": {
-                    "rendered": "let update: (\n  t<'key, 'value, 'id>,\n  ~key: 'key,\n  ~f: option<'value> => option<'value>,\n) => t<'key, 'value, 'id>"
+                    "rendered": "(\n  t<'key, 'value, 'id>,\n  ~key: 'key,\n  ~f: option<'value> => option<'value>,\n) => t<'key, 'value, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -28961,7 +28961,7 @@
                   "name": "any",
                   "qualified_name": "TableclothMap.any",
                   "type": {
-                    "rendered": "let any: (t<_, 'value, _>, ~f: 'value => bool) => bool"
+                    "rendered": "(t<_, 'value, _>, ~f: 'value => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -29023,7 +29023,7 @@
                   "name": "all",
                   "qualified_name": "TableclothMap.all",
                   "type": {
-                    "rendered": "let all: (t<_, 'value, _>, ~f: 'value => bool) => bool"
+                    "rendered": "(t<_, 'value, _>, ~f: 'value => bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -29085,7 +29085,7 @@
                   "name": "find",
                   "qualified_name": "TableclothMap.find",
                   "type": {
-                    "rendered": "let find: (t<'key, 'value, _>, ~f: (~key: 'key, ~value: 'value) => bool) => option<('key, 'value)>"
+                    "rendered": "(t<'key, 'value, _>, ~f: (~key: 'key, ~value: 'value) => bool) => option<('key, 'value)>"
                   },
                   "info": {
                     "deprecated": null,
@@ -29685,7 +29685,7 @@
                   "name": "merge",
                   "qualified_name": "TableclothMap.merge",
                   "type": {
-                    "rendered": "let merge: (\n  t<'key, 'v1, 'id>,\n  t<'key, 'v2, 'id>,\n  ~f: ('key, option<'v1>, option<'v2>) => option<'v3>,\n) => t<'key, 'v3, 'id>"
+                    "rendered": "(\n  t<'key, 'v1, 'id>,\n  t<'key, 'v2, 'id>,\n  ~f: ('key, option<'v1>, option<'v2>) => option<'v3>,\n) => t<'key, 'v3, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -29809,7 +29809,7 @@
                   "name": "map",
                   "qualified_name": "TableclothMap.map",
                   "type": {
-                    "rendered": "let map: (t<'key, 'value, 'id>, ~f: 'value => 'b) => t<'key, 'b, 'id>"
+                    "rendered": "(t<'key, 'value, 'id>, ~f: 'value => 'b) => t<'key, 'b, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -29883,7 +29883,7 @@
                   "name": "mapWithIndex",
                   "qualified_name": "TableclothMap.mapWithIndex",
                   "type": {
-                    "rendered": "let mapWithIndex: (t<'key, 'value, 'id>, ~f: ('key, 'value) => 'b) => t<'key, 'b, 'id>"
+                    "rendered": "(t<'key, 'value, 'id>, ~f: ('key, 'value) => 'b) => t<'key, 'b, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -29949,7 +29949,7 @@
                   "name": "filter",
                   "qualified_name": "TableclothMap.filter",
                   "type": {
-                    "rendered": "let filter: (t<'key, 'value, 'id>, ~f: 'value => bool) => t<'key, 'value, 'id>"
+                    "rendered": "(t<'key, 'value, 'id>, ~f: 'value => bool) => t<'key, 'value, 'id>"
                   },
                   "info": {
                     "deprecated": null,
@@ -30039,7 +30039,7 @@
                   "name": "partition",
                   "qualified_name": "TableclothMap.partition",
                   "type": {
-                    "rendered": "let partition: (\n  t<'key, 'value, 'id>,\n  ~f: (~key: 'key, ~value: 'value) => bool,\n) => (t<'key, 'value, 'id>, t<'key, 'value, 'id>)"
+                    "rendered": "(\n  t<'key, 'value, 'id>,\n  ~f: (~key: 'key, ~value: 'value) => bool,\n) => (t<'key, 'value, 'id>, t<'key, 'value, 'id>)"
                   },
                   "info": {
                     "deprecated": null,
@@ -30145,7 +30145,7 @@
                   "name": "fold",
                   "qualified_name": "TableclothMap.fold",
                   "type": {
-                    "rendered": "let fold: (t<'key, 'value, _>, ~initial: 'a, ~f: ('a, ~key: 'key, ~value: 'value) => 'a) => 'a"
+                    "rendered": "(t<'key, 'value, _>, ~initial: 'a, ~f: ('a, ~key: 'key, ~value: 'value) => 'a) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -30241,7 +30241,7 @@
                   "name": "forEach",
                   "qualified_name": "TableclothMap.forEach",
                   "type": {
-                    "rendered": "let forEach: (t<_, 'value, _>, ~f: 'value => unit) => unit"
+                    "rendered": "(t<_, 'value, _>, ~f: 'value => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -30300,7 +30300,7 @@
                   "name": "forEachWithIndex",
                   "qualified_name": "TableclothMap.forEachWithIndex",
                   "type": {
-                    "rendered": "let forEachWithIndex: (t<'key, 'value, _>, ~f: (~key: 'key, ~value: 'value) => unit) => unit"
+                    "rendered": "(t<'key, 'value, _>, ~f: (~key: 'key, ~value: 'value) => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -32903,7 +32903,7 @@
                   "name": "map",
                   "qualified_name": "TableclothOption.map",
                   "type": {
-                    "rendered": "let map: (t<'a>, ~f: 'a => 'b) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => 'b) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -33043,7 +33043,7 @@
                   "name": "map2",
                   "qualified_name": "TableclothOption.map2",
                   "type": {
-                    "rendered": "let map2: (t<'a>, t<'b>, ~f: ('a, 'b) => 'c) => t<'c>"
+                    "rendered": "(t<'a>, t<'b>, ~f: ('a, 'b) => 'c) => t<'c>"
                   },
                   "info": {
                     "deprecated": null,
@@ -33222,7 +33222,7 @@
                   "name": "andThen",
                   "qualified_name": "TableclothOption.andThen",
                   "type": {
-                    "rendered": "let andThen: (t<'a>, ~f: 'a => t<'b>) => t<'b>"
+                    "rendered": "(t<'a>, ~f: 'a => t<'b>) => t<'b>"
                   },
                   "info": {
                     "deprecated": null,
@@ -33445,7 +33445,7 @@
                   "name": "unwrap",
                   "qualified_name": "TableclothOption.unwrap",
                   "type": {
-                    "rendered": "let unwrap: (t<'a>, ~default: 'a) => 'a"
+                    "rendered": "(t<'a>, ~default: 'a) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -34187,7 +34187,7 @@
                   "name": "tap",
                   "qualified_name": "TableclothOption.tap",
                   "type": {
-                    "rendered": "let tap: (t<'a>, ~f: 'a => unit) => unit"
+                    "rendered": "(t<'a>, ~f: 'a => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -35446,7 +35446,7 @@
                   "name": "repeat",
                   "qualified_name": "TableclothString.repeat",
                   "type": {
-                    "rendered": "let repeat: (string, ~count: int) => string"
+                    "rendered": "(string, ~count: int) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -35603,7 +35603,7 @@
                   "name": "initialize",
                   "qualified_name": "TableclothString.initialize",
                   "type": {
-                    "rendered": "let initialize: (int, ~f: int => char) => string"
+                    "rendered": "(int, ~f: int => char) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -35741,7 +35741,7 @@
                   "name": "getAt",
                   "qualified_name": "TableclothString.getAt",
                   "type": {
-                    "rendered": "let getAt: (string, ~index: int) => option<char>"
+                    "rendered": "(string, ~index: int) => option<char>"
                   },
                   "info": {
                     "deprecated": null,
@@ -36016,7 +36016,7 @@
                   "name": "slice",
                   "qualified_name": "TableclothString.slice",
                   "type": {
-                    "rendered": "let slice: (~to_: int=?, string, ~from: int) => string"
+                    "rendered": "(~to_: int=?, string, ~from: int) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -36241,7 +36241,7 @@
                   "name": "startsWith",
                   "qualified_name": "TableclothString.startsWith",
                   "type": {
-                    "rendered": "let startsWith: (string, ~prefix: string) => bool"
+                    "rendered": "(string, ~prefix: string) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -36330,7 +36330,7 @@
                   "name": "endsWith",
                   "qualified_name": "TableclothString.endsWith",
                   "type": {
-                    "rendered": "let endsWith: (string, ~suffix: string) => bool"
+                    "rendered": "(string, ~suffix: string) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -36423,7 +36423,7 @@
                   "name": "includes",
                   "qualified_name": "TableclothString.includes",
                   "type": {
-                    "rendered": "let includes: (string, ~substring: string) => bool"
+                    "rendered": "(string, ~substring: string) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -36625,7 +36625,7 @@
                   "name": "dropLeft",
                   "qualified_name": "TableclothString.dropLeft",
                   "type": {
-                    "rendered": "let dropLeft: (string, ~count: int) => string"
+                    "rendered": "(string, ~count: int) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -36751,7 +36751,7 @@
                   "name": "dropRight",
                   "qualified_name": "TableclothString.dropRight",
                   "type": {
-                    "rendered": "let dropRight: (string, ~count: int) => string"
+                    "rendered": "(string, ~count: int) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37071,7 +37071,7 @@
                   "name": "insertAt",
                   "qualified_name": "TableclothString.insertAt",
                   "type": {
-                    "rendered": "let insertAt: (string, ~index: int, ~value: t) => string"
+                    "rendered": "(string, ~index: int, ~value: t) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37836,7 +37836,7 @@
                   "name": "padLeft",
                   "qualified_name": "TableclothString.padLeft",
                   "type": {
-                    "rendered": "let padLeft: (string, int, ~with_: string) => string"
+                    "rendered": "(string, int, ~with_: string) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -37926,7 +37926,7 @@
                   "name": "padRight",
                   "qualified_name": "TableclothString.padRight",
                   "type": {
-                    "rendered": "let padRight: (string, int, ~with_: string) => string"
+                    "rendered": "(string, int, ~with_: string) => string"
                   },
                   "info": {
                     "deprecated": null,
@@ -38168,7 +38168,7 @@
                   "name": "split",
                   "qualified_name": "TableclothString.split",
                   "type": {
-                    "rendered": "let split: (string, ~on: string) => list<string>"
+                    "rendered": "(string, ~on: string) => list<string>"
                   },
                   "info": {
                     "deprecated": null,
@@ -38268,7 +38268,7 @@
                   "name": "forEach",
                   "qualified_name": "TableclothString.forEach",
                   "type": {
-                    "rendered": "let forEach: (string, ~f: char => unit) => unit"
+                    "rendered": "(string, ~f: char => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -38314,7 +38314,7 @@
                   "name": "fold",
                   "qualified_name": "TableclothString.fold",
                   "type": {
-                    "rendered": "let fold: (string, ~initial: 'a, ~f: ('a, char) => 'a) => 'a"
+                    "rendered": "(string, ~initial: 'a, ~f: ('a, char) => 'a) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -42642,7 +42642,7 @@
                   "name": "divide",
                   "qualified_name": "TableclothInt.divide",
                   "type": {
-                    "rendered": "let divide: (t, ~by: t) => t"
+                    "rendered": "(t, ~by: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -42930,7 +42930,7 @@
                   "name": "power",
                   "qualified_name": "TableclothInt.power",
                   "type": {
-                    "rendered": "let power: (~base: t, ~exponent: t) => t"
+                    "rendered": "(~base: t, ~exponent: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43382,7 +43382,7 @@
                   "name": "modulo",
                   "qualified_name": "TableclothInt.modulo",
                   "type": {
-                    "rendered": "let modulo: (t, ~by: t) => t"
+                    "rendered": "(t, ~by: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43714,7 +43714,7 @@
                   "name": "remainder",
                   "qualified_name": "TableclothInt.remainder",
                   "type": {
-                    "rendered": "let remainder: (t, ~by: t) => t"
+                    "rendered": "(t, ~by: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44228,7 +44228,7 @@
                   "name": "clamp",
                   "qualified_name": "TableclothInt.clamp",
                   "type": {
-                    "rendered": "let clamp: (t, ~lower: t, ~upper: t) => t"
+                    "rendered": "(t, ~lower: t, ~upper: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -44389,7 +44389,7 @@
                   "name": "inRange",
                   "qualified_name": "TableclothInt.inRange",
                   "type": {
-                    "rendered": "let inRange: (t, ~lower: t, ~upper: t) => bool"
+                    "rendered": "(t, ~lower: t, ~upper: t) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -46338,7 +46338,7 @@
                   "name": "tap",
                   "qualified_name": "TableclothFun.tap",
                   "type": {
-                    "rendered": "let tap: ('a, ~f: 'a => unit) => 'a"
+                    "rendered": "('a, ~f: 'a => unit) => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -46497,7 +46497,7 @@
                   "name": "times",
                   "qualified_name": "TableclothFun.times",
                   "type": {
-                    "rendered": "let times: (int, ~f: unit => unit) => unit"
+                    "rendered": "(int, ~f: unit => unit) => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -48763,7 +48763,7 @@
                   "name": "divide",
                   "qualified_name": "TableclothFloat.divide",
                   "type": {
-                    "rendered": "let divide: (t, ~by: t) => t"
+                    "rendered": "(t, ~by: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -48918,7 +48918,7 @@
                   "name": "power",
                   "qualified_name": "TableclothFloat.power",
                   "type": {
-                    "rendered": "let power: (~base: t, ~exponent: t) => t"
+                    "rendered": "(~base: t, ~exponent: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49566,7 +49566,7 @@
                   "name": "clamp",
                   "qualified_name": "TableclothFloat.clamp",
                   "type": {
-                    "rendered": "let clamp: (t, ~lower: t, ~upper: t) => t"
+                    "rendered": "(t, ~lower: t, ~upper: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49874,7 +49874,7 @@
                   "name": "log",
                   "qualified_name": "TableclothFloat.log",
                   "type": {
-                    "rendered": "let log: (t, ~base: t) => t"
+                    "rendered": "(t, ~base: t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -50602,7 +50602,7 @@
                   "name": "inRange",
                   "qualified_name": "TableclothFloat.inRange",
                   "type": {
-                    "rendered": "let inRange: (t, ~lower: t, ~upper: t) => bool"
+                    "rendered": "(t, ~lower: t, ~upper: t) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -52422,7 +52422,7 @@
                   "name": "atan2",
                   "qualified_name": "TableclothFloat.atan2",
                   "type": {
-                    "rendered": "let atan2: (~y: t, ~x: t) => radians"
+                    "rendered": "(~y: t, ~x: t) => radians"
                   },
                   "info": {
                     "deprecated": null,
@@ -52756,7 +52756,7 @@
                   "name": "round",
                   "qualified_name": "TableclothFloat.round",
                   "type": {
-                    "rendered": "let round: (~direction: direction=?, t) => t"
+                    "rendered": "(~direction: direction=?, t) => t"
                   },
                   "info": {
                     "deprecated": null,

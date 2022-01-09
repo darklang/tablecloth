@@ -1034,8 +1034,8 @@ class json =
       in
       let trim_name line =
         match String.split_on_char ':' line with
-        | [ _; result ] ->
-            result |> String.trim
+        | _ :: result ->
+            result |> String.concat ":" |> String.trim
         | _ ->
             line
       in
