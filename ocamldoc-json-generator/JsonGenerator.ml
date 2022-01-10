@@ -1019,31 +1019,97 @@ class json =
             while true do
               lines := input_line chan :: !lines
             done ;
-            Some !lines
+            !lines
           with
           | End_of_file ->
               close_in chan ;
-              Some (List.rev !lines)
+              List.rev !lines
         with
-        | _ ->
-            None
+        | err ->
+          print_DEBUG ("!!!!!!!!!!!!!!!!!!!!!!! " ^ (Printexc.to_string err)) ;
+            [ "no file" ^ filename ]
       in
+
       let starts_with line funcName =
-        let r = Str.regexp ("^" ^ "let " ^ funcName) in
-        Str.string_match r line 0
+        let r_let = Str.regexp (Str.quote  "let " ^ funcName) in
+        let r_external = Str.regexp (Str.quote  "external " ^ funcName) in
+        let r_module = Str.regexp (Str.quote  "module " ^ funcName) in
+        let r_module_type = Str.regexp (Str.quote  "module type " ^ funcName) in
+        let contains_pars x = String.contains x '(' in
+        let is_operator =
+          match contains_pars funcName with
+          | true ->
+              let start_index = 1 in
+              let close_index = String.index funcName ')' in
+              let extracted_val =
+                String.sub funcName start_index (close_index - start_index) |> String.trim
+              in
+              let stop_chars = Str.regexp {|[\"letexternal]|} in
+              let cleaned_line = Str.global_replace stop_chars  "" line |> String.trim in
+            (**  print_DEBUG ("funcName " ^ extracted_val ^ " | " ^ cleaned_line) ;*) 
+              let r = Str.regexp (Str.quote  extracted_val) in
+              Str.string_match r cleaned_line 0
+          | _ ->
+              false
+        in
+        let is_let = Str.string_match r_let line 0 in
+        let is_external = Str.string_match r_external line 0 in
+        let is_module = Str.string_match r_module line 0 in
+        let is_module_type = Str.string_match r_module_type line 0 in
+
+
+
+        is_let || is_external || is_module || is_module_type || is_operator
       in
       let trim_name line =
         match String.split_on_char ':' line with
         | _ :: result ->
             result |> String.concat ":" |> String.trim
         | _ ->
-            line
+            line |> String.trim
+        in
+            let remove_external line =
+              match String.split_on_char '=' line with | result::_ -> result | _ -> line
+      in
+      let is_submodule moduleName =
+        match moduleName |> String.split_on_char '.' with
+        | [ _ ] ->
+            None
+        | [ glob; block ] ->
+            Some (glob, block)
+        | _ ->
+            None
+      in
+      let fetch_rescript_submodule ~file ~block =
+        print_DEBUG ("reading " ^ file ^ " | " ^ block) ;
+        let filename = "./_rescript/" ^ file ^ ".resi" in
+        let result = ref [ "" ] in
+        let subName = block in
+        let handle_line line =
+          match starts_with line subName with
+          | true ->
+              result := List.append [ line ] !result
+          | _ ->
+            ( match !result with
+            | [ "" ] | "}" :: _ ->
+                ()
+            | _ ->
+                result := List.append [ line |> String.trim ] !result )
+        in
+        let () =
+          let lines = read_file filename in
+          List.iter handle_line lines
+        in
+        let xxx =
+          !result |> List.tl |> List.rev |> String.concat "" |> trim_name
+        in
+        !result |> List.tl  |> List.rev
       in
       let fetch_rescript_type ~moduleName ~funcName =
         let filename = "./_rescript/" ^ moduleName ^ ".resi" in
         let result = ref [ "" ] in
         let handle_line line =
-          match (starts_with line funcName, !result) with
+          match (starts_with line (funcName), !result) with
           | true, [ "" ] ->
               result := List.append [ line ] !result
           | _, "" :: rest ->
@@ -1053,27 +1119,35 @@ class json =
         in
 
         let () =
-          let lines = read_file filename in
+          let lines =
+            match moduleName |> is_submodule with
+            | Some (file, block) ->
+                fetch_rescript_submodule ~file ~block
+            | None ->
+                read_file filename
+          in
 
-          match lines with
-          | Some lines ->
-              List.iter handle_line lines
-          | None ->
-              ()
+          List.iter handle_line lines
         in
-        !result |> List.rev |> String.concat "" |> trim_name
+        !result  |> List.rev |> String.concat "" |> trim_name 
       in
       try
         let rendered =
-          fetch_rescript_type ~moduleName ~funcName
-          |> Odoc_info.remove_ending_newline
+          match
+            fetch_rescript_type ~moduleName ~funcName
+            |> Odoc_info.remove_ending_newline
+          with
+          | "" ->
+              "Empty type of: " ^ moduleName ^ funcName
+          | ok ->
+              ok
         in
         obj [ ("rendered", string rendered) ]
       with
-      | _ ->
+      | err ->
           obj
             [ ( "rendered"
-              , string ("Failed to retrieve type of: " ^ moduleName ^ funcName)
+              , string ("Failed to retrieve type of: " ^ (Printexc.to_string err))
               )
             ]
 
