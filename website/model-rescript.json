@@ -10828,7 +10828,7 @@
                   "name": "map",
                   "qualified_name": "TableclothResult.map",
                   "type": {
-                    "rendered": "(t<'a, 'error>, t<'b, 'error>, ~f: ('a, 'b) => 'c) => t<'c, 'error>"
+                    "rendered": "(t<'a, 'error>, ~f: 'a => 'b) => t<'b, 'error>"
                   },
                   "info": {
                     "deprecated": null,
@@ -13991,7 +13991,7 @@
                   "name": "initial",
                   "qualified_name": "TableclothList.initial",
                   "type": {
-                    "rendered": "(int, ~f: int => 'a) => t<'a>"
+                    "rendered": "t<'a> => option<t<'a>>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16419,7 +16419,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothList.minimum",
                   "type": {
-                    "rendered": "(~f: 'a => 'comparable, list<'a>) => option<'a>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -16517,7 +16517,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothList.maximum",
                   "type": {
-                    "rendered": "(~f: 'a => 'comparable, list<'a>) => option<'a>"
+                    "rendered": "(t<'a>, ~compare: ('a, 'a) => int) => option<'a>"
                   },
                   "info": {
                     "deprecated": null,
@@ -41158,7 +41158,7 @@
                   "name": "toBeltComparator",
                   "qualified_name": "Internal.toBeltComparator",
                   "type": {
-                    "rendered": "TableclothComparator.S with type identity = id and type t = a),\n): Belt.Id.comparable<a, id> =>\n  module(\n    {\n      type rec t = M.t"
+                    "rendered": "Empty type of: InternaltoBeltComparator"
                   },
                   "info": null,
                   "parameters": {
@@ -43816,7 +43816,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothInt.maximum",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -43909,7 +43909,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothInt.minimum",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49318,7 +49318,7 @@
                   "name": "maximum",
                   "qualified_name": "TableclothFloat.maximum",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -49442,7 +49442,7 @@
                   "name": "minimum",
                   "qualified_name": "TableclothFloat.minimum",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
