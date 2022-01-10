@@ -1012,58 +1012,64 @@ class json =
       let open Json in
       (* let desc = t.desc in *)
       let read_file filename =
+        let lines = ref [] in
+        let chan = open_in filename in
         try
-          let lines = ref [] in
-          let chan = open_in filename in
-          try
-            while true do
-              lines := input_line chan :: !lines
-            done ;
-            !lines
-          with
-          | End_of_file ->
-              close_in chan ;
-              List.rev !lines
+          while true do
+            lines := input_line chan :: !lines
+          done ;
+          !lines
         with
-        | err ->
-            print_DEBUG ("!!!!!!!!!!!!!!!!!!!!!!! " ^ Printexc.to_string err) ;
-            [ "no file" ^ filename ]
+        | End_of_file ->
+            close_in chan ;
+            List.rev !lines
       in
 
-      let starts_with line funcName =
-        let r_let = Str.regexp (Str.quote "let " ^ funcName ^ ":") in
-        let r_external = Str.regexp (Str.quote "external " ^ funcName ^ ":") in
-        let r_module = Str.regexp (Str.quote "module " ^ funcName) in
-        let r_module_type = Str.regexp (Str.quote "module type " ^ funcName) in
+      let has_type_definition line funcName =
         let contains_pars x = String.contains x '(' in
-        let is_operator =
-          match contains_pars funcName with
-          | true ->
-              let start_index = 1 in
-              let close_index = String.index funcName ')' in
-              let extracted_val =
-                String.sub funcName start_index (close_index - start_index)
-                |> String.trim
-              in
-              let stop_chars = Str.regexp {|[\"letexternal]|} in
-              let cleaned_line =
-                Str.global_replace stop_chars "" line |> String.trim
-              in
-              let r = Str.regexp (Str.quote extracted_val) in
-              Str.string_match r cleaned_line 0
-          | _ ->
-              false
-        in
-                    (**  print_DEBUG ("funcName " ^ extracted_val ^ " | " ^ cleaned_line) ;*) 
+        if contains_pars funcName
+        then
+          (* detect let/external (~-) (.?[]) (mod) (|>) *)
+          let start_i = 1 in
+          let close_i = String.index funcName ')' in
+          let extracted_val =
+            String.sub funcName start_i (close_i - start_i) |> String.trim
+          in
+          let r_ignore = Str.regexp {|["ltextrna]|} in
+          let cleaned_line =
+            Str.global_replace r_ignore "" line |> String.trim
+          in
+          let q_external = Str.quote ("\\" ^ extracted_val) in
+          let q_let = Str.quote ("let " ^ extracted_val) in
 
-        let is_let = Str.string_match r_let line 0 in
-        let is_external = Str.string_match r_external line 0 in
-        let is_module = Str.string_match r_module line 0 in
-        let is_module_type = Str.string_match r_module_type line 0 in
+          let r_external = Str.regexp q_external in
+          let r_let = Str.regexp q_let in
 
-        is_let || is_external || is_module || is_module_type || is_operator
+          let is_external = Str.string_match r_external cleaned_line 0 in
+          let is_let = Str.string_match r_let line 0 in
+
+          is_external || is_let
+        else
+          (* detect let/external/module/module type function_name *)
+          let q_let = Str.quote ("let " ^ funcName ^ ":") in
+          let q_external = Str.quote ("external " ^ funcName ^ ":") in
+          let q_module = Str.quote ("module " ^ funcName) in
+          let q_module_type = Str.quote ("module type " ^ funcName) in
+
+          let r_let = Str.regexp q_let in
+          let r_external = Str.regexp q_external in
+          let r_module = Str.regexp q_module in
+          let r_module_type = Str.regexp q_module_type in
+
+          let is_let = Str.string_match r_let line 0 in
+          let is_external = Str.string_match r_external line 0 in
+          let is_module = Str.string_match r_module line 0 in
+          let is_module_type = Str.string_match r_module_type line 0 in
+
+          is_let || is_external || is_module || is_module_type
       in
       let trim_name line =
+        (*let (||): (bool, bool) => bool = "%seqor" => (bool, bool) => bool = "%seqor" *)
         match String.split_on_char ':' line with
         | _ :: result ->
             result |> String.concat ":" |> String.trim
@@ -1071,11 +1077,11 @@ class json =
             line |> String.trim
       in
       let remove_external line =
-        match String.split_on_char '=' line with
-        | result :: _ ->
-            result
-        | _ ->
-            line
+        (* (bool, bool) => bool = "%seqor" => (bool, bool) => bool *)
+        let q_has_external = Str.quote " = \"" in
+        let r_let = Str.regexp q_has_external in
+        let result = Str.split r_let line in
+        match result with [ result; _ ] -> result | _ -> line
       in
       let is_submodule moduleName =
         match moduleName |> String.split_on_char '.' with
@@ -1087,12 +1093,11 @@ class json =
             None
       in
       let fetch_rescript_submodule ~file ~block =
-        print_DEBUG ("reading " ^ file ^ " | " ^ block) ;
         let filename = "./_rescript/" ^ file ^ ".resi" in
         let result = ref [ "" ] in
         let subName = block in
         let handle_line line =
-          match starts_with line subName with
+          match has_type_definition line subName with
           | true ->
               result := List.append [ line ] !result
           | _ ->
@@ -1115,7 +1120,7 @@ class json =
         let filename = "./_rescript/" ^ moduleName ^ ".resi" in
         let result = ref [ "" ] in
         let handle_line line =
-          match (starts_with line funcName, !result) with
+          match (has_type_definition line funcName, !result) with
           | true, [ "" ] ->
               result := List.append [ line ] !result
           | _, "" :: rest ->
@@ -1135,27 +1140,19 @@ class json =
 
           List.iter handle_line lines
         in
-        !result |> List.rev |> String.concat "" |> trim_name
+        !result |> List.rev |> String.concat "" |> trim_name |> remove_external
       in
-      try
-        let rendered =
-          match
-            fetch_rescript_type ~moduleName ~funcName
-            |> Odoc_info.remove_ending_newline
-          with
-          | "" ->
-              "Empty type of: " ^ moduleName ^ funcName
-          | ok ->
-              ok
-        in
-        obj [ ("rendered", string rendered) ]
-      with
-      | err ->
-          obj
-            [ ( "rendered"
-              , string ("Failed to retrieve type of: " ^ Printexc.to_string err)
-              )
-            ]
+      let rendered =
+        match
+          fetch_rescript_type ~moduleName ~funcName
+          |> Odoc_info.remove_ending_newline
+        with
+        | "" ->
+            "Empty type of: " ^ moduleName ^ funcName
+        | ok ->
+            ok
+      in
+      obj [ ("rendered", string rendered) ]
 
     (** Json to display a [Types.type_expr list]. *)
     method json_of_cstr_args

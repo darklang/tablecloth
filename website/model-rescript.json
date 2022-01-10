@@ -35783,7 +35783,7 @@
                   "name": "(.?[])",
                   "qualified_name": "TableclothString.(.?[])",
                   "type": {
-                    "rendered": "Failed to retrieve type of: Failure(\"[ class not closed by ]\")"
+                    "rendered": "(string, int) => option<char>"
                   },
                   "info": {
                     "deprecated": null,
@@ -45078,7 +45078,7 @@
                   "name": "identity",
                   "qualified_name": "TableclothFun.identity",
                   "type": {
-                    "rendered": "'a => 'a = \"%identity\""
+                    "rendered": "'a => 'a"
                   },
                   "info": {
                     "deprecated": null,
@@ -45190,7 +45190,7 @@
                   "name": "ignore",
                   "qualified_name": "TableclothFun.ignore",
                   "type": {
-                    "rendered": "_ => unit = \"%ignore\""
+                    "rendered": "_ => unit"
                   },
                   "info": {
                     "deprecated": null,
@@ -45868,7 +45868,7 @@
                   "name": "pipe",
                   "qualified_name": "TableclothFun.pipe",
                   "type": {
-                    "rendered": "('a, 'a => 'b) => 'b = \"%revapply\""
+                    "rendered": "('a, 'a => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -45922,7 +45922,7 @@
                   "name": "(|>)",
                   "qualified_name": "TableclothFun.(|>)",
                   "type": {
-                    "rendered": "Empty type of: TableclothFun(|>)"
+                    "rendered": "('a, 'a => 'b) => 'b"
                   },
                   "info": {
                     "deprecated": null,
@@ -48554,7 +48554,7 @@
                   "name": "(-)",
                   "qualified_name": "TableclothFloat.(-)",
                   "type": {
-                    "rendered": "Empty type of: TableclothFloat(-)"
+                    "rendered": "(t, t) => t"
                   },
                   "info": {
                     "deprecated": null,
@@ -54651,7 +54651,7 @@
                   "name": "(&&)",
                   "qualified_name": "TableclothBool.(&&)",
                   "type": {
-                    "rendered": "(bool, bool) => bool = \"%sequand\""
+                    "rendered": "(bool, bool) => bool"
                   },
                   "info": {
                     "deprecated": null,
@@ -54798,7 +54798,7 @@
                   "name": "(||)",
                   "qualified_name": "TableclothBool.(||)",
                   "type": {
-                    "rendered": "(bool, bool) => bool = \"%sequor\""
+                    "rendered": "(bool, bool) => bool"
                   },
                   "info": {
                     "deprecated": null,

@@ -163,7 +163,7 @@ rescript-interfaces: opt dummy
 	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothString.mli > ./_rescript/TableclothString.resi
 	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothTuple2.mli > ./_rescript/TableclothTuple2.resi
 	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothTuple3.mli > ./_rescript/TableclothTuple3.resi
-	# these are not interfaces, so we do just pretend that they actually are. Still works!
+	# These are not interfaces, so we do just pretend that they actually are. Still works!
 	~/.npm-global/bin/esy bsc -format res ../rescript/src/Internal.ml > ./_rescript/Internal.resi 
 	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothComparator.ml > ./_rescript/TableclothComparator.resi
 	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothContainer.ml > ./_rescript/TableclothContainer.resi
