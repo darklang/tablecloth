@@ -112,4 +112,12 @@ let suite =
               |> toEqual
                    (let open Eq in
                    result string string)
-                   (Error "Robin") ) ) )
+                   (Error "Robin") ) ;
+
+      describe "unwrapLazy" (fun () ->
+          test "returns forced default arg if error" (fun () ->
+              expect (Result.unwrapLazy (Error "Periwinkle") ~default:(lazy("Gecko")))
+              |> toEqual
+                   (let open Eq in
+                   string)
+                   "Gecko" ) ) ) )
