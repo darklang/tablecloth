@@ -27520,112 +27520,51 @@
                 }
               },
               {
-                "tag": "Module",
-                "value": {
-                  "name": "Of",
-                  "kind": {
-                    "tag": "ModuleFunctor",
+                "tag": "Text",
+                "value": [
+                  {
+                    "tag": "Raw",
+                    "value": "This functor lets you describe the type of Maps a little more concisely."
+                  },
+                  {
+                    "tag": "Newline",
+                    "value": "\n"
+                  },
+                  {
+                    "tag": "Raw",
+                    "value": "\n    "
+                  },
+                  {
+                    "tag": "CodePre",
                     "value": {
-                      "parameter": {
-                        "tag": "ModuleParameter",
-                        "value": {
-                          "name": "M",
-                          "kind": {
-                            "tag": "ModuleTypeAlias",
-                            "value": "TableclothComparator.S"
-                          }
-                        }
-                      },
-                      "result": {
-                        "tag": "ModuleStruct",
-                        "value": [
-                          {
-                            "tag": "Type",
-                            "value": {
-                              "name": "t",
-                              "parameters": "'value",
-                              "is_private": false,
-                              "father": "TableclothMap.Of",
-                              "field_comment": null,
-                              "kind": {
-                                "tag": "TypeAbstract",
-                                "value": null
-                              },
-                              "manifest": {
-                                "tag": "Other",
-                                "value": {
-                                  "rendered": "(M.t, 'value, M.identity) TableclothMap.t"
-                                }
-                              },
-                              "info": null
-                            }
-                          }
-                        ]
-                      }
+                      "ocaml": "\n      let stringToInt : int Map.Of(String).t =\n        Map.fromList (module String) [(\"Apple\", 2); (\"Pear\", 0)]\n    ",
+                      "reason": "let stringToInt: Map.Of(String).t(int) = (\n  Map.fromList((module String), [(\"Apple\", 2), (\"Pear\", 0)]):\n    Map.Of(String).t(int)\n);\n"
                     }
                   },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "This functor lets you describe the type of Maps a little more concisely."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "\n      let stringToInt : int Map.Of(String).t =\n        Map.fromList (module String) [(\"Apple\", 2); (\"Pear\", 0)]\n    ",
-                            "reason": "let stringToInt: Map.Of(String).t(int) = (\n  Map.fromList((module String), [(\"Apple\", 2), (\"Pear\", 0)]):\n    Map.Of(String).t(int)\n);\n"
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    Is the same as"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "\n      let stringToInt : (string, int, String.identity) Map.t =\n        Map.fromList (module String) [(\"Apple\", 2); (\"Pear\", 0)]\n    ",
-                            "reason": "let stringToInt: Map.t(string, int, String.identity) = (\n  Map.fromList((module String), [(\"Apple\", 2), (\"Pear\", 0)]):\n    Map.t(string, int, String.identity)\n);\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
+                  {
+                    "tag": "Newline",
+                    "value": "\n"
+                  },
+                  {
+                    "tag": "Raw",
+                    "value": "\n    Is the same as"
+                  },
+                  {
+                    "tag": "Newline",
+                    "value": "\n"
+                  },
+                  {
+                    "tag": "Raw",
+                    "value": "\n    "
+                  },
+                  {
+                    "tag": "CodePre",
+                    "value": {
+                      "ocaml": "\n      let stringToInt : (string, int, String.identity) Map.t =\n        Map.fromList (module String) [(\"Apple\", 2); (\"Pear\", 0)]\n    ",
+                      "reason": "let stringToInt: Map.t(string, int, String.identity) = (\n  Map.fromList((module String), [(\"Apple\", 2), (\"Pear\", 0)]):\n    Map.t(string, int, String.identity)\n);\n"
+                    }
                   }
-                }
+                ]
               },
               {
                 "tag": "Text",
@@ -31002,7 +30941,7 @@
                           "name": "identity",
                           "parameters": "",
                           "is_private": false,
-                          "father": "TableclothMap.String",
+                          "father": "TableclothMap.Int",
                           "field_comment": null,
                           "kind": {
                             "tag": "TypeAbstract",
@@ -31321,7 +31260,7 @@
                           "name": "identity",
                           "parameters": "",
                           "is_private": false,
-                          "father": "TableclothMap.Int",
+                          "father": "TableclothMap.String",
                           "field_comment": null,
                           "kind": {
                             "tag": "TypeAbstract",
@@ -41158,7 +41097,7 @@
                   "name": "toBeltComparator",
                   "qualified_name": "Internal.toBeltComparator",
                   "type": {
-                    "rendered": "Empty type of: InternaltoBeltComparator"
+                    "rendered": ""
                   },
                   "info": null,
                   "parameters": {

@@ -1010,7 +1010,6 @@ class json =
     method json_of_rescript_type_expr (moduleName : string) (funcName : string)
         : Json.t =
       let open Json in
-      (* let desc = t.desc in *)
       let read_file filename =
         let lines = ref [] in
         let chan = open_in filename in
@@ -1035,7 +1034,7 @@ class json =
           let extracted_val =
             String.sub funcName start_i (close_i - start_i) |> String.trim
           in
-          let r_ignore = Str.regexp {|["ltextrna]|} in
+          let r_ignore = Str.regexp "[\"ltextrna]" in
           let cleaned_line =
             Str.global_replace r_ignore "" line |> String.trim
           in
@@ -1111,9 +1110,6 @@ class json =
           let lines = read_file filename in
           List.iter handle_line lines
         in
-        let xxx =
-          !result |> List.tl |> List.rev |> String.concat "" |> trim_name
-        in
         !result |> List.tl |> List.rev
       in
       let fetch_rescript_type ~moduleName ~funcName =
@@ -1143,14 +1139,8 @@ class json =
         !result |> List.rev |> String.concat "" |> trim_name |> remove_external
       in
       let rendered =
-        match
-          fetch_rescript_type ~moduleName ~funcName
-          |> Odoc_info.remove_ending_newline
-        with
-        | "" ->
-            "Empty type of: " ^ moduleName ^ funcName
-        | ok ->
-            ok
+        fetch_rescript_type ~moduleName ~funcName
+        |> Odoc_info.remove_ending_newline
       in
       obj [ ("rendered", string rendered) ]
 
