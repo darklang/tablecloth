@@ -123,6 +123,39 @@ let suite =
           test "negative number" (fun () ->
               expect (Int.absolute (-7)) |> toEqual Eq.int 7 ) ;
           test "zero" (fun () -> expect (Int.absolute 0) |> toEqual Eq.int 0) ) ;
+
+      describe "minimum" (fun () ->
+          test "positive numbers" (fun () ->
+              expect (Int.minimum 8 18) |> toEqual Eq.int 8 ) ;
+          test "with zero" (fun () ->
+              expect (Int.minimum 5 0) |> toEqual Eq.int 0 ) ;
+          test "negative numbers" (fun () ->
+              expect (Int.minimum (-4) (-1)) |> toEqual Eq.int (-4) ) ) ;
+
+      describe "maximum" (fun () ->
+          test "positive numbers" (fun () ->
+              expect (Int.maximum 8 18) |> toEqual Eq.int 18 ) ;
+          test "with zero" (fun () ->
+              expect (Int.maximum 5 0) |> toEqual Eq.int 5 ) ;
+          test "negative numbers" (fun () ->
+              expect (Int.maximum (-4) (-1)) |> toEqual Eq.int (-1) ) ) ;
+
+      describe "isEven" (fun () ->
+          test "even number" (fun () ->
+              expect (Int.isEven 8) |> toEqual Eq.bool true ) ;
+          test "odd number" (fun () ->
+              expect (Int.isEven 9) |> toEqual Eq.bool false ) ;
+          test "zero even" (fun () ->
+              expect (Int.isEven 0) |> toEqual Eq.bool true ) ) ;
+
+      describe "isOdd" (fun () ->
+          test "even number" (fun () ->
+              expect (Int.isOdd 8) |> toEqual Eq.bool false ) ;
+          test "odd number" (fun () ->
+              expect (Int.isOdd 9) |> toEqual Eq.bool true ) ;
+          test "zero even" (fun () ->
+              expect (Int.isOdd 0) |> toEqual Eq.bool false ) ) ;
+
       describe "clamp" (fun () ->
           test "in range" (fun () ->
               expect (Int.clamp ~lower:0 ~upper:8 5) |> toEqual Eq.int 5 ) ;

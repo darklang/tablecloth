@@ -469,4 +469,9 @@ let suite =
               |> toEqual
                    (let open Eq in
                    option int)
-                   None ) ) )
+                   None ) ) ;
+
+      describe "isInteger" (fun () ->
+          test "true" (fun () -> expect (isInteger 5.0) |> toEqual Eq.bool true) ;
+          test "false" (fun () ->
+              expect (isInteger pi) |> toEqual Eq.bool false ) ) )
