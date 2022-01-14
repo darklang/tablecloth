@@ -358,6 +358,10 @@ let bs s =
   print_endline s
 
 
+type extractionKind =
+  | ExtractRegular
+  | ExtractManifest
+
 let destination_json = Sys.getenv "DESTINATION_JSON"
 
 (* TODO surely everything in this class is going to be deleted soon *)
@@ -1014,8 +1018,10 @@ class json =
       *)
       obj [ ("rendered", string rendered) (*      ("raw", raw) *) ]
 
-    method json_of_rescript_type_expr (moduleName : string) (funcName : string)
-        : Json.t =
+    method json_of_rescript_type_expr
+        (moduleName : string)
+        (funcName : string)
+        (extractionKind : extractionKind) : Json.t =
       let open Json in
       let read_file filename =
         let lines = ref [] in
@@ -1031,7 +1037,7 @@ class json =
             List.rev !lines
       in
 
-      let has_type_definition line funcName =
+      let has_type_definition line funcName extractionKind =
         let contains_pars x = String.contains x '(' in
         if contains_pars funcName
         then
@@ -1057,30 +1063,50 @@ class json =
           is_external || is_let
         else
           (* detect let/external/module/module type function_name *)
-          let q_let = Str.quote ("let " ^ funcName ^ ":") in
-          let q_external = Str.quote ("external " ^ funcName ^ ":") in
-          let q_module = Str.quote ("module " ^ funcName) in
-          let q_module_type = Str.quote ("module type " ^ funcName) in
+          match extractionKind with
+          | ExtractManifest ->
+              let q_type = Str.quote ("type " ^ funcName) in
+              let q_type_rec = Str.quote ("type rec " ^ funcName) in
 
-          let r_let = Str.regexp q_let in
-          let r_external = Str.regexp q_external in
-          let r_module = Str.regexp q_module in
-          let r_module_type = Str.regexp q_module_type in
+              let r_type = Str.regexp q_type in
+              let r_type_rec = Str.regexp q_type_rec in
 
-          let is_let = Str.string_match r_let line 0 in
-          let is_external = Str.string_match r_external line 0 in
-          let is_module = Str.string_match r_module line 0 in
-          let is_module_type = Str.string_match r_module_type line 0 in
+              let is_type = Str.string_match r_type line 0 in
+              let is_type_rec = Str.string_match r_type_rec line 0 in
 
-          is_let || is_external || is_module || is_module_type
+              is_type || is_type_rec
+          | ExtractRegular ->
+              let q_let = Str.quote ("let " ^ funcName ^ ":") in
+              let q_external = Str.quote ("external " ^ funcName ^ ":") in
+              let q_module = Str.quote ("module " ^ funcName) in
+              let q_module_type = Str.quote ("module type " ^ funcName) in
+
+              let r_let = Str.regexp q_let in
+              let r_external = Str.regexp q_external in
+              let r_module = Str.regexp q_module in
+              let r_module_type = Str.regexp q_module_type in
+
+              let is_let = Str.string_match r_let line 0 in
+              let is_external = Str.string_match r_external line 0 in
+              let is_module = Str.string_match r_module line 0 in
+              let is_module_type = Str.string_match r_module_type line 0 in
+
+              is_let || is_external || is_module || is_module_type
       in
       let trim_name line =
         (*let (||): (bool, bool) => bool = "%seqor" => (bool, bool) => bool = "%seqor" *)
-        match String.split_on_char ':' line with
-        | _ :: result ->
-            result |> String.concat ":" |> String.trim
-        | _ ->
-            line |> String.trim
+        let extract_after_char char =
+          match String.split_on_char char line with
+          | _ :: result ->
+              result |> String.concat (String.make 1 char) |> String.trim
+          | _ ->
+              line |> String.trim
+        in
+        match String.index_from_opt line 0 ':' with
+        | Some _ ->
+            extract_after_char ':'
+        | None ->
+            extract_after_char '='
       in
       let remove_external line =
         (* (bool, bool) => bool = "%seqor" => (bool, bool) => bool *)
@@ -1103,7 +1129,7 @@ class json =
         let result = ref [ "" ] in
         let subName = block in
         let handle_line line =
-          match has_type_definition line subName with
+          match has_type_definition line subName ExtractRegular with
           | true ->
               result := List.append [ line ] !result
           | _ ->
@@ -1123,7 +1149,7 @@ class json =
         let filename = "./_rescript/" ^ moduleName ^ ".resi" in
         let result = ref [ "" ] in
         let handle_line line =
-          match (has_type_definition line funcName, !result) with
+          match (has_type_definition line funcName extractionKind, !result) with
           | true, [ "" ] ->
               result := List.append [ line ] !result
           | _, "" :: rest ->
@@ -1329,6 +1355,7 @@ class json =
             self#json_of_rescript_type_expr
               (Name.father v.val_name)
               (Name.simple v.val_name)
+              ExtractRegular
         | _ ->
             self#json_of_type_expr v.val_type
       in
@@ -1528,7 +1555,19 @@ class json =
                    in
                    tagged "ObjectType" (array json_of_field fields)
                | Some (Other typ) ->
-                   tagged "Other" (self#json_of_type_expr typ) )
+                   print_DEBUG
+                     (Name.father t.ty_name ^ " | " ^ Name.simple t.ty_name) ;
+                   let value_content =
+                     match destination_json with
+                     | "model-rescript.json" ->
+                         self#json_of_rescript_type_expr
+                           (Name.father t.ty_name)
+                           (Name.simple t.ty_name)
+                           ExtractManifest
+                     | _ ->
+                         self#json_of_type_expr typ
+                   in
+                   tagged "Other" value_content )
            ; ("info", self#json_of_info t.ty_info)
            ] )
 

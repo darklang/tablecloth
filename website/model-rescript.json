@@ -653,7 +653,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "'a * 'b * 'c"
+                      "rendered": "('a, 'b, 'c)"
                     }
                   },
                   "info": null
@@ -2532,7 +2532,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "'a * 'b"
+                      "rendered": "('a, 'b)"
                     }
                   },
                   "info": null
@@ -4106,7 +4106,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "('a, 'id) Belt.Set.t"
+                      "rendered": "Belt.Set.t<'a, 'id>"
                     }
                   },
                   "info": null
@@ -6246,7 +6246,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "('a, TableclothSet.Poly.identity) TableclothSet.t"
+                              "rendered": "t<'a, identity>"
                             }
                           },
                           "info": null
@@ -6622,7 +6622,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "(TableclothInt.t, TableclothSet.Int.identity) TableclothSet.t"
+                              "rendered": "t<TableclothInt.t, identity>"
                             }
                           },
                           "info": null
@@ -7018,7 +7018,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "(TableclothString.t, TableclothSet.String.identity) TableclothSet.t"
+                              "rendered": "t<TableclothString.t, identity>"
                             }
                           },
                           "info": null
@@ -7671,7 +7671,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "('ok, 'error) Stdlib.result"
+                      "rendered": "result<'ok, 'error>"
                     }
                   },
                   "info": null
@@ -10870,7 +10870,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "'a list"
+                      "rendered": "list<'a>"
                     }
                   },
                   "info": null
@@ -18047,7 +18047,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "'a array"
+                      "rendered": "array<'a>"
                     }
                   },
                   "info": null
@@ -24559,7 +24559,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "('key, 'value, 'cmp) Belt.Map.t"
+                      "rendered": "Belt.Map.t<'key, 'value, 'cmp>"
                     }
                   },
                   "info": null
@@ -27410,7 +27410,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "('key, 'value, TableclothMap.Poly.identity) TableclothMap.t"
+                              "rendered": "t<'key, 'value, identity>"
                             }
                           },
                           "info": null
@@ -27716,7 +27716,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "(TableclothInt.t, 'value, TableclothMap.Int.identity) TableclothMap.t"
+                              "rendered": "t<TableclothInt.t, 'value, identity>"
                             }
                           },
                           "info": null
@@ -28034,7 +28034,7 @@
                           "manifest": {
                             "tag": "Other",
                             "value": {
-                              "rendered": "(TableclothString.t, 'value, TableclothMap.String.identity) TableclothMap.t"
+                              "rendered": "t<TableclothString.t, 'value, identity>"
                             }
                           },
                           "info": null
@@ -28666,7 +28666,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "'a option"
+                      "rendered": "option<'a>"
                     }
                   },
                   "info": null
@@ -45371,7 +45371,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "[ `AwayFromZero\n  | `Closest of [ `AwayFromZero | `Down | `ToEven | `Up | `Zero ]\n  | `Down\n  | `Up\n  | `Zero ]"
+                      "rendered": "[\n  | #Zero\n  | #AwayFromZero\n  | #Up\n  | #Down\n  | #Closest([#Zero | #AwayFromZero | #Up | #Down | #ToEven])\n]"
                     }
                   },
                   "info": {
@@ -48279,7 +48279,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "('a, 'identity) TableclothComparator.t"
+                      "rendered": "t<'a, 'identity>"
                     }
                   },
                   "info": {
@@ -48496,7 +48496,7 @@
                   "manifest": {
                     "tag": "Other",
                     "value": {
-                      "rendered": "(module TableclothComparator.S with type identity = 'identity and type t = 'a)"
+                      "rendered": "module(S with type identity = 'identity and type t = 'a)"
                     }
                   },
                   "info": {
