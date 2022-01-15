@@ -20311,11 +20311,11 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": " in OCaml with the "
+                    "value": " in Rescript with the "
                   },
                   {
                     "tag": "Code",
-                    "value": "[|1; 2; 3|]"
+                    "value": "[1, 2, 3]"
                   },
                   {
                     "tag": "Raw",
@@ -20372,8 +20372,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.singleton 1234 = [|1234|]",
-                            "reason": "Array.singleton(1234) == [|1234|];\n"
+                            "ocaml": "Array.singleton(1234) == [1234]",
+                            "reason": "Array.singleton(1234) === [1234];\n"
                           }
                         },
                         {
@@ -20383,8 +20383,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.singleton \"hi\" = [|\"hi\"|]",
-                            "reason": "Array.singleton(\"hi\") == [|\"hi\"|];\n"
+                            "ocaml": "Array.singleton(\"hi\") == [\"hi\"]",
+                            "reason": "Array.singleton(\"hi\") === [\"hi\"];\n"
                           }
                         }
                       ]
@@ -20473,8 +20473,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.repeat ~length:5 'a' = [|'a'; 'a'; 'a'; 'a'; 'a'|]",
-                            "reason": "Array.repeat(~length=5, 'a') == [|'a', 'a', 'a', 'a', 'a'|];\n"
+                            "ocaml": "Array.repeat('a', ~length=5) == ['a', 'a', 'a', 'a', 'a']",
+                            "reason": "Array.repeat('a', ~length=5) == ['a', 'a', 'a', 'a', 'a']"
                           }
                         },
                         {
@@ -20484,8 +20484,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.repeat ~length:0 7 = [||]",
-                            "reason": "Array.repeat(~length=0, 7) == [||];\n"
+                            "ocaml": "Array.repeat(7, ~length=0) == []",
+                            "reason": "Array.repeat(7, ~length=0) == []"
                           }
                         },
                         {
@@ -20495,8 +20495,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.repeat ~length:(-1) \"Why?\" = [||]",
-                            "reason": "Array.repeat(~length=-1, \"Why?\") == [||];\n"
+                            "ocaml": "Array.repeat(\"Why?\", ~length=-1) == []",
+                            "reason": "Array.repeat(\"Why?\", ~length=-1) == []"
                           }
                         }
                       ]
@@ -20589,8 +20589,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.range 5 = [|0; 1; 2; 3; 4|] ",
-                            "reason": "Array.range(5) == [|0, 1, 2, 3, 4|];\n"
+                            "ocaml": "Array.range(5) == [0, 1, 2, 3, 4]",
+                            "reason": "Array.range(5) === [(0, 1, 2, 3, 4)];\n"
                           }
                         },
                         {
@@ -20600,8 +20600,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.range ~from:2 5 = [|2; 3; 4|] ",
-                            "reason": "Array.range(~from=2, 5) == [|2, 3, 4|];\n"
+                            "ocaml": "Array.range(5, ~from=2) == [2, 3, 4]",
+                            "reason": "Array.range(5, ~from=2) == [2, 3, 4]"
                           }
                         },
                         {
@@ -20611,8 +20611,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.range ~from:(-2) 3 = [|-2; -1; 0; 1; 2|] ",
-                            "reason": "Array.range(~from=-2, 3) == [|(-2), (-1), 0, 1, 2|];\n"
+                            "ocaml": "Array.range(3, ~from=-2) == [-2, -1, 0, 1, 2]",
+                            "reason": "Array.range(3, ~from=-2) == [-2, -1, 0, 1, 2]"
                           }
                         }
                       ]
@@ -20717,8 +20717,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.initialize 4 ~f:identity = [|0; 1; 2; 3|]",
-                            "reason": "Array.initialize(4, ~f=identity) == [|0, 1, 2, 3|];\n"
+                            "ocaml": "Array.initialize(4, ~f=identity) == [0, 1, 2, 3]",
+                            "reason": "Array.initialize(4, ~f=identity) == [0, 1, 2, 3]"
                           }
                         },
                         {
@@ -20728,8 +20728,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.initialize 4 ~f:(fun n -> n * n) = [|0; 1; 4; 9|]",
-                            "reason": "Array.initialize(4, ~f=n => n * n) == [|0, 1, 4, 9|];\n"
+                            "ocaml": "Array.initialize(4, ~f=n => n * n) == [0, 1, 4, 9]",
+                            "reason": "Array.initialize(4, ~f=n => n * n) == [0, 1, 4, 9]"
                           }
                         }
                       ]
@@ -20822,8 +20822,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.fromList [1;2;3] = [|1;2;3|]",
-                            "reason": "Array.fromList([1, 2, 3]) == [|1, 2, 3|];\n"
+                            "ocaml": "Array.fromList(list{1, 2, 3}) == [1, 2, 3]",
+                            "reason": "Array.fromList(list{1, 2, 3}) == [1, 2, 3]"
                           }
                         }
                       ]
@@ -20896,8 +20896,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = [|1;2;3|] in\n      let otherNumbers = Array.copy numbers in\n      numbers.(1) <- 9;\n      numbers = [|1;9;3|];\n      otherNumbers = [|1;2;3|];\n    ",
-                            "reason": "{\n  let numbers = [|1, 2, 3|];\n  let otherNumbers = Array.copy(numbers);\n  numbers[1] = 9;\n  numbers == [|1, 9, 3|];\n  otherNumbers == [|1, 2, 3|];\n};\n"
+                            "ocaml": "\n      let numbers = [1, 2, 3]\n      let otherNumbers = Array.copy(numbers)\n      numbers[1] == 9\n      numbers == [1, 9, 3]\n      otherNumbers == [1, 2, 3]\n    ",
+                            "reason": "let numbers = [(1, 2, 3)];\nlet otherNumbers =\n  Array.copy(numbers, numbers, [1]) === 9(numbers)\n  === [(1, 9, 3)](otherNumbers)\n  === [(1, 2, 3)];\n"
                           }
                         },
                         {
@@ -20907,8 +20907,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numberGrid = [|\n        [|1;2;3|];\n        [|4;5;6|];\n        [|7;8;9|];\n      |] in\n\n      let numberGridCopy = Array.copy numberGrid in\n\n      numberGrid.(1).(1) <- 0;\n\n      numberGridCopy.(1).(1) = 9;\n    ",
-                            "reason": "{\n  let numberGrid = [|[|1, 2, 3|], [|4, 5, 6|], [|7, 8, 9|]|];\n\n  let numberGridCopy = Array.copy(numberGrid);\n\n  numberGrid[1][1] = 0;\n\n  numberGridCopy[1][1] == 9;\n};\n"
+                            "ocaml": "\n      let numberGrid = [\n        [1, 2, 3], \n        [4, 5, 6], \n        [7, 8, 9]\n        ]\n\n      let numberGridCopy = Array.copy(numberGrid)\n\n      numberGrid[1][1] == 0\n      numberGridCopy[1][1] == 9\n    ",
+                            "reason": "let numberGrid = [([(1, 2, 3)], [(4, 5, 6)], [(7, 8, 9)])];\n\nlet numberGridCopy =\n  Array.copy(numberGrid, numberGrid, [1], [1])\n  === 0(numberGridCopy, [1], [1])\n  === 9;\n"
                           }
                         }
                       ]
@@ -20985,7 +20985,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Array.length a - 1"
+                          "value": "Array.length(a) - 1"
                         },
                         {
                           "tag": "Raw",
@@ -21010,8 +21010,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "array.(n)",
-                            "reason": "array[n];\n"
+                            "ocaml": "array[n]",
+                            "reason": "array([n]);\n"
                           }
                         },
                         {
@@ -21073,7 +21073,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Invalid_argument \"index out of bounds\""
+                          "value": "Invalid_argument(\"index out of bounds\")"
                         },
                         {
                           "tag": "Raw",
@@ -21127,8 +21127,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "[|1; 2; 3; 2; 1|].(3) = 2",
-                            "reason": "[|1, 2, 3, 2, 1|][3] == 2;\n"
+                            "ocaml": "[1, 2, 3, 2, 1][3] == 2",
+                            "reason": "[(1, 2, 3, 2, 1)]([3]) === 2;\n"
                           }
                         },
                         {
@@ -21138,8 +21138,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let animals = [|\"cat\"; \"dog\"; \"eel\"|] in\n      animals.(2) = \"eel\"\n    ",
-                            "reason": "{\n  let animals = [|\"cat\", \"dog\", \"eel\"|];\n  animals[2] == \"eel\";\n};\n"
+                            "ocaml": "\n      let animals = [\"cat\", \"dog\", \"eel\"]\n      animals[2] == \"eel\"\n    ",
+                            "reason": "let animals = [(\"cat\", \"dog\", \"eel\")](animals, [2]) === \"eel\";\n"
                           }
                         }
                       ]
@@ -21250,7 +21250,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "(Array.length a - 1)"
+                          "value": "(Array.length(a) - 1)"
                         },
                         {
                           "tag": "Raw",
@@ -21288,8 +21288,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.getAt [|0; 1; 2|] ~index:5 = None",
-                            "reason": "Array.getAt([|0, 1, 2|], ~index=5) == None;\n"
+                            "ocaml": "Array.getAt([0, 1, 2], ~index=5) == None",
+                            "reason": "Array.getAt([0, 1, 2], ~index=5) == None"
                           }
                         },
                         {
@@ -21514,8 +21514,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "array.(index) <- value",
-                            "reason": "array[index] = value;\n"
+                            "ocaml": "array[index] = value",
+                            "reason": "array([index]) == value;\n"
                           }
                         },
                         {
@@ -21577,7 +21577,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Invalid_argument \"index out of bounds\""
+                          "value": "Invalid_argument(\"index out of bounds\")"
                         },
                         {
                           "tag": "Raw",
@@ -21601,7 +21601,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Array.length a - 1"
+                          "value": "Array.length(a) - 1"
                         },
                         {
                           "tag": "Raw",
@@ -21639,8 +21639,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = [|1;2;3|] in\n      Array.set numbers 1 1;\n      numbers.(2) <- 0;\n\n      numbers = [|1;0;0|]\n    ",
-                            "reason": "{\n  let numbers = [|1, 2, 3|];\n  numbers[1] = 1;\n  numbers[2] = 0;\n\n  numbers == [|1, 0, 0|];\n};\n"
+                            "ocaml": "\n      let numbers = [1, 2, 3]\n      Array.set(numbers, 1, 1)\n      numbers[2] = 0\n\n      numbers  == [1, 1, 0]\n    ",
+                            "reason": "let numbers =\n  [(1, 2, 3)](Array.set, (numbers, 1, 1), numbers, [2]) == 0(numbers)\n  === [(1, 1, 0)];\n"
                           }
                         }
                       ]
@@ -21787,8 +21787,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.first [1;2;3] = Some 1",
-                            "reason": "Array.first([1, 2, 3]) == Some(1);\n"
+                            "ocaml": "Array.first([1, 2, 3]) == Some(1)",
+                            "reason": "Array.first([(1, 2, 3)]) === Some(1);\n"
                           }
                         },
                         {
@@ -21798,8 +21798,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.first [1] = Some 1",
-                            "reason": "Array.first([1]) == Some(1);\n"
+                            "ocaml": "Array.first([1]) == Some(1)",
+                            "reason": "Array.first([1]) === Some(1);\n"
                           }
                         },
                         {
@@ -21809,8 +21809,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.first [] = None",
-                            "reason": "Array.first([]) == None;\n"
+                            "ocaml": "Array.first([]) == None",
+                            "reason": "Array.first([]) === None;\n"
                           }
                         }
                       ]
@@ -21899,8 +21899,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.last [1;2;3] = Some 3",
-                            "reason": "Array.last([1, 2, 3]) == Some(3);\n"
+                            "ocaml": "Array.last([1, 2, 3]) == Some(3)",
+                            "reason": "Array.last([(1, 2, 3)]) === Some(3);\n"
                           }
                         },
                         {
@@ -21910,8 +21910,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.last [1] = Some 1",
-                            "reason": "Array.last([1]) == Some(1);\n"
+                            "ocaml": "Array.last([1]) == Some(1)",
+                            "reason": "Array.last([1]) === Some(1);\n"
                           }
                         },
                         {
@@ -21921,8 +21921,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.last [] = None",
-                            "reason": "Array.last([]) == None;\n"
+                            "ocaml": "Array.last([]) == None",
+                            "reason": "Array.last([]) === None;\n"
                           }
                         }
                       ]
@@ -21961,7 +21961,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Get a sub-section of a list. "
+                          "value": "Get a sub-section of an array. "
                         },
                         {
                           "tag": "Code",
@@ -22059,8 +22059,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.slice ~from:0 ~to_:3 [0; 1; 2; 3; 4] = [0; 1; 2]",
-                            "reason": "Array.slice(~from=0, ~to_=3, [0, 1, 2, 3, 4]) == [0, 1, 2];\n"
+                            "ocaml": "Array.slice([0, 1, 2, 3, 4], ~from=0, ~to_=3) == [0, 1, 2]",
+                            "reason": "Array.slice([0, 1, 2, 3, 4], ~from=0, ~to_=3) == [0, 1, 2]"
                           }
                         },
                         {
@@ -22070,8 +22070,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.slice ~from:1 ~to_:4 [0; 1; 2; 3; 4] = [1; 2; 3]",
-                            "reason": "Array.slice(~from=1, ~to_=4, [0, 1, 2, 3, 4]) == [1, 2, 3];\n"
+                            "ocaml": "Array.slice([0, 1, 2, 3, 4], ~from=1, ~to_=4) == [1, 2, 3]",
+                            "reason": "Array.slice([0, 1, 2, 3, 4], ~from=1, ~to_=4) == [1, 2, 3]"
                           }
                         },
                         {
@@ -22081,8 +22081,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.slice ~from:5 ~to_:3 [0; 1; 2; 3; 4] = []",
-                            "reason": "Array.slice(~from=5, ~to_=3, [0, 1, 2, 3, 4]) == [];\n"
+                            "ocaml": "Array.slice([0, 1, 2, 3, 4], ~from=5, ~to_=3) == []",
+                            "reason": "Array.slice([0, 1, 2, 3, 4], ~from=5, ~to_=3) == []"
                           }
                         },
                         {
@@ -22092,8 +22092,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.slice ~from:1 ~to_:(-1) [0; 1; 2; 3; 4] = [1; 2; 3]",
-                            "reason": "Array.slice(~from=1, ~to_=-1, [0, 1, 2, 3, 4]) == [1, 2, 3];\n"
+                            "ocaml": "Array.slice([0, 1, 2, 3, 4], ~from=1, ~to_=-1) == [1, 2, 3]",
+                            "reason": "Array.slice([0, 1, 2, 3, 4], ~from=1, ~to_=-1) == [1, 2, 3]"
                           }
                         },
                         {
@@ -22103,8 +22103,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.slice ~from:(-2) ~to_:5 [0; 1; 2; 3; 4] = [3; 4]",
-                            "reason": "Array.slice(~from=-2, ~to_=5, [0, 1, 2, 3, 4]) == [3, 4];\n"
+                            "ocaml": "Array.slice([0, 1, 2, 3, 4], ~from=-2, ~to_=5) == [3, 4]",
+                            "reason": "Array.slice([0, 1, 2, 3, 4], ~from=-2, ~to_=5) == [3, 4]"
                           }
                         },
                         {
@@ -22114,8 +22114,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.slice ~from:(-2) ~to_:(-1) [0; 1; 2; 3; 4] = [3]",
-                            "reason": "Array.slice(~from=-2, ~to_=-1, [0, 1, 2, 3, 4]) == [3];\n"
+                            "ocaml": "Array.slice([0, 1, 2, 3, 4], ~from=-2, ~to_=-1) == [3]",
+                            "reason": "Array.slice([0, 1, 2, 3, 4], ~from=-2, ~to_=-1) == [3]"
                           }
                         }
                       ]
@@ -22225,8 +22225,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.swap [|1; 2; 3|] 1 2 = [|1; 3; 2|]",
-                            "reason": "Array.swap([|1, 2, 3|], 1, 2) == [|1, 3, 2|];\n"
+                            "ocaml": "Array.swap([1, 2, 3], 1, 2) == [1, 3, 2]",
+                            "reason": "Array.swap(([(1, 2, 3)], 1, 2)) === [(1, 3, 2)];\n"
                           }
                         }
                       ]
@@ -22312,8 +22312,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = [|1; 2; 3|] in\n      Array.reverse numbers\n      numbers = [|3; 2; 1|];\n    ",
-                            "reason": "{\n  let numbers = [|1, 2, 3|];\n  Array.reverse(numbers, numbers) == [|3, 2, 1|];\n};\n"
+                            "ocaml": "\n      let numbers = [1, 2, 3]\n      Array.reverse(numbers)\n      numbers == [3, 2, 1]\n    ",
+                            "reason": "let numbers =\n  [(1, 2, 3)](Array.reverse, numbers, numbers) === [(3, 2, 1)];\n"
                           }
                         }
                       ]
@@ -22368,39 +22368,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    On native it uses "
-                        },
-                        {
-                          "tag": "Link",
-                          "value": {
-                            "target": " https://en.wikipedia.org/wiki/Merge_sort ",
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": " merge sort"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " which means the sort is stable,\n    runs in constant heap space, logarithmic stack space and "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "n * log (n)"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " time."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    When targeting javascript the time and space complexity of the sort cannot be guaranteed as it depends on the implementation."
+                          "value": "\n    The time and space complexity of the sort cannot be guaranteed as it depends on the implementation."
                         },
                         {
                           "tag": "Newline",
@@ -22434,8 +22402,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sortInPlace [|5;6;8;3;6|] ~compare:compare = [|3;5;6;6;8|]",
-                            "reason": "Array.sortInPlace([|5, 6, 8, 3, 6|], ~compare) == [|3, 5, 6, 6, 8|];\n"
+                            "ocaml": "Array.sort([5, 6, 8, 3, 6], ~compare) == [3, 5, 6, 6, 8]",
+                            "reason": "Array.sort([5, 6, 8, 3, 6], ~compare) == [3, 5, 6, 6, 8]"
                           }
                         }
                       ]
@@ -22526,8 +22494,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.isEmpty [|1; 2, 3|] = false",
-                            "reason": "Array.isEmpty([|1, (2, 3)|]) == false;\n"
+                            "ocaml": "Array.isEmpty([1, 2, 3]) == false",
+                            "reason": "Array.isEmpty([(1, 2, 3)]) === false;\n"
                           }
                         },
                         {
@@ -22537,8 +22505,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.isEmpty [||] = true",
-                            "reason": "Array.isEmpty([||]) == true;\n"
+                            "ocaml": "Array.isEmpty([]) == true",
+                            "reason": "Array.isEmpty([]) === true;\n"
                           }
                         }
                       ]
@@ -22611,8 +22579,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.length [|1; 2, 3|] = 3",
-                            "reason": "Array.length([|1, (2, 3)|]) == 3;\n"
+                            "ocaml": "Array.length([1, 2, 3]) == 3",
+                            "reason": "Array.length([(1, 2, 3)]) === 3;\n"
                           }
                         },
                         {
@@ -22622,8 +22590,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.length [||] = 0",
-                            "reason": "Array.length([||]) == 0;\n"
+                            "ocaml": "Array.length([]) == 0",
+                            "reason": "Array.length([]) === 0;\n"
                           }
                         }
                       ]
@@ -22732,8 +22700,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.any ~f:Int.isEven [|1;2;3;5|] = true",
-                            "reason": "Array.any(~f=Int.isEven, [|1, 2, 3, 5|]) == true;\n"
+                            "ocaml": "Array.any([1, 2, 3, 5], ~f=Int.isEven) == true",
+                            "reason": "Array.any([1, 2, 3, 5], ~f=Int.isEven) == true"
                           }
                         },
                         {
@@ -22743,8 +22711,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.any ~f:Int.isEven [|1;3;5;7|] = false",
-                            "reason": "Array.any(~f=Int.isEven, [|1, 3, 5, 7|]) == false;\n"
+                            "ocaml": "Array.any([1, 3, 5, 7], ~f=Int.isEven) == false",
+                            "reason": "Array.any([1, 3, 5, 7], ~f=Int.isEven) == false"
                           }
                         },
                         {
@@ -22754,8 +22722,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.any ~f:Int.isEven [||] = false",
-                            "reason": "Array.any(~f=Int.isEven, [||]) == false;\n"
+                            "ocaml": "Array.any([], ~f=Int.isEven) == false",
+                            "reason": "Array.any([], ~f=Int.isEven) == false"
                           }
                         }
                       ]
@@ -22864,8 +22832,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.all ~f:Int.isEven [|2;4|] = true",
-                            "reason": "Array.all(~f=Int.isEven, [|2, 4|]) == true;\n"
+                            "ocaml": "Array.all([2, 4], ~f=Int.isEven) == true",
+                            "reason": "Array.all([2, 4], ~f=Int.isEven) == true"
                           }
                         },
                         {
@@ -22875,8 +22843,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.all ~f:Int.isEven [|2;3|] = false",
-                            "reason": "Array.all(~f=Int.isEven, [|2, 3|]) == false;\n"
+                            "ocaml": "Array.all([2, 3], ~f=Int.isEven) == false",
+                            "reason": "Array.all([2, 3], ~f=Int.isEven) == false"
                           }
                         },
                         {
@@ -22886,8 +22854,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.all ~f:Int.isEven [||] = true",
-                            "reason": "Array.all(~f=Int.isEven, [||]) == true;\n"
+                            "ocaml": "Array.all([], ~f=Int.isEven) == true",
+                            "reason": "Array.all([], ~f=Int.isEven) == true"
                           }
                         }
                       ]
@@ -22976,8 +22944,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.count [|7; 5; 8; 6|] ~f:Int.isEven = 2",
-                            "reason": "Array.count([|7, 5, 8, 6|], ~f=Int.isEven) == 2;\n"
+                            "ocaml": "Array.count([7, 5, 8, 6], ~f=Int.isEven) == 2",
+                            "reason": "Array.count([7, 5, 8, 6], ~f=Int.isEven) == 2"
                           }
                         }
                       ]
@@ -23122,8 +23090,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.find ~f:Int.isEven [|1; 3; 4; 8;|] = Some 4",
-                            "reason": "Array.find(~f=Int.isEven, [|1, 3, 4, 8|]) == Some(4);\n"
+                            "ocaml": "Array.find([1, 3, 4, 8], ~f=Int.isEven) == Some(4)",
+                            "reason": "Array.find([1, 3, 4, 8], ~f=Int.isEven) == Some(4)"
                           }
                         },
                         {
@@ -23133,8 +23101,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.find ~f:Int.isOdd [|0; 2; 4; 8;|] = None",
-                            "reason": "Array.find(~f=Int.isOdd, [|0, 2, 4, 8|]) == None;\n"
+                            "ocaml": "Array.find([0, 2, 4, 8], ~f=Int.isOdd) == None",
+                            "reason": "Array.find([0, 2, 4, 8], ~f=Int.isOdd) == None"
                           }
                         },
                         {
@@ -23144,8 +23112,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.find ~f:Int.isEven [||] = None",
-                            "reason": "Array.find(~f=Int.isEven, [||]) == None;\n"
+                            "ocaml": "Array.find([], ~f=Int.isEven) == None",
+                            "reason": "Array.find([], ~f=Int.isEven) == None"
                           }
                         }
                       ]
@@ -23246,8 +23214,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.findIndex [|1; 3; 4; 8;|] ~f:(fun index number -> index > 2 && Int.isEven number) = Some (3, 8)",
-                            "reason": "Array.findIndex([|1, 3, 4, 8|], ~f=(index, number) =>\n  index > 2 && Int.isEven(number)\n)\n== Some((3, 8));\n"
+                            "ocaml": "Array.findIndex([1, 3, 4, 8], ~f=(index, number) => index > 2 && Int.isEven(number)) == Some(3, 8)",
+                            "reason": "Array.findIndex([1, 3, 4, 8], ~f=(index, number) => index > 2 && Int.isEven(number)) == Some(3, 8)"
                           }
                         }
                       ]
@@ -23328,8 +23296,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.contains [1; 2; 3]  2 ~equal:(=) = true",
-                            "reason": "Array.contains([1, 2, 3], 2, ~equal=(==)) == true;\n"
+                            "ocaml": "Array.includes([1, 2, 3], 2, ~equal=Int.equal) == true",
+                            "reason": "Array.includes([1, 2, 3], 2, ~equal=Int.equal) == true"
                           }
                         }
                       ]
@@ -23426,8 +23394,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.minimum [|7;5;8;6|] ~compare:Int.compare = Some 5",
-                            "reason": "Array.minimum([|7, 5, 8, 6|], ~compare=Int.compare) == Some(5);\n"
+                            "ocaml": "Array.minimum([7, 5, 8, 6], ~compare=Int.compare) == Some(5)",
+                            "reason": "Array.minimum([7, 5, 8, 6], ~compare=Int.compare) == Some(5)"
                           }
                         },
                         {
@@ -23437,8 +23405,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.minimum [||] ~compare:Int.compare = None",
-                            "reason": "Array.minimum([||], ~compare=Int.compare) == None;\n"
+                            "ocaml": "Array.minimum([], ~compare=Int.compare) == None",
+                            "reason": "Array.minimum([], ~compare=Int.compare) == None"
                           }
                         }
                       ]
@@ -23535,8 +23503,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.maximum [|7;5;8;6|] ~compare:Int.compare = Some 8",
-                            "reason": "Array.maximum([|7, 5, 8, 6|], ~compare=Int.compare) == Some(8);\n"
+                            "ocaml": "Array.maximum([7, 5, 8, 6], ~compare=Int.compare) == Some(8)",
+                            "reason": "Array.maximum([7, 5, 8, 6], ~compare=Int.compare) == Some(8)"
                           }
                         },
                         {
@@ -23546,8 +23514,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.maximum [||] ~compare:Int.compare = None",
-                            "reason": "Array.maximum([||], ~compare=Int.compare) == None;\n"
+                            "ocaml": "Array.maximum([], ~compare=Int.compare) == None",
+                            "reason": "Array.maximum([], ~compare=Int.compare) == None"
                           }
                         }
                       ]
@@ -23696,8 +23664,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.extent [|7;5;8;6|] ~compare:Int.compare = Some (5, 8)",
-                            "reason": "Array.extent([|7, 5, 8, 6|], ~compare=Int.compare) == Some((5, 8));\n"
+                            "ocaml": "Array.extent([7, 5, 8, 6], ~compare=Int.compare) == Some(5, 8)",
+                            "reason": "Array.extent([7, 5, 8, 6], ~compare=Int.compare) == Some(5, 8)"
                           }
                         },
                         {
@@ -23707,8 +23675,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.extent [|7|] ~compare:Int.compare = Some (7, 7)",
-                            "reason": "Array.extent([|7|], ~compare=Int.compare) == Some((7, 7));\n"
+                            "ocaml": "Array.extent([7], ~compare=Int.compare) == Some(7, 7)",
+                            "reason": "Array.extent([7], ~compare=Int.compare) == Some(7, 7)"
                           }
                         },
                         {
@@ -23718,8 +23686,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.extent [||] ~compare:Int.compare = None",
-                            "reason": "Array.extent([||], ~compare=Int.compare) == None;\n"
+                            "ocaml": "Array.extent([], ~compare=Int.compare) == None",
+                            "reason": "Array.extent([], ~compare=Int.compare) == None"
                           }
                         }
                       ]
@@ -23808,8 +23776,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sum [|1; 2; 3|] (module Int) = 6",
-                            "reason": "Array.sum([|1, 2, 3|], (module Int)) == 6;\n"
+                            "ocaml": "Array.sum([1, 2, 3], module(Int)) == 6",
+                            "reason": "Array.sum([1, 2, 3], module(Int)) == 6"
                           }
                         },
                         {
@@ -23819,8 +23787,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sum [|4.0; 4.5; 5.0|] (module Float) = 13.5",
-                            "reason": "Array.sum([|4.0, 4.5, 5.0|], (module Float)) == 13.5;\n"
+                            "ocaml": "Array.sum([4.0, 4.5, 5.0], module(Float)) == 13.5",
+                            "reason": "Array.sum([4.0, 4.5, 5.0], module(Float)) == 13.5"
                           }
                         },
                         {
@@ -23830,8 +23798,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.sum\n        [|\"a\"; \"b\"; \"c\"|]\n        (\n          module struct\n            type t = string\n            let zero = \"\"\n            let add = (^)\n          end\n        )\n        = \"abc\"\n    ",
-                            "reason": "Array.sum(\n  [|\"a\", \"b\", \"c\"|],\n  (module\n   {\n     type t = string;\n     let zero = \"\";\n     let add = (++);\n   }),\n)\n== \"abc\";\n"
+                            "ocaml": "\n      Array.sum(\n      [\"a\", \"b\", \"c\"],\n      module(\n        {\n          type rec t = string\n          let zero = \"\"\n          let add = (x, y) => x ++ y\n        }\n      ),\n    ) == \"abc\"\n    ",
+                            "reason": "\n      Array.sum(\n      [\"a\", \"b\", \"c\"],\n      module(\n        {\n          type rec t = string\n          let zero = \"\"\n          let add = (x, y) => x ++ y\n        }\n      ),\n    ) == \"abc\"\n    "
                           }
                         }
                       ]
@@ -23930,8 +23898,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.map ~f:Float.squareRoot [|1.0; 4.0; 9.0|] = [|1.0; 2.0; 3.0|]",
-                            "reason": "Array.map(~f=Float.squareRoot, [|1.0, 4.0, 9.0|]) == [|1.0, 2.0, 3.0|];\n"
+                            "ocaml": "Array.map([1.0, 4.0, 9.0], ~f=Float.squareRoot) == [1.0, 2.0, 3.0]",
+                            "reason": "Array.map([1.0, 4.0, 9.0], ~f=Float.squareRoot) == [1.0, 2.0, 3.0]"
                           }
                         }
                       ]
@@ -24012,8 +23980,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.mapWithIndex ~f:( * ) [|5; 5; 5|] = [|0; 5; 10|]",
-                            "reason": "Array.mapWithIndex(~f=( * ), [|5, 5, 5|]) == [|0, 5, 10|];\n"
+                            "ocaml": "Array.mapWithIndex([5, 5, 5], ~f=Int.multiply) == [0, 5, 10]",
+                            "reason": "Array.mapWithIndex([5, 5, 5], ~f=Int.multiply) == [0, 5, 10]"
                           }
                         }
                       ]
@@ -24102,8 +24070,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.filter ~f:Int.isEven [|1; 2; 3; 4; 5; 6|] = [|2; 4; 6|]",
-                            "reason": "Array.filter(~f=Int.isEven, [|1, 2, 3, 4, 5, 6|]) == [|2, 4, 6|];\n"
+                            "ocaml": "Array.filter([1, 2, 3, 4, 5, 6], ~f=Int.isEven) == [2, 4, 6]",
+                            "reason": "Array.filter([1, 2, 3, 4, 5, 6], ~f=Int.isEven) == [2, 4, 6]"
                           }
                         }
                       ]
@@ -24388,8 +24356,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let characters = [|'a'; '9'; '6'; ' '; '2'; 'z' |] in\n      Array.filterMap characters ~f:Char.toDigit = [|9; 6; 2|]\n    ",
-                            "reason": "{\n  let characters = [|'a', '9', '6', ' ', '2', 'z'|];\n  Array.filterMap(characters, ~f=Char.toDigit) == [|9, 6, 2|];\n};\n"
+                            "ocaml": "\n      let characters = ['a', '9', '6', ' ', '2', 'z']\n      Array.filterMap(characters, ~f=Char.toDigit) == [9, 6, 2]\n    ",
+                            "reason": "\n      let characters = ['a', '9', '6', ' ', '2', 'z']\n      Array.filterMap(characters, ~f=Char.toDigit) == [9, 6, 2]\n    "
                           }
                         },
                         {
@@ -24399,8 +24367,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.filterMap [|3; 4; 5; 6|] ~f:(fun number ->\n        if Int.isEven number then\n          Some (number * number)\n        else\n          None\n      ) = [16; 36]\n    ",
-                            "reason": "Array.filterMap([|3, 4, 5, 6|], ~f=number =>\n  if (Int.isEven(number)) {\n    Some(number * number);\n  } else {\n    None;\n  }\n)\n== [16, 36];\n"
+                            "ocaml": "\n      Array.filterMap([3, 4, 5, 6], ~f=number =>\n        Int.isEven(number) ? Some(number * number) : None\n      ) == [16, 36]\n    ",
+                            "reason": "\n      Array.filterMap([3, 4, 5, 6], ~f=number =>\n        Int.isEven(number) ? Some(number * number) : None\n      ) == [16, 36]\n    "
                           }
                         }
                       ]
@@ -24517,8 +24485,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.flatMap ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]",
-                            "reason": "Array.flatMap(~f=n => [|n, n|], [|1, 2, 3|]) == [|1, 1, 2, 2, 3, 3|];\n"
+                            "ocaml": "Array.flatMap([1, 2, 3], ~f=n => [n, n]) == [1, 1, 2, 2, 3, 3]",
+                            "reason": "Array.flatMap([1, 2, 3], ~f=n => [n, n]) == [1, 1, 2, 2, 3, 3]"
                           }
                         }
                       ]
@@ -24557,7 +24525,31 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Produce a new value from an array."
+                          "value": "Just as "
+                        },
+                        {
+                          "tag": "Link",
+                          "value": {
+                            "target": " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce ",
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": " Array.prototype.reduce() "
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " from the JS,\n    "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "fold"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " will produce a new value from an array."
                         },
                         {
                           "tag": "Newline",
@@ -24714,8 +24706,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = [|1, 2, 3|] in\n      let sum =\n        Array.fold numbers ~initial:0 ~f:(fun accumulator element -> accumulator +element)\n      in\n      sum = 6\n    ",
-                            "reason": "{\n  let numbers = [|(1, 2, 3)|];\n  let sum =\n    Array.fold(numbers, ~initial=0, ~f=(accumulator, element) =>\n      accumulator + element\n    );\n\n  sum == 6;\n};\n"
+                            "ocaml": "\n      let numbers = [(1, 2, 3)]\n      let sum = Array.fold(numbers, ~initial=0, ~f=(accumulator, element) => accumulator + element)\n\n      sum == 6\n    ",
+                            "reason": "\n      let numbers = [(1, 2, 3)]\n      let sum = Array.fold(numbers, ~initial=0, ~f=(accumulator, element) => accumulator + element)\n\n      sum == 6\n    "
                           }
                         },
                         {
@@ -24817,8 +24809,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.fold [|1; 2; 3|] ~initial:[] ~f:(List.cons) = [3; 2; 1]",
-                            "reason": "Array.fold([|1, 2, 3|], ~initial=[], ~f=List.cons) == [3, 2, 1];\n"
+                            "ocaml": "Array.fold([3, 4, 5], ~f=Int.multiply, ~initial=2) == 120",
+                            "reason": "Array.fold([3, 4, 5], ~f=Int.multiply, ~initial=2) == 120"
                           }
                         },
                         {
@@ -24828,8 +24820,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.fold [|1; 1; 2; 2; 3|] ~initial:Set.Int.empty ~f:Set.add |> Set.toArray = [|1; 2; 3|]\n    ",
-                            "reason": "Array.fold([|1, 1, 2, 2, 3|], ~initial=Set.Int.empty, ~f=Set.add)\n|> Set.toArray == [|1, 2, 3|];\n"
+                            "ocaml": "\n      Array.fold([1, 1, 2, 2, 3], ~initial=Set.Int.empty, ~f=Set.add) -> Set.toArray == [1, 2, 3]\n    ",
+                            "reason": "\n      Array.fold([1, 1, 2, 2, 3], ~initial=Set.Int.empty, ~f=Set.add) -> Set.toArray == [1, 2, 3]\n    "
                           }
                         },
                         {
@@ -24839,8 +24831,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let lastEven integers =\n        Array.fold integers ~initial:None ~f:(fun last int ->\n          if Int.isEven then\n            Some int\n          else\n            last\n        )\n      in\n      lastEven [|1;2;3;4;5|] = Some 4\n    ",
-                            "reason": "{\n  let lastEven = integers =>\n    Array.fold(integers, ~initial=None, ~f=(last, int) =>\n      if (Int.isEven) {\n        Some(int);\n      } else {\n        last;\n      }\n    );\n\n  lastEven([|1, 2, 3, 4, 5|]) == Some(4);\n};\n"
+                            "ocaml": "\n      let lastEven = integers =>\n        Array.fold(integers, ~initial=None, ~f=(last, int) =>\n          int->Int.isEven ? Some(int) : last\n        )\n\n      lastEven([1, 2, 3, 4, 5]) == Some(4)\n    ",
+                            "reason": "\n      let lastEven = integers =>\n        Array.fold(integers, ~initial=None, ~f=(last, int) =>\n          int->Int.isEven ? Some(int) : last\n        )\n\n      lastEven([1, 2, 3, 4, 5]) == Some(4)\n    "
                           }
                         }
                       ]
@@ -24933,8 +24925,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.foldRight ~f:(+) ~initial:0 (Array.repeat ~length:3 5) = 15",
-                            "reason": "Array.foldRight(~f=(+), ~initial=0, Array.repeat(~length=3, 5)) == 15;\n"
+                            "ocaml": "Array.repeat(~length=3, 5) -> Array.foldRight(~f=Int.add, ~initial=0) == 15",
+                            "reason": "Array.repeat(~length=3, 5) -> Array.foldRight(~f=Int.add, ~initial=0) == 15"
                           }
                         },
                         {
@@ -24944,8 +24936,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.foldRight ~f:List.cons ~initial:[] [|1; 2; 3|] = [1; 2; 3]",
-                            "reason": "Array.foldRight(~f=List.cons, ~initial=[], [|1, 2, 3|]) == [1, 2, 3];\n"
+                            "ocaml": "Array.foldRight([3, 4, 5], ~f=Int.multiply, ~initial=2) == 120",
+                            "reason": "Array.foldRight([3, 4, 5], ~f=Int.multiply, ~initial=2) == 120"
                           }
                         }
                       ]
@@ -25018,8 +25010,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let fortyTwos = Array.repeat ~length:2 42 in\n      let eightyOnes = Array.repeat ~length:3 81 in\n      Array.append fourtyTwos eightyOnes = [|42; 42; 81; 81; 81|];\n    ",
-                            "reason": "{\n  let fortyTwos = Array.repeat(~length=2, 42);\n  let eightyOnes = Array.repeat(~length=3, 81);\n  Array.append(fourtyTwos, eightyOnes) == [|42, 42, 81, 81, 81|];\n};\n"
+                            "ocaml": "\n      let fortyTwos = Array.repeat(42, ~length=2)\n      let eightyOnes = Array.repeat(81, ~length=3)\n      Array.append(fourtyTwos, eightyOnes) == [42, 42, 81, 81, 81]\n    ",
+                            "reason": "\n      let fortyTwos = Array.repeat(42, ~length=2)\n      let eightyOnes = Array.repeat(81, ~length=3)\n      Array.append(fourtyTwos, eightyOnes) == [42, 42, 81, 81, 81]\n    "
                           }
                         }
                       ]
@@ -25092,8 +25084,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.flatten [|[|1; 2|]; [|3|]; [|4; 5|]|] = [|1; 2; 3; 4; 5|]",
-                            "reason": "Array.flatten([|[|1, 2|], [|3|], [|4, 5|]|]) == [|1, 2, 3, 4, 5|];\n"
+                            "ocaml": "Array.flatten([[1, 2], [3], [4, 5]]) == [1, 2, 3, 4, 5]",
+                            "reason": "Array.flatten([([(1, 2)], [3], [(4, 5)])]) === [(1, 2, 3, 4, 5)];\n"
                           }
                         }
                       ]
@@ -25137,14 +25129,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -25168,7 +25160,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Array.map2 ~f:Tuple.make"
+                          "value": "Array.map2(~f=Tuple2.make)"
                         },
                         {
                           "tag": "Newline",
@@ -25202,8 +25194,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.zip [|1;2;3;4;5|] [|\"Dog\"; \"Eagle\"; \"Ferret\"|] = [|(1, \"Dog\"); (2, \"Eagle\"); (3, \"Ferret\")|]",
-                            "reason": "Array.zip([|1, 2, 3, 4, 5|], [|\"Dog\", \"Eagle\", \"Ferret\"|])\n== [|(1, \"Dog\"), (2, \"Eagle\"), (3, \"Ferret\")|];\n"
+                            "ocaml": "Array.zip([1, 2, 3, 4, 5], [\"Dog\", \"Eagle\", \"Ferret\"]) == [(1, \"Dog\"), (2, \"Eagle\"), (3, \"Ferret\")]",
+                            "reason": "Array.zip(([(1, 2, 3, 4, 5)], [(\"Dog\", \"Eagle\", \"Ferret\")]))\n=== [((1, \"Dog\"), (2, \"Eagle\"), (3, \"Ferret\"))];\n"
                           }
                         }
                       ]
@@ -25292,8 +25284,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let totals (xs : int array) (ys : int array) : int array =\n        Array.map2 ~f:(+) xs ys in\n\n      totals [|1;2;3|] [|4;5;6|] = [|5;7;9|]\n    ",
-                            "reason": "{\n  let totals = (xs: array(int), ys: array(int)): array(int) =>\n    Array.map2(~f=(+), xs, ys);\n\n  totals([|1, 2, 3|], [|4, 5, 6|]) == [|5, 7, 9|];\n};\n"
+                            "ocaml": "\n      let totals = (xs, ys) => Array.map2(~f=Int.add, xs, ys)\n\n      totals([1, 2, 3], [4, 5, 6]) == [5, 7, 9]\n    ",
+                            "reason": "\n      let totals = (xs, ys) => Array.map2(~f=Int.add, xs, ys)\n\n      totals([1, 2, 3], [4, 5, 6]) == [5, 7, 9]\n    "
                           }
                         },
                         {
@@ -25303,8 +25295,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.map2\n        ~f:Tuple.create\n        [|\"alice\"; \"bob\"; \"chuck\"|]\n        [|2; 5; 7; 8|] =\n          [|(\"alice\",2); (\"bob\",5); (\"chuck\",7)|]\n    ",
-                            "reason": "Array.map2(~f=Tuple.create, [|\"alice\", \"bob\", \"chuck\"|], [|2, 5, 7, 8|])\n== [|(\"alice\", 2), (\"bob\", 5), (\"chuck\", 7)|];\n"
+                            "ocaml": "\n      Array.map2(~f=Tuple2.make, [\"alice\", \"bob\", \"chuck\"], [2, 5, 7, 8])\n      == [(\"alice\", 2), (\"bob\", 5), (\"chuck\", 7)];\n    ",
+                            "reason": "\n      Array.map2(~f=Tuple2.make, [\"alice\", \"bob\", \"chuck\"], [2, 5, 7, 8])\n      == [(\"alice\", 2), (\"bob\", 5), (\"chuck\", 7)];\n    "
                           }
                         }
                       ]
@@ -25393,8 +25385,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.map3\n        ~f:Tuple3.create\n        [|\"alice\"; \"bob\"; \"chuck\"|]\n        [|2; 5; 7; 8;|]\n        [|true; false; true; false|] =\n          [|(\"alice\", 2, true); (\"bob\", 5, false); (\"chuck\", 7, true)|]\n    ",
-                            "reason": "Array.map3(\n  ~f=Tuple3.create,\n  [|\"alice\", \"bob\", \"chuck\"|],\n  [|2, 5, 7, 8|],\n  [|true, false, true, false|],\n)\n== [|(\"alice\", 2, true), (\"bob\", 5, false), (\"chuck\", 7, true)|];\n"
+                            "ocaml": "\n      Array.map3(\n        ~f=Tuple3.make,\n        [\"alice\", \"bob\", \"chuck\"],\n        [2, 5, 7, 8],\n        [true, false, true, false],\n      )\n      == [(\"alice\", 2, true), (\"bob\", 5, false), (\"chuck\", 7, true)];\n    ",
+                            "reason": "\n      Array.map3(\n        ~f=Tuple3.make,\n        [\"alice\", \"bob\", \"chuck\"],\n        [2, 5, 7, 8],\n        [true, false, true, false],\n      )\n      == [(\"alice\", 2, true), (\"bob\", 5, false), (\"chuck\", 7, true)];\n    "
                           }
                         }
                       ]
@@ -25456,14 +25448,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -25484,14 +25476,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple.first",
+                            "name": "Tuple2.first",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple.first",
+                              "target": "Tuple2.first",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple.first"
+                                  "value": "Tuple2.first"
                                 }
                               ]
                             }
@@ -25533,8 +25525,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.partition [|1;2;3;4;5;6|] ~f:Int.isOdd = ([|1;3;5|], [|2;4;6|])",
-                            "reason": "Array.partition([|1, 2, 3, 4, 5, 6|], ~f=Int.isOdd)\n== ([|1, 3, 5|], [|2, 4, 6|]);\n"
+                            "ocaml": "Array.partition([1, 2, 3, 4, 5, 6], ~f=Int.isOdd) == ([1, 3, 5], [2, 4, 6])",
+                            "reason": "Array.partition([1, 2, 3, 4, 5, 6], ~f=Int.isOdd) == ([1, 3, 5], [2, 4, 6])"
                           }
                         }
                       ]
@@ -25578,14 +25570,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -25704,8 +25696,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.splitAt [|1;2;3;4;5|] ~index:2 = ([|1;2|], [|3;4;5|])",
-                            "reason": "Array.splitAt([|1, 2, 3, 4, 5|], ~index=2) == ([|1, 2|], [|3, 4, 5|]);\n"
+                            "ocaml": "Array.splitAt([1, 2, 3, 4, 5], ~index=2) == ([1, 2], [3, 4, 5])",
+                            "reason": "Array.splitAt([1, 2, 3, 4, 5], ~index=2) == ([1, 2], [3, 4, 5])"
                           }
                         },
                         {
@@ -25715,8 +25707,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.splitAt [|1;2;3;4;5|] ~index:10 = ([|1;2;3;4;5|], [||])",
-                            "reason": "Array.splitAt([|1, 2, 3, 4, 5|], ~index=10) == ([|1, 2, 3, 4, 5|], [||]);\n"
+                            "ocaml": "Array.splitAt([1, 2, 3, 4, 5], ~index=10) == ([1, 2, 3, 4, 5], [])",
+                            "reason": "Array.splitAt([1, 2, 3, 4, 5], ~index=10) == ([1, 2, 3, 4, 5], [])"
                           }
                         },
                         {
@@ -25726,8 +25718,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.splitAt [|1;2;3;4;5|] ~index:0 = ([||], [|1;2;3;4;5|])",
-                            "reason": "Array.splitAt([|1, 2, 3, 4, 5|], ~index=0) == ([||], [|1, 2, 3, 4, 5|]);\n"
+                            "ocaml": "Array.splitAt([1, 2, 3, 4, 5], ~index=0) == ([], [1, 2, 3, 4, 5])",
+                            "reason": "Array.splitAt([1, 2, 3, 4, 5], ~index=0) == ([], [1, 2, 3, 4, 5])"
                           }
                         }
                       ]
@@ -25795,14 +25787,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -25868,8 +25860,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.splitWhen\n        [|5; 7; 8; 6; 4;|]\n        ~f:Int.isEven =\n        ([|5; 7|], [|8; 6; 4|])\n    ",
-                            "reason": "Array.splitWhen([|5, 7, 8, 6, 4|], ~f=Int.isEven)\n== ([|5, 7|], [|8, 6, 4|]);\n"
+                            "ocaml": "\n      Array.splitWhen([5, 7, 8, 6, 4], ~f=Int.isEven) == ([5, 7], [8, 6, 4])\n    ",
+                            "reason": "\n      Array.splitWhen([5, 7, 8, 6, 4], ~f=Int.isEven) == ([5, 7], [8, 6, 4])\n    "
                           }
                         },
                         {
@@ -25879,8 +25871,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.splitWhen\n        [|\"Ant\"; \"Bat\"; \"Cat\"|]\n        ~f:(fun animal -> String.length animal > 3) =\n          ([|\"Ant\"; \"Bat\"; \"Cat\"|], [||])\n    ",
-                            "reason": "Array.splitWhen([|\"Ant\", \"Bat\", \"Cat\"|], ~f=animal =>\n  String.length(animal) > 3\n)\n== ([|\"Ant\", \"Bat\", \"Cat\"|], [||]);\n"
+                            "ocaml": "\n      Array.splitWhen([\"Ant\", \"Bat\", \"Cat\"], ~f=animal => String.length(animal) > 3) ==\n        ([\"Ant\", \"Bat\", \"Cat\"], [])\n    ",
+                            "reason": "\n      Array.splitWhen([\"Ant\", \"Bat\", \"Cat\"], ~f=animal => String.length(animal) > 3) ==\n        ([\"Ant\", \"Bat\", \"Cat\"], [])\n    "
                           }
                         },
                         {
@@ -25890,8 +25882,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.splitWhen [|2.; Float.pi; 1.111|] ~f:Float.isInteger =\n        ([||], [|2.; Float.pi; 1.111|])\n    ",
-                            "reason": "Array.splitWhen([|2., Float.pi, 1.111|], ~f=Float.isInteger)\n== ([||], [|2., Float.pi, 1.111|]);\n"
+                            "ocaml": "\n      Array.splitWhen([2., Float.pi, 1.111], ~f=Float.isInteger) == ([], [2., Float.pi, 1.111])\n    ",
+                            "reason": "\n      Array.splitWhen([2., Float.pi, 1.111], ~f=Float.isInteger) == ([], [2., Float.pi, 1.111])\n    "
                           }
                         }
                       ]
@@ -25935,14 +25927,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -25955,14 +25947,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -26004,8 +25996,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.unzip [(0, true); (17, false); (1337, true)] = ([0;17;1337], [true; false; true])",
-                            "reason": "Array.unzip([(0, true), (17, false), (1337, true)])\n== ([0, 17, 1337], [true, false, true]);\n"
+                            "ocaml": "Array.unzip([(0, true), (17, false), (1337, true)]) == ([0, 17, 1337], [true, false, true])",
+                            "reason": "Array.unzip([((0, true), (17, false), (1337, true))])\n=== ([(0, 17, 1337)], [(true, false, true)]);\n"
                           }
                         }
                       ]
@@ -26104,8 +26096,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.forEach [|1; 2; 3|] ~f:(fun int -> print (Int.toString int))",
-                            "reason": "Array.forEach([|1, 2, 3|], ~f=int => print(Int.toString(int)));\n"
+                            "ocaml": "Array.forEach([1, 2, 3], ~f=int => Js.log(int))",
+                            "reason": "Array.forEach([1, 2, 3], ~f=int => Js.log(int))"
                           }
                         }
                       ]
@@ -26186,8 +26178,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.forEachI [|1; 2; 3|] ~f:(fun index int -> printf \"%d: %d\" index int)\n      (*\n        0: 1\n        1: 2\n        2: 3\n      *)\n    ",
-                            "reason": "Array.forEachI([|1, 2, 3|], ~f=(index, int) =>\n  printf(\"%d: %d\", index, int)\n);\n/*\n   0: 1\n   1: 2\n   2: 3\n */\n"
+                            "ocaml": "\n      Array.forEachWithIndex([1, 2, 3], ~f=(index, int) => Js.log2(index, int))\n      (*\n        0 1\n        1 2\n        2 3\n      *)\n    ",
+                            "reason": "\n      Array.forEachWithIndex([1, 2, 3], ~f=(index, int) => Js.log2(index, int))\n      (*\n        0 1\n        1 2\n        2 3\n      *)\n    "
                           }
                         }
                       ]
@@ -26268,8 +26260,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.values [|(Some \"Ant\"); None; (Some \"Cat\")|] = [|\"Ant\"; \"Cat\"|]",
-                            "reason": "Array.values([|Some(\"Ant\"), None, Some(\"Cat\")|]) == [|\"Ant\", \"Cat\"|];\n"
+                            "ocaml": "Array.values([Some(\"Ant\"), None, Some(\"Cat\")]) == [\"Ant\", \"Cat\"]",
+                            "reason": "Array.values([(Some(\"Ant\"), None, Some(\"Cat\"))]) === [(\"Ant\", \"Cat\")];\n"
                           }
                         },
                         {
@@ -26279,8 +26271,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.values [|None; None; None|] = [||]",
-                            "reason": "Array.values([|None, None, None|]) == [||];\n"
+                            "ocaml": "Array.values([None, None, None]) == []",
+                            "reason": "Array.values([(None, None, None)]) === [];\n"
                           }
                         }
                       ]
@@ -26361,8 +26353,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.intersperse ~sep:\"on\" [|\"turtles\"; \"turtles\"; \"turtles\"|] =\n      [|\"turtles\"; \"on\"; \"turtles\"; \"on\"; \"turtles\"|]\n    ",
-                            "reason": "Array.intersperse(~sep=\"on\", [|\"turtles\", \"turtles\", \"turtles\"|])\n== [|\"turtles\", \"on\", \"turtles\", \"on\", \"turtles\"|];\n"
+                            "ocaml": "\n      Array.intersperse(~sep=\"on\", [\"turtles\", \"turtles\", \"turtles\"])\n      == [\"turtles\", \"on\", \"turtles\", \"on\", \"turtles\"];\n    ",
+                            "reason": "\n      Array.intersperse(~sep=\"on\", [\"turtles\", \"turtles\", \"turtles\"])\n      == [\"turtles\", \"on\", \"turtles\", \"on\", \"turtles\"];\n    "
                           }
                         },
                         {
@@ -26372,8 +26364,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.intersperse ~sep:0 [||] = [||]",
-                            "reason": "Array.intersperse(~sep=0, [||]) == [||];\n"
+                            "ocaml": "Array.intersperse(~sep=0, []) == []",
+                            "reason": "Array.intersperse(~sep=0, []) == []"
                           }
                         }
                       ]
@@ -26454,8 +26446,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.chunksOf ~size:2 [|\"#FFBA49\"; \"#9984D4\"; \"#20A39E\"; \"#EF5B5B\"; \"#23001E\"|] =  [|\n        [|\"#FFBA49\"; \"#9984D4\"|];\n        [|\"#20A39E\"; \"#EF5B5B\"|];\n      |]\n    ",
-                            "reason": "Array.chunksOf(\n  ~size=2,\n  [|\"#FFBA49\", \"#9984D4\", \"#20A39E\", \"#EF5B5B\", \"#23001E\"|],\n)\n== [|[|\"#FFBA49\", \"#9984D4\"|], [|\"#20A39E\", \"#EF5B5B\"|]|];\n"
+                            "ocaml": "\n      Array.chunksOf([\"#FFBA49\", \"#9984D4\", \"#20A39E\", \"#EF5B5B\", \"#23001E\"], ~size=2) == [\n        [\"#FFBA49\", \"#9984D4\"],\n        [\"#20A39E\", \"#EF5B5B\"],\n      ]\n    ",
+                            "reason": "\n      Array.chunksOf([\"#FFBA49\", \"#9984D4\", \"#20A39E\", \"#EF5B5B\", \"#23001E\"], ~size=2) == [\n        [\"#FFBA49\", \"#9984D4\"],\n        [\"#20A39E\", \"#EF5B5B\"],\n      ]\n    "
                           }
                         }
                       ]
@@ -26592,8 +26584,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:1 = [|[|1|]; [|2|]; [|3|]; [|4|]; [|5|]|] ",
-                            "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=1)\n== [|[|1|], [|2|], [|3|], [|4|], [|5|]|];\n"
+                            "ocaml": "Array.sliding([1, 2, 3, 4, 5], ~size=1) == [[1], [2], [3], [4], [5]]",
+                            "reason": "Array.sliding([1, 2, 3, 4, 5], ~size=1) == [[1], [2], [3], [4], [5]]"
                           }
                         },
                         {
@@ -26603,8 +26595,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:2 = [|[|1;2|]; [|2;3|]; [|3;4|]; [|4;5|]|] ",
-                            "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=2)\n== [|[|1, 2|], [|2, 3|], [|3, 4|], [|4, 5|]|];\n"
+                            "ocaml": "Array.sliding([1, 2, 3, 4, 5], ~size=2) == [[1, 2], [2, 3], [3, 4], [4, 5]]",
+                            "reason": "Array.sliding([1, 2, 3, 4, 5], ~size=2) == [[1, 2], [2, 3], [3, 4], [4, 5]]"
                           }
                         },
                         {
@@ -26614,8 +26606,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:3 = [|[|1;2;3|]; [|2;3;4|]; [|3;4;5|]|] ",
-                            "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=3)\n== [|[|1, 2, 3|], [|2, 3, 4|], [|3, 4, 5|]|];\n"
+                            "ocaml": "Array.sliding([1, 2, 3, 4, 5], ~size=3) == [[1, 2, 3], [2, 3, 4], [3, 4, 5]]",
+                            "reason": "Array.sliding([1, 2, 3, 4, 5], ~size=3) == [[1, 2, 3], [2, 3, 4], [3, 4, 5]]"
                           }
                         },
                         {
@@ -26625,8 +26617,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:2 ~step:2 = [|[|1;2|]; [|3;4|]|] ",
-                            "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=2, ~step=2)\n== [|[|1, 2|], [|3, 4|]|];\n"
+                            "ocaml": "Array.sliding([1, 2, 3, 4, 5], ~size=2, ~step=2) == [[1, 2], [3, 4]]",
+                            "reason": "Array.sliding([1, 2, 3, 4, 5], ~size=2, ~step=2) == [[1, 2], [3, 4]]"
                           }
                         },
                         {
@@ -26636,8 +26628,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.sliding [|1;2;3;4;5|] ~size:1 ~step:3 = [|[|1|]; [|4|]|] ",
-                            "reason": "Array.sliding([|1, 2, 3, 4, 5|], ~size=1, ~step=3) == [|[|1|], [|4|]|];\n"
+                            "ocaml": "Array.sliding([1, 2, 3, 4, 5], ~size=1, ~step=3) == [[1], [4]]",
+                            "reason": "Array.sliding([1, 2, 3, 4, 5], ~size=1, ~step=3) == [[1], [4]]"
                           }
                         }
                       ]
@@ -26756,8 +26748,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.join [|\"Ant\"; \"Bat\"; \"Cat\"|] ~sep:\", \" = \"Ant, Bat, Cat\"",
-                            "reason": "Array.join([|\"Ant\", \"Bat\", \"Cat\"|], ~sep=\", \") == \"Ant, Bat, Cat\";\n"
+                            "ocaml": "Array.join([\"Ant\", \"Bat\", \"Cat\"], ~sep=\", \") == \"Ant, Bat, Cat\"",
+                            "reason": "Array.join([\"Ant\", \"Bat\", \"Cat\"], ~sep=\", \") == \"Ant, Bat, Cat\""
                           }
                         }
                       ]
@@ -26878,8 +26870,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let animals = [\"Ant\"; \"Bear\"; \"Cat\"; \"Dewgong\"] in\n      Array.groupBy animals (module Int) ~f:String.length = Map.Int.fromList [\n        (3, [\"Cat\"; \"Ant\"]);\n        (4, [\"Bear\"]);\n        (7, [\"Dewgong\"]);\n      ]\n    ",
-                            "reason": "{\n  let animals = [\"Ant\", \"Bear\", \"Cat\", \"Dewgong\"];\n  Array.groupBy(animals, (module Int), ~f=String.length)\n  == Map.Int.fromList([\n       (3, [\"Cat\", \"Ant\"]),\n       (4, [\"Bear\"]),\n       (7, [\"Dewgong\"]),\n     ]);\n};\n"
+                            "ocaml": "\n      let animals = [\"Ant\", \"Bear\", \"Cat\", \"Dewgong\"]\n      Array.groupBy(animals, module(Int), ~f=String.length) ==\n      Map.Int.fromArray([\n        (3, list{\"Cat\", \"Ant\"}),\n        (4, list{\"Bear\"}),\n        (7, list{\"Dewgong\"})\n      ])\n    ",
+                            "reason": "\n      let animals = [\"Ant\", \"Bear\", \"Cat\", \"Dewgong\"]\n      Array.groupBy(animals, module(Int), ~f=String.length) ==\n      Map.Int.fromArray([\n        (3, list{\"Cat\", \"Ant\"}),\n        (4, list{\"Bear\"}),\n        (7, list{\"Dewgong\"})\n      ])\n    "
                           }
                         }
                       ]
@@ -26972,8 +26964,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.toList [|1;2;3|] = [1;2;3]",
-                            "reason": "Array.toList([|1, 2, 3|]) == [1, 2, 3];\n"
+                            "ocaml": "Array.toList([1, 2, 3]) == list{1, 2, 3}",
+                            "reason": "Array.toList([1, 2, 3]) == list{1, 2, 3}"
                           }
                         },
                         {
@@ -26983,8 +26975,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.toList (Array.fromList [3; 5; 8]) = [3; 5; 8]",
-                            "reason": "Array.toList(Array.fromList([3, 5, 8])) == [3, 5, 8];\n"
+                            "ocaml": "Array.toList(Array.fromList(list{3, 5, 8})) == list{3, 5, 8}",
+                            "reason": "Array.toList(Array.fromList(list{3, 5, 8})) == list{3, 5, 8}"
                           }
                         }
                       ]
@@ -27097,8 +27089,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.toIndexedList [|\"cat\"; \"dog\"|] = [(0, \"cat\"); (1, \"dog\")]",
-                            "reason": "Array.toIndexedList([|\"cat\", \"dog\"|]) == [(0, \"cat\"), (1, \"dog\")];\n"
+                            "ocaml": "Array.toIndexedList([\"cat\", \"dog\"]) == list{(0, \"cat\"), (1, \"dog\")}",
+                            "reason": "Array.toIndexedList([\"cat\", \"dog\"]) == list{(0, \"cat\"), (1, \"dog\")}"
                           }
                         }
                       ]
@@ -27217,8 +27209,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = -1",
-                            "reason": "Array.compare(Int.compare, [|1, 2, 3|], [|1, 2, 3, 4|]) == (-1);\n"
+                            "ocaml": "Array.compare(Int.compare, [1, 2, 3], [1, 2, 3, 4]) == -1",
+                            "reason": "Array.compare((Int.compare, [(1, 2, 3)], [(1, 2, 3, 4)])) === (-1);\n"
                           }
                         },
                         {
@@ -27228,8 +27220,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0",
-                            "reason": "Array.compare(Int.compare, [|1, 2, 3|], [|1, 2, 3|]) == 0;\n"
+                            "ocaml": "Array.compare(Int.compare, [1, 2, 3], [1, 2, 3]) == 0",
+                            "reason": "Array.compare((Int.compare, [(1, 2, 3)], [(1, 2, 3)])) === 0;\n"
                           }
                         },
                         {
@@ -27239,8 +27231,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.compare Int.compare [|1;2;5|] [|1;2;3|] = 1",
-                            "reason": "Array.compare(Int.compare, [|1, 2, 5|], [|1, 2, 3|]) == 1;\n"
+                            "ocaml": "Array.compare(Int.compare, [1, 2, 5], [1, 2, 3]) == 1",
+                            "reason": "Array.compare((Int.compare, [(1, 2, 5)], [(1, 2, 3)])) === 1;\n"
                           }
                         }
                       ]
