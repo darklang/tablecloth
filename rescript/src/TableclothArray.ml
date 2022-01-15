@@ -28,10 +28,6 @@ let get = Belt.Array.getExn
 
 let getAt t ~index = Belt.Array.get t index
 
-let ( .?() ) (array : 'element t) (index : int) : 'element option =
-  getAt array ~index
-
-
 let first t = getAt t ~index:0
 
 let last t = getAt t ~index:(Array.length t - 1)
