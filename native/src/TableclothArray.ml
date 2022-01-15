@@ -130,7 +130,7 @@ let values t =
   let result =
     fold t ~initial:[] ~f:(fun results element ->
         match element with None -> results | Some value -> value :: results )
-    |> fromList
+    |> from_list
   in
   reverse result ;
   result
