@@ -157,7 +157,7 @@ val set : 'a t -> int -> 'a -> unit
       Array.set numbers 1 1;
       numbers.(2) <- 0;
 
-      numbers = [|1;0;0|]
+      numbers = [|1;1;0|]
     ]}
 *)
 
@@ -171,9 +171,9 @@ val first : 'a t -> 'a option
 
     {2 Examples}
 
-    {[Array.first [1;2;3] = Some 1]}
-    {[Array.first [1] = Some 1]}
-    {[Array.first [] = None]}
+    {[Array.first [|1;2;3|] = Some 1]}
+    {[Array.first [|1|] = Some 1]}
+    {[Array.first [||] = None]}
 *)
 
 val last : 'a t -> 'a option
@@ -226,7 +226,7 @@ val reverse : 'a t -> unit
 
     {[
       let numbers = [|1; 2; 3|] in
-      Array.reverse numbers
+      Array.reverse numbers;
       numbers = [|3; 2; 1|];
     ]}
 *)
@@ -251,7 +251,7 @@ val is_empty : 'a t -> bool
 
     {2 Examples}
 
-    {[Array.is_empty [|1; 2, 3|] = false]}
+    {[Array.is_empty [|1; 2; 3|] = false]}
     {[Array.is_empty [||] = true]}
 *)
 
@@ -260,7 +260,7 @@ val length : 'a t -> int
 
     {2 Examples}
 
-    {[Array.length [|1; 2, 3|] = 3]}
+    {[Array.length [|1; 2; 3|] = 3]}
     {[Array.length [||] = 0]}
 *)
 
@@ -321,7 +321,7 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 
     {2 Examples}
 
-    {[Array.contains [1; 2; 3]  2 ~equal:(=) = true]}
+    {[Array.includes [|1; 2; 3|]  2 ~equal:(=) = true]}
 *)
 
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
@@ -347,7 +347,7 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 *)
 
 val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
-(** Find a {!Tuple} of the {!minimum} and {!maximum} in a single pass
+(** Find a {!Tuple2} of the {!minimum} and {!maximum} in a single pass
 
     Returns [None] if called on an empty array.
 
@@ -428,7 +428,7 @@ val filter_map : 'a t -> f:('a -> 'b option) -> 'b t
           Some (number * number)
         else
           None
-      ) = [16; 36]
+      ) = [|36; 16|]
     ]}
 *)
 
@@ -477,7 +477,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     {2 Examples}
 
-    {[Array.fold [|1; 2; 3|] ~initial:[] ~f:(List.cons) = [3; 2; 1]]}
+    {[Array.fold [|3;4;5|] ~f:Int.multiply ~initial:2 = 120]}
     {[
       Array.fold [|1; 1; 2; 2; 3|] ~initial:Set.Int.empty ~f:Set.add |> Set.to_array = [|1; 2; 3|]
     ]}
@@ -500,7 +500,7 @@ val fold_right : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     {2 Examples}
 
     {[Array.fold_right ~f:(+) ~initial:0 (Array.repeat ~length:3 5) = 15]}
-    {[Array.fold_right ~f:List.cons ~initial:[] [|1; 2; 3|] = [1; 2; 3]]}
+    {[Array.fold_right [|3;4;5|] ~f:Int.multiply ~initial:2 = 120]}
 *)
 
 val append : 'a t -> 'a t -> 'a t
@@ -524,11 +524,11 @@ val flatten : 'a t t -> 'a t
 *)
 
 val zip : 'a t -> 'b t -> ('a * 'b) t
-(** Combine two arrays by merging each pair of elements into a {!Tuple}
+(** Combine two arrays by merging each pair of elements into a {!Tuple2}
 
     If one array is longer, the extra elements are dropped.
 
-    The same as [Array.map2 ~f:Tuple.make]
+    The same as [Array.map2 ~f:Tuple2.make]
 
     {2 Examples}
 
@@ -550,7 +550,7 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
     ]}
     {[
       Array.map2
-        ~f:Tuple.create
+        ~f:Tuple2.make
         [|"alice"; "bob"; "chuck"|]
         [|2; 5; 7; 8|] =
           [|("alice",2); ("bob",5); ("chuck",7)|]
@@ -566,7 +566,7 @@ val map3 : 'a t -> 'b t -> 'c t -> f:('a -> 'b -> 'c -> 'd) -> 'd t
 
     {[
       Array.map3
-        ~f:Tuple3.create
+        ~f:Tuple3.make
         [|"alice"; "bob"; "chuck"|]
         [|2; 5; 7; 8;|]
         [|true; false; true; false|] =
@@ -577,7 +577,7 @@ val map3 : 'a t -> 'b t -> 'c t -> f:('a -> 'b -> 'c -> 'd) -> 'd t
 (** {1 Deconstruct} *)
 
 val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
-(** Split an array into a {!Tuple} of arrays. Values which [f] returns true for will end up in {!Tuple.first}.
+(** Split an array into a {!Tuple2} of arrays. Values which [f] returns true for will end up in {!Tuple2.first}.
 
     {2 Examples}
 
@@ -585,7 +585,7 @@ val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
 *)
 
 val split_at : 'a t -> index:int -> 'a t * 'a t
-(** Divides an array into a {!Tuple} of arrays.
+(** Divides an array into a {!Tuple2} of arrays.
 
     Elements which have index upto (but not including) [index] will be in the first component of the tuple.
 
@@ -605,7 +605,7 @@ val split_at : 'a t -> index:int -> 'a t * 'a t
 val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
 (** Divides an array at the first element [f] returns [true] for.
 
-    Returns a {!Tuple}, the first component contains the elements [f] returned false for,
+    Returns a {!Tuple2}, the first component contains the elements [f] returned false for,
     the second component includes the element that [f] retutned [true] for an all the remaining elements.
 
     {2 Examples}
@@ -629,11 +629,11 @@ val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
 *)
 
 val unzip : ('a * 'b) t -> 'a t * 'b t
-(** Decompose an array of {!Tuple}s into a {!Tuple} of arrays.
+(** Decompose an array of {!Tuple2}s into a {!Tuple2} of arrays.
 
     {2 Examples}
 
-    {[Array.unzip [(0, true); (17, false); (1337, true)] = ([0;17;1337], [true; false; true])]}
+    {[Array.unzip [|(0, true); (17, false); (1337, true)|] = ([|0; 17; 1337|], [|true; false; true|])]}
 *)
 
 (** {1 Iterate} *)
@@ -737,12 +737,12 @@ val group_by :
     {2 Examples}
 
     {[
-      let animals = ["Ant"; "Bear"; "Cat"; "Dewgong"] in
-      Array.group_by animals (module Int) ~f:String.length = Map.Int.from_list [
+      let animals = [|"Ant"; "Bear"; "Cat"; "Dewgong"|] in
+      Array.group_by animals (module Int) ~f:String.length = Map.Int.fromArray [|
         (3, ["Cat"; "Ant"]);
         (4, ["Bear"]);
         (7, ["Dewgong"]);
-      ]
+      |]
     ]}
 *)
 
