@@ -23559,14 +23559,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -27040,14 +27040,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
