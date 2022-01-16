@@ -160,9 +160,9 @@ val to_uppercase : char -> char
 
     {2 Examples}
 
-    {[to_uppercase 'a' = 'A']}
-    {[to_uppercase 'b' = 'B']}
-    {[to_uppercase '7' = '7']}
+    {[Char.to_uppercase 'a' = 'A']}
+    {[Char.to_uppercase 'b' = 'B']}
+    {[Char.to_uppercase '7' = '7']}
 *)
 
 val to_code : char -> int

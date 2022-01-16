@@ -2,19 +2,20 @@
 
 (** Functions for working with boolean values.
 
-    Booleans in OCaml / Reason are represented by the [true] and [false] literals.
+    Booleans in Rescript are represented by the [true] and [false] literals.
 
     Whilst a bool isnt a variant, you will get warnings if you haven't
     exhaustively pattern match on them:
 
     {[
       let bool = false
-      let string =
-        match bool with
-        | false -> "false"
+      let string = switch bool {
+      | false => "false"
+      }
+
       (*
-        Warning 8: this pattern-matching is not exhaustive.
-        Here is an example of a case that is not matched:
+        Warning number 8
+        You forgot to handle a possible case here, for example: 
         true
       *)
     ]}
@@ -29,10 +30,10 @@ val fromInt : int -> bool option
 
     {2 Examples}
 
-    {[Bool.fromInt 0 = Some false]}
-    {[Bool.fromInt 1 = Some true]}
-    {[Bool.fromInt 8 = None]}
-    {[Bool.fromInt (-3) = None]}
+    {[Bool.fromInt(0) == Some(false)]}
+    {[Bool.fromInt(1) == Some(true)]}
+    {[Bool.fromInt(8) == None]}
+    {[Bool.fromInt(-3) == None]}
 *)
 
 val fromString : string -> bool option
@@ -40,46 +41,16 @@ val fromString : string -> bool option
 
     {2 Examples}
 
-    {[Bool.fromString "true" = Some true]}
-    {[Bool.fromString "false" = Some false]}
-    {[Bool.fromString "True" = None]}
-    {[Bool.fromString "False" = None]}
-    {[Bool.fromString "0" = None]}
-    {[Bool.fromString "1" = None]}
-    {[Bool.fromString "Not even close" = None]}
+    {[Bool.fromString("true") == Some(true)]}
+    {[Bool.fromString("false") == Some(false)]}
+    {[Bool.fromString("True") == None]}
+    {[Bool.fromString("False") == None]}
+    {[Bool.fromString("0") == None]}
+    {[Bool.fromString("1") == None]}
+    {[Bool.fromString("Not even close") == None]}
 *)
 
 (** {1 Basic operations} *)
-
-external ( && ) : bool -> bool -> bool = "%sequand"
-(** The lazy logical AND operator.
-
-    Returns [true] if both of its operands evaluate to [true].
-
-    If the 'left' operand evaluates to [false], the 'right' operand is not evaluated.
-
-    {2 Examples}
-
-    {[Bool.(true && true) = true]}
-    {[Bool.(true && false) = false]}
-    {[Bool.(false && true) = false]}
-    {[Bool.(false && false) = false]}
-*)
-
-external ( || ) : bool -> bool -> bool = "%sequor"
-(** The lazy logical OR operator.
-
-    Returns [true] if one of its operands evaluates to [true].
-
-    If the 'left' operand evaluates to [true], the 'right' operand is not evaluated.
-
-    {2 Examples}
-
-    {[Bool.(true || true) = true]}
-    {[Bool.(true || false) = true]}
-    {[Bool.(false || true) = true]}
-    {[Bool.(false || false) = false]}
-*)
 
 val xor : bool -> bool -> bool
 (** The exclusive or operator.
@@ -88,10 +59,10 @@ val xor : bool -> bool -> bool
 
     {2 Examples}
 
-    {[Bool.xor true true  = false]}
-    {[Bool.xor true false = true]}
-    {[Bool.xor false true  = true]}
-    {[Bool.xor false false = false]}
+    {[Bool.xor(true, true) == false]}
+    {[Bool.xor(true, false) == true]}
+    {[Bool.xor(false, true) == true]}
+    {[Bool.xor(false, false) == false]}
 *)
 
 val not : t -> bool
@@ -99,8 +70,8 @@ val not : t -> bool
 
     {2 Examples}
 
-    {[Bool.not false = true]}
-    {[Bool.not true = false]}
+    {[Bool.not(false) == true]}
+    {[Bool.not(true) == false]}
 *)
 
 (** {1 Convert} *)
@@ -110,8 +81,8 @@ val toString : bool -> string
 
     {2 Examples}
 
-    {[Bool.toString true = "true"]}
-    {[Bool.toString false = "false"]}
+    {[Bool.toString(true) == "true"]}
+    {[Bool.toString(false) == "false"]}
 *)
 
 val toInt : bool -> int
@@ -119,8 +90,8 @@ val toInt : bool -> int
 
     {2 Examples}
 
-    {[Bool.toInt true = 1]}
-    {[Bool.toInt false = 0]}
+    {[Bool.toInt(true) == 1]}
+    {[Bool.toInt(false) == 0]}
 *)
 
 (** {1 Compare} *)
@@ -130,9 +101,9 @@ val equal : bool -> bool -> bool
 
     {2 Examples}
 
-    {[Bool.equal true true = true]}
-    {[Bool.equal false false = true]}
-    {[Bool.equal false true = false]}
+    {[Bool.equal(true, true) == true]}
+    {[Bool.equal(false, false) == true]}
+    {[Bool.equal(false, true) == false]}
 *)
 
 val compare : bool -> bool -> int
@@ -140,8 +111,8 @@ val compare : bool -> bool -> int
 
     {2 Examples}
 
-    {[Bool.compare true false = 1]}
-    {[Bool.compare false true = -1]}
-    {[Bool.compare true true = 0]}
-    {[Bool.compare false false = 0]}
+    {[Bool.compare(true, false) == 1]}
+    {[Bool.compare(false, true) == -1]}
+    {[Bool.compare(true, true) == 0]}
+    {[Bool.compare(false, false) == 0]}
 *)

@@ -5,15 +5,14 @@
     Say we have a module [Book] which we want to be able to create a {!Set} of
 
     {[
-      module Book = struct
+      module Book = {
         type t = {
-          isbn: string;
-          title: string;
+          isbn: string,
+          title: string,
         }
 
-        let compare bookA bookB =
-          String.compare bookA.isbn bookb.isbn
-      end
+        let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)
+      }
     ]}
 
     First we need to make our module conform to the {!S} signature.
@@ -21,29 +20,29 @@
     This can be done by using the {!Make} functor.
 
     {[
-      module Book = struct
+      module Book = {
         type t = {
-          isbn: string;
-          title: string;
+          isbn: string,
+          title: string,
         }
 
-        let compare bookA bookB =
-          String.compare bookA.isbn bookb.isbn
-        
-        include Comparator.Make(struct 
-          type nonrec t = t
+        let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)
+
+        include Comparator.Make({
+          type t = t
 
           let compare = compare
-        end)
-      end
+        })
+      }
     ]}
 
     Now we can create a Set of books
 
     {[
-      Set.fromList (module Book) [
-        { isbn="9788460767923"; title="Moby Dick or The Whale" }
-      ]
+      Set.fromArray(module(Book),
+       [
+         {isbn: "9788460767923", title: "Moby Dick or The Whale"}
+       ])
     ]}
 *)
 
@@ -79,21 +78,20 @@ type ('a, 'identity) s =
     {2 Examples}
 
     {[
-      module Book = struct
-        module T = struct
+      module Book = {
+        module T = {
           type t = {
-            isbn: string;
-            title: string;
+            isbn: string,
+            title: string,
           }
-          let compare bookA bookB =
-            String.compare bookA.isbn bookB.isbn
-        end
+          let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)
+        }
 
         include T
         include Comparator.Make(T)
-      end
+      }
 
-      let books = Set.empty (module Book)
+      let books = Set.empty(module(Book))
     ]}
 *)
 module Make (M : T) : S with type t := M.t

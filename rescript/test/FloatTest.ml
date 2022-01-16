@@ -13,18 +13,65 @@ let suite =
           |> toEqual Eq.bool true ) ;
       describe "equals" (fun () ->
           test "zero" (fun () -> expect (0. = -0.) |> toEqual Eq.bool true) ) ;
+      describe "fromString" (fun () ->
+          test "NaN" (fun () ->
+              expect (fromString "NaN")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some Js.Float._NaN) ) ;
+          test "nan" (fun () ->
+              expect (fromString "nan")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some Js.Float._NaN) ) ;
+          test "Infinity" (fun () ->
+              expect (fromString "Infinity")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some infinity) ) ;
+          test "infinity" (fun () ->
+              expect (fromString "infinity")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   None ) ;
+
+          test "infinity" (fun () ->
+              expect (fromString "infinity")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   None ) ;
+          test "55" (fun () ->
+              expect (fromString "55")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some 55.) ) ;
+          test "-100" (fun () ->
+              expect (fromString "-100")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   (Some (-100.)) ) ;
+          test "not number" (fun () ->
+              expect (fromString "not number")
+              |> toEqual
+                   (let open Eq in
+                   option float)
+                   None ) ) ;
       describe "add" (fun () ->
           test "add" (fun () ->
-              expect (add 3.14 3.14) |> toEqual Eq.float 6.28 ) ;
-          test "+" (fun () -> expect (3.14 + 3.14) |> toEqual Eq.float 6.28) ) ;
+              expect (add 3.14 3.14) |> toEqual Eq.float 6.28 ) ) ;
       describe "subtract" (fun () ->
           test "subtract" (fun () ->
-              expect (subtract 4. 3.) |> toEqual Eq.float 1. ) ;
-          test "-" (fun () -> expect (4. - 3.) |> toEqual Eq.float 1.) ) ;
+              expect (subtract 4. 3.) |> toEqual Eq.float 1. ) ) ;
       describe "multiply" (fun () ->
           test "multiply" (fun () ->
-              expect (multiply 2. 7.) |> toEqual Eq.float 14. ) ;
-          test "*" (fun () -> expect (2. * 7.) |> toEqual Eq.float 14.) ) ;
+              expect (multiply 2. 7.) |> toEqual Eq.float 14. ) ) ;
       describe "divide" (fun () ->
           test "divide" (fun () ->
               expect (divide 3.14 ~by:2.) |> toEqual Eq.float 1.57 ) ;
@@ -32,23 +79,20 @@ let suite =
               expect (divide 3.14 ~by:0. = infinity) |> toEqual Eq.bool true ) ;
           test "divide by negative zero" (fun () ->
               expect (divide 3.14 ~by:(-0.) = negativeInfinity)
-              |> toEqual Eq.bool true ) ;
-          test "/" (fun () -> expect (3.14 / 2.) |> toEqual Eq.float 1.57) ) ;
+              |> toEqual Eq.bool true ) ) ;
       describe "power" (fun () ->
           test "power" (fun () ->
               expect (power ~base:7. ~exponent:3.) |> toEqual Eq.float 343. ) ;
           test "0 base" (fun () ->
               expect (power ~base:0. ~exponent:3.) |> toEqual Eq.float 0. ) ;
           test "0 exponent" (fun () ->
-              expect (power ~base:7. ~exponent:0.) |> toEqual Eq.float 1. ) ;
-          test "**" (fun () -> expect (7. ** 3.) |> toEqual Eq.float 343.) ) ;
+              expect (power ~base:7. ~exponent:0.) |> toEqual Eq.float 1. ) ) ;
       describe "negate" (fun () ->
           test "positive number" (fun () ->
               expect (negate 8.) |> toEqual Eq.float (-8.) ) ;
           test "negative number" (fun () ->
               expect (negate (-7.)) |> toEqual Eq.float 7. ) ;
-          test "zero" (fun () -> expect (negate 0.) |> toEqual Eq.float (-0.)) ;
-          test "~-" (fun () -> expect (-7.) |> toEqual Eq.float (-7.)) ) ;
+          test "zero" (fun () -> expect (negate 0.) |> toEqual Eq.float (-0.)) ) ;
       describe "absolute" (fun () ->
           test "positive number" (fun () ->
               expect (absolute 8.) |> toEqual Eq.float 8. ) ;
@@ -164,7 +208,7 @@ let suite =
           expect (hypotenuse 3. 4.) |> toEqual Eq.float 5. ) ;
       test "degrees" (fun () -> expect (degrees 180.) |> toEqual Eq.float pi) ;
       test "radians" (fun () -> expect (radians pi) |> toEqual Eq.float pi) ;
-      test "turns" (fun () -> expect (turns 1.) |> toEqual Eq.float (2. * pi)) ;
+      test "turns" (fun () -> expect (turns 1.) |> toEqual Eq.float (2. *. pi)) ;
       describe "ofPolar" (fun () ->
           let x, y = fromPolar (squareRoot 2., degrees 45.) in
           test "x" (fun () -> expect x |> toBeCloseTo 1.) ;
@@ -184,34 +228,35 @@ let suite =
       describe "cos" (fun () ->
           test "cos" (fun () -> expect (cos (degrees 60.)) |> toBeCloseTo 0.5) ;
           test "cos" (fun () ->
-              expect (cos (radians (pi / 3.))) |> toBeCloseTo 0.5 ) ) ;
+              expect (cos (radians (pi /. 3.))) |> toBeCloseTo 0.5 ) ) ;
       describe "acos" (fun () ->
-          test "1 / 2" (fun () -> expect (acos (1. / 2.)) |> toBeCloseTo 1.0472) ) ;
+          test "1 / 2" (fun () ->
+              expect (acos (1. /. 2.)) |> toBeCloseTo 1.0472 ) ) ;
       describe "sin" (fun () ->
           test "30 degrees" (fun () ->
               expect (sin (degrees 30.)) |> toBeCloseTo 0.5 ) ;
           test "pi / 6" (fun () ->
-              expect (sin (radians (pi / 6.))) |> toBeCloseTo 0.5 ) ) ;
+              expect (sin (radians (pi /. 6.))) |> toBeCloseTo 0.5 ) ) ;
       describe "asin" (fun () ->
           test "asin" (fun () ->
-              expect (asin (1. / 2.)) |> toBeCloseTo 0.523599 ) ) ;
+              expect (asin (1. /. 2.)) |> toBeCloseTo 0.523599 ) ) ;
       describe "tan" (fun () ->
           test "45 degrees" (fun () ->
               expect (tan (degrees 45.)) |> toEqual Eq.float 0.9999999999999999 ) ;
           test "pi / 4" (fun () ->
-              expect (tan (radians (pi / 4.)))
+              expect (tan (radians (pi /. 4.)))
               |> toEqual Eq.float 0.9999999999999999 ) ;
           test "0" (fun () -> expect (tan 0.) |> toEqual Eq.float 0.) ) ;
       describe "atan" (fun () ->
           test "0" (fun () -> expect (atan 0.) |> toEqual Eq.float 0.) ;
           test "1 / 1" (fun () ->
-              expect (atan (1. / 1.)) |> toEqual Eq.float 0.7853981633974483 ) ;
+              expect (atan (1. /. 1.)) |> toEqual Eq.float 0.7853981633974483 ) ;
           test "1 / -1" (fun () ->
-              expect (atan (1. / -1.)) |> toEqual Eq.float (-0.7853981633974483) ) ;
+              expect (atan (1. /. -1.)) |> toEqual Eq.float (-0.7853981633974483) ) ;
           test "-1 / -1" (fun () ->
-              expect (atan (-1. / -1.)) |> toEqual Eq.float 0.7853981633974483 ) ;
+              expect (atan (-1. /. -1.)) |> toEqual Eq.float 0.7853981633974483 ) ;
           test "-1 / -1" (fun () ->
-              expect (atan (-1. / 1.)) |> toEqual Eq.float (-0.7853981633974483) ) ) ;
+              expect (atan (-1. /. 1.)) |> toEqual Eq.float (-0.7853981633974483) ) ) ;
       describe "atan2" (fun () ->
           test "0" (fun () ->
               expect (atan2 ~y:0. ~x:0.) |> toEqual Eq.float 0. ) ;

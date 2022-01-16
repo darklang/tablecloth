@@ -22025,7 +22025,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " indexes can be negative, indicating an offset from the end of the list."
+                          "value": " indexes can be negative, indicating an offset from the end of the array."
                         },
                         {
                           "tag": "Newline",
@@ -38976,6 +38976,30 @@
                   },
                   {
                     "tag": "Raw",
+                    "value": ". "
+                  },
+                  {
+                    "tag": "Newline",
+                    "value": "\n"
+                  },
+                  {
+                    "tag": "Raw",
+                    "value": "\n    Note that in Rescript source code you can include only the characters from 0-127 range. \n    Full list of available characters is available "
+                  },
+                  {
+                    "tag": "Link",
+                    "value": {
+                      "target": " https://www.w3schools.com/charsets/ref_html_ascii.asp ",
+                      "content": [
+                        {
+                          "tag": "Raw",
+                          "value": " here"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "tag": "Raw",
                     "value": "."
                   },
                   {
@@ -38984,7 +39008,7 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": "\n    Since character 128 through 255 have varying values depending on what\n    standard you are using (ISO 8859-1 or Windows 1252), you are advised to\n    stick to the 0-127 range."
+                    "value": "\n    Characters from 128-255 range can still be handled, but only as codes."
                   }
                 ]
               },
@@ -39151,8 +39175,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromCode 65 = Some 'A'",
-                            "reason": "Char.fromCode(65) == Some('A');\n"
+                            "ocaml": "Char.fromCode(65) == Some('A')",
+                            "reason": "Char.fromCode(65) === Some('A');\n"
                           }
                         },
                         {
@@ -39162,8 +39186,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromCode 66 = Some 'B'",
-                            "reason": "Char.fromCode(66) == Some('B');\n"
+                            "ocaml": "Char.fromCode(66) == Some('B')",
+                            "reason": "Char.fromCode(66) === Some('B');\n"
                           }
                         },
                         {
@@ -39173,8 +39197,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromCode 3000 = None",
-                            "reason": "Char.fromCode(3000) == None;\n"
+                            "ocaml": "Char.fromCode(3000) == None",
+                            "reason": "Char.fromCode(3000) === None;\n"
                           }
                         },
                         {
@@ -39184,8 +39208,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromCode (-1) = None",
-                            "reason": "Char.fromCode(-1) == None;\n"
+                            "ocaml": "Char.fromCode(-1) == None",
+                            "reason": "Char.fromCode(-1) === None;\n"
                           }
                         },
                         {
@@ -39290,8 +39314,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromString \"A\" = Some 'A'",
-                            "reason": "Char.fromString(\"A\") == Some('A');\n"
+                            "ocaml": "Char.fromString(\"A\") == Some('A')",
+                            "reason": "Char.fromString(\"A\") === Some('A');\n"
                           }
                         },
                         {
@@ -39301,8 +39325,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromString \" \" = Some ' '",
-                            "reason": "Char.fromString(\" \") == Some(' ');\n"
+                            "ocaml": "Char.fromString(\" \") == Some(' ')",
+                            "reason": "Char.fromString(\" \") === Some(' ');\n"
                           }
                         },
                         {
@@ -39312,8 +39336,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromString \"\" = None",
-                            "reason": "Char.fromString(\"\") == None;\n"
+                            "ocaml": "Char.fromString(\"\") == None",
+                            "reason": "Char.fromString(\"\") === None;\n"
                           }
                         },
                         {
@@ -39323,8 +39347,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromString \"abc\" = None",
-                            "reason": "Char.fromString(\"abc\") == None;\n"
+                            "ocaml": "Char.fromString(\"abc\") == None",
+                            "reason": "Char.fromString(\"abc\") === None;\n"
                           }
                         },
                         {
@@ -39334,8 +39358,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.fromString \" a\" = None",
-                            "reason": "Char.fromString(\" a\") == None;\n"
+                            "ocaml": "Char.fromString(\" a\") == None",
+                            "reason": "Char.fromString(\" a\") === None;\n"
                           }
                         }
                       ]
@@ -39408,8 +39432,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLowercase 'a' = true",
-                            "reason": "Char.isLowercase('a') == true;\n"
+                            "ocaml": "Char.isLowercase('a') == true",
+                            "reason": "Char.isLowercase('a') === true;\n"
                           }
                         },
                         {
@@ -39419,8 +39443,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLowercase 'b' = true",
-                            "reason": "Char.isLowercase('b') == true;\n"
+                            "ocaml": "Char.isLowercase('b') == true",
+                            "reason": "Char.isLowercase('b') === true;\n"
                           }
                         },
                         {
@@ -39430,8 +39454,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLowercase 'z' = true",
-                            "reason": "Char.isLowercase('z') == true;\n"
+                            "ocaml": "Char.isLowercase('z') == true",
+                            "reason": "Char.isLowercase('z') === true;\n"
                           }
                         },
                         {
@@ -39441,8 +39465,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLowercase '0' = false",
-                            "reason": "Char.isLowercase('0') == false;\n"
+                            "ocaml": "Char.isLowercase('0') == false",
+                            "reason": "Char.isLowercase('0') === false;\n"
                           }
                         },
                         {
@@ -39452,8 +39476,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLowercase 'A' = false",
-                            "reason": "Char.isLowercase('A') == false;\n"
+                            "ocaml": "Char.isLowercase('A') == false",
+                            "reason": "Char.isLowercase('A') === false;\n"
                           }
                         },
                         {
@@ -39463,8 +39487,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLowercase '-' = false",
-                            "reason": "Char.isLowercase('-') == false;\n"
+                            "ocaml": "Char.isLowercase('-') == false",
+                            "reason": "Char.isLowercase('-') === false;\n"
                           }
                         }
                       ]
@@ -39537,8 +39561,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isUppercase 'A' = true",
-                            "reason": "Char.isUppercase('A') == true;\n"
+                            "ocaml": "Char.isUppercase('A') == true",
+                            "reason": "Char.isUppercase('A') === true;\n"
                           }
                         },
                         {
@@ -39548,8 +39572,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isUppercase 'B' = true",
-                            "reason": "Char.isUppercase('B') == true;\n"
+                            "ocaml": "Char.isUppercase('B') == true",
+                            "reason": "Char.isUppercase('B') === true;\n"
                           }
                         },
                         {
@@ -39559,8 +39583,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isUppercase 'Z' = true",
-                            "reason": "Char.isUppercase('Z') == true;\n"
+                            "ocaml": "Char.isUppercase('Z') == true",
+                            "reason": "Char.isUppercase('Z') === true;\n"
                           }
                         },
                         {
@@ -39570,8 +39594,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isUppercase 'h' = false",
-                            "reason": "Char.isUppercase('h') == false;\n"
+                            "ocaml": "Char.isUppercase('h') == false",
+                            "reason": "Char.isUppercase('h') === false;\n"
                           }
                         },
                         {
@@ -39581,8 +39605,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isUppercase '0' = false",
-                            "reason": "Char.isUppercase('0') == false;\n"
+                            "ocaml": "Char.isUppercase('0') == false",
+                            "reason": "Char.isUppercase('0') === false;\n"
                           }
                         },
                         {
@@ -39592,8 +39616,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isUppercase '-' = false",
-                            "reason": "Char.isUppercase('-') == false;\n"
+                            "ocaml": "Char.isUppercase('-') == false",
+                            "reason": "Char.isUppercase('-') === false;\n"
                           }
                         }
                       ]
@@ -39666,8 +39690,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLetter 'a' = true",
-                            "reason": "Char.isLetter('a') == true;\n"
+                            "ocaml": "Char.isLetter('a') == true",
+                            "reason": "Char.isLetter('a') === true;\n"
                           }
                         },
                         {
@@ -39677,8 +39701,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLetter 'b' = true",
-                            "reason": "Char.isLetter('b') == true;\n"
+                            "ocaml": "Char.isLetter('b') == true",
+                            "reason": "Char.isLetter('b') === true;\n"
                           }
                         },
                         {
@@ -39688,8 +39712,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLetter 'E' = true",
-                            "reason": "Char.isLetter('E') == true;\n"
+                            "ocaml": "Char.isLetter('E') == true",
+                            "reason": "Char.isLetter('E') === true;\n"
                           }
                         },
                         {
@@ -39699,8 +39723,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLetter 'Y' = true",
-                            "reason": "Char.isLetter('Y') == true;\n"
+                            "ocaml": "Char.isLetter('Y') == true",
+                            "reason": "Char.isLetter('Y') === true;\n"
                           }
                         },
                         {
@@ -39710,8 +39734,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLetter '0' = false",
-                            "reason": "Char.isLetter('0') == false;\n"
+                            "ocaml": "Char.isLetter('0') == false",
+                            "reason": "Char.isLetter('0') === false;\n"
                           }
                         },
                         {
@@ -39721,8 +39745,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isLetter '-' = false",
-                            "reason": "Char.isLetter('-') == false;\n"
+                            "ocaml": "Char.isLetter('-') == false",
+                            "reason": "Char.isLetter('-') === false;\n"
                           }
                         }
                       ]
@@ -39795,8 +39819,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isDigit '0' = true",
-                            "reason": "Char.isDigit('0') == true;\n"
+                            "ocaml": "Char.isDigit('0') == true",
+                            "reason": "Char.isDigit('0') === true;\n"
                           }
                         },
                         {
@@ -39806,8 +39830,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isDigit '1' = true",
-                            "reason": "Char.isDigit('1') == true;\n"
+                            "ocaml": "Char.isDigit('1') == true",
+                            "reason": "Char.isDigit('1') === true;\n"
                           }
                         },
                         {
@@ -39817,8 +39841,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isDigit '9' = true",
-                            "reason": "Char.isDigit('9') == true;\n"
+                            "ocaml": "Char.isDigit('9') == true",
+                            "reason": "Char.isDigit('9') === true;\n"
                           }
                         },
                         {
@@ -39828,8 +39852,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isDigit 'a' = false",
-                            "reason": "Char.isDigit('a') == false;\n"
+                            "ocaml": "Char.isDigit('a') == false",
+                            "reason": "Char.isDigit('a') === false;\n"
                           }
                         },
                         {
@@ -39839,8 +39863,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isDigit 'b' = false",
-                            "reason": "Char.isDigit('b') == false;\n"
+                            "ocaml": "Char.isDigit('b') == false",
+                            "reason": "Char.isDigit('b') === false;\n"
                           }
                         }
                       ]
@@ -39913,8 +39937,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric 'a' = true",
-                            "reason": "Char.isAlphanumeric('a') == true;\n"
+                            "ocaml": "Char.isAlphanumeric('a') == true",
+                            "reason": "Char.isAlphanumeric('a') === true;\n"
                           }
                         },
                         {
@@ -39924,8 +39948,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric 'b' = true",
-                            "reason": "Char.isAlphanumeric('b') == true;\n"
+                            "ocaml": "Char.isAlphanumeric('b') == true",
+                            "reason": "Char.isAlphanumeric('b') === true;\n"
                           }
                         },
                         {
@@ -39935,8 +39959,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric 'E' = true",
-                            "reason": "Char.isAlphanumeric('E') == true;\n"
+                            "ocaml": "Char.isAlphanumeric('E') == true",
+                            "reason": "Char.isAlphanumeric('E') === true;\n"
                           }
                         },
                         {
@@ -39946,8 +39970,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric 'Y' = true",
-                            "reason": "Char.isAlphanumeric('Y') == true;\n"
+                            "ocaml": "Char.isAlphanumeric('Y') == true",
+                            "reason": "Char.isAlphanumeric('Y') === true;\n"
                           }
                         },
                         {
@@ -39957,8 +39981,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric '0' = true",
-                            "reason": "Char.isAlphanumeric('0') == true;\n"
+                            "ocaml": "Char.isAlphanumeric('0') == true",
+                            "reason": "Char.isAlphanumeric('0') === true;\n"
                           }
                         },
                         {
@@ -39968,8 +39992,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric '7' = true",
-                            "reason": "Char.isAlphanumeric('7') == true;\n"
+                            "ocaml": "Char.isAlphanumeric('7') == true",
+                            "reason": "Char.isAlphanumeric('7') === true;\n"
                           }
                         },
                         {
@@ -39979,8 +40003,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isAlphanumeric '-' = false",
-                            "reason": "Char.isAlphanumeric('-') == false;\n"
+                            "ocaml": "Char.isAlphanumeric('-') == false",
+                            "reason": "Char.isAlphanumeric('-') === false;\n"
                           }
                         }
                       ]
@@ -40113,8 +40137,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isPrintable 'G' = true",
-                            "reason": "Char.isPrintable('G') == true;\n"
+                            "ocaml": "Char.isPrintable('G') == true",
+                            "reason": "Char.isPrintable('G') === true;\n"
                           }
                         },
                         {
@@ -40124,8 +40148,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isPrintable '%' = true",
-                            "reason": "Char.isPrintable('%') == true;\n"
+                            "ocaml": "Char.isPrintable('%') == true",
+                            "reason": "Char.isPrintable('%') === true;\n"
                           }
                         },
                         {
@@ -40135,8 +40159,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isPrintable ' ' = true",
-                            "reason": "Char.isPrintable(' ') == true;\n"
+                            "ocaml": "Char.isPrintable(' ') == true",
+                            "reason": "Char.isPrintable(' ') === true;\n"
                           }
                         },
                         {
@@ -40146,8 +40170,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isPrintable '\\t' = false",
-                            "reason": "Char.isPrintable('\\t') == false;\n"
+                            "ocaml": "Char.isPrintable('\\t') == false",
+                            "reason": "Char.isPrintable('\\t') === false;\n"
                           }
                         },
                         {
@@ -40157,8 +40181,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isPrintable '\\007' = false",
-                            "reason": "Char.isPrintable('\\007') == false;\n"
+                            "ocaml": "Char.isPrintable('\\007') == false",
+                            "reason": "Char.isPrintable('\\007') === false;\n"
                           }
                         }
                       ]
@@ -40292,8 +40316,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isWhitespace '\\t' = true",
-                            "reason": "Char.isWhitespace('\\t') == true;\n"
+                            "ocaml": "Char.isWhitespace('\\t') == true",
+                            "reason": "Char.isWhitespace('\\t') === true;\n"
                           }
                         },
                         {
@@ -40303,8 +40327,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isWhitespace ' ' = true",
-                            "reason": "Char.isWhitespace(' ') == true;\n"
+                            "ocaml": "Char.isWhitespace(' ') == true",
+                            "reason": "Char.isWhitespace(' ') === true;\n"
                           }
                         },
                         {
@@ -40314,8 +40338,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isWhitespace '?' = false",
-                            "reason": "Char.isWhitespace('?') == false;\n"
+                            "ocaml": "Char.isWhitespace('?') == false",
+                            "reason": "Char.isWhitespace('?') === false;\n"
                           }
                         },
                         {
@@ -40325,8 +40349,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.isWhitespace 'G' = false",
-                            "reason": "Char.isWhitespace('G') == false;\n"
+                            "ocaml": "Char.isWhitespace('G') == false",
+                            "reason": "Char.isWhitespace('G') === false;\n"
                           }
                         }
                       ]
@@ -40399,8 +40423,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toLowercase 'A' = 'a'",
-                            "reason": "Char.toLowercase('A') == 'a';\n"
+                            "ocaml": "Char.toLowercase('A') == 'a'",
+                            "reason": "Char.toLowercase('A') === 'a';\n"
                           }
                         },
                         {
@@ -40410,8 +40434,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toLowercase 'B' = 'b'",
-                            "reason": "Char.toLowercase('B') == 'b';\n"
+                            "ocaml": "Char.toLowercase('B') == 'b'",
+                            "reason": "Char.toLowercase('B') === 'b';\n"
                           }
                         },
                         {
@@ -40421,8 +40445,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toLowercase '7' = '7'",
-                            "reason": "Char.toLowercase('7') == '7';\n"
+                            "ocaml": "Char.toLowercase('7') == '7'",
+                            "reason": "Char.toLowercase('7') === '7';\n"
                           }
                         }
                       ]
@@ -40495,8 +40519,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "toUppercase 'a' = 'A'",
-                            "reason": "toUppercase('a') == 'A';\n"
+                            "ocaml": "Char.toUppercase('a') == 'A'",
+                            "reason": "Char.toUppercase('a') === 'A';\n"
                           }
                         },
                         {
@@ -40506,8 +40530,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "toUppercase 'b' = 'B'",
-                            "reason": "toUppercase('b') == 'B';\n"
+                            "ocaml": "Char.toUppercase('b') == 'B'",
+                            "reason": "Char.toUppercase('b') === 'B';\n"
                           }
                         },
                         {
@@ -40517,8 +40541,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "toUppercase '7' = '7'",
-                            "reason": "toUppercase('7') == '7';\n"
+                            "ocaml": "Char.toUppercase('7') == '7'",
+                            "reason": "Char.toUppercase('7') === '7';\n"
                           }
                         }
                       ]
@@ -40619,8 +40643,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toCode 'A' = 65",
-                            "reason": "Char.toCode('A') == 65;\n"
+                            "ocaml": "Char.toCode('A') == 65",
+                            "reason": "Char.toCode('A') === 65;\n"
                           }
                         },
                         {
@@ -40630,8 +40654,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toCode 'B' = 66",
-                            "reason": "Char.toCode('B') == 66;\n"
+                            "ocaml": "Char.toCode('B') == 66",
+                            "reason": "Char.toCode('B') === 66;\n"
                           }
                         }
                       ]
@@ -40704,8 +40728,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toString 'A' = \"A\"",
-                            "reason": "Char.toString('A') == \"A\";\n"
+                            "ocaml": "Char.toString('A') == \"A\"",
+                            "reason": "Char.toString('A') === \"A\";\n"
                           }
                         },
                         {
@@ -40715,8 +40739,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toString '{' = \"{\"",
-                            "reason": "Char.toString('{') == \"{\";\n"
+                            "ocaml": "Char.toString('{') == \"{\"",
+                            "reason": "Char.toString('{') === \"{\";\n"
                           }
                         },
                         {
@@ -40726,8 +40750,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toString '7' = \"7\"",
-                            "reason": "Char.toString('7') == \"7\";\n"
+                            "ocaml": "Char.toString('7') == \"7\"",
+                            "reason": "Char.toString('7') === \"7\";\n"
                           }
                         }
                       ]
@@ -40836,8 +40860,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toDigit \"7\" = Some 7",
-                            "reason": "Char.toDigit(\"7\") == Some(7);\n"
+                            "ocaml": "Char.toDigit(\"7\") == Some(7)",
+                            "reason": "Char.toDigit(\"7\") === Some(7);\n"
                           }
                         },
                         {
@@ -40847,8 +40871,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toDigit \"0\" = Some 0",
-                            "reason": "Char.toDigit(\"0\") == Some(0);\n"
+                            "ocaml": "Char.toDigit(\"0\") == Some(0)",
+                            "reason": "Char.toDigit(\"0\") === Some(0);\n"
                           }
                         },
                         {
@@ -40858,8 +40882,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toDigit \"A\" = None",
-                            "reason": "Char.toDigit(\"A\") == None;\n"
+                            "ocaml": "Char.toDigit(\"A\") == None",
+                            "reason": "Char.toDigit(\"A\") === None;\n"
                           }
                         },
                         {
@@ -40869,8 +40893,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Char.toDigit \"\" = None",
-                            "reason": "Char.toDigit(\"\") == None;\n"
+                            "ocaml": "Char.toDigit(\"\") == None",
+                            "reason": "Char.toDigit(\"\") === None;\n"
                           }
                         }
                       ]
@@ -46947,60 +46971,6 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": "\n    Without opening this module you can use the "
-                  },
-                  {
-                    "tag": "Code",
-                    "value": "."
-                  },
-                  {
-                    "tag": "Raw",
-                    "value": " suffixed operators e.g"
-                  },
-                  {
-                    "tag": "Newline",
-                    "value": "\n"
-                  },
-                  {
-                    "tag": "Raw",
-                    "value": "\n    "
-                  },
-                  {
-                    "tag": "CodePre",
-                    "value": {
-                      "ocaml": " 1. +. 2. /. 0.25 *. 2. = 17. ",
-                      "reason": "1. +. 2. /. 0.25 *. 2. == 17.;\n"
-                    }
-                  },
-                  {
-                    "tag": "Newline",
-                    "value": "\n"
-                  },
-                  {
-                    "tag": "Raw",
-                    "value": "\n    But by opening this module locally you can use the un-suffixed operators"
-                  },
-                  {
-                    "tag": "Newline",
-                    "value": "\n"
-                  },
-                  {
-                    "tag": "Raw",
-                    "value": "\n    "
-                  },
-                  {
-                    "tag": "CodePre",
-                    "value": {
-                      "ocaml": "Float.((10.0 - 1.5 / 0.5) ** 3.0) = 2401.0",
-                      "reason": "Float.((10.0 - 1.5 / 0.5) ** 3.0) == 2401.0;\n"
-                    }
-                  },
-                  {
-                    "tag": "Newline",
-                    "value": "\n"
-                  },
-                  {
-                    "tag": "Raw",
                     "value": "\n    "
                   },
                   {
@@ -47299,8 +47269,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let isNotANumber x = Float.(x = nan) in\n\n      isNotANumber nan = false\n    ",
-                            "reason": "{\n  let isNotANumber = x => Float.(x == nan);\n\n  isNotANumber(nan) == false;\n};\n"
+                            "ocaml": "\n      let isNotANumber = x => Float.equal(x, nan)\n\n      isNotANumber(nan) == false\n    ",
+                            "reason": "let isNotANumber = (x => Float.equal((x, nan), isNotANumber, nan)) === false;\n"
                           }
                         },
                         {
@@ -47396,8 +47366,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.log ~base:10.0 0.0 = Float.infinity",
-                            "reason": "Float.log(~base=10.0, 0.0) == Float.infinity;\n"
+                            "ocaml": "Float.divide(Float.pi, ~by=0.0) == Float.infinity",
+                            "reason": "Float.divide(Float.pi, ~by=0.0) == Float.infinity"
                           }
                         }
                       ]
@@ -47641,6 +47611,26 @@
                         {
                           "tag": "Code",
                           "value": "float"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ". \n    Has a value of approximately "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "1.79E+308"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", or 1.7976931348623157 * 10^308.\n    Values larger than "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "largestValue"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " are represented as Infinity."
                         }
                       ]
                     },
@@ -47669,7 +47659,7 @@
                   "name": "smallestValue",
                   "qualified_name": "TableclothFloat.smallestValue",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47686,7 +47676,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ". The closest to zero without actually being zero."
+                          "value": ".\n    The closest to zero without actually being zero. \n    Has a value of approximately "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "5E-324"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", in browsers and in Node.js is 2^-1074"
                         }
                       ]
                     },
@@ -47715,7 +47713,7 @@
                   "name": "maximumSafeInteger",
                   "qualified_name": "TableclothFloat.maximumSafeInteger",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47724,7 +47722,31 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "For floats greater than "
+                          "value": "Represents the maximum safe integer in JS. "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Number"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "s in JS are represented as a 64-bit floating point  \n    "
+                        },
+                        {
+                          "tag": "Link",
+                          "value": {
+                            "target": " https://en.wikipedia.org/wiki/IEEE_754 ",
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": " IEEE 754 "
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " numbers.\n    "
                         },
                         {
                           "tag": "Code",
@@ -47732,11 +47754,47 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ", it no longer holds that "
+                          "value": " has a value of 2^53 - 1 === "
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.(n + 1.) > n"
+                          "value": "9_007_199_254_740_991.0"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n    Values larger cannot be represented exactly and cannot be correctly compared."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    Defined as Float since integers in Rescript are limited to 32-bits, their max value is 2^31 - 1 === "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "2_147_483_647"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    See also: "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "Int.maximumValue",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "Int.maximumValue",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "Int.maximumValue"
+                                }
+                              ]
+                            }
+                          }
                         }
                       ]
                     },
@@ -47765,7 +47823,7 @@
                   "name": "minimumSafeInteger",
                   "qualified_name": "TableclothFloat.minimumSafeInteger",
                   "type": {
-                    "rendered": "t"
+                    "rendered": "TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47774,7 +47832,31 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "For floats less than "
+                          "value": "Represents the minimum safe integer in JS. "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Number"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "s in JS are represented as a 64-bit floating point  \n    "
+                        },
+                        {
+                          "tag": "Link",
+                          "value": {
+                            "target": " https://en.wikipedia.org/wiki/IEEE_754 ",
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": " IEEE 754 "
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " numbers.\n    "
                         },
                         {
                           "tag": "Code",
@@ -47782,11 +47864,47 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ", it no longer holds that "
+                          "value": " has a value of -2^53 - 1 === "
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.(n - 1.) < n"
+                          "value": "-9_007_199_254_740_991.0"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n    Values larger cannot be represented exactly and cannot be correctly compared."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    Defined as Float since Rescript integers are limited to 32-bits, their min value is -2^31 - 1 === "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "-2_147_483_647"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    See also: "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "Int.minimumValue",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "Int.minimumValue",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "Int.minimumValue"
+                                }
+                              ]
+                            }
+                          }
                         }
                       ]
                     },
@@ -47833,7 +47951,7 @@
                   "name": "fromInt",
                   "qualified_name": "TableclothFloat.fromInt",
                   "type": {
-                    "rendered": "int => t"
+                    "rendered": "int -> TableclothFloat.t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47900,8 +48018,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.fromInt 5 = 5.0\n      Float.fromInt 0 = 0.0\n      Float.fromInt -7 = -7.0\n    ",
-                            "reason": "Float.fromInt(5) == 5.0(Float.fromInt, 0) == 0.0(Float.fromInt)\n- 7 == (-7.0);\n"
+                            "ocaml": "\n      Float.fromInt(5) == 5.0\n      Float.fromInt(0) == 0.0\n      Float.fromInt - 7 == -7.0\n    ",
+                            "reason": "Float.fromInt(5) === 5.0(Float.fromInt, 0) === 0.0(Float.fromInt)\n- 7 === (-7.0);\n"
                           }
                         }
                       ]
@@ -47968,15 +48086,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ".\n    The behaviour of this function is platform specific.\n    Parses "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "nan"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " and "
+                          "value": ".\n    Parses "
                         },
                         {
                           "tag": "Code",
@@ -47984,7 +48094,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " case-insensitive."
+                          "value": " case-sensitive, "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "NaN"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " is case-insensitive."
                         },
                         {
                           "tag": "Newline",
@@ -48018,8 +48136,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.fromString \"4.667\" = Some 4.667",
-                            "reason": "Float.fromString(\"4.667\") == Some(4.667);\n"
+                            "ocaml": "Float.fromString(\"4.667\") == Some(4.667)",
+                            "reason": "Float.fromString(\"4.667\") === Some(4.667);\n"
                           }
                         },
                         {
@@ -48029,8 +48147,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.fromString \"-4.667\" = Some (-4.667)",
-                            "reason": "Float.fromString(\"-4.667\") == Some(-4.667);\n"
+                            "ocaml": "Float.fromString(\"-4.667\") == Some(-4.667)",
+                            "reason": "Float.fromString(\"-4.667\") === Some(-4.667);\n"
                           }
                         },
                         {
@@ -48040,8 +48158,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.fromString \"Hamster\" = None",
-                            "reason": "Float.fromString(\"Hamster\") == None;\n"
+                            "ocaml": "Float.fromString(\"Hamster\") == None",
+                            "reason": "Float.fromString(\"Hamster\") === None;\n"
                           }
                         },
                         {
@@ -48051,8 +48169,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.fromString \"NaN\" = Some Float.nan",
-                            "reason": "Float.fromString(\"NaN\") == Some(Float.nan);\n"
+                            "ocaml": "Float.fromString(\"NaN\") == Some(Float.nan)",
+                            "reason": "Float.fromString(\"NaN\") === Some(Float.nan);\n"
                           }
                         },
                         {
@@ -48062,8 +48180,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.fromString \"nan\" = Some Float.nan",
-                            "reason": "Float.fromString(\"nan\") == Some(Float.nan);\n"
+                            "ocaml": "Float.fromString(\"nan\") == Some(Float.nan)",
+                            "reason": "Float.fromString(\"nan\") === Some(Float.nan);\n"
                           }
                         },
                         {
@@ -48073,8 +48191,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.fromString \"Infinity\" = Some Float.infinity",
-                            "reason": "Float.fromString(\"Infinity\") == Some(Float.infinity);\n"
+                            "ocaml": "Float.fromString(\"Infinity\") == Some(Float.infinity)",
+                            "reason": "Float.fromString(\"Infinity\") === Some(Float.infinity);\n"
                           }
                         }
                       ]
@@ -48225,14 +48343,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "List.length",
+                            "name": "Array.length",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "List.length",
+                              "target": "Array.length",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "List.length"
+                                  "value": "Array.length"
                                 }
                               ]
                             }
@@ -48261,31 +48379,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.add 3.14 (Int.toFloat (List.length [1,2,3])) = 6.14",
-                            "reason": "Float.add(3.14, Int.toFloat(List.length([(1, 2, 3)]))) == 6.14;\n"
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    or"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Float.roundToInt 3.14 + List.length [1,2,3] = 6",
-                            "reason": "Float.roundToInt(3.14) + List.length([(1, 2, 3)]) == 6;\n"
+                            "ocaml": "[1, 2, 3]->Array.length->Int.toFloat-> Float.add(3.5) == 6.5",
+                            "reason": "[1, 2, 3]->Array.length->Int.toFloat-> Float.add(3.5) == 6.5"
                           }
                         },
                         {
@@ -48318,7 +48413,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    OCaml has opted for a design that makes all conversions explicit."
+                          "value": "\n    Rescript has opted for a design that makes all conversions explicit."
                         },
                         {
                           "tag": "Newline",
@@ -48352,62 +48447,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.add 3.14 3.14 = 6.28\n      Float.(3.14 + 3.14 = 6.28)\n    ",
-                            "reason": "Float.add(3.14, 3.14) == 6.28(Float.(3.14 + 3.14 == 6.28));\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(+)",
-                  "qualified_name": "TableclothFloat.(+)",
-                  "type": {
-                    "rendered": "(t, t) => t"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "See "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "Float.add",
-                            "reference": {
-                              "kind": "Unknown",
-                              "target": "Float.add",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "Float.add"
-                                }
-                              ]
-                            }
+                            "ocaml": "\n      Float.add(3.14, 3.14) == 6.28\n\n      3.2\n      ->Float.round\n      ->Float.toInt\n      ->Option.map(~f=int => int + Array.length([1, 2, 3])) == Some(6)\n    ",
+                            "reason": "\n      Float.add(3.14, 3.14) == 6.28\n\n      3.2\n      ->Float.round\n      ->Float.toInt\n      ->Option.map(~f=int => int + Array.length([1, 2, 3])) == Some(6)\n    "
                           }
                         }
                       ]
@@ -48454,22 +48495,6 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Alternatively the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "-"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " operator can be used"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
                           "value": "\n    "
                         },
                         {
@@ -48496,73 +48521,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.subtract 4.0 3.0 = 1.0",
-                            "reason": "Float.subtract(4.0, 3.0) == 1.0;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Float.(4.0 - 3.0) = 1.0",
-                            "reason": "Float.(4.0 - 3.0) == 1.0;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(-)",
-                  "qualified_name": "TableclothFloat.(-)",
-                  "type": {
-                    "rendered": "(t, t) => t"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "See "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "Float.subtract",
-                            "reference": {
-                              "kind": "Unknown",
-                              "target": "Float.subtract",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "Float.subtract"
-                                }
-                              ]
-                            }
+                            "ocaml": "Float.subtract(4.0, 3.0) == 1.0",
+                            "reason": "Float.subtract((4.0, 3.0)) === 1.0;\n"
                           }
                         }
                       ]
@@ -48609,22 +48569,6 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Alternatively the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "*"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " operator can be used"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
                           "value": "\n    "
                         },
                         {
@@ -48651,73 +48595,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.multiply 2.0 7.0 = 14.0",
-                            "reason": "Float.multiply(2.0, 7.0) == 14.0;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Float.(2.0 * 7.0) = 14.0",
-                            "reason": "Float.(2.0 * 7.0) == 14.0;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "( * )",
-                  "qualified_name": "TableclothFloat.( * )",
-                  "type": {
-                    "rendered": "(t, t) => t"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "See "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "Float.multiply",
-                            "reference": {
-                              "kind": "Unknown",
-                              "target": "Float.multiply",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "Float.multiply"
-                                }
-                              ]
-                            }
+                            "ocaml": "Float.multiply(2.0, 7.0) == 14.0",
+                            "reason": "Float.multiply((2.0, 7.0)) === 14.0;\n"
                           }
                         }
                       ]
@@ -48756,23 +48635,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Floating-point division:"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    Alternatively the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "/"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " operator can be used"
+                          "value": "Floating-point division"
                         },
                         {
                           "tag": "Newline",
@@ -48806,73 +48669,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.divide 3.14 ~by:2.0 = 1.57",
-                            "reason": "Float.divide(3.14, ~by=2.0) == 1.57;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Float.(3.14 / 2.0) = 1.57",
-                            "reason": "Float.(3.14 / 2.0) == 1.57;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(/)",
-                  "qualified_name": "TableclothFloat.(/)",
-                  "type": {
-                    "rendered": "(t, t) => t"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "See "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "Float.divide",
-                            "reference": {
-                              "kind": "Unknown",
-                              "target": "Float.divide",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "Float.divide"
-                                }
-                              ]
-                            }
+                            "ocaml": "Float.divide(3.14, ~by=2.0) == 1.57",
+                            "reason": "Float.divide(3.14, ~by=2.0) == 1.57"
                           }
                         }
                       ]
@@ -48919,22 +48717,6 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Alternatively the "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "**"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " operator can be used"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
                           "value": "\n    "
                         },
                         {
@@ -48961,73 +48743,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.power ~base:7.0 ~exponent:3.0 = 343.0",
-                            "reason": "Float.power(~base=7.0, ~exponent=3.0) == 343.0;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Float.(7.0 ** 3.0) = 343.0",
-                            "reason": "Float.(7.0 ** 3.0) == 343.0;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "( ** )",
-                  "qualified_name": "TableclothFloat.( ** )",
-                  "type": {
-                    "rendered": "(t, t) => t"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "See "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "Float.power",
-                            "reference": {
-                              "kind": "Unknown",
-                              "target": "Float.power",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "Float.power"
-                                }
-                              ]
-                            }
+                            "ocaml": "Float.power(~base=7.0, ~exponent=3.0) == 343.0",
+                            "reason": "Float.power(~base=7.0, ~exponent=3.0) == 343.0"
                           }
                         }
                       ]
@@ -49082,14 +48799,6 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Alternatively an operator is available"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
                           "value": "\n    "
                         },
                         {
@@ -49116,73 +48825,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(~- 4.0) = (-4.0)",
-                            "reason": "Float.(- 4.0) == (-4.0);\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "\n      Float.negate 8 = (-8)\n      Float.negate (-7) = 7\n      Float.negate 0 = 0\n    ",
-                            "reason": "Float.negate(8) == (-8)(Float.negate, -7) == 7(Float.negate, 0) == 0;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(~-)",
-                  "qualified_name": "TableclothFloat.(~-)",
-                  "type": {
-                    "rendered": "t => t"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "See "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "Float.negate",
-                            "reference": {
-                              "kind": "Unknown",
-                              "target": "Float.negate",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "Float.negate"
-                                }
-                              ]
-                            }
+                            "ocaml": "\n      Float.negate(8.) == -8.\n      Float.negate(-7.) == 7.\n      Float.negate(0.) == 0.\n    ",
+                            "reason": "Float.negate(8.) === - 8.(Float.negate, -7.) === 7.(Float.negate, 0.) === 0.;\n"
                           }
                         }
                       ]
@@ -49271,8 +48915,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.absolute 8. = 8.\n      Float.absolute (-7) = 7\n      Float.absolute 0 = 0\n    ",
-                            "reason": "Float.absolute(8.) == 8.(Float.absolute, -7) == 7(Float.absolute, 0) == 0;\n"
+                            "ocaml": "\n      Float.absolute(8.) == 8.\n      Float.absolute (-7) = 7\n      Float.absolute(0) == 0\n    ",
+                            "reason": "Float.absolute(8.) === 8.(Float.absolute, -7) == 7(Float.absolute, 0) === 0;\n"
                           }
                         }
                       ]
@@ -49373,8 +49017,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.maximum 7. 9. = 9.",
-                            "reason": "Float.maximum(7., 9.) == 9.;\n"
+                            "ocaml": "Float.maximum(7., 9.) == 9.",
+                            "reason": "Float.maximum((7., 9.)) === 9.;\n"
                           }
                         },
                         {
@@ -49384,8 +49028,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.maximum (-4.) (-1.) = (-1.)",
-                            "reason": "Float.maximum(-4., -1.) == (-1.);\n"
+                            "ocaml": "Float.maximum(-4., -1.) == -1.",
+                            "reason": "Float.maximum(((-4.), (-1.))) === (-1.);\n"
                           }
                         },
                         {
@@ -49395,8 +49039,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isNaN (maximum 7. nan)) = true",
-                            "reason": "Float.(isNaN(maximum(7., nan))) == true;\n"
+                            "ocaml": "Float.maximum(7., Float.nan)->Float.isNaN == true",
+                            "reason": "Float.maximum(7., Float.nan)->Float.isNaN == true"
                           }
                         }
                       ]
@@ -49497,8 +49141,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.minimum 7.0 9.0 = 7.0",
-                            "reason": "Float.minimum(7.0, 9.0) == 7.0;\n"
+                            "ocaml": "Float.minimum(7.0, 9.0) == 7.0",
+                            "reason": "Float.minimum((7.0, 9.0)) === 7.0;\n"
                           }
                         },
                         {
@@ -49508,8 +49152,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.minimum (-4.0) (-1.0) = (-4.0)",
-                            "reason": "Float.minimum(-4.0, -1.0) == (-4.0);\n"
+                            "ocaml": "Float.minimum(-4.0, -1.0) == -4.0",
+                            "reason": "Float.minimum(((-4.0), (-1.0))) === (-4.0);\n"
                           }
                         },
                         {
@@ -49519,8 +49163,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isNaN (minimum 7. nan)) = true",
-                            "reason": "Float.(isNaN(minimum(7., nan))) == true;\n"
+                            "ocaml": "Float.minimum(7., Float.nan)->Float.isNaN == true",
+                            "reason": "Float.minimum(7., Float.nan)->Float.isNaN == true"
                           }
                         }
                       ]
@@ -49658,8 +49302,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.clamp ~lower:0. ~upper:8. 5. = 5.",
-                            "reason": "Float.clamp(~lower=0., ~upper=8., 5.) == 5.;\n"
+                            "ocaml": "Float.clamp(5.0, ~lower=0., ~upper=8.) == 5.",
+                            "reason": "Float.clamp(5.0, ~lower=0., ~upper=8.) == 5."
                           }
                         },
                         {
@@ -49669,8 +49313,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.clamp ~lower:0. ~upper:8. 9. = 8.",
-                            "reason": "Float.clamp(~lower=0., ~upper=8., 9.) == 8.;\n"
+                            "ocaml": "Float.clamp(9.0, ~lower=0., ~upper=8.) == 8.",
+                            "reason": "Float.clamp(9.0, ~lower=0., ~upper=8.) == 8."
                           }
                         },
                         {
@@ -49680,8 +49324,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.clamp ~lower:(-10.) ~upper:(-5.) 5. = -5.",
-                            "reason": "Float.clamp(~lower=-10., ~upper=-5., 5.) == (-5.);\n"
+                            "ocaml": "Float.clamp(5.0, ~lower=-10., ~upper=-5.) == -5.",
+                            "reason": "Float.clamp(5.0, ~lower=-10., ~upper=-5.) == -5."
                           }
                         }
                       ]
@@ -49816,8 +49460,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.squareRoot 4.0 = 2.0",
-                            "reason": "Float.squareRoot(4.0) == 2.0;\n"
+                            "ocaml": "Float.squareRoot(4.0) == 2.0",
+                            "reason": "Float.squareRoot(4.0) === 2.0;\n"
                           }
                         },
                         {
@@ -49827,8 +49471,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.squareRoot 9.0 = 3.0",
-                            "reason": "Float.squareRoot(9.0) == 3.0;\n"
+                            "ocaml": "Float.squareRoot(9.0) == 3.0",
+                            "reason": "Float.squareRoot(9.0) === 3.0;\n"
                           }
                         }
                       ]
@@ -49901,8 +49545,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.log ~base:10. 100. = 2.",
-                            "reason": "Float.log(~base=10., 100.) == 2.;\n"
+                            "ocaml": "Float.log(100., ~base=10.) == 2.",
+                            "reason": "Float.log(100., ~base=10.) == 2."
                           }
                         },
                         {
@@ -49912,8 +49556,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.log ~base:2. 256. = 8.",
-                            "reason": "Float.log(~base=2., 256.) == 8.;\n"
+                            "ocaml": "Float.log(256., ~base=2.) == 8.",
+                            "reason": "Float.log(256., ~base=2.) == 8."
                           }
                         }
                       ]
@@ -50016,7 +49660,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Nan"
+                          "value": "NaN"
                         },
                         {
                           "tag": "Raw",
@@ -50033,8 +49677,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(nan = nan) = false",
-                            "reason": "Float.(nan == nan) == false;\n"
+                            "ocaml": "(Float.nan == Float.nan) == false",
+                            "reason": "Float.nan === Float.nan === false;\n"
                           }
                         },
                         {
@@ -50069,8 +49713,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isNaN (0.0 / 0.0) = true",
-                            "reason": "Float.isNaN(0.0 / 0.0) == true;\n"
+                            "ocaml": "Float.isNaN(0.0 /. 0.0) == true",
+                            "reason": "Float.isNaN(0.0 /. 0.0) === true;\n"
                           }
                         },
                         {
@@ -50080,8 +49724,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isNaN (squareRoot (-1.0))) = true",
-                            "reason": "Float.(isNaN(squareRoot(-1.0))) == true;\n"
+                            "ocaml": "Float.squareRoot(-1.0)->Float.isNaN == true",
+                            "reason": "Float.squareRoot(-1.0)->Float.isNaN == true"
                           }
                         },
                         {
@@ -50091,8 +49735,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isNaN (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)",
-                            "reason": "Float.isNaN(1.0 / 0.0) == false; /* Float.infinity {b is} a number */\n"
+                            "ocaml": "Float.isNaN(1.0 /. 0.0) == false  (* Float.infinity {b is} a number *)",
+                            "reason": "Float.isNaN(1.0 /. 0.0) === false; /* Float.infinity {b is} a number */\n"
                           }
                         },
                         {
@@ -50102,8 +49746,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isNaN 1. = false",
-                            "reason": "Float.isNaN(1.) == false;\n"
+                            "ocaml": "Float.isNaN(1.) == false",
+                            "reason": "Float.isNaN(1.) === false;\n"
                           }
                         }
                       ]
@@ -50212,8 +49856,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isFinite (0. / 0.) = false",
-                            "reason": "Float.isFinite(0. / 0.) == false;\n"
+                            "ocaml": "Float.isFinite(0. /. 0.) == false",
+                            "reason": "Float.isFinite(0. /. 0.) === false;\n"
                           }
                         },
                         {
@@ -50223,8 +49867,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isFinite (squareRoot (-1.))) = false",
-                            "reason": "Float.(isFinite(squareRoot(-1.))) == false;\n"
+                            "ocaml": "Float.squareRoot(-1.)->Float.isFinite == false",
+                            "reason": "Float.squareRoot(-1.)->Float.isFinite == false"
                           }
                         },
                         {
@@ -50234,8 +49878,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isFinite (1. / 0.) = false",
-                            "reason": "Float.isFinite(1. / 0.) == false;\n"
+                            "ocaml": "Float.isFinite(1. /. 0.) == false",
+                            "reason": "Float.isFinite(1. /. 0.) === false;\n"
                           }
                         },
                         {
@@ -50245,8 +49889,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isFinite 1. = true",
-                            "reason": "Float.isFinite(1.) == true;\n"
+                            "ocaml": "Float.isFinite(1.) == true",
+                            "reason": "Float.isFinite(1.) === true;\n"
                           }
                         },
                         {
@@ -50256,8 +49900,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isFinite nan) = false",
-                            "reason": "Float.(isFinite(nan)) == false;\n"
+                            "ocaml": "Float.nan->Float.isFinite == false",
+                            "reason": "Float.nan->Float.isFinite == false"
                           }
                         }
                       ]
@@ -50330,8 +49974,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isInfinite (0. / 0.) = false",
-                            "reason": "Float.isInfinite(0. / 0.) == false;\n"
+                            "ocaml": "Float.isInfinite(0. /. 0.) == false",
+                            "reason": "Float.isInfinite(0. /. 0.) === false;\n"
                           }
                         },
                         {
@@ -50341,8 +49985,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isInfinite (squareRoot (-1.))) = false",
-                            "reason": "Float.(isInfinite(squareRoot(-1.))) == false;\n"
+                            "ocaml": "Float.squareRoot(-1.)->Float.isInfinite == false",
+                            "reason": "Float.squareRoot(-1.)->Float.isInfinite == false"
                           }
                         },
                         {
@@ -50352,8 +49996,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isInfinite (1. / 0.) = true",
-                            "reason": "Float.isInfinite(1. / 0.) == true;\n"
+                            "ocaml": "Float.isInfinite(1. /. 0.) == true",
+                            "reason": "Float.isInfinite(1. /. 0.) === true;\n"
                           }
                         },
                         {
@@ -50363,8 +50007,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isInfinite 1. = false",
-                            "reason": "Float.isInfinite(1.) == false;\n"
+                            "ocaml": "Float.isInfinite(1.) == false",
+                            "reason": "Float.isInfinite(1.) === false;\n"
                           }
                         },
                         {
@@ -50374,8 +50018,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isInfinite nan) = false",
-                            "reason": "Float.(isInfinite(nan)) == false;\n"
+                            "ocaml": "Float.nan->Float.isInfinite == false",
+                            "reason": "Float.nan->Float.isInfinite == false"
                           }
                         }
                       ]
@@ -50448,8 +50092,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isInteger 4.0 = true",
-                            "reason": "Float.isInteger(4.0) == true;\n"
+                            "ocaml": "Float.isInteger(4.0) == true",
+                            "reason": "Float.isInteger(4.0) === true;\n"
                           }
                         },
                         {
@@ -50459,8 +50103,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isInteger Float.pi = false",
-                            "reason": "Float.isInteger(Float.pi) == false;\n"
+                            "ocaml": "Float.pi->Float.isInteger == false",
+                            "reason": "Float.pi->Float.isInteger == false"
                           }
                         }
                       ]
@@ -50533,8 +50177,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isSafeInteger 4.0 = true",
-                            "reason": "Float.isSafeInteger(4.0) == true;\n"
+                            "ocaml": "Float.isSafeInteger(4.0) == true",
+                            "reason": "Float.isSafeInteger(4.0) === true;\n"
                           }
                         },
                         {
@@ -50544,8 +50188,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.isSafeInteger Float.pi = false",
-                            "reason": "Float.isSafeInteger(Float.pi) == false;\n"
+                            "ocaml": "Float.isSafeInteger(Float.pi) == false",
+                            "reason": "Float.isSafeInteger(Float.pi) === false;\n"
                           }
                         },
                         {
@@ -50555,8 +50199,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(isSafeInteger (maximumSafeInteger + 1.)) = false",
-                            "reason": "Float.(isSafeInteger(maximumSafeInteger + 1.)) == false;\n"
+                            "ocaml": "Float.isSafeInteger(Float.maximumSafeInteger +. 1.) == false",
+                            "reason": "Float.isSafeInteger(Float.maximumSafeInteger +. 1.) === false;\n"
                           }
                         }
                       ]
@@ -50710,8 +50354,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.inRange ~lower:2. ~upper:4. 3. = true",
-                            "reason": "Float.inRange(~lower=2., ~upper=4., 3.) == true;\n"
+                            "ocaml": "Float.inRange(3., ~lower=2., ~upper=4.) == true",
+                            "reason": "Float.inRange(3., ~lower=2., ~upper=4.) == true"
                           }
                         },
                         {
@@ -50721,8 +50365,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.inRange ~lower:1. ~upper:2. 2. = false",
-                            "reason": "Float.inRange(~lower=1., ~upper=2., 2.) == false;\n"
+                            "ocaml": "Float.inRange(2., ~lower=1., ~upper=2.) == false",
+                            "reason": "Float.inRange(2., ~lower=1., ~upper=2.) == false"
                           }
                         },
                         {
@@ -50732,8 +50376,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.inRange ~lower:5.2 ~upper:7.9 9.6 = false",
-                            "reason": "Float.inRange(~lower=5.2, ~upper=7.9, 9.6) == false;\n"
+                            "ocaml": "Float.inRange(9.6, ~lower=5.2, ~upper=7.9) == false",
+                            "reason": "Float.inRange(9.6, ~lower=5.2, ~upper=7.9) == false"
                           }
                         }
                       ]
@@ -50957,8 +50601,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.hypotenuse 3. 4. = 5.",
-                            "reason": "Float.hypotenuse(3., 4.) == 5.;\n"
+                            "ocaml": "Float.hypotenuse(3., 4.) == 5.",
+                            "reason": "Float.hypotenuse((3., 4.)) === 5.;\n"
                           }
                         }
                       ]
@@ -51067,8 +50711,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.degrees 180. = Float.pi",
-                            "reason": "Float.degrees(180.) == Float.pi;\n"
+                            "ocaml": "Float.degrees(180.) == Float.pi",
+                            "reason": "Float.degrees(180.) === Float.pi;\n"
                           }
                         },
                         {
@@ -51078,8 +50722,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.degrees 360. = Float.pi * 2.",
-                            "reason": "Float.degrees(360.) == Float.pi * 2.;\n"
+                            "ocaml": "Float.degrees(360.) == Float.pi *. 2.",
+                            "reason": "Float.degrees(360.) === Float.pi *. 2.;\n"
                           }
                         },
                         {
@@ -51089,8 +50733,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.degrees 90. = Float.pi /. 2.",
-                            "reason": "Float.degrees(90.) == Float.pi /. 2.;\n"
+                            "ocaml": "Float.degrees(90.) == Float.pi /. 2.",
+                            "reason": "Float.degrees(90.) === Float.pi /. 2.;\n"
                           }
                         }
                       ]
@@ -51220,8 +50864,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(radians pi) = 3.141592653589793",
-                            "reason": "Float.(radians(pi)) == 3.141592653589793;\n"
+                            "ocaml": "Float.pi->Float.radians == 3.141592653589793",
+                            "reason": "Float.pi->Float.radians == 3.141592653589793"
                           }
                         }
                       ]
@@ -51338,8 +50982,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(turns (1. / 2.)) = pi",
-                            "reason": "Float.(turns(1. / 2.)) == pi;\n"
+                            "ocaml": "Float.turns(1. /. 2.) == Float.pi",
+                            "reason": "Float.turns(1. /. 2.) === Float.pi;\n"
                           }
                         },
                         {
@@ -51349,8 +50993,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(turns 1. = degrees 360.)",
-                            "reason": "Float.(turns(1.) == degrees(360.));\n"
+                            "ocaml": "Float.turns(1.) ==  Float.degrees(360.)",
+                            "reason": "Float.turns(1.) === Float.degrees(360.);\n"
                           }
                         }
                       ]
@@ -51473,8 +51117,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(fromPolar (squareRoot 2., degrees 45.)) = (1., 1.)",
-                            "reason": "Float.(fromPolar((squareRoot(2.), degrees(45.)))) == (1., 1.);\n"
+                            "ocaml": "Float.fromPolar((Float.squareRoot(2.), Float.degrees(45.))) == (1.0000000000000002, 1.)",
+                            "reason": "Float.fromPolar((Float.squareRoot(2.), Float.degrees(45.)))\n=== (1.0000000000000002, 1.);\n"
                           }
                         }
                       ]
@@ -51595,8 +51239,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.toPolar (-1.0, 0.0) = (1.0, Float.pi)",
-                            "reason": "Float.toPolar(((-1.0), 0.0)) == (1.0, Float.pi);\n"
+                            "ocaml": "Float.toPolar((-1.0, 0.0)) == (1.0, Float.pi)",
+                            "reason": "Float.toPolar(((-1.0), 0.0)) === (1.0, Float.pi);\n"
                           }
                         },
                         {
@@ -51606,8 +51250,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.toPolar (3.0, 4.0) = (5.0, 0.9272952180016122)",
-                            "reason": "Float.toPolar((3.0, 4.0)) == (5.0, 0.9272952180016122);\n"
+                            "ocaml": "Float.toPolar((3.0, 4.0)) == (5.0, 0.9272952180016122)",
+                            "reason": "Float.toPolar((3.0, 4.0)) === (5.0, 0.9272952180016122);\n"
                           }
                         },
                         {
@@ -51617,8 +51261,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.toPolar (5.0, 12.0) = (13.0, 1.1760052070951352)",
-                            "reason": "Float.toPolar((5.0, 12.0)) == (13.0, 1.1760052070951352);\n"
+                            "ocaml": "Float.toPolar((5.0, 12.0)) == (13.0, 1.1760052070951352)",
+                            "reason": "Float.toPolar((5.0, 12.0)) === (13.0, 1.1760052070951352);\n"
                           }
                         }
                       ]
@@ -51707,8 +51351,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(cos (degrees 60.)) = 0.5000000000000001",
-                            "reason": "Float.(cos(degrees(60.))) == 0.5000000000000001;\n"
+                            "ocaml": "Float.degrees(60.)->Float.cos == 0.5000000000000001",
+                            "reason": "Float.degrees(60.)->Float.cos == 0.5000000000000001"
                           }
                         },
                         {
@@ -51718,8 +51362,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(cos (radians (pi / 3.))) = 0.5000000000000001",
-                            "reason": "Float.(cos(radians(pi / 3.))) == 0.5000000000000001;\n"
+                            "ocaml": "(Float.pi /. 3.)->Float.radians->Float.cos == 0.5000000000000001",
+                            "reason": "(Float.pi /. 3.)->Float.radians->Float.cos == 0.5000000000000001"
                           }
                         }
                       ]
@@ -51816,8 +51460,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(acos (radians 1.0 / 2.0)) = Float.radians 1.0471975511965979 (* 60 degrees or pi/3 radians *)",
-                            "reason": "Float.(acos(radians(1.0) / 2.0)) == Float.radians(1.0471975511965979); /* 60 degrees or pi/3 radians */\n"
+                            "ocaml": "(Float.radians(1.0) /. 2.0)->Float.acos == Float.radians(1.0471975511965979) (* 60 degrees or pi/3 radians *)",
+                            "reason": "(Float.radians(1.0) /. 2.0)->Float.acos == Float.radians(1.0471975511965979) (* 60 degrees or pi/3 radians *)"
                           }
                         }
                       ]
@@ -51906,8 +51550,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(sin (degrees 30.)) = 0.49999999999999994",
-                            "reason": "Float.(sin(degrees(30.))) == 0.49999999999999994;\n"
+                            "ocaml": "Float.degrees(30.)->Float.sin == 0.49999999999999994",
+                            "reason": "Float.degrees(30.)->Float.sin == 0.49999999999999994"
                           }
                         },
                         {
@@ -51917,8 +51561,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(sin (radians (pi / 6.))) = 0.49999999999999994",
-                            "reason": "Float.(sin(radians(pi / 6.))) == 0.49999999999999994;\n"
+                            "ocaml": "(Float.pi /. 6.)->Float.radians->Float.sin == 0.49999999999999994",
+                            "reason": "(Float.pi /. 6.)->Float.radians->Float.sin == 0.49999999999999994"
                           }
                         }
                       ]
@@ -52015,8 +51659,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(asin (1.0 / 2.0)) = 0.5235987755982989 (* 30 degrees or pi / 6 radians *)",
-                            "reason": "Float.(asin(1.0 / 2.0)) == 0.5235987755982989; /* 30 degrees or pi / 6 radians */\n"
+                            "ocaml": "Float.asin(1.0 /. 2.0) == 0.5235987755982989 (* 30 degrees or pi / 6 radians *)",
+                            "reason": "Float.asin(1.0 /. 2.0) === 0.5235987755982989; /* 30 degrees or pi / 6 radians */\n"
                           }
                         }
                       ]
@@ -52089,8 +51733,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(tan (degrees 45.)) = 0.9999999999999999",
-                            "reason": "Float.(tan(degrees(45.))) == 0.9999999999999999;\n"
+                            "ocaml": "Float.degrees(45.)->Float.tan == 0.9999999999999999",
+                            "reason": "Float.degrees(45.)->Float.tan == 0.9999999999999999"
                           }
                         },
                         {
@@ -52100,8 +51744,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(tan (radians (pi / 4.))) = 0.9999999999999999",
-                            "reason": "Float.(tan(radians(pi / 4.))) == 0.9999999999999999;\n"
+                            "ocaml": "(Float.pi /. 4.)->Float.radians->Float.tan == 0.9999999999999999",
+                            "reason": "(Float.pi /. 4.)->Float.radians->Float.tan == 0.9999999999999999"
                           }
                         },
                         {
@@ -52111,8 +51755,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(tan (pi / 4.)) = 0.9999999999999999",
-                            "reason": "Float.(tan(pi / 4.)) == 0.9999999999999999;\n"
+                            "ocaml": "(Float.pi /. 4.)->Float.tan == 0.9999999999999999",
+                            "reason": "(Float.pi /. 4.)->Float.tan == 0.9999999999999999"
                           }
                         }
                       ]
@@ -52342,8 +51986,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan (1. /. 1.) = 0.7853981633974483  (* 45 degrees or pi/4 radians *)",
-                            "reason": "Float.atan(1. /. 1.) == 0.7853981633974483; /* 45 degrees or pi/4 radians */\n"
+                            "ocaml": "Float.atan(1. /. 1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)",
+                            "reason": "Float.atan(1. /. 1.) === 0.7853981633974483; /* 45 degrees or pi/4 radians */\n"
                           }
                         },
                         {
@@ -52353,8 +51997,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan (1. /. -1.) = -0.7853981633974483  (* 315 degrees or 7 * pi / 4 radians *)",
-                            "reason": "Float.atan(1. /. (-1.)) == (-0.7853981633974483); /* 315 degrees or 7 * pi / 4 radians */\n"
+                            "ocaml": "Float.atan(1. /. -1.) == -0.7853981633974483  (* 315 degrees or 7 * pi / 4 radians *)",
+                            "reason": "Float.atan(1. /. (-1.)) === (-0.7853981633974483); /* 315 degrees or 7 * pi / 4 radians */\n"
                           }
                         },
                         {
@@ -52364,8 +52008,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan (-1. /. -1.) = 0.7853981633974483 (* 45 degrees or pi/4 radians *)",
-                            "reason": "Float.atan((-1.) /. (-1.)) == 0.7853981633974483; /* 45 degrees or pi/4 radians */\n"
+                            "ocaml": "Float.atan(-1. /. -1.) == 0.7853981633974483 (* 45 degrees or pi/4 radians *)",
+                            "reason": "Float.atan((-1.) /. (-1.)) === 0.7853981633974483; /* 45 degrees or pi/4 radians */\n"
                           }
                         },
                         {
@@ -52375,8 +52019,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan (-1. /.  1.) = -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)",
-                            "reason": "Float.atan((-1.) /. 1.) == (-0.7853981633974483); /* 315 degrees or 7 * pi/4 radians */\n"
+                            "ocaml": "Float.atan(-1. /. 1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)",
+                            "reason": "Float.atan((-1.) /. 1.) === (-0.7853981633974483); /* 315 degrees or 7 * pi/4 radians */\n"
                           }
                         }
                       ]
@@ -52481,8 +52125,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan2 ~y:1. ~x:1. = 0.7853981633974483  (* 45 degrees or pi/4 radians *)",
-                            "reason": "Float.atan2(~y=1., ~x=1.) == 0.7853981633974483; /* 45 degrees or pi/4 radians */\n"
+                            "ocaml": "Float.atan2(~y=1., ~x=1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)",
+                            "reason": "Float.atan2(~y=1., ~x=1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)"
                           }
                         },
                         {
@@ -52492,8 +52136,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan2 ~y:1. ~x:(-1.) = 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)",
-                            "reason": "Float.atan2(~y=1., ~x=-1.) == 2.3561944901923449; /* 135 degrees or 3 * pi/4 radians */\n"
+                            "ocaml": "Float.atan2(~y=1., ~x=-1.) == 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)",
+                            "reason": "Float.atan2(~y=1., ~x=-1.) == 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)"
                           }
                         },
                         {
@@ -52503,8 +52147,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225 degrees or 5 * pi/4 radians *)",
-                            "reason": "Float.atan2(~y=-1., ~x=-1.) == (-2.3561944901923449); /* 225 degrees or 5 * pi/4 radians */\n"
+                            "ocaml": "Float.atan2(~y=-1., ~x=-1.) == -2.3561944901923449 (* 225 degrees or 5 * pi/4 radians *)",
+                            "reason": "Float.atan2(~y=-1., ~x=-1.) == -2.3561944901923449 (* 225 degrees or 5 * pi/4 radians *)"
                           }
                         },
                         {
@@ -52514,8 +52158,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.atan2 ~y:(-1.) ~x:1. = -(0.7853981633974483) (* 315 degrees or 7 * pi/4 radians *)",
-                            "reason": "Float.atan2(~y=-1., ~x=1.) == (-0.7853981633974483); /* 315 degrees or 7 * pi/4 radians */\n"
+                            "ocaml": "Float.atan2(~y=-1., ~x=1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)",
+                            "reason": "Float.atan2(~y=-1., ~x=1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)"
                           }
                         }
                       ]
@@ -52815,8 +52459,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.round 1.2 = 1.0\n      Float.round 1.5 = 2.0\n      Float.round 1.8 = 2.0\n      Float.round -1.2 = -1.0\n      Float.round -1.5 = -1.0\n      Float.round -1.8 = -2.0\n    ",
-                            "reason": "Float.round(1.2) == 1.0(Float.round, 1.5) == 2.0(Float.round, 1.8)\n== 2.0(Float.round)\n- 1.2 == - 1.0(Float.round)\n- 1.5 == - 1.0(Float.round)\n- 1.8 == (-2.0);\n"
+                            "ocaml": "\n      Float.round(1.2) == 1.0\n      Float.round(1.5) == 2.0\n      Float.round(1.8) == 2.0\n      Float.round(-1.2) == -1.0\n      Float.round(-1.5) == -1.0\n      Float.round(-1.8) == -2.0\n    ",
+                            "reason": "Float.round(1.2) === 1.0(Float.round, 1.5) === 2.0(Float.round, 1.8)\n=== 2.0(Float.round, -1.2)\n=== - 1.0(Float.round, -1.5)\n=== - 1.0(Float.round, -1.8)\n=== (-2.0);\n"
                           }
                         },
                         {
@@ -52851,8 +52495,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.round ~direction:`Zero 1.2 = 1.0\n      Float.round ~direction:`Zero 1.5 = 1.0\n      Float.round ~direction:`Zero 1.8 = 1.0\n      Float.round ~direction:`Zero (-1.2) = -1.0\n      Float.round ~direction:`Zero (-1.5) = -1.0\n      Float.round ~direction:`Zero (-1.8) = -1.0\n    ",
-                            "reason": "Float.round(~direction=`Zero, 1.2) == 1.0(Float.round, ~direction=`Zero, 1.5)\n== 1.0(Float.round, ~direction=`Zero, 1.8)\n== 1.0(Float.round, ~direction=`Zero, -1.2)\n== - 1.0(Float.round, ~direction=`Zero, -1.5)\n== - 1.0(Float.round, ~direction=`Zero, -1.8)\n== (-1.0);\n"
+                            "ocaml": "\n      Float.round(1.2, ~direction=#Zero) == 1.0\n      Float.round(1.5, ~direction=#Zero) == 1.0\n      Float.round(1.8, ~direction=#Zero) == 1.0\n      Float.round(-1.2, ~direction=#Zero) == -1.0\n      Float.round(-1.5, ~direction=#Zero) == -1.0\n      Float.round(-1.8, ~direction=#Zero) == -1.0\n    ",
+                            "reason": "\n      Float.round(1.2, ~direction=#Zero) == 1.0\n      Float.round(1.5, ~direction=#Zero) == 1.0\n      Float.round(1.8, ~direction=#Zero) == 1.0\n      Float.round(-1.2, ~direction=#Zero) == -1.0\n      Float.round(-1.5, ~direction=#Zero) == -1.0\n      Float.round(-1.8, ~direction=#Zero) == -1.0\n    "
                           }
                         },
                         {
@@ -52887,8 +52531,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.round ~direction:`AwayFromZero 1.2 = 1.0\n      Float.round ~direction:`AwayFromZero 1.5 = 1.0\n      Float.round ~direction:`AwayFromZero 1.8 = 1.0\n      Float.round ~direction:`AwayFromZero (-1.2) = -1.0\n      Float.round ~direction:`AwayFromZero (-1.5) = -1.0\n      Float.round ~direction:`AwayFromZero (-1.8) = -1.0\n    ",
-                            "reason": "Float.round(~direction=`AwayFromZero, 1.2)\n== 1.0(Float.round, ~direction=`AwayFromZero, 1.5)\n== 1.0(Float.round, ~direction=`AwayFromZero, 1.8)\n== 1.0(Float.round, ~direction=`AwayFromZero, -1.2)\n== - 1.0(Float.round, ~direction=`AwayFromZero, -1.5)\n== - 1.0(Float.round, ~direction=`AwayFromZero, -1.8)\n== (-1.0);\n"
+                            "ocaml": "\n      Float.round(1.2, ~direction=#AwayFromZero) == 2.0\n      Float.round(1.5, ~direction=#AwayFromZero) == 2.0\n      Float.round(1.8, ~direction=#AwayFromZero) == 2.0\n      Float.round(-1.2, ~direction=#AwayFromZero) == -2.0\n      Float.round(-1.5, ~direction=#AwayFromZero) == -2.0\n      Float.round(-1.8, ~direction=#AwayFromZero) == -2.0\n    ",
+                            "reason": "\n      Float.round(1.2, ~direction=#AwayFromZero) == 2.0\n      Float.round(1.5, ~direction=#AwayFromZero) == 2.0\n      Float.round(1.8, ~direction=#AwayFromZero) == 2.0\n      Float.round(-1.2, ~direction=#AwayFromZero) == -2.0\n      Float.round(-1.5, ~direction=#AwayFromZero) == -2.0\n      Float.round(-1.8, ~direction=#AwayFromZero) == -2.0\n    "
                           }
                         },
                         {
@@ -52947,8 +52591,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.round ~direction:`Up 1.2 = 1.0\n      Float.round ~direction:`Up 1.5 = 1.0\n      Float.round ~direction:`Up 1.8 = 1.0\n      Float.round ~direction:`Up (-1.2) = -1.0\n      Float.round ~direction:`Up (-1.5) = -1.0\n      Float.round ~direction:`Up (-1.8) = -1.0\n    ",
-                            "reason": "Float.round(~direction=`Up, 1.2) == 1.0(Float.round, ~direction=`Up, 1.5)\n== 1.0(Float.round, ~direction=`Up, 1.8)\n== 1.0(Float.round, ~direction=`Up, -1.2)\n== - 1.0(Float.round, ~direction=`Up, -1.5)\n== - 1.0(Float.round, ~direction=`Up, -1.8)\n== (-1.0);\n"
+                            "ocaml": "\n      Float.round(1.2, ~direction=#Up) == 2.0\n      Float.round(1.5, ~direction=#Up) == 2.0\n      Float.round(1.8, ~direction=#Up) == 2.0\n      Float.round(-1.2, ~direction=#Up) == -1.0\n      Float.round(-1.5, ~direction=#Up) == -1.0\n      Float.round(-1.8, ~direction=#Up) == -1.0\n    ",
+                            "reason": "\n      Float.round(1.2, ~direction=#Up) == 2.0\n      Float.round(1.5, ~direction=#Up) == 2.0\n      Float.round(1.8, ~direction=#Up) == 2.0\n      Float.round(-1.2, ~direction=#Up) == -1.0\n      Float.round(-1.5, ~direction=#Up) == -1.0\n      Float.round(-1.8, ~direction=#Up) == -1.0\n    "
                           }
                         },
                         {
@@ -53007,8 +52651,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.map  ~f:(Float.round ~direction:`Down) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -2.0; 1.0 1.0 1.0]",
-                            "reason": "List.map(\n  ~f=Float.round(~direction=`Down),\n  [(-1.8), (-1.5), (-1.2), 1.2, 1.5, 1.8],\n)\n== [(-2.0), (-2.0), (-2.0), 1.0(1.0, 1.0)];\n"
+                            "ocaml": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Down),\n      ) == [-2.0, -2.0, -2.0, 1.0, 1.0, 1.0]\n    ",
+                            "reason": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Down),\n      ) == [-2.0, -2.0, -2.0, 1.0, 1.0, 1.0]\n    "
                           }
                         },
                         {
@@ -53104,8 +52748,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.map  ~f:(Float.round ~direction:(`Closest `AwayFromZero)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -1.0; -1.0; 1.0 1.0 2.0]",
-                            "reason": "List.map(\n  ~f=Float.round(~direction=`Closest(`AwayFromZero)),\n  [(-1.8), (-1.5), (-1.2), 1.2, 1.5, 1.8],\n)\n== [(-2.0), (-1.0), (-1.0), 1.0(1.0, 2.0)];\n"
+                            "ocaml": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Closest(#Zero)),\n      ) == [-2.0, -1.0, -1.0, 1.0, 1.0, 2.0]\n    ",
+                            "reason": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Closest(#Zero)),\n      ) == [-2.0, -1.0, -1.0, 1.0, 1.0, 2.0]\n    "
                           }
                         },
                         {
@@ -53157,8 +52801,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.map  ~f:(Float.round ~direction:(`Closest `AwayFromZero)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -1.0; 1.0 2.0 2.0]",
-                            "reason": "List.map(\n  ~f=Float.round(~direction=`Closest(`AwayFromZero)),\n  [(-1.8), (-1.5), (-1.2), 1.2, 1.5, 1.8],\n)\n== [(-2.0), (-2.0), (-1.0), 1.0(2.0, 2.0)];\n"
+                            "ocaml": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Closest(#AwayFromZero)),\n      ) == [-2.0, -2.0, -1.0, 1.0, 2.0, 2.0]\n    ",
+                            "reason": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Closest(#AwayFromZero)),\n      ) == [-2.0, -2.0, -1.0, 1.0, 2.0, 2.0]\n    "
                           }
                         },
                         {
@@ -53193,8 +52837,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.map  ~f:(Float.round ~direction:(`Closest `Down)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -1.0; 1.0 1.0 2.0]",
-                            "reason": "List.map(\n  ~f=Float.round(~direction=`Closest(`Down)),\n  [(-1.8), (-1.5), (-1.2), 1.2, 1.5, 1.8],\n)\n== [(-2.0), (-2.0), (-1.0), 1.0(1.0, 2.0)];\n"
+                            "ocaml": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Closest(#Down)),\n      ) == [-2.0, -2.0, -1.0, 1.0, 1.0, 2.0]\n    ",
+                            "reason": "\n      Array.map(\n      [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],\n      ~f=Float.round(~direction=#Closest(#Down)),\n      ) == [-2.0, -2.0, -1.0, 1.0, 1.0, 2.0]\n    "
                           }
                         },
                         {
@@ -53236,7 +52880,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.round 1.5"
+                          "value": "Float.round(1.5)"
                         },
                         {
                           "tag": "Raw",
@@ -53244,7 +52888,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.round ~direction:(`Closest `Up) 1.5"
+                          "value": "Float.round(1.5, ~direction=#Closest(#Up))"
                         },
                         {
                           "tag": "Newline",
@@ -53278,8 +52922,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.round ~direction:(`Closest `ToEven) -1.5 = -2.0\n      Float.round ~direction:(`Closest `ToEven) -2.5 = -2.0\n    ",
-                            "reason": "Float.round(~direction=`Closest(`ToEven))\n- 1.5 == - 2.0(Float.round, ~direction=`Closest(`ToEven))\n- 2.5 == (-2.0);\n"
+                            "ocaml": "\n      Float.round(-1.5, ~direction=#Closest(#ToEven)) == -2.0\n      Float.round(-2.5, ~direction=#Closest(#ToEven)) == -2.0\n    ",
+                            "reason": "\n      Float.round(-1.5, ~direction=#Closest(#ToEven)) == -2.0\n      Float.round(-2.5, ~direction=#Closest(#ToEven)) == -2.0\n    "
                           }
                         }
                       ]
@@ -53322,7 +52966,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.round ~direction:`Down"
+                          "value": "Float.round(~direction=#Down)"
                         },
                         {
                           "tag": "Raw",
@@ -53360,8 +53004,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.floor 1.2 = 1.0\n      Float.floor 1.5 = 1.0\n      Float.floor 1.8 = 1.0\n      Float.floor -1.2 = -2.0\n      Float.floor -1.5 = -2.0\n      Float.floor -1.8 = -2.0\n    ",
-                            "reason": "Float.floor(1.2) == 1.0(Float.floor, 1.5) == 1.0(Float.floor, 1.8)\n== 1.0(Float.floor)\n- 1.2 == - 2.0(Float.floor)\n- 1.5 == - 2.0(Float.floor)\n- 1.8 == (-2.0);\n"
+                            "ocaml": "\n      Float.floor(1.2) == 1.0\n      Float.floor(1.5) == 1.0\n      Float.floor(1.8) == 1.0\n      Float.floor(-1.2) == -2.0\n      Float.floor(-1.5) == -2.0\n      Float.floor(-1.8) == -2.0\n    ",
+                            "reason": "Float.floor(1.2) === 1.0(Float.floor, 1.5) === 1.0(Float.floor, 1.8)\n=== 1.0(Float.floor, -1.2)\n=== - 2.0(Float.floor, -1.5)\n=== - 2.0(Float.floor, -1.8)\n=== (-2.0);\n"
                           }
                         }
                       ]
@@ -53404,7 +53048,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.round ~direction:`Up"
+                          "value": "Float.round(~direction=#Up)"
                         },
                         {
                           "tag": "Raw",
@@ -53442,8 +53086,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.ceiling 1.2 = 2.0\n      Float.ceiling 1.5 = 2.0\n      Float.ceiling 1.8 = 2.0\n      Float.ceiling -1.2 = (-1.0)\n      Float.ceiling -1.5 = (-1.0)\n      Float.ceiling -1.8 = (-1.0)\n    ",
-                            "reason": "Float.ceiling(1.2) == 2.0(Float.ceiling, 1.5) == 2.0(Float.ceiling, 1.8)\n== 2.0(Float.ceiling)\n- 1.2 == (-1.0)(Float.ceiling)\n- 1.5 == (-1.0)(Float.ceiling)\n- 1.8 == (-1.0);\n"
+                            "ocaml": "\n      Float.ceiling(1.2) == 2.0\n      Float.ceiling(1.5) == 2.0\n      Float.ceiling(1.8) == 2.0\n      Float.ceiling(-1.2) == -1.0\n      Float.ceiling(-1.5) == -1.0\n      Float.ceiling(-1.8) == -1.0\n    ",
+                            "reason": "Float.ceiling(1.2) === 2.0(Float.ceiling, 1.5) === 2.0(Float.ceiling, 1.8)\n=== 2.0(Float.ceiling, -1.2)\n=== - 1.0(Float.ceiling, -1.5)\n=== - 1.0(Float.ceiling, -1.8)\n=== (-1.0);\n"
                           }
                         }
                       ]
@@ -53486,7 +53130,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Float.round ~direction:`Zero"
+                          "value": "Float.round(~direction=#Zero)"
                         },
                         {
                           "tag": "Raw",
@@ -53524,8 +53168,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Float.truncate 1.0 = 1.\n      Float.truncate 1.2 = 1.\n      Float.truncate 1.5 = 1.\n      Float.truncate 1.8 = 1.\n      Float.truncate (-1.2) = -1.\n      Float.truncate (-1.5) = -1.\n      Float.truncate (-1.8) = -1.\n    ",
-                            "reason": "Float.truncate(1.0) == 1.(Float.truncate, 1.2) == 1.(Float.truncate, 1.5)\n== 1.(Float.truncate, 1.8)\n== 1.(Float.truncate, -1.2)\n== - 1.(Float.truncate, -1.5)\n== - 1.(Float.truncate, -1.8)\n== (-1.);\n"
+                            "ocaml": "\n      Float.truncate(1.0) == 1.\n      Float.truncate(1.2) == 1.\n      Float.truncate(1.5) == 1.\n      Float.truncate(1.8) == 1.\n      Float.truncate(-1.2) == -1.\n      Float.truncate(-1.5) == -1.\n      Float.truncate(-1.8) == -1.\n    ",
+                            "reason": "Float.truncate(1.0) === 1.(Float.truncate, 1.2) === 1.(Float.truncate, 1.5)\n=== 1.(Float.truncate, 1.8)\n=== 1.(Float.truncate, -1.2)\n=== - 1.(Float.truncate, -1.5)\n=== - 1.(Float.truncate, -1.8)\n=== (-1.);\n"
                           }
                         }
                       ]
@@ -53777,8 +53421,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(toInt 1.6) = (Some 1)",
-                            "reason": "Float.(toInt(1.6)) == Some(1);\n"
+                            "ocaml": "Float.toInt(1.6) == Some(1)",
+                            "reason": "Float.toInt(1.6) === Some(1);\n"
                           }
                         },
                         {
@@ -53788,8 +53432,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(toInt 2.0) = (Some 2)",
-                            "reason": "Float.(toInt(2.0)) == Some(2);\n"
+                            "ocaml": "Float.toInt(2.0) == Some(2))",
+                            "reason": "Float.toInt(2.0) == Some(2))"
                           }
                         },
                         {
@@ -53799,8 +53443,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(toInt 5.683) = (Some 5)",
-                            "reason": "Float.(toInt(5.683)) == Some(5);\n"
+                            "ocaml": "Float.toInt(5.683) == Some(5)",
+                            "reason": "Float.toInt(5.683) === Some(5);\n"
                           }
                         },
                         {
@@ -53810,8 +53454,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(toInt nan) = None",
-                            "reason": "Float.(toInt(nan)) == None;\n"
+                            "ocaml": "Float.nan->Float.toInt == None",
+                            "reason": "Float.nan->Float.toInt == None"
                           }
                         },
                         {
@@ -53821,8 +53465,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(toInt infinity) = None",
-                            "reason": "Float.(toInt(infinity)) == None;\n"
+                            "ocaml": "Float.infinity->Float.toInt == None",
+                            "reason": "Float.infinity->Float.toInt == None"
                           }
                         },
                         {
@@ -53832,8 +53476,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Float.(round 1.6 |> toInt) = Some 2",
-                            "reason": "Float.(round(1.6) |> toInt) == Some(2);\n"
+                            "ocaml": "Float.round(1.6)->Float.toInt) = Some(2)",
+                            "reason": "Float.round(1.6)->Float.toInt) = Some(2)"
                           }
                         }
                       ]
@@ -53900,7 +53544,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    The behaviour of this function is platform specific"
+                          "value": "\n    Returns a string representation of the float in base 10."
                         }
                       ]
                     },
@@ -54198,7 +53842,7 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": "\n    Booleans in OCaml / Reason are represented by the "
+                    "value": "\n    Booleans in Rescript are represented by the "
                   },
                   {
                     "tag": "Code",
@@ -54235,8 +53879,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      let bool = false\n      let string =\n        match bool with\n        | false -> \"false\"\n      (*\n        Warning 8: this pattern-matching is not exhaustive.\n        Here is an example of a case that is not matched:\n        true\n      *)\n    ",
-                      "reason": "let bool = false;\nlet string =\n  switch (bool) {\n  | false => \"false\"\n  };\n/*\n   Warning 8: this pattern-matching is not exhaustive.\n   Here is an example of a case that is not matched:\n   true\n */\n"
+                      "ocaml": "\n      let bool = false\n      let string = switch bool {\n      | false => \"false\"\n      }\n\n      (*\n        Warning number 8\n        You forgot to handle a possible case here, for example: \n        true\n      *)\n    ",
+                      "reason": "\n      let bool = false\n      let string = switch bool {\n      | false => \"false\"\n      }\n\n      (*\n        Warning number 8\n        You forgot to handle a possible case here, for example: \n        true\n      *)\n    "
                     }
                   }
                 ]
@@ -54369,8 +54013,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromInt 0 = Some false",
-                            "reason": "Bool.fromInt(0) == Some(false);\n"
+                            "ocaml": "Bool.fromInt(0) == Some(false)",
+                            "reason": "Bool.fromInt(0) === Some(false);\n"
                           }
                         },
                         {
@@ -54380,8 +54024,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromInt 1 = Some true",
-                            "reason": "Bool.fromInt(1) == Some(true);\n"
+                            "ocaml": "Bool.fromInt(1) == Some(true)",
+                            "reason": "Bool.fromInt(1) === Some(true);\n"
                           }
                         },
                         {
@@ -54391,8 +54035,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromInt 8 = None",
-                            "reason": "Bool.fromInt(8) == None;\n"
+                            "ocaml": "Bool.fromInt(8) == None",
+                            "reason": "Bool.fromInt(8) === None;\n"
                           }
                         },
                         {
@@ -54402,8 +54046,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromInt (-3) = None",
-                            "reason": "Bool.fromInt(-3) == None;\n"
+                            "ocaml": "Bool.fromInt(-3) == None",
+                            "reason": "Bool.fromInt(-3) === None;\n"
                           }
                         }
                       ]
@@ -54516,8 +54160,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"true\" = Some true",
-                            "reason": "Bool.fromString(\"true\") == Some(true);\n"
+                            "ocaml": "Bool.fromString(\"true\") == Some(true)",
+                            "reason": "Bool.fromString(\"true\") === Some(true);\n"
                           }
                         },
                         {
@@ -54527,8 +54171,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"false\" = Some false",
-                            "reason": "Bool.fromString(\"false\") == Some(false);\n"
+                            "ocaml": "Bool.fromString(\"false\") == Some(false)",
+                            "reason": "Bool.fromString(\"false\") === Some(false);\n"
                           }
                         },
                         {
@@ -54538,8 +54182,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"True\" = None",
-                            "reason": "Bool.fromString(\"True\") == None;\n"
+                            "ocaml": "Bool.fromString(\"True\") == None",
+                            "reason": "Bool.fromString(\"True\") === None;\n"
                           }
                         },
                         {
@@ -54549,8 +54193,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"False\" = None",
-                            "reason": "Bool.fromString(\"False\") == None;\n"
+                            "ocaml": "Bool.fromString(\"False\") == None",
+                            "reason": "Bool.fromString(\"False\") === None;\n"
                           }
                         },
                         {
@@ -54560,8 +54204,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"0\" = None",
-                            "reason": "Bool.fromString(\"0\") == None;\n"
+                            "ocaml": "Bool.fromString(\"0\") == None",
+                            "reason": "Bool.fromString(\"0\") === None;\n"
                           }
                         },
                         {
@@ -54571,8 +54215,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"1\" = None",
-                            "reason": "Bool.fromString(\"1\") == None;\n"
+                            "ocaml": "Bool.fromString(\"1\") == None",
+                            "reason": "Bool.fromString(\"1\") === None;\n"
                           }
                         },
                         {
@@ -54582,8 +54226,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.fromString \"Not even close\" = None",
-                            "reason": "Bool.fromString(\"Not even close\") == None;\n"
+                            "ocaml": "Bool.fromString(\"Not even close\") == None",
+                            "reason": "Bool.fromString(\"Not even close\") === None;\n"
                           }
                         }
                       ]
@@ -54624,300 +54268,6 @@
                     }
                   }
                 ]
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(&&)",
-                  "qualified_name": "TableclothBool.(&&)",
-                  "type": {
-                    "rendered": "(bool, bool) => bool"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "The lazy logical AND operator."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    Returns "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "true"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " if both of its operands evaluate to "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "true"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    If the 'left' operand evaluates to "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "false"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": ", the 'right' operand is not evaluated."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "Title",
-                          "value": {
-                            "size": 2,
-                            "label": null,
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": "Examples"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(true && true) = true",
-                            "reason": "Bool.(true && true) == true;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(true && false) = false",
-                            "reason": "Bool.(true && false) == false;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(false && true) = false",
-                            "reason": "Bool.(false && true) == false;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(false && false) = false",
-                            "reason": "Bool.(false && false) == false;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(||)",
-                  "qualified_name": "TableclothBool.(||)",
-                  "type": {
-                    "rendered": "(bool, bool) => bool"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "The lazy logical OR operator."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    Returns "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "true"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " if one of its operands evaluates to "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "true"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    If the 'left' operand evaluates to "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "true"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": ", the 'right' operand is not evaluated."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "Title",
-                          "value": {
-                            "size": 2,
-                            "label": null,
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": "Examples"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(true || true) = true",
-                            "reason": "Bool.(true || true) == true;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(true || false) = true",
-                            "reason": "Bool.(true || false) == true;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(false || true) = true",
-                            "reason": "Bool.(false || true) == true;\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Bool.(false || false) = false",
-                            "reason": "Bool.(false || false) == false;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
               },
               {
                 "tag": "Value",
@@ -55005,8 +54355,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.xor true true  = false",
-                            "reason": "Bool.xor(true, true) == false;\n"
+                            "ocaml": "Bool.xor(true, true) == false",
+                            "reason": "Bool.xor((true, true)) === false;\n"
                           }
                         },
                         {
@@ -55016,8 +54366,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.xor true false = true",
-                            "reason": "Bool.xor(true, false) == true;\n"
+                            "ocaml": "Bool.xor(true, false) == true",
+                            "reason": "Bool.xor((true, false)) === true;\n"
                           }
                         },
                         {
@@ -55027,8 +54377,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.xor false true  = true",
-                            "reason": "Bool.xor(false, true) == true;\n"
+                            "ocaml": "Bool.xor(false, true) == true",
+                            "reason": "Bool.xor((false, true)) === true;\n"
                           }
                         },
                         {
@@ -55038,8 +54388,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.xor false false = false",
-                            "reason": "Bool.xor(false, false) == false;\n"
+                            "ocaml": "Bool.xor(false, false) == false",
+                            "reason": "Bool.xor((false, false)) === false;\n"
                           }
                         }
                       ]
@@ -55120,8 +54470,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.not false = true",
-                            "reason": "Bool.(!)(false) == true;\n"
+                            "ocaml": "Bool.not(false) == true",
+                            "reason": "Bool.(!)(false) === true;\n"
                           }
                         },
                         {
@@ -55131,8 +54481,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.not true = false",
-                            "reason": "Bool.(!)(true) == false;\n"
+                            "ocaml": "Bool.not(true) == false",
+                            "reason": "Bool.(!)(true) === false;\n"
                           }
                         }
                       ]
@@ -55247,8 +54597,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.toString true = \"true\"",
-                            "reason": "Bool.toString(true) == \"true\";\n"
+                            "ocaml": "Bool.toString(true) == \"true\"",
+                            "reason": "Bool.toString(true) === \"true\";\n"
                           }
                         },
                         {
@@ -55258,8 +54608,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.toString false = \"false\"",
-                            "reason": "Bool.toString(false) == \"false\";\n"
+                            "ocaml": "Bool.toString(false) == \"false\"",
+                            "reason": "Bool.toString(false) === \"false\";\n"
                           }
                         }
                       ]
@@ -55360,8 +54710,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.toInt true = 1",
-                            "reason": "Bool.toInt(true) == 1;\n"
+                            "ocaml": "Bool.toInt(true) == 1",
+                            "reason": "Bool.toInt(true) === 1;\n"
                           }
                         },
                         {
@@ -55371,8 +54721,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.toInt false = 0",
-                            "reason": "Bool.toInt(false) == 0;\n"
+                            "ocaml": "Bool.toInt(false) == 0",
+                            "reason": "Bool.toInt(false) === 0;\n"
                           }
                         }
                       ]
@@ -55471,8 +54821,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.equal true true = true",
-                            "reason": "Bool.equal(true, true) == true;\n"
+                            "ocaml": "Bool.equal(true, true) == true",
+                            "reason": "Bool.equal((true, true)) === true;\n"
                           }
                         },
                         {
@@ -55482,8 +54832,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.equal false false = true",
-                            "reason": "Bool.equal(false, false) == true;\n"
+                            "ocaml": "Bool.equal(false, false) == true",
+                            "reason": "Bool.equal((false, false)) === true;\n"
                           }
                         },
                         {
@@ -55493,8 +54843,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.equal false true = false",
-                            "reason": "Bool.equal(false, true) == false;\n"
+                            "ocaml": "Bool.equal(false, true) == false",
+                            "reason": "Bool.equal((false, true)) === false;\n"
                           }
                         }
                       ]
@@ -55567,8 +54917,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.compare true false = 1",
-                            "reason": "Bool.compare(true, false) == 1;\n"
+                            "ocaml": "Bool.compare(true, false) == 1",
+                            "reason": "Bool.compare((true, false)) === 1;\n"
                           }
                         },
                         {
@@ -55578,8 +54928,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.compare false true = -1",
-                            "reason": "Bool.compare(false, true) == (-1);\n"
+                            "ocaml": "Bool.compare(false, true) == -1",
+                            "reason": "Bool.compare((false, true)) === (-1);\n"
                           }
                         },
                         {
@@ -55589,8 +54939,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.compare true true = 0",
-                            "reason": "Bool.compare(true, true) == 0;\n"
+                            "ocaml": "Bool.compare(true, true) == 0",
+                            "reason": "Bool.compare((true, true)) === 0;\n"
                           }
                         },
                         {
@@ -55600,8 +54950,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.compare false false = 0",
-                            "reason": "Bool.compare(false, false) == 0;\n"
+                            "ocaml": "Bool.compare(false, false) == 0",
+                            "reason": "Bool.compare((false, false)) === 0;\n"
                           }
                         }
                       ]
@@ -55745,8 +55095,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Book = struct\n        type t = {\n          isbn: string;\n          title: string;\n        }\n\n        let compare bookA bookB =\n          String.compare bookA.isbn bookb.isbn\n      end\n    ",
-                      "reason": "module Book = {\n  type t = {\n    isbn: string,\n    title: string,\n  };\n\n  let compare = (bookA, bookB) => String.compare(bookA.isbn, bookb.isbn);\n};\n"
+                      "ocaml": "\n      module Book = {\n        type t = {\n          isbn: string,\n          title: string,\n        }\n\n        let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)\n      }\n    ",
+                      "reason": "\n      module Book = {\n        type t = {\n          isbn: string,\n          title: string,\n        }\n\n        let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)\n      }\n    "
                     }
                   },
                   {
@@ -55816,8 +55166,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Book = struct\n        type t = {\n          isbn: string;\n          title: string;\n        }\n\n        let compare bookA bookB =\n          String.compare bookA.isbn bookb.isbn\n        \n        include Comparator.Make(struct \n          type nonrec t = t\n\n          let compare = compare\n        end)\n      end\n    ",
-                      "reason": "module Book = {\n  type t = {\n    isbn: string,\n    title: string,\n  };\n\n  let compare = (bookA, bookB) => String.compare(bookA.isbn, bookb.isbn);\n\n  include Comparator.Make({\n    type nonrec t = t;\n\n    let compare = compare;\n  });\n};\n"
+                      "ocaml": "\n      module Book = {\n        type t = {\n          isbn: string,\n          title: string,\n        }\n\n        let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)\n\n        include Comparator.Make({\n          type t = t\n\n          let compare = compare\n        })\n      }\n    ",
+                      "reason": "\n      module Book = {\n        type t = {\n          isbn: string,\n          title: string,\n        }\n\n        let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)\n\n        include Comparator.Make({\n          type t = t\n\n          let compare = compare\n        })\n      }\n    "
                     }
                   },
                   {
@@ -55839,8 +55189,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      Set.fromList (module Book) [\n        { isbn=\"9788460767923\"; title=\"Moby Dick or The Whale\" }\n      ]\n    ",
-                      "reason": "Set.fromList(\n  (module Book),\n  [{isbn: \"9788460767923\", title: \"Moby Dick or The Whale\"}],\n);\n"
+                      "ocaml": "\n      Set.fromArray(module(Book),\n       [\n         {isbn: \"9788460767923\", title: \"Moby Dick or The Whale\"}\n       ])\n    ",
+                      "reason": "\n      Set.fromArray(module(Book),\n       [\n         {isbn: \"9788460767923\", title: \"Moby Dick or The Whale\"}\n       ])\n    "
                     }
                   }
                 ]
@@ -56353,8 +55703,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      module Book = struct\n        module T = struct\n          type t = {\n            isbn: string;\n            title: string;\n          }\n          let compare bookA bookB =\n            String.compare bookA.isbn bookB.isbn\n        end\n\n        include T\n        include Comparator.Make(T)\n      end\n\n      let books = Set.empty (module Book)\n    ",
-                            "reason": "module Book = {\n  module T = {\n    type t = {\n      isbn: string,\n      title: string,\n    };\n    let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn);\n  };\n\n  include T;\n  include Comparator.Make(T);\n};\n\nlet books = Set.empty((module Book));\n"
+                            "ocaml": "\n      module Book = {\n        module T = {\n          type t = {\n            isbn: string,\n            title: string,\n          }\n          let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)\n        }\n\n        include T\n        include Comparator.Make(T)\n      }\n\n      let books = Set.empty(module(Book))\n    ",
+                            "reason": "\n      module Book = {\n        module T = {\n          type t = {\n            isbn: string,\n            title: string,\n          }\n          let compare = (bookA, bookB) => String.compare(bookA.isbn, bookB.isbn)\n        }\n\n        include T\n        include Comparator.Make(T)\n      }\n\n      let books = Set.empty(module(Book))\n    "
                           }
                         }
                       ]

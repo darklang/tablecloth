@@ -756,7 +756,7 @@ val to_list : 'a t -> 'a list
 *)
 
 val to_indexed_list : 'a t -> (int * 'a) list
-(** Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple}.
+(** Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple2}.
 
     {2 Examples}
 
@@ -773,7 +773,7 @@ val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
 
     {2 Examples}
 
-    {[Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = -1]}
+    {[Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = (-1)]}
     {[Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0]}
     {[Array.compare Int.compare [|1;2;5|] [|1;2;3|] = 1]}
 *)

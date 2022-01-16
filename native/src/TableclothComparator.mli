@@ -12,7 +12,7 @@
         }
 
         let compare book_a book_b =
-          String.compare book_a.isbn bookb.isbn
+          String.compare book_a.isbn book_b.isbn
       end
     ]}
 
@@ -28,7 +28,7 @@
         }
 
         let compare book_a book_b =
-          String.compare book_a.isbn bookb.isbn
+          String.compare book_a.isbn book_b.isbn
         
         include Comparator.Make(struct 
           type nonrec t = t

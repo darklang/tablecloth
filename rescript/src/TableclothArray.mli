@@ -183,7 +183,7 @@ val slice : ?to_:int -> 'a t -> from:int -> 'a t
 
     The slice extracts up to but not including [to_].
 
-    Both the [from] and [to_] indexes can be negative, indicating an offset from the end of the list.
+    Both the [from] and [to_] indexes can be negative, indicating an offset from the end of the array.
 
     {2 Examples}
 
