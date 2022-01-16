@@ -4,7 +4,8 @@
     "ocaml": "4.12.x",
     "melange": "melange-re/melange",
     "@opam/base": "v0.14.1",
-    "@opam/menhir": "20210419"
+    "@opam/menhir": "20210419",
+    "@opam/ocamlformat":"*"
   },
   "esy": {
     "buildsInSource": "unsafe",
@@ -12,7 +13,8 @@
       "rm -rf node_modules/bs-platform",
       "ln -sfn #{melange.install} node_modules/bs-platform",
       "bsb -make-world"
-    ]
+    ],
+    "format": "dune build @fmt --auto-promote"
   },
   "installConfig": {
     "pnp": false

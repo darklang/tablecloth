@@ -1007,6 +1007,143 @@ class json =
       *)
       obj [ ("rendered", string rendered) (*      ("raw", raw) *) ]
 
+    method json_of_rescript_type_expr (moduleName : string) (funcName : string)
+        : Json.t =
+      let open Json in
+      let read_file filename =
+        let lines = ref [] in
+        let chan = open_in filename in
+        try
+          while true do
+            lines := input_line chan :: !lines
+          done ;
+          !lines
+        with
+        | End_of_file ->
+            close_in chan ;
+            List.rev !lines
+      in
+
+      let has_type_definition line funcName =
+        let contains_pars x = String.contains x '(' in
+        if contains_pars funcName
+        then
+          (* detect let/external (~-) (.?[]) (mod) (|>) *)
+          let start_i = 1 in
+          let close_i = String.index funcName ')' in
+          let extracted_val =
+            String.sub funcName start_i (close_i - start_i) |> String.trim
+          in
+          let r_ignore = Str.regexp "[\"ltextrna]" in
+          let cleaned_line =
+            Str.global_replace r_ignore "" line |> String.trim
+          in
+          let q_external = Str.quote ("\\" ^ extracted_val) in
+          let q_let = Str.quote ("let " ^ extracted_val) in
+
+          let r_external = Str.regexp q_external in
+          let r_let = Str.regexp q_let in
+
+          let is_external = Str.string_match r_external cleaned_line 0 in
+          let is_let = Str.string_match r_let line 0 in
+
+          is_external || is_let
+        else
+          (* detect let/external/module/module type function_name *)
+          let q_let = Str.quote ("let " ^ funcName ^ ":") in
+          let q_external = Str.quote ("external " ^ funcName ^ ":") in
+          let q_module = Str.quote ("module " ^ funcName) in
+          let q_module_type = Str.quote ("module type " ^ funcName) in
+
+          let r_let = Str.regexp q_let in
+          let r_external = Str.regexp q_external in
+          let r_module = Str.regexp q_module in
+          let r_module_type = Str.regexp q_module_type in
+
+          let is_let = Str.string_match r_let line 0 in
+          let is_external = Str.string_match r_external line 0 in
+          let is_module = Str.string_match r_module line 0 in
+          let is_module_type = Str.string_match r_module_type line 0 in
+
+          is_let || is_external || is_module || is_module_type
+      in
+      let trim_name line =
+        (*let (||): (bool, bool) => bool = "%seqor" => (bool, bool) => bool = "%seqor" *)
+        match String.split_on_char ':' line with
+        | _ :: result ->
+            result |> String.concat ":" |> String.trim
+        | _ ->
+            line |> String.trim
+      in
+      let remove_external line =
+        (* (bool, bool) => bool = "%seqor" => (bool, bool) => bool *)
+        let q_has_external = Str.quote " = \"" in
+        let r_let = Str.regexp q_has_external in
+        let result = Str.split r_let line in
+        match result with [ result; _ ] -> result | _ -> line
+      in
+      let is_submodule moduleName =
+        match moduleName |> String.split_on_char '.' with
+        | [ _ ] ->
+            None
+        | [ glob; block ] ->
+            Some (glob, block)
+        | _ ->
+            None
+      in
+      let fetch_rescript_submodule ~file ~block =
+        let filename = "./_rescript/" ^ file ^ ".resi" in
+        let result = ref [ "" ] in
+        let subName = block in
+        let handle_line line =
+          match has_type_definition line subName with
+          | true ->
+              result := List.append [ line ] !result
+          | _ ->
+            ( match !result with
+            | [ "" ] | "}" :: _ ->
+                ()
+            | _ ->
+                result := List.append [ line |> String.trim ] !result )
+        in
+        let () =
+          let lines = read_file filename in
+          List.iter handle_line lines
+        in
+        !result |> List.tl |> List.rev
+      in
+      let fetch_rescript_type ~moduleName ~funcName =
+        let filename = "./_rescript/" ^ moduleName ^ ".resi" in
+        let result = ref [ "" ] in
+        let handle_line line =
+          match (has_type_definition line funcName, !result) with
+          | true, [ "" ] ->
+              result := List.append [ line ] !result
+          | _, "" :: rest ->
+              ()
+          | _ ->
+              result := List.append [ line; "\n" ] !result
+        in
+
+        let () =
+          let lines =
+            match moduleName |> is_submodule with
+            | Some (file, block) ->
+                fetch_rescript_submodule ~file ~block
+            | None ->
+                read_file filename
+          in
+
+          List.iter handle_line lines
+        in
+        !result |> List.rev |> String.concat "" |> trim_name |> remove_external
+      in
+      let rendered =
+        fetch_rescript_type ~moduleName ~funcName
+        |> Odoc_info.remove_ending_newline
+      in
+      obj [ ("rendered", string rendered) ]
+
     (** Json to display a [Types.type_expr list]. *)
     method json_of_cstr_args
         ?(par : bool option)
@@ -1179,12 +1316,21 @@ class json =
     method json_of_value v : Json.t =
       let open Json in
       Odoc_info.reset_type_names () ;
+      let value_content =
+        match destination_json with
+        | "model-rescript.json" ->
+            self#json_of_rescript_type_expr
+              (Name.father v.val_name)
+              (Name.simple v.val_name)
+        | _ ->
+            self#json_of_type_expr v.val_type
+      in
       tagged
         "Value"
         (obj
            [ ("name", string (Name.simple v.val_name))
            ; ("qualified_name", string v.val_name)
-           ; ("type", self#json_of_type_expr v.val_type)
+           ; ("type", value_content)
            ; ("info", self#json_of_info v.val_info)
            ; ( "parameters"
              , self#json_of_described_parameter_list

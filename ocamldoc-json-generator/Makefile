@@ -147,6 +147,28 @@ build-rescript: opt dummy
 	cp ../rescript/src/Tablecloth.ml ./_rescript/Tablecloth.ml
 	~/.npm-global/bin/esy build
 
+rescript-interfaces: opt dummy
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothBool.mli > ./_rescript/TableclothBool.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothComparator.mli > ./_rescript/TableclothComparator.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothFloat.mli > ./_rescript/TableclothFloat.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothFun.mli > ./_rescript/TableclothFun.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothInt.mli > ./_rescript/TableclothInt.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothArray.mli > ./_rescript/TableclothArray.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothChar.mli > ./_rescript/TableclothChar.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothList.mli > ./_rescript/TableclothList.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothMap.mli > ./_rescript/TableclothMap.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothOption.mli > ./_rescript/TableclothOption.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothResult.mli > ./_rescript/TableclothResult.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothSet.mli > ./_rescript/TableclothSet.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothString.mli > ./_rescript/TableclothString.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothTuple2.mli > ./_rescript/TableclothTuple2.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothTuple3.mli > ./_rescript/TableclothTuple3.resi
+	# These are not interfaces, so we do just pretend that they actually are. Still works!
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/Internal.ml > ./_rescript/Internal.resi 
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothComparator.ml > ./_rescript/TableclothComparator.resi
+	~/.npm-global/bin/esy bsc -format res ../rescript/src/TableclothContainer.ml > ./_rescript/TableclothContainer.resi
+
+
 doc-native: build-native
 	DESTINATION_JSON=model.json \
 	~/.npm-global/bin/esy ocamldoc.opt \
@@ -234,6 +256,6 @@ doc-rescript: build-rescript
 doc: doc-native doc-rescript
 
 clean:
-	rm -f _rescript/* *.cm* *.o *.a
+	rm -f _rescript/* *.cm* *.o *.a 
 	rm -f _native/* *.cm* *.o *.a
 

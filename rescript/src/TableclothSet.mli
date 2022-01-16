@@ -300,7 +300,9 @@ end
 
 (** Construct sets of {!Int}s *)
 module Int : sig
-  type nonrec t = Of(TableclothInt).t
+  type identity
+
+  type nonrec t = (TableclothInt.t, identity) t
 
   val empty : t
   (** A set with nothing in it. *)
@@ -332,7 +334,9 @@ end
 
 (** Construct sets of {!String}s *)
 module String : sig
-  type nonrec t = Of(TableclothString).t
+  type identity
+
+  type nonrec t = (TableclothString.t, identity) t
 
   val empty : t
   (** A set with nothing in it. *)
