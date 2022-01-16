@@ -6,7 +6,9 @@ let singleton x = [ x ]
 
 let fromArray array = List.init (Array.length array) (fun i -> array.(i))
 
-let range ?(from = 0) to_ = List.init (to_ - from) (fun i -> i + from)
+let range ?(from = 0) to_ =
+  if to_ < from then [] else List.init (to_ - from) (fun i -> i + from)
+
 
 let rec repeat element ~times =
   if times <= 0 then [] else element :: repeat element ~times:(times - 1)
@@ -273,18 +275,22 @@ let sortBy ~(f : 'a -> 'b) (l : 'a t) : 'a t =
       if a' = b' then 0 else if a' < b' then -1 else 1 )
 
 
-let span t ~f =
-  match t with [] -> ([], []) | _ -> (takeWhile t ~f, dropWhile t ~f)
+let groupi l ~break =
+  let groups =
+    Belt.List.reduceWithIndex l [] (fun acc x i ->
+        match acc with
+        | [] ->
+            [ [ x ] ]
+        | current_group :: tl ->
+            if break i (Belt.List.headExn current_group) x
+            then [ x ] :: current_group :: tl (* start new group *)
+            else (x :: current_group) :: tl )
+    (* extend current group *)
+  in
+  match groups with [] -> [] | l -> Belt.List.mapReverse l reverse
 
 
-let rec groupWhile t ~f =
-  match t with
-  | [] ->
-      []
-  | x :: rest ->
-      let ys, zs = span rest ~f:(f x) in
-      (x :: ys) :: groupWhile zs ~f
-
+let groupWhile l ~f = groupi l ~break:(fun _ x y -> f x y)
 
 let insertAt t ~index ~value =
   let front, back = splitAt t ~index in

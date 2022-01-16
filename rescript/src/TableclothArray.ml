@@ -231,17 +231,25 @@ let unzip t =
 let repeat element ~length = Array.init (max length 0) (fun _ -> element)
 
 let filterMap t ~f =
-  fold t ~initial:[] ~f:(fun results element ->
-      match f element with None -> results | Some value -> value :: results )
-  |> fromList
+  let result =
+    fold t ~initial:[] ~f:(fun results element ->
+        match f element with None -> results | Some value -> value :: results )
+    |. fromList
+  in
+  reverse result ;
+  result
 
 
 let sort a ~compare = Array.sort compare a
 
 let values t =
-  fold t ~initial:[] ~f:(fun results element ->
-      match element with None -> results | Some value -> value :: results )
-  |> fromList
+  let result =
+    fold t ~initial:[] ~f:(fun results element ->
+        match element with None -> results | Some value -> value :: results )
+    |. fromList
+  in
+  reverse result ;
+  result
 
 
 let join t ~sep = Js.Array.joinWith sep t
