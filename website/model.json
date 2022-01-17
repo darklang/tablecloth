@@ -24513,8 +24513,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.filter_map [|3; 4; 5; 6|] ~f:(fun number ->\n        if Int.is_even number then\n          Some (number * number)\n        else\n          None\n      ) = [|36; 16|]\n    ",
-                            "reason": "Array.filter_map([|3, 4, 5, 6|], ~f=number =>\n  if (Int.is_even(number)) {\n    Some(number * number);\n  } else {\n    None;\n  }\n)\n== [|36, 16|];\n"
+                            "ocaml": "\n      Array.filter_map [|3; 4; 5; 6|] ~f:(fun number ->\n        if Int.is_even number then\n          Some (number * number)\n        else\n          None\n      ) = [|16; 36|]\n    ",
+                            "reason": "Array.filter_map([|3, 4, 5, 6|], ~f=number =>\n  if (Int.is_even(number)) {\n    Some(number * number);\n  } else {\n    None;\n  }\n)\n== [|16, 36|];\n"
                           }
                         }
                       ]

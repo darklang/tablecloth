@@ -107,7 +107,7 @@ val fromInt : int -> t
     {[
       Float.fromInt(5) == 5.0
       Float.fromInt(0) == 0.0
-      Float.fromInt - 7 == -7.0
+      Float.fromInt(-7) == -7.0
     ]}
 *)
 
@@ -137,7 +137,7 @@ val add : t -> t -> t
     So if you needed to add a {!Array.length} to a [float] for some reason, you
     could:
 
-    {[[1, 2, 3]->Array.length->Int.toFloat-> Float.add(3.5) == 6.5]}
+    {[[1, 2, 3]->Array.length->Int.toFloat->Float.add(3.5) == 6.5]}
 
 
     Languages like Java and JavaScript automatically convert [int] values
@@ -210,7 +210,7 @@ val absolute : t -> t
 
     {[
       Float.absolute(8.) == 8.
-      Float.absolute (-7) = 7
+      Float.absolute(-7) = 7
       Float.absolute(0) == 0
     ]}
 *)

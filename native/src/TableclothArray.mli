@@ -428,7 +428,7 @@ val filter_map : 'a t -> f:('a -> 'b option) -> 'b t
           Some (number * number)
         else
           None
-      ) = [|36; 16|]
+      ) = [|16; 36|]
     ]}
 *)
 

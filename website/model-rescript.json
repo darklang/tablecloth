@@ -21299,146 +21299,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.getAt [||] ~index:0 = None",
-                            "reason": "Array.getAt([||], ~index=0) == None;\n"
-                          }
-                        }
-                      ]
-                    },
-                    "version": null,
-                    "before": [
-                    ],
-                    "since": null,
-                    "exceptions": [
-                    ],
-                    "return": null,
-                    "see": [
-                    ],
-                    "custom": [
-                    ]
-                  },
-                  "parameters": {
-                    "tag": "DescribedParameterList",
-                    "value": [
-                    ]
-                  }
-                }
-              },
-              {
-                "tag": "Value",
-                "value": {
-                  "name": "(.?())",
-                  "qualified_name": "TableclothArray.(.?())",
-                  "type": {
-                    "rendered": "(array<'element>, int) => option<'element>"
-                  },
-                  "info": {
-                    "deprecated": null,
-                    "description": {
-                      "tag": "Text",
-                      "value": [
-                        {
-                          "tag": "Raw",
-                          "value": "The "
-                        },
-                        {
-                          "tag": "Link",
-                          "value": {
-                            "target": " https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html ",
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": " index operator"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " version of "
-                        },
-                        {
-                          "tag": "Ref",
-                          "value": {
-                            "name": "TableclothArray.getAt",
-                            "reference": {
-                              "kind": "VAL",
-                              "target": "TableclothArray.getAt",
-                              "content": [
-                                {
-                                  "tag": "Code",
-                                  "value": "TableclothArray.getAt"
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "Bold",
-                          "value": [
-                            {
-                              "tag": "Raw",
-                              "value": "Note"
-                            }
-                          ]
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " Currently this is only supported by the OCaml syntax."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "Title",
-                          "value": {
-                            "size": 2,
-                            "label": null,
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": "Examples"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Array.([||].?(3)) = Some 'g'",
-                            "reason": "Array.(.?()([||], 3)) == Some('g');\n"
-                          }
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "Array.([||].?(9)) = None",
-                            "reason": "Array.(.?()([||], 9)) == None;\n"
+                            "ocaml": "Array.getAt([], ~index=0) == None",
+                            "reason": "Array.getAt([], ~index=0) == None"
                           }
                         }
                       ]
@@ -47659,7 +47521,7 @@
                   "name": "smallestValue",
                   "qualified_name": "TableclothFloat.smallestValue",
                   "type": {
-                    "rendered": "TableclothFloat.t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47713,7 +47575,7 @@
                   "name": "maximumSafeInteger",
                   "qualified_name": "TableclothFloat.maximumSafeInteger",
                   "type": {
-                    "rendered": "TableclothFloat.t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47823,7 +47685,7 @@
                   "name": "minimumSafeInteger",
                   "qualified_name": "TableclothFloat.minimumSafeInteger",
                   "type": {
-                    "rendered": "TableclothFloat.t"
+                    "rendered": "t"
                   },
                   "info": {
                     "deprecated": null,
@@ -47951,7 +47813,7 @@
                   "name": "fromInt",
                   "qualified_name": "TableclothFloat.fromInt",
                   "type": {
-                    "rendered": "int -> TableclothFloat.t"
+                    "rendered": "int => t"
                   },
                   "info": {
                     "deprecated": null,
