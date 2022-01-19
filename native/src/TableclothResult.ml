@@ -37,9 +37,8 @@ let and_ a b = match a with Ok _ -> b | _ -> a
 let unwrap = Result.value
 
 let unwrapLazy t ~default =
-  match t with
-  | Ok t' -> t'
-  | Error _ -> Lazy.force default
+  match t with Ok t' -> t' | Error _ -> Lazy.force default
+
 
 let unwrapUnsafe = Result.get_ok
 

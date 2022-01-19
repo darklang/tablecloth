@@ -237,7 +237,7 @@ val unwrap : ('ok, 'error) t -> default:'ok -> 'ok
     {[Result.unwrap ~default:0 ((Error (`UnexpectedBird "Ostrich"))) = 0]}
 *)
 
-val unwrapLazy : ('ok, 'error) t -> default:('ok Lazy.t) -> 'ok
+val unwrapLazy : ('ok, 'error) t -> default:'ok Lazy.t -> 'ok
 (** Unwrap a Result using the [Lazy.force default] value in case of an [Error]
 
     {2 Examples}
