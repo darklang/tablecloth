@@ -191,7 +191,7 @@ val orElse : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
   {[Result.orElse (Ok "Boar") (Error (`UnexpectedInvertabrate "Periwinkle")) = (Ok "Boar") ]}
 
-  {[Result.orElse (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedBird "Peregrin"))]}
+  {[Result.orElse (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedInvertabrate "Periwinkle"))]}
 *)
 
 val or_else : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
