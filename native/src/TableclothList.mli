@@ -167,7 +167,7 @@ val drop : 'a t -> count:int -> 'a t
 
     {[List.drop [1;2;3;4] ~count:2 = [3;4]]}
     {[List.drop [1;2;3;4] ~count:6 = []]}
-    {[List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]]}
+    {[List.drop [1;2;3;4] ~count:(-1) = [1;2;3;4]]}
 *)
 
 val drop_while : 'a t -> f:('a -> bool) -> 'a t
@@ -240,8 +240,8 @@ val insert_at : 'a t -> index:int -> value:'a -> 'a t
     ]}
     {[List.insert_at ~index:0 ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]]}
     {[List.insert_at ~index:4 ~value:999 [100; 101; 102; 103] = [100; 101; 102; 103; 999]]}
-    {[List.insert_at ~index:(-1) ~value:999 [100; 101; 102; 103] = [999]]}
-    {[List.insert_at ~index:5 ~value:999 [100; 101; 102; 103] = [999]]}
+    {[List.insert_at ~index:(-1) ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]]}
+    {[List.insert_at ~index:5 ~value:999 [100; 101; 102; 103] = [100; 101; 102; 103; 999]]}
 *)
 
 val update_at : 'a t -> index:int -> f:('a -> 'a) -> 'a t
@@ -311,8 +311,8 @@ val is_empty : _ t -> bool
     {2 Examples}
 
     {[List.is_empty List.empty = true]}
-    {[List.is_empty [||] = true]}
-    {[List.is_empty [|1; 2; 3|] = false]}
+    {[List.is_empty [] = true]}
+    {[List.is_empty [1; 2; 3] = false]}
 *)
 
 val length : 'a t -> int
@@ -364,9 +364,9 @@ val any : 'a t -> f:('a -> bool) -> bool
 
     {2 Examples}
 
-    {[List.any ~f:is_even [|2;3|] = true]}
-    {[List.any ~f:is_even [|1;3|] = false]}
-    {[List.any ~f:is_even [||] = false]}
+    {[List.any ~f:Int.is_even [2;3] = true]}
+    {[List.any ~f:Int.is_even [1;3] = false]}
+    {[List.any ~f:Int.is_even [] = false]}
 *)
 
 val all : 'a t -> f:('a -> bool) -> bool
@@ -376,9 +376,9 @@ val all : 'a t -> f:('a -> bool) -> bool
 
     {2 Examples}
 
-    {[List.all ~f:Int.is_even [|2;4|] = true]}
-    {[List.all ~f:Int.is_even [|2;3|] = false]}
-    {[List.all ~f:Int.is_even [||] = true]}
+    {[List.all ~f:Int.is_even [2;4] = true]}
+    {[List.all ~f:Int.is_even [2;3] = false]}
+    {[List.all ~f:Int.is_even [] = true]}
 *)
 
 val count : 'a t -> f:('a -> bool) -> int
@@ -397,8 +397,8 @@ val unique_by : f:('a -> string) -> 'a list -> 'a list
    and returns a [string]. If the function generates the same string for two or more
    list items, only the first of them is retained.
    {[
-   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]
-   let abs_str x = string_of_int (abs x)
+   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6];
+   let abs_str x = string_of_int (abs x) in
    List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]
    ]}
  *)
@@ -410,9 +410,9 @@ val find : 'a t -> f:('a -> bool) -> 'a option
 
   {2 Examples}
 
-  {[List.find ~f:Int.is_even [|1; 3; 4; 8;|] = Some 4]}
-  {[List.find ~f:Int.is_odd [|0; 2; 4; 8;|] = None]}
-  {[List.find ~f:Int.is_even [||] = None]}
+  {[List.find ~f:Int.is_even [1; 3; 4; 8;] = Some 4]}
+  {[List.find ~f:Int.is_odd [0; 2; 4; 8;] = None]}
+  {[List.find ~f:Int.is_even [] = None]}
 *)
 
 val find_index : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
@@ -422,7 +422,7 @@ val find_index : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
 
     {2 Examples}
 
-    {[List.find_index ~f:(fun index number -> index > 2 && Int.is_even number) [|1; 3; 4; 8;|] = Some (3, 8)]}
+    {[List.find_index ~f:(fun index number -> index > 2 && Int.is_even number) [1; 3; 4; 8;] = Some (3, 8)]}
 *)
 
 val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
@@ -440,32 +440,32 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 
 val minimum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 (**
-    [List.minimum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+    [List.minimum_by ~f:fcn xs], when given a non-empty list, returns the item in the list
     for which [fcn item] is a minimum. It is returned as [Some item].
     If given an empty list, [List.minimum_by] returns [None]. If more than one value has
     a minimum value for [fcn item], the first one is returned.
     The function provided takes a list item as its parameter and must return a value
     that can be compared---for example, a [string] or [int].
     {[
-    let mod12 x = x mod 12
-    let hours = [7; 9; 15; 10; 3; 22]
-    List.minimum_by ~f:mod12 hours = Some 15
+    let mod12 x = x mod 12 in
+    let hours = [7; 9; 15; 10; 3; 22] in
+    List.minimum_by ~f:mod12 hours = Some 15;
     List.minimum_by ~f:mod12 [] = None
     ]}
    *)
 
 val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 (**
-     [List.maximum_by ~f:fcn, xs], when given a non-empty list, returns the item in the list
+     [List.maximum_by ~f:fcn xs], when given a non-empty list, returns the item in the list
      for which [fcn item] is a maximum. It is returned as [Some item].
      If given an empty list, [List.maximum_by] returns [None]. If more than one value
      has a maximum value for [fcn item], the first one is returned.
      The function provided takes a list item as its parameter and must return a value
      that can be compared---for example, a [string] or [int].
      {[
-     let mod12 x = x mod 12
-     let hours = [7;9;15;10;3;22]
-     List.maximum_by ~f:mod12 hours = Some 10
+     let mod12 x = x mod 12 in
+     let hours = [7;9;15;10;3;22] in
+     List.maximum_by ~f:mod12 hours = Some 10;
      List.maximum_by ~f:mod12 [] = None
      ]}
     *)
@@ -477,7 +477,7 @@ val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 
     {2 Examples}
 
-    {[List.minimum [|7; 5; 8; 6|] ~compare:Int.compare = Some 5]}
+    {[List.minimum [7; 5; 8; 6] ~compare:Int.compare = Some 5]}
 *)
 
 val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
@@ -487,17 +487,17 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 
     {2 Examples}
 
-    {[List.maximum [|7; 5; 8; 6|] ~compare:compare = Some 8]}
+    {[List.maximum [7; 5; 8; 6] ~compare:compare = Some 8]}
 *)
 
 val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
-(** Find a {!Tuple} of the [(minimum, maximum)] elements using the provided [compare] function.
+(** Find a {!Tuple2} of the [(minimum, maximum)] elements using the provided [compare] function.
 
     Returns [None] if called on an empty array.
 
     {2 Examples}
 
-    {[List.extent [|7; 5; 8; 6|] ~compare:compare = Some (5, 8)]}
+    {[List.extent [7; 5; 8; 6] ~compare:compare = Some (5, 8)]}
 *)
 
 val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
@@ -528,7 +528,7 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
 
     {2 Examples}
 
-    {[List.map ~f:Float.square_root [|1.0; 4.0; 9.0|] = [|1.0; 2.0; 3.0|]]}
+    {[List.map ~f:Float.square_root [1.0; 4.0; 9.0] = [1.0; 2.0; 3.0]]}
 *)
 
 val map_with_index : 'a t -> f:(int -> 'a -> 'b) -> 'b t
@@ -588,7 +588,7 @@ val flat_map : 'a t -> f:('a -> 'b t) -> 'b t
     {2 Examples}
 
     {[List.flat_map ~f xs = List.map ~f xs |> List.flatten]}
-    {[List.flat_map ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]]}
+    {[List.flat_map ~f:(fun n -> [n; n]) [1; 2; 3] = [1; 1; 2; 2; 3; 3]]}
 *)
 
 val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
@@ -601,7 +601,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     For examples if we have:
 
     {[
-      let numbers = [1, 2, 3] in
+      let numbers = [1; 2; 3] in
       let sum =
         List.fold numbers ~initial:0 ~f:(fun accumulator element -> accumulator + element)
       in
@@ -618,25 +618,25 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     {b Examples continued}
 
-    {[List.fold [|1; 2; 3|] ~initial:[] ~f:(List.cons) = [3; 2; 1]]}
+    {[List.fold [1; 2; 3] ~initial:[] ~f:(List.cons) = [3; 2; 1]]}
 
     {[
       let unique integers =
         List.fold integers ~initial:Set.Int.empty ~f:Set.add |> Set.to_list
       in
-      unique [|1; 1; 2; 3; 2|] = [|1; 2; 3|]
+      unique [1; 1; 2; 3; 2] = [1; 2; 3]
     ]}
 
     {[
       let last_even integers =
         List.fold integers ~initial:None ~f:(fun last int ->
-          if Int.is_even then
+          if Int.is_even int then
             Some int
           else
             last
         )
       in
-      last_even [|1;2;3;4;5|] = Some 4
+      last_even [1;2;3;4;5] = Some 4
     ]}
 *)
 
@@ -651,8 +651,8 @@ val append : 'a t -> 'a t -> 'a t
     {2 Examples}
 
     {[
-      let forty_twos = List.repeat ~length:2 42 in
-      let eighty_ones = List.repeat ~length:3 81 in
+      let fourty_twos = List.repeat ~times:2 42 in
+      let eighty_ones = List.repeat ~times:3 81 in
       List.append fourty_twos eighty_ones = [42; 42; 81; 81; 81];
     ]}
 *)
@@ -666,15 +666,15 @@ val flatten : 'a t t -> 'a t
 *)
 
 val zip : 'a t -> 'b t -> ('a * 'b) t
-(** Combine two lists by merging each pair of elements into a {!Tuple}
+(** Combine two lists by merging each pair of elements into a {!Tuple2}
 
     If one list is longer, the extra elements are dropped.
 
-    The same as [List.map2 ~f:Tuple.make]
+    The same as [List.map2 ~f:Tuple2.make]
 
     {2 Examples}
 
-    {[List.zip [|1;2;3;4;5|] [|"Dog"; "Eagle"; "Ferret"|] = [|(1, "Dog"); (2, "Eagle"); (3, "Ferret")|]]}
+    {[List.zip [1;2;3;4;5] ["Dog"; "Eagle"; "Ferret"] = [(1, "Dog"); (2, "Eagle"); (3, "Ferret")]]}
 *)
 
 val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
@@ -684,14 +684,14 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
 
     {2 Examples}
 
-    {[List.map2 [|1;2;3|] [|4;5;6|] ~f:(+) = [|5;7;9|]]}
+    {[List.map2 [1;2;3] [4;5;6] ~f:(+) = [5;7;9]]}
 
     {[
       List.map2
-        [|"alice"; "bob"; "chuck"|]
-        [|3; 5; 7; 9; 11; 13; 15; 17; 19|]
-        ~f:Tuple.create
-          = [|("alice", 3); ("bob", 5); ("chuck", 7)|]
+        ["alice"; "bob"; "chuck"]
+        [3; 5; 7; 9; 11; 13; 15; 17; 19]
+        ~f:Tuple2.make
+          = [("alice", 3); ("bob", 5); ("chuck", 7)]
     ]}
 *)
 
@@ -704,18 +704,18 @@ val map3 : 'a t -> 'b t -> 'c t -> f:('a -> 'b -> 'c -> 'd) -> 'd t
 
     {[
       List.map3
-        ~f:Tuple3.create
-        [|"alice"; "bob"; "chuck"|]
-        [|2; 5; 7; 8;|]
-        [|true; false; true; false|] =
-          [|("alice", 2, true); ("bob", 5, false); ("chuck", 7, true)|]
+        ~f:Tuple3.make
+        ["alice"; "bob"; "chuck"]
+        [2; 5; 7; 8;]
+        [true; false; true; false] =
+          [("alice", 2, true); ("bob", 5, false); ("chuck", 7, true)]
     ]}
 *)
 
 (** {1 Deconstruct} *)
 
 val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
-(** Split a list into a {!Tuple} of lists. Values which [f] returns true for will end up in {!Tuple.first}.
+(** Split a list into a {!Tuple2} of lists. Values which [f] returns true for will end up in {!Tuple2.first}.
 
     {2 Examples}
 
@@ -723,7 +723,7 @@ val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
 *)
 
 val split_at : 'a t -> index:int -> 'a t * 'a t
-(** Divides a list into a {!Tuple} of lists.
+(** Divides a list into a {!Tuple2} of lists.
 
     Elements which have index upto (but not including) [index] will be in the first component of the tuple.
 
@@ -736,12 +736,12 @@ val split_at : 'a t -> index:int -> 'a t * 'a t
     {2 Examples}
 
     {[List.split_at [1;2;3;4;5] ~index:2 = ([1;2], [3;4;5])]}
-    {[List.split_at [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])]}
+    {[List.split_at [1;2;3;4;5] ~index:(-1) = ([], [1;2;3;4;5])]}
     {[List.split_at [1;2;3;4;5] ~index:10 = ([1;2;3;4;5], 10)]}
 *)
 
 val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
-(** Divides a list into a {!Tuple} at the first element [f] returns [true] for.
+(** Divides a list into a {!Tuple2} at the first element [f] returns [true] for.
 
     Elements up to (but not including) the first element [f] returns [true] for
     will be in the first component of the tuple, the remaining elements will be
@@ -754,7 +754,7 @@ val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
 *)
 
 val unzip : ('a * 'b) t -> 'a t * 'b t
-(** Decompose a list of {!Tuple} into a {!Tuple} of lists.
+(** Decompose a list of {!Tuple2} into a {!Tuple2} of lists.
 
     {2 Examples}
 
@@ -774,7 +774,7 @@ val for_each : 'a t -> f:('a -> unit) -> unit
     {2 Examples}
 
     {[
-      List.for_each [|1; 2; 3|] ~f:(fun int -> print (Int.to_string int))
+      List.for_each [1; 2; 3] ~f:(fun int -> print (Int.to_string int))
       (*
         Prints
         1
@@ -805,8 +805,8 @@ val intersperse : 'a t -> sep:'a -> 'a t
 
     {2 Examples}
 
-    {[List.intersperse ~sep:"on" [|"turtles"; "turtles"; "turtles"|] = [|"turtles"; "on"; "turtles"; "on"; "turtles"|]]}
-    {[List.intersperse ~sep:0 [||] = [||]]}
+    {[List.intersperse ~sep:"on" ["turtles"; "turtles"; "turtles"] = ["turtles"; "on"; "turtles"; "on"; "turtles"]]}
+    {[List.intersperse ~sep:0 [] = []]}
 *)
 
 val chunks_of : 'a t -> size:int -> 'a t t
@@ -893,8 +893,8 @@ val group_by :
     {2 Examples}
 
     {[
-      let animals = [|"Ant"; "Bear"; "Cat"; "Dewgong"|] in
-      Array.group_by animals (module Int) ~f:String.length = Map.Int.from_list [
+      let animals = ["Ant"; "Bear"; "Cat"; "Dewgong"] in
+      List.group_by animals (module Int) ~f:String.length |> Map.toList = [
         (3, ["Cat"; "Ant"]);
         (4, ["Bear"]);
         (7, ["Dewgong"]);

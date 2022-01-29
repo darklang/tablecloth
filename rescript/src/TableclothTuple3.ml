@@ -9,7 +9,7 @@ let fromArray array =
   | [| a; b; c |] ->
       Some (a, b, c)
   | _ ->
-      None
+      Some (array.(0), array.(1), array.(2))
 
 
 let fromList list =
@@ -48,11 +48,12 @@ let toArray (a, b, c) = [| a; b; c |]
 
 let toList (a, b, c) = [ a; b; c ]
 
-let equal equalFirst equalSecond equalThird (a, b, c) (a', b', c') =
+let equal (a, b, c) (a', b', c') equalFirst equalSecond equalThird =
   equalFirst a a' && equalSecond b b' && equalThird c c'
 
 
-let compare compareFirst compareSecond compareThird (a, b, c) (a', b', c') =
+let compare
+    (a, b, c) (a', b', c') ~f:compareFirst ~g:compareSecond ~h:compareThird =
   match compareFirst a a' with
   | 0 ->
     (match compareSecond b b' with 0 -> compareThird c c' | result -> result)

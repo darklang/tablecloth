@@ -6,7 +6,7 @@
 
     [int]s are subject to {{: https://en.wikipedia.org/wiki/Integer_overflow } overflow }, meaning that [Int.maximum_value + 1 = Int.minimum_value].
 
-    If you need to work with integers larger than {!maximum_value} (or smaller than {!minimum_value} you can use the {!Integer} module.
+    If you need to work with integers larger than {!maximum_value} (or smaller than {!minimum_value} you can use the {!Float} module.
 
     Valid syntax for [int]s includes:
     {[
@@ -59,8 +59,8 @@ val from_string : string -> t option
 
     {2 Examples}
 
-    {[Int.from_string "0" = Some 0.]}
-    {[Int.from_string "42" = Some 42.]}
+    {[Int.from_string "0" = Some 0]}
+    {[Int.from_string "42" = Some 42]}
     {[Int.from_string "-3" = Some (-3)]}
     {[Int.from_string "123_456" = Some 123_456]}
     {[Int.from_string "0xFF" = Some 255]}
@@ -147,6 +147,17 @@ val ( /. ) : t -> t -> float
     {[Int.(8 /. 4) = 2.0]}
 *)
 
+val divide_float : by:t -> t -> float
+(** Floating point division
+
+    {2 Examples}
+
+    {[Int.divide_float 3 ~by:2 = 1.5]}
+    {[Int.divide_float 27 ~by:5 = 5.25]}
+    {[Int.divide_float 8 ~by:4 = 2.0]}
+
+*)
+
 val power : base:t -> exponent:t -> t
 (** Exponentiation, takes the base first, then the exponent.
 
@@ -200,10 +211,10 @@ val modulo : t -> by:t -> t
 
     {2 Examples}
 
-    {[Int.modulo ~by:3 (-4) = 1]}
+    {[Int.modulo ~by:3 (-4) = 2]}
     {[Int.modulo ~by:3 (-3 )= 0]}
-    {[Int.modulo ~by:3 (-2) = 2]}
-    {[Int.modulo ~by:3 (-1) = 1]}
+    {[Int.modulo ~by:3 (-2) = 1]}
+    {[Int.modulo ~by:3 (-1) = 2]}
     {[Int.modulo ~by:3 0 = 0]}
     {[Int.modulo ~by:3 1 = 1]}
     {[Int.modulo ~by:3 2 = 2]}
@@ -307,7 +318,7 @@ val to_float : t -> float
 
     {[
       let half_of (number : int) : float =
-        Float.((Int.to_float number) / 2)
+        Float.((Int.to_float number) / 2.)
         (* Note that locally opening the {!Float} module here allows us to use the floating point division operator *)
       in
       half_of 7 = 3.5

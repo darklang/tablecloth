@@ -46,7 +46,7 @@ external ignore : _ -> unit = "%ignore"
 
       let add_list_to_queue queue list =
         List.for_each list ~f:(fun element ->
-          ignore (MutableQueue.push_returning_length queue element)
+          Fun.ignore (PretendMutableQueue.push_returning_length queue element)
         )
       in ()
     ]}
@@ -198,8 +198,8 @@ val times : int -> f:(unit -> unit) -> unit
     {2 Examples}
 
     {[
-      let count = ref 0
-      times(10, fun () -> (count <- !count + 1))
+      let count = ref 0 in
+      times 10 (fun () -> count <- !count + 1);
       !count = 10
     ]}
 *)
@@ -211,8 +211,8 @@ val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
 
     {[
       let square_area (width, height) = width * height in
-      let curried_area : float -> float -> float = curry square_area in
-      let sizes = [3, 4, 5] in
+      let curried_area : int -> int -> int = Fun.curry square_area in
+      let sizes = [3; 4; 5] in
       List.map sizes ~f:(curried_area 4) = [12; 16; 20]
     ]}
 *)
@@ -224,7 +224,7 @@ val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
 
     {[
       let sum (a : int) (b: int) : int = a + b in
-      let uncurried_sum : (int * int) -> int = uncurry add in
+      let uncurried_sum : (int * int) -> int = Fun.uncurry sum in
       uncurried_sum (3, 4) = 7
     ]}
 *)

@@ -98,7 +98,7 @@ val map_all : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
 
     {2 Examples}
 
-    {[Tuple2.map_all ~f:(Int.add 1) (3, 4, 5) = (4, 5, 6)]}
+    {[Tuple2.map_all ~f:(Int.add 1) (3, 4) = (4, 5)]}
     {[Tuple2.map_all ~f:String.length ("was", "stressed") = (3, 8)]}
 *)
 

@@ -9,7 +9,7 @@ let from_array array =
   | [| a; b |] ->
       Some (a, b)
   | _ ->
-      None
+      Some (array.(0), array.(1))
 
 
 let from_array = from_array

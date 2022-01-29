@@ -18,7 +18,7 @@
         end)
       end
 
-      let points : Set.Of(Point).t = Set.from_list (module Points) [(0, 0); (3, 4); (6, 7)]
+      let points : Set.Of(Point).t = Set.from_list (module Point) [(0, 0); (3, 4); (6, 7)]
     ]}
 
     See the {!Comparator} module for a more details.
@@ -61,7 +61,7 @@ val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
     {[
       Array.fold 
         [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|] 
-        ~intial:(Set.empty (module Char))
+        ~initial:(Set.empty (module Char))
         ~f:Set.add
       |> Set.to_array
       = [|'i'; 'm'; 'p'; 's'|] 
@@ -114,7 +114,7 @@ val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
     {[Set.remove (Set.Int.from_list [1; 2]) 2 |> Set.to_list = [1]]}
     {[
       let original_set = Set.Int.from_list [1; 2] in
-      let new_set = Set.remove orignal_set 3 in
+      let new_set = Set.remove original_set 3 in
       original_set = new_set
     ]}
 *)
@@ -235,7 +235,7 @@ val partition : ('a, 'id) t -> f:('a -> bool) -> ('a, 'id) t * ('a, 'id) t
     {[
       let numbers = Set.Int.from_list [1; 1; 5; 6; 5; 7; 9; 8] in
       let (evens, odds) = Set.partition numbers ~f:Int.is_even in
-      Set.to_list evens = [6; 8]
+      Set.to_list evens = [6; 8];
       Set.to_list odds = [1; 5; 7; 9]
     ]}
 *)
@@ -278,7 +278,7 @@ module Poly : sig
 
       {2 Examples}
 
-      {[Set.Int.singleton (5, "Emu") |> Set.to_list = [(5, "Emu")]]}
+      {[Set.Poly.singleton 5 "Emu" |> Set.to_list = [(5, "Emu")]]}
   *)
 
   val from_array : 'a array -> 'a t
@@ -286,7 +286,7 @@ module Poly : sig
 
       {2 Examples}
 
-      {[Set.Poly.from_array [(1, "Ant");(2, "Bat");(2, "Bat")] |> Set.to_list = [(1, "Ant"); (2, "Bat")]]}
+      {[Set.Poly.from_array [|(1, "Ant");(2, "Bat");(2, "Bat")|] |> Set.to_list = [(1, "Ant"); (2, "Bat")]]}
   *)
 
   val from_list : 'a list -> 'a t

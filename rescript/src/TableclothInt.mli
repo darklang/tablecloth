@@ -1,12 +1,15 @@
 (** *)
 
-(** The platform-dependant {{: https://en.wikipedia.org/wiki/Signed_number_representations } signed } {{: https://en.wikipedia.org/wiki/Integer } integer} type.
+(** An [int] is a whole number.
 
-    An [int] is a whole number.
+    Rescript's has a 32-bit {{: https://en.wikipedia.org/wiki/Signed_number_representations } signed } {{: https://en.wikipedia.org/wiki/Integer } integer}.
+    Largegest [int] value is 2^31 - 1 === [2_147_483_647], and smallest is -2^31 - 1 === [-2_147_483_647]
 
-    [int]s are subject to {{: https://en.wikipedia.org/wiki/Integer_overflow } overflow }, meaning that [Int.maximumValue + 1 = Int.minimumValue].
+    [int]s are subject to {{: https://en.wikipedia.org/wiki/Integer_overflow } overflow }, meaning that [Int.maximumValue + 1 == Int.minimumValue].
 
-    If you need to work with integers larger than {!maximumValue} (or smaller than {!minimumValue} you can use the {!Integer} module.
+    If you work with integers larger than {!minimumValue} and smaller than {!maximumValue} you can use the {!Int} module.
+    If you need to work with larger numbers, concider using {!Float} since they are signed 64-bit [float]s and limited by
+    [1.79E+308], or 1.7976931348623157 * 10^308 at the upper end and [5E-324] at the lower.
 
     Valid syntax for [int]s includes:
     {[
@@ -18,17 +21,6 @@
       0xFF (* 255 in hexadecimal *)
       0x000A (* 10 in hexadecimal *)
     ]}
-
-    {b Note:} The number of bits used for an [int] is platform dependent.
-
-    When targeting Bucklescript {{: https://bucklescript.github.io/docs/en/common-data-types.html#int }  Ints are 32 bits}.
-
-    When targeting native OCaml uses 31-bits on 32-bit platforms and 63-bits on 64-bit platforms
-    which means that [int] math is well-defined in the range [-2 ** 30] to [2 ** 30 - 1] for 32bit platforms [-2 ** 62] to [2 ** 62 - 1] for 64bit platforms.
-
-    Outside of that range, the behavior is determined by the compilation target.
-
-    You can read about the reasons for OCaml's unusual integer sizes {{: https://v1.realworldocaml.org/v1/en/html/memory-representation-of-values.html} here }.
 
     {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}). It appears
     that the [int] abbreviation was introduced in the programming language ALGOL 68.
@@ -59,65 +51,39 @@ val fromString : string -> t option
 
     {2 Examples}
 
-    {[Int.fromString "0" = Some 0.]}
-    {[Int.fromString "42" = Some 42.]}
-    {[Int.fromString "-3" = Some (-3)]}
-    {[Int.fromString "123_456" = Some 123_456]}
-    {[Int.fromString "0xFF" = Some 255]}
-    {[Int.fromString "0x00A" = Some 10]}
-    {[Int.fromString "Infinity" = None]}
-    {[Int.fromString "NaN" = None]}
+    {[Int.fromString("0") == Some(0)]}
+    {[Int.fromString("42") == Some(42)]}
+    {[Int.fromString("-3") == Some(-3)]}
+    {[Int.fromString("123_456") == Some(123_456)]}
+    {[Int.fromString("0xFF") == Some(255)]}
+    {[Int.fromString("0x00A") == Some(10)]}
+    {[Int.fromString("Infinity") == None]}
+    {[Int.fromString("NaN") == None]}
 *)
 
-(** {1 Operators}
-
-    {b Note } You do not need to open the {!Int} module to use the
-    {!( + )}, {!( - )}, {!( * )}, {!( ** )}, {! (mod)} or {!( / )} operators, these are
-    available as soon as you [open Tablecloth]
-*)
+(** {1 Operators} *)
 
 val add : t -> t -> t
 (** Add two {!Int} numbers.
 
-  {[Int.add 3002 4004 = 7006]}
-
-  Or using the globally available operator:
-
-  {[3002 + 4004 = 7006]}
+  {[Int.add(3002, 4004) == 7006]}
 
   You {e cannot } add an [int] and a [float] directly though.
 
   See {!Float.add} for why, and how to overcome this limitation.
 *)
 
-val ( + ) : t -> t -> t
-(** See {!Int.add} *)
-
 val subtract : t -> t -> t
 (** Subtract numbers
 
-    {[Int.subtract 4 3 = 1]}
-
-    Alternatively the operator can be used:
-
-    {[4 - 3 = 1]}
+    {[Int.subtract(4, 3) == 1]}
 *)
-
-val ( - ) : t -> t -> t
-(** See {!Int.subtract} *)
 
 val multiply : t -> t -> t
 (** Multiply [int]s like
 
-    {[Int.multiply 2 7 = 14]}
-
-    Alternatively the operator can be used:
-
-    {[(2 * 7) = 14]}
+    {[Int.multiply(2, 7) == 14]}
 *)
-
-val ( * ) : t -> t -> t
-(** See {!Int.multiply} *)
 
 val divide : t -> by:t -> t
 (** Integer division
@@ -130,21 +96,17 @@ val divide : t -> by:t -> t
 
     {2 Examples}
 
-    {[Int.divide 3 ~by:2 = 1]}
-    {[27 / 5 = 5]}
+    {[Int.divide(3, ~by=2) == 1]}
 *)
 
-val ( / ) : t -> t -> t
-(** See {!Int.divide} *)
-
-val ( /. ) : t -> t -> float
+val divideFloat : t -> by:t -> float
 (** Floating point division
 
     {2 Examples}
 
-    {[Int.(3 /. 2) = 1.5]}
-    {[Int.(27 /. 5) = 5.25]}
-    {[Int.(8 /. 4) = 2.0]}
+    {[Int.divideFloat(3, ~by=2) == 1.5]}
+    {[Int.divideFloat(27, ~by=5) == 5.25]}
+    {[Int.divideFloat(8, ~by=4) == 2.0]}
 *)
 
 val power : base:t -> exponent:t -> t
@@ -152,45 +114,33 @@ val power : base:t -> exponent:t -> t
 
     {2 Examples}
 
-    {[Int.power ~base:7 ~exponent:3 = 343]}
-
-    Alternatively the [**] operator can be used:
-
-    {[7 ** 3 = 343]}
+    {[Int.power(~base=7, ~exponent=3) == 343]}
 *)
-
-val ( ** ) : t -> t -> t
-(** See {!Int.power} *)
 
 val negate : t -> t
 (** Flips the 'sign' of an integer so that positive integers become negative and negative integers become positive. Zero stays as it is.
 
     {2 Examples}
 
-    {[Int.negate 8 = (-8)]}
-    {[Int.negate (-7) = 7]}
-    {[Int.negate 0 = 0]}
-
-    Alternatively the [~-] operator can be used:
-
-    {[~-(7) = (-7)]}
+    {[Int.negate(8) == -8]}
+    {[Int.negate(-7) == 7]}
+    {[Int.negate(0) == 0]}
 *)
-
-val ( ~- ) : t -> t
-(** See {!Int.negate} *)
 
 val absolute : t -> t
 (** Get the {{: https://en.wikipedia.org/wiki/Absolute_value } absolute value } of a number.
 
     {2 Examples}
 
-    {[Int.absolute 8 = 8]}
-    {[Int.absolute (-7) = 7]}
-    {[Int.absolute 0 = 0]}
+    {[Int.absolute(8) == 8]}
+    {[Int.absolute(-7) == 7]}
+    {[Int.absolute(0) == 0]}
 *)
 
 val modulo : t -> by:t -> t
 (** Perform {{: https://en.wikipedia.org/wiki/Modular_arithmetic } modular arithmetic }.
+
+    {b Note} {!modulo} is not [%] JS operator. If you want [%], use {!remainder}
 
     If you intend to use [modulo] to detect even and odd numbers consider using {!Int.isEven} or {!Int.isOdd}.
 
@@ -200,32 +150,31 @@ val modulo : t -> by:t -> t
 
     {2 Examples}
 
-    {[Int.modulo ~by:3 (-4) = 1]}
-    {[Int.modulo ~by:3 (-3 )= 0]}
-    {[Int.modulo ~by:3 (-2) = 2]}
-    {[Int.modulo ~by:3 (-1) = 1]}
-    {[Int.modulo ~by:3 0 = 0]}
-    {[Int.modulo ~by:3 1 = 1]}
-    {[Int.modulo ~by:3 2 = 2]}
-    {[Int.modulo ~by:3 3 = 0]}
-    {[Int.modulo ~by:3 4 = 1]}
+    {[Int.modulo(-4, ~by=3) == 2]}
+    {[Int.modulo(-3, ~by=3) == 0]}
+    {[Int.modulo(-2, ~by=3) = 1]}
+    {[Int.modulo(-1, ~by=3) == 2]}
+    {[Int.modulo(0, ~by=3) == 0]}
+    {[Int.modulo(1, ~by=3) == 1]}
+    {[Int.modulo(2, ~by=3) == 2]}
+    {[Int.modulo(3, ~by=3) == 0]}
+    {[Int.modulo(4, ~by=3) == 1]}
 *)
 
-val ( mod ) : t -> t -> t
-(** See {!Int.modulo} *)
-
 val remainder : t -> by:t -> t
-(** Get the remainder after division. Here are bunch of examples of dividing by four:
+(** Get the remainder after division. Works the same as [%] JS operator
 
     Use {!Int.modulo} for a different treatment of negative numbers.
+
+    The sign of the result is the same as the sign 
+    of the dividend ([~by]) while with a {!modulo} the sign 
+    of the result is the same as the divisor ([t]).
 
     {2 Examples}
 
     {[
-      List.map
-        ~f:(Int.remainder ~by:4)
-        [(-5); (-4); (-3); (-2); (-1); 0; 1; 2; 3; 4; 5] =
-          [(-1); 0; (-3); (-2); (-1); 0; 1; 2; 3; 0; 1]
+      Array.map([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], ~f=Int.remainder(~by=4)) ==
+      [-1, 0, -3, -2, -1, 0, 1, 2, 3, 0, 1]
     ]}
 *)
 
@@ -234,8 +183,8 @@ val maximum : t -> t -> t
 
     {2 Examples}
 
-    {[Int.maximum 7 9 = 9]}
-    {[Int.maximum (-4) (-1) = (-1)]}
+    {[Int.maximum(7, 9) == 9]}
+    {[Int.maximum(-4, -1) == -1]}
 *)
 
 val minimum : t -> t -> t
@@ -243,8 +192,8 @@ val minimum : t -> t -> t
 
     {2 Examples}
 
-    {[Int.minimum 7 9 = 7]}
-    {[Int.minimum (-4) (-1) = (-4)]}
+    {[Int.minimum(7, 9) == 7]}
+    {[Int.minimum(-4, -1) == -4]}
 *)
 
 (** {1 Query} *)
@@ -254,9 +203,9 @@ val isEven : t -> bool
 
     {2 Examples}
 
-    {[Int.isEven 8 = true]}
-    {[Int.isEven 7 = false]}
-    {[Int.isEven 0 = true]}
+    {[Int.isEven(8) == true]}
+    {[Int.isEven(7) == false]}
+    {[Int.isEven(0) == true]}
 *)
 
 val isOdd : t -> bool
@@ -264,9 +213,9 @@ val isOdd : t -> bool
 
   {2 Examples}
 
-  {[Int.isOdd 7 = true]}
-  {[Int.isOdd 8 = false]}
-  {[Int.isOdd 0 = false]}
+  {[Int.isOdd(7) == true]}
+  {[Int.isOdd(8) == false]}
+  {[Int.isOdd(0) == false]}
 *)
 
 val clamp : t -> lower:t -> upper:t -> t
@@ -278,9 +227,9 @@ val clamp : t -> lower:t -> upper:t -> t
 
   {2 Examples}
 
-  {[Int.clamp ~lower:0 ~upper:8 5 = 5]}
-  {[Int.clamp ~lower:0 ~upper:8 9 = 8]}
-  {[Int.clamp ~lower:(-10) ~upper:(-5) 5 = (-5)]}
+  {[Int.clamp(5, ~lower=0, ~upper=8) == 5]}
+  {[Int.clamp(9, ~lower=0, ~upper=8) == 8]}
+  {[Int.clamp(5, ~lower=-10, ~upper=-5) == -5]}
 *)
 
 val inRange : t -> lower:t -> upper:t -> bool
@@ -292,9 +241,9 @@ val inRange : t -> lower:t -> upper:t -> bool
 
     {2 Examples}
 
-    {[Int.inRange ~lower:2 ~upper:4 3 = true]}
-    {[Int.inRange ~lower:5 ~upper:8 4 = false]}
-    {[Int.inRange ~lower:(-6) ~upper:(-2) (-3) = true]}
+    {[Int.inRange(3, ~lower=2, ~upper=4) == true]}
+    {[Int.inRange(4, ~lower=5, ~upper=8) == false]}
+    {[Int.inRange(-3, ~lower=-6, ~upper=-2) == true]}
 
 *)
 
@@ -306,11 +255,9 @@ val toFloat : t -> float
     {2 Examples}
 
     {[
-      let halfOf (number : int) : float =
-        Float.((Int.toFloat number) / 2)
-        (* Note that locally opening the {!Float} module here allows us to use the floating point division operator *)
-      in
-      halfOf 7 = 3.5
+      let halfOf = (number: int): float => Int.toFloat(number) /. 2.
+
+      halfOf(7) == 3.5
     ]}
 *)
 
@@ -319,13 +266,13 @@ val toString : t -> string
 
     Guarantees that
 
-    {[Int.(fromString (toString n)) = Some n ]}
+    {[n->Int.toString->Int.fromString == Some(n)]}
 
     {2 Examples}
 
-    {[Int.toString 3 = "3"]}
-    {[Int.toString (-3) = "-3"]}
-    {[Int.to_sString 0 = "0"]}
+    {[Int.toString(3) == "3"]}
+    {[Int.toString(-3) == "-3"]}
+    {[Int.toString(0) == "0"]}
 *)
 
 (** {1 Compare} *)

@@ -6,13 +6,11 @@ let fromString string =
   match string with "false" -> Some false | "true" -> Some true | _ -> None
 
 
-external ( && ) : bool -> bool -> bool = "%sequand"
-
-external ( || ) : bool -> bool -> bool = "%sequor"
-
 let xor a b = (a && not b) || ((not a) && b)
 
 let not = not
+
+let and_ a b = a && b
 
 external toString : bool -> string = "toString" [@@bs.send]
 

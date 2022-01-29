@@ -24,7 +24,7 @@
         | Alpacca
 
       let point_to_animal : animal Map.Of(Point).t = 
-        Map.from_list (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
+        Map.from_list (module Point) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Pig)]
     ]}
 
     See the {!Comparator} module for a more details.
@@ -67,13 +67,13 @@ val empty :
 
     {[
       Array.fold
-        [|"Pear", "Orange", "Grapefruit"|]
+        [|"Pear"; "Orange"; "Grapefruit"|]
         ~initial:(Map.empty (module Int))
         ~f:(fun length_to_fruit fruit ->
-          Map.add length_to_fruit (String.length fruit) fruit
+          Map.add length_to_fruit ~key:(String.length fruit) ~value:fruit
         )
       |> Map.to_array
-      = [|(4, "Pear"); (6, "Orange"), (10, "Grapefruit")|]
+      = [|(4, "Pear"); (6, "Orange"); (10, "Grapefruit")|]
     ]}
 
     In this particular case you might want to use {!Array.group_by}
@@ -342,7 +342,7 @@ val merge :
         ~f:(fun _animal population growth ->
           match (Option.both population growth) with
           | Some (population, growth) ->
-              Some Float.((of_int population) * growth)
+              Some Float.((from_int population) * growth)
           | None -> None
         )
       |> Map.to_list
@@ -386,10 +386,10 @@ val filter :
         ("Elephant", 3_156);
         ("Shrew", 56_423);
       ]
-      |> Map.map ~f:(fun population -> population > 10_000)
+      |> Map.filter ~f:(fun population -> population > 10_000)
       |> Map.to_list
         = [
-        ("Shrew", "56423");
+        ("Shrew", 56423);
       ]
     ]}
 *)
@@ -409,7 +409,7 @@ val partition :
         ("Rhino", 3);
         ("Shrew", 56_423);
       ]
-      |> Map.partition ~f:(fun population -> population < 10_000)
+      |> Map.partition ~f:(fun ~key:_  -> fun ~value:population  -> population < 10000)
       in
 
       Map.to_list endangered = [

@@ -32,6 +32,8 @@ let ( / ) = ( / )
 
 let ( /. ) = Base.Int.( // )
 
+let divide_float ~by n = Base.Int.(n // by)
+
 let power ~base ~exponent = Base.Int.(base ** exponent)
 
 let ( ** ) = Base.Int.( ** )

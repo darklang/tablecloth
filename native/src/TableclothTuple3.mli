@@ -11,9 +11,9 @@ val make : 'a -> 'b -> 'c -> 'a * 'b * 'c
 
     {2 Examples}
 
-    {[Tuple3.create 3 "cat" false = (3, "cat", false)]}
+    {[Tuple3.make 3 "cat" false = (3, "cat", false)]}
     {[
-      List.map3 ~f:Tuple3.create [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =
+      List.map3 ~f:Tuple3.make [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =
         [(1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.)]
     ]}
 *)
@@ -171,8 +171,8 @@ val to_array : 'a * 'a * 'a -> 'a array
 
     {2 Examples}
 
-    {[Tuple3.to_array (3, 4, 5) = [3; 4; 5]]}
-    {[Tuple3.to_array ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
+    {[Tuple3.to_array (3, 4, 5) = [|3; 4; 5|]]}
+    {[Tuple3.to_array ("was", "stressed", "then") = [|"was"; "stressed"; "then"|]]}
 *)
 
 val to_list : 'a * 'a * 'a -> 'a list

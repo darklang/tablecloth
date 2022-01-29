@@ -21,7 +21,7 @@
     {b Note} The ['error] case can be of {b any} type and while [string] is very common you could also use:
     - [string List.t] to allow errors to be accumulated
     - [exn], in which case the result type just makes exceptions explicit in the return type
-    - A variant or polymorphic variant, with one case per possible error. This is means each error can be dealt with explicitly. See {{: https://keleshev.com/composable-error-handling-in-ocaml } this excellent article} for mnore information on this approach.
+    - A variant or polymorphic variant, with one case per possible error. This is means each error can be dealt with explicitly. See {{: https://keleshev.com/composable-error-handling-in-ocaml } this excellent article} for more information on this approach.
 
     If the function you are writing can only fail in a single obvious way, maybe you want an {!Option} instead.
 *)
@@ -50,11 +50,11 @@ val error : 'error -> ('ok, 'error) t
 
     {[5 |. Ok = (Ok 5)]}
 
-    See the {{: https://reasonml.github.io/docs/en/pipe-first#pipe-into-variants} Reason docs } for more.
+    See the {{: https://rescript-lang.org/docs/manual/v8.0.0/pipe#pipe-into-variants} Reason docs } for more.
 
     {2 Examples}
 
-    {[Int.negate 3 |> Result.error 3 = Error (-3)]}
+    {[Int.negate 3 |> Result.error = Error (-3)]}
     {[List.map [1; 2; 3] ~f:Result.error = [Error 1; Error 2; Error 3]]}
 *)
 
@@ -65,7 +65,7 @@ val attempt : (unit -> 'ok) -> ('ok, exn) t
 
     {[Result.attempt (fun () -> 5 / 0) = Error Division_by_zero]}
     {[
-      let numbers = [|1,2,3|] in
+      let numbers = [|1; 2; 3|] in
       Result.attempt (fun () -> numbers.(3)) =
         Error (Invalid_argument "index out of bounds")
     ]}
@@ -76,7 +76,7 @@ val from_option : 'ok option -> error:'error -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[Result.from_option (Some 84) ~error:"Greater than 100" = Ok 8]}
+    {[Result.from_option (Some 84) ~error:"Greater than 100" = Ok 84]}
     {[
       Result.from_option None ~error:"Greater than 100" =
         Error "Greater than 100"
@@ -86,7 +86,7 @@ val from_option : 'ok option -> error:'error -> ('ok, 'error) t
 val is_ok : (_, _) t -> bool
 (** Check if a {!Result} is an [Ok].
 
-    Useful when you want to perform some side affect based on the presence of
+    Useful when you want to perform some side effect based on the presence of
     an [Ok] like logging.
 
     {b Note} if you need access to the contained value rather than doing
@@ -103,7 +103,7 @@ val is_ok : (_, _) t -> bool
 val is_error : (_, _) t -> bool
 (** Check if a {!Result} is an [Error].
 
-    Useful when you want to perform some side affect based on the presence of
+    Useful when you want to perform some side effect based on the presence of
     an [Error] like logging.
 
     {b Note} if you need access to the contained value rather than doing
@@ -140,9 +140,9 @@ val and_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
     ]}
     {[
       Result.and_
-        (Error (`UnexpectedInvertabrate "Honey bee"))
+        (Error (`UnexpectedInvertebrate "Honey Bee"))
         (Error (`UnexpectedBird "Finch"))
-          = Error (`UnexpectedBird "Honey Bee")
+          = Error (`UnexpectedInvertebrate "Honey Bee")
     ]}
 *)
 
@@ -155,17 +155,17 @@ val or_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
   {2 Examples}
 
   {[Result.or_ (Ok "Boar") (Ok "Gecko") = (Ok "Boar")]}
-  {[Result.or_ (Error (`UnexpectedInvertabrate "Periwinkle")) (Ok "Gecko") = (Ok "Gecko")]}
-  {[Result.or_ (Ok "Boar") (Error (`UnexpectedInvertabrate "Periwinkle")) = (Ok "Boar") ]}
-  {[Result.or_ (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedBird "Robin"))]}
+  {[Result.or_ (Error (`UnexpectedInvertebrate "Periwinkle")) (Ok "Gecko") = (Ok "Gecko")]}
+  {[Result.or_ (Ok "Boar") (Error (`UnexpectedInvertebrate "Periwinkle")) = (Ok "Boar") ]}
+  {[Result.or_ (Error (`UnexpectedInvertebrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedBird "Robin"))]}
 *)
 
 val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
-(** Combine two results, if both are [Ok] returns an [Ok] containing a {!Tuple} of the values.
+(** Combine two results, if both are [Ok] returns an [Ok] containing a {!Tuple2} of the values.
 
-    If either is an [Error], returns the [Error].
+    If either is an [Error], returns the first [Error].
 
-    The same as writing [Result.map2 ~f:Tuple.make]
+    The same as writing [Result.map2 ~f:Tuple2.make]
 
     {2 Examples}
 
@@ -177,14 +177,14 @@ val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
     {[
       Result.both
         (Ok "Badger")
-        (Error (`UnexpectedInvertabrate "Blue ringed octopus")) =
-          (Error (`UnexpectedInvertabrate "Blue ringed octopus"))
+        (Error (`UnexpectedInvertebrate "Blue ringed octopus")) =
+          (Error (`UnexpectedInvertebrate "Blue ringed octopus"))
     ]}
 
     {[
       Result.both
         (Error (`UnexpectedBird "Flamingo"))
-        (Error (`UnexpectedInvertabrate "Blue ringed octopus")) =
+        (Error (`UnexpectedInvertebrate "Blue ringed octopus")) =
           (Error (`UnexpectedBird "Flamingo"))
     ]}
 *)
@@ -200,8 +200,8 @@ val flatten : (('ok, 'error) t, 'error) t -> ('ok, 'error) t
         (Error (`UnexpectedBird "Peregrin falcon"))
     ]}
     {[
-      Result.flatten (Error (`UnexpectedInvertabrate "Woodlouse")) =
-        (Error (`UnexpectedInvertabrate "Woodlouse"))
+      Result.flatten (Error (`UnexpectedInvertebrate "Woodlouse")) =
+        (Error (`UnexpectedInvertebrate "Woodlouse"))
     ]}
 *)
 
@@ -235,14 +235,14 @@ val unwrap_error : ('ok, 'error) t -> default:'error -> 'error
     {[
       Result.unwrap_error
         (Error (`UnexpectedBird "Swallow"))
-        ~default:(`UnexpectedInvertabrate "Ladybird") =
+        ~default:(`UnexpectedInvertebrate "Ladybird") =
           `UnexpectedBird "Swallow"
     ]}
     {[
       Result.unwrap_error
         (Ok 5)
-        ~default:(`UnexpectedInvertabrate "Ladybird") =
-          `UnexpectedInvertabrate "Ladybird"
+        ~default:(`UnexpectedInvertebrate "Ladybird") =
+          `UnexpectedInvertebrate "Ladybird"
     ]}
 *)
 
@@ -302,7 +302,7 @@ val map_error : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
     {2 Examples}
 
     {[Result.map_error (Ok 3) ~f:String.reverse = Ok 3]}
-    {[Result.map_error (Error "bad") ~f:(Int.add 1)  = Error "bad"]}
+    {[Result.map_error (Error "bad") ~f:String.reverse  = Error "dab"]}
 *)
 
 val and_then : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
@@ -313,28 +313,25 @@ val and_then : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
     {2 Examples}
 
     {[
-      let reciprical (x:float) : (string, float) Standard.Result.t = (
+      let reciprical (x:float) : (float, string) Result.t = (
         if (x = 0.0) then
           Error "Divide by zero"
         else
           Ok (1.0 /. x)
       )
 
-      let root (x:float) : (string, float) Standard.Result.t = (
+      let root (x:float) : (float, string) Result.t = (
         if (x < 0.0) then
           Error "Cannot be negative"
         else
           Ok (Float.square_root x)
       )
     ]}
-
-    {2 Examples}
-
     {[Result.and_then ~f:reciprical (Ok 4.0) = Ok 0.25]}
     {[Result.and_then ~f:reciprical (Error "Missing number!") = Error "Missing number!"]}
     {[Result.and_then ~f:reciprical (Ok 0.0) = Error "Divide by zero"]}
     {[Result.and_then (Ok 4.0) ~f:root  |> Result.and_then ~f:reciprical = Ok 0.5]}
-    {[Result.and_then (Ok -2.0) ~f:root |> Result.and_then ~f:reciprical = Error "Cannot be negative"]}
+    {[Result.and_then (Ok (-2.0)) ~f:root |> Result.and_then ~f:reciprical = Error "Cannot be negative"]}
     {[Result.and_then (Ok 0.0) ~f:root |> Result.and_then ~f:reciprical = Error "Divide by zero"]}
 *)
 
@@ -376,11 +373,11 @@ val equal :
 
     {2 Examples}
 
-    {[Result.equal String.equal Int.equal (Ok 3) (Ok 3) = true]}
-    {[Result.equal String.equal Int.equal (Ok 3) (Ok 4) = false]}
-    {[Result.equal String.equal Int.equal (Error "Fail") (Error "Fail") = true]}
-    {[Result.equal String.equal Int.equal (Error "Expected error") (Error "Unexpected error") = false]}
-    {[Result.equal String.equal Int.equal (Error "Fail") (Ok 4) = false]}
+    {[Result.equal Int.equal String.equal (Ok 3) (Ok 3) = true]}
+    {[Result.equal Int.equal String.equal (Ok 3) (Ok 4) = false]}
+    {[Result.equal Int.equal String.equal (Error "Fail") (Error "Fail") = true]}
+    {[Result.equal Int.equal String.equal (Error "Expected error") (Error "Unexpected error") = false]}
+    {[Result.equal Int.equal String.equal (Error "Fail") (Ok 4) = false]}
 *)
 
 val compare :
@@ -395,12 +392,12 @@ val compare :
 
     {2 Examples}
 
-    {[Result.compare String.compare Int.compare (Ok 3) (Ok 3) = 0]}
-    {[Result.compare String.compare Int.compare (Ok 3) (Ok 4) = -1]}
-    {[Result.compare String.compare Int.compare (Error "Fail") (Error "Fail") = 0]}
-    {[Result.compare String.compare Int.compare (Error "Fail") (Ok 4) = -1]}
-    {[Result.compare String.compare Int.compare (Ok 4) (Error "Fail") = 1]}
-    {[Result.compare String.compare Int.compare (Error "Expected error") (Error "Unexpected error") = -1]}
+    {[Result.compare Int.compare String.compare (Ok 3) (Ok 3) = 0]}
+    {[Result.compare Int.compare String.compare (Ok 3) (Ok 4) = (-1)]}
+    {[Result.compare Int.compare String.compare (Error "Fail") (Error "Fail") = 0]}
+    {[Result.compare Int.compare String.compare (Error "Fail") (Ok 4) = (-1)]}
+    {[Result.compare Int.compare String.compare (Ok 4) (Error "Fail") = 1]}
+    {[Result.compare Int.compare String.compare (Error "Expected error") (Error "Unexpected error") = -1]}
 *)
 
 (** {1 Operators}

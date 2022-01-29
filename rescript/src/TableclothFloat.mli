@@ -44,7 +44,7 @@ val nan : t
       isNotANumber(nan) == false
     ]}
 
-    For detecting [Nan] you should use {!Float.isNaN}
+    For detecting [NaN] you should use {!Float.isNaN}
 *)
 
 val infinity : t
@@ -516,7 +516,7 @@ type direction =
   ]
 
 val round : ?direction:direction -> t -> t
-(** Round a number, by default to the to the closest [int] with halves rounded [`Up] (towards positive infinity)
+(** Round a number, by default to the to the closest [int] with halves rounded [#Up] (towards positive infinity)
 
     Other rounding strategies are available by using the optional [~direction] labelelled.
 

@@ -55,13 +55,24 @@ val initialize : int -> f:(int -> char) -> string
 
     {2 Examples}
 
-    {[String.initialize 8 ~f:(Fun.constant '9') = "999999999"]}
+    {[String.initialize 8 ~f:(Fun.constant '9') = "99999999"]}
 *)
 
 (** {1 Basic operations} *)
 
 val get : string -> int -> char
-(** Get the character at the specified index *)
+(** Get the character at the specified index 
+
+    {3 Exceptions}
+
+    If index out of range, throws a [Invalid_argument] exception.
+    Concider using {!getAt}, it returns an [option<char>]
+
+    {2 Examples}
+
+    {[String.get "stressed" 1 = 't']}
+
+*)
 
 val get_at : string -> index:int -> char option
 (** Get the character at [~index] *)
@@ -242,7 +253,7 @@ val capitalize : string -> string
 
     {2 Examples}
 
-    {[String.uncapitalize "den" = "Den"]}
+    {[String.capitalize "den" = "Den"]}
 *)
 
 val trim : string -> string
@@ -264,7 +275,7 @@ val trim_right : string -> string
 val pad_left : string -> int -> with_:string -> string
 (** Pad a string up to a minimum length
 
-    If the string is shorted than the proivded length, adds [with] to the left of the string until the minimum length is met
+    If the string is shorted than the proivded length, adds [with_] to the left of the string until the minimum length is met
 
     {2 Examples}
 

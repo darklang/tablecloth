@@ -19,7 +19,7 @@
     - Return values for functions that are not defined over their entire input range (partial functions).
     - Return value for otherwise reporting simple errors, where None is returned on error.
 
-    Lots of functions in [Standard] return options, one you have one you can
+    Lots of functions in [Tablecloth] return options, one you have one you can
     work with the value it might contain by:
 
     - Pattern matching
@@ -44,11 +44,11 @@ val some : 'a -> 'a option
 
     Note that when using the Reason syntax you {b can} use fast pipe ([->]) with variant constructors, so you don't need this function.
 
-    See the {{: https://reasonml.github.io/docs/en/pipe-first#pipe-into-variants} Reason docs } for more.
+    See the {{: https://rescript-lang.org/docs/manual/v8.0.0/pipe#pipe-into-variants} Reason docs } for more.
 
     {2 Examples}
 
-    {[String.reverse("desserts") |> Option.some = Some "desserts" ]}
+    {[String.reverse("desserts") |> Option.some = Some "stressed" ]}
  *)
 
 val and_ : 'a t -> 'a t -> 'a t
@@ -94,7 +94,7 @@ val or_else : 'a t -> 'a t -> 'a t
 *)
 
 val both : 'a t -> 'b t -> ('a * 'b) t
-(** Transform two options into an option of a {!Tuple}.
+(** Transform two options into an option of a {!Tuple2}.
 
     Returns None if either of the aguments is None.
 
@@ -140,7 +140,7 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
     {2 Examples}
 
     {[Option.map2 (Some 3) (Some 4) ~f:Int.add = Some 7]}
-    {[Option.map2 (Some 3) (Some 4) ~f:Tuple.make = Some (3, 4)]}
+    {[Option.map2 (Some 3) (Some 4) ~f:Tuple2.make = Some (3, 4)]}
     {[Option.map2 (Some 3) None ~f:Int.add = None]}
     {[Option.map2 None (Some 4) ~f:Int.add = None]}
 *)
@@ -174,7 +174,7 @@ val and_then : 'a t -> f:('a -> 'b t) -> 'b t
       |> Option.and_then ~f:to_valid_month
     ]}
 
-    If [String.to_tnt] produces [None] (because the [user_input] was not an
+    If [Int.from_string] produces [None] (because the [user_input] was not an
     integer) this entire chain of operations will short-circuit and result in
     [None]. If [to_valid_month] results in [None], again the chain of
     computations will result in [None].
@@ -183,7 +183,7 @@ val and_then : 'a t -> f:('a -> 'b t) -> 'b t
 
     {2 Examples}
 
-    {[Option.and_then (Some [1, 2, 3]) ~f:List.head = Some 1]}
+    {[Option.and_then (Some [1; 2; 3]) ~f:List.head = Some 1]}
     {[Option.and_then (Some []) ~f:List.head = None]}
 *)
 
@@ -242,12 +242,20 @@ val is_none : 'a t -> bool
 *)
 
 val tap : 'a t -> f:('a -> unit) -> unit
-(** Run a function against a value, if it is present. *)
+(** Run a function against an [Some(value)], ignores [None]s.
+
+    {2 Examples}
+
+    {[
+      Option.tap (Some "Dog") ~f:print_endline
+      (* prints "Dog" *)
+    ]} 
+*)
 
 val to_array : 'a t -> 'a array
-(** Convert an option to a {!Array}.
+(** Convert an option to an {!Array}.
 
-    [None] is represented as an empty list and [Some] is represented as a list of one element.
+    [None] is represented as an empty list and [Some] is represented as a array of one element.
 
     {2 Examples}
 
