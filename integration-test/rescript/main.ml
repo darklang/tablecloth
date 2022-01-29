@@ -24,10 +24,10 @@ let () =
 
   assert (Result.isOk (Ok 1)) ;
 
-  assert (Tuple2.equal Int.equal Int.equal (Tuple2.make 1 1) (1, 1)) ;
+  assert (Tuple2.equal (Tuple2.make 1 1) (1, 1) Int.equal Int.equal) ;
 
   assert (
-    Tuple3.equal Int.equal Int.equal Int.equal (Tuple3.make 1 1 1) (1, 1, 1) ) ;
+    Tuple3.equal (Tuple3.make 1 1 1) (1, 1, 1) Int.equal Int.equal Int.equal  ) ;
 
   assert (Set.length Set.String.empty = 0) ;
 
