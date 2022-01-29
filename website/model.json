@@ -876,8 +876,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple3.create 3 \"cat\" false = (3, \"cat\", false)",
-                            "reason": "Tuple3.create(3, \"cat\", false) == (3, \"cat\", false);\n"
+                            "ocaml": "Tuple3.make 3 \"cat\" false = (3, \"cat\", false)",
+                            "reason": "Tuple3.make(3, \"cat\", false) == (3, \"cat\", false);\n"
                           }
                         },
                         {
@@ -887,8 +887,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      List.map3 ~f:Tuple3.create [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =\n        [(1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.)]\n    ",
-                            "reason": "List.map3(~f=Tuple3.create, [1, 2, 3], ['a', 'b', 'c'], [4., 5., 6.])\n== [((1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.))];\n"
+                            "ocaml": "\n      List.map3 ~f:Tuple3.make [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =\n        [(1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.)]\n    ",
+                            "reason": "List.map3(~f=Tuple3.make, [1, 2, 3], ['a', 'b', 'c'], [4., 5., 6.])\n== [((1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.))];\n"
                           }
                         }
                       ]
@@ -2461,8 +2461,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple3.to_array (3, 4, 5) = [3; 4; 5]",
-                            "reason": "Tuple3.to_array((3, 4, 5)) == [3, 4, 5];\n"
+                            "ocaml": "Tuple3.to_array (3, 4, 5) = [|3; 4; 5|]",
+                            "reason": "Tuple3.to_array((3, 4, 5)) == [|3, 4, 5|];\n"
                           }
                         },
                         {
@@ -2472,8 +2472,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple3.to_array (\"was\", \"stressed\", \"then\") = [\"was\"; \"stressed\"; \"then\"]",
-                            "reason": "Tuple3.to_array((\"was\", \"stressed\", \"then\")) == [\"was\", \"stressed\", \"then\"];\n"
+                            "ocaml": "Tuple3.to_array (\"was\", \"stressed\", \"then\") = [|\"was\"; \"stressed\"; \"then\"|]",
+                            "reason": "Tuple3.to_array((\"was\", \"stressed\", \"then\")) == [|\"was\", \"stressed\", \"then\"|];\n"
                           }
                         }
                       ]
@@ -2721,7 +2721,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothTuple3.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) ->\n  ('b -> 'b -> int) ->\n  ('c -> 'c -> int) ->\n  ('a, 'b, 'c) TableclothTuple3.t -> ('a, 'b, 'c) TableclothTuple3.t -> int"
+                    "rendered": "f:('a -> 'a -> int) ->\n  g:('b -> 'b -> int) ->\n  h:('c -> 'c -> int) ->\n  ('a, 'b, 'c) TableclothTuple3.t -> ('a, 'b, 'c) TableclothTuple3.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -2750,7 +2750,27 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s, using the provided functions to compare the first\n    components then, if the first components are equal, the second components,\n    then the third components"
+                          "value": "s, using "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " to compare the first\n    components then, if the first components are equal, the second components are compared with "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "g"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ",\n    then the third components are compared with "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "h"
                         },
                         {
                           "tag": "Newline",
@@ -2784,8 +2804,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple3.compare Int.compare String.compare Char.compare (1, \"Fox\", 'j') (1, \"Fox\", 'j') = 0",
-                            "reason": "Tuple3.compare(\n  Int.compare,\n  String.compare,\n  Char.compare,\n  (1, \"Fox\", 'j'),\n  (1, \"Fox\", 'j'),\n)\n== 0;\n"
+                            "ocaml": "Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, \"Fox\", 'j') (1, \"Fox\", 'j') = 0",
+                            "reason": "Tuple3.compare(\n  ~f=Int.compare,\n  ~g=String.compare,\n  ~h=Char.compare,\n  (1, \"Fox\", 'j'),\n  (1, \"Fox\", 'j'),\n)\n== 0;\n"
                           }
                         },
                         {
@@ -2795,8 +2815,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple3.compare Int.compare String.compare Char.compare (1, \"Fox\", 'j') (1, \"Eel\", 'j') = 1",
-                            "reason": "Tuple3.compare(\n  Int.compare,\n  String.compare,\n  Char.compare,\n  (1, \"Fox\", 'j'),\n  (1, \"Eel\", 'j'),\n)\n== 1;\n"
+                            "ocaml": "Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, \"Fox\", 'j') (1, \"Eel\", 'j') = 1",
+                            "reason": "Tuple3.compare(\n  ~f=Int.compare,\n  ~g=String.compare,\n  ~h=Char.compare,\n  (1, \"Fox\", 'j'),\n  (1, \"Eel\", 'j'),\n)\n== 1;\n"
                           }
                         },
                         {
@@ -2806,8 +2826,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple3.compare Int.compare String.compare Char.compare (1, \"Fox\", 'j') (2, \"Fox\", 'm') = -1",
-                            "reason": "Tuple3.compare(\n  Int.compare,\n  String.compare,\n  Char.compare,\n  (1, \"Fox\", 'j'),\n  (2, \"Fox\", 'm'),\n)\n== (-1);\n"
+                            "ocaml": "Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, \"Fox\", 'j') (2, \"Fox\", 'm') = -1",
+                            "reason": "Tuple3.compare(\n  ~f=Int.compare,\n  ~g=String.compare,\n  ~h=Char.compare,\n  (1, \"Fox\", 'j'),\n  (2, \"Fox\", 'm'),\n)\n== (-1);\n"
                           }
                         }
                       ]
@@ -3803,8 +3823,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple2.map_all ~f:(Int.add 1) (3, 4, 5) = (4, 5, 6)",
-                            "reason": "Tuple2.map_all(~f=Int.add(1), (3, 4, 5)) == (4, 5, 6);\n"
+                            "ocaml": "Tuple2.map_all ~f:(Int.add 1) (3, 4) = (4, 5)",
+                            "reason": "Tuple2.map_all(~f=Int.add(1), (3, 4)) == (4, 5);\n"
                           }
                         },
                         {
@@ -4251,7 +4271,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothTuple2.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) ->\n  ('b -> 'b -> int) ->\n  ('a, 'b) TableclothTuple2.t -> ('a, 'b) TableclothTuple2.t -> int"
+                    "rendered": "f:('a -> 'a -> int) ->\n  g:('b -> 'b -> int) ->\n  ('a, 'b) TableclothTuple2.t -> ('a, 'b) TableclothTuple2.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -4280,7 +4300,23 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s, using the provided functions to compare the first\n    components then, if the first components are equal, the second components."
+                          "value": "s, using the provided "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " function to compare the first components.\n    Then, if the first components are equal, the second components are compared with "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "g"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -4314,8 +4350,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple2.compare Int.compare String.compare (1, \"Fox\") (1, \"Fox\") = 0",
-                            "reason": "Tuple2.compare(Int.compare, String.compare, (1, \"Fox\"), (1, \"Fox\")) == 0;\n"
+                            "ocaml": "Tuple2.compare ~f:Int.compare ~g:String.compare (1, \"Fox\") (1, \"Fox\") = 0",
+                            "reason": "Tuple2.compare(~f=Int.compare, ~g=String.compare, (1, \"Fox\"), (1, \"Fox\"))\n== 0;\n"
                           }
                         },
                         {
@@ -4325,8 +4361,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple2.compare Int.compare String.compare (1, \"Fox\") (1, \"Eel\") = 1",
-                            "reason": "Tuple2.compare(Int.compare, String.compare, (1, \"Fox\"), (1, \"Eel\")) == 1;\n"
+                            "ocaml": "Tuple2.compare ~f:Int.compare ~g:String.compare (1, \"Fox\") (1, \"Eel\") = 1",
+                            "reason": "Tuple2.compare(~f=Int.compare, ~g=String.compare, (1, \"Fox\"), (1, \"Eel\"))\n== 1;\n"
                           }
                         },
                         {
@@ -4336,8 +4372,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Tuple2.compare Int.compare String.compare (1, \"Fox\") (2, \"Hen\") = -1",
-                            "reason": "Tuple2.compare(Int.compare, String.compare, (1, \"Fox\"), (2, \"Hen\")) == (-1);\n"
+                            "ocaml": "Tuple2.compare ~f:Int.compare ~g:String.compare (1, \"Fox\") (2, \"Hen\") = -1",
+                            "reason": "Tuple2.compare(~f=Int.compare, ~g=String.compare, (1, \"Fox\"), (2, \"Hen\"))\n== (-1);\n"
                           }
                         }
                       ]
@@ -4573,8 +4609,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      let points : Set.Of(Point).t = Set.from_list (module Points) [(0, 0); (3, 4); (6, 7)]\n    ",
-                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\nlet points: Set.Of(Point).t = (\n  Set.from_list((module Points), [(0, 0), (3, 4), (6, 7)]): Set.Of(Point).t\n);\n"
+                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      let points : Set.Of(Point).t = Set.from_list (module Point) [(0, 0); (3, 4); (6, 7)]\n    ",
+                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\nlet points: Set.Of(Point).t = (\n  Set.from_list((module Point), [(0, 0), (3, 4), (6, 7)]): Set.Of(Point).t\n);\n"
                     }
                   },
                   {
@@ -5067,8 +5103,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.fold \n        [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|] \n        ~intial:(Set.empty (module Char))\n        ~f:Set.add\n      |> Set.to_array\n      = [|'i'; 'm'; 'p'; 's'|] \n    ",
-                            "reason": "Array.fold(\n  [|'m', 'i', 's', 's', 'i', 's', 's', 'i', 'p', 'p', 'i'|],\n  ~intial=Set.empty((module Char)),\n  ~f=Set.add,\n)\n|> Set.to_array == [|'i', 'm', 'p', 's'|];\n"
+                            "ocaml": "\n      Array.fold \n        [|'m'; 'i'; 's'; 's'; 'i'; 's'; 's';'i';'p';'p';'i'|] \n        ~initial:(Set.empty (module Char))\n        ~f:Set.add\n      |> Set.to_array\n      = [|'i'; 'm'; 'p'; 's'|] \n    ",
+                            "reason": "Array.fold(\n  [|'m', 'i', 's', 's', 'i', 's', 's', 'i', 'p', 'p', 'i'|],\n  ~initial=Set.empty((module Char)),\n  ~f=Set.add,\n)\n|> Set.to_array == [|'i', 'm', 'p', 's'|];\n"
                           }
                         }
                       ]
@@ -5525,8 +5561,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let original_set = Set.Int.from_list [1; 2] in\n      let new_set = Set.remove orignal_set 3 in\n      original_set = new_set\n    ",
-                            "reason": "{\n  let original_set = Set.Int.from_list([1, 2]);\n  let new_set = Set.remove(orignal_set, 3);\n  original_set == new_set;\n};\n"
+                            "ocaml": "\n      let original_set = Set.Int.from_list [1; 2] in\n      let new_set = Set.remove original_set 3 in\n      original_set = new_set\n    ",
+                            "reason": "{\n  let original_set = Set.Int.from_list([1, 2]);\n  let new_set = Set.remove(original_set, 3);\n  original_set == new_set;\n};\n"
                           }
                         }
                       ]
@@ -6764,8 +6800,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = Set.Int.from_list [1; 1; 5; 6; 5; 7; 9; 8] in\n      let (evens, odds) = Set.partition numbers ~f:Int.is_even in\n      Set.to_list evens = [6; 8]\n      Set.to_list odds = [1; 5; 7; 9]\n    ",
-                            "reason": "{\n  let numbers = Set.Int.from_list([1, 1, 5, 6, 5, 7, 9, 8]);\n  let (evens, odds) = Set.partition(numbers, ~f=Int.is_even);\n  Set.to_list(evens) == [6, 8](Set.to_list, odds) == [1, 5, 7, 9];\n};\n"
+                            "ocaml": "\n      let numbers = Set.Int.from_list [1; 1; 5; 6; 5; 7; 9; 8] in\n      let (evens, odds) = Set.partition numbers ~f:Int.is_even in\n      Set.to_list evens = [6; 8];\n      Set.to_list odds = [1; 5; 7; 9]\n    ",
+                            "reason": "{\n  let numbers = Set.Int.from_list([1, 1, 5, 6, 5, 7, 9, 8]);\n  let (evens, odds) = Set.partition(numbers, ~f=Int.is_even);\n  Set.to_list(evens) == [6, 8];\n  Set.to_list(odds) == [1, 5, 7, 9];\n};\n"
                           }
                         }
                       ]
@@ -7214,8 +7250,8 @@
                                 {
                                   "tag": "CodePre",
                                   "value": {
-                                    "ocaml": "Set.Int.singleton (5, \"Emu\") |> Set.to_list = [(5, \"Emu\")]",
-                                    "reason": "Set.Int.singleton((5, \"Emu\")) |> Set.to_list == [(5, \"Emu\")];\n"
+                                    "ocaml": "Set.Poly.singleton 5 \"Emu\" |> Set.to_list = [(5, \"Emu\")]",
+                                    "reason": "Set.Poly.singleton(5, \"Emu\") |> Set.to_list == [(5, \"Emu\")];\n"
                                   }
                                 }
                               ]
@@ -7304,8 +7340,8 @@
                                 {
                                   "tag": "CodePre",
                                   "value": {
-                                    "ocaml": "Set.Poly.from_array [(1, \"Ant\");(2, \"Bat\");(2, \"Bat\")] |> Set.to_list = [(1, \"Ant\"); (2, \"Bat\")]",
-                                    "reason": "Set.Poly.from_array([(1, \"Ant\"), (2, \"Bat\"), (2, \"Bat\")])\n|> Set.to_list == [(1, \"Ant\"), (2, \"Bat\")];\n"
+                                    "ocaml": "Set.Poly.from_array [|(1, \"Ant\");(2, \"Bat\");(2, \"Bat\")|] |> Set.to_list = [(1, \"Ant\"); (2, \"Bat\")]",
+                                    "reason": "Set.Poly.from_array([|(1, \"Ant\"), (2, \"Bat\"), (2, \"Bat\")|])\n|> Set.to_list == [(1, \"Ant\"), (2, \"Bat\")];\n"
                                   }
                                 }
                               ]
@@ -8474,7 +8510,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " for mnore information on this approach."
+                          "value": " for more information on this approach."
                         }
                       ]
                     ]
@@ -8806,7 +8842,7 @@
                         {
                           "tag": "Link",
                           "value": {
-                            "target": " https://reasonml.github.io/docs/en/pipe-first#pipe-into-variants",
+                            "target": " https://rescript-lang.org/docs/manual/v8.0.0/pipe#pipe-into-variants",
                             "content": [
                               {
                                 "tag": "Raw",
@@ -8851,8 +8887,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Int.negate 3 |> Result.error 3 = Error (-3)",
-                            "reason": "Int.negate(3) |> Result.error(3) == Error(-3);\n"
+                            "ocaml": "Int.negate 3 |> Result.error = Error (-3)",
+                            "reason": "Int.negate(3) |> Result.error == Error(-3);\n"
                           }
                         },
                         {
@@ -8967,8 +9003,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = [|1,2,3|] in\n      Result.attempt (fun () -> numbers.(3)) =\n        Error (Invalid_argument \"index out of bounds\")\n    ",
-                            "reason": "{\n  let numbers = [|(1, 2, 3)|];\n  Result.attempt(() => numbers[3])\n  == Error(Invalid_argument(\"index out of bounds\"));\n};\n"
+                            "ocaml": "\n      let numbers = [|1; 2; 3|] in\n      Result.attempt (fun () -> numbers.(3)) =\n        Error (Invalid_argument \"index out of bounds\")\n    ",
+                            "reason": "{\n  let numbers = [|1, 2, 3|];\n  Result.attempt(() => numbers[3])\n  == Error(Invalid_argument(\"index out of bounds\"));\n};\n"
                           }
                         }
                       ]
@@ -9113,8 +9149,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.from_option (Some 84) ~error:\"Greater than 100\" = Ok 8",
-                            "reason": "Result.from_option(Some(84), ~error=\"Greater than 100\") == Ok(8);\n"
+                            "ocaml": "Result.from_option (Some 84) ~error:\"Greater than 100\" = Ok 84",
+                            "reason": "Result.from_option(Some(84), ~error=\"Greater than 100\") == Ok(84);\n"
                           }
                         },
                         {
@@ -9200,7 +9236,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Useful when you want to perform some side affect based on the presence of\n    an "
+                          "value": "\n    Useful when you want to perform some side effect based on the presence of\n    an "
                         },
                         {
                           "tag": "Code",
@@ -9414,7 +9450,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Useful when you want to perform some side affect based on the presence of\n    an "
+                          "value": "\n    Useful when you want to perform some side effect based on the presence of\n    an "
                         },
                         {
                           "tag": "Code",
@@ -9735,8 +9771,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.and_\n        (Error (`UnexpectedInvertabrate \"Honey bee\"))\n        (Error (`UnexpectedBird \"Finch\"))\n          = Error (`UnexpectedBird \"Honey Bee\")\n    ",
-                            "reason": "Result.and_(\n  Error(`UnexpectedInvertabrate(\"Honey bee\")),\n  Error(`UnexpectedBird(\"Finch\")),\n)\n== Error(`UnexpectedBird(\"Honey Bee\"));\n"
+                            "ocaml": "\n      Result.and_\n        (Error (`UnexpectedInvertebrate \"Honey Bee\"))\n        (Error (`UnexpectedBird \"Finch\"))\n          = Error (`UnexpectedInvertebrate \"Honey Bee\")\n    ",
+                            "reason": "Result.and_(\n  Error(`UnexpectedInvertebrate(\"Honey Bee\")),\n  Error(`UnexpectedBird(\"Finch\")),\n)\n== Error(`UnexpectedInvertebrate(\"Honey Bee\"));\n"
                           }
                         }
                       ]
@@ -9872,8 +9908,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.or_ (Error (`UnexpectedInvertabrate \"Periwinkle\")) (Ok \"Gecko\") = (Ok \"Gecko\")",
-                            "reason": "Result.or_(Error(`UnexpectedInvertabrate(\"Periwinkle\")), Ok(\"Gecko\"))\n== Ok(\"Gecko\");\n"
+                            "ocaml": "Result.or_ (Error (`UnexpectedInvertebrate \"Periwinkle\")) (Ok \"Gecko\") = (Ok \"Gecko\")",
+                            "reason": "Result.or_(Error(`UnexpectedInvertebrate(\"Periwinkle\")), Ok(\"Gecko\"))\n== Ok(\"Gecko\");\n"
                           }
                         },
                         {
@@ -9883,8 +9919,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.or_ (Ok \"Boar\") (Error (`UnexpectedInvertabrate \"Periwinkle\")) = (Ok \"Boar\") ",
-                            "reason": "Result.or_(Ok(\"Boar\"), Error(`UnexpectedInvertabrate(\"Periwinkle\")))\n== Ok(\"Boar\");\n"
+                            "ocaml": "Result.or_ (Ok \"Boar\") (Error (`UnexpectedInvertebrate \"Periwinkle\")) = (Ok \"Boar\") ",
+                            "reason": "Result.or_(Ok(\"Boar\"), Error(`UnexpectedInvertebrate(\"Periwinkle\")))\n== Ok(\"Boar\");\n"
                           }
                         },
                         {
@@ -9894,8 +9930,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.or_ (Error (`UnexpectedInvertabrate \"Periwinkle\")) (Error (`UnexpectedBird \"Robin\")) = (Error (`UnexpectedBird \"Robin\"))",
-                            "reason": "Result.or_(\n  Error(`UnexpectedInvertabrate(\"Periwinkle\")),\n  Error(`UnexpectedBird(\"Robin\")),\n)\n== Error(`UnexpectedBird(\"Robin\"));\n"
+                            "ocaml": "Result.or_ (Error (`UnexpectedInvertebrate \"Periwinkle\")) (Error (`UnexpectedBird \"Robin\")) = (Error (`UnexpectedBird \"Robin\"))",
+                            "reason": "Result.or_(\n  Error(`UnexpectedInvertebrate(\"Periwinkle\")),\n  Error(`UnexpectedBird(\"Robin\")),\n)\n== Error(`UnexpectedBird(\"Robin\"));\n"
                           }
                         }
                       ]
@@ -9955,14 +9991,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -9986,7 +10022,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ", returns the "
+                          "value": ", returns the first "
                         },
                         {
                           "tag": "Code",
@@ -10006,7 +10042,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "Result.map2 ~f:Tuple.make"
+                          "value": "Result.map2 ~f:Tuple2.make"
                         },
                         {
                           "tag": "Newline",
@@ -10062,8 +10098,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.both\n        (Ok \"Badger\")\n        (Error (`UnexpectedInvertabrate \"Blue ringed octopus\")) =\n          (Error (`UnexpectedInvertabrate \"Blue ringed octopus\"))\n    ",
-                            "reason": "Result.both(\n  Ok(\"Badger\"),\n  Error(`UnexpectedInvertabrate(\"Blue ringed octopus\")),\n)\n== Error(`UnexpectedInvertabrate(\"Blue ringed octopus\"));\n"
+                            "ocaml": "\n      Result.both\n        (Ok \"Badger\")\n        (Error (`UnexpectedInvertebrate \"Blue ringed octopus\")) =\n          (Error (`UnexpectedInvertebrate \"Blue ringed octopus\"))\n    ",
+                            "reason": "Result.both(\n  Ok(\"Badger\"),\n  Error(`UnexpectedInvertebrate(\"Blue ringed octopus\")),\n)\n== Error(`UnexpectedInvertebrate(\"Blue ringed octopus\"));\n"
                           }
                         },
                         {
@@ -10077,8 +10113,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.both\n        (Error (`UnexpectedBird \"Flamingo\"))\n        (Error (`UnexpectedInvertabrate \"Blue ringed octopus\")) =\n          (Error (`UnexpectedBird \"Flamingo\"))\n    ",
-                            "reason": "Result.both(\n  Error(`UnexpectedBird(\"Flamingo\")),\n  Error(`UnexpectedInvertabrate(\"Blue ringed octopus\")),\n)\n== Error(`UnexpectedBird(\"Flamingo\"));\n"
+                            "ocaml": "\n      Result.both\n        (Error (`UnexpectedBird \"Flamingo\"))\n        (Error (`UnexpectedInvertebrate \"Blue ringed octopus\")) =\n          (Error (`UnexpectedBird \"Flamingo\"))\n    ",
+                            "reason": "Result.both(\n  Error(`UnexpectedBird(\"Flamingo\")),\n  Error(`UnexpectedInvertebrate(\"Blue ringed octopus\")),\n)\n== Error(`UnexpectedBird(\"Flamingo\"));\n"
                           }
                         }
                       ]
@@ -10173,8 +10209,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.flatten (Error (`UnexpectedInvertabrate \"Woodlouse\")) =\n        (Error (`UnexpectedInvertabrate \"Woodlouse\"))\n    ",
-                            "reason": "Result.flatten(Error(`UnexpectedInvertabrate(\"Woodlouse\")))\n== Error(`UnexpectedInvertabrate(\"Woodlouse\"));\n"
+                            "ocaml": "\n      Result.flatten (Error (`UnexpectedInvertebrate \"Woodlouse\")) =\n        (Error (`UnexpectedInvertebrate \"Woodlouse\"))\n    ",
+                            "reason": "Result.flatten(Error(`UnexpectedInvertebrate(\"Woodlouse\")))\n== Error(`UnexpectedInvertebrate(\"Woodlouse\"));\n"
                           }
                         }
                       ]
@@ -10494,8 +10530,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.unwrap_error\n        (Error (`UnexpectedBird \"Swallow\"))\n        ~default:(`UnexpectedInvertabrate \"Ladybird\") =\n          `UnexpectedBird \"Swallow\"\n    ",
-                            "reason": "Result.unwrap_error(\n  Error(`UnexpectedBird(\"Swallow\")),\n  ~default=`UnexpectedInvertabrate(\"Ladybird\"),\n)\n== `UnexpectedBird(\"Swallow\");\n"
+                            "ocaml": "\n      Result.unwrap_error\n        (Error (`UnexpectedBird \"Swallow\"))\n        ~default:(`UnexpectedInvertebrate \"Ladybird\") =\n          `UnexpectedBird \"Swallow\"\n    ",
+                            "reason": "Result.unwrap_error(\n  Error(`UnexpectedBird(\"Swallow\")),\n  ~default=`UnexpectedInvertebrate(\"Ladybird\"),\n)\n== `UnexpectedBird(\"Swallow\");\n"
                           }
                         },
                         {
@@ -10505,8 +10541,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Result.unwrap_error\n        (Ok 5)\n        ~default:(`UnexpectedInvertabrate \"Ladybird\") =\n          `UnexpectedInvertabrate \"Ladybird\"\n    ",
-                            "reason": "Result.unwrap_error(Ok(5), ~default=`UnexpectedInvertabrate(\"Ladybird\"))\n== `UnexpectedInvertabrate(\"Ladybird\");\n"
+                            "ocaml": "\n      Result.unwrap_error\n        (Ok 5)\n        ~default:(`UnexpectedInvertebrate \"Ladybird\") =\n          `UnexpectedInvertebrate \"Ladybird\"\n    ",
+                            "reason": "Result.unwrap_error(Ok(5), ~default=`UnexpectedInvertebrate(\"Ladybird\"))\n== `UnexpectedInvertebrate(\"Ladybird\");\n"
                           }
                         }
                       ]
@@ -10898,7 +10934,36 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ".\n    "
+                          "value": "."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
                         },
                         {
                           "tag": "CodePre",
@@ -11121,8 +11186,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.map_error (Error \"bad\") ~f:(Int.add 1)  = Error \"bad\"",
-                            "reason": "Result.map_error(Error(\"bad\"), ~f=Int.add(1)) == Error(\"bad\");\n"
+                            "ocaml": "Result.map_error (Error \"bad\") ~f:String.reverse  = Error \"dab\"",
+                            "reason": "Result.map_error(Error(\"bad\"), ~f=String.reverse) == Error(\"dab\");\n"
                           }
                         }
                       ]
@@ -11211,34 +11276,9 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let reciprical (x:float) : (string, float) Standard.Result.t = (\n        if (x = 0.0) then\n          Error \"Divide by zero\"\n        else\n          Ok (1.0 /. x)\n      )\n\n      let root (x:float) : (string, float) Standard.Result.t = (\n        if (x < 0.0) then\n          Error \"Cannot be negative\"\n        else\n          Ok (Float.square_root x)\n      )\n    ",
-                            "reason": "let reciprical = (x: float): Standard.Result.t(string, float) =>\n  if (x == 0.0) {\n    Error(\"Divide by zero\");\n  } else {\n    Ok(1.0 /. x);\n  };\n\nlet root = (x: float): Standard.Result.t(string, float) =>\n  if (x < 0.0) {\n    Error(\"Cannot be negative\");\n  } else {\n    Ok(Float.square_root(x));\n  };\n"
+                            "ocaml": "\n      let reciprical (x:float) : (float, string) Result.t = (\n        if (x = 0.0) then\n          Error \"Divide by zero\"\n        else\n          Ok (1.0 /. x)\n      )\n\n      let root (x:float) : (float, string) Result.t = (\n        if (x < 0.0) then\n          Error \"Cannot be negative\"\n        else\n          Ok (Float.square_root x)\n      )\n    ",
+                            "reason": "let reciprical = (x: float): Result.t(float, string) =>\n  if (x == 0.0) {\n    Error(\"Divide by zero\");\n  } else {\n    Ok(1.0 /. x);\n  };\n\nlet root = (x: float): Result.t(float, string) =>\n  if (x < 0.0) {\n    Error(\"Cannot be negative\");\n  } else {\n    Ok(Float.square_root(x));\n  };\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "Title",
-                          "value": {
-                            "size": 2,
-                            "label": null,
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": "Examples"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11291,8 +11331,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.and_then (Ok -2.0) ~f:root |> Result.and_then ~f:reciprical = Error \"Cannot be negative\"",
-                            "reason": "Result.and_then(Ok - 2.0, ~f=root)\n|> Result.and_then(~f=reciprical) == Error(\"Cannot be negative\");\n"
+                            "ocaml": "Result.and_then (Ok (-2.0)) ~f:root |> Result.and_then ~f:reciprical = Error \"Cannot be negative\"",
+                            "reason": "Result.and_then(Ok(-2.0), ~f=root)\n|> Result.and_then(~f=reciprical) == Error(\"Cannot be negative\");\n"
                           }
                         },
                         {
@@ -11667,8 +11707,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.equal String.equal Int.equal (Ok 3) (Ok 3) = true",
-                            "reason": "Result.equal(String.equal, Int.equal, Ok(3), Ok(3)) == true;\n"
+                            "ocaml": "Result.equal Int.equal String.equal (Ok 3) (Ok 3) = true",
+                            "reason": "Result.equal(Int.equal, String.equal, Ok(3), Ok(3)) == true;\n"
                           }
                         },
                         {
@@ -11678,8 +11718,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.equal String.equal Int.equal (Ok 3) (Ok 4) = false",
-                            "reason": "Result.equal(String.equal, Int.equal, Ok(3), Ok(4)) == false;\n"
+                            "ocaml": "Result.equal Int.equal String.equal (Ok 3) (Ok 4) = false",
+                            "reason": "Result.equal(Int.equal, String.equal, Ok(3), Ok(4)) == false;\n"
                           }
                         },
                         {
@@ -11689,8 +11729,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.equal String.equal Int.equal (Error \"Fail\") (Error \"Fail\") = true",
-                            "reason": "Result.equal(String.equal, Int.equal, Error(\"Fail\"), Error(\"Fail\")) == true;\n"
+                            "ocaml": "Result.equal Int.equal String.equal (Error \"Fail\") (Error \"Fail\") = true",
+                            "reason": "Result.equal(Int.equal, String.equal, Error(\"Fail\"), Error(\"Fail\")) == true;\n"
                           }
                         },
                         {
@@ -11700,8 +11740,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.equal String.equal Int.equal (Error \"Expected error\") (Error \"Unexpected error\") = false",
-                            "reason": "Result.equal(\n  String.equal,\n  Int.equal,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== false;\n"
+                            "ocaml": "Result.equal Int.equal String.equal (Error \"Expected error\") (Error \"Unexpected error\") = false",
+                            "reason": "Result.equal(\n  Int.equal,\n  String.equal,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== false;\n"
                           }
                         },
                         {
@@ -11711,8 +11751,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.equal String.equal Int.equal (Error \"Fail\") (Ok 4) = false",
-                            "reason": "Result.equal(String.equal, Int.equal, Error(\"Fail\"), Ok(4)) == false;\n"
+                            "ocaml": "Result.equal Int.equal String.equal (Error \"Fail\") (Ok 4) = false",
+                            "reason": "Result.equal(Int.equal, String.equal, Error(\"Fail\"), Ok(4)) == false;\n"
                           }
                         }
                       ]
@@ -11825,8 +11865,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare String.compare Int.compare (Ok 3) (Ok 3) = 0",
-                            "reason": "Result.compare(String.compare, Int.compare, Ok(3), Ok(3)) == 0;\n"
+                            "ocaml": "Result.compare Int.compare String.compare (Ok 3) (Ok 3) = 0",
+                            "reason": "Result.compare(Int.compare, String.compare, Ok(3), Ok(3)) == 0;\n"
                           }
                         },
                         {
@@ -11836,8 +11876,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare String.compare Int.compare (Ok 3) (Ok 4) = -1",
-                            "reason": "Result.compare(String.compare, Int.compare, Ok(3), Ok(4)) == (-1);\n"
+                            "ocaml": "Result.compare Int.compare String.compare (Ok 3) (Ok 4) = (-1)",
+                            "reason": "Result.compare(Int.compare, String.compare, Ok(3), Ok(4)) == (-1);\n"
                           }
                         },
                         {
@@ -11847,8 +11887,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare String.compare Int.compare (Error \"Fail\") (Error \"Fail\") = 0",
-                            "reason": "Result.compare(String.compare, Int.compare, Error(\"Fail\"), Error(\"Fail\"))\n== 0;\n"
+                            "ocaml": "Result.compare Int.compare String.compare (Error \"Fail\") (Error \"Fail\") = 0",
+                            "reason": "Result.compare(Int.compare, String.compare, Error(\"Fail\"), Error(\"Fail\"))\n== 0;\n"
                           }
                         },
                         {
@@ -11858,8 +11898,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare String.compare Int.compare (Error \"Fail\") (Ok 4) = -1",
-                            "reason": "Result.compare(String.compare, Int.compare, Error(\"Fail\"), Ok(4)) == (-1);\n"
+                            "ocaml": "Result.compare Int.compare String.compare (Error \"Fail\") (Ok 4) = (-1)",
+                            "reason": "Result.compare(Int.compare, String.compare, Error(\"Fail\"), Ok(4)) == (-1);\n"
                           }
                         },
                         {
@@ -11869,8 +11909,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare String.compare Int.compare (Ok 4) (Error \"Fail\") = 1",
-                            "reason": "Result.compare(String.compare, Int.compare, Ok(4), Error(\"Fail\")) == 1;\n"
+                            "ocaml": "Result.compare Int.compare String.compare (Ok 4) (Error \"Fail\") = 1",
+                            "reason": "Result.compare(Int.compare, String.compare, Ok(4), Error(\"Fail\")) == 1;\n"
                           }
                         },
                         {
@@ -11880,8 +11920,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare String.compare Int.compare (Error \"Expected error\") (Error \"Unexpected error\") = -1",
-                            "reason": "Result.compare(\n  String.compare,\n  Int.compare,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== (-1);\n"
+                            "ocaml": "Result.compare Int.compare String.compare (Error \"Expected error\") (Error \"Unexpected error\") = -1",
+                            "reason": "Result.compare(\n  Int.compare,\n  String.compare,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== (-1);\n"
                           }
                         }
                       ]
@@ -13958,8 +13998,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]",
-                            "reason": "List.drop [1;2;3;4] ~count:-1 = [1;2;3;4]"
+                            "ocaml": "List.drop [1;2;3;4] ~count:(-1) = [1;2;3;4]",
+                            "reason": "List.drop([1, 2, 3, 4], ~count=-1) == [1, 2, 3, 4];\n"
                           }
                         }
                       ]
@@ -14643,8 +14683,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.insert_at ~index:(-1) ~value:999 [100; 101; 102; 103] = [999]",
-                            "reason": "List.insert_at(~index=-1, ~value=999, [100, 101, 102, 103]) == [999];\n"
+                            "ocaml": "List.insert_at ~index:(-1) ~value:999 [100; 101; 102; 103] = [999; 100; 101; 102; 103]",
+                            "reason": "List.insert_at(~index=-1, ~value=999, [100, 101, 102, 103])\n== [999, 100, 101, 102, 103];\n"
                           }
                         },
                         {
@@ -14654,8 +14694,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.insert_at ~index:5 ~value:999 [100; 101; 102; 103] = [999]",
-                            "reason": "List.insert_at(~index=5, ~value=999, [100, 101, 102, 103]) == [999];\n"
+                            "ocaml": "List.insert_at ~index:5 ~value:999 [100; 101; 102; 103] = [100; 101; 102; 103; 999]",
+                            "reason": "List.insert_at(~index=5, ~value=999, [100, 101, 102, 103])\n== [100, 101, 102, 103, 999];\n"
                           }
                         }
                       ]
@@ -15228,8 +15268,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.is_empty [||] = true",
-                            "reason": "List.is_empty([||]) == true;\n"
+                            "ocaml": "List.is_empty [] = true",
+                            "reason": "List.is_empty([]) == true;\n"
                           }
                         },
                         {
@@ -15239,8 +15279,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.is_empty [|1; 2; 3|] = false",
-                            "reason": "List.is_empty([|1, 2, 3|]) == false;\n"
+                            "ocaml": "List.is_empty [1; 2; 3] = false",
+                            "reason": "List.is_empty([1, 2, 3]) == false;\n"
                           }
                         }
                       ]
@@ -15569,8 +15609,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.any ~f:is_even [|2;3|] = true",
-                            "reason": "List.any(~f=is_even, [|2, 3|]) == true;\n"
+                            "ocaml": "List.any ~f:Int.is_even [2;3] = true",
+                            "reason": "List.any(~f=Int.is_even, [2, 3]) == true;\n"
                           }
                         },
                         {
@@ -15580,8 +15620,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.any ~f:is_even [|1;3|] = false",
-                            "reason": "List.any(~f=is_even, [|1, 3|]) == false;\n"
+                            "ocaml": "List.any ~f:Int.is_even [1;3] = false",
+                            "reason": "List.any(~f=Int.is_even, [1, 3]) == false;\n"
                           }
                         },
                         {
@@ -15591,8 +15631,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.any ~f:is_even [||] = false",
-                            "reason": "List.any(~f=is_even, [||]) == false;\n"
+                            "ocaml": "List.any ~f:Int.is_even [] = false",
+                            "reason": "List.any(~f=Int.is_even, []) == false;\n"
                           }
                         }
                       ]
@@ -15697,8 +15737,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.all ~f:Int.is_even [|2;4|] = true",
-                            "reason": "List.all(~f=Int.is_even, [|2, 4|]) == true;\n"
+                            "ocaml": "List.all ~f:Int.is_even [2;4] = true",
+                            "reason": "List.all(~f=Int.is_even, [2, 4]) == true;\n"
                           }
                         },
                         {
@@ -15708,8 +15748,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.all ~f:Int.is_even [|2;3|] = false",
-                            "reason": "List.all(~f=Int.is_even, [|2, 3|]) == false;\n"
+                            "ocaml": "List.all ~f:Int.is_even [2;3] = false",
+                            "reason": "List.all(~f=Int.is_even, [2, 3]) == false;\n"
                           }
                         },
                         {
@@ -15719,8 +15759,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.all ~f:Int.is_even [||] = true",
-                            "reason": "List.all(~f=Int.is_even, [||]) == true;\n"
+                            "ocaml": "List.all ~f:Int.is_even [] = true",
+                            "reason": "List.all(~f=Int.is_even, []) == true;\n"
                           }
                         }
                       ]
@@ -15890,8 +15930,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6]\n   let abs_str x = string_of_int (abs x)\n   List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]\n   ",
-                            "reason": "List.unique_by(~f=string_of_int, [1, 3, 4, 3, 7, 7, 6]) == [1, 3, 4, 7, 6];\nlet abs_str = x =>\n  string_of_int(\n    abs(x),\n    List.unique_by,\n    ~f=abs_str,\n    [1, 3, 4, (-3), (-7), 7, 6],\n  )\n  == [1, 3, 4, (-7), 6];\n"
+                            "ocaml": "\n   List.unique_by ~f:string_of_int [1; 3; 4; 3; 7; 7; 6] = [1; 3; 4; 7; 6];\n   let abs_str x = string_of_int (abs x) in\n   List.unique_by ~f:abs_str [1; 3; 4; -3; -7; 7; 6] = [1; 3; 4; -7; 6]\n   ",
+                            "reason": "{\n  List.unique_by(~f=string_of_int, [1, 3, 4, 3, 7, 7, 6]) == [1, 3, 4, 7, 6];\n  let abs_str = x => string_of_int(abs(x));\n  List.unique_by(~f=abs_str, [1, 3, 4, (-3), (-7), 7, 6])\n  == [1, 3, 4, (-7), 6];\n};\n"
                           }
                         }
                       ]
@@ -16008,8 +16048,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.find ~f:Int.is_even [|1; 3; 4; 8;|] = Some 4",
-                            "reason": "List.find(~f=Int.is_even, [|1, 3, 4, 8|]) == Some(4);\n"
+                            "ocaml": "List.find ~f:Int.is_even [1; 3; 4; 8;] = Some 4",
+                            "reason": "List.find(~f=Int.is_even, [1, 3, 4, 8]) == Some(4);\n"
                           }
                         },
                         {
@@ -16019,8 +16059,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.find ~f:Int.is_odd [|0; 2; 4; 8;|] = None",
-                            "reason": "List.find(~f=Int.is_odd, [|0, 2, 4, 8|]) == None;\n"
+                            "ocaml": "List.find ~f:Int.is_odd [0; 2; 4; 8;] = None",
+                            "reason": "List.find(~f=Int.is_odd, [0, 2, 4, 8]) == None;\n"
                           }
                         },
                         {
@@ -16030,8 +16070,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.find ~f:Int.is_even [||] = None",
-                            "reason": "List.find(~f=Int.is_even, [||]) == None;\n"
+                            "ocaml": "List.find ~f:Int.is_even [] = None",
+                            "reason": "List.find(~f=Int.is_even, []) == None;\n"
                           }
                         }
                       ]
@@ -16152,8 +16192,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.find_index ~f:(fun index number -> index > 2 && Int.is_even number) [|1; 3; 4; 8;|] = Some (3, 8)",
-                            "reason": "List.find_index(\n  ~f=(index, number) => index > 2 && Int.is_even(number),\n  [|1, 3, 4, 8|],\n)\n== Some((3, 8));\n"
+                            "ocaml": "List.find_index ~f:(fun index number -> index > 2 && Int.is_even number) [1; 3; 4; 8;] = Some (3, 8)",
+                            "reason": "List.find_index(\n  ~f=(index, number) => index > 2 && Int.is_even(number),\n  [1, 3, 4, 8],\n)\n== Some((3, 8));\n"
                           }
                         }
                       ]
@@ -16324,7 +16364,7 @@
                       "value": [
                         {
                           "tag": "Code",
-                          "value": "List.minimum_by ~f:fcn, xs"
+                          "value": "List.minimum_by ~f:fcn xs"
                         },
                         {
                           "tag": "Raw",
@@ -16389,8 +16429,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n    let mod12 x = x mod 12\n    let hours = [7; 9; 15; 10; 3; 22]\n    List.minimum_by ~f:mod12 hours = Some 15\n    List.minimum_by ~f:mod12 [] = None\n    ",
-                            "reason": "\n    let mod12 x = x mod 12\n    let hours = [7; 9; 15; 10; 3; 22]\n    List.minimum_by ~f:mod12 hours = Some 15\n    List.minimum_by ~f:mod12 [] = None\n    "
+                            "ocaml": "\n    let mod12 x = x mod 12 in\n    let hours = [7; 9; 15; 10; 3; 22] in\n    List.minimum_by ~f:mod12 hours = Some 15;\n    List.minimum_by ~f:mod12 [] = None\n    ",
+                            "reason": "{\n  let mod12 = x => x mod 12;\n  let hours = [7, 9, 15, 10, 3, 22];\n  List.minimum_by(~f=mod12, hours) == Some(15);\n  List.minimum_by(~f=mod12, []) == None;\n};\n"
                           }
                         }
                       ]
@@ -16429,7 +16469,7 @@
                       "value": [
                         {
                           "tag": "Code",
-                          "value": "List.maximum_by ~f:fcn, xs"
+                          "value": "List.maximum_by ~f:fcn xs"
                         },
                         {
                           "tag": "Raw",
@@ -16494,8 +16534,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n     let mod12 x = x mod 12\n     let hours = [7;9;15;10;3;22]\n     List.maximum_by ~f:mod12 hours = Some 10\n     List.maximum_by ~f:mod12 [] = None\n     ",
-                            "reason": "\n     let mod12 x = x mod 12\n     let hours = [7;9;15;10;3;22]\n     List.maximum_by ~f:mod12 hours = Some 10\n     List.maximum_by ~f:mod12 [] = None\n     "
+                            "ocaml": "\n     let mod12 x = x mod 12 in\n     let hours = [7;9;15;10;3;22] in\n     List.maximum_by ~f:mod12 hours = Some 10;\n     List.maximum_by ~f:mod12 [] = None\n     ",
+                            "reason": "{\n  let mod12 = x => x mod 12;\n  let hours = [7, 9, 15, 10, 3, 22];\n  List.maximum_by(~f=mod12, hours) == Some(10);\n  List.maximum_by(~f=mod12, []) == None;\n};\n"
                           }
                         }
                       ]
@@ -16592,8 +16632,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.minimum [|7; 5; 8; 6|] ~compare:Int.compare = Some 5",
-                            "reason": "List.minimum([|7, 5, 8, 6|], ~compare=Int.compare) == Some(5);\n"
+                            "ocaml": "List.minimum [7; 5; 8; 6] ~compare:Int.compare = Some 5",
+                            "reason": "List.minimum([7, 5, 8, 6], ~compare=Int.compare) == Some(5);\n"
                           }
                         }
                       ]
@@ -16690,8 +16730,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.maximum [|7; 5; 8; 6|] ~compare:compare = Some 8",
-                            "reason": "List.maximum([|7, 5, 8, 6|], ~compare) == Some(8);\n"
+                            "ocaml": "List.maximum [7; 5; 8; 6] ~compare:compare = Some 8",
+                            "reason": "List.maximum([7, 5, 8, 6], ~compare) == Some(8);\n"
                           }
                         }
                       ]
@@ -16735,14 +16775,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -16816,8 +16856,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.extent [|7; 5; 8; 6|] ~compare:compare = Some (5, 8)",
-                            "reason": "List.extent([|7, 5, 8, 6|], ~compare) == Some((5, 8));\n"
+                            "ocaml": "List.extent [7; 5; 8; 6] ~compare:compare = Some (5, 8)",
+                            "reason": "List.extent([7, 5, 8, 6], ~compare) == Some((5, 8));\n"
                           }
                         }
                       ]
@@ -17028,8 +17068,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.map ~f:Float.square_root [|1.0; 4.0; 9.0|] = [|1.0; 2.0; 3.0|]",
-                            "reason": "List.map(~f=Float.square_root, [|1.0, 4.0, 9.0|]) == [|1.0, 2.0, 3.0|];\n"
+                            "ocaml": "List.map ~f:Float.square_root [1.0; 4.0; 9.0] = [1.0; 2.0; 3.0]",
+                            "reason": "List.map(~f=Float.square_root, [1.0, 4.0, 9.0]) == [1.0, 2.0, 3.0];\n"
                           }
                         }
                       ]
@@ -17660,8 +17700,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.flat_map ~f:(fun n -> [|n; n|]) [|1; 2; 3|] = [|1; 1; 2; 2; 3; 3|]",
-                            "reason": "List.flat_map(~f=n => [|n, n|], [|1, 2, 3|]) == [|1, 1, 2, 2, 3, 3|];\n"
+                            "ocaml": "List.flat_map ~f:(fun n -> [n; n]) [1; 2; 3] = [1; 1; 2; 2; 3; 3]",
+                            "reason": "List.flat_map(~f=n => [n, n], [1, 2, 3]) == [1, 1, 2, 2, 3, 3];\n"
                           }
                         }
                       ]
@@ -17761,8 +17801,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let numbers = [1, 2, 3] in\n      let sum =\n        List.fold numbers ~initial:0 ~f:(fun accumulator element -> accumulator + element)\n      in\n      sum = 6\n    ",
-                            "reason": "{\n  let numbers = [(1, 2, 3)];\n  let sum =\n    List.fold(numbers, ~initial=0, ~f=(accumulator, element) =>\n      accumulator + element\n    );\n\n  sum == 6;\n};\n"
+                            "ocaml": "\n      let numbers = [1; 2; 3] in\n      let sum =\n        List.fold numbers ~initial:0 ~f:(fun accumulator element -> accumulator + element)\n      in\n      sum = 6\n    ",
+                            "reason": "{\n  let numbers = [1, 2, 3];\n  let sum =\n    List.fold(numbers, ~initial=0, ~f=(accumulator, element) =>\n      accumulator + element\n    );\n\n  sum == 6;\n};\n"
                           }
                         },
                         {
@@ -17860,8 +17900,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.fold [|1; 2; 3|] ~initial:[] ~f:(List.cons) = [3; 2; 1]",
-                            "reason": "List.fold([|1, 2, 3|], ~initial=[], ~f=List.cons) == [3, 2, 1];\n"
+                            "ocaml": "List.fold [1; 2; 3] ~initial:[] ~f:(List.cons) = [3; 2; 1]",
+                            "reason": "List.fold([1, 2, 3], ~initial=[], ~f=List.cons) == [3, 2, 1];\n"
                           }
                         },
                         {
@@ -17875,8 +17915,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let unique integers =\n        List.fold integers ~initial:Set.Int.empty ~f:Set.add |> Set.to_list\n      in\n      unique [|1; 1; 2; 3; 2|] = [|1; 2; 3|]\n    ",
-                            "reason": "{\n  let unique = integers =>\n    List.fold(integers, ~initial=Set.Int.empty, ~f=Set.add) |> Set.to_list;\n\n  unique([|1, 1, 2, 3, 2|]) == [|1, 2, 3|];\n};\n"
+                            "ocaml": "\n      let unique integers =\n        List.fold integers ~initial:Set.Int.empty ~f:Set.add |> Set.to_list\n      in\n      unique [1; 1; 2; 3; 2] = [1; 2; 3]\n    ",
+                            "reason": "{\n  let unique = integers =>\n    List.fold(integers, ~initial=Set.Int.empty, ~f=Set.add) |> Set.to_list;\n\n  unique([1, 1, 2, 3, 2]) == [1, 2, 3];\n};\n"
                           }
                         },
                         {
@@ -17890,8 +17930,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let last_even integers =\n        List.fold integers ~initial:None ~f:(fun last int ->\n          if Int.is_even then\n            Some int\n          else\n            last\n        )\n      in\n      last_even [|1;2;3;4;5|] = Some 4\n    ",
-                            "reason": "{\n  let last_even = integers =>\n    List.fold(integers, ~initial=None, ~f=(last, int) =>\n      if (Int.is_even) {\n        Some(int);\n      } else {\n        last;\n      }\n    );\n\n  last_even([|1, 2, 3, 4, 5|]) == Some(4);\n};\n"
+                            "ocaml": "\n      let last_even integers =\n        List.fold integers ~initial:None ~f:(fun last int ->\n          if Int.is_even int then\n            Some int\n          else\n            last\n        )\n      in\n      last_even [1;2;3;4;5] = Some 4\n    ",
+                            "reason": "{\n  let last_even = integers =>\n    List.fold(integers, ~initial=None, ~f=(last, int) =>\n      if (Int.is_even(int)) {\n        Some(int);\n      } else {\n        last;\n      }\n    );\n\n  last_even([1, 2, 3, 4, 5]) == Some(4);\n};\n"
                           }
                         }
                       ]
@@ -18040,8 +18080,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let forty_twos = List.repeat ~length:2 42 in\n      let eighty_ones = List.repeat ~length:3 81 in\n      List.append fourty_twos eighty_ones = [42; 42; 81; 81; 81];\n    ",
-                            "reason": "{\n  let forty_twos = List.repeat(~length=2, 42);\n  let eighty_ones = List.repeat(~length=3, 81);\n  List.append(fourty_twos, eighty_ones) == [42, 42, 81, 81, 81];\n};\n"
+                            "ocaml": "\n      let fourty_twos = List.repeat ~times:2 42 in\n      let eighty_ones = List.repeat ~times:3 81 in\n      List.append fourty_twos eighty_ones = [42; 42; 81; 81; 81];\n    ",
+                            "reason": "{\n  let fourty_twos = List.repeat(~times=2, 42);\n  let eighty_ones = List.repeat(~times=3, 81);\n  List.append(fourty_twos, eighty_ones) == [42, 42, 81, 81, 81];\n};\n"
                           }
                         }
                       ]
@@ -18159,14 +18199,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -18190,7 +18230,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "List.map2 ~f:Tuple.make"
+                          "value": "List.map2 ~f:Tuple2.make"
                         },
                         {
                           "tag": "Newline",
@@ -18224,8 +18264,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.zip [|1;2;3;4;5|] [|\"Dog\"; \"Eagle\"; \"Ferret\"|] = [|(1, \"Dog\"); (2, \"Eagle\"); (3, \"Ferret\")|]",
-                            "reason": "List.zip([|1, 2, 3, 4, 5|], [|\"Dog\", \"Eagle\", \"Ferret\"|])\n== [|(1, \"Dog\"), (2, \"Eagle\"), (3, \"Ferret\")|];\n"
+                            "ocaml": "List.zip [1;2;3;4;5] [\"Dog\"; \"Eagle\"; \"Ferret\"] = [(1, \"Dog\"); (2, \"Eagle\"); (3, \"Ferret\")]",
+                            "reason": "List.zip([1, 2, 3, 4, 5], [\"Dog\", \"Eagle\", \"Ferret\"])\n== [(1, \"Dog\"), (2, \"Eagle\"), (3, \"Ferret\")];\n"
                           }
                         }
                       ]
@@ -18314,8 +18354,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.map2 [|1;2;3|] [|4;5;6|] ~f:(+) = [|5;7;9|]",
-                            "reason": "List.map2([|1, 2, 3|], [|4, 5, 6|], ~f=(+)) == [|5, 7, 9|];\n"
+                            "ocaml": "List.map2 [1;2;3] [4;5;6] ~f:(+) = [5;7;9]",
+                            "reason": "List.map2([1, 2, 3], [4, 5, 6], ~f=(+)) == [5, 7, 9];\n"
                           }
                         },
                         {
@@ -18329,8 +18369,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      List.map2\n        [|\"alice\"; \"bob\"; \"chuck\"|]\n        [|3; 5; 7; 9; 11; 13; 15; 17; 19|]\n        ~f:Tuple.create\n          = [|(\"alice\", 3); (\"bob\", 5); (\"chuck\", 7)|]\n    ",
-                            "reason": "List.map2(\n  [|\"alice\", \"bob\", \"chuck\"|],\n  [|3, 5, 7, 9, 11, 13, 15, 17, 19|],\n  ~f=Tuple.create,\n)\n== [|(\"alice\", 3), (\"bob\", 5), (\"chuck\", 7)|];\n"
+                            "ocaml": "\n      List.map2\n        [\"alice\"; \"bob\"; \"chuck\"]\n        [3; 5; 7; 9; 11; 13; 15; 17; 19]\n        ~f:Tuple2.make\n          = [(\"alice\", 3); (\"bob\", 5); (\"chuck\", 7)]\n    ",
+                            "reason": "List.map2(\n  [\"alice\", \"bob\", \"chuck\"],\n  [3, 5, 7, 9, 11, 13, 15, 17, 19],\n  ~f=Tuple2.make,\n)\n== [(\"alice\", 3), (\"bob\", 5), (\"chuck\", 7)];\n"
                           }
                         }
                       ]
@@ -18419,8 +18459,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      List.map3\n        ~f:Tuple3.create\n        [|\"alice\"; \"bob\"; \"chuck\"|]\n        [|2; 5; 7; 8;|]\n        [|true; false; true; false|] =\n          [|(\"alice\", 2, true); (\"bob\", 5, false); (\"chuck\", 7, true)|]\n    ",
-                            "reason": "List.map3(\n  ~f=Tuple3.create,\n  [|\"alice\", \"bob\", \"chuck\"|],\n  [|2, 5, 7, 8|],\n  [|true, false, true, false|],\n)\n== [|(\"alice\", 2, true), (\"bob\", 5, false), (\"chuck\", 7, true)|];\n"
+                            "ocaml": "\n      List.map3\n        ~f:Tuple3.make\n        [\"alice\"; \"bob\"; \"chuck\"]\n        [2; 5; 7; 8;]\n        [true; false; true; false] =\n          [(\"alice\", 2, true); (\"bob\", 5, false); (\"chuck\", 7, true)]\n    ",
+                            "reason": "List.map3(\n  ~f=Tuple3.make,\n  [\"alice\", \"bob\", \"chuck\"],\n  [2, 5, 7, 8],\n  [true, false, true, false],\n)\n== [(\"alice\", 2, true), (\"bob\", 5, false), (\"chuck\", 7, true)];\n"
                           }
                         }
                       ]
@@ -18482,14 +18522,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -18510,14 +18550,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple.first",
+                            "name": "Tuple2.first",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple.first",
+                              "target": "Tuple2.first",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple.first"
+                                  "value": "Tuple2.first"
                                 }
                               ]
                             }
@@ -18604,14 +18644,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -18728,8 +18768,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.split_at [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])",
-                            "reason": "List.split_at [1;2;3;4;5] ~index:-1 = ([], [1;2;3;4;5])"
+                            "ocaml": "List.split_at [1;2;3;4;5] ~index:(-1) = ([], [1;2;3;4;5])",
+                            "reason": "List.split_at([1, 2, 3, 4, 5], ~index=-1) == ([], [1, 2, 3, 4, 5]);\n"
                           }
                         },
                         {
@@ -18784,14 +18824,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -18929,14 +18969,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -18949,14 +18989,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -19146,8 +19186,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      List.for_each [|1; 2; 3|] ~f:(fun int -> print (Int.to_string int))\n      (*\n        Prints\n        1\n        2\n        3\n      *)\n    ",
-                            "reason": "List.for_each([|1, 2, 3|], ~f=int => print(Int.to_string(int)));\n/*\n   Prints\n   1\n   2\n   3\n */\n"
+                            "ocaml": "\n      List.for_each [1; 2; 3] ~f:(fun int -> print (Int.to_string int))\n      (*\n        Prints\n        1\n        2\n        3\n      *)\n    ",
+                            "reason": "List.for_each([1, 2, 3], ~f=int => print(Int.to_string(int)));\n/*\n   Prints\n   1\n   2\n   3\n */\n"
                           }
                         }
                       ]
@@ -19330,8 +19370,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.intersperse ~sep:\"on\" [|\"turtles\"; \"turtles\"; \"turtles\"|] = [|\"turtles\"; \"on\"; \"turtles\"; \"on\"; \"turtles\"|]",
-                            "reason": "List.intersperse(~sep=\"on\", [|\"turtles\", \"turtles\", \"turtles\"|])\n== [|\"turtles\", \"on\", \"turtles\", \"on\", \"turtles\"|];\n"
+                            "ocaml": "List.intersperse ~sep:\"on\" [\"turtles\"; \"turtles\"; \"turtles\"] = [\"turtles\"; \"on\"; \"turtles\"; \"on\"; \"turtles\"]",
+                            "reason": "List.intersperse(~sep=\"on\", [\"turtles\", \"turtles\", \"turtles\"])\n== [\"turtles\", \"on\", \"turtles\", \"on\", \"turtles\"];\n"
                           }
                         },
                         {
@@ -19341,8 +19381,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.intersperse ~sep:0 [||] = [||]",
-                            "reason": "List.intersperse(~sep=0, [||]) == [||];\n"
+                            "ocaml": "List.intersperse ~sep:0 [] = []",
+                            "reason": "List.intersperse(~sep=0, []) == [];\n"
                           }
                         }
                       ]
@@ -20000,8 +20040,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let animals = [|\"Ant\"; \"Bear\"; \"Cat\"; \"Dewgong\"|] in\n      Array.group_by animals (module Int) ~f:String.length = Map.Int.from_list [\n        (3, [\"Cat\"; \"Ant\"]);\n        (4, [\"Bear\"]);\n        (7, [\"Dewgong\"]);\n      ]\n    ",
-                            "reason": "{\n  let animals = [|\"Ant\", \"Bear\", \"Cat\", \"Dewgong\"|];\n  Array.group_by(animals, (module Int), ~f=String.length)\n  == Map.Int.from_list([\n       (3, [\"Cat\", \"Ant\"]),\n       (4, [\"Bear\"]),\n       (7, [\"Dewgong\"]),\n     ]);\n};\n"
+                            "ocaml": "\n      let animals = [\"Ant\"; \"Bear\"; \"Cat\"; \"Dewgong\"] in\n      List.group_by animals (module Int) ~f:String.length |> Map.toList = [\n        (3, [\"Cat\"; \"Ant\"]);\n        (4, [\"Bear\"]);\n        (7, [\"Dewgong\"]);\n      ]\n    ",
+                            "reason": "{\n  let animals = [\"Ant\", \"Bear\", \"Cat\", \"Dewgong\"];\n  List.group_by(animals, (module Int), ~f=String.length)\n  |> Map.toList\n  == [(3, [\"Cat\", \"Ant\"]), (4, [\"Bear\"]), (7, [\"Dewgong\"])];\n};\n"
                           }
                         }
                       ]
@@ -27578,8 +27618,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      type animal = \n        | Cow\n        | Pig\n        | Alpacca\n\n      let point_to_animal : animal Map.Of(Point).t = \n        Map.from_list (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]\n    ",
-                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\ntype animal =\n  | Cow\n  | Pig\n  | Alpacca;\n\nlet point_to_animal: Map.Of(Point).t(animal) = (\n  Map.from_list(\n    (module Points),\n    [((0, 0), Alpacca), ((3, 4), Cow), ((6, 7), Sheep)],\n  ):\n    Map.Of(Point).t(animal)\n);\n"
+                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      type animal = \n        | Cow\n        | Pig\n        | Alpacca\n\n      let point_to_animal : animal Map.Of(Point).t = \n        Map.from_list (module Point) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Pig)]\n    ",
+                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\ntype animal =\n  | Cow\n  | Pig\n  | Alpacca;\n\nlet point_to_animal: Map.Of(Point).t(animal) = (\n  Map.from_list(\n    (module Point),\n    [((0, 0), Alpacca), ((3, 4), Cow), ((6, 7), Pig)],\n  ):\n    Map.Of(Point).t(animal)\n);\n"
                     }
                   },
                   {
@@ -28068,8 +28108,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Array.fold\n        [|\"Pear\", \"Orange\", \"Grapefruit\"|]\n        ~initial:(Map.empty (module Int))\n        ~f:(fun length_to_fruit fruit ->\n          Map.add length_to_fruit (String.length fruit) fruit\n        )\n      |> Map.to_array\n      = [|(4, \"Pear\"); (6, \"Orange\"), (10, \"Grapefruit\")|]\n    ",
-                            "reason": "Array.fold(\n  [|(\"Pear\", \"Orange\", \"Grapefruit\")|],\n  ~initial=Map.empty((module Int)),\n  ~f=(length_to_fruit, fruit) =>\n  Map.add(length_to_fruit, String.length(fruit), fruit)\n)\n|> Map.to_array == [|(4, \"Pear\"), ((6, \"Orange\"), (10, \"Grapefruit\"))|];\n"
+                            "ocaml": "\n      Array.fold\n        [|\"Pear\"; \"Orange\"; \"Grapefruit\"|]\n        ~initial:(Map.empty (module Int))\n        ~f:(fun length_to_fruit fruit ->\n          Map.add length_to_fruit ~key:(String.length fruit) ~value:fruit\n        )\n      |> Map.to_array\n      = [|(4, \"Pear\"); (6, \"Orange\"); (10, \"Grapefruit\")|]\n    ",
+                            "reason": "Array.fold(\n  [|\"Pear\", \"Orange\", \"Grapefruit\"|],\n  ~initial=Map.empty((module Int)),\n  ~f=(length_to_fruit, fruit) =>\n  Map.add(length_to_fruit, ~key=String.length(fruit), ~value=fruit)\n)\n|> Map.to_array == [|(4, \"Pear\"), (6, \"Orange\"), (10, \"Grapefruit\")|];\n"
                           }
                         },
                         {
@@ -29878,8 +29918,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let animal_to_population =\n        Map.String.from_list [\n          (\"Elephant\", 3_156);\n          (\"Shrew\", 56_423);\n        ]\n      in\n      let animal_to_population_growth_rate = Map.String.from_list [\n        (\"Elephant\", 0.88);\n        (\"Squirrel\", 1.2);\n        (\"Python\", 4.0);\n      ] in\n\n      Map.merge\n        animal_to_population\n        animal_to_population_growth_rate\n        ~f:(fun _animal population growth ->\n          match (Option.both population growth) with\n          | Some (population, growth) ->\n              Some Float.((of_int population) * growth)\n          | None -> None\n        )\n      |> Map.to_list\n        = [(\"Elephant\", 2777.28)]\n    ",
-                            "reason": "{\n  let animal_to_population =\n    Map.String.from_list([(\"Elephant\", 3_156), (\"Shrew\", 56_423)]);\n\n  let animal_to_population_growth_rate =\n    Map.String.from_list([\n      (\"Elephant\", 0.88),\n      (\"Squirrel\", 1.2),\n      (\"Python\", 4.0),\n    ]);\n\n  Map.merge(\n    animal_to_population,\n    animal_to_population_growth_rate,\n    ~f=(_animal, population, growth) =>\n    switch (Option.both(population, growth)) {\n    | Some((population, growth)) =>\n      Some(Float.(of_int(population) * growth))\n    | None => None\n    }\n  )\n  |> Map.to_list == [(\"Elephant\", 2777.28)];\n};\n"
+                            "ocaml": "\n      let animal_to_population =\n        Map.String.from_list [\n          (\"Elephant\", 3_156);\n          (\"Shrew\", 56_423);\n        ]\n      in\n      let animal_to_population_growth_rate = Map.String.from_list [\n        (\"Elephant\", 0.88);\n        (\"Squirrel\", 1.2);\n        (\"Python\", 4.0);\n      ] in\n\n      Map.merge\n        animal_to_population\n        animal_to_population_growth_rate\n        ~f:(fun _animal population growth ->\n          match (Option.both population growth) with\n          | Some (population, growth) ->\n              Some Float.((from_int population) * growth)\n          | None -> None\n        )\n      |> Map.to_list\n        = [(\"Elephant\", 2777.28)]\n    ",
+                            "reason": "{\n  let animal_to_population =\n    Map.String.from_list([(\"Elephant\", 3_156), (\"Shrew\", 56_423)]);\n\n  let animal_to_population_growth_rate =\n    Map.String.from_list([\n      (\"Elephant\", 0.88),\n      (\"Squirrel\", 1.2),\n      (\"Python\", 4.0),\n    ]);\n\n  Map.merge(\n    animal_to_population,\n    animal_to_population_growth_rate,\n    ~f=(_animal, population, growth) =>\n    switch (Option.both(population, growth)) {\n    | Some((population, growth)) =>\n      Some(Float.(from_int(population) * growth))\n    | None => None\n    }\n  )\n  |> Map.to_list == [(\"Elephant\", 2777.28)];\n};\n"
                           }
                         }
                       ]
@@ -30126,8 +30166,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      Map.String.from_list [\n        (\"Elephant\", 3_156);\n        (\"Shrew\", 56_423);\n      ]\n      |> Map.map ~f:(fun population -> population > 10_000)\n      |> Map.to_list\n        = [\n        (\"Shrew\", \"56423\");\n      ]\n    ",
-                            "reason": "Map.String.from_list([(\"Elephant\", 3_156), (\"Shrew\", 56_423)])\n|> Map.map(~f=population => population > 10_000)\n|> Map.to_list == [(\"Shrew\", \"56423\")];\n"
+                            "ocaml": "\n      Map.String.from_list [\n        (\"Elephant\", 3_156);\n        (\"Shrew\", 56_423);\n      ]\n      |> Map.filter ~f:(fun population -> population > 10_000)\n      |> Map.to_list\n        = [\n        (\"Shrew\", 56423);\n      ]\n    ",
+                            "reason": "Map.String.from_list([(\"Elephant\", 3_156), (\"Shrew\", 56_423)])\n|> Map.filter(~f=population => population > 10_000)\n|> Map.to_list == [(\"Shrew\", 56423)];\n"
                           }
                         }
                       ]
@@ -30232,8 +30272,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let (endangered, not_endangered) = Map.String.from_list [\n        (\"Elephant\", 3_156);\n        (\"Mosquito\", 56_123_156);\n        (\"Rhino\", 3);\n        (\"Shrew\", 56_423);\n      ]\n      |> Map.partition ~f:(fun population -> population < 10_000)\n      in\n\n      Map.to_list endangered = [\n        (\"Elephant\", 3_156);\n        (\"Rhino\", 3);\n      ];\n\n      Map.to_list not_endangered = [\n        (\"Mosquito\", 56_123_156);\n        (\"Shrew\", 56_423);\n      ];\n    ",
-                            "reason": "{\n  let (endangered, not_endangered) =\n    Map.String.from_list([\n      (\"Elephant\", 3_156),\n      (\"Mosquito\", 56_123_156),\n      (\"Rhino\", 3),\n      (\"Shrew\", 56_423),\n    ])\n    |> Map.partition(~f=population => population < 10_000);\n\n  Map.to_list(endangered) == [(\"Elephant\", 3_156), (\"Rhino\", 3)];\n\n  Map.to_list(not_endangered)\n  == [(\"Mosquito\", 56_123_156), (\"Shrew\", 56_423)];\n};\n"
+                            "ocaml": "\n      let (endangered, not_endangered) = Map.String.from_list [\n        (\"Elephant\", 3_156);\n        (\"Mosquito\", 56_123_156);\n        (\"Rhino\", 3);\n        (\"Shrew\", 56_423);\n      ]\n      |> Map.partition ~f:(fun ~key:_  -> fun ~value:population  -> population < 10000)\n      in\n\n      Map.to_list endangered = [\n        (\"Elephant\", 3_156);\n        (\"Rhino\", 3);\n      ];\n\n      Map.to_list not_endangered = [\n        (\"Mosquito\", 56_123_156);\n        (\"Shrew\", 56_423);\n      ];\n    ",
+                            "reason": "{\n  let (endangered, not_endangered) =\n    Map.String.from_list([\n      (\"Elephant\", 3_156),\n      (\"Mosquito\", 56_123_156),\n      (\"Rhino\", 3),\n      (\"Shrew\", 56_423),\n    ])\n    |> Map.partition(~f=(~key as _, ~value as population) =>\n         population < 10000\n       );\n\n  Map.to_list(endangered) == [(\"Elephant\", 3_156), (\"Rhino\", 3)];\n\n  Map.to_list(not_endangered)\n  == [(\"Mosquito\", 56_123_156), (\"Shrew\", 56_423)];\n};\n"
                           }
                         }
                       ]
@@ -31894,7 +31934,7 @@
                   },
                   {
                     "tag": "Code",
-                    "value": "Standard"
+                    "value": "Tablecloth"
                   },
                   {
                     "tag": "Raw",
@@ -32197,7 +32237,7 @@
                         {
                           "tag": "Link",
                           "value": {
-                            "target": " https://reasonml.github.io/docs/en/pipe-first#pipe-into-variants",
+                            "target": " https://rescript-lang.org/docs/manual/v8.0.0/pipe#pipe-into-variants",
                             "content": [
                               {
                                 "tag": "Raw",
@@ -32242,8 +32282,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "String.reverse(\"desserts\") |> Option.some = Some \"desserts\" ",
-                            "reason": "String.reverse(\"desserts\") |> Option.some == Some(\"desserts\");\n"
+                            "ocaml": "String.reverse(\"desserts\") |> Option.some = Some \"stressed\" ",
+                            "reason": "String.reverse(\"desserts\") |> Option.some == Some(\"stressed\");\n"
                           }
                         }
                       ]
@@ -32772,14 +32812,14 @@
                         {
                           "tag": "Ref",
                           "value": {
-                            "name": "Tuple",
+                            "name": "Tuple2",
                             "reference": {
                               "kind": "Unknown",
-                              "target": "Tuple",
+                              "target": "Tuple2",
                               "content": [
                                 {
                                   "tag": "Code",
-                                  "value": "Tuple"
+                                  "value": "Tuple2"
                                 }
                               ]
                             }
@@ -33255,8 +33295,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Option.map2 (Some 3) (Some 4) ~f:Tuple.make = Some (3, 4)",
-                            "reason": "Option.map2(Some(3), Some(4), ~f=Tuple.make) == Some((3, 4));\n"
+                            "ocaml": "Option.map2 (Some 3) (Some 4) ~f:Tuple2.make = Some (3, 4)",
+                            "reason": "Option.map2(Some(3), Some(4), ~f=Tuple2.make) == Some((3, 4));\n"
                           }
                         },
                         {
@@ -33375,7 +33415,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "String.to_tnt"
+                          "value": "Int.from_string"
                         },
                         {
                           "tag": "Raw",
@@ -33489,8 +33529,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Option.and_then (Some [1, 2, 3]) ~f:List.head = Some 1",
-                            "reason": "Option.and_then(Some([(1, 2, 3)]), ~f=List.head) == Some(1);\n"
+                            "ocaml": "Option.and_then (Some [1; 2; 3]) ~f:List.head = Some 1",
+                            "reason": "Option.and_then(Some([1, 2, 3]), ~f=List.head) == Some(1);\n"
                           }
                         },
                         {
@@ -34282,7 +34322,59 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Run a function against a value, if it is present."
+                          "value": "Run a function against an "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Some(value)"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", ignores "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "s."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n      Option.tap (Some \"Dog\") ~f:print_endline\n      (* prints \"Dog\" *)\n    ",
+                            "reason": "Option.tap(Some(\"Dog\"), ~f=print_endline);\n/* prints \"Dog\" */\n"
+                          }
                         }
                       ]
                     },
@@ -34320,7 +34412,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Convert an option to a "
+                          "value": "Convert an option to an "
                         },
                         {
                           "tag": "Ref",
@@ -34364,7 +34456,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is represented as a list of one element."
+                          "value": " is represented as a array of one element."
                         },
                         {
                           "tag": "Newline",
@@ -35740,8 +35832,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "String.initialize 8 ~f:(Fun.constant '9') = \"999999999\"",
-                            "reason": "String.initialize(8, ~f=Fun.constant('9')) == \"999999999\";\n"
+                            "ocaml": "String.initialize 8 ~f:(Fun.constant '9') = \"99999999\"",
+                            "reason": "String.initialize(8, ~f=Fun.constant('9')) == \"99999999\";\n"
                           }
                         }
                       ]
@@ -35798,7 +35890,104 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Get the character at the specified index"
+                          "value": "Get the character at the specified index "
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 3,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Exceptions"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    If index out of range, throws a "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Invalid_argument"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " exception.\n    Concider using "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "getAt",
+                            "reference": {
+                              "kind": "Unknown",
+                              "target": "getAt",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "getAt"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", it returns an "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "option<char>"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "String.get \"stressed\" 1 = 't'",
+                            "reason": "\"stressed\".[1] == 't';\n"
+                          }
                         }
                       ]
                     },
@@ -37659,8 +37848,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "String.uncapitalize \"den\" = \"Den\"",
-                            "reason": "String.uncapitalize(\"den\") == \"Den\";\n"
+                            "ocaml": "String.capitalize \"den\" = \"Den\"",
+                            "reason": "String.capitalize(\"den\") == \"Den\";\n"
                           }
                         }
                       ]
@@ -37943,7 +38132,7 @@
                         },
                         {
                           "tag": "Code",
-                          "value": "with"
+                          "value": "with_"
                         },
                         {
                           "tag": "Raw",
@@ -41426,14 +41615,14 @@
                   {
                     "tag": "Ref",
                     "value": {
-                      "name": "Integer",
+                      "name": "Float",
                       "reference": {
                         "kind": "Unknown",
-                        "target": "Integer",
+                        "target": "Float",
                         "content": [
                           {
                             "tag": "Code",
-                            "value": "Integer"
+                            "value": "Float"
                           }
                         ]
                       }
@@ -41968,8 +42157,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Int.from_string \"0\" = Some 0.",
-                            "reason": "Int.from_string(\"0\") == Some(0.);\n"
+                            "ocaml": "Int.from_string \"0\" = Some 0",
+                            "reason": "Int.from_string(\"0\") == Some(0);\n"
                           }
                         },
                         {
@@ -41979,8 +42168,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Int.from_string \"42\" = Some 42.",
-                            "reason": "Int.from_string(\"42\") == Some(42.);\n"
+                            "ocaml": "Int.from_string \"42\" = Some 42",
+                            "reason": "Int.from_string(\"42\") == Some(42);\n"
                           }
                         },
                         {
@@ -43027,6 +43216,102 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "divide_float",
+                  "qualified_name": "TableclothInt.divide_float",
+                  "type": {
+                    "rendered": "by:TableclothInt.t -> TableclothInt.t -> float"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Floating point division"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Int.divide_float 3 ~by:2 = 1.5",
+                            "reason": "Int.divide_float(3, ~by=2) == 1.5;\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Int.divide_float 27 ~by:5 = 5.25",
+                            "reason": "Int.divide_float(27, ~by=5) == 5.25;\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Int.divide_float 8 ~by:4 = 2.0",
+                            "reason": "Int.divide_float(8, ~by=4) == 2.0;\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "power",
                   "qualified_name": "TableclothInt.power",
                   "type": {
@@ -43641,8 +43926,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Int.modulo ~by:3 (-4) = 1",
-                            "reason": "Int.modulo(~by=3, -4) == 1;\n"
+                            "ocaml": "Int.modulo ~by:3 (-4) = 2",
+                            "reason": "Int.modulo(~by=3, -4) == 2;\n"
                           }
                         },
                         {
@@ -43663,8 +43948,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Int.modulo ~by:3 (-2) = 2",
-                            "reason": "Int.modulo(~by=3, -2) == 2;\n"
+                            "ocaml": "Int.modulo ~by:3 (-2) = 1",
+                            "reason": "Int.modulo(~by=3, -2) == 1;\n"
                           }
                         },
                         {
@@ -43674,8 +43959,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Int.modulo ~by:3 (-1) = 1",
-                            "reason": "Int.modulo(~by=3, -1) == 1;\n"
+                            "ocaml": "Int.modulo ~by:3 (-1) = 2",
+                            "reason": "Int.modulo(~by=3, -1) == 2;\n"
                           }
                         },
                         {
@@ -44751,8 +45036,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let half_of (number : int) : float =\n        Float.((Int.to_float number) / 2)\n        (* Note that locally opening the {!Float} module here allows us to use the floating point division operator *)\n      in\n      half_of 7 = 3.5\n    ",
-                            "reason": "{\n  let half_of = (number: int): float => Float.(Int.to_float(number) / 2);\n  /* Note that locally opening the {!Float} module here allows us to use the floating point division operator */\n\n  half_of(7) == 3.5;\n};\n"
+                            "ocaml": "\n      let half_of (number : int) : float =\n        Float.((Int.to_float number) / 2.)\n        (* Note that locally opening the {!Float} module here allows us to use the floating point division operator *)\n      in\n      half_of 7 = 3.5\n    ",
+                            "reason": "{\n  let half_of = (number: int): float => Float.(Int.to_float(number) / 2.);\n  /* Note that locally opening the {!Float} module here allows us to use the floating point division operator */\n\n  half_of(7) == 3.5;\n};\n"
                           }
                         }
                       ]
@@ -45353,8 +45638,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      (* Pretend we have a module with the following signature:\n          module PretendMutableQueue : sig\n            type 'a t\n\n            (** Adds an element to the queue, returning the new length of the queue *)\n            val push_returning_length : 'a t -> 'a -> int\n          end\n      *)\n\n      let add_list_to_queue queue list =\n        List.for_each list ~f:(fun element ->\n          ignore (MutableQueue.push_returning_length queue element)\n        )\n      in ()\n    ",
-                            "reason": "/* Pretend we have a module with the following signature:\n       module PretendMutableQueue : sig\n         type 'a t\n\n         (** Adds an element to the queue, returning the new length of the queue *)\n         val push_returning_length : 'a t -> 'a -> int\n       end\n   */\n\n{\n  let add_list_to_queue = (queue, list) =>\n    List.for_each(list, ~f=element =>\n      ignore(MutableQueue.push_returning_length(queue, element))\n    );\n  ();\n};\n"
+                            "ocaml": "\n      (* Pretend we have a module with the following signature:\n          module PretendMutableQueue : sig\n            type 'a t\n\n            (** Adds an element to the queue, returning the new length of the queue *)\n            val push_returning_length : 'a t -> 'a -> int\n          end\n      *)\n\n      let add_list_to_queue queue list =\n        List.for_each list ~f:(fun element ->\n          Fun.ignore (PretendMutableQueue.push_returning_length queue element)\n        )\n      in ()\n    ",
+                            "reason": "/* Pretend we have a module with the following signature:\n       module PretendMutableQueue : sig\n         type 'a t\n\n         (** Adds an element to the queue, returning the new length of the queue *)\n         val push_returning_length : 'a t -> 'a -> int\n       end\n   */\n\n{\n  let add_list_to_queue = (queue, list) =>\n    List.for_each(list, ~f=element =>\n      Fun.ignore(PretendMutableQueue.push_returning_length(queue, element))\n    );\n  ();\n};\n"
                           }
                         }
                       ]
@@ -46640,8 +46925,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let count = ref 0\n      times(10, fun () -> (count <- !count + 1))\n      !count = 10\n    ",
-                            "reason": "let count = ref(0, times, (10, () => count = count^ + 1), count^) == 10;\n"
+                            "ocaml": "\n      let count = ref 0 in\n      times 10 (fun () -> count <- !count + 1);\n      !count = 10\n    ",
+                            "reason": "{\n  let count = ref(0);\n  times(10, () => count = count^ + 1);\n  count^ == 10;\n};\n"
                           }
                         }
                       ]
@@ -46730,8 +47015,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let square_area (width, height) = width * height in\n      let curried_area : float -> float -> float = curry square_area in\n      let sizes = [3, 4, 5] in\n      List.map sizes ~f:(curried_area 4) = [12; 16; 20]\n    ",
-                            "reason": "{\n  let square_area = ((width, height)) => width * height;\n  let curried_area: (float, float) => float = (\n    curry(square_area): (float, float) => float\n  );\n  let sizes = [(3, 4, 5)];\n  List.map(sizes, ~f=curried_area(4)) == [12, 16, 20];\n};\n"
+                            "ocaml": "\n      let square_area (width, height) = width * height in\n      let curried_area : int -> int -> int = Fun.curry square_area in\n      let sizes = [3; 4; 5] in\n      List.map sizes ~f:(curried_area 4) = [12; 16; 20]\n    ",
+                            "reason": "{\n  let square_area = ((width, height)) => width * height;\n  let curried_area: (int, int) => int = (\n    Fun.curry(square_area): (int, int) => int\n  );\n  let sizes = [3, 4, 5];\n  List.map(sizes, ~f=curried_area(4)) == [12, 16, 20];\n};\n"
                           }
                         }
                       ]
@@ -46804,8 +47089,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "\n      let sum (a : int) (b: int) : int = a + b in\n      let uncurried_sum : (int * int) -> int = uncurry add in\n      uncurried_sum (3, 4) = 7\n    ",
-                            "reason": "{\n  let sum = (a: int, b: int): int => a + b;\n  let uncurried_sum: ((int, int)) => int = (\n    uncurry(add): ((int, int)) => int\n  );\n  uncurried_sum((3, 4)) == 7;\n};\n"
+                            "ocaml": "\n      let sum (a : int) (b: int) : int = a + b in\n      let uncurried_sum : (int * int) -> int = Fun.uncurry sum in\n      uncurried_sum (3, 4) = 7\n    ",
+                            "reason": "{\n  let sum = (a: int, b: int): int => a + b;\n  let uncurried_sum: ((int, int)) => int = (\n    Fun.uncurry(sum): ((int, int)) => int\n  );\n  uncurried_sum((3, 4)) == 7;\n};\n"
                           }
                         }
                       ]

@@ -125,7 +125,7 @@ val and_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[Result.and_(Ok("Antelope"), Ok("Salmon")) == Ok("Salmon")}
+    {[Result.and_(Ok("Antelope"), Ok("Salmon")) == Ok("Salmon")]}
     {[
      Result.and_(Error(#UnexpectedBird("Finch")), Ok("Salmon"))
      == Error(#UnexpectedBird("Finch"))
@@ -273,6 +273,9 @@ val combine : ('ok, 'error) result list -> ('ok list, 'error) result
     [Ok xs]
     If any of the elements in [results] are of the form [Error err],
     the first of them is returned as the result of [Result.combine].
+
+    {2 Examples}
+    
     {[
       Result.combine(list{Ok(1), Ok(2), Ok(3), Ok(4)}) == Ok(list{1, 2, 3, 4})
       Result.combine(list{Ok(1), Error("two"), Ok(3), Error("four")}) == Error("two")

@@ -215,7 +215,7 @@ val compare :
   -> int
 (** Compare two {!Tuple3}s, using [f] to compare the first
     components then, if the first components are equal, the second components are compared with [g],
-    then the third components are compared with [h]
+    then the third components are compared with [h].
 
     {2 Examples}
 

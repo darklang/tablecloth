@@ -203,19 +203,19 @@ val equal :
  *)
 
 val compare :
-     ('a -> 'a -> int)
-  -> ('b -> 'b -> int)
-  -> ('c -> 'c -> int)
+     f:('a -> 'a -> int)
+  -> g:('b -> 'b -> int)
+  -> h:('c -> 'c -> int)
   -> ('a, 'b, 'c) t
   -> ('a, 'b, 'c) t
   -> int
-(** Compare two {!Tuple3}s, using the provided functions to compare the first
-    components then, if the first components are equal, the second components,
-    then the third components
+(** Compare two {!Tuple3}s, using [f] to compare the first
+    components then, if the first components are equal, the second components are compared with [g],
+    then the third components are compared with [h]
 
     {2 Examples}
 
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
+    {[Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
+    {[Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
+    {[Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
  *)

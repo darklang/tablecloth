@@ -52,7 +52,8 @@ let equal equal_first equal_second equal_third (a, b, c) (a', b', c') =
   equal_first a a' && equal_second b b' && equal_third c c'
 
 
-let compare compare_first compare_second compare_third (a, b, c) (a', b', c') =
+let compare
+    ~f:compare_first ~g:compare_second ~h:compare_third (a, b, c) (a', b', c') =
   match compare_first a a' with
   | 0 ->
     (match compare_second b b' with 0 -> compare_third c c' | result -> result)

@@ -145,13 +145,13 @@ val equal :
 *)
 
 val compare :
-  ('a -> 'a -> int) -> ('b -> 'b -> int) -> ('a, 'b) t -> ('a, 'b) t -> int
-(** Compare two {!Tuple2}s, using the provided functions to compare the first
-    components then, if the first components are equal, the second components.
+  f:('a -> 'a -> int) -> g:('b -> 'b -> int) -> ('a, 'b) t -> ('a, 'b) t -> int
+(** Compare two {!Tuple2}s, using the provided [f] function to compare the first components.
+    Then, if the first components are equal, the second components are compared with [g].
 
     {2 Examples}
 
-    {[Tuple2.compare Int.compare String.compare (1, "Fox") (1, "Fox") = 0]}
-    {[Tuple2.compare Int.compare String.compare (1, "Fox") (1, "Eel") = 1]}
-    {[Tuple2.compare Int.compare String.compare (1, "Fox") (2, "Hen") = -1]}
+    {[Tuple2.compare ~f:Int.compare ~g:String.compare (1, "Fox") (1, "Fox") = 0]}
+    {[Tuple2.compare ~f:Int.compare ~g:String.compare (1, "Fox") (1, "Eel") = 1]}
+    {[Tuple2.compare ~f:Int.compare ~g:String.compare (1, "Fox") (2, "Hen") = -1]}
 *)

@@ -744,6 +744,7 @@ let TextElement = ({ elements, path }) => {
       css={css`
         padding-top: 12px;
         padding-bottom: 12px;
+        line-height: 26px;
       `}
     >
       {renderTextElements(elements, path)}
@@ -759,7 +760,7 @@ let TypeSignature = ({ signature }) => {
 
 let TypeDefinition = ({ name, type }) => {
   return (
-    <code
+    <pre
     css={css`
     display: inline;
     font-weight: bold;
@@ -774,7 +775,7 @@ let TypeDefinition = ({ name, type }) => {
 
  
 let {name}: <TypeSignature signature={type}/>
-    </code>
+    </pre>
   );
 };
 

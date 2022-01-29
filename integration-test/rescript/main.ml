@@ -27,7 +27,7 @@ let () =
   assert (Tuple2.equal (Tuple2.make 1 1) (1, 1) Int.equal Int.equal) ;
 
   assert (
-    Tuple3.equal (Tuple3.make 1 1 1) (1, 1, 1) Int.equal Int.equal Int.equal  ) ;
+    Tuple3.equal (Tuple3.make 1 1 1) (1, 1, 1) Int.equal Int.equal Int.equal ) ;
 
   assert (Set.length Set.String.empty = 0) ;
 
