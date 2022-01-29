@@ -11,7 +11,7 @@
     {[
       module Point = {
         type t = (int, int)
-        let compare = Tuple2.compare(Int.compare, Int.compare)
+        let compare = Tuple2.compare(~f=Int.compare, ~g=Int.compare)
         include Comparator.Make({
           type t = t
           let compare = compare

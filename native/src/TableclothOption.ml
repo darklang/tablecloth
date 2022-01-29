@@ -50,7 +50,7 @@ let equal equal a b =
       false
 
 
-let compare compare a b =
+let compare ~f:compare a b =
   match (a, b) with
   | None, None ->
       0

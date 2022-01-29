@@ -48,7 +48,7 @@ let equal a b equal =
       false
 
 
-let compare a b compare =
+let compare a b ~f:compare =
   match (a, b) with
   | None, None ->
       0

@@ -87,8 +87,8 @@ let equal equal_ok equal_error a b =
 
 
 let compare
-    (compare_ok : 'ok -> 'ok -> int)
-    (compare_error : 'error -> 'error -> int)
+    ~f:(compare_ok : 'ok -> 'ok -> int)
+    ~g:(compare_error : 'error -> 'error -> int)
     (a : ('ok, 'error) t)
     (b : ('ok, 'error) t) : int =
   match (a, b) with

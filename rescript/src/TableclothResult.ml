@@ -91,8 +91,8 @@ let equal a b equalOk equalError =
 let compare
     (a : ('ok, 'error) t)
     (b : ('ok, 'error) t)
-    (compareOk : 'ok -> 'ok -> int)
-    (compareError : 'error -> 'error -> int) : int =
+    ~f:(compareOk : 'ok -> 'ok -> int)
+    ~g:(compareError : 'error -> 'error -> int) : int =
   match (a, b) with
   | Error a', Error b' ->
       compareError a' b'

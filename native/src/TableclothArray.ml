@@ -231,7 +231,7 @@ let equal equal a b =
     loop 0
 
 
-let compare compare a b =
+let compare ~f:compare a b =
   match Int.compare (length a) (length b) with
   | 0 ->
       if length a == 0

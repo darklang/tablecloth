@@ -4609,8 +4609,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      let points : Set.Of(Point).t = Set.from_list (module Point) [(0, 0); (3, 4); (6, 7)]\n    ",
-                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\nlet points: Set.Of(Point).t = (\n  Set.from_list((module Point), [(0, 0), (3, 4), (6, 7)]): Set.Of(Point).t\n);\n"
+                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare ~f:Int.compare ~g:Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      let points : Set.Of(Point).t = Set.from_list (module Point) [(0, 0); (3, 4); (6, 7)]\n    ",
+                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(~f=Int.compare, ~g=Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\nlet points: Set.Of(Point).t = (\n  Set.from_list((module Point), [(0, 0), (3, 4), (6, 7)]): Set.Of(Point).t\n);\n"
                     }
                   },
                   {
@@ -11782,7 +11782,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothResult.compare",
                   "type": {
-                    "rendered": "('ok -> 'ok -> int) ->\n  ('error -> 'error -> int) ->\n  ('ok, 'error) TableclothResult.t -> ('ok, 'error) TableclothResult.t -> int"
+                    "rendered": "f:('ok -> 'ok -> int) ->\n  g:('error -> 'error -> int) ->\n  ('ok, 'error) TableclothResult.t -> ('ok, 'error) TableclothResult.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -11791,7 +11791,55 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Compare results for using the provided functions."
+                          "value": "Compare results for using the provided "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " and "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "g"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " functions.\n    "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " will be used to compare "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Ok"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "'s and "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "g"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " will be used on "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Error"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "s. "
                         },
                         {
                           "tag": "Newline",
@@ -11865,8 +11913,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare Int.compare String.compare (Ok 3) (Ok 3) = 0",
-                            "reason": "Result.compare(Int.compare, String.compare, Ok(3), Ok(3)) == 0;\n"
+                            "ocaml": "Result.compare ~f:Int.compare ~g:String.compare (Ok 3) (Ok 3) = 0",
+                            "reason": "Result.compare(~f=Int.compare, ~g=String.compare, Ok(3), Ok(3)) == 0;\n"
                           }
                         },
                         {
@@ -11876,8 +11924,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare Int.compare String.compare (Ok 3) (Ok 4) = (-1)",
-                            "reason": "Result.compare(Int.compare, String.compare, Ok(3), Ok(4)) == (-1);\n"
+                            "ocaml": "Result.compare ~f:Int.compare ~g:String.compare (Ok 3) (Ok 4) = (-1)",
+                            "reason": "Result.compare(~f=Int.compare, ~g=String.compare, Ok(3), Ok(4)) == (-1);\n"
                           }
                         },
                         {
@@ -11887,8 +11935,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare Int.compare String.compare (Error \"Fail\") (Error \"Fail\") = 0",
-                            "reason": "Result.compare(Int.compare, String.compare, Error(\"Fail\"), Error(\"Fail\"))\n== 0;\n"
+                            "ocaml": "Result.compare ~f:Int.compare ~g:String.compare (Error \"Fail\") (Error \"Fail\") = 0",
+                            "reason": "Result.compare(\n  ~f=Int.compare,\n  ~g=String.compare,\n  Error(\"Fail\"),\n  Error(\"Fail\"),\n)\n== 0;\n"
                           }
                         },
                         {
@@ -11898,8 +11946,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare Int.compare String.compare (Error \"Fail\") (Ok 4) = (-1)",
-                            "reason": "Result.compare(Int.compare, String.compare, Error(\"Fail\"), Ok(4)) == (-1);\n"
+                            "ocaml": "Result.compare ~f:Int.compare ~g:String.compare (Error \"Fail\") (Ok 4) = (-1)",
+                            "reason": "Result.compare(~f=Int.compare, ~g=String.compare, Error(\"Fail\"), Ok(4))\n== (-1);\n"
                           }
                         },
                         {
@@ -11909,8 +11957,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare Int.compare String.compare (Ok 4) (Error \"Fail\") = 1",
-                            "reason": "Result.compare(Int.compare, String.compare, Ok(4), Error(\"Fail\")) == 1;\n"
+                            "ocaml": "Result.compare ~f:Int.compare ~g:String.compare (Ok 4) (Error \"Fail\") = 1",
+                            "reason": "Result.compare(~f=Int.compare, ~g=String.compare, Ok(4), Error(\"Fail\")) == 1;\n"
                           }
                         },
                         {
@@ -11920,8 +11968,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Result.compare Int.compare String.compare (Error \"Expected error\") (Error \"Unexpected error\") = -1",
-                            "reason": "Result.compare(\n  Int.compare,\n  String.compare,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== (-1);\n"
+                            "ocaml": "Result.compare ~f:Int.compare ~g:String.compare (Error \"Expected error\") (Error \"Unexpected error\") = -1",
+                            "reason": "Result.compare(\n  ~f=Int.compare,\n  ~g=String.compare,\n  Error(\"Expected error\"),\n  Error(\"Unexpected error\"),\n)\n== (-1);\n"
                           }
                         }
                       ]
@@ -20185,7 +20233,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothList.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) -> 'a TableclothList.t -> 'a TableclothList.t -> int"
+                    "rendered": "f:('a -> 'a -> int) -> 'a TableclothList.t -> 'a TableclothList.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -20194,7 +20242,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Compare two lists using the provided function to compare elements."
+                          "value": "Compare two lists using the "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " function to compare elements."
                         },
                         {
                           "tag": "Newline",
@@ -20236,8 +20292,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.compare Int.compare [1;2;3] [1;2;3;4] = -1",
-                            "reason": "List.compare(Int.compare, [1, 2, 3], [1, 2, 3, 4]) == (-1);\n"
+                            "ocaml": "List.compare ~f:Int.compare [1;2;3] [1;2;3;4] = -1",
+                            "reason": "List.compare(~f=Int.compare, [1, 2, 3], [1, 2, 3, 4]) == (-1);\n"
                           }
                         },
                         {
@@ -20247,8 +20303,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.compare Int.compare [1;2;3] [1;2;3] = 0",
-                            "reason": "List.compare(Int.compare, [1, 2, 3], [1, 2, 3]) == 0;\n"
+                            "ocaml": "List.compare ~f:FInt.compare [1;2;3] [1;2;3] = 0",
+                            "reason": "List.compare(~f=FInt.compare, [1, 2, 3], [1, 2, 3]) == 0;\n"
                           }
                         },
                         {
@@ -20258,8 +20314,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "List.compare Int.compare [1;2;5] [1;2;3] = 1",
-                            "reason": "List.compare(Int.compare, [1, 2, 5], [1, 2, 3]) == 1;\n"
+                            "ocaml": "List.compare ~f:Int.compare [1;2;5] [1;2;3] = 1",
+                            "reason": "List.compare(~f=Int.compare, [1, 2, 5], [1, 2, 3]) == 1;\n"
                           }
                         }
                       ]
@@ -27320,7 +27376,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothArray.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) -> 'a TableclothArray.t -> 'a TableclothArray.t -> int"
+                    "rendered": "f:('a -> 'a -> int) -> 'a TableclothArray.t -> 'a TableclothArray.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -27329,7 +27385,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Compare two arrays using the provided function to compare pairs of elements."
+                          "value": "Compare two arrays using the "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " function to compare pairs of elements."
                         },
                         {
                           "tag": "Newline",
@@ -27371,8 +27435,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = (-1)",
-                            "reason": "Array.compare(Int.compare, [|1, 2, 3|], [|1, 2, 3, 4|]) == (-1);\n"
+                            "ocaml": "Array.compare ~f:Int.compare [|1;2;3|] [|1;2;3;4|] = (-1)",
+                            "reason": "Array.compare(~f=Int.compare, [|1, 2, 3|], [|1, 2, 3, 4|]) == (-1);\n"
                           }
                         },
                         {
@@ -27382,8 +27446,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0",
-                            "reason": "Array.compare(Int.compare, [|1, 2, 3|], [|1, 2, 3|]) == 0;\n"
+                            "ocaml": "Array.compare ~f:Int.compare [|1;2;3|] [|1;2;3|] = 0",
+                            "reason": "Array.compare(~f=Int.compare, [|1, 2, 3|], [|1, 2, 3|]) == 0;\n"
                           }
                         },
                         {
@@ -27393,8 +27457,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Array.compare Int.compare [|1;2;5|] [|1;2;3|] = 1",
-                            "reason": "Array.compare(Int.compare, [|1, 2, 5|], [|1, 2, 3|]) == 1;\n"
+                            "ocaml": "Array.compare ~f:Int.compare [|1;2;5|] [|1;2;3|] = 1",
+                            "reason": "Array.compare(~f=Int.compare, [|1, 2, 5|], [|1, 2, 3|]) == 1;\n"
                           }
                         }
                       ]
@@ -27618,8 +27682,8 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      type animal = \n        | Cow\n        | Pig\n        | Alpacca\n\n      let point_to_animal : animal Map.Of(Point).t = \n        Map.from_list (module Point) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Pig)]\n    ",
-                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\ntype animal =\n  | Cow\n  | Pig\n  | Alpacca;\n\nlet point_to_animal: Map.Of(Point).t(animal) = (\n  Map.from_list(\n    (module Point),\n    [((0, 0), Alpacca), ((3, 4), Cow), ((6, 7), Pig)],\n  ):\n    Map.Of(Point).t(animal)\n);\n"
+                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare ~f:Int.compare ~g:Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      type animal = \n        | Cow\n        | Pig\n        | Alpacca\n\n      let point_to_animal : animal Map.Of(Point).t = \n        Map.from_list (module Point) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Pig)]\n    ",
+                      "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(~f=Int.compare, ~g=Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\ntype animal =\n  | Cow\n  | Pig\n  | Alpacca;\n\nlet point_to_animal: Map.Of(Point).t(animal) = (\n  Map.from_list(\n    (module Point),\n    [((0, 0), Alpacca), ((3, 4), Cow), ((6, 7), Pig)],\n  ):\n    Map.Of(Point).t(animal)\n);\n"
                     }
                   },
                   {
@@ -34786,7 +34850,7 @@
                   "name": "compare",
                   "qualified_name": "TableclothOption.compare",
                   "type": {
-                    "rendered": "('a -> 'a -> int) -> 'a TableclothOption.t -> 'a TableclothOption.t -> int"
+                    "rendered": "f:('a -> 'a -> int) -> 'a TableclothOption.t -> 'a TableclothOption.t -> int"
                   },
                   "info": {
                     "deprecated": null,
@@ -34795,7 +34859,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Compare two optional values using the provided function."
+                          "value": "Compare two optional values using the provided "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "f"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " function."
                         },
                         {
                           "tag": "Newline",
@@ -34849,8 +34921,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Option.compare Int.compare (Some 1) (Some 3) = -1",
-                            "reason": "Option.compare(Int.compare, Some(1), Some(3)) == (-1);\n"
+                            "ocaml": "Option.compare ~f:Int.compare (Some 1) (Some 3) = -1",
+                            "reason": "Option.compare(~f=Int.compare, Some(1), Some(3)) == (-1);\n"
                           }
                         },
                         {
@@ -34860,8 +34932,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Option.compare Int.compare (Some 1) None = 1",
-                            "reason": "Option.compare(Int.compare, Some(1), None) == 1;\n"
+                            "ocaml": "Option.compare ~f:Int.compare (Some 1) None = 1",
+                            "reason": "Option.compare(~f=Int.compare, Some(1), None) == 1;\n"
                           }
                         },
                         {
@@ -34871,8 +34943,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Option.compare Int.compare None None = 0",
-                            "reason": "Option.compare(Int.compare, None, None) == 0;\n"
+                            "ocaml": "Option.compare ~f:Int.compare None None = 0",
+                            "reason": "Option.compare(~f=Int.compare, None, None) == 0;\n"
                           }
                         }
                       ]
@@ -56286,6 +56358,150 @@
                           "value": {
                             "ocaml": "Bool.not true = false",
                             "reason": "Bool.(!)(true) == false;\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "and_",
+                  "qualified_name": "TableclothBool.and_",
+                  "type": {
+                    "rendered": "bool -> bool -> bool"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "The logical conjunction or operator."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    Returns "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "true"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " if "
+                        },
+                        {
+                          "tag": "Bold",
+                          "value": [
+                            {
+                              "tag": "Raw",
+                              "value": "both"
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " of its operands are "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "true"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Bool.and_(true, true) == true",
+                            "reason": "Bool.and_((true, true)) === true;\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Bool.and_(true, false) == false",
+                            "reason": "Bool.and_((true, false)) === false;\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Bool.and_(false, true) == false",
+                            "reason": "Bool.and_((false, true)) === false;\n"
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Bool.and_(false, false) == false",
+                            "reason": "Bool.and_((false, false)) === false;\n"
                           }
                         }
                       ]

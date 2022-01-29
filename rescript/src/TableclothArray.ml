@@ -260,7 +260,7 @@ let groupBy t comparator ~f =
               Some (element :: elements) ) )
 
 
-let equal equal a b =
+let equal a b equal =
   if length a <> length b
   then false
   else if length a = 0
@@ -274,7 +274,7 @@ let equal equal a b =
     loop 0
 
 
-let compare compare a b =
+let compare a b ~f:compare =
   match TableclothInt.compare (length a) (length b) with
   | 0 ->
       if length a == 0

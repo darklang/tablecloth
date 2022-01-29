@@ -340,17 +340,17 @@ let groupBy t comparator ~f =
               Some (element :: elements) ) )
 
 
-let rec equal equalElement a b =
+let rec equal a b equalElement =
   match (a, b) with
   | [], [] ->
       true
   | x :: xs, y :: ys ->
-      equalElement x y && equal equalElement xs ys
+      equalElement x y && equal xs ys equalElement
   | _ ->
       false
 
 
-let rec compare compareElement a b =
+let rec compare a b ~f:compareElement =
   match (a, b) with
   | [], [] ->
       0
@@ -361,6 +361,6 @@ let rec compare compareElement a b =
   | x :: xs, y :: ys ->
     ( match compareElement x y with
     | 0 ->
-        compare compareElement xs ys
+        compare ~f:compareElement xs ys
     | result ->
         result )

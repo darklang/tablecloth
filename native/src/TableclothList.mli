@@ -910,14 +910,14 @@ val to_array : 'a t -> 'a array
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two lists for equality using the provided function to test elements. *)
 
-val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
-(** Compare two lists using the provided function to compare elements.
+val compare : f:('a -> 'a -> int) -> 'a t -> 'a t -> int
+(** Compare two lists using the [f] function to compare elements.
 
     A shorter list is 'less' than a longer one.
 
     {2 Examples}
 
-    {[List.compare Int.compare [1;2;3] [1;2;3;4] = -1]}
-    {[List.compare Int.compare [1;2;3] [1;2;3] = 0]}
-    {[List.compare Int.compare [1;2;5] [1;2;3] = 1]}
+    {[List.compare ~f:Int.compare [1;2;3] [1;2;3;4] = -1]}
+    {[List.compare ~f:FInt.compare [1;2;3] [1;2;3] = 0]}
+    {[List.compare ~f:Int.compare [1;2;5] [1;2;3] = 1]}
 *)

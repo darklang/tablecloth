@@ -283,14 +283,14 @@ val equal : 'a t -> 'a t -> ('a -> 'a -> bool) -> bool
     {[Option.equal(None, None, Int.equal) == true]}
 *)
 
-val compare : 'a t -> 'a t -> ('a -> 'a -> int) -> int
-(** Compare two optional values using the provided function.
+val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
+(** Compare two optional values using the provided [f] function.
 
     A [None] is "less" than a [Some]
 
     {2 Examples}
 
-    {[Option.compare(Some(1), Some(3), Int.compare) == -1]}
-    {[Option.compare(Some(1), None, Int.compare) == 1]}
-    {[Option.compare(None, None, Int.compare) == 0]}
+    {[Option.compare(Some(1), Some(3), ~f=Int.compare) == -1]}
+    {[Option.compare(Some(1), None, ~f=Int.compare) == 1]}
+    {[Option.compare(None, None, ~f=Int.compare) == 0]}
 *)

@@ -274,12 +274,13 @@ let suite =
 
       describe "compare" (fun () ->
           test "returns comparative value -1, 0, or 1" (fun () ->
-              expect (Option.compare (Some 1) (Some 3) Int.compare)
+              expect (Option.compare (Some 1) (Some 3) ~f:Int.compare)
               |> toEqual Eq.int (-1) ) ;
 
           test "returns comparative value -1, 0, or 1" (fun () ->
-              expect (Option.compare (Some 1) None Int.compare)
+              expect (Option.compare (Some 1) None ~f:Int.compare)
               |> toEqual Eq.int 1 ) ;
 
           test "returns comparative value -1, 0, or 1" (fun () ->
-              expect (Option.compare None None Int.compare) |> toEqual Eq.int 0 ) ) )
+              expect (Option.compare None None ~f:Int.compare)
+              |> toEqual Eq.int 0 ) ) )

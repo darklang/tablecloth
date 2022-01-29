@@ -275,7 +275,7 @@ val combine : ('ok, 'error) result list -> ('ok list, 'error) result
     the first of them is returned as the result of [Result.combine].
 
     {2 Examples}
-    
+
     {[
       Result.combine(list{Ok(1), Ok(2), Ok(3), Ok(4)}) == Ok(list{1, 2, 3, 4})
       Result.combine(list{Ok(1), Error("two"), Ok(3), Error("four")}) == Error("two")
@@ -326,8 +326,8 @@ val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
     {[Result.andThen(Error("Missing number!"), ~f=reciprical) == Error("Missing number!")]}
     {[Result.andThen(Ok(0.0), ~f=reciprical) == Error("Divide by zero")]}
     {[Result.andThen(Ok(4.0), ~f=root)->Result.andThen(~f=reciprical) == Ok(0.5)]}
-    {[Result.andThen(Ok(-2.0), ~f=root) |> Result.andThen(~f=reciprical) == Error("Cannot be negative")]}
-    {[Result.andThen(Ok(0.0), ~f=root) |> Result.andThen(~f=reciprical) == Error("Divide by zero")]}
+    {[Result.andThen(Ok(-2.0), ~f=root)->Result.andThen(~f=reciprical) == Error("Cannot be negative")]}
+    {[Result.andThen(Ok(0.0), ~f=root)->Result.andThen(~f=reciprical) == Error("Divide by zero")]}
 *)
 
 val tap : ('ok, _) t -> f:('ok -> unit) -> unit
@@ -378,26 +378,27 @@ val equal :
 val compare :
      ('ok, 'error) t
   -> ('ok, 'error) t
-  -> ('ok -> 'ok -> int)
-  -> ('error -> 'error -> int)
+  -> f:('ok -> 'ok -> int)
+  -> g:('error -> 'error -> int)
   -> int
 (** Compare results for using the provided functions.
+    [f] will be used to compare [Ok]'s and [g] will be used on [Error]s. 
 
     In the case when one of the results is an [Error] and one is [Ok], [Error]s  are considered 'less' then [Ok]s
 
     {2 Examples}
 
-    {[Result.compare(Ok(3), Ok(3), Int.compare, String.compare) == 0]}
-    {[Result.compare(Ok(3), Ok(4), Int.compare, String.compare) == -1]}
-    {[Result.compare(Error("Fail"), Error("Fail"), Int.compare, String.compare) == 0]}
-    {[Result.compare(Error("Fail"), Ok(4), Int.compare, String.compare) == -1]}
-    {[Result.compare(Ok(4), Error("Fail"), Int.compare, String.compare) == 1]}
+    {[Result.compare(Ok(3), Ok(3), ~f=Int.compare, ~g=String.compare) == 0]}
+    {[Result.compare(Ok(3), Ok(4), ~f=Int.compare, ~g=String.compare) == -1]}
+    {[Result.compare(Error("Fail"), Error("Fail"), ~f=Int.compare, ~g=String.compare) == 0]}
+    {[Result.compare(Error("Fail"), Ok(4), ~f=Int.compare, ~g=String.compare) == -1]}
+    {[Result.compare(Ok(4), Error("Fail"), ~f=Int.compare, ~g=String.compare) == 1]}
     {[
       Result.compare(
         Error("Expected error"),
         Error("Unexpected error"),
-        Int.compare,
-        String.compare
+        ~f=Int.compare,
+        ~g=String.compare
       ) == -1
     ]}
 *)

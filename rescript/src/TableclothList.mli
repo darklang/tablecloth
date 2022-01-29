@@ -416,7 +416,8 @@ val findIndex : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
 
     {2 Examples}
 
-    {[List.findIndex(
+    {[
+      List.findIndex(
         list{1, 3, 4, 8},
         ~f=(index, number) => index > 2 && Int.isEven(number)
        ) == Some(3, 8)
@@ -510,7 +511,7 @@ val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
         list{"a", "b", "c"},
         module(
           {
-            type rec t = string
+            type t = string
             let zero = ""
             let add = (a, b) => a ++ b
           }
@@ -890,17 +891,17 @@ val toArray : 'a t -> 'a array
 
 (** {1 Compare} *)
 
-val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
+val equal : 'a t -> 'a t -> ('a -> 'a -> bool) -> bool
 (** Test two lists for equality using the provided function to test elements. *)
 
-val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
-(** Compare two lists using the provided function to compare elements.
+val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
+(** Compare two lists using the provided [f] function to compare elements.
 
     A shorter list is 'less' than a longer one.
 
     {2 Examples}
 
-    {[List.compare(Int.compare, list{1, 2, 3}, list{1, 2, 3, 4}) == -1]}
-    {[List.compare(Int.compare, list{1, 2, 3}, list{1, 2, 3}) == 0]}
-    {[List.compare(Int.compare, list{1, 2, 5}, list{1, 2, 3}) == 1]}
+    {[List.compare(list{1, 2, 3}, list{1, 2, 3, 4}, ~f=Int.compare) == -1]}
+    {[List.compare(list{1, 2, 3}, list{1, 2, 3}, ~f=Int.compare) == 0]}
+    {[List.compare(list{1, 2, 5}, list{1, 2, 3}, ~f=Int.compare) == 1]}
 *)

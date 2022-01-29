@@ -384,23 +384,24 @@ val equal :
 *)
 
 val compare :
-     ('ok -> 'ok -> int)
-  -> ('error -> 'error -> int)
+     f:('ok -> 'ok -> int)
+  -> g:('error -> 'error -> int)
   -> ('ok, 'error) t
   -> ('ok, 'error) t
   -> int
-(** Compare results for using the provided functions.
+(** Compare results for using the provided [f] and [g] functions.
+    [f] will be used to compare [Ok]'s and [g] will be used on [Error]s. 
 
     In the case when one of the results is an [Error] and one is [Ok], [Error]s  are considered 'less' then [Ok]s
 
     {2 Examples}
 
-    {[Result.compare Int.compare String.compare (Ok 3) (Ok 3) = 0]}
-    {[Result.compare Int.compare String.compare (Ok 3) (Ok 4) = (-1)]}
-    {[Result.compare Int.compare String.compare (Error "Fail") (Error "Fail") = 0]}
-    {[Result.compare Int.compare String.compare (Error "Fail") (Ok 4) = (-1)]}
-    {[Result.compare Int.compare String.compare (Ok 4) (Error "Fail") = 1]}
-    {[Result.compare Int.compare String.compare (Error "Expected error") (Error "Unexpected error") = -1]}
+    {[Result.compare ~f:Int.compare ~g:String.compare (Ok 3) (Ok 3) = 0]}
+    {[Result.compare ~f:Int.compare ~g:String.compare (Ok 3) (Ok 4) = (-1)]}
+    {[Result.compare ~f:Int.compare ~g:String.compare (Error "Fail") (Error "Fail") = 0]}
+    {[Result.compare ~f:Int.compare ~g:String.compare (Error "Fail") (Ok 4) = (-1)]}
+    {[Result.compare ~f:Int.compare ~g:String.compare (Ok 4) (Error "Fail") = 1]}
+    {[Result.compare ~f:Int.compare ~g:String.compare (Error "Expected error") (Error "Unexpected error") = -1]}
 *)
 
 (** {1 Operators}

@@ -766,14 +766,14 @@ val to_indexed_list : 'a t -> (int * 'a) list
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two arrays for equality using the provided function to test pairs of elements. *)
 
-val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
-(** Compare two arrays using the provided function to compare pairs of elements.
+val compare : f:('a -> 'a -> int) -> 'a t -> 'a t -> int
+(** Compare two arrays using the [f] function to compare pairs of elements.
 
     A shorter array is 'less' than a longer one.
 
     {2 Examples}
 
-    {[Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = (-1)]}
-    {[Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0]}
-    {[Array.compare Int.compare [|1;2;5|] [|1;2;3|] = 1]}
+    {[Array.compare ~f:Int.compare [|1;2;3|] [|1;2;3;4|] = (-1)]}
+    {[Array.compare ~f:Int.compare [|1;2;3|] [|1;2;3|] = 0]}
+    {[Array.compare ~f:Int.compare [|1;2;5|] [|1;2;3|] = 1]}
 *)

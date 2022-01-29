@@ -734,17 +734,17 @@ val toIndexedList : 'a t -> (int * 'a) list
     {[Array.toIndexedList(["cat", "dog"]) == list{(0, "cat"), (1, "dog")}]}
 *)
 
-val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
+val equal : 'a t -> 'a t -> ('a -> 'a -> bool) -> bool
 (** Test two arrays for equality using the provided function to test pairs of elements. *)
 
-val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
-(** Compare two arrays using the provided function to compare pairs of elements.
+val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
+(** Compare two arrays using the provided [f] function to compare pairs of elements.
 
     A shorter array is 'less' than a longer one.
 
     {2 Examples}
 
-    {[Array.compare(Int.compare, [1, 2, 3], [1, 2, 3, 4]) == -1]}
-    {[Array.compare(Int.compare, [1, 2, 3], [1, 2, 3]) == 0]}
-    {[Array.compare(Int.compare, [1, 2, 5], [1, 2, 3]) == 1]}
+    {[Array.compare([1, 2, 3], [1, 2, 3, 4], ~f=Int.compare) == -1]}
+    {[Array.compare([1, 2, 3], [1, 2, 3], ~f=Int.compare) == 0]}
+    {[Array.compare([1, 2, 5], [1, 2, 3], ~f=Int.compare) == 1]}
 *)
