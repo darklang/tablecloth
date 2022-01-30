@@ -167,9 +167,9 @@ val toUppercase : char -> char
 *)
 
 val toCode : char -> int
-(** Convert to the corresponding ASCII [code point][cp].
+(** Convert to the corresponding ASCII [code point] [cp].
 
-    [cp]: https://en.wikipedia.org/wiki/Code_point
+    {{: https://en.wikipedia.org/wiki/Code_point } More info }
 
     {2 Examples}
 

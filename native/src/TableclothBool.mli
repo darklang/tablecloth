@@ -110,10 +110,10 @@ val and_ : bool -> bool -> bool
 
     {2 Examples}
 
-    {[Bool.and_(true, true) == true]}
-    {[Bool.and_(true, false) == false]}
-    {[Bool.and_(false, true) == false]}
-    {[Bool.and_(false, false) == false]}
+    {[Bool.and_ true true == true]}
+    {[Bool.and_ true false == false]}
+    {[Bool.and_ false true == false]}
+    {[Bool.and_ false false == false]}
 *)
 
 (** {1 Convert} *)

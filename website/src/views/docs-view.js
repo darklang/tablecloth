@@ -66,6 +66,8 @@ function deDupeIncludedModules(moduleElements, modulesByName) {
   return deDupedModuleElements;
 }
 
+let scrollToIdGlobal = null;
+
 let Json = ({ value }) => (
   <pre
     className="DebugJsonValue"
@@ -653,10 +655,12 @@ let renderTextElements = (elements = [], parentPath = []) => {
             value.reference.content[0].tag === 'Code'
             ? stripTableclothPrefix(value.reference.content[0].value)
             : renderTextElements(value.reference.content, parentPath);
+        let hashId = stripTableclothPrefix(value.reference.target);
         return (
           <a
             key={index}
-            href={`#${stripTableclothPrefix(value.reference.target)}`}
+            href={`#${hashId}`}
+            onClick={()=> scrollToIdGlobal(hashId)}
           >
             {content}
           </a>
@@ -1202,6 +1206,8 @@ export default ({ data, language, location }) => {
       }, 50);
     }
   };
+  scrollToIdGlobal = scrollToId;
+
   React.useEffect(() => {
     let id = window.location.hash.split('#')[1];
     if (id != null && id !== '') {

@@ -56467,8 +56467,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.and_(true, true) == true",
-                            "reason": "Bool.and_((true, true)) === true;\n"
+                            "ocaml": "Bool.and_ true true == true",
+                            "reason": "Bool.and_(true, true) === true;\n"
                           }
                         },
                         {
@@ -56478,8 +56478,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.and_(true, false) == false",
-                            "reason": "Bool.and_((true, false)) === false;\n"
+                            "ocaml": "Bool.and_ true false == false",
+                            "reason": "Bool.and_(true, false) === false;\n"
                           }
                         },
                         {
@@ -56489,8 +56489,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.and_(false, true) == false",
-                            "reason": "Bool.and_((false, true)) === false;\n"
+                            "ocaml": "Bool.and_ false true == false",
+                            "reason": "Bool.and_(false, true) === false;\n"
                           }
                         },
                         {
@@ -56500,8 +56500,8 @@
                         {
                           "tag": "CodePre",
                           "value": {
-                            "ocaml": "Bool.and_(false, false) == false",
-                            "reason": "Bool.and_((false, false)) === false;\n"
+                            "ocaml": "Bool.and_ false false == false",
+                            "reason": "Bool.and_(false, false) === false;\n"
                           }
                         }
                       ]
