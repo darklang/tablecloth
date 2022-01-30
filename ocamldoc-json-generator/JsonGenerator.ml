@@ -1555,8 +1555,6 @@ class json =
                    in
                    tagged "ObjectType" (array json_of_field fields)
                | Some (Other typ) ->
-                   print_DEBUG
-                     (Name.father t.ty_name ^ " | " ^ Name.simple t.ty_name) ;
                    let value_content =
                      match destination_json with
                      | "model-rescript.json" ->
