@@ -23968,7 +23968,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Calculate the sum of a list using the provided modules "
+                          "value": "Calculate the sum of an array using the provided modules "
                         },
                         {
                           "tag": "Code",
@@ -34512,7 +34512,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is represented as an empty list and "
+                          "value": " is represented as an empty array and "
                         },
                         {
                           "tag": "Code",
@@ -40935,12 +40935,16 @@
                           "value": "\n    "
                         },
                         {
-                          "tag": "Code",
-                          "value": "cp"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": ": https://en.wikipedia.org/wiki/Code_point"
+                          "tag": "Link",
+                          "value": {
+                            "target": " https://en.wikipedia.org/wiki/Code_point ",
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": " More info "
+                              }
+                            ]
+                          }
                         },
                         {
                           "tag": "Newline",

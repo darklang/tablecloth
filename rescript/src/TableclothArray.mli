@@ -344,7 +344,7 @@ val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
 *)
 
 val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
-(** Calculate the sum of a list using the provided modules [zero] value and [add] function.
+(** Calculate the sum of an array using the provided modules [zero] value and [add] function.
 
     {2 Examples}
 

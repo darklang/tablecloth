@@ -251,7 +251,7 @@ val tap : 'a t -> f:('a -> unit) -> unit
 val toArray : 'a t -> 'a array
 (** Convert an option to an {!Array}.
 
-    [None] is represented as an empty list and [Some] is represented as an array of one element.
+    [None] is represented as an empty array and [Some] is represented as an array of one element.
 
     {2 Examples}
 
