@@ -6,7 +6,9 @@ type t = string
 
 (** {1 Create}
 
-    Strings literals are created with the ["double quotes"] syntax.
+    Strings literals are created with the ["double quotes"], [`backticks`] syntax.
+    {b Warning} If string contains non-ASCII characters, use [`backticks`]
+
 *)
 
 val fromChar : char -> string
@@ -19,8 +21,10 @@ val fromArray : char array -> string
 
     {2 Examples}
 
-    {[String.fromArray [||] = ""]}
-    {[String.fromArray [|'a'; 'b'; 'c'|] = "abc"]}
+    {[
+      String.fromArray([]) == ""
+      String.fromArray(['a', 'b', 'c']) == "abc"
+    ]}
 *)
 
 val fromList : char list -> string
@@ -30,8 +34,10 @@ val fromList : char list -> string
 
     {2 Examples}
 
-    {[String.fromList [] = ""]}
-    {[String.fromList ['a'; 'b'; 'c'] = "abc"]}
+    {[
+      String.fromList(list{}) == ""
+      String.fromList(list{'a', 'b', 'c'}) == "abc"
+    ]}
 *)
 
 val repeat : string -> count:int -> string
@@ -43,9 +49,11 @@ val repeat : string -> count:int -> string
 
     {2 Examples}
 
-    {[String.repeat ~count:3 "ok" = "okokok"]}
-    {[String.repeat ~count:3 "" = ""]}
-    {[String.repeat ~count:0 "ok" = ""]}
+    {[
+      String.repeat("ok", ~count=3) == "okokok"
+      String.repeat("", ~count=3) == ""
+      String.repeat("ok", ~count=0) == ""
+    ]}
 *)
 
 val initialize : int -> f:(int -> char) -> string
@@ -55,36 +63,40 @@ val initialize : int -> f:(int -> char) -> string
 
     {2 Examples}
 
-    {[String.initialize 8 ~f:(Fun.constant '9') = "999999999"]}
+    {[
+      String.initialize(8, ~f=Fun.constant('9')) == "99999999"
+    ]}
 *)
 
 (** {1 Basic operations} *)
 
 val get : string -> int -> char
-(** Get the character at the specified index *)
+(** Get the character at the specified index 
+
+    {3 Exceptions}
+
+    If index out of range, throws a [Invalid_argument] exception.
+    Concider using {!getAt}, it returns an [option<char>]
+
+    {2 Examples}
+
+    {[
+      String.get("stressed", 1) == 't'
+    ]}
+
+*)
 
 val getAt : string -> index:int -> char option
 (** Get the character at [~index] *)
 
-val ( .?[] ) : string -> int -> char option
-(** The {{: https://caml.inria.fr/pub/docs/manual-ocaml/indexops.html } index operator} version of {!getAt}
-
-    {b Note} Currently this is only supported by the OCaml syntax.
-
-    {2 Examples}
-
-    {[("Doggie".String.?[3]) = Some 'g']}
-    {[String.("Doggie".?[9]) = None]}
- *)
-
 val reverse : string -> string
 (** Reverse a string
 
-    {b Note} This function does not work with Unicode characters.
-
     {2 Examples}
 
-    {[String.reverse "stressed" = "desserts"]}
+    {[
+      String.reverse("stressed") == "desserts"
+    ]}
 *)
 
 val slice : ?to_:int -> string -> from:int -> string
@@ -101,30 +113,33 @@ val isEmpty : string -> bool
 val length : string -> int
 (** Returns the length of the given string.
 
-    {b Warning} if the string contains non-ASCII characters then [length] will
-    not equal the number of characters
-
     {2 Examples}
 
-    {[String.length "abc" = 3]}
+    {[
+      String.length("abc") == 3
+    ]}
 *)
 
 val startsWith : string -> prefix:string -> bool
-(** See if the second string starts with [prefix]
+(** See if the string starts with [prefix].
 
     {2 Examples}
 
-    {[String.startsWith ~prefix:"the" "theory" = true]}
-    {[String.startsWith ~prefix:"ory" "theory" = false]}
+    {[
+      String.startsWith("theory", ~prefix="the") == true
+      String.startsWith("theory", ~prefix="ory") == false
+    ]}
 *)
 
 val endsWith : string -> suffix:string -> bool
-(** See if the second string ends with [suffix].
+(** See if the string ends with [suffix].
 
     {2 Examples}
 
-    {[String.endsWith ~suffix:"the" "theory" = false]}
-    {[String.endsWith ~suffix:"ory" "theory" = true]}
+    {[
+      String.endsWith("theory", ~suffix="the") == false
+      String.endsWith("theory", ~suffix="ory") == true
+    ]}
 *)
 
 val includes : string -> substring:string -> bool
@@ -132,20 +147,22 @@ val includes : string -> substring:string -> bool
 
     {2 Examples}
 
-    {[String.includes "team" ~substring:"tea" = true]}
-    {[String.includes "team" ~substring:"i" = false]}
-    {[String.includes "ABC" ~substring:"" = true]}
+    {[
+      String.includes("team", ~substring="tea") == true
+      String.includes("team", ~substring="i") == false
+      String.includes("ABC", ~substring="") == true
+    ]}
 *)
 
 val isCapitalized : string -> bool
 (** Test if the first letter of a string is upper case.
 
-    {b Note} This function works only with ASCII characters, not Unicode.
-
     {2 Examples}
 
-    {[String.isCapitalized "Anastasia" = true]}
-    {[String.isCapitalized "" = false]}
+    {[
+      String.isCapitalized("Anastasia") == true
+      String.isCapitalized("") == false
+    ]}
 *)
 
 val dropLeft : string -> count:int -> string
@@ -153,11 +170,13 @@ val dropLeft : string -> count:int -> string
 
     {2 Examples}
 
-    {[String.dropLeft ~count:3 "abcdefg" = "defg"]}
-    {[String.dropLeft ~count:0 "abcdefg" = "abcdefg"]}
-    {[String.dropLeft ~count:7 "abcdefg" = ""]}
-    {[String.dropLeft ~count:(-2) "abcdefg" = "fg"]}
-    {[String.dropLeft ~count:8 "abcdefg" = ""]}
+    {[
+      String.dropLeft("abcdefg", ~count=3) == "defg"
+      String.dropLeft("abcdefg", ~count=0) == "abcdefg"
+      String.dropLeft("abcdefg", ~count=7) == ""
+      String.dropLeft("abcdefg", ~count=-2) == "fg"
+      String.dropLeft("abcdefg", ~count=8) == ""
+    ]}
 *)
 
 val dropRight : string -> count:int -> string
@@ -165,11 +184,13 @@ val dropRight : string -> count:int -> string
 
     {2 Examples}
 
-    {[String.dropRight ~count:3 "abcdefg" = "abcd"]}
-    {[String.dropRight ~count:0 "abcdefg" = "abcdefg"]}
-    {[String.dropRight ~count:7 "abcdefg" = ""]}
-    {[String.dropRight ~count:(-2) "abcdefg" = "abcdefg"]}
-    {[String.dropRight ~count:8 "abcdefg" = ""]}
+    {[
+      String.dropRight("abcdefg", ~count=3) == "abcd"
+      String.dropRight("abcdefg", ~count=0) == "abcdefg"
+      String.dropRight("abcdefg", ~count=7) == ""
+      String.dropRight("abcdefg", ~count=-2) == "abcdefg"
+      String.dropRight("abcdefg", ~count=8) == ""
+    ]}
 *)
 
 val indexOf : string -> string -> int option
@@ -177,8 +198,10 @@ val indexOf : string -> string -> int option
 
     {2 Examples}
 
-    {[ String.indexOf "Hello World World" "World" = Some 6 ]}
-    {[ String.indexOf "Hello World World" "Bye" = None ]}
+    {[
+      String.indexOf("Hello World World", "World") == Some(6)
+      String.indexOf("Hello World World", "Bye") == None
+    ]}
 *)
 
 val indexOfRight : string -> string -> int option
@@ -186,8 +209,10 @@ val indexOfRight : string -> string -> int option
 
     {2 Examples}
 
-    {[ String.indexOfRight "Hello World World" "World" = Some 12 ]}
-    {[ String.indexOfRight "Hello World World" "Bye" = None ]}
+    {[
+      String.indexOfRight("Hello World World", "World") == Some(12)
+      String.indexOfRight("Hello World World", "Bye") == None
+    ]}
 *)
 
 val insertAt : string -> index:int -> value:t -> string
@@ -197,52 +222,54 @@ val insertAt : string -> index:int -> value:t -> string
 
     {2 Examples}
 
-    {[String.insertAt ~value:"**" ~index:2 "abcde" = "ab**cde"]}
-    {[String.insertAt ~value:"**" ~index:0 "abcde" = "**abcde"]}
-    {[String.insertAt ~value:"**" ~index:5 "abcde" = "abcde**"]}
-    {[String.insertAt ~value:"**" ~index:(-2) "abcde" = "abc**de"]}
-    {[String.insertAt ~value:"**" ~index:(-9) "abcde" = "**abcde"]}
-    {[String.insertAt ~value:"**" ~index:9 "abcde" = "abcde**"]}
+    {[
+      String.insertAt("abcde", ~value="**", ~index=2) == "ab**cde"
+      String.insertAt("abcde", ~value="**", ~index=0) == "**abcde"
+      String.insertAt("abcde", ~value="**", ~index=5) == "abcde**"
+      String.insertAt("abcde", ~value="**", ~index=-2) == "abc**de"
+      String.insertAt("abcde", ~value="**", ~index=-9) == "**abcde"
+      String.insertAt("abcde", ~value="**", ~index=9) == "abcde**"
+    ]}
 *)
 
 val toLowercase : string -> string
 (** Converts all upper case letters to lower case.
 
-    {b Note} This function works only with ASCII characters, not Unicode.
-
     {2 Examples}
 
-    {[String.toLowercase "AaBbCc123" = "aabbcc123"]}
+    {[
+      String.toLowercase("AaBbCc123") == "aabbcc123"
+    ]}
 *)
 
 val toUppercase : string -> string
 (** Converts all lower case letters to upper case.
 
-    {b Note} This function works only with ASCII characters, not Unicode.
-
     {2 Examples}
 
-    {[String.toUppercase "AaBbCc123" = "AABBCC123"]}
+    {[
+      String.toUppercase("AaBbCc123") == "AABBCC123"
+    ]}
 *)
 
 val uncapitalize : string -> string
 (** Converts the first letter to lower case if it is upper case.
 
-    {b Note} This function works only with ASCII characters, not Unicode.
-
     {2 Examples}
 
-    {[String.uncapitalize "Anastasia" = "anastasia"]}
+    {[
+      String.uncapitalize("Anastasia") == "anastasia"
+    ]}
 *)
 
 val capitalize : string -> string
 (** Converts the first letter of [s] to lowercase if it is upper case.
 
-    {b Note} This function works only with ASCII characters, not Unicode.
-
     {2 Examples}
 
-    {[String.uncapitalize "den" = "Den"]}
+    {[
+      String.capitalize("den") == "Den"
+    ]}
 *)
 
 val trim : string -> string
@@ -250,9 +277,11 @@ val trim : string -> string
 
     {2 Examples}
 
-    {[String.trim "  abc  " = "abc"]}
-    {[String.trim "  abc def  " = "abc def"]}
-    {[String.trim "\r\n\t abc \n\n" = "abc"]}
+    {[
+      String.trim("  abc  ") == "abc"
+      String.trim("  abc def  ") == "abc def"
+      String.trim("\r\n\t abc \n\n") == "abc"
+    ]}
 *)
 
 val trimLeft : string -> string
@@ -262,23 +291,29 @@ val trimRight : string -> string
 (** Like {!trim} but only drops characters from the end of the string. *)
 
 val padLeft : string -> int -> with_:string -> string
-(** Pad a string up to a minimum length
+(** Pad a string up to a minimum length.
 
-    If the string is shorted than the proivded length, adds [with] to the left of the string until the minimum length is met
+    If the string is shorted than the proivded length, adds [with_]
+    to the left of the string until the minimum length is met.
 
     {2 Examples}
 
-    {[String.padLeft "5" 3 ~with_:"0" = "005"]}
+    {[
+      String.padLeft("5", 3, ~with_="0") == "005"
+    ]}
 *)
 
 val padRight : string -> int -> with_:string -> string
-(** Pad a string up to a minimum length
+(** Pad a string up to a minimum length.
 
-    If the string is shorted than the proivded length, adds [with] to the left of the string until the minimum length is met
+    If the string is shorted than the proivded length, adds [with_]
+    to the left of the string until the minimum length is met.
 
     {2 Examples}
 
-    {[String.padRight "Ahh" 7 ~with_:"h" = "Ahhhhhh"]}
+    {[
+      String.padRight("Ahh", 7, ~with_="h") == "Ahhhhhh"
+    ]}
 *)
 
 val uncons : string -> (char * string) option
@@ -288,9 +323,11 @@ val uncons : string -> (char * string) option
 
     {2 Examples}
 
-    {[String.uncons "abcde" = Some ('a', "bcde")]}
-    {[String.uncons "a" = Some ('a', "")]}
-    {[String.uncons "" = None]}
+    {[
+      String.uncons("abcde") == Some('a', "bcde")
+      String.uncons("a") == Some('a', "")
+      String.uncons("") == None
+    ]}
 *)
 
 val split : string -> on:string -> string list
@@ -299,11 +336,11 @@ val split : string -> on:string -> string list
     {2 Examples}
 
     {[
-      String.split ~on:"/" "a/b/c" = ["a"; "b"; "c"]
-      String.split ~on:"--" "a--b--c" = ["a"; "b"; "c"]
-      String.split ~on:"/" "abc" = ["abc"]
-      String.split ~on:"/" "" = [""]
-      String.split ~on:"" "abc" = ["a"; "b"; "c"]
+      String.split("a/b/c", ~on="/") == list{"a", "b", "c"}
+      String.split("a--b--c", ~on="--") == list{"a", "b", "c"}
+      String.split("abc", ~on="/") == list{"abc"}
+      String.split("", ~on="/") == list{""}
+      String.split("abc", ~on="") == list{"a", "b", "c"}
     ]}
 *)
 
@@ -322,8 +359,10 @@ val toArray : string -> char array
 
     {2 Examples}
 
-    {[String.toArray "" = [||]]}
-    {[String.toArray "abc" = [|'a'; 'b'; 'c'|]]}
+    {[
+      String.toArray("") == []
+      String.toArray("abc") == ['a', 'b', 'c']
+    ]}
 *)
 
 val toList : string -> char list
@@ -331,14 +370,16 @@ val toList : string -> char list
 
     {2 Examples}
 
-    {[String.toList "" = []]}
-    {[String.toList "abc" = ['a'; 'b'; 'c']]}
+    {[
+      String.toList("") == list{}
+      String.toList("abc") == list{'a', 'b', 'c'}
+    ]}
 *)
 
 (** {1 Compare} *)
 
 val equal : string -> string -> bool
-(** Test two string for equality *)
+(** Test two string for equality. *)
 
 val compare : string -> string -> int
 (** Compare two strings. Strings use 'dictionary' ordering.
@@ -347,10 +388,12 @@ val compare : string -> string -> int
 
     {2 Examples}
 
-    {[String.compare "Z" "A" = 1]}
-    {[String.compare "Be" "Bee" = -1]}
-    {[String.compare "Pear" "pear" = 1]}
-    {[String.compare "Peach" "Peach" = 0]}
+    {[
+      String.compare("Z", "A") == 1
+      String.compare("Be", "Bee") == -1
+      String.compare("Pear", "pear") == 1
+      String.compare("Peach", "Peach") == 0
+    ]}
 *)
 
 (** The unique identity for {!Comparator} *)

@@ -11,9 +11,9 @@ val make : 'a -> 'b -> 'c -> 'a * 'b * 'c
 
     {2 Examples}
 
-    {[Tuple3.create 3 "cat" false = (3, "cat", false)]}
+    {[Tuple3.make 3 "cat" false = (3, "cat", false)]}
     {[
-      List.map3 ~f:Tuple3.create [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =
+      List.map3 ~f:Tuple3.make [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =
         [(1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.)]
     ]}
 *)
@@ -171,8 +171,8 @@ val to_array : 'a * 'a * 'a -> 'a array
 
     {2 Examples}
 
-    {[Tuple3.to_array (3, 4, 5) = [3; 4; 5]]}
-    {[Tuple3.to_array ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
+    {[Tuple3.to_array (3, 4, 5) = [|3; 4; 5|]]}
+    {[Tuple3.to_array ("was", "stressed", "then") = [|"was"; "stressed"; "then"|]]}
 *)
 
 val to_list : 'a * 'a * 'a -> 'a list
@@ -203,19 +203,19 @@ val equal :
  *)
 
 val compare :
-     ('a -> 'a -> int)
-  -> ('b -> 'b -> int)
-  -> ('c -> 'c -> int)
+     f:('a -> 'a -> int)
+  -> g:('b -> 'b -> int)
+  -> h:('c -> 'c -> int)
   -> ('a, 'b, 'c) t
   -> ('a, 'b, 'c) t
   -> int
-(** Compare two {!Tuple3}s, using the provided functions to compare the first
-    components then, if the first components are equal, the second components,
-    then the third components
+(** Compare two {!Tuple3}s, using [f] to compare the first
+    components then, if the first components are equal, the second components are compared with [g],
+    then the third components are compared with [h]
 
     {2 Examples}
 
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
+    {[Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
+    {[Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
+    {[Tuple3.compare ~f:Int.compare ~g:String.compare ~h:Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
  *)

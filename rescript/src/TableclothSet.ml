@@ -1,25 +1,21 @@
 type ('a, 'id) t = ('a, 'id) Belt.Set.t
 
-module Of (M : TableclothComparator.S) = struct
-  type nonrec t = (M.t, M.identity) t
-end
-
 let empty comparator = Belt.Set.make ~id:(Internal.toBeltComparator comparator)
 
 let singleton
-    (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
+    (element : 'a) (comparator : ('a, 'identity) TableclothComparator.s) :
     ('a, 'identity) t =
   Belt.Set.fromArray ~id:(Internal.toBeltComparator comparator) [| element |]
 
 
 let fromArray
-    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
+    (elements : 'a array) (comparator : ('a, 'identity) TableclothComparator.s)
     : ('a, 'identity) t =
   Belt.Set.fromArray ~id:(Internal.toBeltComparator comparator) elements
 
 
 let fromList
-    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
+    (elements : 'a list) (comparator : ('a, 'identity) TableclothComparator.s) :
     ('a, 'identity) t =
   Belt.Set.fromArray
     ~id:(Internal.toBeltComparator comparator)
@@ -31,10 +27,6 @@ let length = Belt.Set.size
 let isEmpty = Belt.Set.isEmpty
 
 let includes = Belt.Set.has
-
-let ( .?{} ) (set : ('element, _) t) (element : 'element) : bool =
-  includes set element
-
 
 let add = Belt.Set.add
 

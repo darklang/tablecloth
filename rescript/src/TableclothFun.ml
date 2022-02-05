@@ -12,19 +12,9 @@ let negate f t = not (f t)
 
 let apply f a = f a
 
-let ( <| ) a b = a b
+let compose a g f = f (g a)
 
-external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
-
-let compose g f a = g (f a)
-
-let ( << ) = compose
-
-let composeRight g f a = f (g a)
-
-let ( >> ) = composeRight
+let composeRight a g f = g (f a)
 
 let tap a ~f =
   f a ;

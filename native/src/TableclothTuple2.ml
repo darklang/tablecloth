@@ -9,7 +9,7 @@ let from_array array =
   | [| a; b |] ->
       Some (a, b)
   | _ ->
-      None
+      Some (array.(0), array.(1))
 
 
 let from_array = from_array
@@ -40,5 +40,5 @@ let equal equal_first equal_second (a, b) (a', b') =
   equal_first a a' && equal_second b b'
 
 
-let compare compare_first compare_second (a, b) (a', b') =
+let compare ~f:compare_first ~g:compare_second (a, b) (a', b') =
   match compare_first a a' with 0 -> compare_second b b' | result -> result

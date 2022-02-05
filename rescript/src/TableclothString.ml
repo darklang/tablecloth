@@ -15,12 +15,10 @@ let initialize length ~f =
 let get (string : string) (index : int) = string.[index]
 
 let getAt (string : string) ~(index : int) =
-  if index < 0 || index >= String.length string
+  if index < 0 || index >= Js.String.length string
   then None
   else Some string.[index]
 
-
-let ( .?[] ) (string : string) (index : int) : char option = getAt string ~index
 
 let fromArray characters =
   Js.Array.joinWith
@@ -54,14 +52,14 @@ let indexOfRight haystack needle : int option =
 
 let isEmpty t = t = ""
 
-let length = String.length
+let length = Js.String.length
 
 let uncons s =
   match s with
   | "" ->
       None
   | s ->
-      Some (s.[0], String.sub s 1 (String.length s - 1))
+      Some (s.[0], String.sub s 1 (Js.String.length s - 1))
 
 
 let dropLeft s ~count = Js.String.substr ~from:count s
@@ -90,15 +88,21 @@ external padRight : string -> int -> string -> string = "padEnd" [@@bs.send]
 
 let padRight string count ~with_ = padRight string count with_
 
-let toLowercase s = String.lowercase_ascii s
+let toLowercase = Js.String.toLowerCase
 
-let toUppercase s = String.uppercase_ascii s
+let toUppercase = Js.String.toUpperCase
 
-let uncapitalize = String.uncapitalize_ascii
+let uncapitalize str =
+  Js.String.toLowerCase (Js.String.charAt 0 str)
+  ^ Js.String.sliceToEnd ~from:1 str
 
-let capitalize = String.capitalize_ascii
 
-let isCapitalized s = s = String.capitalize_ascii s
+let capitalize str =
+  Js.String.toUpperCase (Js.String.charAt 0 str)
+  ^ Js.String.sliceToEnd ~from:1 str
+
+
+let isCapitalized s = s = capitalize s
 
 let includes t ~substring = Js.String.includes substring t
 

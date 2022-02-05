@@ -66,6 +66,8 @@ function deDupeIncludedModules(moduleElements, modulesByName) {
   return deDupedModuleElements;
 }
 
+let scrollToIdGlobal = null;
+
 let Json = ({ value }) => (
   <pre
     className="DebugJsonValue"
@@ -122,6 +124,8 @@ function renderSidebarElements(
     search.length > 1 ? search.slice(0, search.length - 1) : [];
   let valueSearch = search.length === 0 ? '' : search[search.length - 1];
   let hasSearch = valueSearch.length > 0;
+  let includesCaseInsensitive = (a, b) => a.toLowerCase().includes(b.toLowerCase());
+
   return deDupeIncludedModules(moduleElements, modulesByModulePath).map(
     (moduleElement, index) => {
       switch (moduleElement.tag) {
@@ -131,7 +135,7 @@ function renderSidebarElements(
             hasSearch &&
             !(
               moduleSearchPath.length === 0 &&
-              moduleElement.value.name.includes(valueSearch)
+              includesCaseInsensitive(moduleElement.value.name, valueSearch)
             )
           ) {
             return null;
@@ -156,7 +160,7 @@ function renderSidebarElements(
             hasSearch &&
             !(
               moduleSearchPath.length === 0 &&
-              moduleElement.value.name.includes(valueSearch)
+              includesCaseInsensitive(moduleElement.value.name, valueSearch)  
             )
           ) {
             return null;
@@ -176,7 +180,9 @@ function renderSidebarElements(
             moduleElement.tag,
             moduleElement.value.name,
           );
-          if (hasSearch && !moduleElement.value.name.includes(valueSearch)) {
+          if (hasSearch &&
+            !includesCaseInsensitive(moduleElement.value.name, valueSearch)
+              ) {
             return null;
           }
           return (
@@ -196,7 +202,7 @@ function renderSidebarElements(
               );
               if (
                 hasSearch &&
-                !moduleElement.value.name.includes(valueSearch)
+                !includesCaseInsensitive(moduleElement.value.name, valueSearch)
               ) {
                 return null;
               }
@@ -598,7 +604,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
       case 'Newline':
         return <pre key={index}>{'\n'}</pre>;
       case 'Emphasize':
-        return <em key={index}>{(renderTextElements(value), parentPath)}</em>;
+        return <em key={index}>{renderTextElements(value, parentPath)}</em>;
       case 'Bold':
         return <b key={index}>{renderTextElements(value, parentPath)}</b>;
       case 'Link':
@@ -653,10 +659,12 @@ let renderTextElements = (elements = [], parentPath = []) => {
             value.reference.content[0].tag === 'Code'
             ? stripTableclothPrefix(value.reference.content[0].value)
             : renderTextElements(value.reference.content, parentPath);
+        let hashId = stripTableclothPrefix(value.reference.target);
         return (
           <a
             key={index}
-            href={`#${stripTableclothPrefix(value.reference.target)}`}
+            href={`#${hashId}`}
+            onClick={()=> scrollToIdGlobal(hashId)}
           >
             {content}
           </a>
@@ -744,6 +752,7 @@ let TextElement = ({ elements, path }) => {
       css={css`
         padding-top: 12px;
         padding-bottom: 12px;
+        line-height: 26px;
       `}
     >
       {renderTextElements(elements, path)}
@@ -759,7 +768,7 @@ let TypeSignature = ({ signature }) => {
 
 let TypeDefinition = ({ name, type }) => {
   return (
-    <code
+    <pre
     css={css`
     display: inline;
     font-weight: bold;
@@ -774,7 +783,7 @@ let TypeDefinition = ({ name, type }) => {
 
  
 let {name}: <TypeSignature signature={type}/>
-    </code>
+    </pre>
   );
 };
 
@@ -1201,6 +1210,8 @@ export default ({ data, language, location }) => {
       }, 50);
     }
   };
+  scrollToIdGlobal = scrollToId;
+
   React.useEffect(() => {
     let id = window.location.hash.split('#')[1];
     if (id != null && id !== '') {

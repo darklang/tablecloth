@@ -34,7 +34,7 @@ val repeat : 'a -> length:int -> 'a t
 *)
 
 val range : ?from:int -> int -> int t
-(** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to]
+(** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to].
 
     {2 Examples}
 
@@ -96,7 +96,7 @@ val get : 'a t -> int -> 'a
 
     The last element has index number [Array.length a - 1].
 
-    You should prefer using the dedicated literal syntax;
+    You should prefer using the dedicated literal syntax:
 
     {[array.(n)]}
 
@@ -157,12 +157,12 @@ val set : 'a t -> int -> 'a -> unit
       Array.set numbers 1 1;
       numbers.(2) <- 0;
 
-      numbers = [|1;0;0|]
+      numbers = [|1;1;0|]
     ]}
 *)
 
 val set_at : 'a t -> index:int -> value:'a -> unit
-(** Like {!set} but with labelled arguments *)
+(** Like {!set} but with labelled arguments. *)
 
 val first : 'a t -> 'a option
 (** Get the first element of an array.
@@ -171,9 +171,9 @@ val first : 'a t -> 'a option
 
     {2 Examples}
 
-    {[Array.first [1;2;3] = Some 1]}
-    {[Array.first [1] = Some 1]}
-    {[Array.first [] = None]}
+    {[Array.first [|1;2;3|] = Some 1]}
+    {[Array.first [|1|] = Some 1]}
+    {[Array.first [||] = None]}
 *)
 
 val last : 'a t -> 'a option
@@ -226,7 +226,7 @@ val reverse : 'a t -> unit
 
     {[
       let numbers = [|1; 2; 3|] in
-      Array.reverse numbers
+      Array.reverse numbers;
       numbers = [|3; 2; 1|];
     ]}
 *)
@@ -247,11 +247,11 @@ val sort : 'a t -> compare:('a -> 'a -> int) -> unit
 (** {1 Query} *)
 
 val is_empty : 'a t -> bool
-(** Check if an array is empty
+(** Check if an array is empty.
 
     {2 Examples}
 
-    {[Array.is_empty [|1; 2, 3|] = false]}
+    {[Array.is_empty [|1; 2; 3|] = false]}
     {[Array.is_empty [||] = true]}
 *)
 
@@ -260,14 +260,14 @@ val length : 'a t -> int
 
     {2 Examples}
 
-    {[Array.length [|1; 2, 3|] = 3]}
+    {[Array.length [|1; 2; 3|] = 3]}
     {[Array.length [||] = 0]}
 *)
 
 val any : 'a t -> f:('a -> bool) -> bool
 (** Determine if [f] returns true for [any] values in an array.
 
-    Iteration is stopped as soon as [f] returns [true]
+    Iteration is stopped as soon as [f] returns [true].
 
     {2 Examples}
 
@@ -279,7 +279,7 @@ val any : 'a t -> f:('a -> bool) -> bool
 val all : 'a t -> f:('a -> bool) -> bool
 (** Determine if [f] returns true for [all] values in an array.
 
-    Iteration is stopped as soon as [f] returns [false]
+    Iteration is stopped as soon as [f] returns [false].
 
     {2 Examples}
 
@@ -289,7 +289,7 @@ val all : 'a t -> f:('a -> bool) -> bool
 *)
 
 val count : 'a t -> f:('a -> bool) -> int
-(** Count the number of elements which [f] returns [true] for
+(** Count the number of elements which function [f] will return [true].
 
     {2 Examples}
 
@@ -321,7 +321,7 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 
     {2 Examples}
 
-    {[Array.contains [1; 2; 3]  2 ~equal:(=) = true]}
+    {[Array.includes [|1; 2; 3|]  2 ~equal:(=) = true]}
 *)
 
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
@@ -347,7 +347,7 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 *)
 
 val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
-(** Find a {!Tuple} of the {!minimum} and {!maximum} in a single pass
+(** Find a {!Tuple2} of the {!minimum} and {!maximum} in a single pass.
 
     Returns [None] if called on an empty array.
 
@@ -359,7 +359,7 @@ val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
 *)
 
 val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
-(** Calculate the sum of a list using the provided modules [zero] value and [add] function.
+(** Calculate the sum of an array using the provided modules [zero] value and [add] function.
 
     {2 Examples}
 
@@ -398,7 +398,7 @@ val map_with_index : 'a t -> f:(int -> 'a -> 'b) -> 'b t
 *)
 
 val filter : 'a t -> f:('a -> bool) -> 'a t
-(** Keep elements that [f] returns [true] for.
+(** Keep elements where function [f] will return [true].
 
     {2 Examples}
 
@@ -428,12 +428,12 @@ val filter_map : 'a t -> f:('a -> 'b option) -> 'b t
           Some (number * number)
         else
           None
-      ) = [16; 36]
+      ) = [|16; 36|]
     ]}
 *)
 
 val flat_map : 'a t -> f:('a -> 'b t) -> 'b t
-(** {!map} [f] onto an array and {!flatten} the resulting arrays
+(** {!map} [f] onto an array and {!flatten} the resulting arrays.
 
     {2 Examples}
 
@@ -445,7 +445,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     [fold] takes two arguments, an [initial] 'accumulator' value and a function [f].
 
-    For each element of the array [f] will be called with two arguments; the current accumulator and an element.
+    For each element of the array [f] will be called with two arguments: the current accumulator and an element.
 
     [f] returns the value that the accumulator should have for the next iteration.
 
@@ -457,7 +457,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     Folding is useful whenever you have a collection of something, and want to produce a single value from it.
 
-    For examples if we have:
+    For example, if we have:
 
     {[
       let numbers = [|1, 2, 3|] in
@@ -477,7 +477,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     {2 Examples}
 
-    {[Array.fold [|1; 2; 3|] ~initial:[] ~f:(List.cons) = [3; 2; 1]]}
+    {[Array.fold [|3;4;5|] ~f:Int.multiply ~initial:2 = 120]}
     {[
       Array.fold [|1; 1; 2; 2; 3|] ~initial:Set.Int.empty ~f:Set.add |> Set.to_array = [|1; 2; 3|]
     ]}
@@ -500,7 +500,7 @@ val fold_right : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
     {2 Examples}
 
     {[Array.fold_right ~f:(+) ~initial:0 (Array.repeat ~length:3 5) = 15]}
-    {[Array.fold_right ~f:List.cons ~initial:[] [|1; 2; 3|] = [1; 2; 3]]}
+    {[Array.fold_right [|3;4;5|] ~f:Int.multiply ~initial:2 = 120]}
 *)
 
 val append : 'a t -> 'a t -> 'a t
@@ -524,11 +524,11 @@ val flatten : 'a t t -> 'a t
 *)
 
 val zip : 'a t -> 'b t -> ('a * 'b) t
-(** Combine two arrays by merging each pair of elements into a {!Tuple}
+(** Combine two arrays by merging each pair of elements into a {!Tuple2}.
 
     If one array is longer, the extra elements are dropped.
 
-    The same as [Array.map2 ~f:Tuple.make]
+    The same as [Array.map2 ~f:Tuple2.make]
 
     {2 Examples}
 
@@ -550,7 +550,7 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
     ]}
     {[
       Array.map2
-        ~f:Tuple.create
+        ~f:Tuple2.make
         [|"alice"; "bob"; "chuck"|]
         [|2; 5; 7; 8|] =
           [|("alice",2); ("bob",5); ("chuck",7)|]
@@ -566,7 +566,7 @@ val map3 : 'a t -> 'b t -> 'c t -> f:('a -> 'b -> 'c -> 'd) -> 'd t
 
     {[
       Array.map3
-        ~f:Tuple3.create
+        ~f:Tuple3.make
         [|"alice"; "bob"; "chuck"|]
         [|2; 5; 7; 8;|]
         [|true; false; true; false|] =
@@ -577,7 +577,7 @@ val map3 : 'a t -> 'b t -> 'c t -> f:('a -> 'b -> 'c -> 'd) -> 'd t
 (** {1 Deconstruct} *)
 
 val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
-(** Split an array into a {!Tuple} of arrays. Values which [f] returns true for will end up in {!Tuple.first}.
+(** Split an array into a {!Tuple2} of arrays. Values which [f] returns true for will end up in {!Tuple2.first}.
 
     {2 Examples}
 
@@ -585,7 +585,7 @@ val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
 *)
 
 val split_at : 'a t -> index:int -> 'a t * 'a t
-(** Divides an array into a {!Tuple} of arrays.
+(** Divides an array into a {!Tuple2} of arrays.
 
     Elements which have index upto (but not including) [index] will be in the first component of the tuple.
 
@@ -593,7 +593,7 @@ val split_at : 'a t -> index:int -> 'a t * 'a t
 
     {3 Exceptions}
 
-    Raises an [Invalid_argument] exception if [index] is less than zero
+    Raises an [Invalid_argument] exception if [index] is less than zero.
 
     {2 Examples}
 
@@ -605,7 +605,7 @@ val split_at : 'a t -> index:int -> 'a t * 'a t
 val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
 (** Divides an array at the first element [f] returns [true] for.
 
-    Returns a {!Tuple}, the first component contains the elements [f] returned false for,
+    Returns a {!Tuple2}, the first component contains the elements [f] returned false for,
     the second component includes the element that [f] retutned [true] for an all the remaining elements.
 
     {2 Examples}
@@ -629,11 +629,11 @@ val split_when : 'a t -> f:('a -> bool) -> 'a t * 'a t
 *)
 
 val unzip : ('a * 'b) t -> 'a t * 'b t
-(** Decompose an array of {!Tuple}s into a {!Tuple} of arrays.
+(** Decompose an array of {!Tuple2}s into a {!Tuple2} of arrays.
 
     {2 Examples}
 
-    {[Array.unzip [(0, true); (17, false); (1337, true)] = ([0;17;1337], [true; false; true])]}
+    {[Array.unzip [|(0, true); (17, false); (1337, true)|] = ([|0; 17; 1337|], [|true; false; true|])]}
 *)
 
 (** {1 Iterate} *)
@@ -662,7 +662,7 @@ val for_each_with_index : 'a t -> f:(int -> 'a -> unit) -> unit
 *)
 
 val values : 'a option t -> 'a t
-(** Return all of the [Some] values from an array of options
+(** Return all of the [Some] values from an array of options.
 
     {2 Examples}
 
@@ -730,19 +730,19 @@ val group_by :
   -> ('key, 'id) TableclothComparator.s
   -> f:('value -> 'key)
   -> ('key, 'value list, 'id) TableclothMap.t
-(** Collect elements which [f] produces the same key for
+(** Collect elements where function [f] will produce the same key.
 
-    Produces a map from ['key] to a {!List} of all elements which produce the same ['key]
+    Produces a map from ['key] to a {!List} of all elements which produce the same ['key].
 
     {2 Examples}
 
     {[
-      let animals = ["Ant"; "Bear"; "Cat"; "Dewgong"] in
-      Array.group_by animals (module Int) ~f:String.length = Map.Int.from_list [
+      let animals = [|"Ant"; "Bear"; "Cat"; "Dewgong"|] in
+      Array.group_by animals (module Int) ~f:String.length = Map.Int.fromArray [|
         (3, ["Cat"; "Ant"]);
         (4, ["Bear"]);
         (7, ["Dewgong"]);
-      ]
+      |]
     ]}
 *)
 
@@ -756,7 +756,7 @@ val to_list : 'a t -> 'a list
 *)
 
 val to_indexed_list : 'a t -> (int * 'a) list
-(** Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple}.
+(** Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple2}.
 
     {2 Examples}
 
@@ -766,14 +766,14 @@ val to_indexed_list : 'a t -> (int * 'a) list
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 (** Test two arrays for equality using the provided function to test pairs of elements. *)
 
-val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
-(** Compare two arrays using the provided function to compare pairs of elements.
+val compare : f:('a -> 'a -> int) -> 'a t -> 'a t -> int
+(** Compare two arrays using the [f] function to compare pairs of elements.
 
     A shorter array is 'less' than a longer one.
 
     {2 Examples}
 
-    {[Array.compare Int.compare [|1;2;3|] [|1;2;3;4|] = -1]}
-    {[Array.compare Int.compare [|1;2;3|] [|1;2;3|] = 0]}
-    {[Array.compare Int.compare [|1;2;5|] [|1;2;3|] = 1]}
+    {[Array.compare ~f:Int.compare [|1;2;3|] [|1;2;3;4|] = (-1)]}
+    {[Array.compare ~f:Int.compare [|1;2;3|] [|1;2;3|] = 0]}
+    {[Array.compare ~f:Int.compare [|1;2;5|] [|1;2;3|] = 1]}
 *)

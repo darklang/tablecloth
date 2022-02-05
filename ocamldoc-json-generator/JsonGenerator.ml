@@ -406,22 +406,29 @@ class virtual text =
         | Odoc_info.Code s ->
             tagged "Code" (string s)
         | Odoc_info.CodePre code ->
-            let reasonSyntax : string =
-              try
-                Lexing.from_string code
-                |> Reason_toolchain.ML.implementation_with_comments
-                |> Reason_toolchain.RE.print_implementation_with_comments
-                     Format.str_formatter
-                |> Format.flush_str_formatter
-              with
-              | _ ->
-                  print_DEBUG "Unable to convert code snippet" ;
-                  print_DEBUG code ;
-                  code
-            in
-            tagged
-              "CodePre"
-              (obj [ ("ocaml", string code); ("reason", string reasonSyntax) ])
+          ( match destination_json with
+          | "model-rescript.json" ->
+              tagged "CodePre" (obj [ ("rescript", string code) ])
+          | _ ->
+              let reasonSyntax : string =
+                try
+                  Lexing.from_string code
+                  |> Reason_toolchain.ML.implementation_with_comments
+                  |> Reason_toolchain.RE.print_implementation_with_comments
+                       Format.str_formatter
+                  |> Format.flush_str_formatter
+                with
+                | _ ->
+                    print_DEBUG "Unable to convert code snippet" ;
+                    print_DEBUG code ;
+                    code
+              in
+
+              tagged
+                "CodePre"
+                (obj
+                   [ ("ocaml", string code); ("reason", string reasonSyntax) ] )
+          )
         | Odoc_info.Verbatim s ->
             tagged "Verbatim" (string s)
         | Odoc_info.Bold t ->

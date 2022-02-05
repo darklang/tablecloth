@@ -16,6 +16,8 @@ let not = not
 
 let equal = ( = )
 
+let and_ a b = a && b
+
 let compare = compare
 
 let to_string = function true -> "true" | false -> "false"

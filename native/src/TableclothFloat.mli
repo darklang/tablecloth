@@ -44,19 +44,19 @@ val nan : t
 
     {b Note } comparing values with {!Float.nan} will {b always return } [false] even if the value you are comparing against is also [NaN].
 
-    e.g
+    For detecting [Nan] you should use {!Float.is_nan}
+
+    {2 Examples}
 
     {[
       let is_not_a_number x = Float.(x = nan) in
 
       is_not_a_number nan = false
     ]}
-
-    For detecting [Nan] you should use {!Float.is_nan}
 *)
 
 val infinity : t
-(** Positive {{: https://en.wikipedia.org/wiki/IEEE_754-1985#Positive_and_negative_infinity } infinity }
+(** Positive {{: https://en.wikipedia.org/wiki/IEEE_754-1985#Positive_and_negative_infinity } infinity}.
 
     {[Float.log ~base:10.0 0.0 = Float.infinity]}
 *)
@@ -65,37 +65,37 @@ val negative_infinity : t
 (** Negative infinity, see {!Float.infinity} *)
 
 val e : t
-(** An approximation of {{: https://en.wikipedia.org/wiki/E_(mathematical_constant) } Euler's number }. *)
+(** An approximation of {{: https://en.wikipedia.org/wiki/E_(mathematical_constant) } Euler's number}. *)
 
 val pi : t
-(** An approximation of {{: https://en.wikipedia.org/wiki/Pi } pi }. *)
+(** An approximation of {{: https://en.wikipedia.org/wiki/Pi } pi}. *)
 
 val epsilon : t
 (** The smallest interval between two representable numbers. *)
 
 val largest_value : t
-(** The largest (furthest from zero) representable positive [float] *)
+(** The largest (furthest from zero) representable positive [float]. *)
 
 val smallest_value : t
 (** The smallest representable positive [float]. The closest to zero without actually being zero. *)
 
 val maximum_safe_integer : t
-(** For floats greater than [maximum_safe_integer], it no longer holds that [Float.(n + 1.) > n]  *)
+(** For floats greater than [maximum_safe_integer], it no longer holds that [Float.(n + 1.) > n].  *)
 
 val minimum_safe_integer : t
-(** For floats less than [minimum_safe_integer], it no longer holds that [Float.(n - 1.) < n]  *)
+(** For floats less than [minimum_safe_integer], it no longer holds that [Float.(n - 1.) < n].  *)
 
 (** {1 Create} *)
 
 val from_int : int -> t
-(** Convert an {!Int} to a [float]
+(** Convert an {!Int} to a [float].
 
     {2 Examples}
 
     {[
       Float.from_int 5 = 5.0
       Float.from_int 0 = 0.0
-      Float.from_int -7 = -7.0
+      Float.from_int (-7) = (-7.0)
     ]}
 *)
 
@@ -126,11 +126,11 @@ val add : t -> t -> t
     So if you needed to add a {!List.length} to a [float] for some reason, you
     could:
 
-    {[Float.add 3.14 (Int.to_float (List.length [1,2,3])) = 6.14]}
+    {[Float.add 3.14 (Int.to_float (List.length [1;2;3])) = 6.14]}
 
     or
 
-    {[Float.round_to_int 3.14 + List.length [1,2,3] = 6]}
+    {[Float.(round 3.5 |> toInt) + List.length [1;2;3] = 6]}
 
     Languages like Java and JavaScript automatically convert [int] values
     to [float] values when you mix and match. This can make it difficult to be sure
@@ -150,7 +150,7 @@ val ( + ) : t -> t -> t
 (** See {!Float.add} *)
 
 val subtract : t -> t -> t
-(** Subtract numbers
+(** Subtract numbers.
 
     Alternatively the [-] operator can be used
 
@@ -164,7 +164,7 @@ val ( - ) : t -> t -> t
 (** See {!Float.subtract} *)
 
 val multiply : t -> t -> t
-(** Multiply numbers
+(** Multiply numbers.
 
     Alternatively the [*] operator can be used
 
@@ -175,7 +175,7 @@ val multiply : t -> t -> t
 *)
 
 val ( * ) : t -> t -> t
-(** See {!Float.multiply} *)
+(** See {!Float.multiply}. *)
 
 val divide : t -> by:t -> t
 (** Floating-point division:
@@ -214,9 +214,9 @@ val negate : t -> t
 
     {[Float.(~- 4.0) = (-4.0)]}
     {[
-      Float.negate 8 = (-8)
-      Float.negate (-7) = 7
-      Float.negate 0 = 0
+      Float.negate 8. = (-8.)
+      Float.negate (-7.) = 7.
+      Float.negate 0. = 0.
     ]}
 *)
 
@@ -230,13 +230,13 @@ val absolute : t -> t
 
     {[
       Float.absolute 8. = 8.
-      Float.absolute (-7) = 7
-      Float.absolute 0 = 0
+      Float.absolute (-7.) = 7.
+      Float.absolute 0. = 0.
     ]}
 *)
 
 val maximum : t -> t -> t
-(** Returns the larger of two [float]s, if both arguments are equal, returns the first argument
+(** Returns the larger of two [float]s, if both arguments are equal, returns the first argument.
 
     If either (or both) of the arguments are [NaN], returns [NaN]
 
@@ -248,9 +248,9 @@ val maximum : t -> t -> t
 *)
 
 val minimum : t -> t -> t
-(** Returns the smaller of two [float]s, if both arguments are equal, returns the first argument
+(** Returns the smaller of two [float]s, if both arguments are equal, returns the first argument.
 
-    If either (or both) of the arguments are [NaN], returns [NaN]
+    If either (or both) of the arguments are [NaN], returns [NaN].
 
     {2 Examples}
 
@@ -264,13 +264,13 @@ val clamp : t -> lower:t -> upper:t -> t
 
     {3 Exceptions}
 
-    Throws an [Invalid_argument] exception if [lower > upper]
+    Throws an [Invalid_argument] exception if [lower > upper].
 
     {2 Examples}
 
     {[Float.clamp ~lower:0. ~upper:8. 5. = 5.]}
     {[Float.clamp ~lower:0. ~upper:8. 9. = 8.]}
-    {[Float.clamp ~lower:(-10.) ~upper:(-5.) 5. = -5.]}
+    {[Float.clamp ~lower:(-10.) ~upper:(-5.) 5. = (-5.)]}
 *)
 
 (** {1 Fancier math} *)
@@ -300,15 +300,15 @@ val log : t -> base:t -> t
 val is_nan : t -> bool
 (** Determine whether a float is an undefined or unrepresentable number.
 
-    {b Note } this function is more useful than it might seem since [NaN] {b does not } equal [Nan]:
+    {b Note: } this function is more useful than it might seem since [NaN] {b does not } equal [NaN]:
 
     {[Float.(nan = nan) = false]}
 
     {2 Examples}
 
-    {[Float.is_nan (0.0 / 0.0) = true]}
+    {[Float.is_nan (0.0 /. 0.0) = true]}
     {[Float.(is_nan (square_root (-1.0))) = true]}
-    {[Float.is_nan (1.0 / 0.0) = false  (* Float.infinity {b is} a number *)]}
+    {[Float.is_nan (1.0 /. 0.0) = false  (* Float.infinity {b is} a number *)]}
     {[Float.is_nan 1. = false]}
 *)
 
@@ -319,9 +319,9 @@ val is_finite : t -> bool
 
     {2 Examples}
 
-    {[Float.is_finite (0. / 0.) = false]}
+    {[Float.is_finite (0. /. 0.) = false]}
     {[Float.(is_finite (square_root (-1.))) = false]}
-    {[Float.is_finite (1. / 0.) = false]}
+    {[Float.is_finite (1. /. 0.) = false]}
     {[Float.is_finite 1. = true]}
     {[Float.(is_finite nan) = false]}
 *)
@@ -331,9 +331,9 @@ val is_infinite : t -> bool
 
     {2 Examples}
 
-    {[Float.is_infinite (0. / 0.) = false]}
+    {[Float.is_infinite (0. /. 0.) = false]}
     {[Float.(is_infinite (square_root (-1.))) = false]}
-    {[Float.is_infinite (1. / 0.) = true]}
+    {[Float.is_infinite (1. /. 0.) = true]}
     {[Float.is_infinite 1. = false]}
     {[Float.(is_infinite nan) = false]}
 *)
@@ -396,12 +396,12 @@ val degrees : t -> radians
     {2 Examples}
 
     {[Float.degrees 180. = Float.pi]}
-    {[Float.degrees 360. = Float.pi * 2.]}
+    {[Float.degrees 360. = Float.pi *. 2.]}
     {[Float.degrees 90. = Float.pi /. 2.]}
 *)
 
 val radians : t -> radians
-(** Convert a {!Float.t} to {{: https://en.wikipedia.org/wiki/Radian } radians }.
+(** Convert a {!Float.t} to {{: https://en.wikipedia.org/wiki/Radian } radians}.
 
     {b Note } This function doesn't actually do anything to its argument, but can be useful to indicate intent when inter-mixing angles of different units within the same function.
 
@@ -417,7 +417,7 @@ val turns : t -> radians
 
     {2 Examples}
 
-    {[Float.(turns (1. / 2.)) = pi]}
+    {[Float.(turns (1. / 2.)) = Float.pi]}
     {[Float.(turns 1. = degrees 360.)]}
 *)
 
@@ -442,7 +442,7 @@ val to_polar : float * float -> float * radians
 *)
 
 val cos : radians -> t
-(** Figure out the cosine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
+(** Figure out the cosine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians}.
 
     {2 Examples}
 
@@ -451,7 +451,7 @@ val cos : radians -> t
 *)
 
 val acos : radians -> t
-(** Figure out the arccosine for [adjacent / hypotenuse] in {{: https://en.wikipedia.org/wiki/Radian } radians }:
+(** Figure out the arccosine for [adjacent / hypotenuse] in {{: https://en.wikipedia.org/wiki/Radian } radians}:
 
     {2 Examples}
 
@@ -459,7 +459,7 @@ val acos : radians -> t
 *)
 
 val sin : radians -> t
-(** Figure out the sine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians }.
+(** Figure out the sine given an angle in {{: https://en.wikipedia.org/wiki/Radian } radians}.
 
     {2 Examples}
 
@@ -468,7 +468,7 @@ val sin : radians -> t
 *)
 
 val asin : radians -> t
-(** Figure out the arcsine for [opposite / hypotenuse] in {{: https://en.wikipedia.org/wiki/Radian } radians }:
+(** Figure out the arcsine for [opposite / hypotenuse] in {{: https://en.wikipedia.org/wiki/Radian } radians}:
 
     {2 Examples}
 
@@ -503,9 +503,9 @@ val atan : t -> radians
     {2 Examples}
 
     {[Float.atan (1. /. 1.) = 0.7853981633974483  (* 45 degrees or pi/4 radians *)]}
-    {[Float.atan (1. /. -1.) = -0.7853981633974483  (* 315 degrees or 7 * pi / 4 radians *)]}
+    {[Float.atan (1. /. -1.) = (-0.7853981633974483)  (* 315 degrees or 7 * pi / 4 radians *)]}
     {[Float.atan (-1. /. -1.) = 0.7853981633974483 (* 45 degrees or pi/4 radians *)]}
-    {[Float.atan (-1. /.  1.) = -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)]}
+    {[Float.atan (-1. /.  1.) = (-0.7853981633974483) (* 315 degrees or 7 * pi/4 radians *)]}
 *)
 
 val atan2 : y:t -> x:t -> radians
@@ -517,8 +517,8 @@ val atan2 : y:t -> x:t -> radians
 
     {[Float.atan2 ~y:1. ~x:1. = 0.7853981633974483  (* 45 degrees or pi/4 radians *)]}
     {[Float.atan2 ~y:1. ~x:(-1.) = 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)]}
-    {[Float.atan2 ~y:(-1.) ~x:(-1.) = -(2.3561944901923449) (* 225 degrees or 5 * pi/4 radians *)]}
-    {[Float.atan2 ~y:(-1.) ~x:1. = -(0.7853981633974483) (* 315 degrees or 7 * pi/4 radians *)]}
+    {[Float.atan2 ~y:(-1.) ~x:(-1.) = (-2.3561944901923449) (* 225 degrees or 5 * pi/4 radians *)]}
+    {[Float.atan2 ~y:(-1.) ~x:1. = (-0.7853981633974483) (* 315 degrees or 7 * pi/4 radians *)]}
 *)
 
 (** {1 Rounding} *)
@@ -536,7 +536,7 @@ type direction =
   ]
 
 val round : ?direction:direction -> t -> t
-(** Round a number, by default to the to the closest [int] with halves rounded [`Up] (towards positive infinity)
+(** Round a number, by default to the to the closest [int] with halves rounded [`Up] (towards positive infinity).
 
     Other rounding strategies are available by using the optional [~direction] labelelled.
 
@@ -546,9 +546,9 @@ val round : ?direction:direction -> t -> t
       Float.round 1.2 = 1.0
       Float.round 1.5 = 2.0
       Float.round 1.8 = 2.0
-      Float.round -1.2 = -1.0
-      Float.round -1.5 = -1.0
-      Float.round -1.8 = -2.0
+      Float.round (-1.2) = (-1.0)
+      Float.round (-1.5) = (-1.0)
+      Float.round (-1.8) = (-2.0)
     ]}
 
     {3 Towards zero}
@@ -557,70 +557,70 @@ val round : ?direction:direction -> t -> t
       Float.round ~direction:`Zero 1.2 = 1.0
       Float.round ~direction:`Zero 1.5 = 1.0
       Float.round ~direction:`Zero 1.8 = 1.0
-      Float.round ~direction:`Zero (-1.2) = -1.0
-      Float.round ~direction:`Zero (-1.5) = -1.0
-      Float.round ~direction:`Zero (-1.8) = -1.0
+      Float.round ~direction:`Zero (-1.2) = (-1.0)
+      Float.round ~direction:`Zero (-1.5) = (-1.0)
+      Float.round ~direction:`Zero (-1.8) = (-1.0)
     ]}
 
     {3 Away from zero}
 
     {[
-      Float.round ~direction:`AwayFromZero 1.2 = 1.0
-      Float.round ~direction:`AwayFromZero 1.5 = 1.0
-      Float.round ~direction:`AwayFromZero 1.8 = 1.0
-      Float.round ~direction:`AwayFromZero (-1.2) = -1.0
-      Float.round ~direction:`AwayFromZero (-1.5) = -1.0
-      Float.round ~direction:`AwayFromZero (-1.8) = -1.0
+      Float.round ~direction:`AwayFromZero 1.2 = 2.0
+      Float.round ~direction:`AwayFromZero 1.5 = 2.0
+      Float.round ~direction:`AwayFromZero 1.8 = 2.0
+      Float.round ~direction:`AwayFromZero (-1.2) = (-2.0)
+      Float.round ~direction:`AwayFromZero (-1.5) = (-2.0)
+      Float.round ~direction:`AwayFromZero (-1.8) = (-2.0)
     ]}
 
     {3 Towards infinity}
 
-    This is also known as {!Float.ceiling}
+    This is also known as {!Float.ceiling}.
 
     {[
-      Float.round ~direction:`Up 1.2 = 1.0
-      Float.round ~direction:`Up 1.5 = 1.0
-      Float.round ~direction:`Up 1.8 = 1.0
-      Float.round ~direction:`Up (-1.2) = -1.0
-      Float.round ~direction:`Up (-1.5) = -1.0
-      Float.round ~direction:`Up (-1.8) = -1.0
+      Float.round ~direction:`Up 1.2 = 2.0
+      Float.round ~direction:`Up 1.5 = 2.0
+      Float.round ~direction:`Up 1.8 = 2.0
+      Float.round ~direction:`Up (-1.2) = (-1.0)
+      Float.round ~direction:`Up (-1.5) = (-1.0)
+      Float.round ~direction:`Up (-1.8) = (-1.0)
     ]}
 
     {3 Towards negative infinity}
 
-    This is also known as {!Float.floor}
+    This is also known as {!Float.floor}.
 
-    {[List.map  ~f:(Float.round ~direction:`Down) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -2.0; 1.0 1.0 1.0]]}
+    {[List.map  ~f:(Float.round ~direction:`Down) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -2.0; 1.0; 1.0; 1.0]]}
 
     {3 To the closest integer}
 
     Rounding a number [x] to the closest integer requires some tie-breaking for when the [fraction] part of [x] is exactly [0.5].
 
-    {4 Halves rounded towards zero}
+    {3 Halves rounded towards zero}
 
-    {[List.map  ~f:(Float.round ~direction:(`Closest `AwayFromZero)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -1.0; -1.0; 1.0 1.0 2.0]]}
+    {[List.map  ~f:(Float.round ~direction:(`Closest `Zero)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -1.0; -1.0; 1.0; 1.0; 2.0]]}
 
-    {4 Halves rounded away from zero}
+    {3 Halves rounded away from zero}
 
-    This method is often known as {b commercial rounding }
+    This method is often known as {b commercial rounding}.
 
-    {[List.map  ~f:(Float.round ~direction:(`Closest `AwayFromZero)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -1.0; 1.0 2.0 2.0]]}
+    {[List.map  ~f:(Float.round ~direction:(`Closest `AwayFromZero)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -1.0; 1.0; 2.0; 2.0]]}
 
-    {4 Halves rounded down}
+    {3 Halves rounded down}
 
-    {[List.map  ~f:(Float.round ~direction:(`Closest `Down)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -1.0; 1.0 1.0 2.0]]}
+    {[List.map  ~f:(Float.round ~direction:(`Closest `Down)) [-1.8; -1.5; -1.2; 1.2; 1.5; 1.8] = [-2.0; -2.0; -1.0; 1.0; 1.0; 2.0]]}
 
-    {4 Halves rounded up}
+    {3 Halves rounded up}
 
     This is the default.
 
     [Float.round 1.5] is the same as [Float.round ~direction:(`Closest `Up) 1.5]
 
-    {4 Halves rounded towards the closest even number}
+    {3 Halves rounded towards the closest even number}
 
     {[
-      Float.round ~direction:(`Closest `ToEven) -1.5 = -2.0
-      Float.round ~direction:(`Closest `ToEven) -2.5 = -2.0
+      Float.round ~direction:(`Closest `ToEven) (-1.5) = (-2.0)
+      Float.round ~direction:(`Closest `ToEven) (-2.5) = (-2.0)
     ]}
 *)
 
@@ -633,9 +633,9 @@ val floor : t -> t
       Float.floor 1.2 = 1.0
       Float.floor 1.5 = 1.0
       Float.floor 1.8 = 1.0
-      Float.floor -1.2 = -2.0
-      Float.floor -1.5 = -2.0
-      Float.floor -1.8 = -2.0
+      Float.floor (-1.2) = (-2.0)
+      Float.floor (-1.5) = (-2.0)
+      Float.floor (-1.8) = (-2.0)
     ]}
 *)
 
@@ -648,9 +648,9 @@ val ceiling : t -> t
       Float.ceiling 1.2 = 2.0
       Float.ceiling 1.5 = 2.0
       Float.ceiling 1.8 = 2.0
-      Float.ceiling -1.2 = (-1.0)
-      Float.ceiling -1.5 = (-1.0)
-      Float.ceiling -1.8 = (-1.0)
+      Float.ceiling (-1.2) = (-1.0)
+      Float.ceiling (-1.5) = (-1.0)
+      Float.ceiling (-1.8) = (-1.0)
     ]}
 *)
 
@@ -664,9 +664,9 @@ val truncate : t -> t
       Float.truncate 1.2 = 1.
       Float.truncate 1.5 = 1.
       Float.truncate 1.8 = 1.
-      Float.truncate (-1.2) = -1.
-      Float.truncate (-1.5) = -1.
-      Float.truncate (-1.8) = -1.
+      Float.truncate (-1.2) = (-1.)
+      Float.truncate (-1.5) = (-1.)
+      Float.truncate (-1.8) = (-1.)
     ]}
 *)
 
@@ -690,15 +690,15 @@ val to_int : t -> int option
 *)
 
 val to_string : t -> string
-(** Convert a [float] to a {!String}
+(** Convert a [float] to a {!String}.
 
-    The behaviour of this function is platform specific
+    The behaviour of this function is platform specific.
 *)
 
 (** {1 Compare} *)
 
 val equal : t -> t -> bool
-(** Test two floats for equality *)
+(** Test two floats for equality. *)
 
 val compare : t -> t -> int
-(** Compare two floats *)
+(** Compare two floats. *)

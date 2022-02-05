@@ -83,7 +83,7 @@ jobs:
 
   documentation-generator-build:
     docker:
-      - image: ocaml/opam:ubuntu-ocaml-4.12
+      - image: ocaml/opam:ubuntu-20.04-ocaml-4.12
     environment:
       CI: true
     working_directory: ~/repo

@@ -52,7 +52,7 @@ let unzip list =
 
 let includes t value ~equal = Belt.List.has t value equal
 
-let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
+let uniqueBy (l : 'a list) ~(f : 'a -> string) : 'a list =
   let rec uniqueHelper
       (f : 'a -> string)
       (existing : Belt.Set.String.t)
@@ -268,7 +268,7 @@ let extent t ~compare =
 
 let sort t ~compare = Belt.List.sort t compare
 
-let sortBy ~(f : 'a -> 'b) (l : 'a t) : 'a t =
+let sortBy (l : 'a t) ~(f : 'a -> 'b) : 'a t =
   Belt.List.sort l (fun a b ->
       let a' = f a in
       let b' = f b in
@@ -340,17 +340,17 @@ let groupBy t comparator ~f =
               Some (element :: elements) ) )
 
 
-let rec equal equalElement a b =
+let rec equal a b equalElement =
   match (a, b) with
   | [], [] ->
       true
   | x :: xs, y :: ys ->
-      equalElement x y && equal equalElement xs ys
+      equalElement x y && equal xs ys equalElement
   | _ ->
       false
 
 
-let rec compare compareElement a b =
+let rec compare a b ~f:compareElement =
   match (a, b) with
   | [], [] ->
       0
@@ -361,6 +361,6 @@ let rec compare compareElement a b =
   | x :: xs, y :: ys ->
     ( match compareElement x y with
     | 0 ->
-        compare compareElement xs ys
+        compare ~f:compareElement xs ys
     | result ->
         result )

@@ -26,7 +26,8 @@ type t = char
 val from_code : int -> char option
 (** Convert an ASCII {{: https://en.wikipedia.org/wiki/Code_point } code point } to a character.
 
-    Returns [None] if the codepoint is outside the range of 0 to 255 inclusive.
+    The full range of extended ASCII is from [0] to [255].
+    For numbers outside that range, you get [None].
 
     {2 Examples}
 
@@ -34,12 +35,12 @@ val from_code : int -> char option
     {[Char.from_code 66 = Some 'B']}
     {[Char.from_code 3000 = None]}
     {[Char.from_code (-1) = None]}
-
-    The full range of extended ASCII is from [0] to [255]. For numbers outside that range, you get [None].
 *)
 
 val from_string : string -> char option
-(** Converts a string to character. Returns None when the string isn't of length one.
+(** Converts a string to character. 
+
+    Returns [None] when the [string] isn't of length one.
 
     {2 Examples}
 
@@ -90,7 +91,7 @@ val is_letter : char -> bool
 *)
 
 val is_digit : char -> bool
-(** Detect when a character is a number
+(** Detect when a character is a number.
 
     {2 Examples}
 
@@ -160,15 +161,13 @@ val to_uppercase : char -> char
 
     {2 Examples}
 
-    {[to_uppercase 'a' = 'A']}
-    {[to_uppercase 'b' = 'B']}
-    {[to_uppercase '7' = '7']}
+    {[Char.to_uppercase 'a' = 'A']}
+    {[Char.to_uppercase 'b' = 'B']}
+    {[Char.to_uppercase '7' = '7']}
 *)
 
 val to_code : char -> int
-(** Convert to the corresponding ASCII [code point][cp].
-
-    [cp]: https://en.wikipedia.org/wiki/Code_point
+(** Convert [char] to the corresponding ASCII {{: https://en.wikipedia.org/wiki/Code_point } code point}.
 
     {2 Examples}
 
@@ -177,7 +176,7 @@ val to_code : char -> int
 *)
 
 val to_string : char -> string
-(** Convert a character into a string.
+(** Convert a character into a [string].
 
     {2 Examples}
 

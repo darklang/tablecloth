@@ -11,18 +11,20 @@ external identity : 'a -> 'a = "%identity"
 
     Perhaps you want to create an array of integers
 
-    {[Array.initialize 6 ~f:Fun.identity = [|0; 1; 2; 3; 4; 5|]]}
+    {[
+      Array.initialize(6, ~f=Fun.identity) == [0, 1, 2, 3, 4, 5]
+    ]}
 
     (In this particular case you probably want to use {!Array.range}.)
 
     Or maybe you need to register a callback, but dont want to do anything:
 
     {[
-      let httpMiddleware =
-        HttpLibrary.createMiddleWare
-          ~onEventYouDoCareAbout:transformAndReturn
-          ~onEventYouDontCareAbout:Fun.identity
-    ]}
+      let httpMiddleware = HttpLibrary.createMiddleWare(
+        ~onEventYouDoCareAbout=transformAndReturn,
+        ~onEventYouDontCareAbout=Fun.identity,
+      )
+   ]}
 *)
 
 external ignore : _ -> unit = "%ignore"
@@ -36,31 +38,32 @@ external ignore : _ -> unit = "%ignore"
 
     {[
       (* Pretend we have a module with the following signature:
-          module PretendMutableQueue : sig
-            type 'a t
+          module type PretendMutableQueue = {
+            type t<'a>
 
             (** Adds an element to the queue, returning the new length of the queue *)
-            val pushReturningLength : 'a t -> 'a -> int
-          end
+            let pushReturningLength: (t<'a>, 'a) => int
+          }
       *)
 
-      let addListToQueue queue list =
-        List.forEach list ~f:(fun element ->
-          ignore (MutableQueue.pushReturningLength queue element)
-        )
-      in ()
-    ]}
+      let addArrayToQueue = (queue, array) =>
+        Array.forEach(array, ~f=element =>
+          PretendMutableQueue.pushReturningLength(queue, element)
+        )->Fun.ignore
+   ]}
 *)
 
 val constant : 'a -> 'b -> 'a
 (** Create a function that {b always} returns the same value.
 
-    Useful with functions like {!List.map} or {!Array.initialize}
+    Useful with functions like {!List.map} or {!Array.initialize}.
 
     {2 Examples}
 
-    {[List.map ~f:(Fun.constant 0) [1;2;3;4;5] = [0;0;0;0;0]]}
-    {[Array.initialize 6 ~f:(Fun.constant 0) = [|0;0;0;0;0;0|]]}
+    {[
+      Array.map([1, 2, 3, 4, 5], ~f=Fun.constant(0)) == [0, 0, 0, 0, 0]
+      Array.initialize(6, ~f=Fun.constant(0)) == [0, 0, 0, 0, 0, 0]
+    ]}
 *)
 
 val sequence : 'a -> 'b -> 'b
@@ -69,7 +72,7 @@ val sequence : 'a -> 'b -> 'b
 val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
 (** Reverses the argument order of a function.
 
-    For any arguments [x] and [y], [(flip f) x y] is the same as [f y x].
+    For any arguments [x] and [y], [flip(f)(x, y)] is the same as [f(y, x)].
 
     Perhaps you want to [fold] something, but the arguments of a function you
     already have access to are in the wrong order.
@@ -78,91 +81,59 @@ val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
 val negate : ('a -> bool) -> 'a -> bool
 (** Negate a function.
 
-    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
+    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}.
 
     {2 Examples}
 
     {[
-      let isLessThanTwelve = Fun.negate (fun n -> n >= 12) in
-      isLessThanTwelve 12 = false
-    ]}
+      let isLessThanTwelve = Fun.negate(n => n >= 12)
+      isLessThanTwelve(12) == false
+   ]}
 *)
 
 val apply : ('a -> 'b) -> 'a -> 'b
-(** See {!Fun.(<|)} *)
+(** Calls function [f] with an argument [x].
 
-val ( <| ) : ('a -> 'b) -> 'a -> 'b
-(** Like {!(|>)} but in the opposite direction.
+    [apply(f, x)] is exactly the same as [f(x)].
 
-    [f <| x] is exactly the same as [f x].
-
-    Maybe you want to apply a function to a [match] expression? That sort of thing.
+    Maybe you want to apply a function to a [switch] expression? That sort of thing.
 *)
 
-external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-(** See {!Fun.(|>)} *)
+val compose : 'a -> ('a -> 'b) -> ('b -> 'c) -> 'c
+(** Function composition, passing result from left to right.
 
-external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
-(** Saying [x |> f] is exactly the same as [f x], just a bit longer.
+    This is usefull in cases when you want to make multiple transformations
+    during a [map] operation.
 
-    It is called the "pipe" operator because it lets you write "pipelined" code.
-
-    It can make nested function calls more readable.
-
-    For example, say we have a [sanitize] function for turning user input into
-    integers:
+    {2 Examples}
 
     {[
-      (* Before *)
-      let sanitize (input: string) : int option =
-        Int.fromString (String.trim input)
-    ]}
+      let numbers = [1, 2, 3, 4, 5, 6, 7]
 
-    We can rewrite it like this:
+      let multiplied = Array.map(numbers, ~f=Fun.compose(Int.multiply(5), Int.toString))
+
+      multiplied == ["5", "10", "15", "20", "25", "30", "35"]
+   ]}
+*)
+
+val composeRight : 'a -> ('b -> 'c) -> ('a -> 'b) -> 'c
+(** Function composition, passing result from right to left.
+
+    Same as [!compose], but function application order is reversed.
+
+    This is usefull in cases when you want to make multiple transformations
+    during a [map] operation.
+    
+    {2 Examples}
 
     {[
-      (* After *)
-      let sanitize (input: string) : int option =
-        input
-        |> String.trim
-        |> Int.fromString
-    ]}
+      let numbers = [1, 2, 3, 4, 5, 6, 7]
 
-    This can be overused! When you have three or four steps, the code often gets clearer if you break things out into
-    some smaller piplines assigned to variables. Now the transformation has a name, maybe it could have a type annotation.
+      let a = (b) => b -> Fun.compose(Int.toString, Int.multiply(5))
 
-    It can often be more self-documenting that way!
+      multiplied == ["5", "10", "15", "20", "25", "30", "35"]
+   ]}
 *)
-
-val compose : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
-(** Function composition, passing results along in the suggested direction.
-
-    For example, the following code (in a very roundabout way) checks if a number divided by two is odd:
-
-    {[let isHalfOdd = Fun.(not << Int.isEven << Int.divide ~by:2)]}
-
-    You can think of this operator as equivalent to the following:
-
-    {[(g << f) = (fun x -> g (f x))]}
-
-    So our example expands out to something like this:
-
-    {[let isHalfOdd = fun n -> not (Int.isEven (Int.divide ~by:2 n))]}
-*)
-
-val ( << ) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
-(** See {!Fun.compose} *)
-
-val composeRight : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-(** Function composition, passing results along in the suggested direction.
-
-    For example, the following code checks if the square root of a number is odd:
-
-    {[Int.squareRoot >> Int.isEven >> not]}
-*)
-
-val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-(** See {!Fun.composeRight} *)
 
 val tap : 'a -> f:('a -> unit) -> 'a
 (** Useful for performing some side affect in {!Fun.pipe}-lined code.
@@ -172,24 +143,22 @@ val tap : 'a -> f:('a -> unit) -> 'a
     {2 Examples}
 
     {[
-      let sanitize (input: string) : int option =
+      let sanitize = (input: string): option<int> =>
         input
-        |> String.trim
-        |> Fun.tap ~f:(fun trimmedString -> print_endline trimmedString)
-        |> Int.fromString
-    ]}
-    {[
-      Array.filter [|1;3;2;5;4;|] ~f:Int.isEven
-      |> Fun.tap ~f:(fun numbers -> numbers.(0) <- 0)
-      |> Fun.tap ~f:Array.reverseInPlace
-      = [|4;0|]
-    ]}
+        ->String.trim
+        ->Fun.tap(~f=Js.log)
+        ->Int.fromString
+
+      Array.filter([1, 3, 2, 5, 4], ~f=Int.isEven)
+      ->Fun.tap(~f=numbers => numbers[0] = 0)
+      ->Fun.tap(~f=Array.reverse) == [4, 0]
+   ]}
 *)
 
 val forever : (unit -> unit) -> exn
 (** Runs the provided function, forever.
 
-    If an exception is thrown, returns the exception
+    If an exception is thrown, returns the exception.
 *)
 
 val times : int -> f:(unit -> unit) -> unit
@@ -198,23 +167,23 @@ val times : int -> f:(unit -> unit) -> unit
     {2 Examples}
 
     {[
-      let count = ref 0
-      times(10, fun () -> (count <- !count + 1))
-      !count = 10
-    ]}
+      let count = ref(0)
+      Fun.times(10, ~f=() => count.contents = count.contents + 1)
+      count.contents == 10
+   ]}
 *)
 
 val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
-(** Takes a function [f] which takes a single argument of a tuple ['a * 'b] and returns a function which takes two arguments that can be partially applied.
+(** Takes a function [f] which takes a single argument of a tuple [('a, 'b)] and returns a function which takes two arguments that can be partially applied.
 
     {2 Examples}
 
     {[
-      let squareArea (width, height) = width * height in
-      let curriedArea : float -> float -> float = curry squareArea in
-      let sizes = [3, 4, 5] in
-      List.map sizes ~f:(curriedArea 4) = [12; 16; 20]
-    ]}
+      let squareArea = ((width, height)) => width * height
+      let curriedArea: (int, int) => int = Fun.curry(squareArea)
+      let sizes = [3, 4, 5]
+      Array.map(sizes, ~f=curriedArea(4)) == [12, 16, 20]
+   ]}
 *)
 
 val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
@@ -223,14 +192,14 @@ val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
     {2 Examples}
 
     {[
-      let sum (a : int) (b: int) : int = a + b in
-      let uncurriedSum : (int * int) -> int = uncurry add in
-      uncurriedSum (3, 4) = 7
-    ]}
+      let sum = (a: int, b: int): int => a + b
+      let uncurriedSum: ((int, int)) => int = Fun.uncurry(sum)
+      uncurriedSum((3, 4)) == 7
+   ]}
 *)
 
 val curry3 : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd
-(** Like {!curry} but for a {!Tuple3} *)
+(** Like {!curry} but for a {!Tuple3}. *)
 
 val uncurry3 : ('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd
-(** Like {!uncurry} but for a {!Tuple3} *)
+(** Like {!uncurry} but for a {!Tuple3}. *)

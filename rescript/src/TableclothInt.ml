@@ -20,21 +20,13 @@ let fromString s =
 
 let add = ( + )
 
-let ( + ) = ( + )
-
 let subtract = ( - )
-
-let ( - ) = ( - )
 
 let multiply = ( * )
 
-let ( * ) = multiply
-
 let divide n ~by = n / by
 
-let ( / ) = ( / )
-
-let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
+let divideFloat n ~by = Js.Int.toFloat n /. Js.Int.toFloat by
 
 let power ~base ~exponent =
   let result =
@@ -50,17 +42,11 @@ let power ~base ~exponent =
   Js.Math.unsafe_trunc result
 
 
-let ( ** ) base exponent = power ~base ~exponent
-
 let negate = ( ~- )
-
-let ( ~- ) = ( ~- )
 
 let remainder n ~by = n mod by
 
-let ( mod ) n by = (if n <= 0 then abs n * 2 else n) mod by
-
-let modulo n ~by = n mod by
+let modulo n ~by = (if n <= 0 then abs n * 2 else n) mod by
 
 let maximum = Js.Math.max_int
 

@@ -11,63 +11,48 @@ let suite =
           expect (Int.maximumValue + 1) |> toEqual Eq.int Int.minimumValue ) ;
       describe "add" (fun () ->
           test "add" (fun () ->
-              expect (Int.add 3002 4004) |> toEqual Eq.int 7006 ) ;
-          test "+" (fun () ->
-              expect
-                (let open Int in
-                3002 + 4004)
-              |> toEqual Eq.int 7006 ) ) ;
+              expect (Int.add 3002 4004) |> toEqual Eq.int 7006 ) ) ;
       describe "subtract" (fun () ->
           test "subtract" (fun () ->
-              expect (Int.subtract 4 3) |> toEqual Eq.int 1 ) ;
-          test "-" (fun () ->
-              expect
-                (let open Int in
-                4 - 3)
-              |> toEqual Eq.int 1 ) ) ;
+              expect (Int.subtract 4 3) |> toEqual Eq.int 1 ) ) ;
       describe "multiply" (fun () ->
           test "multiply" (fun () ->
-              expect (Int.multiply 2 7) |> toEqual Eq.int 14 ) ;
-          test "*" (fun () ->
-              expect
-                (let open Int in
-                2 * 7)
-              |> toEqual Eq.int 14 ) ) ;
+              expect (Int.multiply 2 7) |> toEqual Eq.int 14 ) ) ;
       describe "divide" (fun () ->
           test "divide" (fun () ->
               expect (Int.divide 3 ~by:2) |> toEqual Eq.int 1 ) ;
           test "division by zero" (fun () ->
               expect (fun () -> Int.divide 3 ~by:0) |> toThrow ) ;
-          test "/" (fun () ->
+          test "divide" (fun () ->
               expect
                 (let open Int in
-                27 / 5)
+                divide 27 ~by:5)
               |> toEqual Eq.int 5 ) ;
-          test "/." (fun () ->
+          test "divideFloat" (fun () ->
               expect
                 (let open Int in
-                3 /. 2)
+                divideFloat 3 ~by:2)
               |> toEqual Eq.float 1.5 ) ;
-          test "/." (fun () ->
+          test "divideFloat" (fun () ->
               expect
                 (let open Int in
-                27 /. 5)
+                divideFloat 27 ~by:5)
               |> toEqual Eq.float 5.4 ) ;
-          test "/." (fun () ->
+          test "divideFloat" (fun () ->
               expect
                 (let open Int in
-                8 /. 4)
+                divideFloat 8 ~by:4)
               |> toEqual Eq.float 2.0 ) ;
-          test "x /. 0" (fun () ->
+          test "divideFloat by 0" (fun () ->
               expect
                 ( (let open Int in
-                  8 /. 0)
+                  divideFloat 8 ~by:0)
                 = Float.infinity )
               |> toEqual Eq.bool true ) ;
-          test "-x /. 0" (fun () ->
+          test "divideFloat 0" (fun () ->
               expect
                 ( (let open Int in
-                  -8 /. 0)
+                  divideFloat (-8) ~by:0)
                 = Float.negativeInfinity )
               |> toEqual Eq.bool true ) ) ;
       describe "power" (fun () ->
@@ -76,12 +61,7 @@ let suite =
           test "0 base" (fun () ->
               expect (Int.power ~base:0 ~exponent:3) |> toEqual Eq.int 0 ) ;
           test "0 exponent" (fun () ->
-              expect (Int.power ~base:7 ~exponent:0) |> toEqual Eq.int 1 ) ;
-          test "**" (fun () ->
-              expect
-                (let open Int in
-                7 ** 3)
-              |> toEqual Eq.int 343 ) ) ;
+              expect (Int.power ~base:7 ~exponent:0) |> toEqual Eq.int 1 ) ) ;
       describe "negate" (fun () ->
           test "positive number" (fun () ->
               expect (Int.negate 8) |> toEqual Eq.int (-8) ) ;
@@ -97,16 +77,7 @@ let suite =
               |> toEqual
                    (let open Eq in
                    array int)
-                   [| 2; 0; 1; 2; 0; 1; 2; 0; 1 |] ) ;
-          test "mod operator" (fun () ->
-              expect
-                (Array.map [| -4; -2; -1; 0; 1; 2; 3; 4 |] ~f:(fun n ->
-                     let open Int in
-                     n mod 3 ) )
-              |> toEqual
-                   (let open Eq in
-                   array int)
-                   [| 2; 1; 2; 0; 1; 2; 0; 1 |] ) ) ;
+                   [| 2; 0; 1; 2; 0; 1; 2; 0; 1 |] ) ) ;
       describe "remainder" (fun () ->
           test "documentation examples" (fun () ->
               expect

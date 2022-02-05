@@ -11,7 +11,7 @@
     {[
       module Point = struct
         type t = int * int
-        let compare = Tuple2.compare Int.compare Int.compare
+        let compare = Tuple2.compare ~f:Int.compare ~g:Int.compare
         include Comparator.Make(struct
           type nonrec t = t
           let compare = compare
@@ -24,7 +24,7 @@
         | Alpacca
 
       let point_to_animal : animal Map.Of(Point).t = 
-        Map.from_list (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
+        Map.from_list (module Point) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Pig)]
     ]}
 
     See the {!Comparator} module for a more details.
@@ -61,19 +61,19 @@ val empty :
   ('key, 'identity) TableclothComparator.s -> ('key, 'value, 'identity) t
 (** A map with nothing in it.
 
-    Often used as an intial value for functions like {!Array.fold}
+    Often used as an intial value for functions like {!Array.fold}.
 
     {2 Examples}
 
     {[
       Array.fold
-        [|"Pear", "Orange", "Grapefruit"|]
+        [|"Pear"; "Orange"; "Grapefruit"|]
         ~initial:(Map.empty (module Int))
         ~f:(fun length_to_fruit fruit ->
-          Map.add length_to_fruit (String.length fruit) fruit
+          Map.add length_to_fruit ~key:(String.length fruit) ~value:fruit
         )
       |> Map.to_array
-      = [|(4, "Pear"); (6, "Orange"), (10, "Grapefruit")|]
+      = [|(4, "Pear"); (6, "Orange"); (10, "Grapefruit")|]
     ]}
 
     In this particular case you might want to use {!Array.group_by}
@@ -84,7 +84,7 @@ val singleton :
   -> key:'key
   -> value:'value
   -> ('key, 'value, 'identity) t
-(** Create a map from a key and value
+(** Create a map from a key and value.
 
     {2 Examples}
 
@@ -95,13 +95,13 @@ val from_array :
      ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) array
   -> ('key, 'value, 'identity) t
-(** Create a map from an {!Array} of key-value tuples *)
+(** Create a map from an {!Array} of key-value tuples. *)
 
 val from_list :
      ('key, 'identity) TableclothComparator.s
   -> ('key * 'value) list
   -> ('key, 'value, 'identity) t
-(** Create a map of a {!List} of key-value tuples *)
+(** Create a map of a {!List} of key-value tuples. *)
 
 (** {1 Basic operations} *)
 
@@ -141,6 +141,7 @@ val remove : ('key, 'value, 'id) t -> 'key -> ('key, 'value, 'id) t
 (** Removes a key-value pair from a map based on they provided key.
 
     {2 Examples}
+
     {[
       let animal_populations = Map.String.from_list [
         ("Elephant", 3_156);
@@ -241,7 +242,7 @@ val find :
      ('key, 'value, _) t
   -> f:(key:'key -> value:'value -> bool)
   -> ('key * 'value) option
-(** Returns, as an {!Option} the first key-value pair for which [f] evaluates to true.
+(** Returns, as an {!Option} the first key-value pair for which [f] evaluates to [true].
 
     If [f] doesn't return [true] for any of the elements [find] will return [None].
 
@@ -315,9 +316,9 @@ val merge :
     You provide a function [f] which is provided the key and the optional
     value from each map and needs to account for the three possibilities:
 
-    1. Only the 'left' map includes a value for the key.
-    2. Both maps contain a value for the key.
-    3. Only the 'right' map includes a value for the key.
+    - Only the 'left' map includes a value for the key.
+    - Both maps contain a value for the key.
+    - Only the 'right' map includes a value for the key.
 
     You then traverse all the keys, building up whatever you want.
 
@@ -342,7 +343,7 @@ val merge :
         ~f:(fun _animal population growth ->
           match (Option.both population growth) with
           | Some (population, growth) ->
-              Some Float.((of_int population) * growth)
+              Some Float.((from_int population) * growth)
           | None -> None
         )
       |> Map.to_list
@@ -373,7 +374,7 @@ val map : ('key, 'value, 'id) t -> f:('value -> 'b) -> ('key, 'b, 'id) t
 
 val map_with_index :
   ('key, 'value, 'id) t -> f:('key -> 'value -> 'b) -> ('key, 'b, 'id) t
-(** Like {!map} but [f] is also called with each values corresponding key *)
+(** Like {!map} but [f] is also called with each values corresponding key. *)
 
 val filter :
   ('key, 'value, 'id) t -> f:('value -> bool) -> ('key, 'value, 'id) t
@@ -386,10 +387,10 @@ val filter :
         ("Elephant", 3_156);
         ("Shrew", 56_423);
       ]
-      |> Map.map ~f:(fun population -> population > 10_000)
+      |> Map.filter ~f:(fun population -> population > 10_000)
       |> Map.to_list
         = [
-        ("Shrew", "56423");
+        ("Shrew", 56423);
       ]
     ]}
 *)
@@ -409,7 +410,7 @@ val partition :
         ("Rhino", 3);
         ("Shrew", 56_423);
       ]
-      |> Map.partition ~f:(fun population -> population < 10_000)
+      |> Map.partition ~f:(fun ~key:_  -> fun ~value:population  -> population < 10000)
       in
 
       Map.to_list endangered = [
@@ -429,7 +430,7 @@ val fold :
   -> initial:'a
   -> f:('a -> key:'key -> value:'value -> 'a)
   -> 'a
-(** Like {!Array.fold} but [f] is also called with both the [key] and [value] *)
+(** Like {!Array.fold} but [f] is also called with both the [key] and [value]. *)
 
 (** {1 Iterate} *)
 
@@ -438,7 +439,7 @@ val for_each : (_, 'value, _) t -> f:('value -> unit) -> unit
 
 val for_each_with_index :
   ('key, 'value, _) t -> f:(key:'key -> value:'value -> unit) -> unit
-(** Like {!Map.for_each} except [~f] is also called with the corresponding key *)
+(** Like {!Map.for_each} except [~f] is also called with the corresponding key. *)
 
 (** {1 Convert} *)
 
@@ -500,7 +501,7 @@ module Poly : sig
   (** A map with nothing in it. *)
 
   val singleton : key:'key -> value:'value -> ('key, 'value) t
-  (** Create a map from a key and value
+  (** Create a map from a key and value.
 
       {2 Examples}
 
@@ -508,10 +509,10 @@ module Poly : sig
   *)
 
   val from_array : ('key * 'value) array -> ('key, 'value) t
-  (** Create a map from an {!Array} of key-value tuples *)
+  (** Create a map from an {!Array} of key-value tuples. *)
 
   val from_list : ('key * 'value) list -> ('key, 'value) t
-  (** Create a map from a {!List} of key-value tuples *)
+  (** Create a map from a {!List} of key-value tuples. *)
 end
 
 (** Construct a Map with {!Int}s for keys. *)
@@ -522,7 +523,7 @@ module Int : sig
   (** A map with nothing in it. *)
 
   val singleton : key:int -> value:'value -> 'value t
-  (** Create a map from a key and value
+  (** Create a map from a key and value.
 
       {2 Examples}
 
@@ -530,10 +531,10 @@ module Int : sig
   *)
 
   val from_array : (int * 'value) array -> 'value t
-  (** Create a map from an {!Array} of key-value tuples *)
+  (** Create a map from an {!Array} of key-value tuples. *)
 
   val from_list : (int * 'value) list -> 'value t
-  (** Create a map of a {!List} of key-value tuples *)
+  (** Create a map of a {!List} of key-value tuples. *)
 end
 
 (** Construct a Map with {!String}s for keys. *)
@@ -544,7 +545,7 @@ module String : sig
   (** A map with nothing in it. *)
 
   val singleton : key:string -> value:'value -> 'value t
-  (** Create a map from a key and value
+  (** Create a map from a key and value.
 
       {2 Examples}
 
@@ -552,8 +553,8 @@ module String : sig
   *)
 
   val from_array : (string * 'value) array -> 'value t
-  (** Create a map from an {!Array} of key-value tuples *)
+  (** Create a map from an {!Array} of key-value tuples. *)
 
   val from_list : (string * 'value) list -> 'value t
-  (** Create a map from a {!List} of key-value tuples *)
+  (** Create a map from a {!List} of key-value tuples. *)
 end

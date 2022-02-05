@@ -6,8 +6,9 @@ import { SyntaxProvider } from '../../components/Syntax';
 import DocsView from '../../views/docs-view';
 
 export default ({ data, location }) => {
+  //  TODO: Replace with "rescript" once updates in docgen are there
   return (
-    <SyntaxProvider defaultSyntax="reason">
+    <SyntaxProvider defaultSyntax="rescript"> 
       <Helmet>
         <title>Tablecloth: Rescript Documentation</title>
       </Helmet>

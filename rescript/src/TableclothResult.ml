@@ -78,7 +78,7 @@ let attempt f =
 
 let tap t ~f = match t with Ok a -> f a | _ -> ()
 
-let equal equalOk equalError a b =
+let equal a b equalOk equalError =
   match (a, b) with
   | Error a', Error b' ->
       equalError a' b'
@@ -89,10 +89,10 @@ let equal equalOk equalError a b =
 
 
 let compare
-    (compareOk : 'ok -> 'ok -> int)
-    (compareError : 'error -> 'error -> int)
     (a : ('ok, 'error) t)
-    (b : ('ok, 'error) t) : int =
+    (b : ('ok, 'error) t)
+    ~f:(compareOk : 'ok -> 'ok -> int)
+    ~g:(compareError : 'error -> 'error -> int) : int =
   match (a, b) with
   | Error a', Error b' ->
       compareError a' b'
@@ -102,10 +102,3 @@ let compare
       -1
   | Ok _, Error _ ->
       1
-
-
-let ( |? ) t default = unwrap t ~default
-
-let ( >>| ) t f = map t ~f
-
-let ( >>= ) t f = andThen t ~f

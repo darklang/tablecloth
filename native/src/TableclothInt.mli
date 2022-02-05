@@ -6,7 +6,7 @@
 
     [int]s are subject to {{: https://en.wikipedia.org/wiki/Integer_overflow } overflow }, meaning that [Int.maximum_value + 1 = Int.minimum_value].
 
-    If you need to work with integers larger than {!maximum_value} (or smaller than {!minimum_value} you can use the {!Integer} module.
+    If you need to work with integers larger than {!maximum_value} (or smaller than {!minimum_value} you can use the {!Float} module.
 
     Valid syntax for [int]s includes:
     {[
@@ -30,7 +30,7 @@
 
     You can read about the reasons for OCaml's unusual integer sizes {{: https://v1.realworldocaml.org/v1/en/html/memory-representation-of-values.html} here }.
 
-    {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}). It appears
+    {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}. It appears
     that the [int] abbreviation was introduced in the programming language ALGOL 68.
 
     Today, almost all programming languages use this abbreviation.
@@ -41,16 +41,16 @@ type t = int
 (** {1 Constants } *)
 
 val zero : t
-(** The literal [0] as a named value *)
+(** The literal [0] as a named value. *)
 
 val one : t
-(** The literal [1] as a named value *)
+(** The literal [1] as a named value. *)
 
 val maximum_value : t
-(** The maximum representable [int] on the current platform *)
+(** The maximum representable [int] on the current platform. *)
 
 val minimum_value : t
-(** The minimum representable [int] on the current platform *)
+(** The minimum representable [int] on the current platform. *)
 
 (** {1 Create} *)
 
@@ -59,8 +59,8 @@ val from_string : string -> t option
 
     {2 Examples}
 
-    {[Int.from_string "0" = Some 0.]}
-    {[Int.from_string "42" = Some 42.]}
+    {[Int.from_string "0" = Some 0]}
+    {[Int.from_string "42" = Some 42]}
     {[Int.from_string "-3" = Some (-3)]}
     {[Int.from_string "123_456" = Some 123_456]}
     {[Int.from_string "0xFF" = Some 255]}
@@ -94,7 +94,9 @@ val ( + ) : t -> t -> t
 (** See {!Int.add} *)
 
 val subtract : t -> t -> t
-(** Subtract numbers
+(** Subtract numbers.
+
+    {2 Examples}
 
     {[Int.subtract 4 3 = 1]}
 
@@ -107,7 +109,9 @@ val ( - ) : t -> t -> t
 (** See {!Int.subtract} *)
 
 val multiply : t -> t -> t
-(** Multiply [int]s like
+(** Multiply [int]s.
+
+    {2 Examples}
 
     {[Int.multiply 2 7 = 14]}
 
@@ -120,7 +124,7 @@ val ( * ) : t -> t -> t
 (** See {!Int.multiply} *)
 
 val divide : t -> by:t -> t
-(** Integer division
+(** Integer division.
 
     Notice that the remainder is discarded.
 
@@ -138,13 +142,24 @@ val ( / ) : t -> t -> t
 (** See {!Int.divide} *)
 
 val ( /. ) : t -> t -> float
-(** Floating point division
+(** Floating point division.
 
     {2 Examples}
 
     {[Int.(3 /. 2) = 1.5]}
     {[Int.(27 /. 5) = 5.25]}
     {[Int.(8 /. 4) = 2.0]}
+*)
+
+val divide_float : by:t -> t -> float
+(** Floating point division.
+
+    {2 Examples}
+
+    {[Int.divide_float 3 ~by:2 = 1.5]}
+    {[Int.divide_float 27 ~by:5 = 5.25]}
+    {[Int.divide_float 8 ~by:4 = 2.0]}
+
 *)
 
 val power : base:t -> exponent:t -> t
@@ -200,10 +215,10 @@ val modulo : t -> by:t -> t
 
     {2 Examples}
 
-    {[Int.modulo ~by:3 (-4) = 1]}
+    {[Int.modulo ~by:3 (-4) = 2]}
     {[Int.modulo ~by:3 (-3 )= 0]}
-    {[Int.modulo ~by:3 (-2) = 2]}
-    {[Int.modulo ~by:3 (-1) = 1]}
+    {[Int.modulo ~by:3 (-2) = 1]}
+    {[Int.modulo ~by:3 (-1) = 2]}
     {[Int.modulo ~by:3 0 = 0]}
     {[Int.modulo ~by:3 1 = 1]}
     {[Int.modulo ~by:3 2 = 2]}
@@ -230,7 +245,7 @@ val remainder : t -> by:t -> t
 *)
 
 val maximum : t -> t -> t
-(** Returns the larger of two [int]s
+(** Returns the larger of two [int]s.
 
     {2 Examples}
 
@@ -239,7 +254,7 @@ val maximum : t -> t -> t
 *)
 
 val minimum : t -> t -> t
-(** Returns the smaller of two [int]s
+(** Returns the smaller of two [int]s.
 
     {2 Examples}
 
@@ -250,7 +265,7 @@ val minimum : t -> t -> t
 (** {1 Query} *)
 
 val is_even : t -> bool
-(** Check if an [int] is even
+(** Check if an [int] is even.
 
     {2 Examples}
 
@@ -260,7 +275,7 @@ val is_even : t -> bool
 *)
 
 val is_odd : t -> bool
-(** Check if an [int] is odd
+(** Check if an [int] is odd.
 
   {2 Examples}
 
@@ -301,13 +316,13 @@ val in_range : t -> lower:t -> upper:t -> bool
 (** {1 Convert} *)
 
 val to_float : t -> float
-(** Convert an integer into a float. Useful when mixing {!Int} and {!Float} values like this:
+(** Convert an [int] into a [float]. Useful when mixing {!Int} and {!Float} values like this:
 
     {2 Examples}
 
     {[
       let half_of (number : int) : float =
-        Float.((Int.to_float number) / 2)
+        Float.((Int.to_float number) / 2.)
         (* Note that locally opening the {!Float} module here allows us to use the floating point division operator *)
       in
       half_of 7 = 3.5
@@ -331,12 +346,12 @@ val to_string : t -> string
 (** {1 Compare} *)
 
 val equal : t -> t -> bool
-(** Test two [int]s for equality *)
+(** Test two [int]s for equality. *)
 
 val compare : t -> t -> int
-(** Compare two [int]s *)
+(** Compare two [int]s. *)
 
-(** The unique identity for {!Comparator} *)
+(** The unique identity for {!Comparator}. *)
 type identity
 
 val comparator : (t, identity) TableclothComparator.t

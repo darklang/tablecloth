@@ -17,9 +17,9 @@
     - Optional function arguments
     - Optional record fields
     - Return values for functions that are not defined over their entire input range (partial functions).
-    - Return value for otherwise reporting simple errors, where None is returned on error.
+    - Return value for otherwise reporting simple errors, where [None] is returned on error.
 
-    Lots of functions in [Standard] return options, one you have one you can
+    Lots of functions in [Tablecloth] return options, one you have one you can
     work with the value it might contain by:
 
     - Pattern matching
@@ -44,11 +44,11 @@ val some : 'a -> 'a option
 
     Note that when using the Reason syntax you {b can} use fast pipe ([->]) with variant constructors, so you don't need this function.
 
-    See the {{: https://reasonml.github.io/docs/en/pipe-first#pipe-into-variants} Reason docs } for more.
+    See the {{: https://rescript-lang.org/docs/manual/v8.0.0/pipe#pipe-into-variants} Reason docs } for more.
 
     {2 Examples}
 
-    {[String.reverse("desserts") |> Option.some = Some "desserts" ]}
+    {[String.reverse("desserts") |> Option.some = Some "stressed" ]}
  *)
 
 val and_ : 'a t -> 'a t -> 'a t
@@ -94,7 +94,7 @@ val or_else : 'a t -> 'a t -> 'a t
 *)
 
 val both : 'a t -> 'b t -> ('a * 'b) t
-(** Transform two options into an option of a {!Tuple}.
+(** Transform two options into an option of a {!Tuple2}.
 
     Returns None if either of the aguments is None.
 
@@ -131,16 +131,16 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
 *)
 
 val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
-(** Combine two {!Option}s
+(** Combine two {!Option}s.
 
     If both options are [Some] returns, as [Some] the result of running [f] on both values.
 
-    If either value is [None], returns [None]
+    If either value is [None], returns [None].
 
     {2 Examples}
 
     {[Option.map2 (Some 3) (Some 4) ~f:Int.add = Some 7]}
-    {[Option.map2 (Some 3) (Some 4) ~f:Tuple.make = Some (3, 4)]}
+    {[Option.map2 (Some 3) (Some 4) ~f:Tuple2.make = Some (3, 4)]}
     {[Option.map2 (Some 3) None ~f:Int.add = None]}
     {[Option.map2 None (Some 4) ~f:Int.add = None]}
 *)
@@ -149,6 +149,7 @@ val and_then : 'a t -> f:('a -> 'b t) -> 'b t
 (** Chain together many computations that may not return a value.
 
     It is helpful to see its definition:
+
     {[
       let and_then t ~f =
         match t with
@@ -174,7 +175,7 @@ val and_then : 'a t -> f:('a -> 'b t) -> 'b t
       |> Option.and_then ~f:to_valid_month
     ]}
 
-    If [String.to_tnt] produces [None] (because the [user_input] was not an
+    If [Int.from_string] produces [None] (because the [user_input] was not an
     integer) this entire chain of operations will short-circuit and result in
     [None]. If [to_valid_month] results in [None], again the chain of
     computations will result in [None].
@@ -183,7 +184,7 @@ val and_then : 'a t -> f:('a -> 'b t) -> 'b t
 
     {2 Examples}
 
-    {[Option.and_then (Some [1, 2, 3]) ~f:List.head = Some 1]}
+    {[Option.and_then (Some [1; 2; 3]) ~f:List.head = Some 1]}
     {[Option.and_then (Some []) ~f:List.head = None]}
 *)
 
@@ -194,7 +195,7 @@ val unwrap : 'a t -> default:'a -> 'a
 
     See {!(|?)} for an operator version of this function.
 
-    {b Note} This can be overused! Many cases are better handled using pattern matching, {!map} or {!and_then}.
+    {b Note:} This can be overused! Many cases are better handled using pattern matching, {!map} or {!and_then}.
 
     {2 Examples}
 
@@ -242,12 +243,20 @@ val is_none : 'a t -> bool
 *)
 
 val tap : 'a t -> f:('a -> unit) -> unit
-(** Run a function against a value, if it is present. *)
+(** Run a function against an [Some(value)], ignores [None]s.
+
+    {2 Examples}
+
+    {[
+      Option.tap (Some "Dog") ~f:print_endline
+      (* prints "Dog" *)
+    ]} 
+*)
 
 val to_array : 'a t -> 'a array
-(** Convert an option to a {!Array}.
+(** Convert an option to an {!Array}.
 
-    [None] is represented as an empty list and [Some] is represented as a list of one element.
+    [None] is represented as an empty array and [Some] is represented as a array of one element.
 
     {2 Examples}
 
@@ -269,7 +278,7 @@ val to_list : 'a t -> 'a list
 (** {1 Compare} *)
 
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
-(** Test two optional values for equality using the provided function
+(** Test two optional values for equality using the provided function.
 
     {2 Examples}
 
@@ -279,16 +288,16 @@ val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
     {[Option.equal Int.equal None None = true]}
 *)
 
-val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
-(** Compare two optional values using the provided function.
+val compare : f:('a -> 'a -> int) -> 'a t -> 'a t -> int
+(** Compare two optional values using the provided [f] function.
 
-    A [None] is "less" than a [Some]
+    A [None] is "less" than a [Some].
 
     {2 Examples}
 
-    {[Option.compare Int.compare (Some 1) (Some 3) = -1]}
-    {[Option.compare Int.compare (Some 1) None = 1]}
-    {[Option.compare Int.compare None None = 0]}
+    {[Option.compare ~f:Int.compare (Some 1) (Some 3) = -1]}
+    {[Option.compare ~f:Int.compare (Some 1) None = 1]}
+    {[Option.compare ~f:Int.compare None None = 0]}
 *)
 
 (** {1 Operators}
@@ -319,7 +328,7 @@ val compare : ('a -> 'a -> int) -> 'a t -> 'a t -> int
 *)
 
 val ( |? ) : 'a t -> 'a -> 'a
-(** The operator version of {!get}
+(** The operator version of {!get}.
 
     {2 Examples}
 
@@ -328,7 +337,7 @@ val ( |? ) : 'a t -> 'a -> 'a
 *)
 
 val ( >>| ) : 'a t -> ('a -> 'b) -> 'b t
-(** The operator version of {!map}
+(** The operator version of {!map}.
 
     {2 Examples}
 
@@ -337,7 +346,7 @@ val ( >>| ) : 'a t -> ('a -> 'b) -> 'b t
 *)
 
 val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
-(** The operator version of {!and_then}
+(** The operator version of {!and_then}.
 
     {2 Examples}
 

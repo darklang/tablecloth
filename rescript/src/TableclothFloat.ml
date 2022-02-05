@@ -2,31 +2,29 @@ type t = float
 
 let fromInt = Js.Int.toFloat
 
-let fromString string = Some (Js.Float.fromString string)
+let fromString string =
+  match string |> String.lowercase_ascii with
+  | "nan" ->
+      Some Js.Float._NaN
+  | _ ->
+    ( match Js.Float.fromString string with
+    | result when result |> Js.Float.isNaN ->
+        None
+    | result ->
+        Some result )
+
 
 let add = ( +. )
 
-let ( + ) = ( +. )
-
 let subtract = ( -. )
-
-let ( - ) = ( -. )
 
 let multiply = ( *. )
 
-let ( * ) = ( *. )
-
 let divide n ~by = n /. by
-
-let ( / ) = ( /. )
 
 let power ~base ~exponent = Js.Math.pow_float ~base ~exp:exponent
 
-let ( ** ) base exponent = power ~base ~exponent
-
 let negate = ( ~-. )
-
-let ( ~- ) = ( ~-. )
 
 let absolute = Js.Math.abs_float
 
@@ -58,7 +56,7 @@ let inRange n ~lower ~upper =
 
 let squareRoot = sqrt
 
-let log n ~base = Js.Math.log n / Js.Math.log base
+let log n ~base = Js.Math.log n /. Js.Math.log base
 
 let zero = 0.0
 
@@ -105,11 +103,11 @@ let hypotenuse = Js.Math.hypot
 
 type radians = float
 
-let degrees n = n * (pi / 180.0)
+let degrees n = n *. (pi /. 180.0)
 
 external radians : float -> float = "%identity"
 
-let turns n = n * 2. * pi
+let turns n = n *. 2. *. pi
 
 let cos = Js.Math.cos
 
@@ -180,7 +178,7 @@ let ceiling = Js.Math.ceil_float
 
 let truncate = Js.Math.trunc
 
-let fromPolar (r, theta) = (r * cos theta, r * sin theta)
+let fromPolar (r, theta) = (r *. cos theta, r *. sin theta)
 
 let toPolar (x, y) = (hypotenuse x y, atan2 ~x ~y)
 

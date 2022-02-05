@@ -12,7 +12,7 @@
         }
 
         let compare book_a book_b =
-          String.compare book_a.isbn bookb.isbn
+          String.compare book_a.isbn book_b.isbn
       end
     ]}
 
@@ -28,7 +28,7 @@
         }
 
         let compare book_a book_b =
-          String.compare book_a.isbn bookb.isbn
+          String.compare book_a.isbn book_b.isbn
         
         include Comparator.Make(struct 
           type nonrec t = t
@@ -38,7 +38,7 @@
       end
     ]}
 
-    Now we can create a Set of books
+    Now we can create a Set of books:
 
     {[
       Set.from_list (module Book) [
@@ -48,7 +48,7 @@
 *)
 
 module type T = sig
-  (** T represents the input for the {!Make} functor *)
+  (** T represents the input for the {!Make} functor. *)
 
   type nonrec t
 
@@ -57,7 +57,7 @@ end
 
 type ('a, 'identity) t
 
-(** This just is an alias for {!t}  *)
+(** This just is an alias for {!t}.  *)
 type ('a, 'identity) comparator = ('a, 'identity) t
 
 module type S = sig
@@ -70,7 +70,7 @@ module type S = sig
   val comparator : (t, identity) comparator
 end
 
-(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.from_array} *)
+(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.from_array}.Tablecloth *)
 type ('a, 'identity) s =
   (module S with type identity = 'identity and type t = 'a)
 

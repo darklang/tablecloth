@@ -21,7 +21,7 @@ val from_array : 'a array -> ('a * 'a) option
 
     If the array is longer than two elements, the extra elements are ignored.
 
-    If the array is less than two elements, returns [None]
+    If the array is less than two elements, returns [None].
 
     {2 Examples}
 
@@ -35,7 +35,7 @@ val from_list : 'a list -> ('a * 'a) option
 
     If the list is longer than two elements, the extra elements are ignored.
 
-    If the list is less than two elements, returns [None]
+    If the list is less than two elements, returns [None].
 
     {2 Examples}
 
@@ -98,7 +98,7 @@ val map_all : 'a * 'a -> f:('a -> 'b) -> 'b * 'b
 
     {2 Examples}
 
-    {[Tuple2.map_all ~f:(Int.add 1) (3, 4, 5) = (4, 5, 6)]}
+    {[Tuple2.map_all ~f:(Int.add 1) (3, 4) = (4, 5)]}
     {[Tuple2.map_all ~f:String.length ("was", "stressed") = (3, 8)]}
 *)
 
@@ -145,13 +145,13 @@ val equal :
 *)
 
 val compare :
-  ('a -> 'a -> int) -> ('b -> 'b -> int) -> ('a, 'b) t -> ('a, 'b) t -> int
-(** Compare two {!Tuple2}s, using the provided functions to compare the first
-    components then, if the first components are equal, the second components.
+  f:('a -> 'a -> int) -> g:('b -> 'b -> int) -> ('a, 'b) t -> ('a, 'b) t -> int
+(** Compare two {!Tuple2}s, using the provided [f] function to compare the first components.
+    Then, if the first components are equal, the second components are compared with [g].
 
     {2 Examples}
 
-    {[Tuple2.compare Int.compare String.compare (1, "Fox") (1, "Fox") = 0]}
-    {[Tuple2.compare Int.compare String.compare (1, "Fox") (1, "Eel") = 1]}
-    {[Tuple2.compare Int.compare String.compare (1, "Fox") (2, "Hen") = -1]}
+    {[Tuple2.compare ~f:Int.compare ~g:String.compare (1, "Fox") (1, "Fox") = 0]}
+    {[Tuple2.compare ~f:Int.compare ~g:String.compare (1, "Fox") (1, "Eel") = 1]}
+    {[Tuple2.compare ~f:Int.compare ~g:String.compare (1, "Fox") (2, "Hen") = -1]}
 *)

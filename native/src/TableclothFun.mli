@@ -46,7 +46,7 @@ external ignore : _ -> unit = "%ignore"
 
       let add_list_to_queue queue list =
         List.for_each list ~f:(fun element ->
-          ignore (MutableQueue.push_returning_length queue element)
+          Fun.ignore (PretendMutableQueue.push_returning_length queue element)
         )
       in ()
     ]}
@@ -55,7 +55,7 @@ external ignore : _ -> unit = "%ignore"
 val constant : 'a -> 'b -> 'a
 (** Create a function that {b always} returns the same value.
 
-    Useful with functions like {!List.map} or {!Array.initialize}
+    Useful with functions like {!List.map} or {!Array.initialize}.
 
     {2 Examples}
 
@@ -78,7 +78,7 @@ val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
 val negate : ('a -> bool) -> 'a -> bool
 (** Negate a function.
 
-    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
+    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}.
 
     {2 Examples}
 
@@ -89,7 +89,7 @@ val negate : ('a -> bool) -> 'a -> bool
 *)
 
 val apply : ('a -> 'b) -> 'a -> 'b
-(** See {!Fun.(<|)} *)
+(** See {!Fun.(<|)}. *)
 
 val ( <| ) : ('a -> 'b) -> 'a -> 'b
 (** Like {!(|>)} but in the opposite direction.
@@ -100,7 +100,7 @@ val ( <| ) : ('a -> 'b) -> 'a -> 'b
 *)
 
 external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-(** See {!Fun.(|>)} *)
+(** See {!Fun.(|>)}. *)
 
 external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
 (** Saying [x |> f] is exactly the same as [f x], just a bit longer.
@@ -162,7 +162,7 @@ val compose_right : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 *)
 
 val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-(** See {!Fun.compose_right} *)
+(** See {!Fun.compose_right}. *)
 
 val tap : 'a -> f:('a -> unit) -> 'a
 (** Useful for performing some side affect in {!Fun.pipe}-lined code.
@@ -189,7 +189,7 @@ val tap : 'a -> f:('a -> unit) -> 'a
 val forever : (unit -> unit) -> exn
 (** Runs the provided function, forever.
 
-    If an exception is thrown, returns the exception
+    If an exception is thrown, returns the exception.
 *)
 
 val times : int -> f:(unit -> unit) -> unit
@@ -198,8 +198,8 @@ val times : int -> f:(unit -> unit) -> unit
     {2 Examples}
 
     {[
-      let count = ref 0
-      times(10, fun () -> (count <- !count + 1))
+      let count = ref 0 in
+      times 10 (fun () -> count <- !count + 1);
       !count = 10
     ]}
 *)
@@ -211,8 +211,8 @@ val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
 
     {[
       let square_area (width, height) = width * height in
-      let curried_area : float -> float -> float = curry square_area in
-      let sizes = [3, 4, 5] in
+      let curried_area : int -> int -> int = Fun.curry square_area in
+      let sizes = [3; 4; 5] in
       List.map sizes ~f:(curried_area 4) = [12; 16; 20]
     ]}
 *)
@@ -224,13 +224,13 @@ val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
 
     {[
       let sum (a : int) (b: int) : int = a + b in
-      let uncurried_sum : (int * int) -> int = uncurry add in
+      let uncurried_sum : (int * int) -> int = Fun.uncurry sum in
       uncurried_sum (3, 4) = 7
     ]}
 *)
 
 val curry3 : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd
-(** Like {!curry} but for a {!Tuple3} *)
+(** Like {!curry} but for a {!Tuple3}. *)
 
 val uncurry3 : ('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd
-(** Like {!uncurry} but for a {!Tuple3} *)
+(** Like {!uncurry} but for a {!Tuple3}. *)

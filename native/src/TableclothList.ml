@@ -309,7 +309,7 @@ let rec equal equal_element a b =
       false
 
 
-let rec compare compare_element a b =
+let rec compare ~f:compare_element a b =
   match (a, b) with
   | [], [] ->
       0
@@ -320,6 +320,6 @@ let rec compare compare_element a b =
   | x :: xs, y :: ys ->
     ( match compare_element x y with
     | 0 ->
-        compare compare_element xs ys
+        compare ~f:compare_element xs ys
     | result ->
         result )

@@ -3,9 +3,9 @@ open Tablecloth
 let () =
   assert (
     Array.equal
-      Int.equal
       (Array.initialize 5 ~f:(fun _ -> 0))
-      [| 0; 0; 0; 0; 0 |] ) ;
+      [| 0; 0; 0; 0; 0 |]
+      Int.equal ) ;
 
   assert (String.equal (Bool.toString true) "true") ;
 
@@ -18,16 +18,16 @@ let () =
   assert (String.equal (String.fromList [ 'A'; 'B'; 'C' ]) "ABC") ;
 
   assert (
-    List.equal Int.equal (List.initialize 5 ~f:(fun _ -> 0)) [ 0; 0; 0; 0; 0 ] ) ;
+    List.equal (List.initialize 5 ~f:(fun _ -> 0)) [ 0; 0; 0; 0; 0 ] Int.equal ) ;
 
   assert (Option.isSome (Some 1)) ;
 
   assert (Result.isOk (Ok 1)) ;
 
-  assert (Tuple2.equal Int.equal Int.equal (Tuple2.make 1 1) (1, 1)) ;
+  assert (Tuple2.equal (Tuple2.make 1 1) (1, 1) Int.equal Int.equal) ;
 
   assert (
-    Tuple3.equal Int.equal Int.equal Int.equal (Tuple3.make 1 1 1) (1, 1, 1) ) ;
+    Tuple3.equal (Tuple3.make 1 1 1) (1, 1, 1) Int.equal Int.equal Int.equal ) ;
 
   assert (Set.length Set.String.empty = 0) ;
 
