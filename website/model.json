@@ -36934,6 +36934,10 @@
                           "value": "prefix"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -37109,7 +37113,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Check if one string appears within another"
+                          "value": "Check if one string appears within another."
                         },
                         {
                           "tag": "Newline",

@@ -121,7 +121,7 @@ val length : string -> int
 *)
 
 val starts_with : string -> prefix:string -> bool
-(** See if the string starts with [prefix]
+(** See if the string starts with [prefix].
 
     {2 Examples}
 
@@ -139,7 +139,7 @@ val ends_with : string -> suffix:string -> bool
 *)
 
 val includes : string -> substring:string -> bool
-(** Check if one string appears within another
+(** Check if one string appears within another.
 
     {2 Examples}
 

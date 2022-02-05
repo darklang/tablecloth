@@ -121,7 +121,7 @@ val length : string -> int
 *)
 
 val startsWith : string -> prefix:string -> bool
-(** See if the string starts with [prefix]
+(** See if the string starts with [prefix].
 
     {2 Examples}
 

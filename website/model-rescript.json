@@ -32058,6 +32058,10 @@
                           "value": "prefix"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
