@@ -159,7 +159,8 @@ val to_lowercase : char -> char
 val to_uppercase : char -> char
 (** Convert an ASCII character to upper case, preserving non alphabetic ASCII characters.
 
-`
+    {2 Examples}
+
     {[Char.to_uppercase 'a' = 'A']}
     {[Char.to_uppercase 'b' = 'B']}
     {[Char.to_uppercase '7' = '7']}

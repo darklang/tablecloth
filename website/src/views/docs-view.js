@@ -124,6 +124,8 @@ function renderSidebarElements(
     search.length > 1 ? search.slice(0, search.length - 1) : [];
   let valueSearch = search.length === 0 ? '' : search[search.length - 1];
   let hasSearch = valueSearch.length > 0;
+  let includesCaseInsensitive = (a, b) => a.toLowerCase().includes(b.toLowerCase());
+
   return deDupeIncludedModules(moduleElements, modulesByModulePath).map(
     (moduleElement, index) => {
       switch (moduleElement.tag) {
@@ -133,7 +135,7 @@ function renderSidebarElements(
             hasSearch &&
             !(
               moduleSearchPath.length === 0 &&
-              moduleElement.value.name.includes(valueSearch)
+              includesCaseInsensitive(moduleElement.value.name, valueSearch)
             )
           ) {
             return null;
@@ -158,7 +160,7 @@ function renderSidebarElements(
             hasSearch &&
             !(
               moduleSearchPath.length === 0 &&
-              moduleElement.value.name.includes(valueSearch)
+              includesCaseInsensitive(moduleElement.value.name, valueSearch)  
             )
           ) {
             return null;
@@ -178,7 +180,9 @@ function renderSidebarElements(
             moduleElement.tag,
             moduleElement.value.name,
           );
-          if (hasSearch && !moduleElement.value.name.includes(valueSearch)) {
+          if (hasSearch &&
+            !includesCaseInsensitive(moduleElement.value.name, valueSearch)
+              ) {
             return null;
           }
           return (
@@ -198,7 +202,7 @@ function renderSidebarElements(
               );
               if (
                 hasSearch &&
-                !moduleElement.value.name.includes(valueSearch)
+                !includesCaseInsensitive(moduleElement.value.name, valueSearch)
               ) {
                 return null;
               }
