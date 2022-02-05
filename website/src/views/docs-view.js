@@ -600,7 +600,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
       case 'Newline':
         return <pre key={index}>{'\n'}</pre>;
       case 'Emphasize':
-        return <em key={index}>{(renderTextElements(value), parentPath)}</em>;
+        return <em key={index}>{renderTextElements(value, parentPath)}</em>;
       case 'Bold':
         return <b key={index}>{renderTextElements(value, parentPath)}</b>;
       case 'Link':

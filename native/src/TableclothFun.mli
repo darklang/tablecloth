@@ -55,7 +55,7 @@ external ignore : _ -> unit = "%ignore"
 val constant : 'a -> 'b -> 'a
 (** Create a function that {b always} returns the same value.
 
-    Useful with functions like {!List.map} or {!Array.initialize}
+    Useful with functions like {!List.map} or {!Array.initialize}.
 
     {2 Examples}
 
@@ -78,7 +78,7 @@ val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
 val negate : ('a -> bool) -> 'a -> bool
 (** Negate a function.
 
-    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
+    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}.
 
     {2 Examples}
 
@@ -89,7 +89,7 @@ val negate : ('a -> bool) -> 'a -> bool
 *)
 
 val apply : ('a -> 'b) -> 'a -> 'b
-(** See {!Fun.(<|)} *)
+(** See {!Fun.(<|)}. *)
 
 val ( <| ) : ('a -> 'b) -> 'a -> 'b
 (** Like {!(|>)} but in the opposite direction.
@@ -100,7 +100,7 @@ val ( <| ) : ('a -> 'b) -> 'a -> 'b
 *)
 
 external pipe : 'a -> ('a -> 'b) -> 'b = "%revapply"
-(** See {!Fun.(|>)} *)
+(** See {!Fun.(|>)}. *)
 
 external ( |> ) : 'a -> ('a -> 'b) -> 'b = "%revapply"
 (** Saying [x |> f] is exactly the same as [f x], just a bit longer.
@@ -162,7 +162,7 @@ val compose_right : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 *)
 
 val ( >> ) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
-(** See {!Fun.compose_right} *)
+(** See {!Fun.compose_right}. *)
 
 val tap : 'a -> f:('a -> unit) -> 'a
 (** Useful for performing some side affect in {!Fun.pipe}-lined code.
@@ -189,7 +189,7 @@ val tap : 'a -> f:('a -> unit) -> 'a
 val forever : (unit -> unit) -> exn
 (** Runs the provided function, forever.
 
-    If an exception is thrown, returns the exception
+    If an exception is thrown, returns the exception.
 *)
 
 val times : int -> f:(unit -> unit) -> unit
@@ -230,7 +230,7 @@ val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
 *)
 
 val curry3 : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd
-(** Like {!curry} but for a {!Tuple3} *)
+(** Like {!curry} but for a {!Tuple3}. *)
 
 val uncurry3 : ('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd
-(** Like {!uncurry} but for a {!Tuple3} *)
+(** Like {!uncurry} but for a {!Tuple3}. *)

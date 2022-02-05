@@ -92,8 +92,6 @@ val getAt : string -> index:int -> char option
 val reverse : string -> string
 (** Reverse a string
 
-    {b Note} This function does not work with Unicode characters.
-
     {2 Examples}
 
     {[
@@ -123,7 +121,7 @@ val length : string -> int
 *)
 
 val startsWith : string -> prefix:string -> bool
-(** See if the second string starts with [prefix]
+(** See if the string starts with [prefix]
 
     {2 Examples}
 
@@ -134,7 +132,7 @@ val startsWith : string -> prefix:string -> bool
 *)
 
 val endsWith : string -> suffix:string -> bool
-(** See if the second string ends with [suffix].
+(** See if the string ends with [suffix].
 
     {2 Examples}
 
@@ -293,10 +291,10 @@ val trimRight : string -> string
 (** Like {!trim} but only drops characters from the end of the string. *)
 
 val padLeft : string -> int -> with_:string -> string
-(** Pad a string up to a minimum length
+(** Pad a string up to a minimum length.
 
     If the string is shorted than the proivded length, adds [with_]
-    to the left of the string until the minimum length is met
+    to the left of the string until the minimum length is met.
 
     {2 Examples}
 
@@ -306,10 +304,10 @@ val padLeft : string -> int -> with_:string -> string
 *)
 
 val padRight : string -> int -> with_:string -> string
-(** Pad a string up to a minimum length
+(** Pad a string up to a minimum length.
 
     If the string is shorted than the proivded length, adds [with_]
-    to the left of the string until the minimum length is met
+    to the left of the string until the minimum length is met.
 
     {2 Examples}
 
@@ -381,7 +379,7 @@ val toList : string -> char list
 (** {1 Compare} *)
 
 val equal : string -> string -> bool
-(** Test two string for equality *)
+(** Test two string for equality. *)
 
 val compare : string -> string -> int
 (** Compare two strings. Strings use 'dictionary' ordering.

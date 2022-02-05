@@ -1,6 +1,6 @@
 (** *)
 
-(** Comparator provide a way for custom data structures to be used with {!Map}s and {!Set}s
+(** Comparator provide a way for custom data structures to be used with {!Map}s and {!Set}s.
 
     Say we have a module [Book] which we want to be able to create a {!Set} of
 
@@ -36,7 +36,7 @@
       }
     ]}
 
-    Now we can create a Set of books
+    Now we can create a Set of books:
 
     {[
       Set.fromArray(module(Book),
@@ -47,7 +47,7 @@
 *)
 
 module type T = sig
-  (** T represents the input for the {!Make} functor *)
+  (** T represents the input for the {!Make} functor. *)
 
   type nonrec t
 
@@ -56,7 +56,7 @@ end
 
 type ('a, 'identity) t
 
-(** This just is an alias for {!t}  *)
+(** This just is an alias for {!t}.  *)
 type ('a, 'identity) comparator = ('a, 'identity) t
 
 module type S = sig
@@ -69,7 +69,7 @@ module type S = sig
   val comparator : (t, identity) comparator
 end
 
-(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.fromArray} *)
+(** A type alias that is useful typing functions which accept first class modules like {!Map.empty} or {!Set.fromArray}. *)
 type ('a, 'identity) s =
   (module S with type identity = 'identity and type t = 'a)
 

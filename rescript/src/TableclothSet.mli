@@ -52,7 +52,7 @@ val empty : ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
 
 val singleton :
   'a -> ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
-(** Create a set from a single {!Int}
+(** Create a set from a single {!Int}.
 
   {2 Examples}
 
@@ -63,7 +63,7 @@ val singleton :
 
 val fromArray :
   'a array -> ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
-(** Create a set from an {!Array}
+(** Create a set from an {!Array}.
 
     {2 Examples}
 
@@ -75,7 +75,7 @@ val fromArray :
 
 val fromList :
   'a list -> ('a, 'identity) TableclothComparator.s -> ('a, 'identity) t
-(** Create a set from a {!List}
+(** Create a set from a {!List}.
 
     {2 Examples}
 
@@ -98,7 +98,7 @@ val add : ('a, 'id) t -> 'a -> ('a, 'id) t
 *)
 
 val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
-(** Remove a value from a set, if the set doesn't contain the value anyway, returns the original set
+(** Remove a value from a set, if the set doesn't contain the value anyway, returns the original set.
 
     {2 Examples}
 
@@ -112,7 +112,7 @@ val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
 *)
 
 val includes : ('a, _) t -> 'a -> bool
-(** Determine if a value is in a set
+(** Determine if a value is in a set.
 
     {2 Examples}
 
@@ -372,7 +372,7 @@ module String : sig
   (** A set with nothing in it. *)
 
   val singleton : string -> t
-  (** Create a set of a single {!String}
+  (** Create a set of a single {!String}.
 
       {2 Examples}
 
@@ -382,7 +382,7 @@ module String : sig
   *)
 
   val fromArray : string array -> t
-  (** Create a set from an {!Array}
+  (** Create a set from an {!Array}.
 
       {2 Examples}
 
@@ -392,7 +392,7 @@ module String : sig
   *)
 
   val fromList : string list -> t
-  (** Create a set from a {!List}
+  (** Create a set from a {!List}.
 
       {2 Examples}
 

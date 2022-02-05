@@ -121,7 +121,7 @@ val length : string -> int
 *)
 
 val starts_with : string -> prefix:string -> bool
-(** See if the second string starts with [prefix]
+(** See if the string starts with [prefix]
 
     {2 Examples}
 
@@ -130,7 +130,7 @@ val starts_with : string -> prefix:string -> bool
 *)
 
 val ends_with : string -> suffix:string -> bool
-(** See if the second string ends with [suffix].
+(** See if the string ends with [suffix].
 
     {2 Examples}
 

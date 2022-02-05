@@ -21,7 +21,7 @@ val from_array : 'a array -> ('a * 'a) option
 
     If the array is longer than two elements, the extra elements are ignored.
 
-    If the array is less than two elements, returns [None]
+    If the array is less than two elements, returns [None].
 
     {2 Examples}
 
@@ -35,7 +35,7 @@ val from_list : 'a list -> ('a * 'a) option
 
     If the list is longer than two elements, the extra elements are ignored.
 
-    If the list is less than two elements, returns [None]
+    If the list is less than two elements, returns [None].
 
     {2 Examples}
 

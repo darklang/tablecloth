@@ -56,7 +56,7 @@ external ignore : _ -> unit = "%ignore"
 val constant : 'a -> 'b -> 'a
 (** Create a function that {b always} returns the same value.
 
-    Useful with functions like {!List.map} or {!Array.initialize}
+    Useful with functions like {!List.map} or {!Array.initialize}.
 
     {2 Examples}
 
@@ -81,7 +81,7 @@ val flip : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
 val negate : ('a -> bool) -> 'a -> bool
 (** Negate a function.
 
-    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}
+    This can be useful in combination with {!List.filter} / {!Array.filter} or {!List.find} / {!Array.find}.
 
     {2 Examples}
 
@@ -92,7 +92,7 @@ val negate : ('a -> bool) -> 'a -> bool
 *)
 
 val apply : ('a -> 'b) -> 'a -> 'b
-(** Calls function [f] with an argument [x]
+(** Calls function [f] with an argument [x].
 
     [apply(f, x)] is exactly the same as [f(x)].
 
@@ -103,7 +103,7 @@ val compose : 'a -> ('a -> 'b) -> ('b -> 'c) -> 'c
 (** Function composition, passing result from left to right.
 
     This is usefull in cases when you want to make multiple transformations
-    during a [map] operation
+    during a [map] operation.
 
     {2 Examples}
 
@@ -122,7 +122,7 @@ val composeRight : 'a -> ('b -> 'c) -> ('a -> 'b) -> 'c
     Same as [!compose], but function application order is reversed.
 
     This is usefull in cases when you want to make multiple transformations
-    during a [map] operation
+    during a [map] operation.
     
     {2 Examples}
 
@@ -158,7 +158,7 @@ val tap : 'a -> f:('a -> unit) -> 'a
 val forever : (unit -> unit) -> exn
 (** Runs the provided function, forever.
 
-    If an exception is thrown, returns the exception
+    If an exception is thrown, returns the exception.
 *)
 
 val times : int -> f:(unit -> unit) -> unit
@@ -199,7 +199,7 @@ val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
 *)
 
 val curry3 : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd
-(** Like {!curry} but for a {!Tuple3} *)
+(** Like {!curry} but for a {!Tuple3}. *)
 
 val uncurry3 : ('a -> 'b -> 'c -> 'd) -> 'a * 'b * 'c -> 'd
-(** Like {!uncurry} but for a {!Tuple3} *)
+(** Like {!uncurry} but for a {!Tuple3}. *)

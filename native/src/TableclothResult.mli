@@ -165,7 +165,7 @@ val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
 
     If either is an [Error], returns the first [Error].
 
-    The same as writing [Result.map2 ~f:Tuple2.make]
+    The same as writing [Result.map2 ~f:Tuple2.make].
 
     {2 Examples}
 
@@ -206,7 +206,7 @@ val flatten : (('ok, 'error) t, 'error) t -> ('ok, 'error) t
 *)
 
 val unwrap : ('ok, 'error) t -> default:'ok -> 'ok
-(** Unwrap a Result using the [~default] value in case of an [Error]
+(** Unwrap a Result using the [~default] value in case of an [Error].
 
     {2 Examples}
 
@@ -215,9 +215,9 @@ val unwrap : ('ok, 'error) t -> default:'ok -> 'ok
 *)
 
 val unwrap_unsafe : ('ok, _) t -> 'ok
-(** Unwrap a Result, raising an exception in case of an [Error]
+(** Unwrap a Result, raising an exception in case of an [Error].
 
-    {e Exceptions}
+    {3 Exceptions}
 
     Raises an [Invalid_argument "Result.unwrap_unsafe called with an Error"] exception.
 
@@ -228,7 +228,7 @@ val unwrap_unsafe : ('ok, _) t -> 'ok
 *)
 
 val unwrap_error : ('ok, 'error) t -> default:'error -> 'error
-(** Like {!Result.unwrap} but unwraps an [Error] value instead
+(** Like {!Result.unwrap} but unwraps an [Error] value instead.
 
     {2 Examples}
 
@@ -248,7 +248,7 @@ val unwrap_error : ('ok, 'error) t -> default:'error -> 'error
 
 val map2 :
   ('a, 'error) t -> ('b, 'error) t -> f:('a -> 'b -> 'c) -> ('c, 'error) t
-(** Combine two results
+(** Combine two results.
 
     If one of the results is an [Error], that becomes the return result.
 
@@ -279,6 +279,7 @@ val combine : ('ok, 'error) result list -> ('ok list, 'error) result
     the elements in [results] are of the form [Ok x], then [Result.combine]
     creates a list [xs] of all the values extracted from their [Ok]s, and returns
     [Ok xs]
+
     If any of the elements in [results] are of the form [Error err],
     the first of them is returned as the result of [Result.combine].
 
@@ -392,7 +393,7 @@ val compare :
 (** Compare results for using the provided [f] and [g] functions.
     [f] will be used to compare [Ok]'s and [g] will be used on [Error]s. 
 
-    In the case when one of the results is an [Error] and one is [Ok], [Error]s  are considered 'less' then [Ok]s
+    In the case when one of the results is an [Error] and one is [Ok], [Error]s  are considered 'less' then [Ok]s.
 
     {2 Examples}
 

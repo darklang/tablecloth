@@ -17,7 +17,7 @@
     - Optional function arguments
     - Optional record fields
     - Return values for functions that are not defined over their entire input range (partial functions).
-    - Return value for otherwise reporting simple errors, where None is returned on error.
+    - Return value for otherwise reporting simple errors, where [None] is returned on error.
 
     Lots of functions in [Tablecloth] return options, one you have one you can
     work with the value it might contain by:
@@ -142,11 +142,11 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
 *)
 
 val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
-(** Combine two {!Option}s
+(** Combine two {!Option}s.
 
     If both options are [Some] returns, as [Some] the result of running [f] on both values.
 
-    If either value is [None], returns [None]
+    If either value is [None], returns [None].
 
     {2 Examples}
 
@@ -162,6 +162,7 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
 (** Chain together many computations that may not return a value.
 
     It is helpful to see its definition:
+
     {[
       let andThen = (t, ~f) =>
         switch t {
@@ -206,7 +207,7 @@ val unwrap : 'a t -> default:'a -> 'a
     This comes in handy when paired with functions like {!Map.get},
     {!Array.first} or {!List.head} which return an {!Option}.
 
-    {b Note} This can be overused! Many cases are better handled using pattern matching, {!map} or {!andThen}.
+    {b Note:} This can be overused! Many cases are better handled using pattern matching, {!map} or {!andThen}.
 
     {2 Examples}
 
@@ -301,7 +302,7 @@ val toList : 'a t -> 'a list
 (** {1 Compare} *)
 
 val equal : 'a t -> 'a t -> ('a -> 'a -> bool) -> bool
-(** Test two optional values for equality using the provided function
+(** Test two optional values for equality using the provided function.
 
     {2 Examples}
 
@@ -316,7 +317,7 @@ val equal : 'a t -> 'a t -> ('a -> 'a -> bool) -> bool
 val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
 (** Compare two optional values using the provided [f] function.
 
-    A [None] is "less" than a [Some]
+    A [None] is "less" than a [Some].
 
     {2 Examples}
 

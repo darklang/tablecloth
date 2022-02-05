@@ -18,11 +18,11 @@
       9000
       1_000_000
       1_000_000
-      0xFF (* 255 in hexadecimal *)
-      0x000A (* 10 in hexadecimal *)
+      0xFF // 255 in hexadecimal
+      0x000A // 10 in hexadecimal
    ]}
 
-    {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}). It appears
+    {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}. It appears
     that the [int] abbreviation was introduced in the programming language ALGOL 68.
 
     Today, almost all programming languages use this abbreviation.
@@ -33,16 +33,16 @@ type t = int
 (** {1 Constants } *)
 
 val zero : t
-(** The literal [0] as a named value *)
+(** The literal [0] as a named value. *)
 
 val one : t
-(** The literal [1] as a named value *)
+(** The literal [1] as a named value. *)
 
 val maximumValue : t
-(** The maximum representable [int] on the current platform *)
+(** The maximum representable [int] on the current platform. *)
 
 val minimumValue : t
-(** The minimum representable [int] on the current platform *)
+(** The minimum representable [int] on the current platform. *)
 
 (** {1 Create} *)
 
@@ -68,17 +68,21 @@ val fromString : string -> t option
 val add : t -> t -> t
 (** Add two {!Int} numbers.
 
-  {[
+    You {e cannot } add an [int] and a [float] directly though.
+
+    See {!Float.add} for why, and how to overcome this limitation.
+
+    {2 Examples}
+
+    {[
       Int.add(3002, 4004) == 7006
     ]}
-
-  You {e cannot } add an [int] and a [float] directly though.
-
-  See {!Float.add} for why, and how to overcome this limitation.
 *)
 
 val subtract : t -> t -> t
-(** Subtract numbers
+(** Subtract numbers.
+    
+    {2 Examples}
 
     {[
       Int.subtract(4, 3) == 1
@@ -86,7 +90,9 @@ val subtract : t -> t -> t
 *)
 
 val multiply : t -> t -> t
-(** Multiply [int]s like
+(** Multiply [int]s.
+    
+    {2 Examples}
 
     {[
       Int.multiply(2, 7) == 14
@@ -94,7 +100,7 @@ val multiply : t -> t -> t
 *)
 
 val divide : t -> by:t -> t
-(** Integer division
+(** Integer division.
 
     Notice that the remainder is discarded.
 
@@ -158,7 +164,7 @@ val absolute : t -> t
 val modulo : t -> by:t -> t
 (** Perform {{: https://en.wikipedia.org/wiki/Modular_arithmetic } modular arithmetic }.
 
-    {b Note} {!modulo} is not [%] JS operator. If you want [%], use {!remainder}
+    {b Note:} {!modulo} is not [%] JS operator. If you want [%], use {!remainder}
 
     If you intend to use [modulo] to detect even and odd numbers consider using {!Int.isEven} or {!Int.isOdd}.
 
@@ -199,7 +205,7 @@ val remainder : t -> by:t -> t
 *)
 
 val maximum : t -> t -> t
-(** Returns the larger of two [int]s
+(** Returns the larger of two [int]s.
 
     {2 Examples}
 
@@ -210,7 +216,7 @@ val maximum : t -> t -> t
 *)
 
 val minimum : t -> t -> t
-(** Returns the smaller of two [int]s
+(** Returns the smaller of two [int]s.
 
     {2 Examples}
 
@@ -223,7 +229,7 @@ val minimum : t -> t -> t
 (** {1 Query} *)
 
 val isEven : t -> bool
-(** Check if an [int] is even
+(** Check if an [int] is even.
 
     {2 Examples}
 
@@ -235,7 +241,7 @@ val isEven : t -> bool
 *)
 
 val isOdd : t -> bool
-(** Check if an [int] is odd
+(** Check if an [int] is odd.
 
   {2 Examples}
 
@@ -282,7 +288,7 @@ val inRange : t -> lower:t -> upper:t -> bool
 (** {1 Convert} *)
 
 val toFloat : t -> float
-(** Convert an integer into a float. Useful when mixing {!Int} and {!Float} values like this:
+(** Convert an [int] into a [float]. Useful when mixing {!Int} and {!Float} values like this:
 
     {2 Examples}
 
@@ -314,12 +320,12 @@ val toString : t -> string
 (** {1 Compare} *)
 
 val equal : t -> t -> bool
-(** Test two [int]s for equality *)
+(** Test two [int]s for equality. *)
 
 val compare : t -> t -> int
-(** Compare two [int]s *)
+(** Compare two [int]s. *)
 
-(** The unique identity for {!Comparator} *)
+(** The unique identity for {!Comparator}.*)
 type identity
 
 val comparator : (t, identity) TableclothComparator.t

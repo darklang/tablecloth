@@ -9,7 +9,7 @@
     - Getting the {!tail}
     - Creating a new list by adding an element to the front using {!cons}
 
-    They also support exhaustive pattern matching
+    They also support exhaustive pattern matching:
 
     {[
       switch aList {
@@ -110,7 +110,7 @@ val fromArray : 'a array -> 'a t
 val head : 'a t -> 'a option
 (** Returns, as an {!Option}, the first element of a list.
 
-    If the list is empty, returns [None]
+    If the list is empty, returns [None].
 
     {2 Examples}
 
@@ -155,7 +155,7 @@ val take : 'a t -> count:int -> 'a t
 
    If the list has fewer than [count] elements, returns the entire list.
 
-   If count is zero or negative, returns [].
+   If count is zero or negative, returns [list{}].
 
    {2 Examples}
 
@@ -168,7 +168,7 @@ val take : 'a t -> count:int -> 'a t
 *)
 
 val takeWhile : 'a t -> f:('a -> bool) -> 'a t
-(** Take elements from a list until [f] returns [false]
+(** Take elements from a list until [f] returns [false].
 
     {2 Examples}
 
@@ -196,7 +196,7 @@ val drop : 'a t -> count:int -> 'a t
 *)
 
 val dropWhile : 'a t -> f:('a -> bool) -> 'a t
-(** Drop elements from a list until [f] returns [false]
+(** Drop elements from a list until [f] returns [false].
 
     {2 Examples}
 
@@ -258,9 +258,9 @@ val insertAt : 'a t -> index:int -> value:'a -> 'a t
 
     If [index] is greater than then length of the list, it will be appended:
 
-    {e Exceptions}
+    {3 Exceptions}
 
-    Raises an [Invalid_argument] exception if [index] is negative
+    Raises an [Invalid_argument] exception if [index] is negative.
 
     {2 Examples}
 
@@ -304,7 +304,7 @@ val removeAt : 'a t -> index:int -> 'a t
 *)
 
 val reverse : 'a t -> 'a t
-(** Reverse the elements in a list
+(** Reverse the elements in a list.
 
     {2 Examples}
 
@@ -323,10 +323,10 @@ val sort : 'a t -> compare:('a -> 'a -> int) -> 'a t
     ]}
 *)
 
-val sortBy : f:('a -> 'b) -> 'a t -> 'a t
+val sortBy : 'a t -> f:('a -> 'b) -> 'a t
 (**
     [List.sortBy(xs, ~f=fcn)] returns a new list sorted according to the values
-    returned by [fcn]. This is a stable sort; if two items have the same value,
+    returned by [fcn]. This is a stable sort: if two items have the same value,
     they will appear in the same order that they appeared in the original list.
     {[
       List.sortBy(list{3, 2, 5, -2, 4}, ~f=x => x * x) == list{2, -2, 3, 4, 5}
@@ -358,9 +358,9 @@ val length : 'a t -> int
 
     {[
       if List.length(someList) == 0 {
-        ()
+        () //  It will take longer than you think to reach here
       } else {
-        ()
+        () // But it doesn't need to
       }
     ]}
 
@@ -368,9 +368,9 @@ val length : 'a t -> int
 
     {[
       if List.isEmpty(someList) {
-        ()
+        () // This happens instantly
       } else {
-        ()
+        () // Since List.isEmpty takes the same amount of time for all lists 
       }
     ]}
 
@@ -420,7 +420,7 @@ val all : 'a t -> f:('a -> bool) -> bool
 *)
 
 val count : 'a t -> f:('a -> bool) -> int
-(** Count the number of elements which [f] returns [true] for
+(** Count the number of elements where function [f] returns [true].
 
     {2 Examples}
 
@@ -429,13 +429,17 @@ val count : 'a t -> f:('a -> bool) -> int
     ]}
  *)
 
-val uniqueBy : f:('a -> string) -> 'a list -> 'a list
+val uniqueBy : 'a list -> f:('a -> string) -> 'a list
 (**
    [List.uniqueBy(xs, ~f=fcn)] returns a new list containing only those elements from [xs]
    that have a unique value when [fcn] is applied to them.
+
    The function [fcn] takes as its single parameter an item from the list
    and returns a [string]. If the function generates the same string for two or more
    list items, only the first of them is retained.
+   
+   {2 Examples}
+  
    {[
       List.uniqueBy(list{1, 3, 4, 3, 7, 7, 6}, ~f=Int.toString) == list{1, 3, 4, 7, 6}
       let absStr = x => Int.absolute(x)->Int.toString
@@ -444,9 +448,9 @@ val uniqueBy : f:('a -> string) -> 'a list -> 'a list
  *)
 
 val find : 'a t -> f:('a -> bool) -> 'a option
-(** Returns, as an option, the first element for which [f] evaluates to true.
+(** Returns, as an [option], the first element for which [f] evaluates to true.
 
-  If [f] doesn't return [true] for any of the elements [find] will return [None]
+  If [f] doesn't return [true] for any of the elements [find] will return [None].
 
   {2 Examples}
 
@@ -491,33 +495,43 @@ val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 (**
     [List.minimumBy(xs, ~f=fcn)], when given a non-empty list, returns the item in the list
     for which [fcn item] is a minimum. It is returned as [Some(item)].
+
     If given an empty list, [List.minimumBy] returns [None]. If more than one value has
     a minimum value for [fcn item], the first one is returned.
+
     The function provided takes a list item as its parameter and must return a value
-    that can be compared---for example, a [string] or [int].
+    that can be compared: for example, a [string] or [int].
+        
+    {2 Examples}
+
     {[
       let mod12 = x => mod(x, 12)
       let hours = list{7, 9, 15, 10, 3, 22}
       List.minimumBy(hours, ~f=mod12) == Some(15)
       list{}->List.minimumBy(~f=mod12) == None
      ]}
-   *)
+*)
 
 val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
 (**
      [List.maximumBy ~f:fcn xs], when given a non-empty list, returns the item in the list
      for which [fcn item] is a maximum. It is returned as [Some item].
+     
      If given an empty list, [List.maximumBy] returns [None]. If more than one value
      has a maximum value for [fcn item], the first one is returned.
+     
      The function provided takes a list item as its parameter and must return a value
-     that can be compared---for example, a [string] or [int].
+     that can be compared: for example, a [string] or [int].
+         
+     {2 Examples}
+
      {[
         let mod12 = x => mod(x, 12)
         let hours = list{7, 9, 15, 10, 3, 22}
         List.maximumBy(hours, ~f=mod12) == Some(10)
         list{}->List.maximumBy(~f=mod12) == None
      ]}
-    *)
+*)
 
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 (** Find the smallest element using the provided [compare] function.
@@ -622,7 +636,7 @@ val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
     Why [filterMap] and not just {!filter} then {!map}?
 
     {!filterMap} removes the {!Option} layer automatically.
-    If your mapping is already returning an {!Option} and you want to skip over Nones, then [filterMap] is much nicer to use.
+    If your mapping is already returning an {!Option} and you want to skip over [None]s, then [filterMap] is much nicer to use.
 
     {2 Examples}
 
@@ -648,7 +662,7 @@ val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
 *)
 
 val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
-(** Transform a list into a value
+(** Transform a list into a value.
 
     After applying [f] to every element of the list, [fold] returns the accumulator.
 
@@ -705,7 +719,7 @@ val append : 'a t -> 'a t -> 'a t
 *)
 
 val flatten : 'a t t -> 'a t
-(** Concatenate a list of lists into a single list:
+(** Concatenate a list of lists into a single list.
 
     {2 Examples}
 
@@ -715,11 +729,11 @@ val flatten : 'a t t -> 'a t
 *)
 
 val zip : 'a t -> 'b t -> ('a * 'b) t
-(** Combine two lists by merging each pair of elements into a {!Tuple2}
+(** Combine two lists by merging each pair of elements into a {!Tuple2}.
 
     If one list is longer, the extra elements are dropped.
 
-    The same as [List.map2(~f=Tuple2.make)]
+    The same as [List.map2(~f=Tuple2.make)].
 
     {2 Examples}
 
@@ -796,11 +810,11 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
 *)
 
 val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
-(** Divides a list into a {!Tuple2} at the first element [f] returns [true] for.
+(** Divides a list into a {!Tuple2} at the first element where function [f] will return [true].
 
     Elements up to (but not including) the first element [f] returns [true] for
     will be in the first component of the tuple, the remaining elements will be
-    in the second
+    in the second.
 
     {2 Examples}
 
@@ -944,9 +958,9 @@ val groupBy :
   -> ('key, 'id) TableclothComparator.s
   -> f:('value -> 'key)
   -> ('key, 'value list, 'id) TableclothMap.t
-(** Collect elements which [f] produces the same key for
+(** Collect elements which [f] produces the same key for.
 
-    Produces a map from ['key] to a {!List} of all elements which produce the same ['key]
+    Produces a map from ['key] to a {!List} of all elements which produce the same ['key].
 
     {2 Examples}
 

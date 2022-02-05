@@ -34,7 +34,7 @@ val repeat : 'a -> length:int -> 'a t
 *)
 
 val range : ?from:int -> int -> int t
-(** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to]
+(** Creates an array containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to].
 
     {2 Examples}
 
@@ -96,7 +96,7 @@ val get : 'a t -> int -> 'a
 
     The last element has index number [Array.length a - 1].
 
-    You should prefer using the dedicated literal syntax;
+    You should prefer using the dedicated literal syntax:
 
     {[array.(n)]}
 
@@ -162,7 +162,7 @@ val set : 'a t -> int -> 'a -> unit
 *)
 
 val set_at : 'a t -> index:int -> value:'a -> unit
-(** Like {!set} but with labelled arguments *)
+(** Like {!set} but with labelled arguments. *)
 
 val first : 'a t -> 'a option
 (** Get the first element of an array.
@@ -247,7 +247,7 @@ val sort : 'a t -> compare:('a -> 'a -> int) -> unit
 (** {1 Query} *)
 
 val is_empty : 'a t -> bool
-(** Check if an array is empty
+(** Check if an array is empty.
 
     {2 Examples}
 
@@ -267,7 +267,7 @@ val length : 'a t -> int
 val any : 'a t -> f:('a -> bool) -> bool
 (** Determine if [f] returns true for [any] values in an array.
 
-    Iteration is stopped as soon as [f] returns [true]
+    Iteration is stopped as soon as [f] returns [true].
 
     {2 Examples}
 
@@ -279,7 +279,7 @@ val any : 'a t -> f:('a -> bool) -> bool
 val all : 'a t -> f:('a -> bool) -> bool
 (** Determine if [f] returns true for [all] values in an array.
 
-    Iteration is stopped as soon as [f] returns [false]
+    Iteration is stopped as soon as [f] returns [false].
 
     {2 Examples}
 
@@ -289,7 +289,7 @@ val all : 'a t -> f:('a -> bool) -> bool
 *)
 
 val count : 'a t -> f:('a -> bool) -> int
-(** Count the number of elements which [f] returns [true] for
+(** Count the number of elements which function [f] will return [true].
 
     {2 Examples}
 
@@ -347,7 +347,7 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 *)
 
 val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
-(** Find a {!Tuple2} of the {!minimum} and {!maximum} in a single pass
+(** Find a {!Tuple2} of the {!minimum} and {!maximum} in a single pass.
 
     Returns [None] if called on an empty array.
 
@@ -398,7 +398,7 @@ val map_with_index : 'a t -> f:(int -> 'a -> 'b) -> 'b t
 *)
 
 val filter : 'a t -> f:('a -> bool) -> 'a t
-(** Keep elements that [f] returns [true] for.
+(** Keep elements where function [f] will return [true].
 
     {2 Examples}
 
@@ -433,7 +433,7 @@ val filter_map : 'a t -> f:('a -> 'b option) -> 'b t
 *)
 
 val flat_map : 'a t -> f:('a -> 'b t) -> 'b t
-(** {!map} [f] onto an array and {!flatten} the resulting arrays
+(** {!map} [f] onto an array and {!flatten} the resulting arrays.
 
     {2 Examples}
 
@@ -445,7 +445,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     [fold] takes two arguments, an [initial] 'accumulator' value and a function [f].
 
-    For each element of the array [f] will be called with two arguments; the current accumulator and an element.
+    For each element of the array [f] will be called with two arguments: the current accumulator and an element.
 
     [f] returns the value that the accumulator should have for the next iteration.
 
@@ -457,7 +457,7 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     Folding is useful whenever you have a collection of something, and want to produce a single value from it.
 
-    For examples if we have:
+    For example, if we have:
 
     {[
       let numbers = [|1, 2, 3|] in
@@ -524,7 +524,7 @@ val flatten : 'a t t -> 'a t
 *)
 
 val zip : 'a t -> 'b t -> ('a * 'b) t
-(** Combine two arrays by merging each pair of elements into a {!Tuple2}
+(** Combine two arrays by merging each pair of elements into a {!Tuple2}.
 
     If one array is longer, the extra elements are dropped.
 
@@ -593,7 +593,7 @@ val split_at : 'a t -> index:int -> 'a t * 'a t
 
     {3 Exceptions}
 
-    Raises an [Invalid_argument] exception if [index] is less than zero
+    Raises an [Invalid_argument] exception if [index] is less than zero.
 
     {2 Examples}
 
@@ -662,7 +662,7 @@ val for_each_with_index : 'a t -> f:(int -> 'a -> unit) -> unit
 *)
 
 val values : 'a option t -> 'a t
-(** Return all of the [Some] values from an array of options
+(** Return all of the [Some] values from an array of options.
 
     {2 Examples}
 
@@ -730,9 +730,9 @@ val group_by :
   -> ('key, 'id) TableclothComparator.s
   -> f:('value -> 'key)
   -> ('key, 'value list, 'id) TableclothMap.t
-(** Collect elements which [f] produces the same key for
+(** Collect elements where function [f] will produce the same key.
 
-    Produces a map from ['key] to a {!List} of all elements which produce the same ['key]
+    Produces a map from ['key] to a {!List} of all elements which produce the same ['key].
 
     {2 Examples}
 

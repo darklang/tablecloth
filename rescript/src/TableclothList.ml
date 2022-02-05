@@ -52,7 +52,7 @@ let unzip list =
 
 let includes t value ~equal = Belt.List.has t value equal
 
-let uniqueBy ~(f : 'a -> string) (l : 'a list) : 'a list =
+let uniqueBy (l : 'a list) ~(f : 'a -> string) : 'a list =
   let rec uniqueHelper
       (f : 'a -> string)
       (existing : Belt.Set.String.t)
@@ -268,7 +268,7 @@ let extent t ~compare =
 
 let sort t ~compare = Belt.List.sort t compare
 
-let sortBy ~(f : 'a -> 'b) (l : 'a t) : 'a t =
+let sortBy (l : 'a t) ~(f : 'a -> 'b) : 'a t =
   Belt.List.sort l (fun a b ->
       let a' = f a in
       let b' = f b in

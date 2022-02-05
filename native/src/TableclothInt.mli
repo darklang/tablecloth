@@ -30,7 +30,7 @@
 
     You can read about the reasons for OCaml's unusual integer sizes {{: https://v1.realworldocaml.org/v1/en/html/memory-representation-of-values.html} here }.
 
-    {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}). It appears
+    {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}. It appears
     that the [int] abbreviation was introduced in the programming language ALGOL 68.
 
     Today, almost all programming languages use this abbreviation.
@@ -41,16 +41,16 @@ type t = int
 (** {1 Constants } *)
 
 val zero : t
-(** The literal [0] as a named value *)
+(** The literal [0] as a named value. *)
 
 val one : t
-(** The literal [1] as a named value *)
+(** The literal [1] as a named value. *)
 
 val maximum_value : t
-(** The maximum representable [int] on the current platform *)
+(** The maximum representable [int] on the current platform. *)
 
 val minimum_value : t
-(** The minimum representable [int] on the current platform *)
+(** The minimum representable [int] on the current platform. *)
 
 (** {1 Create} *)
 
@@ -94,7 +94,9 @@ val ( + ) : t -> t -> t
 (** See {!Int.add} *)
 
 val subtract : t -> t -> t
-(** Subtract numbers
+(** Subtract numbers.
+
+    {2 Examples}
 
     {[Int.subtract 4 3 = 1]}
 
@@ -107,7 +109,9 @@ val ( - ) : t -> t -> t
 (** See {!Int.subtract} *)
 
 val multiply : t -> t -> t
-(** Multiply [int]s like
+(** Multiply [int]s.
+
+    {2 Examples}
 
     {[Int.multiply 2 7 = 14]}
 
@@ -120,7 +124,7 @@ val ( * ) : t -> t -> t
 (** See {!Int.multiply} *)
 
 val divide : t -> by:t -> t
-(** Integer division
+(** Integer division.
 
     Notice that the remainder is discarded.
 
@@ -138,7 +142,7 @@ val ( / ) : t -> t -> t
 (** See {!Int.divide} *)
 
 val ( /. ) : t -> t -> float
-(** Floating point division
+(** Floating point division.
 
     {2 Examples}
 
@@ -148,7 +152,7 @@ val ( /. ) : t -> t -> float
 *)
 
 val divide_float : by:t -> t -> float
-(** Floating point division
+(** Floating point division.
 
     {2 Examples}
 
@@ -241,7 +245,7 @@ val remainder : t -> by:t -> t
 *)
 
 val maximum : t -> t -> t
-(** Returns the larger of two [int]s
+(** Returns the larger of two [int]s.
 
     {2 Examples}
 
@@ -250,7 +254,7 @@ val maximum : t -> t -> t
 *)
 
 val minimum : t -> t -> t
-(** Returns the smaller of two [int]s
+(** Returns the smaller of two [int]s.
 
     {2 Examples}
 
@@ -261,7 +265,7 @@ val minimum : t -> t -> t
 (** {1 Query} *)
 
 val is_even : t -> bool
-(** Check if an [int] is even
+(** Check if an [int] is even.
 
     {2 Examples}
 
@@ -271,7 +275,7 @@ val is_even : t -> bool
 *)
 
 val is_odd : t -> bool
-(** Check if an [int] is odd
+(** Check if an [int] is odd.
 
   {2 Examples}
 
@@ -312,7 +316,7 @@ val in_range : t -> lower:t -> upper:t -> bool
 (** {1 Convert} *)
 
 val to_float : t -> float
-(** Convert an integer into a float. Useful when mixing {!Int} and {!Float} values like this:
+(** Convert an [int] into a [float]. Useful when mixing {!Int} and {!Float} values like this:
 
     {2 Examples}
 
@@ -342,12 +346,12 @@ val to_string : t -> string
 (** {1 Compare} *)
 
 val equal : t -> t -> bool
-(** Test two [int]s for equality *)
+(** Test two [int]s for equality. *)
 
 val compare : t -> t -> int
-(** Compare two [int]s *)
+(** Compare two [int]s. *)
 
-(** The unique identity for {!Comparator} *)
+(** The unique identity for {!Comparator}. *)
 type identity
 
 val comparator : (t, identity) TableclothComparator.t

@@ -17,7 +17,7 @@
     - Optional function arguments
     - Optional record fields
     - Return values for functions that are not defined over their entire input range (partial functions).
-    - Return value for otherwise reporting simple errors, where None is returned on error.
+    - Return value for otherwise reporting simple errors, where [None] is returned on error.
 
     Lots of functions in [Tablecloth] return options, one you have one you can
     work with the value it might contain by:
@@ -131,11 +131,11 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
 *)
 
 val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
-(** Combine two {!Option}s
+(** Combine two {!Option}s.
 
     If both options are [Some] returns, as [Some] the result of running [f] on both values.
 
-    If either value is [None], returns [None]
+    If either value is [None], returns [None].
 
     {2 Examples}
 
@@ -149,6 +149,7 @@ val and_then : 'a t -> f:('a -> 'b t) -> 'b t
 (** Chain together many computations that may not return a value.
 
     It is helpful to see its definition:
+
     {[
       let and_then t ~f =
         match t with
@@ -194,7 +195,7 @@ val unwrap : 'a t -> default:'a -> 'a
 
     See {!(|?)} for an operator version of this function.
 
-    {b Note} This can be overused! Many cases are better handled using pattern matching, {!map} or {!and_then}.
+    {b Note:} This can be overused! Many cases are better handled using pattern matching, {!map} or {!and_then}.
 
     {2 Examples}
 
@@ -277,7 +278,7 @@ val to_list : 'a t -> 'a list
 (** {1 Compare} *)
 
 val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
-(** Test two optional values for equality using the provided function
+(** Test two optional values for equality using the provided function.
 
     {2 Examples}
 
@@ -290,7 +291,7 @@ val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
 val compare : f:('a -> 'a -> int) -> 'a t -> 'a t -> int
 (** Compare two optional values using the provided [f] function.
 
-    A [None] is "less" than a [Some]
+    A [None] is "less" than a [Some].
 
     {2 Examples}
 
@@ -327,7 +328,7 @@ val compare : f:('a -> 'a -> int) -> 'a t -> 'a t -> int
 *)
 
 val ( |? ) : 'a t -> 'a -> 'a
-(** The operator version of {!get}
+(** The operator version of {!get}.
 
     {2 Examples}
 
@@ -336,7 +337,7 @@ val ( |? ) : 'a t -> 'a -> 'a
 *)
 
 val ( >>| ) : 'a t -> ('a -> 'b) -> 'b t
-(** The operator version of {!map}
+(** The operator version of {!map}.
 
     {2 Examples}
 
@@ -345,7 +346,7 @@ val ( >>| ) : 'a t -> ('a -> 'b) -> 'b t
 *)
 
 val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
-(** The operator version of {!and_then}
+(** The operator version of {!and_then}.
 
     {2 Examples}
 

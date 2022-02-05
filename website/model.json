@@ -3065,6 +3065,10 @@
                           "value": "None"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -3199,6 +3203,10 @@
                         {
                           "tag": "Code",
                           "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -5162,6 +5170,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -5252,6 +5264,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -5340,6 +5356,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -5516,7 +5536,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Remove a value from a set, if the set doesn't contain the value anyway, returns the original set"
+                          "value": "Remove a value from a set, if the set doesn't contain the value anyway, returns the original set."
                         },
                         {
                           "tag": "Newline",
@@ -5601,7 +5621,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Determine if a value is in a set"
+                          "value": "Determine if a value is in a set."
                         },
                         {
                           "tag": "Newline",
@@ -7973,6 +7993,10 @@
                                   }
                                 },
                                 {
+                                  "tag": "Raw",
+                                  "value": "."
+                                },
+                                {
                                   "tag": "Newline",
                                   "value": "\n"
                                 },
@@ -8063,6 +8087,10 @@
                                   }
                                 },
                                 {
+                                  "tag": "Raw",
+                                  "value": "."
+                                },
+                                {
                                   "tag": "Newline",
                                   "value": "\n"
                                 },
@@ -8151,6 +8179,10 @@
                                       ]
                                     }
                                   }
+                                },
+                                {
+                                  "tag": "Raw",
+                                  "value": "."
                                 },
                                 {
                                   "tag": "Newline",
@@ -10045,6 +10077,10 @@
                           "value": "Result.map2 ~f:Tuple2.make"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -10264,6 +10300,10 @@
                           "value": "Error"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -10353,6 +10393,10 @@
                           "value": "Error"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -10361,13 +10405,17 @@
                           "value": "\n    "
                         },
                         {
-                          "tag": "Emphasize",
-                          "value": [
-                            {
-                              "tag": "Raw",
-                              "value": "Exceptions"
-                            }
-                          ]
+                          "tag": "Title",
+                          "value": {
+                            "size": 3,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Exceptions"
+                              }
+                            ]
+                          }
                         },
                         {
                           "tag": "Newline",
@@ -10496,7 +10544,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " value instead"
+                          "value": " value instead."
                         },
                         {
                           "tag": "Newline",
@@ -10581,7 +10629,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Combine two results"
+                          "value": "Combine two results."
                         },
                         {
                           "tag": "Newline",
@@ -10907,6 +10955,10 @@
                         {
                           "tag": "Code",
                           "value": "Ok xs"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -11879,7 +11931,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s"
+                          "value": "s."
                         },
                         {
                           "tag": "Newline",
@@ -12550,7 +12602,7 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": "\n    They also support exhaustive pattern matching"
+                    "value": "\n    They also support exhaustive pattern matching:"
                   },
                   {
                     "tag": "Newline",
@@ -13422,6 +13474,10 @@
                           "value": "None"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -13537,6 +13593,10 @@
                         {
                           "tag": "Code",
                           "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -13765,7 +13825,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n   If count is zero or negative, returns []."
+                          "value": "\n   If count is zero or negative, returns "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "[]"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -13885,6 +13953,10 @@
                         {
                           "tag": "Code",
                           "value": "false"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -14099,6 +14171,10 @@
                         {
                           "tag": "Code",
                           "value": "false"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -14634,13 +14710,17 @@
                           "value": "\n    "
                         },
                         {
-                          "tag": "Emphasize",
-                          "value": [
-                            {
-                              "tag": "Raw",
-                              "value": "Exceptions"
-                            }
-                          ]
+                          "tag": "Title",
+                          "value": {
+                            "size": 3,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Exceptions"
+                              }
+                            ]
+                          }
                         },
                         {
                           "tag": "Newline",
@@ -14664,7 +14744,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is negative"
+                          "value": " is negative."
                         },
                         {
                           "tag": "Newline",
@@ -15008,7 +15088,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Reverse the elements in a list"
+                          "value": "Reverse the elements in a list."
                         },
                         {
                           "tag": "Newline",
@@ -15208,7 +15288,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ". This is a stable sort; if two items have the same value,\n    they will appear in the same order that they appeared in the original list.\n    "
+                          "value": ". This is a stable sort: if two items have the same value,\n    they will appear in the same order that they appeared in the original list.\n    "
                         },
                         {
                           "tag": "CodePre",
@@ -15847,7 +15927,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Count the number of elements which "
+                          "value": "Count the number of elements where function "
                         },
                         {
                           "tag": "Code",
@@ -15863,7 +15943,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " for"
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -15957,7 +16037,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is applied to them.\n   The function "
+                          "value": " is applied to them."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n   The function "
                         },
                         {
                           "tag": "Code",
@@ -15973,7 +16061,36 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ". If the function generates the same string for two or more\n   list items, only the first of them is retained.\n   "
+                          "value": ". If the function generates the same string for two or more\n   list items, only the first of them is retained."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n   "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n   "
                         },
                         {
                           "tag": "CodePre",
@@ -16018,7 +16135,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Returns, as an option, the first element for which "
+                          "value": "Returns, as an "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "option"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", the first element for which "
                         },
                         {
                           "tag": "Code",
@@ -16063,6 +16188,10 @@
                         {
                           "tag": "Code",
                           "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -16432,7 +16561,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ".\n    If given an empty list, "
+                          "value": "."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    If given an empty list, "
                         },
                         {
                           "tag": "Code",
@@ -16456,7 +16593,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ", the first one is returned.\n    The function provided takes a list item as its parameter and must return a value\n    that can be compared---for example, a "
+                          "value": ", the first one is returned."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    The function provided takes a list item as its parameter and must return a value\n    that can be compared: for example, a "
                         },
                         {
                           "tag": "Code",
@@ -16472,7 +16617,36 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ".\n    "
+                          "value": "."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
                         },
                         {
                           "tag": "CodePre",
@@ -16537,7 +16711,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ".\n     If given an empty list, "
+                          "value": "."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n     If given an empty list, "
                         },
                         {
                           "tag": "Code",
@@ -16561,7 +16743,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ", the first one is returned.\n     The function provided takes a list item as its parameter and must return a value\n     that can be compared---for example, a "
+                          "value": ", the first one is returned."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n     The function provided takes a list item as its parameter and must return a value\n     that can be compared: for example, a "
                         },
                         {
                           "tag": "Code",
@@ -16577,7 +16767,36 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": ".\n     "
+                          "value": "."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n     "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n     "
                         },
                         {
                           "tag": "CodePre",
@@ -17582,7 +17801,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " and you want to skip over Nones, then "
+                          "value": " and you want to skip over "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "s, then "
                         },
                         {
                           "tag": "Code",
@@ -17788,7 +18015,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Transform a list into a value"
+                          "value": "Transform a list into a value."
                         },
                         {
                           "tag": "Newline",
@@ -18168,7 +18395,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Concatenate a list of lists into a single list:"
+                          "value": "Concatenate a list of lists into a single list."
                         },
                         {
                           "tag": "Newline",
@@ -18261,6 +18488,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -18279,6 +18510,10 @@
                         {
                           "tag": "Code",
                           "value": "List.map2 ~f:Tuple2.make"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -18887,7 +19122,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " at the first element "
+                          "value": " at the first element where function "
                         },
                         {
                           "tag": "Code",
@@ -18895,7 +19130,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " returns "
+                          "value": " will return "
                         },
                         {
                           "tag": "Code",
@@ -18903,7 +19138,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " for."
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -18927,7 +19162,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " for\n    will be in the first component of the tuple, the remaining elements will be\n    in the second"
+                          "value": " for\n    will be in the first component of the tuple, the remaining elements will be\n    in the second."
                         },
                         {
                           "tag": "Newline",
@@ -20014,7 +20249,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " produces the same key for"
+                          "value": " produces the same key for."
                         },
                         {
                           "tag": "Newline",
@@ -20055,6 +20290,10 @@
                         {
                           "tag": "Code",
                           "value": "'key"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -20768,6 +21007,10 @@
                           "value": "to"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -21207,7 +21450,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    You should prefer using the dedicated literal syntax;"
+                          "value": "\n    You should prefer using the dedicated literal syntax:"
                         },
                         {
                           "tag": "Newline",
@@ -21909,7 +22152,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " but with labelled arguments"
+                          "value": " but with labelled arguments."
                         }
                       ]
                     },
@@ -22702,7 +22945,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Check if an array is empty"
+                          "value": "Check if an array is empty."
                         },
                         {
                           "tag": "Newline",
@@ -22911,6 +23154,10 @@
                           "value": "true"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -23043,6 +23290,10 @@
                           "value": "false"
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -23136,7 +23387,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Count the number of elements which "
+                          "value": "Count the number of elements which function "
                         },
                         {
                           "tag": "Code",
@@ -23144,7 +23395,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " returns "
+                          "value": " will return "
                         },
                         {
                           "tag": "Code",
@@ -23152,7 +23403,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " for"
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -23856,7 +24107,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " in a single pass"
+                          "value": " in a single pass."
                         },
                         {
                           "tag": "Newline",
@@ -24262,7 +24513,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Keep elements that "
+                          "value": "Keep elements where function "
                         },
                         {
                           "tag": "Code",
@@ -24270,7 +24521,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " returns "
+                          "value": " will return "
                         },
                         {
                           "tag": "Code",
@@ -24278,7 +24529,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " for."
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -24693,7 +24944,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " the resulting arrays"
+                          "value": " the resulting arrays."
                         },
                         {
                           "tag": "Newline",
@@ -24815,7 +25066,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " will be called with two arguments; the current accumulator and an element."
+                          "value": " will be called with two arguments: the current accumulator and an element."
                         },
                         {
                           "tag": "Newline",
@@ -24911,7 +25162,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    For examples if we have:"
+                          "value": "\n    For example, if we have:"
                         },
                         {
                           "tag": "Newline",
@@ -25359,6 +25610,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -25880,7 +26135,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is less than zero"
+                          "value": " is less than zero."
                         },
                         {
                           "tag": "Newline",
@@ -26444,7 +26699,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " values from an array of options"
+                          "value": " values from an array of options."
                         },
                         {
                           "tag": "Newline",
@@ -27006,7 +27261,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Collect elements which "
+                          "value": "Collect elements where function "
                         },
                         {
                           "tag": "Code",
@@ -27014,7 +27269,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " produces the same key for"
+                          "value": " will produce the same key."
                         },
                         {
                           "tag": "Newline",
@@ -27055,6 +27310,10 @@
                         {
                           "tag": "Code",
                           "value": "'key"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -28141,6 +28400,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -28236,7 +28499,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Create a map from a key and value"
+                          "value": "Create a map from a key and value."
                         },
                         {
                           "tag": "Newline",
@@ -28330,7 +28593,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " of key-value tuples"
+                          "value": " of key-value tuples."
                         }
                       ]
                     },
@@ -28388,7 +28651,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " of key-value tuples"
+                          "value": " of key-value tuples."
                         }
                       ]
                     },
@@ -28698,6 +28961,10 @@
                               }
                             ]
                           }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
                         },
                         {
                           "tag": "Raw",
@@ -29344,7 +29611,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " evaluates to true."
+                          "value": " evaluates to "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "true"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -29939,12 +30214,27 @@
                           "value": "\n"
                         },
                         {
-                          "tag": "Raw",
-                          "value": "\n    1. Only the 'left' map includes a value for the key.\n    2. Both maps contain a value for the key.\n    3. Only the 'right' map includes a value for the key."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
+                          "tag": "List",
+                          "value": [
+                            [
+                              {
+                                "tag": "Raw",
+                                "value": "Only the 'left' map includes a value for the key."
+                              }
+                            ],
+                            [
+                              {
+                                "tag": "Raw",
+                                "value": "Both maps contain a value for the key."
+                              }
+                            ],
+                            [
+                              {
+                                "tag": "Raw",
+                                "value": "Only the 'right' map includes a value for the key."
+                              }
+                            ]
+                          ]
                         },
                         {
                           "tag": "Raw",
@@ -30142,7 +30432,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is also called with each values corresponding key"
+                          "value": " is also called with each values corresponding key."
                         }
                       ]
                     },
@@ -30417,6 +30707,10 @@
                         {
                           "tag": "Code",
                           "value": "value"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -30559,7 +30853,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is also called with the corresponding key"
+                          "value": " is also called with the corresponding key."
                         }
                       ]
                     },
@@ -31001,7 +31295,7 @@
                               "value": [
                                 {
                                   "tag": "Raw",
-                                  "value": "Create a map from a key and value"
+                                  "value": "Create a map from a key and value."
                                 },
                                 {
                                   "tag": "Newline",
@@ -31095,7 +31389,7 @@
                                 },
                                 {
                                   "tag": "Raw",
-                                  "value": " of key-value tuples"
+                                  "value": " of key-value tuples."
                                 }
                               ]
                             },
@@ -31153,7 +31447,7 @@
                                 },
                                 {
                                   "tag": "Raw",
-                                  "value": " of key-value tuples"
+                                  "value": " of key-value tuples."
                                 }
                               ]
                             },
@@ -31292,7 +31586,7 @@
                               "value": [
                                 {
                                   "tag": "Raw",
-                                  "value": "Create a map from a key and value"
+                                  "value": "Create a map from a key and value."
                                 },
                                 {
                                   "tag": "Newline",
@@ -31386,7 +31680,7 @@
                                 },
                                 {
                                   "tag": "Raw",
-                                  "value": " of key-value tuples"
+                                  "value": " of key-value tuples."
                                 }
                               ]
                             },
@@ -31444,7 +31738,7 @@
                                 },
                                 {
                                   "tag": "Raw",
-                                  "value": " of key-value tuples"
+                                  "value": " of key-value tuples."
                                 }
                               ]
                             },
@@ -31595,7 +31889,7 @@
                               "value": [
                                 {
                                   "tag": "Raw",
-                                  "value": "Create a map from a key and value"
+                                  "value": "Create a map from a key and value."
                                 },
                                 {
                                   "tag": "Newline",
@@ -31689,7 +31983,7 @@
                                 },
                                 {
                                   "tag": "Raw",
-                                  "value": " of key-value tuples"
+                                  "value": " of key-value tuples."
                                 }
                               ]
                             },
@@ -31747,7 +32041,7 @@
                                 },
                                 {
                                   "tag": "Raw",
-                                  "value": " of key-value tuples"
+                                  "value": " of key-value tuples."
                                 }
                               ]
                             },
@@ -31987,7 +32281,15 @@
                       [
                         {
                           "tag": "Raw",
-                          "value": "Return value for otherwise reporting simple errors, where None is returned on error."
+                          "value": "Return value for otherwise reporting simple errors, where "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " is returned on error."
                         }
                       ]
                     ]
@@ -33262,7 +33564,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s"
+                          "value": "s."
                         },
                         {
                           "tag": "Newline",
@@ -33315,6 +33617,10 @@
                         {
                           "tag": "Code",
                           "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -33429,7 +33735,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    It is helpful to see its definition:\n    "
+                          "value": "\n    It is helpful to see its definition:"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
                         },
                         {
                           "tag": "CodePre",
@@ -33779,7 +34093,7 @@
                           "value": [
                             {
                               "tag": "Raw",
-                              "value": "Note"
+                              "value": "Note:"
                             }
                           ]
                         },
@@ -34752,7 +35066,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Test two optional values for equality using the provided function"
+                          "value": "Test two optional values for equality using the provided function."
                         },
                         {
                           "tag": "Newline",
@@ -34888,6 +35202,10 @@
                         {
                           "tag": "Code",
                           "value": "Some"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -35063,6 +35381,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -35164,6 +35486,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -35263,6 +35589,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -36597,7 +36927,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "See if the second string starts with "
+                          "value": "See if the string starts with "
                         },
                         {
                           "tag": "Code",
@@ -36686,7 +37016,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "See if the second string ends with "
+                          "value": "See if the string ends with "
                         },
                         {
                           "tag": "Code",
@@ -40832,28 +41162,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "Title",
-                          "value": {
-                            "size": 2,
-                            "label": null,
-                            "content": [
-                              {
-                                "tag": "Raw",
-                                "value": "Examples"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
+                          "value": "\n`\n    "
                         },
                         {
                           "tag": "CodePre",
@@ -40937,7 +41246,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " code point "
+                                "value": " code point"
                               }
                             ]
                           }
@@ -41915,7 +42224,7 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": "). It appears\n    that the "
+                    "value": ". It appears\n    that the "
                   },
                   {
                     "tag": "Code",
@@ -41997,7 +42306,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " as a named value"
+                          "value": " as a named value."
                         }
                       ]
                     },
@@ -42043,7 +42352,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " as a named value"
+                          "value": " as a named value."
                         }
                       ]
                     },
@@ -42089,7 +42398,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " on the current platform"
+                          "value": " on the current platform."
                         }
                       ]
                     },
@@ -42135,7 +42444,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " on the current platform"
+                          "value": " on the current platform."
                         }
                       ]
                     },
@@ -42756,7 +43065,28 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Subtract numbers"
+                          "value": "Subtract numbers."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
                         },
                         {
                           "tag": "Newline",
@@ -42894,7 +43224,28 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s like"
+                          "value": "s."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
                         },
                         {
                           "tag": "Newline",
@@ -43024,7 +43375,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Integer division"
+                          "value": "Integer division."
                         },
                         {
                           "tag": "Newline",
@@ -43216,7 +43567,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Floating point division"
+                          "value": "Floating point division."
                         },
                         {
                           "tag": "Newline",
@@ -43312,7 +43663,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Floating point division"
+                          "value": "Floating point division."
                         },
                         {
                           "tag": "Newline",
@@ -44302,7 +44653,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s"
+                          "value": "s."
                         },
                         {
                           "tag": "Newline",
@@ -44395,7 +44746,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s"
+                          "value": "s."
                         },
                         {
                           "tag": "Newline",
@@ -44506,7 +44857,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is even"
+                          "value": " is even."
                         },
                         {
                           "tag": "Newline",
@@ -44610,7 +44961,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " is odd"
+                          "value": " is odd."
                         },
                         {
                           "tag": "Newline",
@@ -45046,7 +45397,23 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Convert an integer into a float. Useful when mixing "
+                          "value": "Convert an "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "int"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " into a "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "float"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ". Useful when mixing "
                         },
                         {
                           "tag": "Ref",
@@ -45321,7 +45688,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s for equality"
+                          "value": "s for equality."
                         }
                       ]
                     },
@@ -45367,7 +45734,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s"
+                          "value": "s."
                         }
                       ]
                     },
@@ -45421,6 +45788,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -45465,6 +45836,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -45822,6 +46197,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -46123,6 +46502,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -46211,6 +46594,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -46363,6 +46750,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -46779,6 +47170,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -46937,7 +47332,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    If an exception is thrown, returns the exception"
+                          "value": "\n    If an exception is thrown, returns the exception."
                         }
                       ]
                     },
@@ -47250,6 +47645,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -47324,6 +47723,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -47763,29 +48166,6 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    e.g"
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
-                        },
-                        {
-                          "tag": "CodePre",
-                          "value": {
-                            "ocaml": "\n      let is_not_a_number x = Float.(x = nan) in\n\n      is_not_a_number nan = false\n    ",
-                            "reason": "{\n  let is_not_a_number = x => Float.(x == nan);\n\n  is_not_a_number(nan) == false;\n};\n"
-                          }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
                           "value": "\n    For detecting "
                         },
                         {
@@ -47810,6 +48190,42 @@
                                 }
                               ]
                             }
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "\n      let is_not_a_number x = Float.(x = nan) in\n\n      is_not_a_number nan = false\n    ",
+                            "reason": "{\n  let is_not_a_number = x => Float.(x == nan);\n\n  is_not_a_number(nan) == false;\n};\n"
                           }
                         }
                       ]
@@ -47857,10 +48273,14 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " infinity "
+                                "value": " infinity"
                               }
                             ]
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -47976,7 +48396,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " Euler's number "
+                                "value": " Euler's number"
                               }
                             ]
                           }
@@ -48030,7 +48450,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " pi "
+                                "value": " pi"
                               }
                             ]
                           }
@@ -48118,6 +48538,10 @@
                         {
                           "tag": "Code",
                           "value": "float"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -48214,6 +48638,10 @@
                         {
                           "tag": "Code",
                           "value": "Float.(n + 1.) > n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -48264,6 +48692,10 @@
                         {
                           "tag": "Code",
                           "value": "Float.(n - 1.) < n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -48344,6 +48776,10 @@
                         {
                           "tag": "Code",
                           "value": "float"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -48931,7 +49367,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Subtract numbers"
+                          "value": "Subtract numbers."
                         },
                         {
                           "tag": "Newline",
@@ -49086,7 +49522,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Multiply numbers"
+                          "value": "Multiply numbers."
                         },
                         {
                           "tag": "Newline",
@@ -49204,6 +49640,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -49804,7 +50244,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s, if both arguments are equal, returns the first argument"
+                          "value": "s, if both arguments are equal, returns the first argument."
                         },
                         {
                           "tag": "Newline",
@@ -49928,7 +50368,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "s, if both arguments are equal, returns the first argument"
+                          "value": "s, if both arguments are equal, returns the first argument."
                         },
                         {
                           "tag": "Newline",
@@ -49949,6 +50389,10 @@
                         {
                           "tag": "Code",
                           "value": "NaN"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -50110,6 +50554,10 @@
                         {
                           "tag": "Code",
                           "value": "lower > upper"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -50470,7 +50918,7 @@
                           "value": [
                             {
                               "tag": "Raw",
-                              "value": "Note "
+                              "value": "Note: "
                             }
                           ]
                         },
@@ -51643,7 +52091,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " radians "
+                                "value": " radians"
                               }
                             ]
                           }
@@ -52151,7 +52599,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " radians "
+                                "value": " radians"
                               }
                             ]
                           }
@@ -52260,7 +52708,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " radians "
+                                "value": " radians"
                               }
                             ]
                           }
@@ -52350,7 +52798,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " radians "
+                                "value": " radians"
                               }
                             ]
                           }
@@ -52459,7 +52907,7 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " radians "
+                                "value": " radians"
                               }
                             ]
                           }
@@ -53250,7 +53698,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " (towards positive infinity)"
+                          "value": " (towards positive infinity)."
                         },
                         {
                           "tag": "Newline",
@@ -53422,6 +53870,10 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
@@ -53480,6 +53932,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -53568,7 +54024,7 @@
                         {
                           "tag": "Title",
                           "value": {
-                            "size": 4,
+                            "size": 3,
                             "label": null,
                             "content": [
                               {
@@ -53604,7 +54060,7 @@
                         {
                           "tag": "Title",
                           "value": {
-                            "size": 4,
+                            "size": 3,
                             "label": null,
                             "content": [
                               {
@@ -53627,9 +54083,13 @@
                           "value": [
                             {
                               "tag": "Raw",
-                              "value": "commercial rounding "
+                              "value": "commercial rounding"
                             }
                           ]
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -53657,7 +54117,7 @@
                         {
                           "tag": "Title",
                           "value": {
-                            "size": 4,
+                            "size": 3,
                             "label": null,
                             "content": [
                               {
@@ -53693,7 +54153,7 @@
                         {
                           "tag": "Title",
                           "value": {
-                            "size": 4,
+                            "size": 3,
                             "label": null,
                             "content": [
                               {
@@ -53742,7 +54202,7 @@
                         {
                           "tag": "Title",
                           "value": {
-                            "size": 4,
+                            "size": 3,
                             "label": null,
                             "content": [
                               {
@@ -54384,12 +54844,16 @@
                           }
                         },
                         {
+                          "tag": "Raw",
+                          "value": "."
+                        },
+                        {
                           "tag": "Newline",
                           "value": "\n"
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    The behaviour of this function is platform specific"
+                          "value": "\n    The behaviour of this function is platform specific."
                         }
                       ]
                     },
@@ -54445,7 +54909,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Test two floats for equality"
+                          "value": "Test two floats for equality."
                         }
                       ]
                     },
@@ -54483,7 +54947,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Compare two floats"
+                          "value": "Compare two floats."
                         }
                       ]
                     },
@@ -54586,6 +55050,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -54849,7 +55317,7 @@
                   },
                   {
                     "tag": "Raw",
-                    "value": "\n    Now we can create a Set of books"
+                    "value": "\n    Now we can create a Set of books:"
                   },
                   {
                     "tag": "Newline",
@@ -54905,7 +55373,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " functor"
+                          "value": " functor."
                         }
                       ]
                     },
@@ -54991,6 +55459,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -55040,6 +55512,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         }
                       ]
                     },
@@ -55200,6 +55676,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".Tablecloth"
                         }
                       ]
                     },
@@ -55269,6 +55749,10 @@
                               ]
                             }
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".Tablecloth"
                         }
                       ]
                     },
