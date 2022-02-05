@@ -32,7 +32,7 @@ export const CodeBlock = ({ code, ...props }) => {
       {...defaultProps}
       code={content}
       theme={theme === 'light' ? prismLightTheme : prismDarkTheme}
-      language={props.language || syntax}
+      language={props.language || (syntax === "rescript" ? "reason": syntax)} // there is no rescript highlighting, yet. Reason works just as well
       {...props}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (

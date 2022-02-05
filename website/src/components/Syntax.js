@@ -17,6 +17,19 @@ export let keywords = {
       close: '}',
     },
   },
+  rescript: {
+    val: 'let',
+    typesig: ': ',
+    arrow: '=>',
+    module: {
+      open: '{',
+      close: '}',
+    },
+    moduleSignature: {
+      open: '{',
+      close: '}',
+    },
+  },
   ocaml: {
     val: 'val',
     typesig: ' : ',

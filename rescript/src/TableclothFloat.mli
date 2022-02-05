@@ -14,7 +14,7 @@
       6.022e+23  (* = (6.022 * 10^23) *)
       1.602e-19  (* = (1.602 * 10^-19) *)
       1e3        (* = (1 * 10 ** 3) = 1000. *)
-    ]}
+   ]}
 
     {b Historical Note: } The particular details of floats (e.g. [NaN]) are
     specified by {{: https://en.wikipedia.org/wiki/IEEE_754 } IEEE 754 } which is literally hard-coded into almost all
@@ -50,7 +50,9 @@ val nan : t
 val infinity : t
 (** Positive {{: https://en.wikipedia.org/wiki/IEEE_754-1985#Positive_and_negative_infinity } infinity }
 
-    {[Float.divide(Float.pi, ~by=0.0) == Float.infinity]}
+    {[
+      Float.divide(Float.pi, ~by=0.0) == Float.infinity
+    ]}
 *)
 
 val negativeInfinity : t
@@ -117,12 +119,14 @@ val fromString : string -> t option
 
     {2 Examples}
 
-    {[Float.fromString("4.667") == Some(4.667)]}
-    {[Float.fromString("-4.667") == Some(-4.667)]}
-    {[Float.fromString("Hamster") == None]}
-    {[Float.fromString("NaN") == Some(Float.nan)]}
-    {[Float.fromString("nan") == Some(Float.nan)]}
-    {[Float.fromString("Infinity") == Some(Float.infinity)]}
+    {[
+      Float.fromString("4.667") == Some(4.667)
+      Float.fromString("-4.667") == Some(-4.667)
+      Float.fromString("Hamster") == None
+      Float.fromString("NaN") == Some(Float.nan)
+      Float.fromString("nan") == Some(Float.nan)
+      Float.fromString("Infinity") == Some(Float.infinity)
+    ]}
 *)
 
 (** {1 Basic arithmetic and operators} *)
@@ -137,8 +141,9 @@ val add : t -> t -> t
     So if you needed to add a {!Array.length} to a [float] for some reason, you
     could:
 
-    {[[1, 2, 3]->Array.length->Int.toFloat->Float.add(3.5) == 6.5]}
-
+    {[
+      [1, 2, 3]->Array.length->Int.toFloat->Float.add(3.5) == 6.5
+    ]}
 
     Languages like Java and JavaScript automatically convert [int] values
     to [float] values when you mix and match. This can make it difficult to be sure
@@ -155,7 +160,7 @@ val add : t -> t -> t
       ->Float.round
       ->Float.toInt
       ->Option.map(~f=int => int + Array.length([1, 2, 3])) == Some(6)
-    ]}
+   ]}
 *)
 
 val subtract : t -> t -> t
@@ -163,7 +168,9 @@ val subtract : t -> t -> t
 
     {2 Examples}
 
-    {[Float.subtract(4.0, 3.0) == 1.0]}
+    {[
+      Float.subtract(4.0, 3.0) == 1.0
+    ]}
 *)
 
 val multiply : t -> t -> t
@@ -171,7 +178,9 @@ val multiply : t -> t -> t
 
     {2 Examples}
 
-    {[Float.multiply(2.0, 7.0) == 14.0]}
+    {[
+      Float.multiply(2.0, 7.0) == 14.0
+    ]}
 *)
 
 val divide : t -> by:t -> t
@@ -179,7 +188,9 @@ val divide : t -> by:t -> t
 
     {2 Examples}
 
-    {[Float.divide(3.14, ~by=2.0) == 1.57]}
+    {[
+      Float.divide(3.14, ~by=2.0) == 1.57
+    ]}
 *)
 
 val power : base:t -> exponent:t -> t
@@ -187,12 +198,13 @@ val power : base:t -> exponent:t -> t
 
     {2 Examples}
 
-    {[Float.power(~base=7.0, ~exponent=3.0) == 343.0]}
+    {[
+      Float.power(~base=7.0, ~exponent=3.0) == 343.0
+    ]}
 *)
 
 val negate : t -> t
 (** Flips the 'sign' of a [float] so that positive floats become negative and negative integers become positive. Zero stays as it is.
-
 
     {2 Examples}
 
@@ -200,7 +212,7 @@ val negate : t -> t
       Float.negate(8.) == -8.
       Float.negate(-7.) == 7.
       Float.negate(0.) == 0.
-    ]}
+   ]}
 *)
 
 val absolute : t -> t
@@ -212,7 +224,7 @@ val absolute : t -> t
       Float.absolute(8.) == 8.
       Float.absolute(-7) = 7
       Float.absolute(0) == 0
-    ]}
+   ]}
 *)
 
 val maximum : t -> t -> t
@@ -222,9 +234,11 @@ val maximum : t -> t -> t
 
     {2 Examples}
 
-    {[Float.maximum(7., 9.) == 9.]}
-    {[Float.maximum(-4., -1.) == -1.]}
-    {[Float.maximum(7., Float.nan)->Float.isNaN == true]}
+    {[
+      Float.maximum(7., 9.) == 9.
+      Float.maximum(-4., -1.) == -1.
+      Float.maximum(7., Float.nan)->Float.isNaN == true
+    ]}
 *)
 
 val minimum : t -> t -> t
@@ -234,9 +248,11 @@ val minimum : t -> t -> t
 
     {2 Examples}
 
-    {[Float.minimum(7.0, 9.0) == 7.0]}
-    {[Float.minimum(-4.0, -1.0) == -4.0]}
-    {[Float.minimum(7., Float.nan)->Float.isNaN == true]}
+    {[
+      Float.minimum(7.0, 9.0) == 7.0
+      Float.minimum(-4.0, -1.0) == -4.0
+      Float.minimum(7., Float.nan)->Float.isNaN == true
+    ]}
 *)
 
 val clamp : t -> lower:t -> upper:t -> t
@@ -248,9 +264,11 @@ val clamp : t -> lower:t -> upper:t -> t
 
     {2 Examples}
 
-    {[Float.clamp(5.0, ~lower=0., ~upper=8.) == 5.]}
-    {[Float.clamp(9.0, ~lower=0., ~upper=8.) == 8.]}
-    {[Float.clamp(5.0, ~lower=-10., ~upper=-5.) == -5.]}
+    {[
+      Float.clamp(5.0, ~lower=0., ~upper=8.) == 5.
+      Float.clamp(9.0, ~lower=0., ~upper=8.) == 8.
+      Float.clamp(5.0, ~lower=-10., ~upper=-5.) == -5.
+    ]}
 *)
 
 (** {1 Fancier math} *)
@@ -262,8 +280,10 @@ val squareRoot : t -> t
 
     {2 Examples}
 
-    {[Float.squareRoot(4.0) == 2.0]}
-    {[Float.squareRoot(9.0) == 3.0]}
+    {[
+      Float.squareRoot(4.0) == 2.0
+      Float.squareRoot(9.0) == 3.0
+    ]}
 *)
 
 val log : t -> base:t -> t
@@ -271,8 +291,10 @@ val log : t -> base:t -> t
 
     {2 Examples}
 
-    {[Float.log(100., ~base=10.) == 2.]}
-    {[Float.log(256., ~base=2.) == 8.]}
+    {[
+      Float.log(100., ~base=10.) == 2.
+      Float.log(256., ~base=2.) == 8.
+    ]}
 *)
 
 (** {1 Query} *)
@@ -282,14 +304,18 @@ val isNaN : t -> bool
 
     {b Note } this function is more useful than it might seem since [NaN] {b does not } equal [NaN]:
 
-    {[(Float.nan == Float.nan) == false]}
+    {[
+      (Float.nan == Float.nan) == false
+    ]}
 
     {2 Examples}
 
-    {[Float.isNaN(0.0 /. 0.0) == true]}
-    {[Float.squareRoot(-1.0)->Float.isNaN == true]}
-    {[Float.isNaN(1.0 /. 0.0) == false  (* Float.infinity {b is} a number *)]}
-    {[Float.isNaN(1.) == false]}
+    {[
+      Float.isNaN(0.0 /. 0.0) == true
+      Float.squareRoot(-1.0)->Float.isNaN == true
+      Float.isNaN(1.0 /. 0.0) == false  (* Float.infinity {b is} a number *)
+      Float.isNaN(1.) == false
+    ]}
 *)
 
 val isFinite : t -> bool
@@ -299,11 +325,13 @@ val isFinite : t -> bool
 
     {2 Examples}
 
-    {[Float.isFinite(0. /. 0.) == false]}
-    {[Float.squareRoot(-1.)->Float.isFinite == false]}
-    {[Float.isFinite(1. /. 0.) == false]}
-    {[Float.isFinite(1.) == true]}
-    {[Float.nan->Float.isFinite == false]}
+    {[
+      Float.isFinite(0. /. 0.) == false
+      Float.squareRoot(-1.)->Float.isFinite == false
+      Float.isFinite(1. /. 0.) == false
+      Float.isFinite(1.) == true
+      Float.nan->Float.isFinite == false
+    ]}
 *)
 
 val isInfinite : t -> bool
@@ -311,11 +339,13 @@ val isInfinite : t -> bool
 
     {2 Examples}
 
-    {[Float.isInfinite(0. /. 0.) == false]}
-    {[Float.squareRoot(-1.)->Float.isInfinite == false]}
-    {[Float.isInfinite(1. /. 0.) == true]}
-    {[Float.isInfinite(1.) == false]}
-    {[Float.nan->Float.isInfinite == false]}
+    {[
+      Float.isInfinite(0. /. 0.) == false
+      Float.squareRoot(-1.)->Float.isInfinite == false
+      Float.isInfinite(1. /. 0.) == true
+      Float.isInfinite(1.) == false
+      Float.nan->Float.isInfinite == false
+    ]}
 *)
 
 val isInteger : t -> bool
@@ -323,8 +353,10 @@ val isInteger : t -> bool
 
     {2 Examples}
 
-    {[Float.isInteger(4.0) == true]}
-    {[Float.pi->Float.isInteger == false]}
+    {[
+      Float.isInteger(4.0) == true
+      Float.pi->Float.isInteger == false
+    ]}
 *)
 
 val isSafeInteger : t -> bool
@@ -332,9 +364,11 @@ val isSafeInteger : t -> bool
 
     {2 Examples}
 
-    {[Float.isSafeInteger(4.0) == true]}
-    {[Float.isSafeInteger(Float.pi) == false]}
-    {[Float.isSafeInteger(Float.maximumSafeInteger +. 1.) == false]}
+    {[
+      Float.isSafeInteger(4.0) == true
+      Float.isSafeInteger(Float.pi) == false
+      Float.isSafeInteger(Float.maximumSafeInteger +. 1.) == false
+    ]}
 *)
 
 val inRange : t -> lower:t -> upper:t -> bool
@@ -348,9 +382,11 @@ val inRange : t -> lower:t -> upper:t -> bool
 
     {2 Examples}
 
-    {[Float.inRange(3., ~lower=2., ~upper=4.) == true]}
-    {[Float.inRange(2., ~lower=1., ~upper=2.) == false]}
-    {[Float.inRange(9.6, ~lower=5.2, ~upper=7.9) == false]}
+    {[
+      Float.inRange(3., ~lower=2., ~upper=4.) == true
+      Float.inRange(2., ~lower=1., ~upper=2.) == false
+      Float.inRange(9.6, ~lower=5.2, ~upper=7.9) == false
+    ]}
 *)
 
 (** {1 Angles} *)
@@ -367,7 +403,9 @@ val hypotenuse : t -> t -> t
 
     {2 Examples}
 
-    {[Float.hypotenuse(3., 4.) == 5.]}
+    {[
+      Float.hypotenuse(3., 4.) == 5.
+    ]}
 *)
 
 val degrees : t -> radians
@@ -375,9 +413,11 @@ val degrees : t -> radians
 
     {2 Examples}
 
-    {[Float.degrees(180.) == Float.pi]}
-    {[Float.degrees(360.) == Float.pi *. 2.]}
-    {[Float.degrees(90.) == Float.pi /. 2.]}
+    {[
+      Float.degrees(180.) == Float.pi
+      Float.degrees(360.) == Float.pi *. 2.
+      Float.degrees(90.) == Float.pi /. 2.
+    ]}
 *)
 
 val radians : t -> radians
@@ -387,7 +427,9 @@ val radians : t -> radians
 
     {2 Examples}
 
-    {[Float.pi->Float.radians == 3.141592653589793]}
+    {[
+      Float.pi->Float.radians == 3.141592653589793
+    ]}
 *)
 
 val turns : t -> radians
@@ -397,8 +439,10 @@ val turns : t -> radians
 
     {2 Examples}
 
-    {[Float.turns(1. /. 2.) == Float.pi]}
-    {[Float.turns(1.) ==  Float.degrees(360.)]}
+    {[
+      Float.turns(1. /. 2.) == Float.pi
+      Float.turns(1.) ==  Float.degrees(360.)
+    ]}
 *)
 
 (** {1 Polar coordinates} *)
@@ -408,7 +452,9 @@ val fromPolar : float * radians -> float * float
 
     {2 Examples}
 
-    {[Float.fromPolar((Float.squareRoot(2.), Float.degrees(45.))) == (1.0000000000000002, 1.)]}
+    {[
+      Float.fromPolar((Float.squareRoot(2.), Float.degrees(45.))) == (1.0000000000000002, 1.)
+    ]}
 *)
 
 val toPolar : float * float -> float * radians
@@ -416,9 +462,11 @@ val toPolar : float * float -> float * radians
 
     {2 Examples}
 
-    {[Float.toPolar((-1.0, 0.0)) == (1.0, Float.pi)]}
-    {[Float.toPolar((3.0, 4.0)) == (5.0, 0.9272952180016122)]}
-    {[Float.toPolar((5.0, 12.0)) == (13.0, 1.1760052070951352)]}
+    {[
+      Float.toPolar((-1.0, 0.0)) == (1.0, Float.pi)
+      Float.toPolar((3.0, 4.0)) == (5.0, 0.9272952180016122)
+      Float.toPolar((5.0, 12.0)) == (13.0, 1.1760052070951352)
+    ]}
 *)
 
 val cos : radians -> t
@@ -426,8 +474,10 @@ val cos : radians -> t
 
     {2 Examples}
 
-    {[Float.degrees(60.)->Float.cos == 0.5000000000000001]}
-    {[(Float.pi /. 3.)->Float.radians->Float.cos == 0.5000000000000001]}
+    {[
+      Float.degrees(60.)->Float.cos == 0.5000000000000001
+      (Float.pi /. 3.)->Float.radians->Float.cos == 0.5000000000000001
+    ]}
 *)
 
 val acos : radians -> t
@@ -435,7 +485,9 @@ val acos : radians -> t
 
     {2 Examples}
 
-    {[(Float.radians(1.0) /. 2.0)->Float.acos == Float.radians(1.0471975511965979) (* 60 degrees or pi/3 radians *)]}
+    {[
+      (Float.radians(1.0) /. 2.0)->Float.acos == Float.radians(1.0471975511965979) (* 60 degrees or pi/3 radians *)
+    ]}
 *)
 
 val sin : radians -> t
@@ -443,8 +495,10 @@ val sin : radians -> t
 
     {2 Examples}
 
-    {[Float.degrees(30.)->Float.sin == 0.49999999999999994]}
-    {[(Float.pi /. 6.)->Float.radians->Float.sin == 0.49999999999999994]}
+    {[
+      Float.degrees(30.)->Float.sin == 0.49999999999999994
+      (Float.pi /. 6.)->Float.radians->Float.sin == 0.49999999999999994
+    ]}
 *)
 
 val asin : radians -> t
@@ -452,7 +506,9 @@ val asin : radians -> t
 
     {2 Examples}
 
-    {[Float.asin(1.0 /. 2.0) == 0.5235987755982989 (* 30 degrees or pi / 6 radians *)]}
+    {[
+      Float.asin(1.0 /. 2.0) == 0.5235987755982989 (* 30 degrees or pi / 6 radians *)
+    ]}
 *)
 
 val tan : radians -> t
@@ -460,9 +516,11 @@ val tan : radians -> t
 
     {2 Examples}
 
-    {[Float.degrees(45.)->Float.tan == 0.9999999999999999]}
-    {[(Float.pi /. 4.)->Float.radians->Float.tan == 0.9999999999999999]}
-    {[(Float.pi /. 4.)->Float.tan == 0.9999999999999999]}
+    {[
+      Float.degrees(45.)->Float.tan == 0.9999999999999999
+      (Float.pi /. 4.)->Float.radians->Float.tan == 0.9999999999999999
+      (Float.pi /. 4.)->Float.tan == 0.9999999999999999
+    ]}
 *)
 
 val atan : t -> radians
@@ -482,10 +540,12 @@ val atan : t -> radians
 
     {2 Examples}
 
-    {[Float.atan(1. /. 1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)]}
-    {[Float.atan(1. /. -1.) == -0.7853981633974483  (* 315 degrees or 7 * pi / 4 radians *)]}
-    {[Float.atan(-1. /. -1.) == 0.7853981633974483 (* 45 degrees or pi/4 radians *)]}
-    {[Float.atan(-1. /. 1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)]}
+    {[
+      Float.atan(1. /. 1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)
+      Float.atan(1. /. -1.) == -0.7853981633974483  (* 315 degrees or 7 * pi / 4 radians *)
+      Float.atan(-1. /. -1.) == 0.7853981633974483 (* 45 degrees or pi/4 radians *)
+      Float.atan(-1. /. 1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)
+    ]}
 *)
 
 val atan2 : y:t -> x:t -> radians
@@ -495,10 +555,12 @@ val atan2 : y:t -> x:t -> radians
 
     {2 Examples}
 
-    {[Float.atan2(~y=1., ~x=1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)]}
-    {[Float.atan2(~y=1., ~x=-1.) == 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)]}
-    {[Float.atan2(~y=-1., ~x=-1.) == -2.3561944901923449 (* 225 degrees or 5 * pi/4 radians *)]}
-    {[Float.atan2(~y=-1., ~x=1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)]}
+    {[
+      Float.atan2(~y=1., ~x=1.) == 0.7853981633974483  (* 45 degrees or pi/4 radians *)
+      Float.atan2(~y=1., ~x=-1.) == 2.3561944901923449  (* 135 degrees or 3 * pi/4 radians *)
+      Float.atan2(~y=-1., ~x=-1.) == -2.3561944901923449 (* 225 degrees or 5 * pi/4 radians *)
+      Float.atan2(~y=-1., ~x=1.) == -0.7853981633974483 (* 315 degrees or 7 * pi/4 radians *)
+    ]}
 *)
 
 (** {1 Rounding} *)
@@ -529,7 +591,7 @@ val round : ?direction:direction -> t -> t
       Float.round(-1.2) == -1.0
       Float.round(-1.5) == -1.0
       Float.round(-1.8) == -2.0
-    ]}
+   ]}
 
     {3 Towards zero}
 
@@ -540,7 +602,7 @@ val round : ?direction:direction -> t -> t
       Float.round(-1.2, ~direction=#Zero) == -1.0
       Float.round(-1.5, ~direction=#Zero) == -1.0
       Float.round(-1.8, ~direction=#Zero) == -1.0
-    ]}
+   ]}
 
     {3 Away from zero}
 
@@ -551,7 +613,7 @@ val round : ?direction:direction -> t -> t
       Float.round(-1.2, ~direction=#AwayFromZero) == -2.0
       Float.round(-1.5, ~direction=#AwayFromZero) == -2.0
       Float.round(-1.8, ~direction=#AwayFromZero) == -2.0
-    ]}
+   ]}
 
     {3 Towards infinity}
 
@@ -564,7 +626,7 @@ val round : ?direction:direction -> t -> t
       Float.round(-1.2, ~direction=#Up) == -1.0
       Float.round(-1.5, ~direction=#Up) == -1.0
       Float.round(-1.8, ~direction=#Up) == -1.0
-    ]}
+   ]}
 
     {3 Towards negative infinity}
 
@@ -575,7 +637,7 @@ val round : ?direction:direction -> t -> t
       [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],
       ~f=Float.round(~direction=#Down),
       ) == [-2.0, -2.0, -2.0, 1.0, 1.0, 1.0]
-    ]}
+   ]}
 
     {3 To the closest integer}
 
@@ -588,7 +650,7 @@ val round : ?direction:direction -> t -> t
       [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],
       ~f=Float.round(~direction=#Closest(#Zero)),
       ) == [-2.0, -1.0, -1.0, 1.0, 1.0, 2.0]
-    ]}
+   ]}
 
     {4 Halves rounded away from zero}
 
@@ -599,7 +661,7 @@ val round : ?direction:direction -> t -> t
       [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],
       ~f=Float.round(~direction=#Closest(#AwayFromZero)),
       ) == [-2.0, -2.0, -1.0, 1.0, 2.0, 2.0]
-    ]}
+   ]}
 
     {4 Halves rounded down}
 
@@ -608,7 +670,7 @@ val round : ?direction:direction -> t -> t
       [-1.8, -1.5, -1.2, 1.2, 1.5, 1.8],
       ~f=Float.round(~direction=#Closest(#Down)),
       ) == [-2.0, -2.0, -1.0, 1.0, 1.0, 2.0]
-    ]}
+   ]}
 
     {4 Halves rounded up}
 
@@ -621,7 +683,7 @@ val round : ?direction:direction -> t -> t
     {[
       Float.round(-1.5, ~direction=#Closest(#ToEven)) == -2.0
       Float.round(-2.5, ~direction=#Closest(#ToEven)) == -2.0
-    ]}
+   ]}
 *)
 
 val floor : t -> t
@@ -636,7 +698,7 @@ val floor : t -> t
       Float.floor(-1.2) == -2.0
       Float.floor(-1.5) == -2.0
       Float.floor(-1.8) == -2.0
-    ]}
+   ]}
 *)
 
 val ceiling : t -> t
@@ -644,14 +706,14 @@ val ceiling : t -> t
 
     {2 Examples}
 
-    {[
+    {[      
       Float.ceiling(1.2) == 2.0
       Float.ceiling(1.5) == 2.0
       Float.ceiling(1.8) == 2.0
       Float.ceiling(-1.2) == -1.0
       Float.ceiling(-1.5) == -1.0
       Float.ceiling(-1.8) == -1.0
-    ]}
+   ]}
 *)
 
 val truncate : t -> t
@@ -659,7 +721,7 @@ val truncate : t -> t
 
     {2 Examples}
 
-    {[
+    {[      
       Float.truncate(1.0) == 1.
       Float.truncate(1.2) == 1.
       Float.truncate(1.5) == 1.
@@ -667,7 +729,7 @@ val truncate : t -> t
       Float.truncate(-1.2) == -1.
       Float.truncate(-1.5) == -1.
       Float.truncate(-1.8) == -1.
-    ]}
+   ]}
 *)
 
 (** {1 Convert} *)
@@ -681,12 +743,14 @@ val toInt : t -> int option
 
     {2 Examples}
 
-    {[Float.toInt(1.6) == Some(1)]}
-    {[Float.toInt(2.0) == Some(2))]}
-    {[Float.toInt(5.683) == Some(5)]}
-    {[Float.nan->Float.toInt == None]}
-    {[Float.infinity->Float.toInt == None]}
-    {[Float.round(1.6)->Float.toInt) = Some(2)]}
+    {[
+      Float.toInt(1.6) == Some(1)
+      Float.toInt(2.0) == Some(2))
+      Float.toInt(5.683) == Some(5)
+      Float.nan->Float.toInt == None
+      Float.infinity->Float.toInt == None
+      Float.round(1.6)->Float.toInt) = Some(2)
+    ]}
 *)
 
 val toString : t -> string

@@ -473,7 +473,7 @@ val maximum_by : f:('a -> 'comparable) -> 'a list -> 'a option
 val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 (** Find the smallest element using the provided [compare] function.
 
-    Returns [None] if called on an empty array.
+    Returns [None] if called on an empty list.
 
     {2 Examples}
 
@@ -483,7 +483,7 @@ val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 (** Find the largest element using the provided [compare] function.
 
-    Returns [None] if called on an empty array.
+    Returns [None] if called on an empty list.
 
     {2 Examples}
 
@@ -493,7 +493,7 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
 (** Find a {!Tuple2} of the [(minimum, maximum)] elements using the provided [compare] function.
 
-    Returns [None] if called on an empty array.
+    Returns [None] if called on an empty list.
 
     {2 Examples}
 

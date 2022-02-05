@@ -18,7 +18,7 @@
       | list{(a, b)} => "Exactly two elements"
       | list{a, b, ...cs} => "More than two elements"
       }
-    ]}
+   ]}
 
     Lists are slow when:
     - You need to access an element that isn't at the front of the list
@@ -41,8 +41,10 @@ val empty : 'a t
 
     {2 Examples}
 
-    {[List.empty == list{}]}
-    {[List.empty->List.length == 0]}
+    {[
+      List.empty == list{}
+      List.empty->List.length == 0
+    ]}
 *)
 
 val singleton : 'a -> 'a t
@@ -50,8 +52,10 @@ val singleton : 'a -> 'a t
 
     {2 Examples}
 
-    {[List.singleton(1234) == list{1234}]}
-    {[List.singleton("hi") == list{"hi"}]}
+    {[
+      List.singleton(1234) == list{1234}
+      List.singleton("hi") == list{"hi"}
+    ]}
 *)
 
 val repeat : 'a -> times:int -> 'a t
@@ -59,9 +63,11 @@ val repeat : 'a -> times:int -> 'a t
 
     {2 Examples}
 
-    {[List.repeat('a', ~times=5) == list{'a', 'a', 'a', 'a', 'a'}]}
-    {[List.repeat(7, ~times=0) == list{}]}
-    {[List.repeat("Why?", ~times=-1) == list{}]}
+    {[
+      List.repeat('a', ~times=5) == list{'a', 'a', 'a', 'a', 'a'}
+      List.repeat(7, ~times=0) == list{}
+      List.repeat("Why?", ~times=-1) == list{}
+    ]}
 *)
 
 val range : ?from:int -> int -> int t
@@ -69,9 +75,11 @@ val range : ?from:int -> int -> int t
 
     {2 Examples}
 
-    {[List.range(5) == list{0, 1, 2, 3, 4}]}
-    {[List.range(5, ~from=2) == list{2, 3, 4}]}
-    {[List.range(3, ~from=-2) == list{-2, -1, 0, 1, 2}]}
+    {[
+      List.range(5) == list{0, 1, 2, 3, 4}
+      List.range(5, ~from=2) == list{2, 3, 4}
+      List.range(3, ~from=-2) == list{-2, -1, 0, 1, 2}
+    ]}
 *)
 
 val initialize : int -> f:(int -> 'a) -> 'a t
@@ -81,8 +89,10 @@ val initialize : int -> f:(int -> 'a) -> 'a t
 
     {2 Examples}
 
-    {[List.initialize(4, ~f=identity) == list{0, 1, 2, 3}]}
-    {[List.initialize(4, ~f=index => index * index) == list{0, 1, 4, 9}]}
+    {[
+      List.initialize(4, ~f=identity) == list{0, 1, 2, 3}
+      List.initialize(4, ~f=index => index * index) == list{0, 1, 4, 9}
+    ]}
 *)
 
 val fromArray : 'a array -> 'a t
@@ -90,7 +100,9 @@ val fromArray : 'a array -> 'a t
 
     {2 Examples}
 
-    {[List.fromArray([1, 2, 3]) == list{1, 2, 3}]}
+    {[
+      List.fromArray([1, 2, 3]) == list{1, 2, 3}
+    ]}
 *)
 
 (** {1 Basic operations} *)
@@ -102,8 +114,10 @@ val head : 'a t -> 'a option
 
     {2 Examples}
 
-    {[List.head(list{1, 2, 3}) == Some(1)]}
-    {[List.head(list{}) == None]}
+    {[
+      List.head(list{1, 2, 3}) == Some(1)
+      List.head(list{}) == None
+    ]}
 *)
 
 val tail : 'a t -> 'a t option
@@ -113,9 +127,11 @@ val tail : 'a t -> 'a t option
 
     {2 Examples}
 
-    {[List.tail(list{1, 2, 3}) == Some(list{2, 3})]}
-    {[List.tail(list{1}) == Some(list{})]}
-    {[List.tail(list{}) == None]}
+    {[
+      List.tail(list{1, 2, 3}) == Some(list{2, 3})
+      List.tail(list{1}) == Some(list{})
+      List.tail(list{}) == None
+    ]}
 *)
 
 val cons : 'a t -> 'a -> 'a t
@@ -125,12 +141,13 @@ val cons : 'a t -> 'a -> 'a t
 
     {2 Examples}
 
-    {[List.cons(list{2, 3, 4}, 1) == list{1, 2, 3, 4}]}
     {[
+      List.cons(list{2, 3, 4}, 1) == list{1, 2, 3, 4}
+      
       let b = list{3, 4}
 
       list{1, 2, ...b} == list{1, 2, 3, 4} 
-    ]}
+   ]}
 *)
 
 val take : 'a t -> count:int -> 'a t
@@ -142,10 +159,12 @@ val take : 'a t -> count:int -> 'a t
 
    {2 Examples}
 
-   {[List.take(list{1, 2, 3}, ~count=2) == list{1, 2}]}
-   {[List.take(list{}, ~count=2) == list{}]}
-   {[List.take(list{1, 2, 3, 4}, ~count=8) == list{1, 2, 3, 4}]}
-   {[List.take(list{1, 2, 3, 4}, ~count=-1) == list{}]}
+   {[
+      List.take(list{1, 2, 3}, ~count=2) == list{1, 2}
+      List.take(list{}, ~count=2) == list{}
+      List.take(list{1, 2, 3, 4}, ~count=8) == list{1, 2, 3, 4}
+      List.take(list{1, 2, 3, 4}, ~count=-1) == list{}
+    ]}
 *)
 
 val takeWhile : 'a t -> f:('a -> bool) -> 'a t
@@ -157,7 +176,7 @@ val takeWhile : 'a t -> f:('a -> bool) -> 'a t
       List.takeWhile(list{2, 4, 6, 7, 8, 9}, ~f=Int.isEven) == list{2, 4, 6}
       List.takeWhile(list{2, 4, 6}, ~f=Int.isEven) == list{2, 4, 6}
       List.takeWhile(list{1, 2, 3}, ~f=Int.isEven) == list{}
-    ]}
+   ]}
 *)
 
 val drop : 'a t -> count:int -> 'a t
@@ -169,9 +188,11 @@ val drop : 'a t -> count:int -> 'a t
 
     {2 Examples}
 
-    {[List.drop(list{1, 2, 3, 4}, ~count=2) == list{3, 4}]}
-    {[List.drop(list{1, 2, 3, 4}, ~count=6) == list{}]}
-    {[List.drop(list{1, 2, 3, 4}, ~count=-1) == list{1, 2, 3, 4}]}
+    {[
+      List.drop(list{1, 2, 3, 4}, ~count=2) == list{3, 4}
+      List.drop(list{1, 2, 3, 4}, ~count=6) == list{}
+      List.drop(list{1, 2, 3, 4}, ~count=-1) == list{1, 2, 3, 4}
+    ]}
 *)
 
 val dropWhile : 'a t -> f:('a -> bool) -> 'a t
@@ -179,9 +200,11 @@ val dropWhile : 'a t -> f:('a -> bool) -> 'a t
 
     {2 Examples}
 
-    {[List.dropWhile(list{2, 4, 6, 7, 8, 9}, ~f=Int.isEven) == list{7, 8, 9}]}
-    {[List.dropWhile(list{2, 4, 6, 8}, ~f=Int.isEven) == list{}]}
-    {[List.dropWhile(list{1, 2, 3}, ~f=Int.isEven) == list{1, 2, 3}]}
+    {[
+      List.dropWhile(list{2, 4, 6, 7, 8, 9}, ~f=Int.isEven) == list{7, 8, 9}
+      List.dropWhile(list{2, 4, 6, 8}, ~f=Int.isEven) == list{}
+      List.dropWhile(list{1, 2, 3}, ~f=Int.isEven) == list{1, 2, 3}
+    ]}
 *)
 
 val initial : 'a t -> 'a t option
@@ -191,9 +214,11 @@ val initial : 'a t -> 'a t option
 
     {2 Examples}
 
-    {[List.initial(list{1, 2, 3}) == Some(list{1, 2})]}
-    {[List.initial(list{1}) == Some(list{})]}
-    {[List.initial(list{}) = None]}
+    {[
+      List.initial(list{1, 2, 3}) == Some(list{1, 2})
+      List.initial(list{1}) == Some(list{})
+      List.initial(list{}) = None
+    ]}
 *)
 
 val last : 'a t -> 'a option
@@ -205,9 +230,11 @@ val last : 'a t -> 'a option
 
     {2 Examples}
 
-    {[List.last(list{1, 2, 3}) == Some(3)]}
-    {[List.last(list{1}) == Some(1)]}
-    {[List.last(list{}) == None]}
+    {[
+      List.last(list{1, 2, 3}) == Some(3)
+      List.last(list{1}) == Some(1)
+      List.last(list{}) == None
+    ]}
 *)
 
 val getAt : 'a t -> index:int -> 'a option
@@ -217,9 +244,11 @@ val getAt : 'a t -> index:int -> 'a option
 
     {2 Examples}
 
-    {[List.getAt(list{1, 2, 3}, ~index=1) == Some(2)]}
-    {[List.getAt(list{}, ~index=2) == None]}
-    {[List.getAt(list{1, 2, 3}, ~index=100) == None]}
+    {[
+      List.getAt(list{1, 2, 3}, ~index=1) == Some(2)
+      List.getAt(list{}, ~index=2) == None
+      List.getAt(list{1, 2, 3}, ~index=100) == None
+    ]}
 *)
 
 val insertAt : 'a t -> index:int -> value:'a -> 'a t
@@ -235,11 +264,13 @@ val insertAt : 'a t -> index:int -> value:'a -> 'a t
 
     {2 Examples}
 
-    {[list{100, 101, 102, 103}->List.insertAt(~index=2, ~value=999) == list{100, 101, 999, 102, 103}]}
-    {[list{100, 101, 102, 103}->List.insertAt(~index=0, ~value=999) == list{999, 100, 101, 102, 103}]}
-    {[list{100, 101, 102, 103}->List.insertAt(~index=4, ~value=999) == list{100, 101, 102, 103, 999}]}
-    {[list{100, 101, 102, 103}->List.insertAt(~index=-1, ~value=999) == list{999, 100, 101, 102, 103}]}
-    {[list{100, 101, 102, 103}->List.insertAt(~index=5, ~value=999)  == list{ 100, 101, 102, 103, 999 }]}
+    {[
+      list{100, 101, 102, 103}->List.insertAt(~index=2, ~value=999) == list{100, 101, 999, 102, 103}
+      list{100, 101, 102, 103}->List.insertAt(~index=0, ~value=999) == list{999, 100, 101, 102, 103}
+      list{100, 101, 102, 103}->List.insertAt(~index=4, ~value=999) == list{100, 101, 102, 103, 999}
+      list{100, 101, 102, 103}->List.insertAt(~index=-1, ~value=999) == list{999, 100, 101, 102, 103}
+      list{100, 101, 102, 103}->List.insertAt(~index=5, ~value=999)  == list{ 100, 101, 102, 103, 999 }
+    ]}
 *)
 
 val updateAt : 'a t -> index:int -> f:('a -> 'a) -> 'a t
@@ -249,11 +280,12 @@ val updateAt : 'a t -> index:int -> f:('a -> 'a) -> 'a t
 
     {2 Examples}
 
-    {[List.updateAt(list{1, 2, 3}, ~index=1, ~f=Int.add(3)) == list{1, 5, 3}]}
     {[
+      List.updateAt(list{1, 2, 3}, ~index=1, ~f=Int.add(3)) == list{1, 5, 3}
+      
       let animals = list{"Ant", "Bat", "Cat"}
       animals == List.updateAt(animals, ~index=4, ~f=String.reverse) 
-    ]}
+   ]}
 *)
 
 val removeAt : 'a t -> index:int -> 'a t
@@ -263,11 +295,12 @@ val removeAt : 'a t -> index:int -> 'a t
 
     {2 Examples}
 
-    {[List.removeAt(list{1, 2, 3}, ~index=2) == list{1, 2}]}
     {[
+      List.removeAt(list{1, 2, 3}, ~index=2) == list{1, 2}
+      
       let animals = list{"Ant", "Bat", "Cat"}
       List.equal(String.equal, animals, List.removeAt(animals, ~index=4)) == true
-    ]}
+   ]}
 *)
 
 val reverse : 'a t -> 'a t
@@ -275,7 +308,9 @@ val reverse : 'a t -> 'a t
 
     {2 Examples}
 
-    {[list{1, 2, 3}->List.reverse == list{3, 2, 1}]}
+    {[
+      list{1, 2, 3}->List.reverse == list{3, 2, 1}
+    ]}
  *)
 
 val sort : 'a t -> compare:('a -> 'a -> int) -> 'a t
@@ -283,7 +318,9 @@ val sort : 'a t -> compare:('a -> 'a -> int) -> 'a t
 
     {2 Examples}
 
-    {[List.sort(list{5, 6, 8, 3, 6}, ~compare=Int.compare) == list{3, 5, 6, 6, 8}]}
+    {[
+      List.sort(list{5, 6, 8, 3, 6}, ~compare=Int.compare) == list{3, 5, 6, 6, 8}
+    ]}
 *)
 
 val sortBy : f:('a -> 'b) -> 'a t -> 'a t
@@ -293,7 +330,7 @@ val sortBy : f:('a -> 'b) -> 'a t -> 'a t
     they will appear in the same order that they appeared in the original list.
     {[
       List.sortBy(list{3, 2, 5, -2, 4}, ~f=x => x * x) == list{2, -2, 3, 4, 5}
-    ]}
+   ]}
 *)
 
 (** {1 Query} *)
@@ -303,9 +340,11 @@ val isEmpty : _ t -> bool
 
     {2 Examples}
 
-    {[List.empty->List.isEmpty == true]}
-    {[list{}->List.isEmpty == true]}
-    {[list{1, 2, 3}->List.isEmpty == false]}
+    {[
+      List.empty->List.isEmpty == true
+      list{}->List.isEmpty == true
+      list{1, 2, 3}->List.isEmpty == false
+    ]}
 *)
 
 val length : 'a t -> int
@@ -342,13 +381,14 @@ val length : 'a t -> int
       | list{} => () // Spoilers
       | _ => () // This is how isEmpty is implemented
       }
-    ]}
-
+   ]}
 
     {2 Examples}
 
-    {[List.length(list{}) == 0]}
-    {[list{7, 8, 9}->List.length == 3]}
+    {[
+      List.length(list{}) == 0
+      list{7, 8, 9}->List.length == 3
+    ]}
 *)
 
 val any : 'a t -> f:('a -> bool) -> bool
@@ -358,9 +398,11 @@ val any : 'a t -> f:('a -> bool) -> bool
 
     {2 Examples}
 
-    {[List.any(list{2, 3}, ~f=Int.isEven) == true]}
-    {[List.any(list{1, 3}, ~f=Int.isEven) == false]}
-    {[List.any(list{}, ~f=Int.isEven) == false]}
+    {[
+      List.any(list{2, 3}, ~f=Int.isEven) == true
+      List.any(list{1, 3}, ~f=Int.isEven) == false
+      List.any(list{}, ~f=Int.isEven) == false
+    ]}
 *)
 
 val all : 'a t -> f:('a -> bool) -> bool
@@ -370,9 +412,11 @@ val all : 'a t -> f:('a -> bool) -> bool
 
     {2 Examples}
 
-    {[List.all(list{2, 4}, ~f=Int.isEven) == true]}
-    {[List.all(list{2, 3}, ~f=Int.isEven) == false]}
-    {[List.all(list{}, ~f=Int.isEven) == true]}
+    {[
+      List.all(list{2, 4}, ~f=Int.isEven) == true
+      List.all(list{2, 3}, ~f=Int.isEven) == false
+      List.all(list{}, ~f=Int.isEven) == true
+    ]}
 *)
 
 val count : 'a t -> f:('a -> bool) -> int
@@ -380,7 +424,9 @@ val count : 'a t -> f:('a -> bool) -> int
 
     {2 Examples}
 
-    {[List.count(list{7, 5, 8, 6}, ~f=Int.isEven) == 2]}
+    {[
+      List.count(list{7, 5, 8, 6}, ~f=Int.isEven) == 2
+    ]}
  *)
 
 val uniqueBy : f:('a -> string) -> 'a list -> 'a list
@@ -394,7 +440,7 @@ val uniqueBy : f:('a -> string) -> 'a list -> 'a list
       List.uniqueBy(list{1, 3, 4, 3, 7, 7, 6}, ~f=Int.toString) == list{1, 3, 4, 7, 6}
       let absStr = x => Int.absolute(x)->Int.toString
       List.uniqueBy(list{1, 3, 4, -3, -7, 7, 6}, ~f=absStr) == list{1, 3, 4, -7, 6}
-   ]}
+  ]}
  *)
 
 val find : 'a t -> f:('a -> bool) -> 'a option
@@ -404,9 +450,11 @@ val find : 'a t -> f:('a -> bool) -> 'a option
 
   {2 Examples}
 
-  {[List.find(list{1, 3, 4, 8}, ~f=Int.isEven) == Some(4)]}
-  {[List.find(list{0, 2, 4, 8}, ~f=Int.isOdd) == None]}
-  {[List.find(list{}, ~f=Int.isEven) == None]}
+  {[
+      List.find(list{1, 3, 4, 8}, ~f=Int.isEven) == Some(4)
+      List.find(list{0, 2, 4, 8}, ~f=Int.isOdd) == None
+      List.find(list{}, ~f=Int.isEven) == None
+  ]}
 *)
 
 val findIndex : 'a t -> f:(int -> 'a -> bool) -> (int * 'a) option
@@ -432,9 +480,11 @@ val includes : 'a t -> 'a -> equal:('a -> 'a -> bool) -> bool
 
     {2 Examples}
 
-    {[List.includes(list{1, 3, 5, 7}, 3, ~equal=Int.equal) == true]}
-    {[List.includes(list{1, 3, 5, 7}, 4, ~equal=Int.equal) == false]}
-    {[List.includes(list{}, 5, ~equal=Int.equal) == false]}
+    {[
+      List.includes(list{1, 3, 5, 7}, 3, ~equal=Int.equal) == true
+      List.includes(list{1, 3, 5, 7}, 4, ~equal=Int.equal) == false
+      List.includes(list{}, 5, ~equal=Int.equal) == false
+    ]}
 *)
 
 val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
@@ -450,7 +500,7 @@ val minimumBy : f:('a -> 'comparable) -> 'a list -> 'a option
       let hours = list{7, 9, 15, 10, 3, 22}
       List.minimumBy(hours, ~f=mod12) == Some(15)
       list{}->List.minimumBy(~f=mod12) == None
-    ]}
+     ]}
    *)
 
 val maximumBy : f:('a -> 'comparable) -> 'a list -> 'a option
@@ -476,7 +526,9 @@ val minimum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 
     {2 Examples}
 
-    {[List.minimum(list{7, 5, 8, 6}, ~compare=Int.compare) == Some(5)]}
+    {[
+      List.minimum(list{7, 5, 8, 6}, ~compare=Int.compare) == Some(5)
+    ]}
 *)
 
 val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
@@ -486,7 +538,9 @@ val maximum : 'a t -> compare:('a -> 'a -> int) -> 'a option
 
     {2 Examples}
 
-    {[List.maximum(list{7, 5, 8, 6}, ~compare) == Some(8)]}
+    {[
+      List.maximum(list{7, 5, 8, 6}, ~compare) == Some(8)
+    ]}
 *)
 
 val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
@@ -496,7 +550,9 @@ val extent : 'a t -> compare:('a -> 'a -> int) -> ('a * 'a) option
 
     {2 Examples}
 
-    {[List.extent(list{7, 5, 8, 6}, ~compare) == Some(5, 8)]}
+    {[
+      List.extent(list{7, 5, 8, 6}, ~compare) == Some(5, 8)
+    ]}
 *)
 
 val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
@@ -504,9 +560,10 @@ val sum : 'a t -> (module TableclothContainer.Sum with type t = 'a) -> 'a
 
     {2 Examples}
 
-    {[List.sum(list{1, 2, 3}, module(Int)) == 6]}
-    {[List.sum(list{4.0, 4.5, 5.0}, module(Float)) == 13.5]}
     {[
+      List.sum(list{1, 2, 3}, module(Int)) == 6
+      List.sum(list{4.0, 4.5, 5.0}, module(Float)) == 13.5
+      
      List.sum(
         list{"a", "b", "c"},
         module(
@@ -527,7 +584,9 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
 
     {2 Examples}
 
-    {[List.map(list{1.0, 4.0, 9.0}, ~f=Float.squareRoot) == list{1.0, 2.0, 3.0}]}
+    {[
+      List.map(list{1.0, 4.0, 9.0}, ~f=Float.squareRoot) == list{1.0, 2.0, 3.0}
+    ]}
 *)
 
 val mapWithIndex : 'a t -> f:(int -> 'a -> 'b) -> 'b t
@@ -547,7 +606,9 @@ val filter : 'a t -> f:('a -> bool) -> 'a t
 
     {2 Examples}
 
-    {[List.filter(list{1, 2, 3, 4, 5, 6}, ~f=Int.isEven) == list{2, 4, 6}]}
+    {[
+      List.filter(list{1, 2, 3, 4, 5, 6}, ~f=Int.isEven) == list{2, 4, 6}
+    ]}
 *)
 
 val filterWithIndex : 'a t -> f:(int -> 'a -> bool) -> 'a t
@@ -568,8 +629,7 @@ val filterMap : 'a t -> f:('a -> 'b option) -> 'b t
     {[
       let characters = list{'a', '9', '6', ' ', '2', 'z'}
       List.filterMap(characters, ~f=Char.toDigit) == list{9, 6, 2}
-    ]}
-    {[
+
       List.filterMap(list{3, 4, 5, 6},
         ~f=number => Int.isEven(number) ? Some(number * number) : None
       ) == list{16, 36}
@@ -581,8 +641,10 @@ val flatMap : 'a t -> f:('a -> 'b t) -> 'b t
 
     {2 Examples}
 
-    {[List.flatMap(xs, ~f) == List.map(xs, ~f)->List.flatten]}
-    {[list{1, 2, 3}->List.flatMap(~f=n => list{n, n}) == list{1, 1, 2, 2, 3, 3}]}
+    {[
+      List.flatMap(xs, ~f) == List.map(xs, ~f)->List.flatten
+      list{1, 2, 3}->List.flatMap(~f=n => list{n, n}) == list{1, 1, 2, 2, 3, 3}
+    ]}
 *)
 
 val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
@@ -611,14 +673,13 @@ val fold : 'a t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
     {b Examples continued}
 
-    {[List.fold(list{1, 2, 3}, ~initial=list{}, ~f=List.cons) == list{3, 2, 1}]}
-
     {[
+      List.fold(list{1, 2, 3}, ~initial=list{}, ~f=List.cons) == list{3, 2, 1}
+      
       let unique = integers => List.fold(integers, ~initial=Set.Int.empty, ~f=Set.add)->Set.toList
 
       unique(list{1, 1, 2, 3, 2}) == list{1, 2, 3}
-    ]}
-    {[
+
       let lastEven = integers =>
       List.fold(integers, ~initial=None, ~f=(last, int) => Int.isEven(int) ? Some(int) : last)
 
@@ -648,7 +709,9 @@ val flatten : 'a t t -> 'a t
 
     {2 Examples}
 
-    {[List.flatten(list{list{1, 2}, list{3}, list{4, 5}}) == list{1, 2, 3, 4, 5}]}
+    {[
+      List.flatten(list{list{1, 2}, list{3}, list{4, 5}}) == list{1, 2, 3, 4, 5}
+    ]}
 *)
 
 val zip : 'a t -> 'b t -> ('a * 'b) t
@@ -673,8 +736,9 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
 
     {2 Examples}
 
-    {[List.map2(list{1, 2, 3}, list{4, 5, 6}, ~f=Int.add) == list{5, 7, 9}]}
     {[
+      List.map2(list{1, 2, 3}, list{4, 5, 6}, ~f=Int.add) == list{5, 7, 9}
+      
       List.map2(
         list{"alice", "bob", "chuck"}, list{3, 5, 7, 9, 11, 13, 15, 17, 19},
         ~f=Tuple2.make
@@ -706,7 +770,9 @@ val partition : 'a t -> f:('a -> bool) -> 'a t * 'a t
 
     {2 Examples}
 
-    {[List.partition(list{1, 2, 3, 4, 5, 6}, ~f=Int.isOdd) == (list{1, 3, 5}, list{2, 4, 6})]}
+    {[
+      List.partition(list{1, 2, 3, 4, 5, 6}, ~f=Int.isOdd) == (list{1, 3, 5}, list{2, 4, 6})
+    ]}
 *)
 
 val splitAt : 'a t -> index:int -> 'a t * 'a t
@@ -722,9 +788,11 @@ val splitAt : 'a t -> index:int -> 'a t * 'a t
 
     {2 Examples}
 
-    {[List.splitAt(list{1, 2, 3, 4, 5}, ~index=2) == (list{1, 2}, list{3, 4, 5})]}
-    {[List.splitAt(list{1, 2, 3, 4, 5}, ~index=-1) == (list{}, list{1, 2, 3, 4, 5})]}
-    {[List.splitAt(list{1, 2, 3, 4, 5}, ~index=10) == (list{1, 2, 3, 4, 5}, 10)]}
+    {[
+      List.splitAt(list{1, 2, 3, 4, 5}, ~index=2) == (list{1, 2}, list{3, 4, 5})
+      List.splitAt(list{1, 2, 3, 4, 5}, ~index=-1) == (list{}, list{1, 2, 3, 4, 5})
+      List.splitAt(list{1, 2, 3, 4, 5}, ~index=10) == (list{1, 2, 3, 4, 5}, 10)
+    ]}
 *)
 
 val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
@@ -736,8 +804,10 @@ val splitWhen : 'a t -> f:('a -> bool) -> 'a t * 'a t
 
     {2 Examples}
 
-    {[List.splitWhen(list{2, 4, 5, 6, 7}, ~f=Int.isEven) == (list{2, 4}, list{5, 6, 7})]}
-    {[List.splitWhen(list{2, 4, 5, 6, 7}, ~f=Fun.constant(false)) == (list{2, 4, 5, 6, 7}, list{})]}
+    {[
+      List.splitWhen(list{2, 4, 5, 6, 7}, ~f=Int.isEven) == (list{2, 4}, list{5, 6, 7})
+      List.splitWhen(list{2, 4, 5, 6, 7}, ~f=Fun.constant(false)) == (list{2, 4, 5, 6, 7}, list{})
+    ]}
 *)
 
 val unzip : ('a * 'b) t -> 'a t * 'b t
@@ -759,7 +829,6 @@ val forEach : 'a t -> f:('a -> unit) -> unit
     The function you provide must return [unit], and the [forEach] call itself also returns [unit].
 
     You use [List.forEach] when you want to process a list only for side effects.
-
 
     {2 Examples}
 
@@ -798,8 +867,9 @@ val intersperse : 'a t -> sep:'a -> 'a t
     {[
       List.intersperse(~sep="on", list{"turtles", "turtles", "turtles"})
       == list{"turtles", "on", "turtles", "on", "turtles"}
+    
+      List.intersperse(list{}, ~sep=0) == list{}
     ]}
-    {[List.intersperse(list{}, ~sep=0) == list{}]}
 *)
 
 val chunksOf : 'a t -> size:int -> 'a t t
@@ -826,13 +896,15 @@ val sliding : ?step:int -> 'a t -> size:int -> 'a t t
 
     {2 Examples}
 
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=1) == list{list{1}, list{2}, list{3}, list{4}, list{5}}]}
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=2) == list{list{1, 2}, list{2, 3}, list{3, 4}, list{4, 5}}]}
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=3) == list{list{1, 2, 3}, list{2, 3, 4}, list{3, 4, 5}}]}
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=2, ~step=2) == list{list{1, 2}, list{3, 4}}]}
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=1, ~step=3) == list{list{1}, list{4}}]}
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=2, ~step=3) == list{list{1, 2}, list{4, 5}}]}
-    {[List.sliding(list{1, 2, 3, 4, 5}, ~size=7) == list{}]}
+    {[
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=1) == list{list{1}, list{2}, list{3}, list{4}, list{5}}
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=2) == list{list{1, 2}, list{2, 3}, list{3, 4}, list{4, 5}}
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=3) == list{list{1, 2, 3}, list{2, 3, 4}, list{3, 4, 5}}
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=2, ~step=2) == list{list{1, 2}, list{3, 4}}
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=1, ~step=3) == list{list{1}, list{4}}
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=2, ~step=3) == list{list{1, 2}, list{4, 5}}
+      List.sliding(list{1, 2, 3, 4, 5}, ~size=7) == list{}
+    ]}
 *)
 
 val groupWhile : 'a t -> f:('a -> 'a -> bool) -> 'a t t
@@ -844,18 +916,15 @@ val groupWhile : 'a t -> f:('a -> 'a -> bool) -> 'a t t
 
     {[
       List.groupWhile(list{1, 2, 3}, ~f=Fun.constant(false)) == list{list{1}, list{2}, list{3}}
-    ]}
-    {[
+
       List.groupWhile(list{1, 2, 3}, ~f=Fun.constant(true)) == list{list{1, 2, 3}}
-    ]}
-    {[
+
       List.groupWhile(list{"a", "b", "b", "a", "a", "a", "b", "a"}, ~f=String.equal)
       == list{list{"a"}, list{"b", "b"}, list{"a", "a", "a"}(list{"b"}), list{"a"}}
-    ]}
-    {[
+
       List.groupWhile(list{"a", "b", "b", "a", "a", "a", "b", "a"}, ~f=String.equal)
       == list{list{"a"}, list{"b", "b"}, list{"a", "a", "a"}, list{"b"}, list{"a"}}
-    ]}
+   ]}
 *)
 
 (** {1 Convert} *)
@@ -865,7 +934,9 @@ val join : string t -> sep:string -> string
 
     {2 Examples}
 
-    {[List.join(list{"Ant", "Bat", "Cat"}, ~sep=", ") == "Ant, Bat, Cat"]}
+    {[
+      List.join(list{"Ant", "Bat", "Cat"}, ~sep=", ") == "Ant, Bat, Cat"
+    ]}
  *)
 
 val groupBy :
@@ -901,7 +972,9 @@ val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
 
     {2 Examples}
 
-    {[List.compare(list{1, 2, 3}, list{1, 2, 3, 4}, ~f=Int.compare) == -1]}
-    {[List.compare(list{1, 2, 3}, list{1, 2, 3}, ~f=Int.compare) == 0]}
-    {[List.compare(list{1, 2, 5}, list{1, 2, 3}, ~f=Int.compare) == 1]}
+    {[
+      List.compare(list{1, 2, 3}, list{1, 2, 3, 4}, ~f=Int.compare) == -1
+      List.compare(list{1, 2, 3}, list{1, 2, 3}, ~f=Int.compare) == 0
+      List.compare(list{1, 2, 5}, list{1, 2, 3}, ~f=Int.compare) == 1
+    ]}
 *)

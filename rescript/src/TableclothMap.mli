@@ -27,7 +27,7 @@
         module(Point),
         [((0, 0), Alpacca), ((3, 4), Cow), ((6, 7), Pig)],
       )
-    ]}
+     ]}
 
     See the {!Comparator} module for a more details.
 *)
@@ -55,7 +55,7 @@ val empty :
         fruit,
       ) => Map.add(lengthToFruit, ~key=String.length(fruit), ~value=fruit))->Map.toArray ==
       [(4, "Pear"), (6, "Orange"), (10, "Grapefruit")]
-    ]}
+     ]}
 
     In this particular case you might want to use {!Array.groupBy}
 *)
@@ -69,7 +69,9 @@ val singleton :
 
     {2 Examples}
 
-    {[Map.singleton(module(Int), ~key=1, ~value="Ant")->Map.toArray == [(1, "Ant")]]}
+    {[
+      Map.singleton(module(Int), ~key=1, ~value="Ant")->Map.toArray == [(1, "Ant")]
+    ]}
 *)
 
 val fromArray :
@@ -98,14 +100,13 @@ val add :
         ~key=3,
         ~value="Cat",
       )->Map.toArray == [(1, "Ant"), (2, "Bat"), (3, "Cat")]
-    ]}
-    {[
+
       Map.add(
         Map.Int.fromArray([(1, "Ant"), (2, "Bat")]),
         ~key=2,
         ~value="Bug",
       )->Map.toArray == [(1, "Ant"), (2, "Bug")]
-    ]}
+     ]}
 *)
 
 val remove : ('key, 'value, 'id) t -> 'key -> ('key, 'value, 'id) t
@@ -121,7 +122,7 @@ val remove : ('key, 'value, 'id) t -> 'key -> ('key, 'value, 'id) t
       ])
       Map.remove(animalPopulations, "Mosquito")->Map.toArray
       == [("Elephant", 3_156), ("Rhino", 3), ("Shrew", 56_423)]
-    ]}
+     ]}
 *)
 
 val get : ('key, 'value, 'id) t -> 'key -> 'value option
@@ -137,7 +138,7 @@ val get : ('key, 'value, 'id) t -> 'key -> 'value option
         ("Shrew", 56_423),
       ])
       Map.get(animalPopulations, "Shrew") == Some(56_423)
-    ]}
+     ]}
 *)
 
 val update :
@@ -170,7 +171,7 @@ val update :
           ("Rhino", 3),
           ("Shrew", 56_423),
         ]
-    ]}
+     ]}
 *)
 
 (** {1 Query} *)
@@ -185,7 +186,7 @@ val length : (_, _, _) t -> int
 
     {[
       Map.Int.fromArray([(1, "Hornet"), (3, "Marmot")])->Map.length == 2
-    ]}
+     ]}
 *)
 
 val any : (_, 'value, _) t -> f:('value -> bool) -> bool
@@ -214,7 +215,7 @@ val find :
         ("Shrew", 56_423),
       ])->Map.find(~f=(~key, ~value) => value > 10_000)
       == Some("Mosquito", 56_123_156)
-    ]}
+     ]}
 *)
 
 val includes : ('key, _, _) t -> 'key -> bool
@@ -230,7 +231,7 @@ val minimum : ('key, _, _) t -> 'key option
     {[
       Map.Int.fromArray([(8, "Pigeon"), (1, "Hornet"), (3, "Marmot")])
       ->Map.minimum == Some(1)
-    ]}
+     ]}
 *)
 
 val maximum : ('key, _, _) t -> 'key option
@@ -243,7 +244,7 @@ val maximum : ('key, _, _) t -> 'key option
     {[
       Map.Int.fromArray([(8, "Pigeon"), (1, "Hornet"), (3, "Marmot")])
       ->Map.maximum == Some(8)
-    ]}
+     ]}
 *)
 
 val extent : ('key, _, _) t -> ('key * 'key) option
@@ -256,7 +257,7 @@ val extent : ('key, _, _) t -> ('key * 'key) option
     {[
       Map.Int.fromArray([(8, "Pigeon"), (1, "Hornet"), (3, "Marmot")])
       ->Map.extent == Some(1, 8)
-    ]}
+     ]}
 *)
 
 (** {1 Combine} *)
@@ -295,7 +296,7 @@ val merge :
         }
       )->Map.toArray
       == [("Elephant", 2777.28)]
-    ]}
+     ]}
 *)
 
 (** {1 Transform} *)
@@ -309,7 +310,7 @@ val map : ('key, 'value, 'id) t -> f:('value -> 'b) -> ('key, 'b, 'id) t
       Map.String.fromArray([("Elephant", 3_156), ("Shrew", 56_423)])
       ->Map.map(~f=Int.toString)
       ->Map.toArray == [("Elephant", "3156"), ("Shrew", "56423")]
-    ]}
+     ]}
 *)
 
 val mapWithIndex :
@@ -327,7 +328,7 @@ val filter :
       ->Map.filter(~f=population => population > 10_000)
       ->Map.toArray
       == [("Shrew", 56423)]
-    ]}
+     ]}
 *)
 
 val partition :
@@ -350,7 +351,7 @@ val partition :
       endangered->Map.toArray == [("Elephant", 3_156), ("Rhino", 3)]
 
       notEndangered->Map.toArray == [("Mosquito", 56_123_156), ("Shrew", 56_423)]
-    ]}
+     ]}
 *)
 
 val fold :
@@ -384,7 +385,7 @@ val keys : ('key, _, _) t -> 'key list
         ("Shrew", 56_423),
       ])->Map.keys
       == list{"Elephant", "Mosquito", "Rhino", "Shrew"}
-    ]}
+     ]}
 *)
 
 val values : (_, 'value, _) t -> 'value list
@@ -400,7 +401,7 @@ val values : (_, 'value, _) t -> 'value list
         ("Shrew", 56_423),
       ])->Map.values
       == list{3_156, 56_123_156, 3, 56_423}
-    ]}
+     ]}
 *)
 
 val toArray : ('key, 'value, _) t -> ('key * 'value) array
@@ -423,7 +424,9 @@ module Poly : sig
 
       {2 Examples}
 
-      {[Map.Poly.singleton(~key=false, ~value=1)->Map.toArray == [(false, 1)]]}
+      {[
+      Map.Poly.singleton(~key=false, ~value=1)->Map.toArray == [(false, 1)]
+    ]}
   *)
 
   val fromArray : ('key * 'value) array -> ('key, 'value) t
@@ -447,7 +450,9 @@ module Int : sig
 
       {2 Examples}
 
-      {[Map.Int.singleton(~key=1, ~value="Ant")->Map.toArray == [(1, "Ant")]]}
+      {[
+      Map.Int.singleton(~key=1, ~value="Ant")->Map.toArray == [(1, "Ant")]
+    ]}
   *)
 
   val fromArray : (int * 'value) array -> 'value t
@@ -471,7 +476,9 @@ module String : sig
 
       {2 Examples}
 
-      {[Map.String.singleton(~key="Ant", ~value=1)->Map.toArray == [("Ant", 1)]]}
+      {[
+      Map.String.singleton(~key="Ant", ~value=1)->Map.toArray == [("Ant", 1)]
+    ]}
   *)
 
   val fromArray : (string * 'value) array -> 'value t

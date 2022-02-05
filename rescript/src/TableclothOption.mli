@@ -61,10 +61,12 @@ val and_ : 'a t -> 'a t -> 'a t
 
   {2 Examples}
 
-  {[Option.and_(Some(11), Some(22)) == Some(22)]}
-  {[Option.and_(None, Some(22)) == None]}
-  {[Option.and_(Some(11), None) == None]}
-  {[Option.and_(None, None) == None]}
+  {[
+      Option.and_(Some(11), Some(22)) == Some(22)
+      Option.and_(None, Some(22)) == None
+      Option.and_(Some(11), None) == None
+      Option.and_(None, None) == None
+    ]}
 *)
 
 val or_ : 'a t -> 'a t -> 'a t
@@ -75,10 +77,12 @@ val or_ : 'a t -> 'a t -> 'a t
 
     {2 Examples}
 
-    {[Option.or_(Some(11), Some(22)) == Some(11)]}
-    {[Option.or_(None, Some(22)) == Some(22)]}
-    {[Option.or_(Some(11), None) == Some(11)]}
-    {[Option.or_(None, None) == None]}
+    {[
+      Option.or_(Some(11), Some(22)) == Some(11)
+      Option.or_(None, Some(22)) == Some(22)
+      Option.or_(Some(11), None) == Some(11)
+      Option.or_(None, None) == None
+    ]}
 *)
 
 val orElse : 'a t -> 'a t -> 'a t
@@ -88,10 +92,12 @@ val orElse : 'a t -> 'a t -> 'a t
 
     {2 Examples}
 
-    {[Option.orElse(Some(11), Some(22)) == Some(22)]}
-    {[Option.orElse(None, Some(22)) == Some(22)]}
-    {[Option.orElse(Some(11), None) == Some(11)]}
-    {[Option.orElse(None, None) == None]}
+    {[
+      Option.orElse(Some(11), Some(22)) == Some(22)
+      Option.orElse(None, Some(22)) == Some(22)
+      Option.orElse(Some(11), None) == Some(11)
+      Option.orElse(None, None) == None
+    ]}
 *)
 
 val both : 'a t -> 'b t -> ('a * 'b) t
@@ -101,10 +107,12 @@ val both : 'a t -> 'b t -> ('a * 'b) t
 
     {2 Examples}
 
-    {[Option.both(Some(3004), Some("Ant")) == Some(3004, "Ant")]}
-    {[Option.both(Some(3004), None) == None]}
-    {[Option.both(None, Some("Ant")) == None]}
-    {[Option.both(None, None) == None]}
+    {[
+      Option.both(Some(3004), Some("Ant")) == Some(3004, "Ant")
+      Option.both(Some(3004), None) == None
+      Option.both(None, Some("Ant")) == None
+      Option.both(None, None) == None
+    ]}
 *)
 
 val flatten : 'a t t -> 'a t
@@ -112,9 +120,11 @@ val flatten : 'a t t -> 'a t
 
     {2 Examples}
 
-    {[Option.flatten(Some(Some(4))) == Some(4)]}
-    {[Option.flatten(Some(None)) == None]}
-    {[Option.flatten(None) == None]}
+    {[
+      Option.flatten(Some(Some(4))) == Some(4)
+      Option.flatten(Some(None)) == None
+      Option.flatten(None) == None
+    ]}
 *)
 
 val map : 'a t -> f:('a -> 'b) -> 'b t
@@ -124,9 +134,11 @@ val map : 'a t -> f:('a -> 'b) -> 'b t
 
     {2 Examples}
 
-    {[Option.map(~f=x => x * x, Some(9)) == Some(81)]}
-    {[Option.map(~f=Int.toString, Some(9)) == Some("9")]}
-    {[Option.map(~f=x => x * x, None) == None]}
+    {[
+      Option.map(~f=x => x * x, Some(9)) == Some(81)
+      Option.map(~f=Int.toString, Some(9)) == Some("9")
+      Option.map(~f=x => x * x, None) == None
+    ]}
 *)
 
 val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
@@ -138,10 +150,12 @@ val map2 : 'a t -> 'b t -> f:('a -> 'b -> 'c) -> 'c t
 
     {2 Examples}
 
-    {[Option.map2(Some(3), Some(4), ~f=Int.add) == Some(7)]}
-    {[Option.map2(Some(3), Some(4), ~f=Tuple.make) == Some(3, 4)]}
-    {[Option.map2(Some(3), None, ~f=Int.add) == None]}
-    {[Option.map2(None, Some(4), ~f=Int.add) == None]}
+    {[
+      Option.map2(Some(3), Some(4), ~f=Int.add) == Some(7)
+      Option.map2(Some(3), Some(4), ~f=Tuple.make) == Some(3, 4)
+      Option.map2(Some(3), None, ~f=Int.add) == None
+      Option.map2(None, Some(4), ~f=Int.add) == None
+    ]}
 *)
 
 val andThen : 'a t -> f:('a -> 'b t) -> 'b t
@@ -180,8 +194,10 @@ val andThen : 'a t -> f:('a -> 'b t) -> 'b t
 
     {2 Examples}
 
-    {[Option.andThen(Some([1, 2, 3]), ~f=Array.first) == Some(1)]}
-    {[Option.andThen(Some([]), ~f=Array.first) == None]}
+    {[
+      Option.andThen(Some([1, 2, 3]), ~f=Array.first) == Some(1)
+      Option.andThen(Some([]), ~f=Array.first) == None
+    ]}
 *)
 
 val unwrap : 'a t -> default:'a -> 'a
@@ -194,9 +210,11 @@ val unwrap : 'a t -> default:'a -> 'a
 
     {2 Examples}
 
-    {[Option.unwrap(Some(42), ~default=99) == 42]}
-    {[Option.unwrap(None, ~default=99) == 99]}
-    {[Option.unwrap(Map.get(Map.String.empty, "Tom"), ~default="unknown") == "unknown"]}
+    {[
+      Option.unwrap(Some(42), ~default=99) == 42
+      Option.unwrap(None, ~default=99) == 99
+      Option.unwrap(Map.get(Map.String.empty, "Tom"), ~default="unknown") == "unknown"
+    ]}
 *)
 
 val unwrapUnsafe : 'a t -> 'a
@@ -211,8 +229,10 @@ val unwrapUnsafe : 'a t -> 'a
 
     {2 Examples}
 
-    {[Array.first([1, 2, 3])->Option.unwrapUnsafe == 1]}
-    {[Array.first([])->Option.unwrapUnsafe // will raise Invalid_argument]}
+    {[
+      Array.first([1, 2, 3])->Option.unwrapUnsafe == 1
+      Array.first([])->Option.unwrapUnsafe // will raise Invalid_argument
+    ]}
 *)
 
 val isSome : 'a t -> bool
@@ -222,8 +242,10 @@ val isSome : 'a t -> bool
 
     {2 Examples}
 
-    {[Option.isSome(Some(3004)) == true]}
-    {[Option.isSome(None) == false]}
+    {[
+      Option.isSome(Some(3004)) == true
+      Option.isSome(None) == false
+    ]}
 *)
 
 val isNone : 'a t -> bool
@@ -233,8 +255,10 @@ val isNone : 'a t -> bool
 
     {2 Examples}
 
-    {[Option.isNone(Some(3004)) == false]}
-    {[Option.isNone(None) == true]}
+    {[
+      Option.isNone(Some(3004)) == false
+      Option.isNone(None) == true
+    ]}
 *)
 
 val tap : 'a t -> f:('a -> unit) -> unit
@@ -255,8 +279,10 @@ val toArray : 'a t -> 'a array
 
     {2 Examples}
 
-    {[Option.toArray(Some(3004)) == [3004]]}
-    {[Option.toArray(None) == []}
+    {[
+      Option.toArray(Some(3004)) == [3004]
+      Option.toArray(None) == [
+    ]}
 *)
 
 val toList : 'a t -> 'a list
@@ -266,8 +292,10 @@ val toList : 'a t -> 'a list
 
     {2 Examples}
 
-    {[Option.toList(Some(3004)) == list{3004}]}
-    {[Option.toList(None) == list{}]}
+    {[
+      Option.toList(Some(3004)) == list{3004}
+      Option.toList(None) == list{}
+    ]}
 *)
 
 (** {1 Compare} *)
@@ -277,10 +305,12 @@ val equal : 'a t -> 'a t -> ('a -> 'a -> bool) -> bool
 
     {2 Examples}
 
-    {[Option.equal(Some(1), Some(1), Int.equal) == true]}
-    {[Option.equal(Some(1), Some(3), Int.equal) == false]}
-    {[Option.equal(Some(1), None, Int.equal) == false]}
-    {[Option.equal(None, None, Int.equal) == true]}
+    {[
+      Option.equal(Some(1), Some(1), Int.equal) == true
+      Option.equal(Some(1), Some(3), Int.equal) == false
+      Option.equal(Some(1), None, Int.equal) == false
+      Option.equal(None, None, Int.equal) == true
+    ]}
 *)
 
 val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
@@ -290,7 +320,9 @@ val compare : 'a t -> 'a t -> f:('a -> 'a -> int) -> int
 
     {2 Examples}
 
-    {[Option.compare(Some(1), Some(3), ~f=Int.compare) == -1]}
-    {[Option.compare(Some(1), None, ~f=Int.compare) == 1]}
-    {[Option.compare(None, None, ~f=Int.compare) == 0]}
+    {[
+      Option.compare(Some(1), Some(3), ~f=Int.compare) == -1
+      Option.compare(Some(1), None, ~f=Int.compare) == 1
+      Option.compare(None, None, ~f=Int.compare) == 0
+    ]}
 *)

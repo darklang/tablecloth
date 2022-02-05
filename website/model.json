@@ -16646,7 +16646,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " if called on an empty array."
+                          "value": " if called on an empty list."
                         },
                         {
                           "tag": "Newline",
@@ -16744,7 +16744,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " if called on an empty array."
+                          "value": " if called on an empty list."
                         },
                         {
                           "tag": "Newline",
@@ -16870,7 +16870,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " if called on an empty array."
+                          "value": " if called on an empty list."
                         },
                         {
                           "tag": "Newline",
@@ -39464,7 +39464,23 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "\n    Returns "
+                          "value": "\n    The full range of extended ASCII is from "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "0"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " to "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "255"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ".\n    For numbers outside that range, you get "
                         },
                         {
                           "tag": "Code",
@@ -39472,7 +39488,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": " if the codepoint is outside the range of 0 to 255 inclusive."
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -39542,38 +39558,6 @@
                             "ocaml": "Char.from_code (-1) = None",
                             "reason": "Char.from_code(-1) == None;\n"
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    The full range of extended ASCII is from "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "0"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": " to "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "255"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": ". For numbers outside that range, you get "
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "None"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "."
                         }
                       ]
                     },
@@ -39611,7 +39595,31 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Converts a string to character. Returns None when the string isn't of length one."
+                          "value": "Converts a string to character. "
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    Returns "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "None"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " when the "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " isn't of length one."
                         },
                         {
                           "tag": "Newline",
@@ -40116,7 +40124,7 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Detect when a character is a number"
+                          "value": "Detect when a character is a number."
                         },
                         {
                           "tag": "Newline",
@@ -40912,27 +40920,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Convert to the corresponding ASCII "
+                          "value": "Convert "
                         },
                         {
                           "tag": "Code",
-                          "value": "code point"
-                        },
-                        {
-                          "tag": "Code",
-                          "value": "cp"
+                          "value": "char"
                         },
                         {
                           "tag": "Raw",
-                          "value": "."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    "
+                          "value": " to the corresponding ASCII "
                         },
                         {
                           "tag": "Link",
@@ -40941,10 +40937,14 @@
                             "content": [
                               {
                                 "tag": "Raw",
-                                "value": " More info "
+                                "value": " code point "
                               }
                             ]
                           }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -41029,7 +41029,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Convert a character into a string."
+                          "value": "Convert a character into a "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "string"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "."
                         },
                         {
                           "tag": "Newline",
@@ -56400,7 +56408,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "The logical conjunction or operator."
+                          "value": "The logical conjunction "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "AND"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " operator."
                         },
                         {
                           "tag": "Newline",
@@ -56437,7 +56453,15 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "."
+                          "value": ".\n    If the 'left' operand evaluates to "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "false"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", the 'right' operand is not evaluated."
                         },
                         {
                           "tag": "Newline",
@@ -56906,7 +56930,15 @@
                       "value": [
                         {
                           "tag": "Raw",
-                          "value": "Compare two boolean values"
+                          "value": "Compare two "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "bool"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " values."
                         },
                         {
                           "tag": "Newline",

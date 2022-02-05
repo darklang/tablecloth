@@ -104,9 +104,10 @@ val not : t -> bool
 *)
 
 val and_ : bool -> bool -> bool
-(** The logical conjunction or operator.
+(** The logical conjunction [AND] operator.
 
     Returns [true] if {b both} of its operands are [true].
+    If the 'left' operand evaluates to [false], the 'right' operand is not evaluated.
 
     {2 Examples}
 
@@ -149,7 +150,7 @@ val equal : bool -> bool -> bool
 *)
 
 val compare : bool -> bool -> int
-(** Compare two boolean values
+(** Compare two [bool] values.
 
     {2 Examples}
 

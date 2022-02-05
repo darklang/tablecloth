@@ -56,7 +56,9 @@ val singleton :
 
   {2 Examples}
 
-  {[Set.singleton(7, module(Int)) |> Set.toArray == [7]]}
+  {[
+      Set.singleton(7, module(Int)) |> Set.toArray == [7]
+    ]}
 *)
 
 val fromArray :
@@ -77,7 +79,9 @@ val fromList :
 
     {2 Examples}
 
-    {[Set.fromList(list{'A', 'B', 'B', 'G'}, module(Char))->Set.toArray == ['A', 'B', 'G']]}
+    {[
+      Set.fromList(list{'A', 'B', 'B', 'G'}, module(Char))->Set.toArray == ['A', 'B', 'G']
+    ]}
 *)
 
 (** {1 Basic operations} *)
@@ -87,8 +91,10 @@ val add : ('a, 'id) t -> 'a -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.add(Set.Int.fromArray([1, 2]), 3) -> Set.toArray == [1, 2, 3]]}
-    {[Set.add(Set.Int.fromArray([1, 2]), 2) -> Set.toArray == [1, 2]]}
+    {[
+      Set.add(Set.Int.fromArray([1, 2]), 3) -> Set.toArray == [1, 2, 3]
+      Set.add(Set.Int.fromArray([1, 2]), 2) -> Set.toArray == [1, 2]
+    ]}
 *)
 
 val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
@@ -96,8 +102,9 @@ val remove : ('a, 'id) t -> 'a -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.remove(Set.Int.fromArray([1, 2]), 2)->Set.toArray == [1]]}
     {[
+      Set.remove(Set.Int.fromArray([1, 2]), 2)->Set.toArray == [1]
+      
      let originalSet = Set.Int.fromArray([1, 2])
       let newSet = Set.remove(originalSet, 3)
       originalSet == newSet
@@ -109,7 +116,9 @@ val includes : ('a, _) t -> 'a -> bool
 
     {2 Examples}
 
-   {[Set.includes(Set.String.fromArray(["Ant", "Bat", "Cat"]), "Bat") == true]}
+   {[
+      Set.includes(Set.String.fromArray(["Ant", "Bat", "Cat"]), "Bat") == true
+    ]}
 *)
 
 val length : (_, _) t -> int
@@ -117,7 +126,9 @@ val length : (_, _) t -> int
 
     {2 Examples}
 
-    {[Set.length(Set.Int.fromArray([1, 2, 3])) == 3]}
+    {[
+      Set.length(Set.Int.fromArray([1, 2, 3])) == 3
+    ]}
 *)
 
 val find : ('value, _) t -> f:('value -> bool) -> 'value option
@@ -126,9 +137,11 @@ val find : ('value, _) t -> f:('value -> bool) -> 'value option
 
     {2 Examples}
 
-    {[Set.find(Set.Int.fromArray([1, 3, 4, 8]), ~f=Int.isEven) == Some(4)]}
-    {[Set.find(Set.Int.fromArray([0, 2, 4, 8]), ~f=Int.isOdd) == None]}
-    {[Set.find(Set.Int.empty, ~f=Int.isEven) == None]}
+    {[
+      Set.find(Set.Int.fromArray([1, 3, 4, 8]), ~f=Int.isEven) == Some(4)
+      Set.find(Set.Int.fromArray([0, 2, 4, 8]), ~f=Int.isOdd) == None
+      Set.find(Set.Int.empty, ~f=Int.isEven) == None
+    ]}
 *)
 
 (** {1 Query} *)
@@ -138,8 +151,10 @@ val isEmpty : (_, _) t -> bool
 
     {2 Examples}
 
-    {[Set.isEmpty(Set.Int.empty) == true]}
-    {[Set.isEmpty(Set.Int.singleton(4)) == false]}
+    {[
+      Set.isEmpty(Set.Int.empty) == true
+      Set.isEmpty(Set.Int.singleton(4)) == false
+    ]}
 *)
 
 val any : ('value, _) t -> f:('value -> bool) -> bool
@@ -147,9 +162,11 @@ val any : ('value, _) t -> f:('value -> bool) -> bool
 
     {2 Examples}
 
-    {[Set.any(Set.Int.fromArray([2, 3]), ~f=Int.isEven) == true]}
-    {[Set.any(Set.Int.fromArray([1, 3]), ~f=Int.isEven) == false]}
-    {[Set.any(Set.Int.fromArray([]), ~f=Int.isEven) == false]}
+    {[
+      Set.any(Set.Int.fromArray([2, 3]), ~f=Int.isEven) == true
+      Set.any(Set.Int.fromArray([1, 3]), ~f=Int.isEven) == false
+      Set.any(Set.Int.fromArray([]), ~f=Int.isEven) == false
+    ]}
 *)
 
 val all : ('value, _) t -> f:('value -> bool) -> bool
@@ -157,9 +174,11 @@ val all : ('value, _) t -> f:('value -> bool) -> bool
 
     {2 Examples}
 
-    {[Set.all(Set.Int.fromArray([2, 4]), ~f=Int.isEven) == true]}
-    {[Set.all(Set.Int.fromArray([2, 3]), ~f=Int.isEven) == false]}
-    {[Set.all(Set.Int.empty, ~f=Int.isEven) == true]}
+    {[
+      Set.all(Set.Int.fromArray([2, 4]), ~f=Int.isEven) == true
+      Set.all(Set.Int.fromArray([2, 3]), ~f=Int.isEven) == false
+      Set.all(Set.Int.empty, ~f=Int.isEven) == true
+    ]}
 *)
 
 (** {1 Combine} *)
@@ -174,8 +193,7 @@ val difference : ('a, 'id) t -> ('a, 'id) t -> ('a, 'id) t
         Set.Int.fromArray([1, 2, 5]),
         Set.Int.fromArray([2, 3, 4])
       )->Set.toArray == [1, 5]
-    ]}
-    {[
+
       Set.difference(
         Set.Int.fromArray([2, 3, 4]), 
         Set.Int.fromArray([1, 2, 5])
@@ -216,7 +234,9 @@ val filter : ('a, 'id) t -> f:('a -> bool) -> ('a, 'id) t
 
     {2 Examples}
 
-    {[Set.filter(Set.Int.fromArray([1, 2, 3]), ~f=Int.isEven)->Set.toArray == [2]]}
+    {[
+      Set.filter(Set.Int.fromArray([1, 2, 3]), ~f=Int.isEven)->Set.toArray == [2]
+    ]}
 *)
 
 val partition : ('a, 'id) t -> f:('a -> bool) -> ('a, 'id) t * ('a, 'id) t
@@ -241,7 +261,9 @@ val fold : ('a, _) t -> initial:'b -> f:('b -> 'a -> 'b) -> 'b
 
   {2 Examples}
 
-  {[Set.fold(Set.Int.fromArray([1, 2, 3, 4], ~initial=1, ~f=Int.multiply)) == 24]}
+  {[
+      Set.fold(Set.Int.fromArray([1, 2, 3, 4], ~initial=1, ~f=Int.multiply)) == 24
+    ]}
 *)
 
 val forEach : ('a, _) t -> f:('a -> unit) -> unit
@@ -272,7 +294,9 @@ module Poly : sig
 
       {2 Examples}
 
-      {[Set.Poly.singleton((5, "Emu"))->Set.toArray == [(5, "Emu")]]}
+      {[
+      Set.Poly.singleton((5, "Emu"))->Set.toArray == [(5, "Emu")]
+    ]}
   *)
 
   val fromArray : 'a array -> 'a t
@@ -312,7 +336,9 @@ module Int : sig
 
     {2 Examples}
 
-    {[Set.Int.singleton(5)->Set.toArray == [5]]}
+    {[
+      Set.Int.singleton(5)->Set.toArray == [5]
+    ]}
   *)
 
   val fromArray : int array -> t
@@ -320,7 +346,9 @@ module Int : sig
 
       {2 Examples}
 
-      {[Set.Int.fromArray([1, 2, 3, 3, 2, 1, 7])->Set.toArray == [1, 2, 3, 7]]}
+      {[
+      Set.Int.fromArray([1, 2, 3, 3, 2, 1, 7])->Set.toArray == [1, 2, 3, 7]
+    ]}
   *)
 
   val fromList : int list -> t
@@ -328,7 +356,9 @@ module Int : sig
 
       {2 Examples}
 
-      {[Set.Int.fromList(list{1, 2, 3, 3, 2, 1, 7})->Set.toArray == [1, 2, 3, 7]]}
+      {[
+      Set.Int.fromList(list{1, 2, 3, 3, 2, 1, 7})->Set.toArray == [1, 2, 3, 7]
+    ]}
   *)
 end
 
@@ -346,7 +376,9 @@ module String : sig
 
       {2 Examples}
 
-      {[Set.String.singleton("Bat")->Set.toArray == ["Bat"]]}
+      {[
+      Set.String.singleton("Bat")->Set.toArray == ["Bat"]
+    ]}
   *)
 
   val fromArray : string array -> t
@@ -354,7 +386,9 @@ module String : sig
 
       {2 Examples}
 
-      {[Set.String.fromArray(["a", "b", "g", "b", "g", "a", "a"])->Set.toArray == ["a", "b", "g"]]}
+      {[
+      Set.String.fromArray(["a", "b", "g", "b", "g", "a", "a"])->Set.toArray == ["a", "b", "g"]
+    ]}
   *)
 
   val fromList : string list -> t
@@ -362,6 +396,8 @@ module String : sig
 
       {2 Examples}
 
-      {[Set.String.fromList(["a", "b", "g", "b", "g", "a", "a"])->Set.toArray == ["a", "b", "g"]]}
+      {[
+      Set.String.fromList(["a", "b", "g", "b", "g", "a", "a"])->Set.toArray == ["a", "b", "g"]
+    ]}
   *)
 end

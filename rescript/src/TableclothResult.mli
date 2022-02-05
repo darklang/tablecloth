@@ -14,9 +14,10 @@
     Here is how you would annotate a [Result] variable whose [Ok]
     variant is an integer and whose [Error] variant is a string:
 
-    {[let ok: Result.t<int, string> = Ok(3)]}
-
-    {[let error: Result.t<int, string> = Error("This computation failed!")]}
+    {[
+      let ok: Result.t<int, string> = Ok(3)
+      let error: Result.t<int, string> = Error("This computation failed!")
+    ]}
 
     {b Note} The ['error] case can be of {b any} type and while [string] is very common you could also use:
     - [Array.t(string)] to allow errors to be accumulated
@@ -36,8 +37,10 @@ val ok : 'ok -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[String.reverse("desserts") ->Result.ok == Ok("stressed")]}
-    {[Array.map([1, 2, 3], ~f=Result.ok) == [Ok(1), Ok(2), Ok(3)]]}
+    {[
+      String.reverse("desserts") ->Result.ok == Ok("stressed")
+      Array.map([1, 2, 3], ~f=Result.ok) == [Ok(1), Ok(2), Ok(3)]
+    ]}
 *)
 
 val error : 'error -> ('ok, 'error) t
@@ -48,14 +51,18 @@ val error : 'error -> ('ok, 'error) t
 
     In Rescript you {b can} use constructors with the fast pipe ([->]).
 
-    {[5->Ok == Ok(5)]}
+    {[
+      5->Ok == Ok(5)
+    ]}
 
     See the {{: https://reasonml.github.io/docs/en/pipe-first#pipe-into-variants} Rescript docs } for more.
 
     {2 Examples}
 
-    {[Int.negate(3)->Result.error == Error(-3)]}
-    {[Array.map([1, 2, 3], ~f=Result.error) == [Error(1), Error(2), Error(3)]]}
+    {[
+      Int.negate(3)->Result.error == Error(-3)
+      Array.map([1, 2, 3], ~f=Result.error) == [Error(1), Error(2), Error(3)]
+    ]}
 *)
 
 val attempt : (unit -> 'ok) -> ('ok, exn) t
@@ -63,8 +70,9 @@ val attempt : (unit -> 'ok) -> ('ok, exn) t
 
     {2 Examples}
 
-    {[Result.attempt(() => 5 / 0) // returns Error(Division_by_zero)]}
     {[
+      Result.attempt(() => 5 / 0) // returns Error(Division_by_zero)
+      
       Array.map([1, 2, 3], ~f=Result.ok) == [Ok(1), Ok(2), Ok(3)]
 
       let numbers = [1, 2, 3]
@@ -77,8 +85,9 @@ val fromOption : 'ok option -> error:'error -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[Result.fromOption(Some(84), ~error="Greater than 100") == Ok(84)]}
     {[
+      Result.fromOption(Some(84), ~error="Greater than 100") == Ok(84)
+      
       Result.fromOption(None, ~error="Greater than 100") == Error("Greater than 100")
     ]}
 *)
@@ -96,8 +105,10 @@ val isOk : (_, _) t -> bool
 
     {2 Examples}
 
-    {[Result.isOk(Ok(3)) == true]}
-    {[Result.isOk(Error(3)) == false]}
+    {[
+      Result.isOk(Ok(3)) == true
+      Result.isOk(Error(3)) == false
+    ]}
 *)
 
 val isError : (_, _) t -> bool
@@ -113,8 +124,10 @@ val isError : (_, _) t -> bool
 
     {2 Examples}
 
-    {[Result.isError(Ok(3)) == false]}
-    {[Result.isError(Error(3)) == true]}
+    {[
+      Result.isError(Ok(3)) == false
+      Result.isError(Error(3)) == true
+    ]}
 *)
 
 val and_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
@@ -125,16 +138,15 @@ val and_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[Result.and_(Ok("Antelope"), Ok("Salmon")) == Ok("Salmon")]}
     {[
+      Result.and_(Ok("Antelope"), Ok("Salmon")) == Ok("Salmon")
+      
      Result.and_(Error(#UnexpectedBird("Finch")), Ok("Salmon"))
      == Error(#UnexpectedBird("Finch"))
-    ]}
-    {[
+
       Result.and_(Ok("Antelope"), Error(#UnexpectedBird("Finch")))
       == Error(#UnexpectedBird("Finch"))
-    ]}
-    {[
+
       Result.and_(Error(#UnexpectedInvertebrate("Honey Bee")), Error(#UnexpectedBird("Finch")))
       == Error(#UnexpectedInvertebrate("Honey Bee"))
     ]}
@@ -148,10 +160,11 @@ val or_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
 
   {2 Examples}
 
-  {[Result.or_(Ok("Boar"), Ok("Gecko")) == Ok("Boar")]}
-  {[Result.or_(Error(#UnexpectedInvertebrate("Periwinkle")), Ok("Gecko")) == Ok("Gecko")]}
-  {[Result.or_(Ok("Boar"), Error(#UnexpectedInvertebrate("Periwinkle"))) == Ok("Boar") ]}
   {[
+      Result.or_(Ok("Boar"), Ok("Gecko")) == Ok("Boar")
+      Result.or_(Error(#UnexpectedInvertebrate("Periwinkle")), Ok("Gecko")) == Ok("Gecko")
+      Result.or_(Ok("Boar"), Error(#UnexpectedInvertebrate("Periwinkle"))) == Ok("Boar") 
+      
     Result.or_(Error(#UnexpectedInvertebrate("Periwinkle")), Error(#UnexpectedBird("Robin")))
     == Error(#UnexpectedBird("Robin"))
    ]}
@@ -166,16 +179,15 @@ val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
 
     {2 Examples}
 
-    {[Result.both(Ok("Badger"), Ok("Rhino")) == Ok("Dog", "Rhino")]}
     {[
+      Result.both(Ok("Badger"), Ok("Rhino")) == Ok("Dog", "Rhino")
+      
       Result.both(Error(#UnexpectedBird("Flamingo")), Ok("Rhino"))
       == Error(#UnexpectedBird("Flamingo"))
-    ]}
-    {[
+
       Result.both(Ok("Badger"), Error(#UnexpectedInvertebrate("Blue ringed octopus")))
       == Error(#UnexpectedInvertebrate("Blue ringed octopus"))
-    ]}
-    {[
+
       Result.both(
         Error(#UnexpectedBird("Flamingo")),
         Error(#UnexpectedInvertebrate("Blue ringed octopus")),
@@ -188,12 +200,12 @@ val flatten : (('ok, 'error) t, 'error) t -> ('ok, 'error) t
 
     {2 Examples}
 
-    {[Result.flatten(Ok(Ok(2))) == Ok(2)]}
     {[
+      Result.flatten(Ok(Ok(2))) == Ok(2)
+      
       Result.flatten(Ok(Error(#UnexpectedBird("Peregrin falcon"))))
       == Error(#UnexpectedBird("Peregrin falcon"))
-    ]}
-    {[
+
       Result.flatten(Error(#UnexpectedInvertebrate("Woodlouse")))
       == Error(#UnexpectedInvertebrate("Woodlouse"))
     ]}
@@ -204,8 +216,10 @@ val unwrap : ('ok, 'error) t -> default:'ok -> 'ok
 
     {2 Examples}
 
-    {[Result.unwrap(Ok(12), ~default=0) == 12]}
-    {[Result.unwrap(Error(#UnexpectedBird("Ostrich")), ~default=0) == 0]}
+    {[
+      Result.unwrap(Ok(12), ~default=0) == 12
+      Result.unwrap(Error(#UnexpectedBird("Ostrich")), ~default=0) == 0
+    ]}
 *)
 
 val unwrapUnsafe : ('ok, _) t -> 'ok
@@ -217,8 +231,10 @@ val unwrapUnsafe : ('ok, _) t -> 'ok
 
     {2 Examples}
 
-    {[Result.unwrapUnsafe(Ok(12)) == 12]}
-    {[Result.unwrapUnsafe(Error("bad")) // raises Not_found ]}
+    {[
+      Result.unwrapUnsafe(Ok(12)) == 12
+      Result.unwrapUnsafe(Error("bad")) // raises Not_found
+    ]}
 *)
 
 val unwrapError : ('ok, 'error) t -> default:'error -> 'error
@@ -231,8 +247,7 @@ val unwrapError : ('ok, 'error) t -> default:'error -> 'error
         Error(#UnexpectedBird("Swallow")),
         ~default=#UnexpectedInvertebrate("Ladybird"),
       ) == #UnexpectedBird("Swallow")
-    ]}
-    {[
+
       Result.unwrapError(Ok(5), ~default=#UnexpectedInvertebrate("Ladybird"))
       == #UnexpectedInvertebrate("Ladybird")
     ]}
@@ -248,10 +263,12 @@ val map2 :
 
     {2 Examples}
 
-    {[Result.map2(Ok(7), Ok(3), ~f=Int.add) == Ok(10)]}
-    {[Result.map2(Error("A"), Ok(3), ~f=Int.add) == Error("A")]}
-    {[Result.map2(Ok(7), Error("B"), ~f=Int.add) == Error("B")]}
-    {[Result.map2(Error("A"), Error("B"), ~f=Int.add) == Error("A")]}
+    {[
+      Result.map2(Ok(7), Ok(3), ~f=Int.add) == Ok(10)
+      Result.map2(Error("A"), Ok(3), ~f=Int.add) == Error("A")
+      Result.map2(Ok(7), Error("B"), ~f=Int.add) == Error("B")
+      Result.map2(Error("A"), Error("B"), ~f=Int.add) == Error("A")
+    ]}
 *)
 
 val values : ('ok, 'error) t list -> ('ok list, 'error) t
@@ -261,8 +278,10 @@ val values : ('ok, 'error) t list -> ('ok list, 'error) t
 
     {2 Examples}
 
-    {[Result.values(list{Ok(1), Ok(2), Ok(3), Ok(4)}) == Ok(list{1, 2, 3, 4})]}
-    {[Result.values(list{Ok(1), Error("two"), Ok(3), Error("four")}) == Error("two")]}
+    {[
+      Result.values(list{Ok(1), Ok(2), Ok(3), Ok(4)}) == Ok(list{1, 2, 3, 4})
+      Result.values(list{Ok(1), Error("two"), Ok(3), Error("four")}) == Error("two")
+    ]}
 *)
 
 val combine : ('ok, 'error) result list -> ('ok list, 'error) result
@@ -287,8 +306,10 @@ val map : ('a, 'error) t -> f:('a -> 'b) -> ('b, 'error) t
 
     {2 Examples}
 
-    {[Result.map(Ok(3), ~f=Int.add(1)) == Ok(9)]}
-    {[Result.map(Error("three"), ~f=Int.add(1)) == Error("three")]}
+    {[
+      Result.map(Ok(3), ~f=Int.add(1)) == Ok(9)
+      Result.map(Error("three"), ~f=Int.add(1)) == Error("three")
+    ]}
 *)
 
 val mapError : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
@@ -296,8 +317,10 @@ val mapError : ('ok, 'a) t -> f:('a -> 'b) -> ('ok, 'b) t
 
     {2 Examples}
 
-    {[Result.mapError(Ok(3), ~f=String.reverse) == Ok(3)]}
-    {[Result.mapError(Error("bad"), ~f=String.reverse) == Error("dab")]}
+    {[
+      Result.mapError(Ok(3), ~f=String.reverse) == Ok(3)
+      Result.mapError(Error("bad"), ~f=String.reverse) == Error("dab")
+    ]}
 *)
 
 val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
@@ -321,13 +344,14 @@ val andThen : ('a, 'error) t -> f:('a -> ('b, 'error) t) -> ('b, 'error) t
         } else {
           Ok(Float.squareRoot(x))
         }
+    
+      Result.andThen(Ok(4.0), ~f=reciprical) == Ok(0.25)
+      Result.andThen(Error("Missing number!"), ~f=reciprical) == Error("Missing number!")
+      Result.andThen(Ok(0.0), ~f=reciprical) == Error("Divide by zero")
+      Result.andThen(Ok(4.0), ~f=root)->Result.andThen(~f=reciprical) == Ok(0.5)
+      Result.andThen(Ok(-2.0), ~f=root)->Result.andThen(~f=reciprical) == Error("Cannot be negative")
+      Result.andThen(Ok(0.0), ~f=root)->Result.andThen(~f=reciprical) == Error("Divide by zero")
     ]}
-    {[Result.andThen(Ok(4.0), ~f=reciprical) == Ok(0.25)]}
-    {[Result.andThen(Error("Missing number!"), ~f=reciprical) == Error("Missing number!")]}
-    {[Result.andThen(Ok(0.0), ~f=reciprical) == Error("Divide by zero")]}
-    {[Result.andThen(Ok(4.0), ~f=root)->Result.andThen(~f=reciprical) == Ok(0.5)]}
-    {[Result.andThen(Ok(-2.0), ~f=root)->Result.andThen(~f=reciprical) == Error("Cannot be negative")]}
-    {[Result.andThen(Ok(0.0), ~f=root)->Result.andThen(~f=reciprical) == Error("Divide by zero")]}
 *)
 
 val tap : ('ok, _) t -> f:('ok -> unit) -> unit
@@ -352,8 +376,10 @@ val toOption : ('ok, _) t -> 'ok option
 
     {2 Examples}
 
-    {[Result.toOption(Ok(42)) == Some(42)]}
-    {[Result.toOption(Error("Missing number!")) == None]}
+    {[
+      Result.toOption(Ok(42)) == Some(42)
+      Result.toOption(Error("Missing number!")) == None
+    ]}
 *)
 
 (** {1 Compare} *)
@@ -368,11 +394,13 @@ val equal :
 
     {2 Examples}
 
-    {[Result.equal(Ok(3), Ok(3), Int.equal, String.equal) == true]}
-    {[Result.equal(Ok(3), Ok(4), Int.equal, String.equal) == false]}
-    {[Result.equal(Error("Fail"), Error("Fail"), Int.equal, String.equal) == true]}
-    {[Result.equal(Error("Expected error"), Error("Unexpected error"), Int.equal, String.equal) == false]}
-    {[Result.equal(Error("Fail"), Ok(4), Int.equal, String.equal) == false]}
+    {[
+      Result.equal(Ok(3), Ok(3), Int.equal, String.equal) == true
+      Result.equal(Ok(3), Ok(4), Int.equal, String.equal) == false
+      Result.equal(Error("Fail"), Error("Fail"), Int.equal, String.equal) == true
+      Result.equal(Error("Expected error"), Error("Unexpected error"), Int.equal, String.equal) == false
+      Result.equal(Error("Fail"), Ok(4), Int.equal, String.equal) == false
+    ]}
 *)
 
 val compare :
@@ -388,12 +416,13 @@ val compare :
 
     {2 Examples}
 
-    {[Result.compare(Ok(3), Ok(3), ~f=Int.compare, ~g=String.compare) == 0]}
-    {[Result.compare(Ok(3), Ok(4), ~f=Int.compare, ~g=String.compare) == -1]}
-    {[Result.compare(Error("Fail"), Error("Fail"), ~f=Int.compare, ~g=String.compare) == 0]}
-    {[Result.compare(Error("Fail"), Ok(4), ~f=Int.compare, ~g=String.compare) == -1]}
-    {[Result.compare(Ok(4), Error("Fail"), ~f=Int.compare, ~g=String.compare) == 1]}
     {[
+      Result.compare(Ok(3), Ok(3), ~f=Int.compare, ~g=String.compare) == 0
+      Result.compare(Ok(3), Ok(4), ~f=Int.compare, ~g=String.compare) == -1
+      Result.compare(Error("Fail"), Error("Fail"), ~f=Int.compare, ~g=String.compare) == 0
+      Result.compare(Error("Fail"), Ok(4), ~f=Int.compare, ~g=String.compare) == -1
+      Result.compare(Ok(4), Error("Fail"), ~f=Int.compare, ~g=String.compare) == 1
+      
       Result.compare(
         Error("Expected error"),
         Error("Unexpected error"),

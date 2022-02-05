@@ -230,7 +230,7 @@ let filterMap t ~f =
   let result =
     fold t ~initial:[] ~f:(fun results element ->
         match f element with None -> results | Some value -> value :: results )
-    |. fromList
+    |> fromList
   in
   reverse result ;
   result
@@ -242,7 +242,7 @@ let values t =
   let result =
     fold t ~initial:[] ~f:(fun results element ->
         match element with None -> results | Some value -> value :: results )
-    |. fromList
+    |> fromList
   in
   reverse result ;
   result

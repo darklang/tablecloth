@@ -11,7 +11,9 @@ external identity : 'a -> 'a = "%identity"
 
     Perhaps you want to create an array of integers
 
-    {[Array.initialize(6, ~f=Fun.identity) == [0, 1, 2, 3, 4, 5]]}
+    {[
+      Array.initialize(6, ~f=Fun.identity) == [0, 1, 2, 3, 4, 5]
+    ]}
 
     (In this particular case you probably want to use {!Array.range}.)
 
@@ -22,7 +24,7 @@ external identity : 'a -> 'a = "%identity"
         ~onEventYouDoCareAbout=transformAndReturn,
         ~onEventYouDontCareAbout=Fun.identity,
       )
-    ]}
+   ]}
 *)
 
 external ignore : _ -> unit = "%ignore"
@@ -39,8 +41,6 @@ external ignore : _ -> unit = "%ignore"
           module type PretendMutableQueue = {
             type t<'a>
 
-
-
             (** Adds an element to the queue, returning the new length of the queue *)
             let pushReturningLength: (t<'a>, 'a) => int
           }
@@ -50,7 +50,7 @@ external ignore : _ -> unit = "%ignore"
         Array.forEach(array, ~f=element =>
           PretendMutableQueue.pushReturningLength(queue, element)
         )->Fun.ignore
-    ]}
+   ]}
 *)
 
 val constant : 'a -> 'b -> 'a
@@ -60,8 +60,10 @@ val constant : 'a -> 'b -> 'a
 
     {2 Examples}
 
-    {[Array.map([1, 2, 3, 4, 5], ~f=Fun.constant(0)) == [0, 0, 0, 0, 0]]}
-    {[Array.initialize(6, ~f=Fun.constant(0)) == [0, 0, 0, 0, 0, 0]]}
+    {[
+      Array.map([1, 2, 3, 4, 5], ~f=Fun.constant(0)) == [0, 0, 0, 0, 0]
+      Array.initialize(6, ~f=Fun.constant(0)) == [0, 0, 0, 0, 0, 0]
+    ]}
 *)
 
 val sequence : 'a -> 'b -> 'b
@@ -86,7 +88,7 @@ val negate : ('a -> bool) -> 'a -> bool
     {[
       let isLessThanTwelve = Fun.negate(n => n >= 12)
       isLessThanTwelve(12) == false
-    ]}
+   ]}
 *)
 
 val apply : ('a -> 'b) -> 'a -> 'b
@@ -111,7 +113,7 @@ val compose : 'a -> ('a -> 'b) -> ('b -> 'c) -> 'c
       let multiplied = Array.map(numbers, ~f=Fun.compose(Int.multiply(5), Int.toString))
 
       multiplied == ["5", "10", "15", "20", "25", "30", "35"]
-    ]}
+   ]}
 *)
 
 val composeRight : 'a -> ('b -> 'c) -> ('a -> 'b) -> 'c
@@ -130,7 +132,7 @@ val composeRight : 'a -> ('b -> 'c) -> ('a -> 'b) -> 'c
       let a = (b) => b -> Fun.compose(Int.toString, Int.multiply(5))
 
       multiplied == ["5", "10", "15", "20", "25", "30", "35"]
-    ]}
+   ]}
 *)
 
 val tap : 'a -> f:('a -> unit) -> 'a
@@ -146,12 +148,11 @@ val tap : 'a -> f:('a -> unit) -> 'a
         ->String.trim
         ->Fun.tap(~f=Js.log)
         ->Int.fromString
-    ]}
-    {[
+
       Array.filter([1, 3, 2, 5, 4], ~f=Int.isEven)
       ->Fun.tap(~f=numbers => numbers[0] = 0)
       ->Fun.tap(~f=Array.reverse) == [4, 0]
-    ]}
+   ]}
 *)
 
 val forever : (unit -> unit) -> exn
@@ -169,7 +170,7 @@ val times : int -> f:(unit -> unit) -> unit
       let count = ref(0)
       Fun.times(10, ~f=() => count.contents = count.contents + 1)
       count.contents == 10
-    ]}
+   ]}
 *)
 
 val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
@@ -182,7 +183,7 @@ val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
       let curriedArea: (int, int) => int = Fun.curry(squareArea)
       let sizes = [3, 4, 5]
       Array.map(sizes, ~f=curriedArea(4)) == [12, 16, 20]
-    ]}
+   ]}
 *)
 
 val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
@@ -194,7 +195,7 @@ val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c
       let sum = (a: int, b: int): int => a + b
       let uncurriedSum: ((int, int)) => int = Fun.uncurry(sum)
       uncurriedSum((3, 4)) == 7
-    ]}
+   ]}
 *)
 
 val curry3 : ('a * 'b * 'c -> 'd) -> 'a -> 'b -> 'c -> 'd

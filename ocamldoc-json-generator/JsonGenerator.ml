@@ -406,6 +406,12 @@ class virtual text =
         | Odoc_info.Code s ->
             tagged "Code" (string s)
         | Odoc_info.CodePre code ->
+          (match destination_json with
+          | "model-rescript.json" ->
+             tagged
+            "CodePre"
+            (obj [ ("rescript", string code); ]) 
+            | _ ->
             let reasonSyntax : string =
               try
                 Lexing.from_string code
@@ -419,9 +425,11 @@ class virtual text =
                   print_DEBUG code ;
                   code
             in
+            
+           
             tagged
               "CodePre"
-              (obj [ ("ocaml", string code); ("reason", string reasonSyntax) ])
+              (obj [ ("ocaml", string code); ("reason", string reasonSyntax) ]) )
         | Odoc_info.Verbatim s ->
             tagged "Verbatim" (string s)
         | Odoc_info.Bold t ->

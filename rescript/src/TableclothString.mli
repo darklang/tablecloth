@@ -21,8 +21,10 @@ val fromArray : char array -> string
 
     {2 Examples}
 
-    {[String.fromArray([]) == ""]}
-    {[String.fromArray(['a', 'b', 'c']) == "abc"]}
+    {[
+      String.fromArray([]) == ""
+      String.fromArray(['a', 'b', 'c']) == "abc"
+    ]}
 *)
 
 val fromList : char list -> string
@@ -32,8 +34,10 @@ val fromList : char list -> string
 
     {2 Examples}
 
-    {[String.fromList(list{}) == ""]}
-    {[String.fromList(list{'a', 'b', 'c'}) == "abc"]}
+    {[
+      String.fromList(list{}) == ""
+      String.fromList(list{'a', 'b', 'c'}) == "abc"
+    ]}
 *)
 
 val repeat : string -> count:int -> string
@@ -45,9 +49,11 @@ val repeat : string -> count:int -> string
 
     {2 Examples}
 
-    {[String.repeat("ok", ~count=3) == "okokok"]}
-    {[String.repeat("", ~count=3) == ""]}
-    {[String.repeat("ok", ~count=0) == ""]}
+    {[
+      String.repeat("ok", ~count=3) == "okokok"
+      String.repeat("", ~count=3) == ""
+      String.repeat("ok", ~count=0) == ""
+    ]}
 *)
 
 val initialize : int -> f:(int -> char) -> string
@@ -57,7 +63,9 @@ val initialize : int -> f:(int -> char) -> string
 
     {2 Examples}
 
-    {[String.initialize(8, ~f=Fun.constant('9')) == "99999999"]}
+    {[
+      String.initialize(8, ~f=Fun.constant('9')) == "99999999"
+    ]}
 *)
 
 (** {1 Basic operations} *)
@@ -72,7 +80,9 @@ val get : string -> int -> char
 
     {2 Examples}
 
-    {[String.get("stressed", 1) == 't']}
+    {[
+      String.get("stressed", 1) == 't'
+    ]}
 
 *)
 
@@ -86,7 +96,9 @@ val reverse : string -> string
 
     {2 Examples}
 
-    {[String.reverse("stressed") == "desserts"]}
+    {[
+      String.reverse("stressed") == "desserts"
+    ]}
 *)
 
 val slice : ?to_:int -> string -> from:int -> string
@@ -105,7 +117,9 @@ val length : string -> int
 
     {2 Examples}
 
-    {[String.length("abc") == 3]}
+    {[
+      String.length("abc") == 3
+    ]}
 *)
 
 val startsWith : string -> prefix:string -> bool
@@ -113,8 +127,10 @@ val startsWith : string -> prefix:string -> bool
 
     {2 Examples}
 
-    {[String.startsWith("theory", ~prefix="the") == true]}
-    {[String.startsWith("theory", ~prefix="ory") == false]}
+    {[
+      String.startsWith("theory", ~prefix="the") == true
+      String.startsWith("theory", ~prefix="ory") == false
+    ]}
 *)
 
 val endsWith : string -> suffix:string -> bool
@@ -122,8 +138,10 @@ val endsWith : string -> suffix:string -> bool
 
     {2 Examples}
 
-    {[String.endsWith("theory", ~suffix="the") == false]}
-    {[String.endsWith("theory", ~suffix="ory") == true]}
+    {[
+      String.endsWith("theory", ~suffix="the") == false
+      String.endsWith("theory", ~suffix="ory") == true
+    ]}
 *)
 
 val includes : string -> substring:string -> bool
@@ -131,9 +149,11 @@ val includes : string -> substring:string -> bool
 
     {2 Examples}
 
-    {[String.includes("team", ~substring="tea") == true]}
-    {[String.includes("team", ~substring="i") == false]}
-    {[String.includes("ABC", ~substring="") == true]}
+    {[
+      String.includes("team", ~substring="tea") == true
+      String.includes("team", ~substring="i") == false
+      String.includes("ABC", ~substring="") == true
+    ]}
 *)
 
 val isCapitalized : string -> bool
@@ -141,8 +161,10 @@ val isCapitalized : string -> bool
 
     {2 Examples}
 
-    {[String.isCapitalized("Anastasia") == true]}
-    {[String.isCapitalized("") == false]}
+    {[
+      String.isCapitalized("Anastasia") == true
+      String.isCapitalized("") == false
+    ]}
 *)
 
 val dropLeft : string -> count:int -> string
@@ -150,11 +172,13 @@ val dropLeft : string -> count:int -> string
 
     {2 Examples}
 
-    {[String.dropLeft("abcdefg", ~count=3) == "defg"]}
-    {[String.dropLeft("abcdefg", ~count=0) == "abcdefg"]}
-    {[String.dropLeft("abcdefg", ~count=7) == ""]}
-    {[String.dropLeft("abcdefg", ~count=-2) == "fg"]}
-    {[String.dropLeft("abcdefg", ~count=8) == ""]}
+    {[
+      String.dropLeft("abcdefg", ~count=3) == "defg"
+      String.dropLeft("abcdefg", ~count=0) == "abcdefg"
+      String.dropLeft("abcdefg", ~count=7) == ""
+      String.dropLeft("abcdefg", ~count=-2) == "fg"
+      String.dropLeft("abcdefg", ~count=8) == ""
+    ]}
 *)
 
 val dropRight : string -> count:int -> string
@@ -162,11 +186,13 @@ val dropRight : string -> count:int -> string
 
     {2 Examples}
 
-    {[String.dropRight("abcdefg", ~count=3) == "abcd"]}
-    {[String.dropRight("abcdefg", ~count=0) == "abcdefg"]}
-    {[String.dropRight("abcdefg", ~count=7) == ""]}
-    {[String.dropRight("abcdefg", ~count=-2) == "abcdefg"]}
-    {[String.dropRight("abcdefg", ~count=8) == ""]}
+    {[
+      String.dropRight("abcdefg", ~count=3) == "abcd"
+      String.dropRight("abcdefg", ~count=0) == "abcdefg"
+      String.dropRight("abcdefg", ~count=7) == ""
+      String.dropRight("abcdefg", ~count=-2) == "abcdefg"
+      String.dropRight("abcdefg", ~count=8) == ""
+    ]}
 *)
 
 val indexOf : string -> string -> int option
@@ -174,8 +200,10 @@ val indexOf : string -> string -> int option
 
     {2 Examples}
 
-    {[String.indexOf("Hello World World", "World") == Some(6)]}
-    {[String.indexOf("Hello World World", "Bye") == None]}
+    {[
+      String.indexOf("Hello World World", "World") == Some(6)
+      String.indexOf("Hello World World", "Bye") == None
+    ]}
 *)
 
 val indexOfRight : string -> string -> int option
@@ -183,8 +211,10 @@ val indexOfRight : string -> string -> int option
 
     {2 Examples}
 
-    {[String.indexOfRight("Hello World World", "World") == Some(12)]}
-    {[String.indexOfRight("Hello World World", "Bye") == None]}
+    {[
+      String.indexOfRight("Hello World World", "World") == Some(12)
+      String.indexOfRight("Hello World World", "Bye") == None
+    ]}
 *)
 
 val insertAt : string -> index:int -> value:t -> string
@@ -194,12 +224,14 @@ val insertAt : string -> index:int -> value:t -> string
 
     {2 Examples}
 
-    {[String.insertAt("abcde", ~value="**", ~index=2) == "ab**cde"]}
-    {[String.insertAt("abcde", ~value="**", ~index=0) == "**abcde"]}
-    {[String.insertAt("abcde", ~value="**", ~index=5) == "abcde**"]}
-    {[String.insertAt("abcde", ~value="**", ~index=-2) == "abc**de"]}
-    {[String.insertAt("abcde", ~value="**", ~index=-9) == "**abcde"]}
-    {[String.insertAt("abcde", ~value="**", ~index=9) == "abcde**"]}
+    {[
+      String.insertAt("abcde", ~value="**", ~index=2) == "ab**cde"
+      String.insertAt("abcde", ~value="**", ~index=0) == "**abcde"
+      String.insertAt("abcde", ~value="**", ~index=5) == "abcde**"
+      String.insertAt("abcde", ~value="**", ~index=-2) == "abc**de"
+      String.insertAt("abcde", ~value="**", ~index=-9) == "**abcde"
+      String.insertAt("abcde", ~value="**", ~index=9) == "abcde**"
+    ]}
 *)
 
 val toLowercase : string -> string
@@ -207,7 +239,9 @@ val toLowercase : string -> string
 
     {2 Examples}
 
-    {[String.toLowercase("AaBbCc123") == "aabbcc123"]}
+    {[
+      String.toLowercase("AaBbCc123") == "aabbcc123"
+    ]}
 *)
 
 val toUppercase : string -> string
@@ -215,7 +249,9 @@ val toUppercase : string -> string
 
     {2 Examples}
 
-    {[String.toUppercase("AaBbCc123") == "AABBCC123"]}
+    {[
+      String.toUppercase("AaBbCc123") == "AABBCC123"
+    ]}
 *)
 
 val uncapitalize : string -> string
@@ -223,7 +259,9 @@ val uncapitalize : string -> string
 
     {2 Examples}
 
-    {[String.uncapitalize("Anastasia") == "anastasia"]}
+    {[
+      String.uncapitalize("Anastasia") == "anastasia"
+    ]}
 *)
 
 val capitalize : string -> string
@@ -231,7 +269,9 @@ val capitalize : string -> string
 
     {2 Examples}
 
-    {[String.capitalize("den") == "Den"]}
+    {[
+      String.capitalize("den") == "Den"
+    ]}
 *)
 
 val trim : string -> string
@@ -239,9 +279,11 @@ val trim : string -> string
 
     {2 Examples}
 
-    {[String.trim("  abc  ") == "abc"]}
-    {[String.trim("  abc def  ") == "abc def"]}
-    {[String.trim("\r\n\t abc \n\n") == "abc"]}
+    {[
+      String.trim("  abc  ") == "abc"
+      String.trim("  abc def  ") == "abc def"
+      String.trim("\r\n\t abc \n\n") == "abc"
+    ]}
 *)
 
 val trimLeft : string -> string
@@ -258,7 +300,9 @@ val padLeft : string -> int -> with_:string -> string
 
     {2 Examples}
 
-    {[String.padLeft("5", 3, ~with_="0") == "005"]}
+    {[
+      String.padLeft("5", 3, ~with_="0") == "005"
+    ]}
 *)
 
 val padRight : string -> int -> with_:string -> string
@@ -269,7 +313,9 @@ val padRight : string -> int -> with_:string -> string
 
     {2 Examples}
 
-    {[String.padRight("Ahh", 7, ~with_="h") == "Ahhhhhh"]}
+    {[
+      String.padRight("Ahh", 7, ~with_="h") == "Ahhhhhh"
+    ]}
 *)
 
 val uncons : string -> (char * string) option
@@ -279,9 +325,11 @@ val uncons : string -> (char * string) option
 
     {2 Examples}
 
-    {[String.uncons("abcde") == Some('a', "bcde")]}
-    {[String.uncons("a") == Some('a', "")]}
-    {[String.uncons("") == None]}
+    {[
+      String.uncons("abcde") == Some('a', "bcde")
+      String.uncons("a") == Some('a', "")
+      String.uncons("") == None
+    ]}
 *)
 
 val split : string -> on:string -> string list
@@ -313,8 +361,10 @@ val toArray : string -> char array
 
     {2 Examples}
 
-    {[String.toArray("") == []]}
-    {[String.toArray("abc") == ['a', 'b', 'c']]}
+    {[
+      String.toArray("") == []
+      String.toArray("abc") == ['a', 'b', 'c']
+    ]}
 *)
 
 val toList : string -> char list
@@ -322,8 +372,10 @@ val toList : string -> char list
 
     {2 Examples}
 
-    {[String.toList("") == list{}]}
-    {[String.toList("abc") == list{'a', 'b', 'c'}]}
+    {[
+      String.toList("") == list{}
+      String.toList("abc") == list{'a', 'b', 'c'}
+    ]}
 *)
 
 (** {1 Compare} *)
@@ -338,10 +390,12 @@ val compare : string -> string -> int
 
     {2 Examples}
 
-    {[String.compare("Z", "A") == 1]}
-    {[String.compare("Be", "Bee") == -1]}
-    {[String.compare("Pear", "pear") == 1]}
-    {[String.compare("Peach", "Peach") == 0]}
+    {[
+      String.compare("Z", "A") == 1
+      String.compare("Be", "Bee") == -1
+      String.compare("Pear", "pear") == 1
+      String.compare("Peach", "Peach") == 0
+    ]}
 *)
 
 (** The unique identity for {!Comparator} *)

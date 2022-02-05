@@ -20,7 +20,7 @@
       1_000_000
       0xFF (* 255 in hexadecimal *)
       0x000A (* 10 in hexadecimal *)
-    ]}
+   ]}
 
     {e Historical Note: } The name [int] comes from the term {{: https://en.wikipedia.org/wiki/Integer } integer}). It appears
     that the [int] abbreviation was introduced in the programming language ALGOL 68.
@@ -51,14 +51,16 @@ val fromString : string -> t option
 
     {2 Examples}
 
-    {[Int.fromString("0") == Some(0)]}
-    {[Int.fromString("42") == Some(42)]}
-    {[Int.fromString("-3") == Some(-3)]}
-    {[Int.fromString("123_456") == Some(123_456)]}
-    {[Int.fromString("0xFF") == Some(255)]}
-    {[Int.fromString("0x00A") == Some(10)]}
-    {[Int.fromString("Infinity") == None]}
-    {[Int.fromString("NaN") == None]}
+    {[
+      Int.fromString("0") == Some(0)
+      Int.fromString("42") == Some(42)
+      Int.fromString("-3") == Some(-3)
+      Int.fromString("123_456") == Some(123_456)
+      Int.fromString("0xFF") == Some(255)
+      Int.fromString("0x00A") == Some(10)
+      Int.fromString("Infinity") == None
+      Int.fromString("NaN") == None
+    ]}
 *)
 
 (** {1 Operators} *)
@@ -66,7 +68,9 @@ val fromString : string -> t option
 val add : t -> t -> t
 (** Add two {!Int} numbers.
 
-  {[Int.add(3002, 4004) == 7006]}
+  {[
+      Int.add(3002, 4004) == 7006
+    ]}
 
   You {e cannot } add an [int] and a [float] directly though.
 
@@ -76,13 +80,17 @@ val add : t -> t -> t
 val subtract : t -> t -> t
 (** Subtract numbers
 
-    {[Int.subtract(4, 3) == 1]}
+    {[
+      Int.subtract(4, 3) == 1
+    ]}
 *)
 
 val multiply : t -> t -> t
 (** Multiply [int]s like
 
-    {[Int.multiply(2, 7) == 14]}
+    {[
+      Int.multiply(2, 7) == 14
+    ]}
 *)
 
 val divide : t -> by:t -> t
@@ -96,7 +104,9 @@ val divide : t -> by:t -> t
 
     {2 Examples}
 
-    {[Int.divide(3, ~by=2) == 1]}
+    {[
+      Int.divide(3, ~by=2) == 1
+    ]}
 *)
 
 val divideFloat : t -> by:t -> float
@@ -104,9 +114,11 @@ val divideFloat : t -> by:t -> float
 
     {2 Examples}
 
-    {[Int.divideFloat(3, ~by=2) == 1.5]}
-    {[Int.divideFloat(27, ~by=5) == 5.25]}
-    {[Int.divideFloat(8, ~by=4) == 2.0]}
+    {[
+      Int.divideFloat(3, ~by=2) == 1.5
+      Int.divideFloat(27, ~by=5) == 5.25
+      Int.divideFloat(8, ~by=4) == 2.0
+    ]}
 *)
 
 val power : base:t -> exponent:t -> t
@@ -114,7 +126,9 @@ val power : base:t -> exponent:t -> t
 
     {2 Examples}
 
-    {[Int.power(~base=7, ~exponent=3) == 343]}
+    {[
+      Int.power(~base=7, ~exponent=3) == 343
+    ]}
 *)
 
 val negate : t -> t
@@ -122,9 +136,11 @@ val negate : t -> t
 
     {2 Examples}
 
-    {[Int.negate(8) == -8]}
-    {[Int.negate(-7) == 7]}
-    {[Int.negate(0) == 0]}
+    {[
+      Int.negate(8) == -8
+      Int.negate(-7) == 7
+      Int.negate(0) == 0
+    ]}
 *)
 
 val absolute : t -> t
@@ -132,9 +148,11 @@ val absolute : t -> t
 
     {2 Examples}
 
-    {[Int.absolute(8) == 8]}
-    {[Int.absolute(-7) == 7]}
-    {[Int.absolute(0) == 0]}
+    {[
+      Int.absolute(8) == 8
+      Int.absolute(-7) == 7
+      Int.absolute(0) == 0
+    ]}
 *)
 
 val modulo : t -> by:t -> t
@@ -150,15 +168,17 @@ val modulo : t -> by:t -> t
 
     {2 Examples}
 
-    {[Int.modulo(-4, ~by=3) == 2]}
-    {[Int.modulo(-3, ~by=3) == 0]}
-    {[Int.modulo(-2, ~by=3) = 1]}
-    {[Int.modulo(-1, ~by=3) == 2]}
-    {[Int.modulo(0, ~by=3) == 0]}
-    {[Int.modulo(1, ~by=3) == 1]}
-    {[Int.modulo(2, ~by=3) == 2]}
-    {[Int.modulo(3, ~by=3) == 0]}
-    {[Int.modulo(4, ~by=3) == 1]}
+    {[
+      Int.modulo(-4, ~by=3) == 2
+      Int.modulo(-3, ~by=3) == 0
+      Int.modulo(-2, ~by=3) = 1
+      Int.modulo(-1, ~by=3) == 2
+      Int.modulo(0, ~by=3) == 0
+      Int.modulo(1, ~by=3) == 1
+      Int.modulo(2, ~by=3) == 2
+      Int.modulo(3, ~by=3) == 0
+      Int.modulo(4, ~by=3) == 1
+    ]}
 *)
 
 val remainder : t -> by:t -> t
@@ -175,7 +195,7 @@ val remainder : t -> by:t -> t
     {[
       Array.map([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], ~f=Int.remainder(~by=4)) ==
       [-1, 0, -3, -2, -1, 0, 1, 2, 3, 0, 1]
-    ]}
+   ]}
 *)
 
 val maximum : t -> t -> t
@@ -183,8 +203,10 @@ val maximum : t -> t -> t
 
     {2 Examples}
 
-    {[Int.maximum(7, 9) == 9]}
-    {[Int.maximum(-4, -1) == -1]}
+    {[
+      Int.maximum(7, 9) == 9
+      Int.maximum(-4, -1) == -1
+    ]}
 *)
 
 val minimum : t -> t -> t
@@ -192,8 +214,10 @@ val minimum : t -> t -> t
 
     {2 Examples}
 
-    {[Int.minimum(7, 9) == 7]}
-    {[Int.minimum(-4, -1) == -4]}
+    {[
+      Int.minimum(7, 9) == 7
+      Int.minimum(-4, -1) == -4
+    ]}
 *)
 
 (** {1 Query} *)
@@ -203,9 +227,11 @@ val isEven : t -> bool
 
     {2 Examples}
 
-    {[Int.isEven(8) == true]}
-    {[Int.isEven(7) == false]}
-    {[Int.isEven(0) == true]}
+    {[
+      Int.isEven(8) == true
+      Int.isEven(7) == false
+      Int.isEven(0) == true
+    ]}
 *)
 
 val isOdd : t -> bool
@@ -213,9 +239,11 @@ val isOdd : t -> bool
 
   {2 Examples}
 
-  {[Int.isOdd(7) == true]}
-  {[Int.isOdd(8) == false]}
-  {[Int.isOdd(0) == false]}
+  {[
+      Int.isOdd(7) == true
+      Int.isOdd(8) == false
+      Int.isOdd(0) == false
+    ]}
 *)
 
 val clamp : t -> lower:t -> upper:t -> t
@@ -227,9 +255,11 @@ val clamp : t -> lower:t -> upper:t -> t
 
   {2 Examples}
 
-  {[Int.clamp(5, ~lower=0, ~upper=8) == 5]}
-  {[Int.clamp(9, ~lower=0, ~upper=8) == 8]}
-  {[Int.clamp(5, ~lower=-10, ~upper=-5) == -5]}
+  {[
+      Int.clamp(5, ~lower=0, ~upper=8) == 5
+      Int.clamp(9, ~lower=0, ~upper=8) == 8
+      Int.clamp(5, ~lower=-10, ~upper=-5) == -5
+    ]}
 *)
 
 val inRange : t -> lower:t -> upper:t -> bool
@@ -241,9 +271,11 @@ val inRange : t -> lower:t -> upper:t -> bool
 
     {2 Examples}
 
-    {[Int.inRange(3, ~lower=2, ~upper=4) == true]}
-    {[Int.inRange(4, ~lower=5, ~upper=8) == false]}
-    {[Int.inRange(-3, ~lower=-6, ~upper=-2) == true]}
+    {[
+      Int.inRange(3, ~lower=2, ~upper=4) == true
+      Int.inRange(4, ~lower=5, ~upper=8) == false
+      Int.inRange(-3, ~lower=-6, ~upper=-2) == true
+    ]}
 
 *)
 
@@ -258,7 +290,7 @@ val toFloat : t -> float
       let halfOf = (number: int): float => Int.toFloat(number) /. 2.
 
       halfOf(7) == 3.5
-    ]}
+   ]}
 *)
 
 val toString : t -> string
@@ -266,13 +298,17 @@ val toString : t -> string
 
     Guarantees that
 
-    {[n->Int.toString->Int.fromString == Some(n)]}
+    {[
+      n->Int.toString->Int.fromString == Some(n)
+    ]}
 
     {2 Examples}
 
-    {[Int.toString(3) == "3"]}
-    {[Int.toString(-3) == "-3"]}
-    {[Int.toString(0) == "0"]}
+    {[
+      Int.toString(3) == "3"
+      Int.toString(-3) == "-3"
+      Int.toString(0) == "0"
+    ]}
 *)
 
 (** {1 Compare} *)

@@ -30,10 +30,12 @@ val fromInt : int -> bool option
 
     {2 Examples}
 
-    {[Bool.fromInt(0) == Some(false)]}
-    {[Bool.fromInt(1) == Some(true)]}
-    {[Bool.fromInt(8) == None]}
-    {[Bool.fromInt(-3) == None]}
+    {[
+      Bool.fromInt(0) == Some(false)
+      Bool.fromInt(1) == Some(true)
+      Bool.fromInt(8) == None
+      Bool.fromInt(-3) == None
+    ]}
 *)
 
 val fromString : string -> bool option
@@ -41,13 +43,15 @@ val fromString : string -> bool option
 
     {2 Examples}
 
-    {[Bool.fromString("true") == Some(true)]}
-    {[Bool.fromString("false") == Some(false)]}
-    {[Bool.fromString("True") == None]}
-    {[Bool.fromString("False") == None]}
-    {[Bool.fromString("0") == None]}
-    {[Bool.fromString("1") == None]}
-    {[Bool.fromString("Not even close") == None]}
+    {[
+      Bool.fromString("true") == Some(true)
+      Bool.fromString("false") == Some(false)
+      Bool.fromString("True") == None
+      Bool.fromString("False") == None
+      Bool.fromString("0") == None
+      Bool.fromString("1") == None
+      Bool.fromString("Not even close") == None
+    ]}
 *)
 
 (** {1 Basic operations} *)
@@ -59,10 +63,12 @@ val xor : bool -> bool -> bool
 
     {2 Examples}
 
-    {[Bool.xor(true, true) == false]}
-    {[Bool.xor(true, false) == true]}
-    {[Bool.xor(false, true) == true]}
-    {[Bool.xor(false, false) == false]}
+    {[
+      Bool.xor(true, true) == false
+      Bool.xor(true, false) == true
+      Bool.xor(false, true) == true
+      Bool.xor(false, false) == false
+    ]}
 *)
 
 val not : t -> bool
@@ -70,21 +76,26 @@ val not : t -> bool
 
     {2 Examples}
 
-    {[Bool.not(false) == true]}
-    {[Bool.not(true) == false]}
+    {[
+      Bool.not(false) == true
+      Bool.not(true) == false
+    ]}
 *)
 
 val and_ : bool -> bool -> bool
-(** The logical conjunction or operator.
+(** The logical conjunction [AND] operator.
 
     Returns [true] if {b both} of its operands are [true].
+    If the 'left' operand evaluates to [false], the 'right' operand is not evaluated.
 
     {2 Examples}
 
-    {[Bool.and_(true, true) == true]}
-    {[Bool.and_(true, false) == false]}
-    {[Bool.and_(false, true) == false]}
-    {[Bool.and_(false, false) == false]}
+    {[
+      Bool.and_(true, true) == true
+      Bool.and_(true, false) == false
+      Bool.and_(false, true) == false
+      Bool.and_(false, false) == false
+    ]}
 *)
 
 (** {1 Convert} *)
@@ -94,8 +105,10 @@ val toString : bool -> string
 
     {2 Examples}
 
-    {[Bool.toString(true) == "true"]}
-    {[Bool.toString(false) == "false"]}
+    {[
+      Bool.toString(true) == "true"
+      Bool.toString(false) == "false"
+    ]}
 *)
 
 val toInt : bool -> int
@@ -103,8 +116,10 @@ val toInt : bool -> int
 
     {2 Examples}
 
-    {[Bool.toInt(true) == 1]}
-    {[Bool.toInt(false) == 0]}
+    {[
+      Bool.toInt(true) == 1
+      Bool.toInt(false) == 0
+    ]}
 *)
 
 (** {1 Compare} *)
@@ -114,18 +129,22 @@ val equal : bool -> bool -> bool
 
     {2 Examples}
 
-    {[Bool.equal(true, true) == true]}
-    {[Bool.equal(false, false) == true]}
-    {[Bool.equal(false, true) == false]}
+    {[
+      Bool.equal(true, true) == true
+      Bool.equal(false, false) == true
+      Bool.equal(false, true) == false
+    ]}
 *)
 
 val compare : bool -> bool -> int
-(** Compare two boolean values
+(** Compare two [bool] values.
 
     {2 Examples}
 
-    {[Bool.compare(true, false) == 1]}
-    {[Bool.compare(false, true) == -1]}
-    {[Bool.compare(true, true) == 0]}
-    {[Bool.compare(false, false) == 0]}
+    {[
+      Bool.compare(true, false) == 1
+      Bool.compare(false, true) == -1
+      Bool.compare(true, true) == 0
+      Bool.compare(false, false) == 0
+    ]}
 *)

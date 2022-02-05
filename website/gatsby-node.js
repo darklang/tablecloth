@@ -128,7 +128,8 @@ exports.sourceNodes = ({ actions }) => {
   log.info('nativeModelPath', nativeModelPath);
   log.info('rescriptModelPath', rescriptModelPath);
 
-  let readModel = (name) =>  fs.readFileSync(name).toString();
+  let removeSpacesFromJSON = (string) => JSON.stringify(JSON.parse(string))
+  let readModel = (name) =>  removeSpacesFromJSON(fs.readFileSync(name).toString());
   
 
   let nativeNode = () => createNodeFromModel("odoc-model-native", readModel(nativeModelPath));
