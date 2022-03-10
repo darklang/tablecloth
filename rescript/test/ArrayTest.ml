@@ -136,6 +136,33 @@ let suite =
                    (let open Eq in
                    list (pair int string))
                    [ (0, "cat"); (1, "dog") ] ) ) ;
+
+      describe "clone" (fun () ->
+          test "returns an int array" (fun () ->
+              let numbers = [| 1; 2; 3 |] in
+              let otherNumbers = clone numbers in
+              numbers.(1) <- 9 ;
+              expect otherNumbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 2; 3 |] ) ;
+          test "returns an array of int arrays" (fun () ->
+              let numberGrid =
+                [| [| 1; 2; 3 |]; [| 4; 5; 6 |]; [| 7; 8; 9 |] |]
+              in
+
+              let numberGridCopy = clone numberGrid in
+
+              numberGrid.(1).(1) <- 0 ;
+
+              numberGridCopy.(1).(1) <- 9 ;
+              expect numberGridCopy
+              |> toEqual
+                   (let open Eq in
+                   array (array int))
+                   [| [| 1; 2; 3 |]; [| 4; 9; 6 |]; [| 7; 8; 9 |] |] ) ) ;
+
       describe "get" (fun () ->
           test "returns Some for an in-bounds index" (fun () ->
               expect [| "cat"; "dog"; "eel" |].(2) |> toEqual Eq.string "eel" ) ;
@@ -191,6 +218,35 @@ let suite =
                    (let open Eq in
                    array string)
                    [| "antelope"; "bat"; "cat" |] ) ) ;
+
+      describe "first" (fun () ->
+          test "return first element" (fun () ->
+              expect (first [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 1) ) ;
+          test "return none from empty array" (fun () ->
+              expect (first [||])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
+      describe "last" (fun () ->
+          test "return last element" (fun () ->
+              expect (last [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 3) ) ;
+          test "return none from empty array" (fun () ->
+              expect (last [||])
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
       describe "sum" (fun () ->
           test "equals zero for an empty array" (fun () ->
               expect (sum [||] (module Int)) |> toEqual Eq.int 0 ) ;
@@ -203,6 +259,28 @@ let suite =
                    (let open Eq in
                    array int)
                    [| 2; 4; 6 |] ) ) ;
+
+      describe "filterMap" (fun () ->
+          test "keep elements that [f] returns [true] for" (fun () ->
+              expect
+                (filterMap [| 3; 4; 5; 6 |] ~f:(fun number ->
+                     if Int.isEven number then Some (number * number) else None )
+                )
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 16; 36 |] ) ) ;
+
+      describe "flatMap" (fun () ->
+          test
+            "{!map} [f] onto an array and {!flatten} the resulting arrays"
+            (fun () ->
+              expect (flatMap ~f:(fun n -> [| n; n |]) [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 1; 2; 2; 3; 3 |] ) ) ;
+
       describe "swap" (fun () ->
           test "switches values at the given indicies" (fun () ->
               let numbers = [| 1; 2; 3 |] in
@@ -243,24 +321,88 @@ let suite =
                    (let open Eq in
                    array (pair string int))
                    [| ("alice", 2); ("bob", 5); ("chuck", 7) |] ) ) ;
-      test "map3" (fun () ->
-          expect
-            (map3
-               ~f:Tuple3.make
-               [| "alice"; "bob"; "chuck" |]
-               [| 2; 5; 7; 8 |]
-               [| true; false; true; false |] )
-          |> toEqual
-               (let open Eq in
-               array (trio string int bool))
-               [| ("alice", 2, true); ("bob", 5, false); ("chuck", 7, true) |] ) ;
-      test "flatMap" (fun () ->
-          let duplicate n = [| n; n |] in
-          expect (flatMap ~f:duplicate [| 1; 2; 3 |])
-          |> toEqual
-               (let open Eq in
-               array int)
-               [| 1; 1; 2; 2; 3; 3 |] ) ;
+
+      describe "map3" (fun () ->
+          test "maps elements of 3 arrays" (fun () ->
+              expect
+                (map3
+                   ~f:Tuple3.make
+                   [| "alice"; "bob"; "chuck" |]
+                   [| 2; 5; 7; 8 |]
+                   [| true; false; true; false |] )
+              |> toEqual
+                   (let open Eq in
+                   array (trio string int bool))
+                   [| ("alice", 2, true)
+                    ; ("bob", 5, false)
+                    ; ("chuck", 7, true)
+                   |] ) ) ;
+
+      describe "partition" (fun () ->
+          test "Split an array into a Tuple of arrays" (fun () ->
+              expect (partition [| 1; 2; 3; 4; 5; 6 |] ~f:Int.isOdd)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 1; 3; 5 |], [| 2; 4; 6 |]) ) ) ;
+
+      describe "splitAt" (fun () ->
+          test "Divides an array into a Tuple of arrays" (fun () ->
+              expect (splitAt [| 1; 2; 3; 4; 5 |] ~index:2)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 1; 2 |], [| 3; 4; 5 |]) ) ;
+          test "Split array at array[0]" (fun () ->
+              expect (splitAt [| 1; 2; 3; 4; 5 |] ~index:0)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([||], [| 1; 2; 3; 4; 5 |]) ) ) ;
+
+      describe "splitWhen" (fun () ->
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
+              expect (splitWhen [| 5; 7; 8; 6; 4 |] ~f:Int.isEven)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 5; 7 |], [| 8; 6; 4 |]) ) ;
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
+              expect (splitWhen [| 5; 7; 8; 7; 4 |] ~f:Int.isEven)
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array int))
+                   ([| 5; 7 |], [| 8; 7; 4 |]) ) ;
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
+              expect
+                (splitWhen [| "Ant"; "Bat"; "Cat" |] ~f:(fun animal ->
+                     String.length animal > 3 ) )
+              |> toEqual
+                   (let open Eq in
+                   pair (array string) (array string))
+                   ([| "Ant"; "Bat"; "Cat" |], [||]) ) ;
+          test
+            "Divides an array at the first element f returns true for"
+            (fun () ->
+              expect (splitWhen [| 2.; Float.pi; 1.111 |] ~f:Float.isInteger)
+              |> toEqual
+                   (let open Eq in
+                   pair (array float) (array float))
+                   ([||], [| 2.; Float.pi; 1.111 |]) ) ) ;
+      describe "flatmap" (fun () ->
+          test "flatMap" (fun () ->
+              let duplicate n = [| n; n |] in
+              expect (flatMap ~f:duplicate [| 1; 2; 3 |])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 1; 2; 2; 3; 3 |] ) ) ;
       describe "sliding" (fun () ->
           test "size 1" (fun () ->
               expect (sliding [| 1; 2; 3; 4; 5 |] ~size:1)
@@ -304,6 +446,30 @@ let suite =
                    (let open Eq in
                    array (array int))
                    [||] ) ) ;
+
+      describe "join" (fun () ->
+          test
+            "Convert an array of strings into a single String, placing [sep] comma between each string in the result"
+            (fun () ->
+              expect (join [| "Ant"; "Bat"; "Cat" |] ~sep:", ")
+              |> toEqual Eq.string "Ant, Bat, Cat" ) ;
+          test
+            "Convert an empty array of strings into a String, returns an empty string"
+            (fun () -> expect (join [||] ~sep:", ") |> toEqual Eq.string "") ) ;
+
+      describe "count" (fun () ->
+          test
+            "returns the number of elements in array of odd and even numbers that isEven returns true for, returns int 2"
+            (fun () ->
+              expect (count ~f:Int.isEven [| 1; 3; 4; 8 |]) |> toEqual Eq.int 2 ) ;
+          test
+            "returns the number of elements in array of odd numbers that isEven returns true for, returns int 0"
+            (fun () ->
+              expect (count ~f:Int.isEven [| 1; 3 |]) |> toEqual Eq.int 0 ) ;
+          test
+            "returns the number of elements in an empty array that isEven returns true for, returns int 0"
+            (fun () -> expect (count ~f:Int.isEven [||]) |> toEqual Eq.int 0) ) ;
+
       describe "find" (fun () ->
           test "returns the first element which `f` returns true for" (fun () ->
               expect (find ~f:Int.isEven [| 1; 3; 4; 8 |])
@@ -354,6 +520,65 @@ let suite =
                    (let open Eq in
                    option (pair int int))
                    None ) ) ;
+
+      describe "includes" (fun () ->
+          test "returns true if equal" (fun () ->
+              expect (includes [| 1; 2; 3 |] 2 ~equal:( = ))
+              |> toEqual Eq.bool true ) ;
+          test "returns false if not equal" (fun () ->
+              expect (includes [| 1; 5; 3 |] 2 ~equal:( = ))
+              |> toEqual Eq.bool false ) ;
+          test "returns false if empty" (fun () ->
+              expect (includes [||] 2 ~equal:( = )) |> toEqual Eq.bool false ) ) ;
+
+      describe "minimum" (fun () ->
+          test "returns smallest element" (fun () ->
+              expect (minimum [| 1; -2; 3 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some (-2)) ) ;
+          test "returns none is empty" (fun () ->
+              expect (minimum [||] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
+      describe "maximum" (fun () ->
+          test "returns largest element" (fun () ->
+              expect (maximum [| 1; -2; 3 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   (Some 3) ) ;
+          test "returns none is empty" (fun () ->
+              expect (maximum [||] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option int)
+                   None ) ) ;
+
+      describe "extent" (fun () ->
+          test "returns range" (fun () ->
+              expect (extent [| 1; -2; 3 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   (Some (-2, 3)) ) ;
+          test "returns range on single" (fun () ->
+              expect (extent [| 1 |] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   (Some (1, 1)) ) ;
+          test "returns none is empty" (fun () ->
+              expect (extent [||] ~compare:Int.compare)
+              |> toEqual
+                   (let open Eq in
+                   option (pair int int))
+                   None ) ) ;
+
       describe "any" (fun () ->
           test "returns false for empty arrays" (fun () ->
               expect (any [||] ~f:Int.isEven) |> toEqual Eq.bool false ) ;
@@ -376,18 +601,81 @@ let suite =
             "returns false if a single element fails returns false for [f]"
             (fun () ->
               expect (all ~f:Int.isEven [| 2; 3 |]) |> toEqual Eq.bool false ) ) ;
-      test "append" (fun () ->
-          expect (append (repeat ~length:2 42) (repeat ~length:3 81))
-          |> toEqual
-               (let open Eq in
-               array int)
-               [| 42; 42; 81; 81; 81 |] ) ;
-      test "flatten" (fun () ->
-          expect (flatten [| [| 1; 2 |]; [| 3 |]; [| 4; 5 |] |])
-          |> toEqual
-               (let open Eq in
-               array int)
-               [| 1; 2; 3; 4; 5 |] ) ;
+
+      describe "append" (fun () ->
+          test "append" (fun () ->
+              expect (append (repeat ~length:2 42) (repeat ~length:3 81))
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 42; 42; 81; 81; 81 |] ) ) ;
+      describe "flatten" (fun () ->
+          test "flatten" (fun () ->
+              expect (flatten [| [| 1; 2 |]; [| 3 |]; [| 4; 5 |] |])
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 1; 2; 3; 4; 5 |] ) ) ;
+
+      describe "zip" (fun () ->
+          test
+            "Combine two arrays by merging each pair of elements into a tuple"
+            (fun () ->
+              expect (zip [| 1; 2; 3; 4; 5 |] [| "Dog"; "Eagle"; "Ferret" |])
+              |> toEqual
+                   (let open Eq in
+                   array (pair int string))
+                   [| (1, "Dog"); (2, "Eagle"); (3, "Ferret") |] ) ;
+          test "Combine an empty array and another array" (fun () ->
+              expect (zip [||] [| "Dog"; "Eagle"; "Ferret" |])
+              |> toEqual
+                   (let open Eq in
+                   array (pair int string))
+                   [||] ) ) ;
+
+      describe "unzip" (fun () ->
+          test "Decompose an array of tuples into a tuple of arrays" (fun () ->
+              expect (unzip [| (0, true); (17, false); (1337, true) |])
+              |> toEqual
+                   (let open Eq in
+                   pair (array int) (array bool))
+                   ([| 0; 17; 1337 |], [| true; false; true |]) ) ) ;
+
+      describe "values" (fun () ->
+          test
+            "Return all of the [Some] values from an array of options"
+            (fun () ->
+              expect (values [| Some "Ant"; None; Some "Cat" |])
+              |> toEqual
+                   (let open Eq in
+                   array string)
+                   [| "Ant"; "Cat" |] ) ;
+          test
+            "Return all of the [Some] values from an empty array of options"
+            (fun () ->
+              expect (values [||])
+              |> toEqual
+                   (let open Eq in
+                   array string)
+                   [||] ) ) ;
+
+      describe "compare" (fun () ->
+          test
+            "Compare two arrays of unequal length using provided function Int.compare to compare pairs of elements and returns -1"
+            (fun () ->
+              expect (compare Int.compare [| 1; 2; 3 |] [| 1; 2; 3; 4 |])
+              |> toEqual Eq.int (-1) ) ;
+          test
+            "Compare two identical arrays using provided function Int.compare to compare pairs of elements and returns 0"
+            (fun () ->
+              expect (compare Int.compare [| 1; 2; 3 |] [| 1; 2; 3 |])
+              |> toEqual Eq.int 0 ) ;
+          test
+            "Compare two arrays with of the same length and differing elements using provided function Int.compare to compare pairs of elements and returns 1"
+            (fun () ->
+              expect (compare Int.compare [| 1; 2; 5 |] [| 1; 2; 3 |])
+              |> toEqual Eq.int 1 ) ) ;
+
       describe "intersperse" (fun () ->
           test "equals an array literal of the same value" (fun () ->
               expect
@@ -402,6 +690,35 @@ let suite =
                    (let open Eq in
                    array int)
                    [||] ) ) ;
+
+      describe "chunksOf" (fun () ->
+          test "Split an array into equally sized chunks" (fun () ->
+              expect
+                (chunksOf
+                   ~size:2
+                   [| "#FFBA49"; "#9984D4"; "#20A39E"; "#EF5B5B" |] )
+              |> toEqual
+                   (let open Eq in
+                   array (array string))
+                   [| [| "#FFBA49"; "#9984D4" |]; [| "#20A39E"; "#EF5B5B" |] |] ) ;
+          test
+            "Split an array into equally sized chunks ignoring partial chunks"
+            (fun () ->
+              expect
+                (chunksOf
+                   ~size:2
+                   [| "#FFBA49"; "#9984D4"; "#20A39E"; "#EF5B5B"; "#23001E" |] )
+              |> toEqual
+                   (let open Eq in
+                   array (array string))
+                   [| [| "#FFBA49"; "#9984D4" |]; [| "#20A39E"; "#EF5B5B" |] |] ) ;
+          test "Split an empty array into equally sized chunks" (fun () ->
+              expect (chunksOf ~size:2 [||])
+              |> toEqual
+                   (let open Eq in
+                   array (array string))
+                   [||] ) ) ;
+
       describe "slice" (fun () ->
           let numbers = [| 0; 1; 2; 3; 4 |] in
           let positiveArrayLengths =
@@ -523,6 +840,33 @@ let suite =
                    (let open Eq in
                    array int)
                    [| 3; 2; 1 |] ) ) ;
+
+      describe "sort" (fun () ->
+          test "empty list" (fun () ->
+              let numbers = [||] in
+              sort numbers ~compare:Int.compare ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [||] ) ;
+          test "one element" (fun () ->
+              let numbers = [| 5 |] in
+              sort numbers ~compare:Int.compare ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 5 |] ) ;
+          test "multiple elements" (fun () ->
+              let numbers = [| 5; 6; 8; 3; 6 |] in
+              sort numbers ~compare:Int.compare ;
+              expect numbers
+              |> toEqual
+                   (let open Eq in
+                   array int)
+                   [| 3; 5; 6; 6; 8 |] ) ) ;
+
       describe "groupBy" (fun () ->
           test "returns an empty map for an empty array" (fun () ->
               expect

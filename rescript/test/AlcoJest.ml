@@ -5,6 +5,13 @@ module Coordinate = struct
   type t = int * int
 end
 
+module Student = struct
+  type t =
+    { id : int
+    ; name : string
+    }
+end
+
 module Eq : sig
   (** This module is purely to make the API match the one provided in native/test/AlcoJest.re
   All of the implementations are `ignore` since although Alcotest requires    
@@ -26,6 +33,8 @@ module Eq : sig
   val float : float t
 
   val coordinate : Coordinate.t t
+
+  val student : Student.t t
 
   val string : string t
 
@@ -60,6 +69,8 @@ end = struct
   let float = ignore
 
   let coordinate = ignore
+
+  let student = ignore
 
   let string = ignore
 

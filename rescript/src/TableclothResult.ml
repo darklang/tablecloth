@@ -40,6 +40,10 @@ let and_ a b = match a with Ok _ -> b | _ -> a
 
 let unwrap t ~default = Belt.Result.getWithDefault t default
 
+let unwrapLazy t ~default =
+  match t with Ok t' -> t' | Error _ -> Lazy.force default
+
+
 let unwrapUnsafe t = Belt.Result.getExn t
 
 let unwrap_unsafe = unwrapUnsafe

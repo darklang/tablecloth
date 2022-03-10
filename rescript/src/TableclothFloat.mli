@@ -113,7 +113,7 @@ val from_int : int -> t
 
 val fromString : string -> t option
 (** Convert a {!String} to a [float].
-
+    The behaviour of this function is platform specific.
     Parses [nan] and [infinity] case-insensitive.
 
     {2 Examples}
@@ -779,7 +779,6 @@ val to_int : t -> int option
 
 val toString : t -> string
 (** Convert a [float] to a {!String}
-
     The behaviour of this function is platform specific
 *)
 
