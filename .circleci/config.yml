@@ -144,15 +144,15 @@ jobs:
           path: ~/repo/website
       - run:
         name: Download dark-cli
-        - command:
+        command:
           curl https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
       - run:
         name: Make dark-cli Executable
-        - command:
+        command:
           chmod +x dark-cli-linux
       - run:
         name: Execute dark-cli to Deploy Static Assets
-        - command:
+        command:
           ./dark-cli-apple --canvas tablecloth --password "$DEPLOY_PWD" --user $DEPLOY_USR ~/repo/website/public
 
 workflows:
