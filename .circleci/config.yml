@@ -128,6 +128,27 @@ jobs:
           paths:
             - ~/repo/website/node_modules
 
+hold-deploy:
+    type: approval
+    requires: build
+
+  website-deploy:
+    requires: hold-deploy #need hold or just build and deploy?
+    filters:
+      branches:
+        only:
+          - main
+    docker:
+      - image: cimg/node:16.6.0 #how get dark cli?
+    environment:
+      CI: true
+      NODE_ENV: production
+    working_directory: ~/repo/website
+    steps: 
+      - checkout:
+          path: ~/repo/website
+      - run: ./dark-cli-apple --canvas tablecloth --password $ENVVAR --user $OTHERENVAR ~/build #need deploy user?
+
 workflows:
   version: 2
   build:
@@ -170,3 +191,5 @@ workflows:
       - source-code-formatting
       - documentation-generator-build
       - website-build
+      - hold-deploy
+      - website-deploy
