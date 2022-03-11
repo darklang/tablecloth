@@ -153,7 +153,7 @@ jobs:
       - run:
         name: Execute dark-cli to Deploy Static Assets
         - command:
-          ./dark-cli-apple --canvas tablecloth --password $DEPLOY_PWD --user $DEPLOY_USR ~/build
+          ./dark-cli-apple --canvas tablecloth --password $DEPLOY_PWD --user $DEPLOY_USR ~/repo/website/build
 
 workflows:
   version: 2
