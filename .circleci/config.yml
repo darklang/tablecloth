@@ -190,7 +190,8 @@ workflows:
       - documentation-generator-build
       - website-build
       - website-deploy:
-          requires: website-build
+          requires: 
+            - website-build
           filters:
             branches:
               only: main
