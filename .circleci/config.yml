@@ -128,11 +128,6 @@ jobs:
           paths:
             - ~/repo/website/node_modules
   website-deploy:
-    requires: website-build
-    filters:
-      branches:
-        only:
-          - main
     docker:
       - image: cimg/node:16.6.0 
     environment:
@@ -197,5 +192,9 @@ workflows:
       - source-code-formatting
       - documentation-generator-build
       - website-build
-      - website-deploy
-      
+      - website-deploy:
+          requires: website-build
+          filters:
+            branches:
+              only: main
+
