@@ -178,6 +178,24 @@ val or_ : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
   {[Result.or_ (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedBird "Robin"))]}
 *)
 
+val orElse : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
+(** Return the second argument if it {!isOk}, otherwise return the first.
+
+  Like {!or_} but in reverse. Useful when using the [|>] operator
+
+  {2 Examples}
+
+  {[Result.orElse (Ok "Boar") (Ok "Gecko") = (Ok "Gecko")]}
+
+  {[Result.orElse (Error (`UnexpectedInvertabrate "Periwinkle")) (Ok "Gecko") = (Ok "Gecko")]}
+
+  {[Result.orElse (Ok "Boar") (Error (`UnexpectedInvertabrate "Periwinkle")) = (Ok "Boar") ]}
+
+  {[Result.orElse (Error (`UnexpectedInvertabrate "Periwinkle")) (Error (`UnexpectedBird "Robin")) = (Error (`UnexpectedInvertabrate "Periwinkle"))]}
+*)
+
+val or_else : ('ok, 'error) t -> ('ok, 'error) t -> ('ok, 'error) t
+
 val both : ('a, 'error) t -> ('b, 'error) t -> ('a * 'b, 'error) t
 (** Combine two results, if both are [Ok] returns an [Ok] containing a {!Tuple} of the values.
 

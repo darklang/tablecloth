@@ -32,6 +32,10 @@ let flatten = Result.join
 
 let or_ a b = match a with Ok _ -> a | _ -> b
 
+let orElse a b = match b with Ok _ -> b | _ -> a
+
+let or_else = orElse
+
 let and_ a b = match a with Ok _ -> b | _ -> a
 
 let unwrap = Result.value
