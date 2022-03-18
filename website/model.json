@@ -11371,6 +11371,107 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "unwrapLazy",
+                  "qualified_name": "TableclothResult.unwrapLazy",
+                  "type": {
+                    "rendered": "('ok, 'error) TableclothResult.t -> default:'ok Stdlib.Lazy.t -> 'ok"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Unwrap a Result using the "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Lazy.force default"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " value in case of an "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "Error"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Result.unwrap ~default:(lazy 0) (Ok 12) = 12",
+                            "reason": "Result.unwrap(~default=lazy(0), Ok(12)) == 12;\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n    "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Result.unwrap ~default:(lazy 0) ((Error (`UnexpectedBird \"Ostrich\"))) = 0",
+                            "reason": "Result.unwrap(~default=lazy(0), Error(`UnexpectedBird(\"Ostrich\"))) == 0;\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "unwrapUnsafe",
                   "qualified_name": "TableclothResult.unwrapUnsafe",
                   "type": {
@@ -52509,15 +52610,7 @@
                         },
                         {
                           "tag": "Raw",
-                          "value": "."
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
-                        },
-                        {
-                          "tag": "Raw",
-                          "value": "\n    Parses "
+                          "value": ".\n    The behaviour of this function is platform specific.\n    Parses "
                         },
                         {
                           "tag": "Code",
@@ -58838,10 +58931,6 @@
                               ]
                             }
                           }
-                        },
-                        {
-                          "tag": "Newline",
-                          "value": "\n"
                         },
                         {
                           "tag": "Raw",

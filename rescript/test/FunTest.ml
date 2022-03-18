@@ -9,6 +9,10 @@ let suite =
       test "sequence" (fun () -> expect (Fun.sequence 1 2) |> toEqual Eq.int 2) ;
       test "flip" (fun () ->
           expect (Fun.flip Int.( / ) 2 4) |> toEqual Eq.int 2 ) ;
+      test "negate" (fun () ->
+          let num = 5 in
+          let greaterThanFour n = n > 4 in
+          expect (Fun.negate greaterThanFour num) |> toEqual Eq.bool false ) ;
       test "apply" (fun () ->
           expect (Fun.apply (fun a -> a + 1) 1) |> toEqual Eq.int 2 ) ;
       let increment x = x + 1 in
@@ -38,6 +42,7 @@ let suite =
                (let open Eq in
                array int)
                [| 0; 2 |] ) ;
+
       test "curry" (fun () ->
           expect (Fun.curry (fun (a, b) -> a / b) 8 4)
           |> toEqual

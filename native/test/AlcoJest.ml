@@ -11,6 +11,13 @@ module Coordinate = struct
     else -1
 end
 
+module Student = struct
+  type t =
+    { id : int
+    ; name : string
+    }
+end
+
 module Eq = struct
   include AT
 
@@ -20,6 +27,17 @@ module Eq = struct
       Format.pp_print_string
         ppf
         ("(" ^ string_of_int x ^ ", " ^ string_of_int y ^ ")")
+    in
+    AT.testable pp eq
+
+
+  let student =
+    let eq (a : Student.t) (b : Student.t) : bool = a = b in
+    let[@warning "-3"] pp
+        (ppf : Format.formatter) ({ id = x; name = y } : Student.t) =
+      Format.pp_print_string
+        ppf
+        ("{ id = " ^ string_of_int x ^ "; name = " ^ y ^ "}")
     in
     AT.testable pp eq
 

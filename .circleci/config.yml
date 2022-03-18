@@ -127,6 +127,25 @@ jobs:
           key: v1-website-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/repo/website/node_modules
+  website-deploy:
+    docker:
+      - image: cimg/node:16.6.0 
+    environment:
+      CI: true
+      NODE_ENV: production
+    working_directory: ~/repo/website
+    steps: 
+      - checkout:
+          path: ~/repo/website
+      - run:
+          name: Download dark-cli
+          command: curl https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
+      - run:
+          name: Make dark-cli Executable
+          command: hmod +x dark-cli-linux
+      - run:
+          name: Execute dark-cli to Deploy Static Assets
+          command: ./dark-cli-apple --canvas tablecloth --password "$DEPLOY_PWD" --user $DEPLOY_USR ~/repo/website/public
 
 workflows:
   version: 2
@@ -170,3 +189,10 @@ workflows:
       - source-code-formatting
       - documentation-generator-build
       - website-build
+      - website-deploy:
+          requires: 
+            - website-build
+          filters:
+            branches:
+              only: main
+
