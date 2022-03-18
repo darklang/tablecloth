@@ -10784,6 +10784,197 @@
               {
                 "tag": "Value",
                 "value": {
+                  "name": "orElse",
+                  "qualified_name": "TableclothResult.orElse",
+                  "type": {
+                    "rendered": "('ok, 'error) TableclothResult.t ->\n  ('ok, 'error) TableclothResult.t -> ('ok, 'error) TableclothResult.t"
+                  },
+                  "info": {
+                    "deprecated": null,
+                    "description": {
+                      "tag": "Text",
+                      "value": [
+                        {
+                          "tag": "Raw",
+                          "value": "Return the second argument if it "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "TableclothResult.isOk",
+                            "reference": {
+                              "kind": "VAL",
+                              "target": "TableclothResult.isOk",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "TableclothResult.isOk"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": ", otherwise return the first."
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n  Like "
+                        },
+                        {
+                          "tag": "Ref",
+                          "value": {
+                            "name": "TableclothResult.or_",
+                            "reference": {
+                              "kind": "VAL",
+                              "target": "TableclothResult.or_",
+                              "content": [
+                                {
+                                  "tag": "Code",
+                                  "value": "TableclothResult.or_"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " but in reverse. Useful when using the "
+                        },
+                        {
+                          "tag": "Code",
+                          "value": "|>"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": " operator"
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n  "
+                        },
+                        {
+                          "tag": "Title",
+                          "value": {
+                            "size": 2,
+                            "label": null,
+                            "content": [
+                              {
+                                "tag": "Raw",
+                                "value": "Examples"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n  "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Result.orElse (Ok \"Boar\") (Ok \"Gecko\") = (Ok \"Gecko\")",
+                            "reason": "Result.orElse(Ok(\"Boar\"), Ok(\"Gecko\")) == Ok(\"Gecko\");\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n  "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Result.orElse (Error (`UnexpectedInvertabrate \"Periwinkle\")) (Ok \"Gecko\") = (Ok \"Gecko\")",
+                            "reason": "Result.orElse(Error(`UnexpectedInvertabrate(\"Periwinkle\")), Ok(\"Gecko\"))\n== Ok(\"Gecko\");\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n  "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Result.orElse (Ok \"Boar\") (Error (`UnexpectedInvertabrate \"Periwinkle\")) = (Ok \"Boar\") ",
+                            "reason": "Result.orElse(Ok(\"Boar\"), Error(`UnexpectedInvertabrate(\"Periwinkle\")))\n== Ok(\"Boar\");\n"
+                          }
+                        },
+                        {
+                          "tag": "Newline",
+                          "value": "\n"
+                        },
+                        {
+                          "tag": "Raw",
+                          "value": "\n  "
+                        },
+                        {
+                          "tag": "CodePre",
+                          "value": {
+                            "ocaml": "Result.orElse (Error (`UnexpectedInvertabrate \"Periwinkle\")) (Error (`UnexpectedBird \"Robin\")) = (Error (`UnexpectedInvertabrate \"Periwinkle\"))",
+                            "reason": "Result.orElse(\n  Error(`UnexpectedInvertabrate(\"Periwinkle\")),\n  Error(`UnexpectedBird(\"Robin\")),\n)\n== Error(`UnexpectedInvertabrate(\"Periwinkle\"));\n"
+                          }
+                        }
+                      ]
+                    },
+                    "version": null,
+                    "before": [
+                    ],
+                    "since": null,
+                    "exceptions": [
+                    ],
+                    "return": null,
+                    "see": [
+                    ],
+                    "custom": [
+                    ]
+                  },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "or_else",
+                  "qualified_name": "TableclothResult.or_else",
+                  "type": {
+                    "rendered": "('ok, 'error) TableclothResult.t ->\n  ('ok, 'error) TableclothResult.t -> ('ok, 'error) TableclothResult.t"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
                   "name": "both",
                   "qualified_name": "TableclothResult.both",
                   "type": {
