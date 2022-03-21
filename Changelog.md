@@ -274,8 +274,10 @@ These functions now return `Radians`:
 - `Result.is_error`
 - `Result.and_`
 - `Result.or_`
+- `Result.orElse`
 - `Result.both`
 - `Result.flatten`
+- `Result.unwrapLazy`
 - `Result.unwrapUnsafe`
 - `Result.unwrap_unsafe`
 - `Result.unwrapError`
