@@ -287,6 +287,7 @@ These functions now return `Radians`:
 - `Result.map_error`
 - `Result.tap`
 - `Result.equal`
+- `Result.combine`
 - `Result.compare`
 - `( |? )` - operator version of `Result.unwrap`
 - `( >>= )` - operator version of `Result.andThen`
