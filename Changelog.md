@@ -266,6 +266,10 @@ These functions now return `Radians`:
 - Previously: `val toOption : ('err, 'ok) t -> 'ok option`
 - Currently: `val toOption : ('ok, \_) t -> 'ok option`
 
+`Result.combine`
+- Previously: `val combine : ('x, 'a) t list -> ('x, 'a list) t`
+- Currently: `val combine : ('ok, 'error) result list -> ('ok list, 'error) result`
+
 ### New
 
 - `Result.attempt`
@@ -287,7 +291,6 @@ These functions now return `Radians`:
 - `Result.map_error`
 - `Result.tap`
 - `Result.equal`
-- `Result.combine`
 - `Result.compare`
 - `( |? )` - operator version of `Result.unwrap`
 - `( >>= )` - operator version of `Result.andThen`
