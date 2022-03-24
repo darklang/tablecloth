@@ -139,7 +139,7 @@ jobs:
           path: ~/repo/website
       - run:
           name: Download dark-cli
-          command: curl https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
+          command: curl -O https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
       - run:
           name: Make dark-cli Executable
           command: hmod +x dark-cli-linux
