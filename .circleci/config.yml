@@ -142,7 +142,7 @@ jobs:
           command: curl -O https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
       - run:
           name: Make dark-cli Executable
-          command: hmod +x dark-cli-linux
+          command: chmod +x dark-cli-linux
       - run:
           name: Execute dark-cli to Deploy Static Assets
           command: ./dark-cli-apple --canvas tablecloth --password "$DEPLOY_PWD" --user $DEPLOY_USR ~/repo/website/public
