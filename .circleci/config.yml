@@ -141,6 +141,8 @@ jobs:
     steps: 
       - attach_workspace:
           at: ~/repo/website/public
+      - checkout:
+          path: ~/repo/website
       - run:
           name: Download dark-cli
           command: curl -O https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
