@@ -139,10 +139,10 @@ jobs:
       NODE_ENV: production
     working_directory: ~/repo/website
     steps: 
-      - attach_workspace:
-          at: ~/repo/website/public
       - checkout:
           path: ~/repo/website
+      - attach_workspace:
+          at: ~/repo/website/public
       - run:
           name: Download dark-cli
           command: curl -O https://dark-cli.storage.googleapis.com/latest/dark-cli-linux
