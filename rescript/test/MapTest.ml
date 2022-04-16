@@ -75,6 +75,33 @@ let suite =
           test "has length zero" (fun () ->
               expect (Tablecloth.Map.empty (module Char) |> Map.length)
               |> toEqual Eq.int 0 ) ) ;
+
+      describe "filterMap" (fun () ->
+          test
+            "maps values by their results and filters out items with no result"
+            (fun () ->
+              let filterMapMap =
+                Map.fromArray
+                  (module String)
+                  [| ("Cat", 4)
+                   ; ("Owl", 2)
+                   ; ("Fox", 5)
+                   ; ("Frog", 12)
+                   ; ("Camel", 2)
+                  |]
+              in
+
+              let ansList =
+                Map.filterMap filterMapMap ~f:(fun ~key ~value ->
+                    if value mod 2 = 0 then Some (value / 2) else None )
+                |> Map.toList
+              in
+
+              expect ansList
+              |> toEqual
+                   (let open Eq in
+                   list (pair string int))
+                   [ ("Camel", 1); ("Cat", 2); ("Frog", 6); ("Owl", 1) ] ) ) ;
       describe "Poly.fromList" (fun () ->
           test "creates a map from a list" (fun () ->
               let map = Map.Poly.fromList [ (`Ant, "Ant"); (`Bat, "Bat") ] in
