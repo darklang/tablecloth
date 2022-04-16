@@ -63,8 +63,8 @@ let filterMap m ~f =
     let result = f ~key ~value in
     Belt.Option.map result (fun value -> (key, value))
   in
-  Belt.Array.keepMap items f'
-  |> Belt.Map.(fromArray ~id:(getId m))
+  Belt.Array.keepMap items f' |> Belt.Map.(fromArray ~id:(getId m))
+
 
 let filter_map = filterMap
 
