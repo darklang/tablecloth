@@ -92,7 +92,7 @@ let suite =
               in
 
               let ansList =
-                Map.filterMap filterMapMap ~f:(fun ~key ~value ->
+                Map.filterMap filterMapMap ~f:(fun ~key:_ ~value ->
                     if value mod 2 = 0 then Some (value / 2) else None )
                 |> Map.toList
               in
