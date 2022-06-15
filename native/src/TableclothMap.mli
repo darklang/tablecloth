@@ -409,6 +409,16 @@ val filter :
     ]}
 *)
 
+val filterMap :
+     ('key, 'value, 'id) t
+  -> f:(key:'key -> value:'value -> 'b option)
+  -> ('key, 'b, 'id) t
+
+val filter_map :
+     ('key, 'value, 'id) t
+  -> f:(key:'key -> value:'value -> 'b option)
+  -> ('key, 'b, 'id) t
+
 val partition :
      ('key, 'value, 'id) t
   -> f:(key:'key -> value:'value -> bool)

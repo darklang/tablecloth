@@ -57,6 +57,17 @@ let map_with_index = mapWithIndex
 
 let filter m ~f = Belt.Map.keep m (fun _ value -> f value)
 
+let filterMap m ~f =
+  let items = Belt.Map.toArray m in
+  let f' (key, value) =
+    let result = f ~key ~value in
+    Belt.Option.map result (fun value -> (key, value))
+  in
+  Belt.Array.keepMap items f'
+  |> Belt.Map.(fromArray ~id:(getId m))
+
+let filter_map = filterMap
+
 let partition m ~f = Belt.Map.partition m (fun key value -> f ~key ~value)
 
 let find m ~f = Belt.Map.findFirstBy m (fun key value -> f ~key ~value)

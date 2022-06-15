@@ -94,6 +94,12 @@ let map_with_index = mapWithIndex
 
 let filter = Base.Map.filter
 
+let filterMap m ~f =
+  Base.Map.filter_mapi m ~f:(fun ~key ~data:value -> f ~key ~value)
+
+
+let filter_map = filterMap
+
 let partition m ~f =
   Base.Map.partitioni_tf m ~f:(fun ~key ~data -> f ~key ~value:data)
 
