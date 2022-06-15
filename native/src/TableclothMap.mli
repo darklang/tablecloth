@@ -18,12 +18,12 @@
         end)
       end
 
-      type animal = 
+      type animal =
         | Cow
         | Pig
         | Alpacca
 
-      let pointToAnimal : animal Map.Of(Point).t = 
+      let pointToAnimal : animal Map.Of(Point).t =
         Map.fromList (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]
     ]}
 
