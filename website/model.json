@@ -30276,7 +30276,7 @@
                   {
                     "tag": "CodePre",
                     "value": {
-                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      type animal = \n        | Cow\n        | Pig\n        | Alpacca\n\n      let pointToAnimal : animal Map.Of(Point).t = \n        Map.fromList (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]\n    ",
+                      "ocaml": "\n      module Point = struct\n        type t = int * int\n        let compare = Tuple2.compare Int.compare Int.compare\n        include Comparator.Make(struct\n          type nonrec t = t\n          let compare = compare\n        end)\n      end\n\n      type animal =\n        | Cow\n        | Pig\n        | Alpacca\n\n      let pointToAnimal : animal Map.Of(Point).t =\n        Map.fromList (module Points) [((0, 0), Alpacca); ((3, 4), Cow); ((6, 7), Sheep)]\n    ",
                       "reason": "module Point = {\n  type t = (int, int);\n  let compare = Tuple2.compare(Int.compare, Int.compare);\n  include Comparator.Make({\n    type nonrec t = t;\n    let compare = compare;\n  });\n};\n\ntype animal =\n  | Cow\n  | Pig\n  | Alpacca;\n\nlet pointToAnimal: Map.Of(Point).t(animal) = (\n  Map.fromList(\n    (module Points),\n    [((0, 0), Alpacca), ((3, 4), Cow), ((6, 7), Sheep)],\n  ):\n    Map.Of(Point).t(animal)\n);\n"
                     }
                   },
@@ -32906,6 +32906,38 @@
                     "custom": [
                     ]
                   },
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "filterMap",
+                  "qualified_name": "TableclothMap.filterMap",
+                  "type": {
+                    "rendered": "('key, 'value, 'id) TableclothMap.t ->\n  f:(key:'key -> value:'value -> 'b option) -> ('key, 'b, 'id) TableclothMap.t"
+                  },
+                  "info": null,
+                  "parameters": {
+                    "tag": "DescribedParameterList",
+                    "value": [
+                    ]
+                  }
+                }
+              },
+              {
+                "tag": "Value",
+                "value": {
+                  "name": "filter_map",
+                  "qualified_name": "TableclothMap.filter_map",
+                  "type": {
+                    "rendered": "('key, 'value, 'id) TableclothMap.t ->\n  f:(key:'key -> value:'value -> 'b option) -> ('key, 'b, 'id) TableclothMap.t"
+                  },
+                  "info": null,
                   "parameters": {
                     "tag": "DescribedParameterList",
                     "value": [
