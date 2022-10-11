@@ -10,13 +10,13 @@ order: "0"
 Install via npm by
 
 ```sh 11
-npm install tablecloth-bucklescript --save
+npm install tablecloth-rescript --save
 ```
 
 Then add to your `bsconfig.json` file:
 
 ```json
-  "bs-dependencies" : ["tablecloth-bucklescript"]
+  "bs-dependencies" : ["tablecloth-rescript"]
 ```
 
 ## OCaml
@@ -24,23 +24,23 @@ Then add to your `bsconfig.json` file:
 ### Using Opam
 
 ```sh
-opam install tablecloth-native
+opam install tablecloth-ocaml-base
 ```
 
 Then update the libraries section in your `dune` file:
 
 ```clj
-(libraries (tablecloth))
+(libraries (tablecloth-ocaml-base))
 ```
 
 ### Using Esy
 
 ```sh
-esy add @opam/tablecloth-native
+esy add @opam/tablecloth-ocaml-base
 ```
 
 Then update the libraries section in your `dune` file:
 
 ```clj
-(libraries (tablecloth))
+(libraries (tablecloth-ocaml-base))
 ```

@@ -64,6 +64,6 @@
     "reason": "3.3.4",
     "reason-highlightjs": "0.2.1",
     "styled-components": "5.1.0",
-    "tablecloth-bucklescript": "file:.."
+    "tablecloth-rescript": "file:.."
   }
 }

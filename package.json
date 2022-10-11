@@ -21,9 +21,9 @@
   },
   "scripts": {
     "clean": "rescript clean",
-    "build": "rescript build",
+    "build": "rescript build -with-deps",
     "test": "jest",
-    "build:watch": "rescript build -w"
+    "build:watch": "rescript build -with-deps -w"
   },
   "jest": {
     "testMatch": [
