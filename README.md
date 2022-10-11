@@ -1,39 +1,46 @@
 # Tablecloth
 
 [![CircleCI](https://circleci.com/gh/darklang/tablecloth.svg?style=shield)](https://circleci.com/gh/darklang/tablecloth)
-[![Npm](https://badge.fury.io/js/tablecloth-bucklescript.svg)](https://www.npmjs.com/package/tablecloth-bucklescript)
-[![Opam](https://img.shields.io/badge/opam_package-0.7.0-brightgreen)](https://opam.ocaml.org/packages/tablecloth-native)
+[![Npm](https://badge.fury.io/js/tablecloth-rescript.svg)](https://www.npmjs.com/package/tablecloth-rescript)
+[![Opam](https://img.shields.io/badge/opam_package-0.7.0-brightgreen)](https://opam.ocaml.org/packages/tablecloth-ocaml-base)
 
-Tablecloth is an ergonomic, cross-platform, standard library for use with OCaml
-and Rescript. It provides an easy-to-use, comprehensive and performant standard
-library, that has the same API on all OCaml/Rescript platforms.
+Tablecloth is a library that shims over various standard libraries so they have the same function and module names, which using idiomatic types and patterns in each language.
 
-**Tablecloth is alpha-quality software, and is pre-1.0. The API will change
-over time as we get more users. Caveat emptor.**
+Supports:
+- OCaml (using Base, pipe-last, labels, and snake_case)
+- Rescript (uses Belt, pipe-first, and camelCase)
+- F# (in development - uses FSharp.Core, pipe-last, and camelCase)
+- Elm (just in the sense that it is extremely similar to Elm's standard libraries)
 
-Check out the [website](https://tableclothml.netlify.app) for our interactive API documentation.
+**Tablecloth is alpha-quality software, and is pre-1.0. It is currently undergoing
+some significant shifts and some libraries listed below are not available yet. 
+Caveat emptor.**
+
+Check out the [website](https://tablecloth.dev) for our interactive API documentation.
 
 ## Installation
+
+**Note: these instructions are for the upcoming new version of tablecloth**
 
 ### Rescript
 
 Install via npm by:
 
-`npm install tablecloth-bucklescript`
+`npm install tablecloth-rescript`
 
 Then add to your `bsconfig.json` file:
 
-`"bs-dependencies" : ["tablecloth-bucklescript"]`
+`"bs-dependencies" : ["tablecloth-rescript"]`
 
 ### OCaml native
 
 Install via opam:
 
-`opam install tablecloth-native`
+`opam install tablecloth-ocaml-base`
 
 Then add to your dune file:
 
-`(libraries (tablecloth-native ...))`
+`(libraries (tablecloth-ocaml-base ...))`
 
 ## Usage
 
@@ -77,65 +84,31 @@ rescript, OCaml (native) and Base, using the following commands:
 - `TC_RESCRIPT_VERSION=7.1.1 make deps-rescript`
 - `TC_BASE_VERSION=v0.14.0 TC_NATIVE_OCAML_SWITCH=4.11.0 make deps-native`
 
-## Design of Tablecloth
+## Design goals of Tablecloth
 
-[Dark](https://darklang.com) uses multiple versions of OCaml on the frontend
-and backend:
+When switching between functional languages, it can be frustrating to try to 
+remember the names of different functions, which are not standardized and differ
+due to history.
 
-- Our backend is written in OCaml native, using [Jane Street Core](https://github.com/janestreet/core) as a standard
-  library
-- Our frontend is written in [Rescript](https://rescript-lang.org/)
-- Parts of our backend are shared with the frontend by compiling them using
-  js_of_ocaml, and running them in a web worker.
+At the same time, we recognize that each language has their own idioms, and 
+often have mature and optimized standard libraries that we do not wish to replace.
+As such, each version of tablecloth is simple a set of functions which call existing
+standard libraries, and uses idiomatic patterns for the language in question.
 
-We discovered that it was impossible to share code between the Rescript
-frontend and the native OCaml backend, as the types and standard libraries were
-very different:
+Tablecloth was originally written to help port the Darklang frontend from Elm to
+ReasonML. As we used OCaml on the backend, we tried to reuse some libraries by adding
+OCaml versions of the ReasonML functions. However, code reuse was difficult and never
+took off, and we ended up splitting the two libraries when the ReasonML community
+moved to Rescript, which did not have the goal to be compatible with OCaml. When we
+ported the backend from OCaml to F#, we added an F# version.
 
-- Rescript uses camelCase by default, while most native libraries,
-  including Core and the OCaml standard library, use snake_case.
-- The libraries in [Belt](https://bucklescript.github.io/bucklescript/api/index.html) have different names and function signatures than native OCaml and Base/Core.
-- Many OCaml libraries have APIs optimized for pipelast (`|>`), while Belt aims
-  for pipefirst (`|.`).
-- Core does not work with Rescript, while Belt is optimized for the JS
-  platform.
-- Belt does not work in native OCaml, while Core is optimized for the native
-  OCaml runtime.
-- Belt is incomplete relative to Core, or to other languages' standard libraries
-
-### Tablecloth's solution
-
-Tablecloth solves this by providing an identical API for Rescript and
-OCaml. It wraps existing standard libraries on those platforms, and so is fast
-and memory efficient. It is draws inspiration from [Elm's standard library](https://package.elm-lang.org/packages/elm/core/1.0.2/), which is extremely
-well-designed and ergonomic.
-
-Tablecloth provides separate libraries for OCaml native/js_of_ocaml and
-Rescript . The libraries have the same API, but different implementations,
-and are installed as different packages.
-
-The APIs:
-
-- have both snake_case and camelCase versions of all functions and types
-- are backed by [Jane Street Base](https://opensource.janestreet.com/base/) for native OCaml
-- are backed by Belt and the `Js` library for Rescript
-- use labelled arguments so that can be used with both pipefirst (`->`) and pipelast (`|>`)
-- are well documented, and reasonably-well tested
-
-We also have design goals that are not yet achieved in the current version:
-
-- Many of the functions could be much more efficient
-- Tablecloth functions should not throw any exceptions
-- All functions should have well-known and consistent edge-case behaviour
-
-## Contributing
-
-Tablecloth is an ideal library to contribute to, even if you're new to OCaml or Rescript.
+## Contributions
 
 The maintainers are warm and friendly, and the project abides by a [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 There are many small tasks to be done - a small change to a single function can be extremely
-helpful.
+helpful. We also welcome new versions of tablecloth for other languages, or even for the same
+language but based on other libraries.
 
 Check out the [dedicated guide](./documentation/contributing.md) on contributing for more.
 
@@ -161,12 +134,8 @@ a handful of useful, supported commands:
 
 ## License
 
-Tablecloth uses the [MIT](./LICENSE) license. Some functions are based on
-Elm/core ([BSD](https://github.com/elm/core/blob/1.0.0/LICENSE)), and from the
-\*.Extra packages in elm-community, which use a
-[BSD](https://github.com/elm-community/string-extra/blob/master/LICENSE)
-license.
+Tablecloth uses the [MIT](./LICENSE) license.
 
 ## Authors
 
-Written with the help of [Dark](https://darklang.com).
+Initially written by [Darklang](https://darklang.com).
