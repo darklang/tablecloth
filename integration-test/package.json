@@ -17,6 +17,6 @@
     "rescript": "9.1.4"
   },
   "dependencies": {
-    "tablecloth-bucklescript": "../"
+    "tablecloth-rescript": "../"
   }
 }

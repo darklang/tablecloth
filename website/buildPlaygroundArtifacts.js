@@ -4,12 +4,7 @@ const browserify = require('browserify');
 const envify = require('envify/custom');
 const childProcess = require('child_process');
 
-const playgroundDir = path.join(
-  __dirname,
-  'src',
-  'components',
-  'playground',
-);
+const playgroundDir = path.join(__dirname, 'src', 'components', 'playground');
 const assetsJsDir = path.join(
   __dirname,
   'src',
@@ -29,8 +24,8 @@ const stdLibBundle = browserify();
 const stdlibDir = path.join(playgroundDir, 'bs', 'stdlib');
 
 fs.readdirSync(stdlibDir)
-  .filter(file => path.extname(file) === '.js')
-  .forEach(file => {
+  .filter((file) => path.extname(file) === '.js')
+  .forEach((file) => {
     const exposedRequireName = './stdlib/' + path.basename(file);
     // map `require('stdlib/list')` from the playground to `require('./stdlib/list.js')`
     stdLibBundle.require(path.join(stdlibDir, file), {
@@ -44,10 +39,10 @@ stdLibBundle
   .bundle()
   .pipe(fs.createWriteStream(path.join(assetsJsDir, 'stdlibBundle.js')));
 
-console.log('2. Compiling tablecloth-bucklescript');
-// Bundle BuckleScript compiler with tablecloth-bucklescript .cmi and .cmj files:
-// 1. compile tablecloth-bucklescript with bsb
-// 2. serialize tablecloth-bucklescript .cmi and .cmj files
+console.log('2. Compiling tablecloth-rescript');
+// Bundle BuckleScript compiler with tablecloth-rescript .cmi and .cmj files:
+// 1. compile tablecloth-rescript with bsb
+// 2. serialize tablecloth-rescript .cmi and .cmj files
 // 3. bundle them with BuckleScript compiler (bs.js)
 
 /** Serialize a .cmi or a .cmj to a string that can be passed to
@@ -166,7 +161,7 @@ function lowercaseFirstLetter(s) {
 }
 
 childProcess.execSync('../bs-platform/lib/bsb.exe -clean-world -make-world', {
-  cwd: path.join(__dirname, 'node_modules', 'tablecloth-bucklescript'),
+  cwd: path.join(__dirname, 'node_modules', 'tablecloth-rescript'),
   encoding: 'utf8',
   stdio: [0, 1, 2],
   shell: true,
@@ -175,13 +170,13 @@ childProcess.execSync('../bs-platform/lib/bsb.exe -clean-world -make-world', {
 const TableclothBsDir = path.join(
   __dirname,
   'node_modules',
-  'tablecloth-bucklescript',
+  'tablecloth-rescript',
   'lib',
   'bs',
   'src',
 );
 const moduleNames = ['Tablecloth'];
-const modules = moduleNames.map(name => ({
+const modules = moduleNames.map((name) => ({
   cmi: path.join(TableclothBsDir, name + '.cmi'),
   cmj: path.join(TableclothBsDir, name + '.cmj'),
 }));
@@ -189,7 +184,7 @@ const modules = moduleNames.map(name => ({
 const bsFilename = path.join(playgroundDir, 'bs', 'exports.js');
 const bsTableclothFilename = path.join(assetsJsDir, 'bsTablecloth.js');
 fs.copyFileSync(bsFilename, bsTableclothFilename);
-modules.forEach(module => {
+modules.forEach((module) => {
   const cmi = module.cmi;
   const cmiBasename = path.basename(cmi);
   fs.appendFileSync(
@@ -204,7 +199,7 @@ modules.forEach(module => {
   fs.appendFileSync(bsTableclothFilename, ');\n');
 });
 
-console.log('3. Bundling tablecloth-bucklescript');
+console.log('3. Bundling tablecloth-rescript');
 
 const standardBundle = browserify();
 const tableclothJsDir = path.join(
@@ -222,8 +217,8 @@ try {
   process.exit(1);
 }
 tableclothDirFiles
-  .filter(file => path.extname(file) === '.js')
-  .forEach(file => {
+  .filter((file) => path.extname(file) === '.js')
+  .forEach((file) => {
     const exposedRequireName =
       './stdlib/' + lowercaseFirstLetter(path.basename(file));
     standardBundle.require(path.join(tableclothJsDir, file), {
@@ -235,6 +230,4 @@ standardBundle
   .transform(envify({ NODE_ENV: 'production' }), { global: true })
   .transform('uglifyify', { global: true })
   .bundle()
-  .pipe(
-    fs.createWriteStream(path.join(assetsJsDir, 'tableclothBundle.js')),
-  );
+  .pipe(fs.createWriteStream(path.join(assetsJsDir, 'tableclothBundle.js')));

@@ -12,6 +12,6 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "tablecloth-bucklescript"
+    "tablecloth-rescript"
   ]
 }
