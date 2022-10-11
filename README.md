@@ -11,7 +11,9 @@ library, that has the same API on all OCaml/Rescript platforms.
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
 over time as we get more users. Caveat emptor.**
 
-Check out the [website](https://tableclothml.netlify.app) for our interactive API documentation.
+Check out the [website](https://www.tablecloth.dev) for our interactive API documentation.
+
+See the [CHANGELOG](./Changelog.md) for list of changes in each release.
 
 ## Installation
 
@@ -19,11 +21,11 @@ Check out the [website](https://tableclothml.netlify.app) for our interactive AP
 
 Install via npm by:
 
-`npm install tablecloth-bucklescript`
+`npm install tablecloth-rescript`
 
 Then add to your `bsconfig.json` file:
 
-`"bs-dependencies" : ["tablecloth-bucklescript"]`
+`"bs-dependencies" : ["tablecloth-rescript"]`
 
 ### OCaml native
 
