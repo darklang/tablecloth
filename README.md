@@ -13,7 +13,7 @@ Supports:
 - Elm (just in the sense that it is extremely similar to Elm's standard libraries)
 
 **Tablecloth is alpha-quality software, and is pre-1.0. It is currently undergoing
-some significant shifts and some libraries listed below are not available yet. 
+some significant shifts and some libraries listed below are not available yet.
 Caveat emptor.**
 
 Check out the [website](https://www.tablecloth.dev) for our interactive API documentation.
@@ -32,7 +32,7 @@ Then add to your `bsconfig.json` file:
 
 `"bs-dependencies" : ["tablecloth-rescript"]`
 
-### OCaml native
+### OCaml
 
 Install via opam:
 
@@ -63,7 +63,7 @@ let () =
 
 ### Rescript
 
-Tablecloth supports Rescript 9. Older versions of Tablecloth supported older versions of bs-platform.
+Tablecloth supports Rescript 9. [Older versions of Tablecloth](https://www.npmjs.com/package/tablecloth-bucklescript) supported older versions of bs-platform.
 
 ### Native
 
@@ -86,11 +86,11 @@ rescript, OCaml (native) and Base, using the following commands:
 
 ## Design goals of Tablecloth
 
-When switching between functional languages, it can be frustrating to try to 
+When switching between functional languages, it can be frustrating to try to
 remember the names of different functions, which are not standardized and differ
 due to history.
 
-At the same time, we recognize that each language has their own idioms, and 
+At the same time, we recognize that each language has their own idioms, and
 often have mature and optimized standard libraries that we do not wish to replace.
 As such, each version of tablecloth is simple a set of functions which call existing
 standard libraries, and uses idiomatic patterns for the language in question.
@@ -114,13 +114,6 @@ Check out the [dedicated guide](./documentation/contributing.md) on contributing
 
 ## Developing
 
-If you are new to [OCaml](https://ocaml.org) there are a few prerequisites you will
-need to get started:
-
-- Install OCaml and OPAM [based on your OS](https://ocaml.org/docs/install.html)
-- You may need to run `opam init`
-- For Rescript install a current version of [Node](https://nodejs.org/en/)
-
 Please refer to the `Makefile` for a complete list of supported actions. Here is
 a handful of useful, supported commands:
 
@@ -131,6 +124,15 @@ a handful of useful, supported commands:
 - `make check-format`: Check your code is formatted correctly.
 - `make format`: Format code.
 - `cd ocamldoc-json-generator && make deps && make doc`: Build model.json for the website (needs to be updated and checked in whenever the APIs change.)
+
+### Rescript dependencies
+
+- Requires a recent version of [NodeJS](https://nodejs.org/en/)
+
+### OCaml dependencies
+
+- Install OCaml and OPAM [based on your OS](https://ocaml.org/docs/install.html)
+- You may need to run `opam init`
 
 ## License
 
