@@ -35,6 +35,7 @@ let unwrap = Result.value
 let unwrap_lazy t ~default =
   match t with Ok t' -> t' | Error _ -> Lazy.force default
 
+
 let unwrap_unsafe = Result.get_ok
 
 let unwrap_error t ~default =
