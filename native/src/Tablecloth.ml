@@ -29,9 +29,9 @@ module Option = TableclothOption
 module Result = struct
   include TableclothResult
 
-  (** [Result.pp errFormat okFormat destFormat result] "pretty-prints"
-      the [result], using [errFormat] if the [result] is an [Error] value or
-      [okFormat] if the [result] is an [Ok] value. [destFormat] is a formatter
+  (** [Result.pp err_format ok_format dest_format result] "pretty-prints"
+      the [result], using [err_format] if the [result] is an [Error] value or
+      [ok_format] if the [result] is an [Ok] value. [dest_format] is a formatter
       that tells where to send the output.
 
       {[

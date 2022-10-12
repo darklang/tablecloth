@@ -8,11 +8,7 @@ end)
 
 let minimumValue = Js.Int.min
 
-let minimum_value = minimumValue
-
 let maximumValue = Js.Int.max
-
-let maximum_value = maximumValue
 
 let zero = 0
 
@@ -22,25 +18,15 @@ let fromString s =
   match int_of_string s with i -> Some i | exception Failure _ -> None
 
 
-let from_string = fromString
-
 let add = ( + )
-
-let ( + ) = ( + )
 
 let subtract = ( - )
 
-let ( - ) = ( - )
-
 let multiply = ( * )
-
-let ( * ) = multiply
 
 let divide n ~by = n / by
 
-let ( / ) = ( / )
-
-let ( /. ) n by = Js.Int.toFloat n /. Js.Int.toFloat by
+let divideFloat n ~by = Js.Int.toFloat n /. Js.Int.toFloat by
 
 let power ~base ~exponent =
   let result =
@@ -56,17 +42,11 @@ let power ~base ~exponent =
   Js.Math.unsafe_trunc result
 
 
-let ( ** ) base exponent = power ~base ~exponent
-
 let negate = ( ~- )
-
-let ( ~- ) = ( ~- )
 
 let remainder n ~by = n mod by
 
-let ( mod ) n by = (if n <= 0 then abs n * 2 else n) mod by
-
-let modulo n ~by = n mod by
+let modulo n ~by = (if n <= 0 then abs n * 2 else n) mod by
 
 let maximum = Js.Math.max_int
 
@@ -76,11 +56,7 @@ let absolute = abs
 
 let isEven n = n mod 2 = 0
 
-let is_even = isEven
-
 let isOdd n = n mod 2 <> 0
-
-let is_odd = isOdd
 
 let clamp n ~lower ~upper =
   if upper < lower
@@ -94,15 +70,9 @@ let inRange n ~lower ~upper =
   else n >= lower && n < upper
 
 
-let in_range = inRange
-
 let toFloat = Js.Int.toFloat
 
-let to_float = toFloat
-
 let toString = Js.Int.toString
-
-let to_string = toString
 
 let equal = ( = )
 

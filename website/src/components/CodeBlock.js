@@ -1,8 +1,8 @@
 import {dropWhile, dropRightWhile} from 'lodash'
 import * as React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import prismLightTheme from 'prism-react-renderer/themes/nightOwlLight';
-import prismDarkTheme from 'prism-react-renderer/themes/nightOwl';
+import prismLightTheme from 'prism-react-renderer/themes/nightOwl';
+import prismDarkTheme from 'prism-react-renderer/themes/oceanicNext';
 import { useSyntax } from './Syntax';
 import { useTheme, colors, spacing } from '../theme';
 
@@ -32,7 +32,7 @@ export const CodeBlock = ({ code, ...props }) => {
       {...defaultProps}
       code={content}
       theme={theme === 'light' ? prismLightTheme : prismDarkTheme}
-      language={props.language || syntax}
+      language={props.language || (syntax === "rescript" ? "reason": syntax)} // there is no rescript highlighting, yet. Reason works just as well
       {...props}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
@@ -40,8 +40,6 @@ export const CodeBlock = ({ code, ...props }) => {
           className={'CodeBlock ' + className}
           style={style}
           css={css`
-            border: 1px solid ${({ theme }) => theme.card.border};
-            border-radius: 3px;
             font-size: 13px;
             padding: ${spacing.smaller}px ${spacing.small}px;
             width: 100%;

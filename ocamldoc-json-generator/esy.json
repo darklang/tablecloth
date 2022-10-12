@@ -1,0 +1,20 @@
+{
+  "name": "melange-project",
+  "dependencies": {
+    "ocaml": "4.12.x",
+    "@opam/base": "v0.14.1",
+    "@opam/menhir": "20210419",
+    "reason": "3.7.0",
+    "@opam/ocamlformat":"*"
+  },
+  "esy": {
+    "buildsInSource": "unsafe",
+    "build": [
+      "bsb -make-world"
+    ],
+    "format": "dune build @fmt --auto-promote"
+  },
+  "installConfig": {
+    "pnp": false
+  }
+}

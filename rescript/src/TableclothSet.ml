@@ -1,46 +1,32 @@
 type ('a, 'id) t = ('a, 'id) Belt.Set.t
 
-module Of (M : TableclothComparator.S) = struct
-  type nonrec t = (M.t, M.identity) t
-end
-
 let empty comparator = Belt.Set.make ~id:(Internal.toBeltComparator comparator)
 
 let singleton
-    (comparator : ('a, 'identity) TableclothComparator.s) (element : 'a) :
+    (element : 'a) (comparator : ('a, 'identity) TableclothComparator.s) :
     ('a, 'identity) t =
   Belt.Set.fromArray ~id:(Internal.toBeltComparator comparator) [| element |]
 
 
 let fromArray
-    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a array)
+    (elements : 'a array) (comparator : ('a, 'identity) TableclothComparator.s)
     : ('a, 'identity) t =
   Belt.Set.fromArray ~id:(Internal.toBeltComparator comparator) elements
 
 
-let from_array = fromArray
-
 let fromList
-    (comparator : ('a, 'identity) TableclothComparator.s) (elements : 'a list) :
+    (elements : 'a list) (comparator : ('a, 'identity) TableclothComparator.s) :
     ('a, 'identity) t =
   Belt.Set.fromArray
     ~id:(Internal.toBeltComparator comparator)
     (Array.of_list elements)
 
 
-let from_list = fromList
-
 let length = Belt.Set.size
 
 let isEmpty = Belt.Set.isEmpty
 
-let is_empty = isEmpty
-
 let includes = Belt.Set.has
-
-let ( .?{} ) (set : ('element, _) t) (element : 'element) : bool =
-  includes set element
-
 
 let add = Belt.Set.add
 
@@ -56,7 +42,7 @@ let filter s ~f = Belt.Set.keep s f
 
 let partition s ~f = Belt.Set.partition s f
 
-let find s ~f = (Belt.Set.toArray s |. Belt.Array.getBy) f
+let find s ~f = (Belt.Set.toArray s |> Belt.Array.getBy) f
 
 let all s ~f = Belt.Set.every s f
 
@@ -64,17 +50,11 @@ let any s ~f = Belt.Set.some s f
 
 let forEach s ~f = Belt.Set.forEach s f
 
-let for_each = forEach
-
 let fold s ~initial ~f = Belt.Set.reduce s initial f
 
 let toArray = Belt.Set.toArray
 
-let to_array = toArray
-
 let toList = Belt.Set.toList
-
-let to_list = toList
 
 module Poly = struct
   type identity
@@ -90,15 +70,11 @@ module Poly = struct
 
           type nonrec identity = identity
 
-          let cmp = Pervasives.compare |. Obj.magic
+          let cmp = Pervasives.compare |> Obj.magic
         end )
 
 
-  let from_array = fromArray
-
-  let fromList l = Array.of_list l |. fromArray
-
-  let from_list = fromList
+  let fromList l = Array.of_list l |> fromArray
 
   let empty () = fromArray [||]
 
@@ -106,33 +82,29 @@ module Poly = struct
 end
 
 module Int = struct
-  type nonrec t = Of(TableclothInt).t
+  type identity
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
+  type nonrec t = (TableclothInt.t, identity) t
 
-  let from_array = fromArray
+  let fromArray a = Poly.fromArray a |> Obj.magic
 
   let empty = fromArray [||]
 
   let singleton a = fromArray [| a |]
 
-  let fromList l = Array.of_list l |. fromArray
-
-  let from_list = fromList
+  let fromList l = Array.of_list l |> fromArray
 end
 
 module String = struct
-  type nonrec t = Of(TableclothString).t
+  type identity
 
-  let fromArray a = Poly.fromArray a |. Obj.magic
+  type nonrec t = (TableclothString.t, identity) t
 
-  let from_array = fromArray
+  let fromArray a = Poly.fromArray a |> Obj.magic
 
   let empty = fromArray [||]
 
   let singleton a = fromArray [| a |]
 
-  let fromList l = Array.of_list l |. fromArray
-
-  let from_list = fromList
+  let fromList l = Array.of_list l |> fromArray
 end

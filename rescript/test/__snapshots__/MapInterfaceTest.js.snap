@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Map prevent interface files from diverging 1`] = `
-"33c33
-< type ('key, 'value, 'cmp) t = ('key, 'value, 'cmp) Belt.Map.t
----
-> type ('key, +'value, 'id) t = ('key, 'value, 'id) Base.Map.t
-"
-`;

@@ -69,15 +69,15 @@ let suite =
           test "module documentation example" (fun () ->
               let result : Book.t list =
                 Set.fromList
-                  (module BookByIsbn)
                   [ frankenstein; frankensteinAlternateTitle ]
+                  (module BookByIsbn)
                 |> Set.toList
               in
               expect result |> toEqual (Eq.list book) [ frankenstein ] ) ) ;
       describe "make" (fun () ->
           test "module documentation example" (fun () ->
               let result : Book.t list =
-                Set.fromList (module BookByTitle) [ mobyDick; mobyDickReissue ]
+                Set.fromList [ mobyDick; mobyDickReissue ] (module BookByTitle)
                 |> Set.toList
               in
               expect result |> toEqual (Eq.list book) [ mobyDick ] ) ) )

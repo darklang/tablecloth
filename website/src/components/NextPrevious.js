@@ -16,8 +16,8 @@ export const NextPrevious = ({ nav, currentUrl }) => {
     previous = null;
   } else if (currentIndex === nav.length - 1) {
     next = {
-      title: 'API',
-      url: '/api',
+      title: 'Documentation',
+      url: '/docs/rescript',
     };
     previous = nav[currentIndex - 1];
   } else if (currentIndex) {
@@ -47,7 +47,7 @@ export const NextPrevious = ({ nav, currentUrl }) => {
           align-items: center;
           place-self: stretch;
           color: ${({ theme }) => theme.card.text};
-          background-color: ${({ theme }) => theme.card.background};
+          background-color: ${({ theme }) => theme.block.background};
           border-radius: 3px;
           border: 1px solid rgb(230, 236, 241);
           transition: border 200ms ease 0s;

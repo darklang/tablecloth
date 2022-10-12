@@ -16,15 +16,11 @@ let range ?(from = 0) (to_ : int) : int array =
   Base.Array.init (max 0 (to_ - from)) ~f:(fun i -> i + from)
 
 
-let fromList = Base.List.to_array
-
-let from_list = fromList
+let from_list = Base.List.to_array
 
 let length (a : 'a array) : int = Base.Array.length a
 
-let isEmpty a = length a = 0
-
-let is_empty = isEmpty
+let is_empty a = length a = 0
 
 let first t = if length t < 1 then None else Some t.(0)
 
@@ -32,21 +28,17 @@ let last t = if length t < 1 then None else Some t.(length t - 1)
 
 let get = Base.Array.get
 
-let getAt a ~index =
+let get_at a ~index =
   if index >= 0 && index < length a then Some (Base.Array.get a index) else None
 
 
-let get_at = getAt
-
 let ( .?() ) (array : 'element t) (index : int) : 'element option =
-  getAt array ~index
+  get_at array ~index
 
 
 let set = Base.Array.set
 
-let setAt t ~index ~value = set t index value
-
-let set_at = setAt
+let set_at t ~index ~value = set t index value
 
 let filter = Base.Array.filter
 
@@ -54,21 +46,15 @@ let sum (type a) t (module M : TableclothContainer.Sum with type t = a) =
   Base.Array.fold t ~init:M.zero ~f:M.add
 
 
-let filterMap = Base.Array.filter_map
+let filter_map = Base.Array.filter_map
 
-let filter_map = filterMap
-
-let flatMap = Base.Array.concat_map
-
-let flat_map = flatMap
+let flat_map = Base.Array.concat_map
 
 let fold a ~initial ~f = Base.Array.fold a ~init:initial ~f
 
-let foldRight a ~initial ~f =
+let fold_right a ~initial ~f =
   Base.Array.fold_right a ~init:initial ~f:(Fun.flip f)
 
-
-let fold_right = foldRight
 
 let count t ~f =
   fold t ~initial:0 ~f:(fun total element ->
@@ -79,52 +65,44 @@ let swap = Base.Array.swap
 
 let find = Base.Array.find
 
-let findIndex = Base.Array.findi
-
-let find_index = findIndex
+let find_index = Base.Array.findi
 
 let map = Base.Array.map
 
-let mapWithIndex = Base.Array.mapi
-
-let map_with_index = mapWithIndex
+let map_with_index = Base.Array.mapi
 
 let map2 (a : 'a array) (b : 'b array) ~(f : 'a -> 'b -> 'c) : 'c array =
-  let minLength = min (length a) (length b) in
-  Base.Array.init minLength ~f:(fun i -> f a.(i) b.(i))
+  let min_length = min (length a) (length b) in
+  Base.Array.init min_length ~f:(fun i -> f a.(i) b.(i))
 
 
 let zip = map2 ~f:(fun left right -> (left, right))
 
 let map3
-    (arrayA : 'a array)
-    (arrayB : 'b array)
-    (arrayC : 'c array)
+    (array_a : 'a array)
+    (array_b : 'b array)
+    (array_c : 'c array)
     ~(f : 'a -> 'b -> 'c -> 'd) =
-  let minLength =
-    Base.min (length arrayA) (Base.min (length arrayC) (length arrayB))
+  let min_length =
+    Base.min (length array_a) (Base.min (length array_c) (length array_b))
   in
-  Base.Array.init minLength ~f:(fun i -> f arrayA.(i) arrayB.(i) arrayC.(i))
+  Base.Array.init min_length ~f:(fun i -> f array_a.(i) array_b.(i) array_c.(i))
 
 
 let partition = Base.Array.partition_tf
 
-let splitAt a ~index =
+let split_at a ~index =
   ( Base.Array.init index ~f:(fun i -> a.(i))
   , Base.Array.init (length a - index) ~f:(fun i -> a.(index + i)) )
 
 
-let split_at = splitAt
-
-let splitWhen a ~f =
-  match findIndex a ~f:(fun _index element -> f element) with
+let split_when a ~f =
+  match find_index a ~f:(fun _index element -> f element) with
   | None ->
       (a, [||])
   | Some (index, _) ->
-      splitAt a ~index
+      split_at a ~index
 
-
-let split_when = splitWhen
 
 let unzip = Base.Array.unzip
 
@@ -152,7 +130,7 @@ let values t =
   let result =
     fold t ~initial:[] ~f:(fun results element ->
         match element with None -> results | Some value -> value :: results )
-    |> fromList
+    |> from_list
   in
   reverse result ;
   result
@@ -160,7 +138,7 @@ let values t =
 
 let join t ~sep = Stdlib.String.concat sep (Array.to_list t)
 
-let groupBy t comparator ~f =
+let group_by t comparator ~f =
   fold t ~initial:(TableclothMap.empty comparator) ~f:(fun map element ->
       let key = f element in
       TableclothMap.update map ~key ~f:(function
@@ -170,23 +148,22 @@ let groupBy t comparator ~f =
               Some (element :: elements) ) )
 
 
-let group_by = groupBy
-
 let slice ?to_ array ~from =
-  let defaultTo = match to_ with None -> length array | Some i -> i in
-  let sliceFrom =
+  let default_to = match to_ with None -> length array | Some i -> i in
+  let slice_from =
     if from >= 0
     then min (length array) from
     else max 0 (min (length array) (length array + from))
   in
-  let sliceTo =
-    if defaultTo >= 0
-    then min (length array) defaultTo
-    else max 0 (min (length array) (length array + defaultTo))
+  let slice_to =
+    if default_to >= 0
+    then min (length array) default_to
+    else max 0 (min (length array) (length array + default_to))
   in
-  if sliceFrom >= sliceTo
+  if slice_from >= slice_to
   then [||]
-  else Base.Array.init (sliceTo - sliceFrom) ~f:(fun i -> array.(i + sliceFrom))
+  else
+    Base.Array.init (slice_to - slice_from) ~f:(fun i -> array.(i + slice_from))
 
 
 let sliding ?(step = 1) a ~size =
@@ -199,9 +176,7 @@ let sliding ?(step = 1) a ~size =
       ~f:(fun i -> initialize size ~f:(fun j -> a.((i * step) + j)))
 
 
-let chunksOf t ~size = sliding t ~step:size ~size
-
-let chunks_of = chunksOf
+let chunks_of t ~size = sliding t ~step:size ~size
 
 let maximum = Base.Array.max_elt
 
@@ -228,27 +203,19 @@ let extent t ~compare =
 
 let sort t = Base.Array.sort t
 
-let forEach a ~f = Base.Array.iter a ~f
+let for_each a ~f = Base.Array.iter a ~f
 
-let for_each = forEach
+let for_each_with_index a ~f = Base.Array.iteri a ~f
 
-let forEachWithIndex a ~f = Base.Array.iteri a ~f
+let to_list (a : 'a array) : 'a list = Base.Array.to_list a
 
-let for_each_with_index = forEachWithIndex
-
-let toList (a : 'a array) : 'a list = Base.Array.to_list a
-
-let to_list = toList
-
-let toIndexedList a =
+let to_indexed_list a =
   Base.Array.fold_right
     a
     ~init:(length a - 1, [])
     ~f:(fun x (i, acc) -> (i - 1, (i, x) :: acc))
   |> Base.snd
 
-
-let to_indexed_list = toIndexedList
 
 let equal equal a b =
   if length a <> length b
@@ -264,7 +231,7 @@ let equal equal a b =
     loop 0
 
 
-let compare compare a b =
+let compare ~f:compare a b =
   match Int.compare (length a) (length b) with
   | 0 ->
       if length a == 0
