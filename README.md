@@ -9,7 +9,9 @@ and Rescript. It provides an easy-to-use, comprehensive and performant standard
 library, that has the same API on all OCaml/Rescript platforms.
 
 **Tablecloth is alpha-quality software, and is pre-1.0. The API will change
-over time as we get more users. Caveat emptor.**
+in the next version as we change the [goals of the
+project](https://github.com/darklang/tablecloth/issues/214) a little bit. Caveat
+emptor.**
 
 Check out the [website](https://www.tablecloth.dev) for our interactive API documentation.
 
