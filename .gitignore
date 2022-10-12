@@ -11,6 +11,7 @@ _build
 /integration-test/native/_build
 /integration-test/bs/node_modules
 /integration-test/bs/lib/
+
 /ocamldoc-json-generator/lib/
 /ocamldoc-json-generator/node_modules/
 /ocamldoc-json-generator/_native/
@@ -23,3 +24,8 @@ _esy
 /ocamldoc-json-generator/dune-project
 /ocamldoc-json-generator/dune
 _opam/
+
+fsharp/src/obj
+fsharp/src/bin
+.paket/
+paket-files/
