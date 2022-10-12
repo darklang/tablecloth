@@ -11,3 +11,8 @@ _build
 /integration-test/native/_build
 /integration-test/bs/node_modules
 /integration-test/bs/lib/
+
+fsharp/src/obj
+fsharp/src/bin
+.paket/
+paket-files/
