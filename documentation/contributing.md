@@ -27,8 +27,7 @@ Here are some ways to contribute:
 
 If you'd like to contribute but don't know where to start [open an
 issue](https://github.com/darklang/tablecloth/issues/new) with your thoughts
-or reach out on [Twitter](https://twitter.com/Dean177) or by
-[email](mailto:deanmerchant@gmail.com).
+or stop by the *#tablecloth* channel in the [Darklang discord](https://darklang.com/discord-invite).
 
 ## Guiding principles
 
