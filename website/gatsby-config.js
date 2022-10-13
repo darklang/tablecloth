@@ -5,19 +5,19 @@ module.exports = {
   assetPrefix: 'https://DARK_STATIC_ASSETS_BASE_URL',
   siteMetadata: {
     title: 'Tablecloth',
-    description: 'A standard library enhancement for Bucklescript and Native',
+    description:
+      'An standard library with the same API in F#, Rescript, and OCaml',
     docsLocation:
       'https://github.com/darklang/tablecloth/tree/main/documentation',
     githubUrl: 'https://github.com/darklang/tablecloth',
-    siteUrl: 'https://tablecloth.github.io',
+    siteUrl: 'https://www.tablecloth.dev',
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-sentry',
+      resolve: '@sentry/gatsby',
       options: {
-        dsn: 'https://702b0527aa914b4197bbd3eefa1eb460@sentry.io/2461811',
-        environment: process.env.NODE_ENV,
-        enabled: ['production', 'stage'].indexOf(process.env.NODE_ENV) !== -1,
+        dsn: 'https://18433ba9734949298cdd886562340d24@o4503977192652800.ingest.sentry.io/4503977196519424',
+        sampleRate: 0.7,
       },
     },
     'gatsby-plugin-remove-trailing-slashes',
