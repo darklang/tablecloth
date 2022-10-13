@@ -5,8 +5,8 @@
   "version": "0.1.0",
   "scripts": {
     "clean": "rescript clean",
-    "build": "rescript build",
-    "watch": "rescript build -w"
+    "build": "rescript build -with-deps",
+    "watch": "rescript build -w -with-deps"
   },
   "keywords": [
     "Rescript"

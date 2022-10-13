@@ -4,8 +4,9 @@
     "ocaml": "4.12.x",
     "@opam/base": "v0.14.1",
     "@opam/menhir": "20210419",
-    "reason": "3.7.0",
-    "@opam/ocamlformat":"*"
+    "@opam/reason": "3.7.0",
+    "@opam/ocamlformat":"*",
+    "bs-platform":"9.0.2"
   },
   "esy": {
     "buildsInSource": "unsafe",

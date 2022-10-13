@@ -1,5 +1,6 @@
 dummy:
 
+ESY=~/.npm-global/bin/esy
 CMO=JsonGenerator.cmo
 CMX=JsonGenerator.cmx
 CMXS=JsonGenerator.cmxs
@@ -10,20 +11,20 @@ CMXA_DEPS=menhirLib.cmxa reason_migrate_parsetree.cmxa ReasonEasyFormat.cmxa rea
 opt: $(CMXS)
 
 $(CMO): JsonGenerator.ml
-	esy ocamlfind ocamlc $(COMPFLAGS) -c $<
+	$(ESY) ocamlfind ocamlc $(COMPFLAGS) -c $<
 
 $(CMX): JsonGenerator.ml
-	esy ocamlfind ocamlopt $(COMPFLAGS) -c $<
+	$(ESY) ocamlfind ocamlopt $(COMPFLAGS) -c $<
 
 $(CMXS): $(CMX)
-	esy ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
+	$(ESY) ocamlfind ocamlopt $(COMPFLAGS) -shared -o $@ $(CMXA_DEPS) $^
 
 init-node:
 	mkdir node_modules
-	mkdir node_modules/tablecloth-bucklescript
-	cp ../package.json node_modules/tablecloth-bucklescript
-	cp ../bsconfig.json node_modules/tablecloth-bucklescript
-	cp -r ../rescript node_modules/tablecloth-bucklescript/rescript
+	mkdir node_modules/tablecloth-rescript
+	cp ../package.json node_modules/tablecloth-rescript
+	cp ../bsconfig.json node_modules/tablecloth-rescript
+	cp -r ../rescript node_modules/tablecloth-rescript/rescript
 
 purge-node:
 	rm -r node_modules
@@ -34,8 +35,8 @@ deps:
 	opam install base.v0.14.1 reason.3.7.0 menhir.20210419 -y
 
 install: opt
-	mkdir -p `esy ocamlfind ocamldoc -customdir`
-	cp -f JsonGenerator.cmxs `esy ocamlfind ocamldoc -customdir`/
+	mkdir -p `$(ESY) ocamlfind ocamldoc -customdir`
+	cp -f JsonGenerator.cmxs `$(ESY) ocamlfind ocamldoc -customdir`/
 
 # We need to build tablecloth to create the cmi files for ocamldoc
 build-native: opt dummy
@@ -72,7 +73,7 @@ build-native: opt dummy
 	cp ../native/src/TableclothTuple3.ml ./_native/TableclothTuple3.ml
 	cp ../native/src/TableclothTuple3.mli ./_native/TableclothTuple3.mli
 	cp ../native/src/Tablecloth.ml ./_native/Tablecloth.ml
-	esy ocamlfind ocamlc \
+	$(ESY) ocamlfind ocamlc \
 		-package base,str \
 		-linkpkg \
 		-I ./_native \
@@ -146,36 +147,36 @@ build-rescript: opt dummy
 	cp ../rescript/src/TableclothTuple3.ml ./_rescript/TableclothTuple3.ml
 	cp ../rescript/src/TableclothTuple3.mli ./_rescript/TableclothTuple3.mli
 	cp ../rescript/src/Tablecloth.ml ./_rescript/Tablecloth.ml
-	esy build
+	$(ESY) build
 
 rescript-interfaces: opt dummy
-	esy bsc -format res ../rescript/src/TableclothBool.mli > ./_rescript/TableclothBool.resi
-	esy bsc -format res ../rescript/src/TableclothComparator.mli > ./_rescript/TableclothComparator.resi
-	esy bsc -format res ../rescript/src/TableclothFloat.mli > ./_rescript/TableclothFloat.resi
-	esy bsc -format res ../rescript/src/TableclothFun.mli > ./_rescript/TableclothFun.resi
-	esy bsc -format res ../rescript/src/TableclothInt.mli > ./_rescript/TableclothInt.resi
-	esy bsc -format res ../rescript/src/TableclothArray.mli > ./_rescript/TableclothArray.resi
-	esy bsc -format res ../rescript/src/TableclothChar.mli > ./_rescript/TableclothChar.resi
-	esy bsc -format res ../rescript/src/TableclothList.mli > ./_rescript/TableclothList.resi
-	esy bsc -format res ../rescript/src/TableclothMap.mli > ./_rescript/TableclothMap.resi
-	esy bsc -format res ../rescript/src/TableclothOption.mli > ./_rescript/TableclothOption.resi
-	esy bsc -format res ../rescript/src/TableclothResult.mli > ./_rescript/TableclothResult.resi
-	esy bsc -format res ../rescript/src/TableclothSet.mli > ./_rescript/TableclothSet.resi
-	esy bsc -format res ../rescript/src/TableclothString.mli > ./_rescript/TableclothString.resi
-	esy bsc -format res ../rescript/src/TableclothTuple2.mli > ./_rescript/TableclothTuple2.resi
-	esy bsc -format res ../rescript/src/TableclothTuple3.mli > ./_rescript/TableclothTuple3.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothBool.mli > ./_rescript/TableclothBool.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothComparator.mli > ./_rescript/TableclothComparator.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothFloat.mli > ./_rescript/TableclothFloat.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothFun.mli > ./_rescript/TableclothFun.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothInt.mli > ./_rescript/TableclothInt.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothArray.mli > ./_rescript/TableclothArray.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothChar.mli > ./_rescript/TableclothChar.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothList.mli > ./_rescript/TableclothList.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothMap.mli > ./_rescript/TableclothMap.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothOption.mli > ./_rescript/TableclothOption.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothResult.mli > ./_rescript/TableclothResult.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothSet.mli > ./_rescript/TableclothSet.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothString.mli > ./_rescript/TableclothString.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothTuple2.mli > ./_rescript/TableclothTuple2.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothTuple3.mli > ./_rescript/TableclothTuple3.resi
 	# These are not interfaces, so we do just pretend that they actually are. Still works!
-	esy bsc -format res ../rescript/src/Internal.ml > ./_rescript/Internal.resi
-	esy bsc -format res ../rescript/src/TableclothComparator.ml > ./_rescript/TableclothComparator.resi
-	esy bsc -format res ../rescript/src/TableclothContainer.ml > ./_rescript/TableclothContainer.resi
+	$(ESY) bsc -format res ../rescript/src/Internal.ml > ./_rescript/Internal.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothComparator.ml > ./_rescript/TableclothComparator.resi
+	$(ESY) bsc -format res ../rescript/src/TableclothContainer.ml > ./_rescript/TableclothContainer.resi
 
 
 doc-native: build-native
 	DESTINATION_JSON=model.json \
-	esy ocamldoc.opt \
+	$(ESY) ocamldoc.opt \
 		-g $(CMXS) \
-		`esy ocamlfind query -i-format base` \
-		`esy ocamlfind query -i-format str` \
+		`$(ESY) ocamlfind query -i-format base` \
+		`$(ESY) ocamlfind query -i-format str` \
 		-I ./_native \
 		-d ../website \
 		./_native/TableclothBool.mli \
@@ -215,10 +216,10 @@ doc-native: build-native
 doc-rescript: build-rescript
 	# dash to ignore compilation error
 	-DESTINATION_JSON=model-rescript.json \
-	esy ocamldoc.opt \
+	$(ESY) ocamldoc.opt \
 		-g $(CMXS) \
 		-I node_modules/bs-platform/lib/melange \
-		-I ../_build/default/ocamldoc-json-generator/node_modules/tablecloth-bucklescript/rescript/src/ \
+		-I ../_build/default/ocamldoc-json-generator/node_modules/tablecloth-rescript/rescript/src/ \
 		-d ../website \
 		./_rescript/TableclothComparator.mli \
 		./_rescript/TableclothComparator.ml \
