@@ -37,7 +37,7 @@
     "gatsby-plugin-offline": "^3.2.6",
     "gatsby-plugin-react-helmet": "^3.3.2",
     "gatsby-plugin-remove-trailing-slashes": "2.3.3",
-    "gatsby-plugin-sentry": "1.0.1",
+    "@sentry/gatsby": "7.15.0",
     "gatsby-plugin-sharp": "^2.6.8",
     "gatsby-plugin-sitemap": "^2.4.3",
     "gatsby-plugin-styled-components": "3.3.2",
