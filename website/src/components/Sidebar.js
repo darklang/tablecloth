@@ -27,7 +27,7 @@ let generateItems = (baseUrl, items = []) =>
     return {
       title: item.title,
       url,
-      items: generateItems(url, item.items),
+      items: generateItems(baseUrl, item.items),
     };
   });
 
@@ -60,11 +60,12 @@ export const Sidebar = ({ location }) => {
       css={css`
         background-color: ${({ theme }) => theme.sidebar.background};
         color: ${({ theme }) => theme.navbar.background};
-        padding-top: 3rem;
         padding-bottom: 3rem;
         width: 100%;
-        height: 100vh;
+        height: calc(100vh - 56px);
         overflow-y: auto;
+        position: sticky;
+        top: 56px;
 
         .sideBarItems {
           padding: 0;

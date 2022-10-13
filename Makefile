@@ -80,7 +80,7 @@ integration-test-rescript:
 		npm install;\
 		npm run build;\
 		echo -e "\n\e[31mRunning generated js\e[0m";\
-		node main.bs.js
+		node rescript/main.bs.js
 
 integration-test-native:
 	echo -e "\n\e[31mBuilding native integration test\e[0m"
@@ -108,6 +108,13 @@ deps-format:
 	opam switch set ${TC_NATIVE_OCAML_SWITCH}
 	opam install reason.3.7.0 ocamlformat.${TC_OCAMLFORMAT_VERSION} -y
 	@printf "\n\e[31mInstalled!\e[0m\n"
+
+all-native: deps-native build-native test-native integration-test-native doc-native
+	@printf "\n\e[31mAll done!\e[0m\n"
+
+all-rescript: deps-rescript build-rescript test-rescript integration-test-rescript doc-rescript
+	@printf "\n\e[31mAll done!\e[0m\n"
+
 
 .PHONY: check-format format
 check-format:

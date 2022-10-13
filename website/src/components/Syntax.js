@@ -17,6 +17,19 @@ export let keywords = {
       close: '}',
     },
   },
+  rescript: {
+    val: 'let',
+    typesig: ': ',
+    arrow: '=>',
+    module: {
+      open: '{',
+      close: '}',
+    },
+    moduleSignature: {
+      open: '{',
+      close: '}',
+    },
+  },
   ocaml: {
     val: 'val',
     typesig: ' : ',
@@ -34,12 +47,11 @@ export let keywords = {
 
 let SyntaxContext = React.createContext([keywords.reason, () => {}]);
 
-export let SyntaxProvider = ({ children }) => {
-  let [syntax, setSyntax] = React.useState('reason');
-  let toggle = () =>
-    setSyntax(current => (current === 'reason' ? 'ocaml' : 'reason'));
+export let SyntaxProvider = ({ children, defaultSyntax="reason" }) => {
+  let [syntax, setSyntax] = React.useState(defaultSyntax);
+
   return (
-    <SyntaxContext.Provider children={children} value={[syntax, toggle]} />
+    <SyntaxContext.Provider children={children} value={[syntax, setSyntax]} />
   );
 };
 
@@ -90,30 +102,3 @@ const ToggleContainer = styled.button`
   }
 `;
 
-export const SyntaxToggle = () => {
-  let [syntax, toggleSyntax] = useSyntax();
-  return (
-    <div
-      css={css`
-        align-items: flex-end;
-        display: flex;
-        flex-direction: column;
-        margin-top: -${spacing.smaller}px;
-        span {
-          color: ${colors.grey.dark};
-          font-size: 10px;
-          font-weight: 500;
-          letter-spacing: 1.1px;
-          margin-bottom: ${spacing.smaller}px;
-          text-transform: uppercase;
-        }
-      `}
-    >
-      <span>Switch syntax</span>
-      <ToggleContainer onClick={toggleSyntax} isReason={syntax === 'reason'}>
-        <Reason height={logoSize * 2.5} width={logoSize * 2.5} />
-        <OCaml height={logoSize * 3.25} width={logoSize * 3.25} />
-      </ToggleContainer>
-    </div>
-  );
-};

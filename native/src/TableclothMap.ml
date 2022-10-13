@@ -6,47 +6,41 @@ module Of (M : TableclothComparator.S) = struct
   type nonrec 'value t = (M.t, 'value, M.identity) t
 end
 
-let keepLatestOnly _ latest = latest
+let keep_latest_only _ latest = latest
 
 let empty (comparator : ('key, 'identity) TableclothComparator.s) :
     ('key, 'value, 'identity) t =
-  Base.Map.empty (Internal.toBaseComparator comparator)
+  Base.Map.empty (Internal.to_base_comparator comparator)
 
 
 let singleton
     (comparator : ('key, 'identity) TableclothComparator.s) ~key ~value :
     ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
-    (Internal.toBaseComparator comparator)
+    (Internal.to_base_comparator comparator)
     [ (key, value) ]
-    ~f:keepLatestOnly
+    ~f:keep_latest_only
 
 
-let fromArray
+let from_array
     (comparator : ('key, 'identity) TableclothComparator.s)
     (elements : ('key * 'value) array) : ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
-    (Internal.toBaseComparator comparator)
+    (Internal.to_base_comparator comparator)
     (Array.to_list elements)
-    ~f:keepLatestOnly
+    ~f:keep_latest_only
 
 
-let from_array = fromArray
-
-let fromList
+let from_list
     (comparator : ('key, 'identity) TableclothComparator.s)
     (elements : ('key * 'value) list) : ('key, 'value, 'identity) t =
   Base.Map.of_alist_reduce
-    (Internal.toBaseComparator comparator)
+    (Internal.to_base_comparator comparator)
     elements
-    ~f:keepLatestOnly
+    ~f:keep_latest_only
 
 
-let from_list = fromList
-
-let isEmpty = Base.Map.is_empty
-
-let is_empty = isEmpty
+let is_empty = Base.Map.is_empty
 
 let includes = Base.Map.mem
 
@@ -88,9 +82,7 @@ let merge m1 m2 ~f =
 
 let map = Base.Map.map
 
-let mapWithIndex t ~f = Base.Map.mapi t ~f:(fun ~key ~data -> f key data)
-
-let map_with_index = mapWithIndex
+let map_with_index t ~f = Base.Map.mapi t ~f:(fun ~key ~data -> f key data)
 
 let filter = Base.Map.filter
 
@@ -111,16 +103,12 @@ let any = Base.Map.exists
 
 let all = Base.Map.for_all
 
-let forEach = Base.Map.iter
+let for_each = Base.Map.iter
 
-let for_each = forEach
-
-let forEachWithIndex
+let for_each_with_index
     (map : ('key, 'value, _) t) ~(f : key:'key -> value:'value -> unit) : unit =
   Base.Map.iteri map ~f:(fun ~key ~data -> f ~key ~value:data)
 
-
-let for_each_with_index = forEachWithIndex
 
 let fold m ~initial ~f =
   Base.Map.fold m ~init:initial ~f:(fun ~key ~data acc ->
@@ -131,13 +119,9 @@ let keys = Base.Map.keys
 
 let values = Base.Map.data
 
-let toArray m = Base.Map.to_alist m |> Base.List.to_array
+let to_array m = Base.Map.to_alist m |> Base.List.to_array
 
-let to_array = toArray
-
-let toList m = Base.Map.to_alist m
-
-let to_list = toList
+let to_list m = Base.Map.to_alist m
 
 module Poly = struct
   type identity = Base.Comparator.Poly.comparator_witness
@@ -148,13 +132,9 @@ module Poly = struct
 
   let singleton ~key ~value = Base.Map.Poly.singleton key value
 
-  let fromList l = Base.Map.Poly.of_alist_reduce l ~f:(fun _ curr -> curr)
+  let from_list l = Base.Map.Poly.of_alist_reduce l ~f:(fun _ curr -> curr)
 
-  let from_list = fromList
-
-  let fromArray a = Base.Array.to_list a |> fromList
-
-  let from_array = fromArray
+  let from_array a = Base.Array.to_list a |> from_list
 end
 
 module Int = struct
@@ -166,16 +146,12 @@ module Int = struct
     Obj.magic (Base.Map.singleton (module Base.Int) key value)
 
 
-  let fromList l =
+  let from_list l =
     Obj.magic
       (Base.Map.of_alist_reduce (module Base.Int) l ~f:(fun _ curr -> curr))
 
 
-  let from_list = fromList
-
-  let fromArray a = Obj.magic (Base.Array.to_list a |> fromList)
-
-  let from_array = fromArray
+  let from_array a = Obj.magic (Base.Array.to_list a |> from_list)
 end
 
 module String = struct
@@ -188,14 +164,10 @@ module String = struct
     Obj.magic (Base.Map.singleton (module Base.String) key value)
 
 
-  let fromList l =
+  let from_list l =
     Obj.magic
       (Base.Map.of_alist_reduce (module Base.String) l ~f:(fun _ curr -> curr))
 
 
-  let from_list = fromList
-
-  let fromArray a = Obj.magic (Base.Array.to_list a |> fromList)
-
-  let from_array = fromArray
+  let from_array a = Obj.magic (Base.Array.to_list a |> from_list)
 end

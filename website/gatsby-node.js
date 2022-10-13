@@ -7,8 +7,13 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
 
   createRedirect({
-    fromPath: '/documentation',
-    toPath: '/documentation/installation',
+    fromPath: '/get-started',
+    toPath: '/get-started/installation',
+    redirectInBrowser: true,
+  })
+  createRedirect({
+    fromPath: '/docs',
+    toPath: '/docs/rescript',
     redirectInBrowser: true,
   })
 
@@ -40,7 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
         result.data.allMdx.edges.forEach(({ node }) => {
           createPage({
             path: node.fields.url,
-            component: path.resolve("./src/templates/documentation.js"),
+            component: path.resolve("./src/templates/get-started.js"),
             context: {
               id: node.fields.id
             }
@@ -59,7 +64,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       name: `url`,
       node,
-      value: `/documentation/${parent.relativePath.replace(parent.ext, "")}`
+      value: `/get-started/${parent.relativePath.replace(parent.ext, "")}`
     });
 
     createNodeField({
@@ -98,9 +103,7 @@ let log = {
   info: (...rest) => console.info('[odoc]', ...rest),
 };
 
-let id = 'odoc-model';
-
-let createNodeFromModel = model => ({
+let createNodeFromModel = (id, model) => ({
   id,
   internal: {
     type: 'OdocModel',
@@ -117,27 +120,33 @@ const inDevelopMode = process.env.gatsby_executing_command === 'develop';
 
 exports.sourceNodes = ({ actions }) => {
   const { createNode } = actions;
-  let modelPath = path.resolve(__dirname, `./model.json`);
-  if (modelPath == null) {
+  let nativeModelPath = path.resolve(__dirname, `./model.json`);
+  let rescriptModelPath = path.resolve(__dirname, `./model-rescript.json`);
+  if (nativeModelPath == null || rescriptModelPath == null) {
     throw new Error(`Invalid model path`);
   }
-  log.info('path', modelPath);
-  let node = createNodeFromModel(fs.readFileSync(modelPath).toString());
-  createNode(node);
+  log.info('nativeModelPath', nativeModelPath);
+  log.info('rescriptModelPath', rescriptModelPath);
+
+  let removeSpacesFromJSON = (string) => JSON.stringify(JSON.parse(string))
+  let readModel = (name) =>  removeSpacesFromJSON(fs.readFileSync(name).toString());
+  
+
+  let nativeNode = () => createNodeFromModel("odoc-model-native", readModel(nativeModelPath));
+  let resciptNode = () => createNodeFromModel("odoc-model-rescript", readModel(rescriptModelPath));
+
+  createNode(nativeNode());
+  createNode(resciptNode());
 
   if (inDevelopMode) {
     log.info('watch mode enabled, listening for changes');
-    chokidar.watch(modelPath).on('all', (event, path) => {
+    chokidar.watch(nativeModelPath).on('all', (event, path) => {
       log.info(event);
       if (event == 'unlink') {
         return
       }
-      fs.readFile(modelPath, (error, data) => {
-        if (error) {
-          return log.error(error);
-        }
-        createNode(createNodeFromModel(data.toString()));
-      });
+      createNode(nativeNode());
+      createNode(resciptNode());
     });
   }
 

@@ -12,15 +12,9 @@ let fromOption ma ~error =
       Belt.Result.Ok right
 
 
-let from_option = fromOption
-
 let isError = Belt.Result.isError
 
-let is_error = isError
-
 let isOk = Belt.Result.isOk
-
-let is_ok = isOk
 
 let both a b =
   match (a, b) with
@@ -50,13 +44,9 @@ let unwrapLazy t ~default =
 
 let unwrapUnsafe t = Belt.Result.getExn t
 
-let unwrap_unsafe = unwrapUnsafe
-
 let unwrapError t ~default =
   match t with Ok _ -> default | Error value -> value
 
-
-let unwrap_error = unwrapError
 
 let map2 a b ~f =
   match (a, b) with
@@ -71,7 +61,7 @@ let map2 a b ~f =
 let values t = List.fold_right (map2 ~f:(fun a b -> a :: b)) t (Ok [])
 
 let combine (l : ('ok, 'error) result list) : ('ok list, 'error) result =
-  (TableclothList.fold_right
+  (TableclothList.foldRight
      ~f:(fun (accum : ('ok list, 'error) result) (value : ('ok, 'error) result)
              : ('ok list, 'error) result ->
        map2 ~f:(fun (head : 'ok) (list : 'ok list) -> head :: list) value accum
@@ -86,15 +76,9 @@ let mapError t ~f =
   match t with Error error -> Error (f error) | Ok value -> Ok value
 
 
-let map_error = mapError
-
 let toOption r = match r with Ok v -> Some v | Error _ -> None
 
-let to_option = toOption
-
 let andThen t ~f = Belt.Result.flatMap t f
-
-let and_then = andThen
 
 let attempt f =
   match f () with value -> Ok value | exception error -> Error error
@@ -102,7 +86,7 @@ let attempt f =
 
 let tap t ~f = match t with Ok a -> f a | _ -> ()
 
-let equal equalOk equalError a b =
+let equal a b equalOk equalError =
   match (a, b) with
   | Error a', Error b' ->
       equalError a' b'
@@ -113,10 +97,10 @@ let equal equalOk equalError a b =
 
 
 let compare
-    (compareOk : 'ok -> 'ok -> int)
-    (compareError : 'error -> 'error -> int)
     (a : ('ok, 'error) t)
-    (b : ('ok, 'error) t) : int =
+    (b : ('ok, 'error) t)
+    ~f:(compareOk : 'ok -> 'ok -> int)
+    ~g:(compareError : 'error -> 'error -> int) : int =
   match (a, b) with
   | Error a', Error b' ->
       compareError a' b'
@@ -126,10 +110,3 @@ let compare
       -1
   | Ok _, Error _ ->
       1
-
-
-let ( |? ) t default = unwrap t ~default
-
-let ( >>| ) t f = map t ~f
-
-let ( >>= ) t f = andThen t ~f

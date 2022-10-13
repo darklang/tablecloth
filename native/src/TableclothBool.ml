@@ -1,14 +1,10 @@
 type t = bool
 
-let fromInt i = match i with 0 -> Some false | 1 -> Some true | _ -> None
+let from_int i = match i with 0 -> Some false | 1 -> Some true | _ -> None
 
-let from_int = fromInt
-
-let fromString string =
+let from_string string =
   match string with "false" -> Some false | "true" -> Some true | _ -> None
 
-
-let from_string = fromString
 
 external ( && ) : bool -> bool -> bool = "%sequand"
 
@@ -20,12 +16,10 @@ let not = not
 
 let equal = ( = )
 
+let and_ a b = a && b
+
 let compare = compare
 
-let toString = function true -> "true" | false -> "false"
+let to_string = function true -> "true" | false -> "false"
 
-let to_string = toString
-
-let toInt t = match t with true -> 1 | false -> 0
-
-let to_int = toInt
+let to_int t = match t with true -> 1 | false -> 0

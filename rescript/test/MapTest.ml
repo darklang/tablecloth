@@ -13,7 +13,7 @@ end = struct
   module T = struct
     type t = int * int
 
-    let compare = Tuple2.compare Int.compare Int.compare
+    let compare = Tuple2.compare ~f:Int.compare ~g:Int.compare
   end
 
   include T

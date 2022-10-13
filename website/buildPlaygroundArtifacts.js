@@ -205,7 +205,7 @@ const standardBundle = browserify();
 const tableclothJsDir = path.join(
   __dirname,
   'node_modules',
-  'tablecloth-bucklescript',
+  'tablecloth-rescript',
   'src',
 );
 let tableclothDirFiles;

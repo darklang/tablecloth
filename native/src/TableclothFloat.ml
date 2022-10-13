@@ -2,15 +2,11 @@ type t = float
 
 type radians = t
 
-let fromInt = Base.Float.of_int
+let from_int = Base.Float.of_int
 
-let from_int = fromInt
-
-let fromString string =
+let from_string string =
   try Some (Base.Float.of_string string) with Invalid_argument _ -> None
 
-
-let from_string = fromString
 
 let zero = 0.0
 
@@ -20,9 +16,7 @@ let nan = Base.Float.nan
 
 let infinity = Base.Float.infinity
 
-let negativeInfinity = Base.Float.neg_infinity
-
-let negative_infinity = neg_infinity
+let negative_infinity = Base.Float.neg_infinity
 
 let e = Base.Float.euler
 
@@ -30,21 +24,13 @@ let pi = Base.Float.pi
 
 let epsilon = Base.Float.epsilon_float
 
-let maximumSafeInteger = (2. ** 52.) -. 1.
+let maximum_safe_integer = (2. ** 52.) -. 1.
 
-let maximum_safe_integer = maximumSafeInteger
+let minimum_safe_integer = (-2. ** 52.) -. 1.
 
-let minimumSafeInteger = (-2. ** 52.) -. 1.
+let largest_value = Base.Float.max_finite_value
 
-let minimum_safe_integer = minimumSafeInteger
-
-let largestValue = Base.Float.max_finite_value
-
-let largest_value = largestValue
-
-let smallestValue = Base.Float.min_positive_normal_value
-
-let smallest_value = smallestValue
+let smallest_value = Base.Float.min_positive_normal_value
 
 let add = ( +. )
 
@@ -72,13 +58,9 @@ let ( ~- ) = negate
 
 let absolute = Base.Float.abs
 
-let isInteger t = t = Base.Float.round t
+let is_integer t = t = Base.Float.round t
 
-let is_integer = isInteger
-
-let isSafeInteger t = isInteger t && t <= maximumSafeInteger
-
-let is_safe_integer = isSafeInteger
+let is_safe_integer t = is_integer t && t <= maximum_safe_integer
 
 let clamp n ~lower ~upper =
   if upper < lower
@@ -96,7 +78,7 @@ let clamp n ~lower ~upper =
   else max lower (min upper n)
 
 
-let inRange n ~lower ~upper =
+let in_range n ~lower ~upper =
   if let open Base.Float in
      upper < lower
   then
@@ -109,34 +91,24 @@ let inRange n ~lower ~upper =
   else n >= lower && n < upper
 
 
-let in_range = inRange
-
-let squareRoot = sqrt
-
-let square_root = squareRoot
+let square_root = sqrt
 
 let log n ~base =
   let open Base.Float in
   log10 n / log10 base
 
 
-let isNaN = Base.Float.is_nan
+let is_nan = Base.Float.is_nan
 
-let is_nan = isNaN
+let is_infinite = Base.Float.is_inf
 
-let isInfinite = Base.Float.is_inf
+let is_finite n = (not (is_infinite n)) && not (is_nan n)
 
-let is_infinite = isInfinite
+let maximum x y = if is_nan x || is_nan y then nan else if y > x then y else x
 
-let isFinite n = (not (isInfinite n)) && not (isNaN n)
+let minimum x y = if is_nan x || is_nan y then nan else if y < x then y else x
 
-let is_finite = isFinite
-
-let maximum x y = if isNaN x || isNaN y then nan else if y > x then y else x
-
-let minimum x y = if isNaN x || isNaN y then nan else if y < x then y else x
-
-let hypotenuse x y = squareRoot ((x * x) + (y * y))
+let hypotenuse x y = square_root ((x * x) + (y * y))
 
 let degrees n = n * (pi / 180.0)
 
@@ -196,21 +168,13 @@ let ceiling = Base.Float.round_up
 
 let truncate = Base.Float.round_towards_zero
 
-let fromPolar (r, theta) = (r * cos theta, r * sin theta)
+let from_polar (r, theta) = (r * cos theta, r * sin theta)
 
-let from_polar = fromPolar
+let to_polar (x, y) = (hypotenuse x y, atan2 ~x ~y)
 
-let toPolar (x, y) = (hypotenuse x y, atan2 ~x ~y)
+let to_int = Base.Float.iround_towards_zero
 
-let to_polar = toPolar
-
-let toInt = Base.Float.iround_towards_zero
-
-let to_int = toInt
-
-let toString = Base.Float.to_string
-
-let to_string = toString
+let to_string = Base.Float.to_string
 
 let equal = ( = )
 

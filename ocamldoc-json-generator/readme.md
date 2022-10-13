@@ -1,20 +1,26 @@
 # Ocamldoc Json Generator
 
-JsonGenerator.ml is responsible for taking the `/native` source files and turning them into a single json file (`website/model.json`) which the website project then turns into the `/api` page.
+JsonGenerator.ml is responsible for taking the `/native` and `/rescript` source files and turning them into json files (`website/model.json` and `website/model-rescript.json`) which the website project then turns into the `/docs` page.
 
 ## Setup
+To generate both native and rescript versions we'll need (esy)[https://esy.sh/docs/en/getting-started.html].
+Since esy can't link local npm projects (our `rescript` folder with `tablecloth-rescript` lib) we should copy the files ourselves. To do this, run:
 
-The generator requires version 4.08 of the ocaml compiler
 ```
-opam switch create 4.08
+make init-node
 ```
 
-Then install the dependencies
+Next, install dependancies
+```
+esy
+```
+
+Then generate rescript interfaces
 
 ```sh
-make deps
+make rescript-interfaces
 ```
 
 ## Usage
 
-After making any changes to interface files run `make doc` to regenerate `website/model.json` 
+After making any changes to interface files run `make doc` to regenerate `website/model.json` and `website/model-rescript.json`.

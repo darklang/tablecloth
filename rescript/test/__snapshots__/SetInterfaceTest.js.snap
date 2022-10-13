@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Set.mli prevent interface files from diverging 1`] = `
-"27c27
-< type ('a, 'id) t = ('a, 'id) Belt.Set.t
----
-> type ('a, 'id) t = ('a, 'id) Base.Set.t
-"
-`;

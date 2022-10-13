@@ -4,7 +4,7 @@
 
 module type Sum = sig
   (** Modules which conform to this signature can be used with functions like
-      {!Array.sum} or {!List.sum}
+      {!Array.sum} or {!List.sum}.
   *)
 
   type t

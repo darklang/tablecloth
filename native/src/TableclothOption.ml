@@ -2,25 +2,17 @@ type 'a t = 'a option
 
 let some a = Some a
 
-let isSome = Option.is_some
+let is_some = Option.is_some
 
-let is_some = isSome
+let is_none = Option.is_none
 
-let isNone = Option.is_none
+let and_ ta tb = match is_some ta with true -> tb | false -> None
 
-let is_none = isNone
+let or_ ta tb = match is_some ta with true -> ta | false -> tb
 
-let and_ ta tb = match isSome ta with true -> tb | false -> None
+let or_else ta tb = match is_some tb with true -> tb | false -> ta
 
-let or_ ta tb = match isSome ta with true -> ta | false -> tb
-
-let orElse ta tb = match isSome tb with true -> tb | false -> ta
-
-let or_else = orElse
-
-let andThen t ~f = match t with Some x -> f x | None -> None
-
-let and_then = andThen
+let and_then t ~f = match t with Some x -> f x | None -> None
 
 let flatten = Option.join
 
@@ -34,25 +26,19 @@ let map2 (ta : 'a t) (tb : 'b t) ~(f : 'a -> 'b -> 'c) : 'c t =
 
 let unwrap t ~default = match t with None -> default | Some value -> value
 
-let unwrapUnsafe x =
+let unwrap_unsafe x =
   match x with
   | None ->
-      raise (Invalid_argument "Option.unwrapUnsafe called with None")
+      raise (Invalid_argument "Option.unwrap_unsafe called with None")
   | Some x ->
       x
 
 
-let unwrap_unsafe = unwrapUnsafe
-
 let tap t ~f = Option.iter f t
 
-let toArray t = match t with None -> [||] | Some value -> [| value |]
+let to_array t = match t with None -> [||] | Some value -> [| value |]
 
-let to_array = toArray
-
-let toList t = match t with None -> [] | Some value -> [ value ]
-
-let to_list = toList
+let to_list t = match t with None -> [] | Some value -> [ value ]
 
 let equal equal a b =
   match (a, b) with
@@ -64,7 +50,7 @@ let equal equal a b =
       false
 
 
-let compare compare a b =
+let compare ~f:compare a b =
   match (a, b) with
   | None, None ->
       0
@@ -80,4 +66,4 @@ let ( |? ) t default = unwrap t ~default
 
 let ( >>| ) t f = map t ~f
 
-let ( >>= ) t f = andThen t ~f
+let ( >>= ) t f = and_then t ~f

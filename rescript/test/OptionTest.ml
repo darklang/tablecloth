@@ -259,27 +259,28 @@ let suite =
 
       describe "equal" (fun () ->
           test "returns bool true if options are equal" (fun () ->
-              expect (Option.equal Int.equal (Some 1) (Some 1))
+              expect (Option.equal (Some 1) (Some 1) Int.equal)
               |> toEqual Eq.bool true ) ;
 
           test "returns bool true if options are equal" (fun () ->
-              expect (Option.equal Int.equal (Some 1) (Some 3))
+              expect (Option.equal (Some 1) (Some 3) Int.equal)
               |> toEqual Eq.bool false ) ;
 
           test "returns bool true if options are equal" (fun () ->
-              expect (Option.equal Int.equal (Some 1) None)
+              expect (Option.equal (Some 1) None Int.equal)
               |> toEqual Eq.bool false ) ;
           test "returns bool true if options are equal" (fun () ->
-              expect (Option.equal Int.equal None None) |> toEqual Eq.bool true ) ) ;
+              expect (Option.equal None None Int.equal) |> toEqual Eq.bool true ) ) ;
 
       describe "compare" (fun () ->
           test "returns comparative value -1, 0, or 1" (fun () ->
-              expect (Option.compare Int.compare (Some 1) (Some 3))
+              expect (Option.compare (Some 1) (Some 3) ~f:Int.compare)
               |> toEqual Eq.int (-1) ) ;
 
           test "returns comparative value -1, 0, or 1" (fun () ->
-              expect (Option.compare Int.compare (Some 1) None)
+              expect (Option.compare (Some 1) None ~f:Int.compare)
               |> toEqual Eq.int 1 ) ;
 
           test "returns comparative value -1, 0, or 1" (fun () ->
-              expect (Option.compare Int.compare None None) |> toEqual Eq.int 0 ) ) )
+              expect (Option.compare None None ~f:Int.compare)
+              |> toEqual Eq.int 0 ) ) )

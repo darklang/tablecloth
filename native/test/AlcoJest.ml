@@ -85,9 +85,9 @@ let test description callback =
 
 let testAll (description : string) (values : 'a list) (callback : 'a -> unit) :
     unit =
-  Tablecloth.List.forEachWithIndex values ~f:(fun index value ->
+  Tablecloth.List.for_each_with_index values ~f:(fun index value ->
       test
-        (description ^ ", [values][" ^ Tablecloth.Int.toString index ^ "]")
+        (description ^ ", [values][" ^ Tablecloth.Int.to_string index ^ "]")
         (fun () -> callback value) )
 
 

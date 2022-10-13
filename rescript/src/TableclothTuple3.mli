@@ -11,31 +11,33 @@ val make : 'a -> 'b -> 'c -> 'a * 'b * 'c
 
     {2 Examples}
 
-    {[Tuple3.create 3 "cat" false = (3, "cat", false)]}
-
     {[
-      List.map3 ~f:Tuple3.create [1;2;3] ['a'; 'b'; 'c'] [4.; 5.; 6.] =
-        [(1, 'a', 4.), (2, 'b', 5.), (3, 'c', 6.)]
-    ]}
+      Tuple3.make(3, "cat", false) == (3, "cat", false)
+      
+      Array.map3(~f=Tuple3.make, [1, 2, 3], ['a', 'b', 'c'], [4., 5., 6.])
+      == [
+          (1, 'a', 4.),
+          (2, 'b', 5.),
+          (3, 'c', 6.),
+      ]
+   ]}
 *)
 
 val fromArray : 'a array -> ('a * 'a * 'a) option
 (** Create a tuple from the first two elements of an {!Array}.
 
-    If the array is longer than two elements, the extra elements are ignored.
+    If the array is longer than three elements, the extra elements are ignored.
 
-    If the array is less than two elements, returns [None]
+    If the array is less than three elements, returns [None]
 
     {2 Examples}
 
-    {[Tuple3.fromArray [|1; 2;3 |] = Some (1, 2, 3)]}
-
-    {[Tuple3.fromArray [|1; 2|] = None]}
-
-    {[Tuple3.fromArray [|4;5;6;7|] = Some (4, 5, 6)]}
+    {[
+      Tuple3.fromArray([1, 2, 3]) == Some(1, 2, 3)
+      Tuple3.fromArray([1, 2]) == None
+      Tuple3.fromArray([4, 5, 6, 7]) == Some(4, 5, 6)
+    ]}
 *)
-
-val from_array : 'a array -> ('a * 'a * 'a) option
 
 val fromList : 'a list -> ('a * 'a * 'a) option
 (** Create a tuple from the first two elements of a {!List}.
@@ -46,25 +48,22 @@ val fromList : 'a list -> ('a * 'a * 'a) option
 
     {2 Examples}
 
-    {[Tuple3.fromList [1; 2; 3] = Some (1, 2, 3)]}
-
-    {[Tuple3.fromList [1; 2] = None]}
-
-    {[Tuple3.fromList [4; 5; 6; 7] = Some (4, 5, 6)]}
+    {[
+      Tuple3.fromList(list{1, 2, 3}) == Some(1, 2, 3)
+      Tuple3.fromList(list{1, 2}) == None
+      Tuple3.fromList(list{4, 5, 6, 7}) == Some(4, 5, 6)
+    ]}
 *)
-
-val from_list : 'a list -> ('a * 'a * 'a) option
-
-(** {1 Basic operations} *)
 
 val first : 'a * 'b * 'c -> 'a
 (** Extract the first value from a tuple.
 
     {2 Examples}
 
-    {[Tuple3.first (3, 4, 5) = 3]}
-
-    {[Tuple3.first ("john", "danger", "doe") = "john"]}
+    {[
+      Tuple3.first((3, 4, 5)) == 3
+      Tuple3.first(("john", "danger", "doe")) == "john"
+    ]}
 *)
 
 val second : 'a * 'b * 'c -> 'b
@@ -72,9 +71,10 @@ val second : 'a * 'b * 'c -> 'b
 
     {2 Examples}
 
-    {[Tuple3.second (3, 4, 5) = 4]}
-
-    {[Tuple3.second ("john", "danger", "doe") = "danger"]}
+    {[
+      Tuple3.second((3, 4, 5)) == 4
+      Tuple3.second(("john", "danger", "doe")) == "danger"
+    ]}
 *)
 
 val third : 'a * 'b * 'c -> 'c
@@ -82,9 +82,10 @@ val third : 'a * 'b * 'c -> 'c
 
     {2 Examples}
 
-    {[Tuple3.third (3, 4, 5) = 5]}
-
-    {[Tuple3.third ("john", "danger", "doe") = "doe"]}
+    {[
+      Tuple3.third((3, 4, 5)) == 5
+      Tuple3.third(("john", "danger", "doe")) == "doe"
+    ]}
 *)
 
 val initial : 'a * 'b * 'c -> 'a * 'b
@@ -92,9 +93,10 @@ val initial : 'a * 'b * 'c -> 'a * 'b
 
     {2 Examples}
 
-    {[Tuple3.initial (3, "stressed", false) = (3, "stressed")]}
-
-    {[Tuple3.initial ("john", 16, true) = ("john", 16)]}
+    {[
+      Tuple3.initial((3, "stressed", false)) == (3, "stressed")
+      Tuple3.initial(("john", 16, true)) == ("john", 16)
+    ]}
 *)
 
 val tail : 'a * 'b * 'c -> 'b * 'c
@@ -102,9 +104,10 @@ val tail : 'a * 'b * 'c -> 'b * 'c
 
     {2 Examples}
 
-    {[Tuple3.tail (3, "stressed", false) = ("stressed", false)]}
-
-    {[Tuple3.tail ("john", 16, true) = (16, true)]}
+    {[
+      Tuple3.tail((3, "stressed", false)) == ("stressed", false)
+      Tuple3.tail(("john", 16, true)) == (16, true)
+    ]}
 *)
 
 (** {1 Modify} *)
@@ -114,60 +117,54 @@ val rotateLeft : 'a * 'b * 'c -> 'b * 'c * 'a
 
     {2 Examples}
 
-    {[Tuple3.rotateLeft (3, 4, 5) = (4, 5, 3)]}
-
-    {[Tuple3.rotateLeft ("was", "stressed", "then") = ("stressed", "then", "was")]}
+    {[
+      Tuple3.rotateLeft((3, 4, 5)) == (4, 5, 3)
+      Tuple3.rotateLeft(("was", "stressed", "then")) == ("stressed", "then", "was")
+    ]}
 *)
-
-val rotate_left : 'a * 'b * 'c -> 'b * 'c * 'a
 
 val rotateRight : 'a * 'b * 'c -> 'c * 'a * 'b
 (** Move each value in the tuple one position to the right, moving the value in the last position into the first position.
 
     {2 Examples}
 
-    {[Tuple3.rotateRight (3, 4, 5) = (5, 3, 4)]}
-
-    {[Tuple3.rotateRight ("was", "stressed", "then") = ("then", "was", "stressed")]}
+    {[
+      Tuple3.rotateRight((3, 4, 5)) == (5, 3, 4)
+      Tuple3.rotateRight(("was", "stressed", "then")) == ("then", "was", "stressed")
+    ]}
 *)
-
-val rotate_right : 'a * 'b * 'c -> 'c * 'a * 'b
-
-(** {1 Transform} *)
 
 val mapFirst : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
 (** Transform the first value in a tuple.
 
     {2 Examples}
 
-    {[Tuple3.mapFirst ~f:String.reverse ("stressed", 16, false) = ("desserts", 16, false)]}
-
-    {[Tuple3.mapFirst ~f:String.length ("stressed", 16, false) = (8, 16, false)]}
+    {[
+      Tuple3.mapFirst(("stressed", 16, false), ~f=String.reverse) == ("desserts", 16, false)
+      Tuple3.mapFirst(("stressed", 16, false), ~f=String.length) == (8, 16, false)
+    ]}
 *)
-
-val map_first : 'a * 'b * 'c -> f:('a -> 'x) -> 'x * 'b * 'c
 
 val mapSecond : 'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c
 (** Transform the second value in a tuple.
 
     {2 Examples}
 
-    {[Tuple3.mapSecond ~f:Float.squareRoot ("stressed", 16., false) = ("stressed", 4., false)]}
-
-    {[Tuple3.mapSecond ~f:(~-) ("stressed", 16, false) = ("stressed", -16, false)]}
+    {[
+      Tuple3.mapSecond(("stressed", 16., false), ~f=Float.squareRoot) == ("stressed", 4., false)
+      Tuple3.mapSecond(~f=Int.negate, ("stressed", 16, false)) == ("stressed", -16, false)
+    ]}
 *)
-
-val map_second : 'a * 'b * 'c -> f:('b -> 'y) -> 'a * 'y * 'c
 
 val mapThird : 'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z
 (** Transform the third value in a tuple.
 
     {2 Examples}
 
-    {[Tuple3.mapThird ~f:not ("stressed", 16, false) ("stressed", 16, true)]}
+    {[
+      Tuple3.mapThird(("stressed", 16, false), ~f=Bool.not) == ("stressed", 16, true)
+    ]}
 *)
-
-val map_third : 'a * 'b * 'c -> f:('c -> 'z) -> 'a * 'b * 'z
 
 val mapEach :
   'a * 'b * 'c -> f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'x * 'y * 'z
@@ -176,16 +173,14 @@ val mapEach :
     {2 Examples}
 
     {[
-      Tuple3.mapEach
-        ~f:String.reverse
-        ~g:Float.squareRoot
-        ~h:Bool.not
-        ("stressed", 16., false) = ("desserts", 4., true)
-    ]}
+      Tuple3.mapEach(
+          ("stressed", 16., false)
+          ~f=String.reverse, 
+          ~g=Float.squareRoot, 
+          ~h=Bool.not)
+      == ("desserts", 4., true)
+   ]}
 *)
-
-val map_each :
-  'a * 'b * 'c -> f:('a -> 'x) -> g:('b -> 'y) -> h:('c -> 'z) -> 'x * 'y * 'z
 
 val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
 (** Transform all the values of a tuple using the same function.
@@ -194,14 +189,11 @@ val mapAll : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
 
     {2 Examples}
 
-    {[Tuple3.mapAll ~f:Float.squareRoot (9., 16., 25.) = (3., 4., 5.)]}
-
-    {[Tuple3.mapAll ~f:String.length ("was", "stressed", "then") = (3, 8, 4)]}
+    {[
+      Tuple3.mapAll((9., 16., 25.), ~f=Float.squareRoot) == (3., 4., 5.)
+      Tuple3.mapAll(("was", "stressed", "then"), ~f=String.length) == (3, 8, 4)
+    ]}
 *)
-
-val map_all : 'a * 'a * 'a -> f:('a -> 'b) -> 'b * 'b * 'b
-
-(** {1 Convert} *)
 
 val toArray : 'a * 'a * 'a -> 'a array
 (** Turns a tuple into a {!List} of length three.
@@ -210,12 +202,11 @@ val toArray : 'a * 'a * 'a -> 'a array
 
     {2 Examples}
 
-    {[Tuple3.toArray (3, 4, 5) = [3; 4; 5]]}
-
-    {[Tuple3.toArray ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
+    {[
+      Tuple3.toArray((3, 4, 5)) == [3, 4, 5]
+      Tuple3.toArray(("was", "stressed", "then")) == ["was", "stressed", "then"]
+    ]}
 *)
-
-val to_array : 'a * 'a * 'a -> 'a array
 
 val toList : 'a * 'a * 'a -> 'a list
 (** Turns a tuple into a {!List} of length three.
@@ -224,48 +215,46 @@ val toList : 'a * 'a * 'a -> 'a list
 
     {2 Examples}
 
-    {[Tuple3.toList (3, 4, 5) = [3; 4; 5]]}
-
-    {[Tuple3.toList ("was", "stressed", "then") = ["was"; "stressed"; "then"]]}
+    {[
+      Tuple3.toList((3, 4, 5)) == list{3, 4, 5}
+      Tuple3.toList(("was", "stressed", "then")) == list{"was", "stressed", "then"}
+    ]}
 *)
 
-val to_list : 'a * 'a * 'a -> 'a list
-
-(** {1 Compare} *)
-
 val equal :
-     ('a -> 'a -> bool)
+     ('a, 'b, 'c) t
+  -> ('a, 'b, 'c) t
+  -> ('a -> 'a -> bool)
   -> ('b -> 'b -> bool)
   -> ('c -> 'c -> bool)
-  -> ('a, 'b, 'c) t
-  -> ('a, 'b, 'c) t
   -> bool
 (** Test two {!Tuple3}s for equality, using the provided functions to test the
     first, second and third components.
 
     {2 Examples}
 
-    {[Tuple3.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (1, "Fox", 'k') = true]}
-
-    {[Tuple3.equal Int.equal String.equal Char.equal (1, "Fox", 'j') (2, "Hen", 'j') = false]}
+    {[
+      Tuple3.equal((1, "Fox", 'j'), (1, "Fox", 'k'), Int.equal, String.equal, Char.equal) == false
+      Tuple3.equal((1, "Fox", 'j'), (2, "Hen", 'j'), Int.equal, String.equal, Char.equal) == false
+    ]}
  *)
 
 val compare :
-     ('a -> 'a -> int)
-  -> ('b -> 'b -> int)
-  -> ('c -> 'c -> int)
+     ('a, 'b, 'c) t
   -> ('a, 'b, 'c) t
-  -> ('a, 'b, 'c) t
+  -> f:('a -> 'a -> int)
+  -> g:('b -> 'b -> int)
+  -> h:('c -> 'c -> int)
   -> int
-(** Compare two {!Tuple3}s, using the provided functions to compare the first
-    components then, if the first components are equal, the second components,
-    then the third components
+(** Compare two {!Tuple3}s, using [f] to compare the first
+    components then, if the first components are equal, the second components are compared with [g],
+    then the third components are compared with [h].
 
     {2 Examples}
 
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Fox", 'j') = 0]}
-
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (1, "Eel", 'j') = 1]}
-
-    {[Tuple3.compare Int.compare String.compare Char.compare (1, "Fox", 'j') (2, "Fox", 'm') = -1]}
+    {[
+      Tuple3.compare((1, "Fox", 'j'), (1, "Fox", 'j'), ~f=Int.compare, ~g=String.compare, ~h=Char.compare) == 0
+      Tuple3.compare((1, "Fox", 'j'), (1, "Eel", 'j'), ~f=Int.compare, ~g=String.compare, ~h=Char.compare) == 1
+      Tuple3.compare((1, "Fox", 'j'), (2, "Fox", 'm'), ~f=Int.compare, ~g=String.compare, ~h=Char.compare) == -1
+    ]}
  *)

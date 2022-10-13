@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const HTML = props => (
-  <html lang="en" {...props.htmlAttributes}>
+  <html lang="en" {...props.htmlAttributes} style={{
+    scrollPaddingTop: '80px'
+  }}>
     <head>
       <meta charSet="utf-8" />
       <meta
