@@ -1,5 +1,0 @@
-!_build
-_build/*
-!_build/.gitkeep
-*.cm*
-*.o
