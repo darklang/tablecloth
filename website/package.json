@@ -20,12 +20,6 @@
     "pjax-api": "^3.31.0",
     "reason": "3.3.4",
     "reason-highlightjs": "0.2.1",
-    "rollup": "^2.10.5",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-jsx": "^1.0.3",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-uglify": "^6.0.4",
     "uglifyify": "^5.0.2"
   },
   "dependencies": {
@@ -63,7 +57,13 @@
     "react-virtualized": "9.21.1",
     "reason": "3.3.4",
     "reason-highlightjs": "0.2.1",
+    "rollup": "^1.32.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-jsx": "^1.0.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "styled-components": "5.1.0",
-    "tablecloth-rescript": "file:.."
+    "tablecloth-rescript": "0.0.8-1"
   }
 }

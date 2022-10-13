@@ -6,13 +6,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { css, createGlobalStyle } from 'styled-components';
 import { NextPrevious } from '../components/NextPrevious';
 import { GithubEditButton } from '../components/GithubEditButton';
-import {
-  colors,
-  fonts,
-  GlobalStyles,
-  ThemeProvider,
-  useTheme,
-} from '../theme';
+import { colors, fonts, GlobalStyles, ThemeProvider, useTheme } from '../theme';
 import {
   AppWrapper,
   ContentContainer,
@@ -110,7 +104,7 @@ let MdxStyles = createGlobalStyle`
 .blockquote {
   background-color: ${({ theme }) => theme.code.background};
   border-left: 3px solid ${colors.grey.base};
-  padding-left: 14px;  
+  padding-left: 14px;
 }
 
 ul, ol {
@@ -124,27 +118,27 @@ ul, ol {
 `;
 
 let mdxComponents = {
-  h1: props => (
+  h1: (props) => (
     <h1 className="heading1" id={formatTitleToId(props.children)} {...props} />
   ),
-  h2: props => (
+  h2: (props) => (
     <h2 className="heading2" id={formatTitleToId(props.children)} {...props} />
   ),
-  h3: props => (
+  h3: (props) => (
     <h3 className="heading3" id={formatTitleToId(props.children)} {...props} />
   ),
-  h4: props => (
+  h4: (props) => (
     <h4 className="heading4" id={formatTitleToId(props.children)} {...props} />
   ),
-  h5: props => (
+  h5: (props) => (
     <h5 className="heading5" id={formatTitleToId(props.children)} {...props} />
   ),
-  h6: props => (
+  h6: (props) => (
     <h6 className="heading6" id={formatTitleToId(props.children)} {...props} />
   ),
-  p: props => <p className="paragraph" {...props} />,
-  pre: props => <pre className="pre">{props.children}</pre>,
-  inlineCode: props => <code className="inlineCode" {...props} />,
+  p: (props) => <p className="paragraph" {...props} />,
+  pre: (props) => <pre className="pre">{props.children}</pre>,
+  inlineCode: (props) => <code className="inlineCode" {...props} />,
   code: ({ className, children, ...props }) => (
     <div className="code">
       <CodeBlock
@@ -161,11 +155,11 @@ let mdxComponents = {
       </a>
     );
   },
-  img: props => <img className="img" {...props} />,
-  blockquote: props => <blockquote className="blockquote" {...props} />,
+  img: (props) => <img className="img" {...props} />,
+  blockquote: (props) => <blockquote className="blockquote" {...props} />,
 };
 
-let Header = ({title, metaTitle, metaDescription}) => {
+let Header = ({ title }) => {
   let [_themeName, _toggle, theme] = useTheme();
   return (
     <Helmet>
@@ -187,18 +181,12 @@ let Header = ({title, metaTitle, metaDescription}) => {
         sizes="16x16"
         href={theme.favicon.icon16}
       />
-      <meta name="title" content={metaTitle} />
-      <meta property="og:title" content={metaTitle} />
-      <meta property="twitter:title" content={metaTitle} />
-      <meta name="description" content={metaDescription} />
-      <meta property="og:description" content={metaDescription} />
-      <meta property="twitter:description" content={metaDescription} />
     </Helmet>
   );
 };
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  query ($id: String!) {
     site {
       siteMetadata {
         title
@@ -220,8 +208,6 @@ export const pageQuery = graphql`
         }
       }
       frontmatter {
-        metaTitle
-        metaDescription
         order
       }
     }
@@ -261,14 +247,13 @@ export default ({ data, location }) => {
     .sort((fieldsA, fieldsB) => fieldsA.order - fieldsB.order);
 
   const { title } = mdx.fields;
-  const { metaTitle, metaDescription } = mdx.frontmatter;
 
   return (
     <ThemeProvider>
       <SyntaxProvider>
         <GlobalStyles />
         <MdxStyles />
-        <Header {...{ title, metaDescription, metaTitle: metaTitle || title }} />
+        <Header {...{ title }} />
         <AppWrapper>
           <ContentContainer>
             <NavBarContainer>
@@ -276,19 +261,20 @@ export default ({ data, location }) => {
             </NavBarContainer>
             <div
               css={css`
-                    justify-content: center;
-                    align-items: stretch;
-                    display: flex;
-                    min-width: 100%;
-                `}
+                justify-content: center;
+                align-items: stretch;
+                display: flex;
+                min-width: 100%;
+              `}
             >
               <SidebarContainer isOpen={isOpen}>
                 <Sidebar location={location} />
               </SidebarContainer>
               <Main
                 css={css`
-                      max-width: 960px;
-                  `}>
+                  max-width: 960px;
+                `}
+              >
                 <Container>
                   <PageTitle>{mdx.fields.title}</PageTitle>
                   <GithubEditButton
@@ -296,9 +282,9 @@ export default ({ data, location }) => {
                   />
                   <div
                     className={css`
-                    display: flex;
-                    flex: 1;
-                  `}
+                      display: flex;
+                      flex: 1;
+                    `}
                   >
                     <MDXProvider components={mdxComponents}>
                       <MDXRenderer>{mdx.body}</MDXRenderer>
@@ -306,16 +292,17 @@ export default ({ data, location }) => {
                   </div>
                   <div
                     css={css`
-                    padding: 50px 0;
-                  `}
+                      padding: 50px 0;
+                    `}
                   >
                     <NextPrevious currentUrl={mdx.fields.url} nav={nav} />
                   </div>
                 </Container>
-              </Main> </div>
+              </Main>{' '}
+            </div>
             <MenuButtonContainer>
               <MenuButton
-                onClick={() => setIsOpen(open => !open)}
+                onClick={() => setIsOpen((open) => !open)}
                 isOpen={isOpen}
               />
             </MenuButtonContainer>

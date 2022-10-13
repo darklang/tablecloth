@@ -1,21 +1,10 @@
 const chokidar = require('chokidar');
 const crypto = require('crypto');
 const fs = require('fs');
-const path = require("path");
+const path = require('path');
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
-
-  createRedirect({
-    fromPath: '/get-started',
-    toPath: '/get-started/installation',
-    redirectInBrowser: true,
-  })
-  createRedirect({
-    fromPath: '/docs',
-    toPath: '/docs/rescript',
-    redirectInBrowser: true,
-  })
 
   return new Promise((resolve, reject) => {
     resolve(
@@ -36,8 +25,8 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-        `
-      ).then(result => {
+        `,
+      ).then((result) => {
         if (result.errors) {
           reject(result.errors);
         }
@@ -45,13 +34,13 @@ exports.createPages = ({ graphql, actions }) => {
         result.data.allMdx.edges.forEach(({ node }) => {
           createPage({
             path: node.fields.url,
-            component: path.resolve("./src/templates/get-started.js"),
+            component: path.resolve('./src/templates/get-started.js'),
             context: {
-              id: node.fields.id
-            }
+              id: node.fields.id,
+            },
           });
         });
-      })
+      }),
     );
   });
 };
@@ -64,19 +53,19 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       name: `url`,
       node,
-      value: `/get-started/${parent.relativePath.replace(parent.ext, "")}`
+      value: `/get-started/${parent.relativePath.replace(parent.ext, '')}`,
     });
 
     createNodeField({
-      name: "id",
+      name: 'id',
       node,
-      value: node.id
+      value: node.id,
     });
 
     createNodeField({
-      name: "title",
+      name: 'title',
       node,
-      value: node.frontmatter.title || (parent.name)
+      value: node.frontmatter.title || parent.name,
     });
 
     createNodeField({
@@ -98,7 +87,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
-
 let log = {
   info: (...rest) => console.info('[odoc]', ...rest),
 };
@@ -107,12 +95,9 @@ let createNodeFromModel = (id, model) => ({
   id,
   internal: {
     type: 'OdocModel',
-    contentDigest: crypto
-      .createHash(`md5`)
-      .update((model))
-      .digest(`hex`),
+    contentDigest: crypto.createHash(`md5`).update(model).digest(`hex`),
     mediaType: `application/json`,
-    content: (model),
+    content: model,
   },
 });
 
@@ -128,12 +113,14 @@ exports.sourceNodes = ({ actions }) => {
   log.info('nativeModelPath', nativeModelPath);
   log.info('rescriptModelPath', rescriptModelPath);
 
-  let removeSpacesFromJSON = (string) => JSON.stringify(JSON.parse(string))
-  let readModel = (name) =>  removeSpacesFromJSON(fs.readFileSync(name).toString());
-  
+  let removeSpacesFromJSON = (string) => JSON.stringify(JSON.parse(string));
+  let readModel = (name) =>
+    removeSpacesFromJSON(fs.readFileSync(name).toString());
 
-  let nativeNode = () => createNodeFromModel("odoc-model-native", readModel(nativeModelPath));
-  let resciptNode = () => createNodeFromModel("odoc-model-rescript", readModel(rescriptModelPath));
+  let nativeNode = () =>
+    createNodeFromModel('odoc-model-native', readModel(nativeModelPath));
+  let resciptNode = () =>
+    createNodeFromModel('odoc-model-rescript', readModel(rescriptModelPath));
 
   createNode(nativeNode());
   createNode(resciptNode());
@@ -143,7 +130,7 @@ exports.sourceNodes = ({ actions }) => {
     chokidar.watch(nativeModelPath).on('all', (event, path) => {
       log.info(event);
       if (event == 'unlink') {
-        return
+        return;
       }
       createNode(nativeNode());
       createNode(resciptNode());
