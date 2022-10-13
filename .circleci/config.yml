@@ -200,7 +200,7 @@ workflows:
               base-version: ["v0.14.1"]
               ocaml-version: ["4.08", "4.09", "4.10", "4.11", "4.12"]
       - source-code-formatting
-      - documentation-generator-build
+      # - documentation-generator-build
       - website-build
       - website-deploy:
           requires:
