@@ -25,7 +25,7 @@ Here are some ways to contribute:
 - Improve a function's documentation by discussing an edge-case
 - Check a function cannot throw exceptions (and add a note to the function documentation to that effect)
 - Suggest a new function or module by [creating an issue](https://github.com/darklang/tablecloth/issues/new).
-- Improve the [documentation site](https://github.com/darklang/tablecloth/tree/master/website)
+- Improve the [documentation site](https://github.com/darklang/tablecloth/tree/main/website)
 - Optimize a function
 
 If you'd like to contribute but don't know where to start [open an

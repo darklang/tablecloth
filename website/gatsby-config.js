@@ -1,12 +1,13 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
-  pathPrefix: "/",
-  assetPrefix: "https://DARK_STATIC_ASSETS_BASE_URL",
+  pathPrefix: '/',
+  assetPrefix: 'https://DARK_STATIC_ASSETS_BASE_URL',
   siteMetadata: {
     title: 'Tablecloth',
     description: 'A standard library enhancement for Bucklescript and Native',
-    docsLocation: 'https://github.com/darklang/tablecloth/tree/master/documentation',
+    docsLocation:
+      'https://github.com/darklang/tablecloth/tree/main/documentation',
     githubUrl: 'https://github.com/darklang/tablecloth',
     siteUrl: 'https://tablecloth.github.io',
   },
