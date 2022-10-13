@@ -1,7 +1,7 @@
 {
   "name": "tablecloth-rescript",
   "description": "A portable standard library enhancement for Rescript and OCaml.",
-  "version": "0.0.8",
+  "version": "0.0.8-1",
   "repository": "https://github.com/darklang/tablecloth",
   "private": false,
   "contributors": [
