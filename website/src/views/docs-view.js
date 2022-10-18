@@ -36,14 +36,14 @@ import { CodeBlock } from '../components/CodeBlock';
 import LanguageIcon from '../components/LanguageLogos';
 import * as lzString from 'lz-string';
 
-let stripTableclothPrefix = path => path.replace(/Tablecloth/g, '');
+let stripTableclothPrefix = (path) => path.replace(/Tablecloth/g, '');
 
 function deDupeIncludedModules(moduleElements, modulesByName) {
   let flattenedModuleElements = [];
-  moduleElements.forEach(moduleElement => {
+  moduleElements.forEach((moduleElement) => {
     if (moduleElement.tag === 'IncludedModule') {
       let includedModule = modulesByName[moduleElement.value.name];
-      includedModule.value.kind.value.forEach(includedModuleElement => {
+      includedModule.value.kind.value.forEach((includedModuleElement) => {
         flattenedModuleElements.push(includedModuleElement);
       });
     } else {
@@ -52,7 +52,7 @@ function deDupeIncludedModules(moduleElements, modulesByName) {
   });
   let seen = {};
   let deDupedModuleElements = [];
-  flattenedModuleElements.forEach(moduleElement => {
+  flattenedModuleElements.forEach((moduleElement) => {
     if (moduleElement.tag === 'Module') {
       if (seen[moduleElement.value.name]) {
         deDupedModuleElements[seen[moduleElement.value.name]] = moduleElement;
@@ -84,7 +84,7 @@ let Json = ({ value }) => (
   </pre>
 );
 
-let UnhandledCase = props => {
+let UnhandledCase = (props) => {
   if (process.env.NODE_ENV === 'production') {
     throw new Error(`Unhandled case: ${props.case}`);
   }
@@ -96,7 +96,7 @@ let UnhandledCase = props => {
       `}
     >
       <h1>Unhandled Case</h1>
-      <Json value={props}/>
+      <Json value={props} />
     </div>
   );
 };
@@ -124,7 +124,8 @@ function renderSidebarElements(
     search.length > 1 ? search.slice(0, search.length - 1) : [];
   let valueSearch = search.length === 0 ? '' : search[search.length - 1];
   let hasSearch = valueSearch.length > 0;
-  let includesCaseInsensitive = (a, b) => a.toLowerCase().includes(b.toLowerCase());
+  let includesCaseInsensitive = (a, b) =>
+    a.toLowerCase().includes(b.toLowerCase());
 
   return deDupeIncludedModules(moduleElements, modulesByModulePath).map(
     (moduleElement, index) => {
@@ -142,10 +143,7 @@ function renderSidebarElements(
           }
           return (
             <div key={typeId}>
-              <a
-                onClick={() => scrollToId(typeId)}
-                href={`#${typeId}`}
-              >
+              <a onClick={() => scrollToId(typeId)} href={`#${typeId}`}>
                 type {moduleElement.value.name}
               </a>
             </div>
@@ -160,16 +158,14 @@ function renderSidebarElements(
             hasSearch &&
             !(
               moduleSearchPath.length === 0 &&
-              includesCaseInsensitive(moduleElement.value.name, valueSearch)  
+              includesCaseInsensitive(moduleElement.value.name, valueSearch)
             )
           ) {
             return null;
           }
           return (
             <div key={valueLink}>
-              <a
-                href={`#${valueLink}`}
-                onClick={() => scrollToId(valueLink)}>
+              <a href={`#${valueLink}`} onClick={() => scrollToId(valueLink)}>
                 {moduleElement.value.name}
               </a>
             </div>
@@ -180,15 +176,18 @@ function renderSidebarElements(
             moduleElement.tag,
             moduleElement.value.name,
           );
-          if (hasSearch &&
+          if (
+            hasSearch &&
             !includesCaseInsensitive(moduleElement.value.name, valueSearch)
-              ) {
+          ) {
             return null;
           }
           return (
             <a
               href={`#${moduleTypeId}`}
-              onClick={() => scrollToId(moduleTypeId)} key={moduleTypeId}>
+              onClick={() => scrollToId(moduleTypeId)}
+              key={moduleTypeId}
+            >
               module type {moduleElement.value.name}
             </a>
           );
@@ -236,8 +235,8 @@ function renderSidebarElements(
               if (aliasedModule.value.kind.tag !== 'ModuleStruct') {
                 throw new Error(
                   'Unmapped case for ' +
-                  kind.value.name +
-                  aliasedModule.value.kind,
+                    kind.value.name +
+                    aliasedModule.value.kind,
                 );
               }
               return renderSidebarModule(
@@ -307,9 +306,7 @@ function renderSidebarModule(
   let valueSearch = search.length === 0 ? '' : search[search.length - 1];
   let hasSearch = valueSearch.length > 0;
   let qualifiedModuleName =
-    path.length > 0
-      ? [...path, moduleName].join('.')
-      : moduleName;
+    path.length > 0 ? [...path, moduleName].join('.') : moduleName;
 
   let isCollapsed = !!collapsed[qualifiedModuleName];
   let moduleId = idFor(path, moduleElement.tag, moduleName);
@@ -344,7 +341,7 @@ function renderSidebarModule(
     [...path, moduleName],
   );
 
-  let hasElementsMatchingSearch = content.filter(e => e != null).length > 0;
+  let hasElementsMatchingSearch = content.filter((e) => e != null).length > 0;
 
   if (
     hasSearch &&
@@ -393,10 +390,9 @@ function renderSidebarModule(
           {isCollapsed ? '▷' : '▽'}
         </div>
 
-        <a
-          href={`#${moduleId}`}
-          onClick={() => scrollToId(moduleId)}
-        >module {qualifiedModuleName}</a>
+        <a href={`#${moduleId}`} onClick={() => scrollToId(moduleId)}>
+          module {qualifiedModuleName}
+        </a>
       </div>
       {isCollapsed ? null : <div className="elements">{content}</div>}
     </div>
@@ -407,10 +403,10 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
   let [searchString, setSearch] = React.useState('');
   let search = searchString
     .split('.')
-    .filter(identifier => identifier.length > 0);
+    .filter((identifier) => identifier.length > 0);
   let [collapsed, setCollapsed] = React.useState({});
-  let toggleModule = qualifiedModuleName =>
-    setCollapsed(collapsed => ({
+  let toggleModule = (qualifiedModuleName) =>
+    setCollapsed((collapsed) => ({
       ...collapsed,
       [qualifiedModuleName]: !collapsed[qualifiedModuleName],
     }));
@@ -430,7 +426,7 @@ const Sidebar = ({ moduleElements, moduleByModulePath, scrollToId }) => {
       <input
         value={searchString}
         placeholder="Search"
-        onChange={e => setSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value)}
         css={css`
           background-color: ${colors.grey.light};
           border-color: ${colors.grey.light};
@@ -481,7 +477,7 @@ const PageAnchor = ({ id, children }) => {
         display: inline-flex;
         flex-shrink: 0;
         flex-direction: row;
-        margin-left: -${spacing.pageMargin.desktop*1.5}px;
+        margin-left: -${spacing.pageMargin.desktop * 1.5}px;
         width: calc(100% + 70px);
 
         .link {
@@ -518,7 +514,7 @@ const PageAnchor = ({ id, children }) => {
         }
 
         @media (min-width: ${breakpoints.desktop}px) {
-          margin-left: -${spacing.pageMargin.desktop*1.5}px;
+          margin-left: -${spacing.pageMargin.desktop * 1.5}px;
           width: calc(100% + 70px);
           .link {
             width: ${spacing.pageMargin.desktop}px;
@@ -656,7 +652,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
         }
         let content =
           value.reference.content.length === 1 &&
-            value.reference.content[0].tag === 'Code'
+          value.reference.content[0].tag === 'Code'
             ? stripTableclothPrefix(value.reference.content[0].value)
             : renderTextElements(value.reference.content, parentPath);
         let hashId = stripTableclothPrefix(value.reference.target);
@@ -664,7 +660,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
           <a
             key={index}
             href={`#${hashId}`}
-            onClick={()=> scrollToIdGlobal(hashId)}
+            onClick={() => scrollToIdGlobal(hashId)}
           >
             {content}
           </a>
@@ -704,7 +700,7 @@ let renderTextElements = (elements = [], parentPath = []) => {
               }
             `}
           >
-            <CodeBlock code={value}/>
+            <CodeBlock code={value} />
             {/* TODO get the playground working */}
             {/* <button
               className="try"
@@ -762,32 +758,30 @@ let TextElement = ({ elements, path }) => {
 
 let TypeSignature = ({ signature }) => {
   return (
-      <React.Fragment children={stripTableclothPrefix(signature.rendered)}/>
+    <React.Fragment children={stripTableclothPrefix(signature.rendered)} />
   );
 };
 
 let TypeDefinition = ({ name, type }) => {
   return (
     <pre
-    css={css`
-    display: inline;
-    font-weight: bold;
-    display: inline-flex;
-    background-color: ${({ theme }) => theme.typeDefinition.background};
-    color: ${({ theme }) => theme.typeDefinition.text};
-    border-left: 4px solid ${({ theme }) => theme.typeDefinition.borderLeft};
-    padding: 8px;
-    margin:${spacing.small}px 0;
-  `}
+      css={css`
+        display: inline;
+        font-weight: bold;
+        display: inline-flex;
+        background-color: ${({ theme }) => theme.typeDefinition.background};
+        color: ${({ theme }) => theme.typeDefinition.text};
+        border-left: 4px solid ${({ theme }) => theme.typeDefinition.borderLeft};
+        padding: 8px;
+        margin: ${spacing.small}px 0;
+      `}
     >
-
- 
-let {name}: <TypeSignature signature={type}/>
+      let {name}: <TypeSignature signature={type} />
     </pre>
   );
 };
 
-let ValueContainer = props => (
+let ValueContainer = (props) => (
   <div
     className="ValueContainer"
     css={css`
@@ -798,7 +792,6 @@ let ValueContainer = props => (
       border-bottom: 1px solid ${({ theme }) => theme.block.outline};
       border-right: 1px solid ${({ theme }) => theme.block.outline};
       border-left: 1px solid ${({ theme }) => theme.block.outline};
-
     `}
     {...props}
   />
@@ -822,7 +815,6 @@ let ValueWrapper = styled.div`
   overflow-x: auto;
   border-top: 1px solid ${({ theme }) => theme.typeDefinition.outline};
   border-right: 1px solid ${({ theme }) => theme.typeDefinition.outline};
- 
 `;
 
 let Value = ({ id, path, name, type, info, parameters, ...value }) => {
@@ -830,15 +822,13 @@ let Value = ({ id, path, name, type, info, parameters, ...value }) => {
     <ValueContainer>
       <PageAnchor id={id}>
         <ValueWrapper>
-        <h2>{id}</h2>
+          <h2>{id}</h2>
         </ValueWrapper>
       </PageAnchor>
       <TypeDefinition name={name} type={type} />
-       
+
       {info && (
-        <div
-      
-        >
+        <div>
           <TextElement
             elements={info.description.value}
             path={[...path, name]}
@@ -876,7 +866,7 @@ function generateModuleElements(
   state = initialState,
 ) {
   deDupeIncludedModules(moduleElements, modulesByName).forEach(
-    moduleElement => {
+    (moduleElement) => {
       switch (moduleElement.tag) {
         case 'Text':
           state.elements.push(
@@ -885,7 +875,7 @@ function generateModuleElements(
                 padding: 10px 0px;
               `}
             >
-              <TextElement elements={moduleElement.value} path={state.path}/>
+              <TextElement elements={moduleElement.value} path={state.path} />
             </div>,
           );
           return;
@@ -908,10 +898,10 @@ function generateModuleElements(
                       {moduleElement.value.manifest ? ' = ' : ''}
                     </code>
                     {moduleElement.value.manifest && (
-                    <TypeSignature
-                      signature={moduleElement.value.manifest.value}
-                    />
-                  )}
+                      <TypeSignature
+                        signature={moduleElement.value.manifest.value}
+                      />
+                    )}
                   </pre>
                 </ValueWrapper>
               </PageAnchor>
@@ -942,12 +932,14 @@ function generateModuleElements(
           );
           registerId(state, moduleTypeId);
           state.elements.push(
-            <div css={css`
-            padding: 0px 15px;
-          `}>
-            <PageAnchor id={moduleTypeId}>
-              <Identifiers.moduleType name={moduleTypeId}/>
-            </PageAnchor>
+            <div
+              css={css`
+                padding: 0px 15px;
+              `}
+            >
+              <PageAnchor id={moduleTypeId}>
+                <Identifiers.moduleType name={moduleTypeId} />
+              </PageAnchor>
             </div>,
           );
           generateModuleElements(moduleElement.value.elements, modulesByName, {
@@ -967,12 +959,15 @@ function generateModuleElements(
               let path = [...state.path, moduleElement.value.name];
               registerId(state, moduleStructId);
               state.elements.push(
-                <div css={css`
-                          padding: 0px 15px;
-                        `}>
-                <PageAnchor id={moduleStructId}>
-                  <Identifiers.module name={moduleStructId}/>
-                </PageAnchor></div>,
+                <div
+                  css={css`
+                    padding: 0px 15px;
+                  `}
+                >
+                  <PageAnchor id={moduleStructId}>
+                    <Identifiers.module name={moduleStructId} />
+                  </PageAnchor>
+                </div>,
               );
               generateModuleElements(
                 moduleElement.value.kind.value,
@@ -992,23 +987,32 @@ function generateModuleElements(
                   'Unmapped case for ' + kind.value.name + module.value.kind,
                 );
               }
-              let id = idFor(state.path, 'ModuleStruct', stripTableclothPrefix(module.value.name));
+              let id = idFor(
+                state.path,
+                'ModuleStruct',
+                stripTableclothPrefix(module.value.name),
+              );
               registerId(state, id);
               state.elements.push(
-                <div css={css`
-                padding: 0px 15px;
-              `}>
-                <PageAnchor id={id}>
-                  <Identifiers.module
-                    name={stripTableclothPrefix(moduleElement.value.kind.value.name)}
-                  />
-                </PageAnchor></div>,
+                <div
+                  css={css`
+                    padding: 0px 15px;
+                  `}
+                >
+                  <PageAnchor id={id}>
+                    <Identifiers.module
+                      name={stripTableclothPrefix(
+                        moduleElement.value.kind.value.name,
+                      )}
+                    />
+                  </PageAnchor>
+                </div>,
               );
               generateModuleElements(module.value.kind.value, modulesByName, {
                 ...state,
                 path: [...state.path, moduleElement.value.name],
               });
-              state.elements.push(<ModuleSpacer/>);
+              state.elements.push(<ModuleSpacer />);
               return;
             case 'ModuleFunctor':
               let functor = moduleElement.value;
@@ -1041,14 +1045,14 @@ function generateModuleElements(
                       <pre>
                         <code>
                           module {functor.name} : functor({parameter.value.name}{' '}
-                          : {stripTableclothPrefix(parameter.value.kind.value)}) ->{' '}
-                          {signature}
+                          : {stripTableclothPrefix(parameter.value.kind.value)})
+                          -> {signature}
                         </code>
                       </pre>
                     </ValueWrapper>
                   </PageAnchor>
                   {functor.info && (
-                    <TextElement elements={functor.info.description.value}/>
+                    <TextElement elements={functor.info.description.value} />
                   )}
                 </ValueContainer>,
               );
@@ -1063,7 +1067,7 @@ function generateModuleElements(
               return;
           }
         default:
-          state.elements.push(<UnhandledCase el={moduleElement}/>);
+          state.elements.push(<UnhandledCase el={moduleElement} />);
           return;
       }
     },
@@ -1071,19 +1075,17 @@ function generateModuleElements(
   return state;
 }
 
-
-
 let title = 'Documentation';
 
 let moduleIndex = (moduleElements, parentPath = []) => {
   return moduleElements
     .filter(
-      element =>
+      (element) =>
         element != null &&
         element.tag === 'Module' &&
         element.value.kind.tag === 'ModuleStruct',
     )
-    .flatMap(modu => {
+    .flatMap((modu) => {
       let path = [...parentPath, modu.value.name];
       return [[path, modu], ...moduleIndex(modu.value.kind.value, path)];
     });
@@ -1110,85 +1112,83 @@ let Header = ({ title }) => {
         sizes="16x16"
         href={theme.favicon.icon16}
       />
-      <meta name="title" content={title}/>
-      <meta property="og:title" content={title}/>
-      <meta property="twitter:title" content={title}/>
+      <meta name="title" content={title} />
+      <meta property="og:title" content={title} />
+      <meta property="twitter:title" content={title} />
     </Helmet>
   );
 };
 
-
-
-
 let links = [
-  {url: "/docs/rescript", name: "Rescript"},
-  {url: "/docs/ocaml", name:"Ocaml"},
-  {url: "/docs/fsharp", name: "F#"}
+  { url: '/docs/rescript', name: 'Rescript' },
+  { url: '/docs/ocaml', name: 'OCaml' },
+  { url: '/docs/fsharp', name: 'F#' },
 ];
 
-const navLink = ({url, name}, location) =>   {
-let isCurrentLocation = location.pathname === url;
+const navLink = ({ url, name }, location) => {
+  let isCurrentLocation = location.pathname === url;
 
-return <Link key={url} to={url}   css={css`
-margin-right: 1rem;
-padding-bottom: 0.5rem;
+  return (
+    <Link
+      key={url}
+      to={url}
+      css={css`
+        margin-right: 1rem;
+        padding-bottom: 0.5rem;
 
-font-weight: ${isCurrentLocation ? "700": "400"};
-pointer-events: ${isCurrentLocation ? "none": "all"};
-`}>
-{name}
-</Link>}
+        font-weight: ${isCurrentLocation ? '700' : '400'};
+        pointer-events: ${isCurrentLocation ? 'none' : 'all'};
+      `}
+    >
+      {name}
+    </Link>
+  );
+};
 
 export default ({ data, language, location }) => {
   let [isOpen, setIsOpen] = React.useState(false);
-
 
   let cache = React.useRef(
     new CellMeasurerCache({
       fixedWidth: true,
     }),
   );
-  let {
-    moduleElements,
-    moduleByModulePath,
-    idToIndex,
-    list,
-  } = React.useMemo(() => {
-    const { odocModel } = data;
-    let model = JSON.parse(odocModel.internal.content);
+  let { moduleElements, moduleByModulePath, idToIndex, list } =
+    React.useMemo(() => {
+      const { odocModel } = data;
+      let model = JSON.parse(odocModel.internal.content);
 
-    // reset initial state
-    initialState = {
-      path: [],
-      elements: [],
-      idToIndex: {},
-    };
+      // reset initial state
+      initialState = {
+        path: [],
+        elements: [],
+        idToIndex: {},
+      };
 
-    let moduleByModulePath = _.fromPairs(
-      _.map(moduleIndex(_.values(model.modules)), ([path, module]) => [
-        path.join('.'),
-        module,
-      ]),
-    );
+      let moduleByModulePath = _.fromPairs(
+        _.map(moduleIndex(_.values(model.modules)), ([path, module]) => [
+          path.join('.'),
+          module,
+        ]),
+      );
 
-    let { idToIndex, elements } = generateModuleElements(
-      model.entry_point.value.kind.value,
-      moduleByModulePath,
-    );
+      let { idToIndex, elements } = generateModuleElements(
+        model.entry_point.value.kind.value,
+        moduleByModulePath,
+      );
 
-    // console.info(idToIndex);
+      // console.info(idToIndex);
 
-    return {
-      moduleElements: model.entry_point.value.kind.value,
-      moduleByModulePath,
-      idToIndex,
-      list: elements,
-    };
-
-  }, [data]);
+      return {
+        moduleElements: model.entry_point.value.kind.value,
+        moduleByModulePath,
+        idToIndex,
+        list: elements,
+      };
+    }, [data]);
 
   let listScroll = React.useRef();
-  let scrollToId = id => {
+  let scrollToId = (id) => {
     // console.info(id);
     setIsOpen(false);
     // react-virtualized's layout calculations aren't accurate for some reason
@@ -1221,135 +1221,130 @@ export default ({ data, language, location }) => {
 
   return (
     <ThemeProvider>
-        <GlobalStyles/>
-        <Header title={title}/>
-        <AppWrapper>
+      <GlobalStyles />
+      <Header title={title} />
+      <AppWrapper>
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          `}
+        >
+          <NavBarContainer>
+            <NavBar />
+          </NavBarContainer>
           <div
             css={css`
               display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
+              flex-direction: row;
+              max-width: 1200px;
+              justify-content: stretch;
+              align-items: stretch;
+              width: 100%;
             `}
           >
-            <NavBarContainer>
-              <NavBar/>
-            </NavBarContainer>
-            <div
-              css={css`
-                display: flex;
-                flex-direction: row;
-                max-width: 1200px;
-                justify-content: stretch;
-                align-items: stretch;
-                width: 100%;
-    
-              `}
-            >
-              <SidebarContainer isOpen={isOpen}>
-                <Sidebar
-                  moduleElements={moduleElements}
-                  moduleByModulePath={moduleByModulePath}
-                  scrollToId={scrollToId}
-                />
-              </SidebarContainer>
-              <Main>
-                <Container
-                  css={css`
+            <SidebarContainer isOpen={isOpen}>
+              <Sidebar
+                moduleElements={moduleElements}
+                moduleByModulePath={moduleByModulePath}
+                scrollToId={scrollToId}
+              />
+            </SidebarContainer>
+            <Main>
+              <Container
+                css={css`
                   background-color: ${({ theme }) => theme.body};
 
+                  @media (min-width: ${breakpoints.desktop}px) {
+                    margin-left: -${spacing.pageMargin.desktop}px;
+                  }
+                `}
+              >
+                <div
+                  css={css`
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+                    height: 25vh;
                     @media (min-width: ${breakpoints.desktop}px) {
-                      margin-left: -${spacing.pageMargin.desktop}px;
+                      margin-left: ${spacing.pageMargin.desktop}px;
                     }
                   `}
                 >
                   <div
                     css={css`
                       display: flex;
-                      flex-direction: row;
-                      justify-content: space-between;
-                      width: 100%;
-                      height: 25vh;
-                      @media (min-width: ${breakpoints.desktop}px) {
-                        margin-left: ${spacing.pageMargin.desktop}px;
-                      }
-                    `}
-                  >
-                    <div
-                      css={css`
-                      display: flex;
                       justify-content: center;
                       align-items: start;
                       flex-direction: column;
                     `}
-                    >
+                  >
                     <PageTitle>{title}</PageTitle>
-                    <div>
-                      {links.map(link => navLink(link, location))}
-                    </div>
-                    </div>
-                    <LanguageIcon  language={language}/>
-
+                    <div>{links.map((link) => navLink(link, location))}</div>
                   </div>
-                  <WindowScroller>
-                    {({ height, onChildScroll, scrollTop }) => (
-                      <AutoSizer disableHeight>
-                        {({ width }) => {
-                          return (
-                            <List
-                              ref={listScroll}
-                              autoHeight
-                              deferredMeasurementCache={cache.current}
-                              height={height}
-                              onScroll={onChildScroll}
-                              rowCount={list.length}
-                              rowHeight={cache.current.rowHeight}
-                              rowRenderer={({ index, key, parent, style }) => {
-                                return (
-                                  <CellMeasurer
-                                    cache={cache.current}
-                                    columnIndex={0}
-                                    key={key}
-                                    parent={parent}
-                                    rowIndex={index}
-                                  >
-                                    <div
-                                      style={style}
-                                      className="row"
-                                      css={css`
+                  <LanguageIcon language={language} />
+                </div>
+                <WindowScroller>
+                  {({ height, onChildScroll, scrollTop }) => (
+                    <AutoSizer disableHeight>
+                      {({ width }) => {
+                        return (
+                          <List
+                            ref={listScroll}
+                            autoHeight
+                            deferredMeasurementCache={cache.current}
+                            height={height}
+                            onScroll={onChildScroll}
+                            rowCount={list.length}
+                            rowHeight={cache.current.rowHeight}
+                            rowRenderer={({ index, key, parent, style }) => {
+                              return (
+                                <CellMeasurer
+                                  cache={cache.current}
+                                  columnIndex={0}
+                                  key={key}
+                                  parent={parent}
+                                  rowIndex={index}
+                                >
+                                  <div
+                                    style={style}
+                                    className="row"
+                                    css={css`
+                                      padding-left: ${spacing.pageMargin
+                                        .mobile}px;
+                                      @media (min-width: ${breakpoints.desktop}px) {
                                         padding-left: ${spacing.pageMargin
-                                          .mobile}px;
-                                        @media (min-width: ${breakpoints.desktop}px) {
-                                          padding-left: ${spacing.pageMargin
                                           .desktop}px;
-                                        }
-                                     
-                                      `}
-                                    >
-                                      {list[index]}
-                                    </div>
-                                  </CellMeasurer>
-                                );
-                              }}
-                              scrollTop={scrollTop}
-                              width={width}
-                            />
-                          );
-                        }}
-                      </AutoSizer>
-                    )}
-                  </WindowScroller>
-                </Container>
-              </Main>
-            </div>
-            <MenuButtonContainer>
-              <MenuButton
-                onClick={() => setIsOpen(open => !open)}
-                isOpen={isOpen}
-              />
-            </MenuButtonContainer>
+                                      }
+                                    `}
+                                  >
+                                    {list[index]}
+                                  </div>
+                                </CellMeasurer>
+                              );
+                            }}
+                            scrollTop={scrollTop}
+                            width={width}
+                          />
+                        );
+                      }}
+                    </AutoSizer>
+                  )}
+                </WindowScroller>
+              </Container>
+            </Main>
           </div>
-        </AppWrapper>
+          <MenuButtonContainer>
+            <MenuButton
+              onClick={() => setIsOpen((open) => !open)}
+              isOpen={isOpen}
+            />
+          </MenuButtonContainer>
+        </div>
+      </AppWrapper>
     </ThemeProvider>
   );
 };

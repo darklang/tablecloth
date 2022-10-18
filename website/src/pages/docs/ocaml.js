@@ -9,7 +9,7 @@ export default ({ data, location }) => {
   return (
     <SyntaxProvider defaultSyntax="ocaml">
       <Helmet>
-        <title>Tablecloth: Ocaml Documentation</title>
+        <title>Tablecloth: OCaml Documentation</title>
       </Helmet>
       <DocsView language="ocaml" location={location} data={data} />
     </SyntaxProvider>
