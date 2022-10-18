@@ -39,7 +39,7 @@ const Section = ({ tell, show, flip }) => {
       css={css`
         align-items: center;
         background-color: ${({ flip, theme }) =>
-        flip ? theme.body : theme.card.background};
+          flip ? theme.body : theme.card.background};
         border-top: 1px solid ${({ theme }) => theme.card.border};
         display: flex;
         flex-direction: column;
@@ -106,44 +106,42 @@ const Section = ({ tell, show, flip }) => {
 };
 
 let CodeSample = ({ language, code }) => {
-  return <div
-    css={css`
-      margin-top: -${sellingPointPadding + 1}px;
-      margin-left: -${sellingPointPadding}px;
-      margin-right: -${sellingPointPadding}px;
-      margin-bottom: -${sellingPointPadding + 2}px;
-      position: relative;
-      
-      .language-label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 12px;
-        padding: 6px;
-        color: ${colors.grey.base};
-      }
-      pre {
-        padding-top: ${sellingPointPadding}px;
-        padding-left: ${spacing.larger}px;
-        padding-right: ${sellingPointPadding}px;
-        padding-bottom: ${sellingPointPadding}px;
-      }
-      
-      
-      @media (min-width: ${breakpoints.desktop}px) {
-        margin-left: 0px;
-        margin-right: -1000px;
-      }
-    `}
-  >
-    <span className="language-label">{language}</span>
-    <CodeBlock
-      language={language}
-      code={code}
-    />
-  </div>;
+  return (
+    <div
+      css={css`
+        margin-top: -${sellingPointPadding + 1}px;
+        margin-left: -${sellingPointPadding}px;
+        margin-right: -${sellingPointPadding}px;
+        margin-bottom: -${sellingPointPadding + 2}px;
+        position: relative;
+
+        .language-label {
+          position: absolute;
+          top: 0;
+          left: 0;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 12px;
+          padding: 6px;
+          color: ${colors.grey.base};
+        }
+        pre {
+          padding-top: ${sellingPointPadding}px;
+          padding-left: ${spacing.larger}px;
+          padding-right: ${sellingPointPadding}px;
+          padding-bottom: ${sellingPointPadding}px;
+        }
+
+        @media (min-width: ${breakpoints.desktop}px) {
+          margin-left: 0px;
+          margin-right: -1000px;
+        }
+      `}
+    >
+      <span className="language-label">{language}</span>
+      <CodeBlock language={language} code={code} />
+    </div>
+  );
 };
 
 const CallToAction = () => (
@@ -216,7 +214,8 @@ export const pageQuery = graphql`
 `;
 
 let title = 'Tablecloth';
-let description = 'A portable standard library enhancement for Reason and OCaml.';
+let description =
+  'A standard library with the same API in Rescript and OCaml (and coming soon: F#).';
 
 let Header = () => {
   let [_themeName, _toggle, theme] = useTheme();
@@ -240,24 +239,23 @@ let Header = () => {
         sizes="16x16"
         href={theme.favicon.icon16}
       />
-      <meta name="title" content={title}/>
-      <meta property="og:title" content={title}/>
-      <meta property="twitter:title" content={title}/>
-      <meta name="description" content={description}/>
-      <meta property="og:description" content={description}/>
-      <meta property="twitter:description" content={description}/>
+      <meta name="title" content={title} />
+      <meta property="og:title" content={title} />
+      <meta property="twitter:title" content={title} />
+      <meta name="description" content={description} />
+      <meta property="og:description" content={description} />
+      <meta property="twitter:description" content={description} />
     </Helmet>
   );
 };
 
 let logoTransformations = [
-
-   {
+  {
     background: `linear-gradient(${colors.orange.ocaml.start}, ${colors.orange.ocaml.end})`,
     borderRadius: 40,
     resTransform: `translate3d(${logoSize}px,0px,0)`,
     camlTransform: `translate3d(0px, 0px, 0)`,
-    fsTransform: `translate3d(${logoSize*2}px, 0px, 0)`,
+    fsTransform: `translate3d(${logoSize * 2}px, 0px, 0)`,
   },
   {
     // Using hsl colors with useSpring throws an exception during interpolation, so we can't use the ones defined in 'theme'
@@ -271,33 +269,31 @@ let logoTransformations = [
   {
     background: `linear-gradient(#3587b4, #2eb3d4)`,
     borderRadius: 20,
-    resTransform: `translate3d(-${logoSize*2}px,0px,0)`,
+    resTransform: `translate3d(-${logoSize * 2}px,0px,0)`,
     camlTransform: `translate3d(-${logoSize}px, 0px, 0)`,
     fsTransform: `translate3d(0px, 0px, 0)`,
   },
-]
+];
 export default () => {
   let [logo, setLogo] = React.useState(0);
   useEffect(() => {
     let nextLogo = setInterval(() => {
-      setLogo(current => (current > 1 ? 0 : current +1 ));
+      setLogo((current) => (current > 1 ? 0 : current + 1));
     }, 3000);
-    return () => { 
+    return () => {
       clearInterval(nextLogo);
     };
   });
-  const logoStyles = useSpring(
-    logoTransformations[logo]
-  );
+  const logoStyles = useSpring(logoTransformations[logo]);
   return (
     <ThemeProvider>
       <SyntaxProvider>
-        <GlobalStyles/>
-        <Header/>
+        <GlobalStyles />
+        <Header />
         <AppWrapper>
           <ContentContainer>
             <NavBarContainer>
-              <NavBar/>
+              <NavBar />
             </NavBarContainer>
             <Main
               css={css`
@@ -327,8 +323,8 @@ export default () => {
                     Tablecloth
                   </h1>
                   <p>
-                    A portable standard library enhancement for Reason and
-                    OCaml.
+                    A standard library with the same API in Rescript and OCaml
+                    (and coming soon: F#).
                   </p>
                   <p
                     css={css`
@@ -337,17 +333,17 @@ export default () => {
                     `}
                   >
                     Tablecloth provides an easy-to-use, comprehensive and safe
-                    standard library that has the same API for the OCaml and
-                    Bucklescript compilers.
+                    standard library that has the same API across multiple
+                    languages (OCaml, Rescript, and F#).
                   </p>
                   <div>
                     <CodeBlock
-                      language="reason"
+                      language="rescript"
                       code={`
 open Tablecloth;
 
 String.toList("Tablecloth")
-|> List.filterMap(~f=character => 
+|> List.filterMap(character =>
   Char.toCode(character)
   |> Int.add(1)
   |> Char.fromCode
@@ -358,10 +354,10 @@ String.toList("Tablecloth")
                     />
                   </div>
                 </Container>
-                <CallToAction/>
+                <CallToAction />
                 <Section
                   flip={true}
-                  show={() => <BookLover className="illustration"/>}
+                  show={() => <BookLover className="illustration" />}
                   tell={() => (
                     <>
                       <h2>Easy to learn</h2>
@@ -376,16 +372,19 @@ String.toList("Tablecloth")
                 <Section
                   flip={false}
                   show={() => (
-                    <CodeSample language="reason" code={`
+                    <CodeSample
+                      language="reason"
+                      code={`
                       let name = Some("Kubo");
                       let species = Some("dog");
                       let favoriteGame = None;
-                      
+
                       let bio = Option.({
                         let (name, species) = Option.both(name, species);
                         name ++ " the " ++ "'s favorite game is" ++ (favoriteGame |? "fetch");
-                      })                                              
-                    `}/>
+                      })
+                    `}
+                    />
                   )}
                   tell={() => (
                     <>
@@ -414,13 +413,13 @@ String.toList("Tablecloth")
                     >
                       <AnimatedRescript
                         style={{
-                          padding: "60px",
+                          padding: '60px',
                           transform: logoStyles.resTransform,
                           position: 'absolute',
                           fill: 'white',
                         }}
-                        height={logoSize }
-                        width={logoSize }
+                        height={logoSize}
+                        width={logoSize}
                       />
                       <AnimatedOCaml
                         style={{
@@ -428,29 +427,25 @@ String.toList("Tablecloth")
                           position: 'absolute',
                           fill: 'white',
                         }}
-                        height={logoSize }
-                        width={logoSize }
+                        height={logoSize}
+                        width={logoSize}
                       />
-                       <AnimatedFSharp
+                      <AnimatedFSharp
                         style={{
-                          padding: "40px",
+                          padding: '40px',
                           transform: logoStyles.fsTransform,
                           position: 'absolute',
                           fill: 'white',
                         }}
-                        height={logoSize }
-                        width={logoSize }
+                        height={logoSize}
+                        width={logoSize}
                       />
                     </animated.div>
                   )}
                   tell={() => (
                     <>
                       <h2>Portable</h2>
-                      <span>
-                        Works with either the Reason or OCaml syntax, targeting
-                        the Bucklescript, Native or <code>js_of_ocaml</code>{' '}
-                        compilers
-                      </span>
+                      <span>Have the same API in OCaml, Rescript, and F#.</span>
                     </>
                   )}
                 />
@@ -458,18 +453,21 @@ String.toList("Tablecloth")
                 <Section
                   flip={false}
                   show={() => (
-                    <CodeSample flip={false} language="ocaml" code={`
+                    <CodeSample
+                      flip={false}
+                      language="ocaml"
+                      code={`
                     let nameToSpecies = Map.String.fromList [
                       ("Amy", "Ant");
                       ("Barry", "Badger");
                     ]
-                    
-                    (* Get a value from a Map by its key *)                     
+
+                    (* Get a value from a Map by its key *)
                     nameToSpecies.Map.?{"Carolyn"} = None
-                      
+
                     (* Extract a Char from a String safely *)
                     "Tablecloth".String.?[1] = Some('a')
-                    
+
                     (* Index into an Array without fear *)
                     [|2;3;5;7|].Array.?(3) = Some(7)
                   `}
@@ -487,7 +485,7 @@ String.toList("Tablecloth")
                   )}
                 />
 
-                <CallToAction/>
+                <CallToAction />
               </div>
             </Main>
           </ContentContainer>
