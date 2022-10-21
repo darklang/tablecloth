@@ -33,7 +33,6 @@ export const SidebarContainer = ({ children, isOpen }) => {
     <aside
       className="SidebarContainer"
       css={css`
-
         display: flex;
         flex-direction: column;
         transition: all 0.2s ease;
@@ -41,24 +40,26 @@ export const SidebarContainer = ({ children, isOpen }) => {
         z-index: 1;
 
         @media (min-width: ${dimensions.maxContentWidth +
-            dimensions.leftSideBar}px) {
+          dimensions.leftSideBar}px) {
           border-right: 1px solid ${colors.grey.light};
-           width: ${dimensions.leftSideBar}px;
+          width: ${dimensions.leftSideBar}px;
           z-index: 1;
           opacity: 1;
         }
-        @media (max-width: ${dimensions.maxContentWidth-
+        @media (max-width: ${dimensions.maxContentWidth -
           dimensions.leftSideBar}px) {
-              display: ${isOpen ? "flex" : "none"};
-              
-              ${isOpen ? `
+          display: ${isOpen ? 'flex' : 'none'};
+
+          ${isOpen
+            ? `
               position: absolute;
               top: 0;
               left: 0;
               bottom: 0;
               right: 0;
               width: 100%;
-              ` : ``};
+              `
+            : ``};
         }
       `}
     >
@@ -80,8 +81,8 @@ export const Main = styled.main`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
- padding: 0 ${spacing.pageMargin.mobile}px;
-  width:  100%;
+  padding: 0 ${spacing.pageMargin.mobile}px;
+  width: 100%;
   @media (min-width: ${breakpoints.desktop}px) {
     padding: 0 ${spacing.pageMargin.desktop}px;
   }
@@ -148,7 +149,8 @@ export const NavBar = () => {
               text-decoration: none;
               opacity: 0.8;
             }
-            @media (max-width: ${breakpoints.desktop-dimensions.leftSideBar}px) {
+            @media (max-width: ${breakpoints.desktop -
+              dimensions.leftSideBar}px) {
               font-size: 16px;
             }
           }
@@ -157,11 +159,11 @@ export const NavBar = () => {
             align-items: center;
             display: flex;
             flex-direction: row;
-           
+
             .navLink {
               margin-left: ${spacing.small}px;
               font-size: 16px;
-             
+
               a {
                 color: ${({ theme }) => theme.navbar.text};
                 font-weight: 500;
@@ -174,11 +176,12 @@ export const NavBar = () => {
                   opacity: 0.7;
                 }
               }
-              @media (max-width: ${breakpoints.desktop-dimensions.leftSideBar}px) {
+              @media (max-width: ${breakpoints.desktop -
+                dimensions.leftSideBar}px) {
                 font-size: 12px;
                 button {
-                  width: 3rem; 
-                 }
+                  width: 3rem;
+                }
               }
             }
           }
@@ -194,12 +197,14 @@ export const NavBar = () => {
           }
         `}
       >
-        <span  css={css`
-                display: flex;
-              `}>
-        <Link to={'/'} className="navBarHeader">
-          Tablecloth
-        </Link>
+        <span
+          css={css`
+            display: flex;
+          `}
+        >
+          <Link to={'/'} className="navBarHeader">
+            Tablecloth
+          </Link>
         </span>
         <div className="navLinks">
           <div className="navLink">
@@ -207,6 +212,11 @@ export const NavBar = () => {
           </div>
           <div className="navLink">
             <Link to="/get-started">Get Started</Link>
+          </div>
+          <div className="navLink">
+            <Link to="https://www.tablecloth.dev/discord-invite">
+              Community
+            </Link>
           </div>
           <div className="navLink">
             <Link to="/docs/rescript">Docs</Link>
