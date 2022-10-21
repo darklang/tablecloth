@@ -23,9 +23,12 @@ Each implementation:
 - has friendly maintainers
 
 **Tablecloth is alpha-quality software, and is pre-1.0. Some of the changes listed
-*above are still in progress. Caveat emptor.**
+above are still in progress. Caveat emptor.**
 
-Check out the [website](https://www.tablecloth.dev) for our interactive API documentation.
+Check out the [website](https://www.tablecloth.dev) for our interactive API
+documentation, or join the community in the [Tablecloth
+Discord](https://www.tablecloth.dev/discord-invite).
+
 
 ## Design goals
 

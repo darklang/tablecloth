@@ -182,6 +182,7 @@ const CallToAction = () => (
         `}
       >
         <div>
+          <Link to="https://www.tablecloth.dev/discord-invite">Community</Link>
           <Link to="/get-started">Get started</Link>
           <Link to="/docs">Documentation</Link>
         </div>
@@ -215,7 +216,7 @@ export const pageQuery = graphql`
 
 let title = 'Tablecloth';
 let description =
-  'A standard library with the same API in Rescript and OCaml (and coming soon: F#).';
+  'A standard library with the same API in Rescript, OCaml and F#.';
 
 let Header = () => {
   let [_themeName, _toggle, theme] = useTheme();
@@ -323,8 +324,18 @@ export default () => {
                     Tablecloth
                   </h1>
                   <p>
-                    A standard library with the same API in Rescript and OCaml
-                    (and coming soon: F#).
+                    A standard library with the same API in{' '}
+                    <a href="https://github.com/darklang/tablecloth-rescript">
+                      Rescript
+                    </a>
+                    ,{' '}
+                    <a href="https://github.com/darklang/tablecloth-ocaml-base">
+                      OCaml
+                    </a>{' '}
+                    and{' '}
+                    <a href="https://github.com/darklang/tablecloth-fsharp">
+                      F#
+                    </a>
                   </p>
                   <p
                     css={css`
@@ -332,7 +343,7 @@ export default () => {
                       padding-bottom: 30px;
                     `}
                   >
-                    Tablecloth provides an easy-to-use, comprehensive and safe
+                    Tablecloth provides an easy-to-use, comprehensive, and safe
                     standard library that has the same API across multiple
                     languages (OCaml, Rescript, and F#).
                   </p>
@@ -345,12 +356,10 @@ open Tablecloth;
 String.toList("Tablecloth")
 |> List.filterMap(character =>
   Char.toCode(character)
-  |> Int.add(1)
-  |> Char.fromCode
+  ->Int.add(1)
+  ->Char.fromCode
 )
-|> String.fromList
-/* "Ubcmfdmpui" */
-                `}
+|> String.fromList`}
                     />
                   </div>
                 </Container>
@@ -363,8 +372,8 @@ String.toList("Tablecloth")
                       <h2>Easy to learn</h2>
                       <span>
                         Excellent documentation, comprehensive examples and
-                        consistent behaviour make Tablecloth efficient to get
-                        started with
+                        consistent behaviour make Tablecloth simple to learn and
+                        easy to get started with
                       </span>
                     </>
                   )}
@@ -373,25 +382,30 @@ String.toList("Tablecloth")
                   flip={false}
                   show={() => (
                     <CodeSample
-                      language="reason"
+                      language="rescript"
                       code={`
-                      let name = Some("Kubo");
-                      let species = Some("dog");
+                      let name = Some("Kubo")
+                      let species = Some("dog")
                       let favoriteGame = None;
 
                       let bio = Option.({
-                        let (name, species) = Option.both(name, species);
-                        name ++ " the " ++ "'s favorite game is" ++ (favoriteGame |? "fetch");
+                        let (name, species) = Option.both(name, species)
+                        name ++ " the " ++ "'s favorite game is" ++ (favoriteGame |? "fetch")
                       })
                     `}
                     />
                   )}
                   tell={() => (
                     <>
-                      <h2>Safe</h2>
+                      <h2>Portable yet idiomatic</h2>
                       <span>
-                        Banish runtime errors and work effectively with Options
-                        and Results
+                        Use the same API in multiple languages (OCaml, Rescript,
+                        and F#), while adapting to each language's best
+                        practices. Tablecloth is built on top of standard
+                        libraries so it interacts seamlessly with the host
+                        language. Whether pipe-first or pipe-last, camelCase or
+                        snakeCase, labelled arguments or no, Tablecloth is
+                        designed to feel at home in each language.
                       </span>
                     </>
                   )}
@@ -444,42 +458,10 @@ String.toList("Tablecloth")
                   )}
                   tell={() => (
                     <>
-                      <h2>Portable</h2>
-                      <span>Have the same API in OCaml, Rescript, and F#.</span>
-                    </>
-                  )}
-                />
-
-                <Section
-                  flip={false}
-                  show={() => (
-                    <CodeSample
-                      flip={false}
-                      language="ocaml"
-                      code={`
-                    let nameToSpecies = Map.String.fromList [
-                      ("Amy", "Ant");
-                      ("Barry", "Badger");
-                    ]
-
-                    (* Get a value from a Map by its key *)
-                    nameToSpecies.Map.?{"Carolyn"} = None
-
-                    (* Extract a Char from a String safely *)
-                    "Tablecloth".String.?[1] = Some('a')
-
-                    (* Index into an Array without fear *)
-                    [|2;3;5;7|].Array.?(3) = Some(7)
-                  `}
-                    />
-                  )}
-                  tell={() => (
-                    <>
-                      <h2>Advanced</h2>
+                      <h2>Safe</h2>
                       <span>
-                        Index operators for Arrays, Maps, Sets and Strings plus
-                        binding operators for Options & Results mean your code
-                        is concise and expressive
+                        Tablecloth avoids runtime exceptions, relying on Options
+                        and Results instead.
                       </span>
                     </>
                   )}
