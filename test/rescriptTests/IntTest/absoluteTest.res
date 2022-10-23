@@ -1,3 +1,3 @@
-test ("absolute(8)", () => expect(8) |> toEqual(8)) 
-test ("absolute(-7)", () => expect(-7) |> toEqual(7)) 
-test ("absolute(0)", () => expect(0) |> toEqual(0)) 
+test ("absolute(8)", () => expect(absolute(8)) |> toEqual(Eq.int, 8)) 
+test ("absolute(-7)", () => expect(absolute(-7)) |> toEqual(Eq.int, 7)) 
+test ("absolute(0)", () => expect(absolute(0)) |> toEqual(Eq.int, 0)) 
