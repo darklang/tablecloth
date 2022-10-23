@@ -1,0 +1,67 @@
+{
+   "module": "Int",
+   "name": "power",
+   "docstring": "Raise <param base> to the power of <param exponent>, returning the power",
+   "parameters": [
+      {
+         "name": "base",
+         "type": "int"
+      },
+      {
+         "name": "exponent",
+         "type": "int"
+      }
+   ],
+   "returnType": "int",
+   "constraints": [
+      "no-ocaml",
+      "no-rescript"
+   ],
+   "tests": [
+      {
+         "inputs": [
+            7,
+            3
+         ],
+         "output": 343
+      },
+      {
+         "inputs": [
+            0,
+            3
+         ],
+         "output": 0
+      },
+      {
+         "inputs": [
+            7,
+            0
+         ],
+         "output": 1
+      }
+   ],
+   "examples": [
+      {
+         "inputs": [
+            7,
+            3
+         ],
+         "output": 343
+      },
+      {
+         "inputs": [
+            0,
+            3
+         ],
+         "output": 0
+      },
+      {
+         "inputs": [
+            7,
+            0
+         ],
+         "output": 1
+      }
+   ],
+   "added": "0.1.0"
+}

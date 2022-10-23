@@ -1,0 +1,28 @@
+module: Int
+name: minimum
+docstring: Compare <param a> and <param b>, returning the lowest value
+parameters:
+  - name: a
+    type: int
+  - name: b
+    type: int
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [8, 18]
+    output: 8
+  - inputs: [5, 0]
+    output: 0
+  - inputs: [-4, -1]
+    output: -4
+examples:
+  - inputs: [8, 18]
+    output: 8
+  - inputs: [5, 0]
+    output: 0
+  - inputs: [-4, -1]
+    output: -4
+added: 0.1.0

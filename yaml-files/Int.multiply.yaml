@@ -1,0 +1,24 @@
+module: Int
+name: multiply
+docstring: Multiply <param a> by <param b>, returning their product
+parameters:
+  - name: a
+    type: int
+  - name: b
+    type: int
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [2, 7]
+    output: 14
+examples:
+  - inputs: [2, 7]
+    output: 14
+added: 0.1.0
+
+  describe("multiply", () =>
+  test("multiply", () => expect(Int.multiply(2, 7)) |> toEqual(Eq.int, 14))
+  )

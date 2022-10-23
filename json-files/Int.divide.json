@@ -1,0 +1,67 @@
+{
+   "module": "Int",
+   "name": "divide",
+   "docstring": "divide <param a> by <param by>, returning their quotient",
+   "parameters": [
+      {
+         "name": "a",
+         "type": "int"
+      },
+      {
+         "name": "by",
+         "type": "int"
+      }
+   ],
+   "returnType": "int",
+   "constraints": [
+      "no-ocaml",
+      "no-rescript"
+   ],
+   "tests": [
+      {
+         "inputs": [
+            3,
+            2
+         ],
+         "output": 1
+      },
+      {
+         "inputs": [
+            3,
+            0
+         ],
+         "output": "exception"
+      },
+      {
+         "inputs": [
+            27,
+            5
+         ],
+         "output": 5
+      }
+   ],
+   "examples": [
+      {
+         "inputs": [
+            3,
+            2
+         ],
+         "output": 1
+      },
+      {
+         "inputs": [
+            3,
+            0
+         ],
+         "output": "exception"
+      },
+      {
+         "inputs": [
+            27,
+            5
+         ],
+         "output": 5
+      }
+   ],
+   "added": "0.1.0"
+}

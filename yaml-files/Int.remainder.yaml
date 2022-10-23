@@ -1,0 +1,48 @@
+module: Int
+name: remainder
+docstring: divide <param a> by <param by>, returning their remainder
+parameters:
+  - name: a
+    type: int
+  - name: by
+    type: int
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [-4, 3]
+    output: -1
+  - inputs: [-2, 3]
+    output: -2
+  - inputs: [-1, 3]
+    output: -1
+  - inputs: [0, 3]
+    output: 0
+  - inputs: [1, 3]
+    output: 1
+  - inputs: [2, 3]
+    output: 2
+  - inputs: [3, 3]
+    output: 0
+  - inputs: [4, 3]
+    output: 1
+examples:
+  - inputs: [-4, 3]
+    output: -1
+  - inputs: [-2, 3]
+    output: -2
+  - inputs: [-1, 3]
+    output: -1
+  - inputs: [0, 3]
+    output: 0
+  - inputs: [1, 3]
+    output: 1
+  - inputs: [2, 3]
+    output: 2
+  - inputs: [3, 3]
+    output: 0
+  - inputs: [4, 3]
+    output: 1
+added: 0.1.0

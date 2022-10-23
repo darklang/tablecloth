@@ -1,0 +1,67 @@
+{
+   "module": "Int",
+   "name": "maximum",
+   "docstring": "Compare <param a> and <param b>, returning the highest value",
+   "parameters": [
+      {
+         "name": "a",
+         "type": "int"
+      },
+      {
+         "name": "b",
+         "type": "int"
+      }
+   ],
+   "returnType": "int",
+   "constraints": [
+      "no-ocaml",
+      "no-rescript"
+   ],
+   "tests": [
+      {
+         "inputs": [
+            8,
+            18
+         ],
+         "output": 18
+      },
+      {
+         "inputs": [
+            5,
+            0
+         ],
+         "output": 5
+      },
+      {
+         "inputs": [
+            -4,
+            -1
+         ],
+         "output": -1
+      }
+   ],
+   "examples": [
+      {
+         "inputs": [
+            8,
+            18
+         ],
+         "output": 18
+      },
+      {
+         "inputs": [
+            5,
+            0
+         ],
+         "output": 5
+      },
+      {
+         "inputs": [
+            -4,
+            -1
+         ],
+         "output": -1
+      }
+   ],
+   "added": "0.1.0"
+}

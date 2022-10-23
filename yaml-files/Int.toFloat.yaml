@@ -1,0 +1,26 @@
+module: Int
+name: toFloat
+docstring: Convert <param a> into a [float] representation
+parameters:
+  - name: a
+    type: int
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 5
+    output: 5.
+  - inputs: 0
+    output: 0.
+  - inputs: -7
+    output: -7.
+examples:
+  - inputs: 5
+    output: 5.
+  - inputs: 0
+    output: 0.
+  - inputs: -7
+    output: -7.
+added: 0.1.0
