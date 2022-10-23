@@ -1,1 +1,1 @@
-test "subtract(4,3)" (fun () -> expect (subtract 4 3) |> toEqual Eq.Int 1) ; 
+test "subtract(4,3)" (fun () -> expect (subtract 4 3) |> toEqual Eq.int 1) ; 

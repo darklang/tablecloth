@@ -24,7 +24,7 @@ type data = {
 @scope("JSON") @val
 external parseIntoMyData: string => data = "parse"
 
-let file = readFileSync(~name="../json-files/Int.power.json", #utf8)
+let file = readFileSync(~name="../json-files/Int.subtract.json", #utf8)
 let myData = parseIntoMyData(file)
 let name = myData.name
 let resultsR = []
@@ -35,9 +35,9 @@ for i in 0 to Belt.Array.length(myData.tests)-1{
     let test = myData.tests[i];
     let inputs = test.inputs
     let output = test.output
-    let resultRescript = `test ("${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})", () => expect(${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})) |> toEqual(Eq.int, ${Belt.Int.toString(output)})) \n`
+    let resultRescript = `test ("${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})", () => expect(${Belt.Int.toString(output)!="exception"? `${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})) |> toEqual(Eq.int, ${Belt.Int.toString(output)}))` : `() => ${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})) |> toThrow)`} \n`
     resultsR->Belt.Array.push(resultRescript)
-    let resultOcaml = `test "${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})" (fun () -> expect (${name} ${Js.Array.isArray(inputs)?Js.Array.joinWith(" ",inputs): Js.Array.toString(inputs)}) |> toEqual Eq.Int ${Belt.Int.toString(output)}) ; \n`
+    let resultOcaml = `test "${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})" (fun () -> expect (${Belt.Int.toString(output)!="exception"? `${name} ${Js.Array.isArray(inputs)?Js.Array.joinWith(" ",inputs): Js.Array.toString(inputs)}) |> toEqual Eq.int ${Belt.Int.toString(output) == "exception"? "|> toThrow":Belt.Int.toString(output)}) ; `:`fun () -> ${name} ${Js.Array.isArray(inputs)?Js.Array.joinWith(" ",inputs): Js.Array.toString(inputs)}) |> toThrow); `}\n`
     resultsO->Belt.Array.push(resultOcaml)
     let resultFSharp =
         `testCase "${name}(${Js.Array.isArray(inputs)?Js.Array.joinWith(",",inputs): Js.Array.toString(inputs)})" <| fun _ -> \n    let expected = ${Belt.Int.toString(output)}\n    Expect.equal expected (${name} ${Js.Array.isArray(inputs)?Js.Array.joinWith(" ",inputs): Js.Array.toString(inputs)}) "message" \n`
