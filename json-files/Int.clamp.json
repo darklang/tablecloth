@@ -65,8 +65,8 @@
       {
          "inputs": [
             3,
-            -10,
-            -5
+            7,
+            1
          ],
          "output": "exception"
       }
@@ -115,8 +115,8 @@
       {
          "inputs": [
             3,
-            -10,
-            -5
+            7,
+            1
          ],
          "output": "exception"
       }

@@ -1,5 +1,0 @@
-test ("divideFloat(3,2)", () => expect(divideFloat(3,2)) |> toEqual(Eq.int, 1.5)) 
-test ("divideFloat(27,5)", () => expect(divideFloat(27,5)) |> toEqual(Eq.int, 5.4)) 
-test ("divideFloat(8,4)", () => expect(divideFloat(8,4)) |> toEqual(Eq.int, 2)) 
-test ("divideFloat(8,0)", () => expect(divideFloat(8,0)) |> toEqual(Eq.int, Float.infinity)) 
-test ("divideFloat(-8,0)", () => expect(divideFloat(-8,0)) |> toEqual(Eq.int, Float.negativeInfinity)) 
