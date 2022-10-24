@@ -12,7 +12,7 @@ type tests = {
 
 type parameter ={
   name: string,
-  types: string,
+  \"type": string,
 }
 
 type data = {
