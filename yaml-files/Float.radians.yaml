@@ -1,0 +1,18 @@
+module: Float
+name: radians
+docstring: Convert <param a> to radians
+parameters:
+  - name: a
+    type: float
+returnType: radians
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: pi
+    output: pi
+examples:
+  - inputs: pi
+    output: pi
+added: 0.1.0

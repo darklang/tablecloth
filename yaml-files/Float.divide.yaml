@@ -1,0 +1,28 @@
+module: Float
+name: divide
+docstring: divide <param a> by <param by>, returning their quotient
+parameters:
+  - name: a
+    type: float
+  - name: by
+    type: float
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3.14, 2.]
+    output: 1.57
+  - inputs: [3.14, 0.]
+    output: infinity
+  - inputs: [3.14, -0.]
+    output: negativeInfinity
+examples:
+  - inputs: [3.14, 2.]
+    output: 1.57
+  - inputs: [3.14, 0.]
+    output: infinity
+  - inputs: [3.14, -0.]
+    output: negativeInfinity
+added: 0.1.0

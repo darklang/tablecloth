@@ -1,0 +1,22 @@
+module: Float
+name: sin
+docstring: Takes <param a> in radians and figure out its sine
+parameters:
+  - name: a
+    type: radians
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: degrees(30.)
+    output: 0.5
+  - inputs: radians(pi /. 6.)
+    output: 0.5
+examples:
+  - inputs: degrees(30.)
+    output: 0.5
+  - inputs: radians(pi /. 6.)
+    output: 0.5
+added: 0.1.0

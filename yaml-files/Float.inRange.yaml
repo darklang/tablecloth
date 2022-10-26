@@ -1,0 +1,54 @@
+module: Float
+name: inRange
+docstring: Checks if <param a> is between <param lower> and up to, but not including, <param upper>
+parameters:
+  - name: a
+    type: float
+  - name: lower
+    type: float
+  - name: upper
+    type: float
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3., 2., 4.]
+    output: true
+  - inputs: [8., 2., 4.]
+    output: false
+  - inputs: [1., 2., 4.]
+    output: false
+  - inputs: [2., 1., 2.]
+    output: false
+  - inputs: [-6.6, -7.9, -5.2]
+    output: true
+  - inputs: [-6.6, -7.9, nan]
+    output: false
+  - inputs: [-6.6, nan, 0]
+    output: false
+  - inputs: [nan, 2., 8.]
+    output: false
+  - inputs: [3., 7., 1.]
+    output: exception
+examples:
+  - inputs: [3., 2., 4.]
+    output: true
+  - inputs: [8., 2., 4.]
+    output: false
+  - inputs: [1., 2., 4.]
+    output: false
+  - inputs: [2., 1., 2.]
+    output: false
+  - inputs: [-6.6, -7.9, -5.2]
+    output: true
+  - inputs: [-6.6, -7.9, nan]
+    output: false
+  - inputs: [-6.6, nan, 0]
+    output: false
+  - inputs: [nan, 2., 8.]
+    output: false
+  - inputs: [3., 7., 1.]
+    output: exception
+added: 0.1.0

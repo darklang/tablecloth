@@ -1,0 +1,26 @@
+module: Float
+name: tan
+docstring: Takes <param a> and figure out its tangent
+parameters:
+  - name: a
+    type: radians
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: degrees(45.)
+    output: 0.9999999999999999
+  - inputs: radians(pi /. 4.)
+    output: 0.9999999999999999
+  - inputs: 0.
+    output: 0.
+examples:
+  - inputs: degrees(45.)
+    output: 0.9999999999999999
+  - inputs: radians(pi /. 4.)
+    output: 0.9999999999999999
+  - inputs: 0.
+    output: 0.
+added: 0.1.0

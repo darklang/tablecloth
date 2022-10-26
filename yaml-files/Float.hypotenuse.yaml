@@ -1,0 +1,20 @@
+module: Float
+name: hypotenuse
+docstring: returns the length of the hypotenuse of a right-angled triangle with sides of length <param a> and <param b>
+parameters:
+  - name: a
+    type: float
+  - name: b
+    type: float
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3., 4.]
+    output: 5.
+examples:
+  - inputs: [3., 4.]
+    output: 5.
+added: 0.1.0

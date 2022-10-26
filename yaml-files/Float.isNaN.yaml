@@ -1,0 +1,21 @@
+module: Float
+name: isNaN
+docstring: Determine whether <param a> is an [undefined] or unrepresentable number.
+  - name: a
+    type: float
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: nan
+    output: true
+  - inputs: 91.4
+    output: false
+examples:
+  - inputs: nan
+    output: true
+  - inputs: 91.4
+    output: false
+added: 0.1.0

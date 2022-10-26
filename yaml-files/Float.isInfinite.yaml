@@ -1,0 +1,42 @@
+module: Float
+name: isInfinite
+docstring: Determine whether <param a > is positive or negative infinity.
+parameters:
+  - name: a
+    type: float
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: infinity
+    output: true
+  - inputs: negativeInfinity
+    output: true
+  - inputs: nan
+    output: false
+  - inputs: -5.
+    output: false
+  - inputs: -0.314
+    output: false
+  - inputs: 0.
+    output: false
+  - inputs: 3.14
+    output: false
+examples:
+  - inputs: infinity
+    output: true
+  - inputs: negativeInfinity
+    output: true
+  - inputs: nan
+    output: false
+  - inputs: -5.
+    output: false
+  - inputs: -0.314
+    output: false
+  - inputs: 0.
+    output: false
+  - inputs: 3.14
+    output: false
+added: 0.1.0

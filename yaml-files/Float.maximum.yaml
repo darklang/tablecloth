@@ -1,0 +1,36 @@
+module: Float
+name: maximum
+docstring: Compare <param a> and <param b>, returning the highest value
+parameters:
+  - name: a
+    type: float
+  - name: b
+    type: float
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [7., 9.]
+    output: 9.
+  - inputs: [-4., -1.]
+    output: -1.
+  - inputs: [7., nan]
+    output: NaN
+  - inputs: [7., infinity]
+    output: infinity
+  - inputs: [7., negativeInfinity]
+    output: 7.
+examples:
+  - inputs: [7., 9.]
+    output: 9.
+  - inputs: [-4., -1.]
+    output: -1.
+  - inputs: [7., nan]
+    output: NaN
+  - inputs: [7., infinity]
+    output: infinity
+  - inputs: [7., negativeInfinity]
+    output: 7.
+added: 0.1.0

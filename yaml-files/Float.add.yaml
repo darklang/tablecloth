@@ -1,0 +1,20 @@
+module: Float
+name: add
+docstring: Add <param a> to <param b>, returning their sum
+parameters:
+  - name: a
+    type: float
+  - name: b
+    type: float
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3.14, 3.14]
+    output: 6.28
+examples:
+  - inputs: [3.14, 3.14]
+    output: 6.28
+added: 0.1.0
