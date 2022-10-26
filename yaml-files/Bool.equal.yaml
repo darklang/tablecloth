@@ -1,0 +1,28 @@
+module: Bool
+name: equal
+docstring: Test for the equality of <param a > and <param b>
+parameters:
+  - name: a
+    type: bool
+  - name: a
+    type: bool
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [true, true]
+    output: true
+  - inputs: [false, false]
+    output: true
+  - inputs: [true, false]
+    output: false
+examples:
+  - inputs: [true, true]
+    output: true
+  - inputs: [false, false]
+    output: true
+  - inputs: [true, false]
+    output: false
+added: 0.1.0

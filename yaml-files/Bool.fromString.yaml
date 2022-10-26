@@ -1,0 +1,30 @@
+module: Bool
+name: fromString
+docstring: Convert <param a> (String) into a Boolean
+parameters:
+  - name: a
+    type: string
+returnType: option<bool>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "true"
+    output: Some(true)
+  - inputs: "false"
+    output: Some(false)
+  - inputs: "True"
+    output: None
+  - inputs: "1"
+    output: None
+examples:
+  - inputs: "true"
+    output: Some(true)
+  - inputs: "false"
+    output: Some(false)
+  - inputs: "True"
+    output: None
+  - inputs: "1"
+    output: None
+added: 0.1.0

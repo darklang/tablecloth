@@ -1,0 +1,22 @@
+module: Bool
+name: toString
+docstring: Convert <param a> (Bool) into a String
+parameters:
+  - name: a
+    type: bool
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: true
+    output: "true"
+  - inputs: false
+    output: "false"
+examples:
+  - inputs: true
+    output: "true"
+  - inputs: false
+    output: "false"
+added: 0.1.0

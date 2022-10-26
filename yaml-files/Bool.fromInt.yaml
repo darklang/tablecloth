@@ -1,0 +1,42 @@
+module: Bool
+name: fromInt
+docstring: Convert <param a> (Int) into a Boolean
+parameters:
+  - name: a
+    type: int
+returnType: option<bool>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 0
+    output: Some(false)
+  - inputs: 1
+    output: Some(true)
+  - inputs: Int.minimumValue
+    output: None
+  - inputs: -2
+    output: None
+  - inputs: -1
+    output: None
+  - inputs: 2
+    output: None
+  - inputs: Int.maximumValue
+    output: None
+examples:
+  - inputs: 0
+    output: Some(false)
+  - inputs: 1
+    output: Some(true)
+  - inputs: Int.minimumValue
+    output: None
+  - inputs: -2
+    output: None
+  - inputs: -1
+    output: None
+  - inputs: 2
+    output: None
+  - inputs: Int.maximumValue
+    output: None
+added: 0.1.0
