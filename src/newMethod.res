@@ -19,13 +19,13 @@ type data = {
   name: string,
   parameters:array<parameter>,
   tests: array<tests>,
-  returnType: int
+  returnType: string
 }
 
 @scope("JSON") @val
 external parseIntoMyData: string => data = "parse"
 
-let file = readFileSync(~name="../json-files/Bool.toString.json", #utf8)
+let file = readFileSync(~name="../json-files/Int.fromString.json", #utf8)
 let myData = parseIntoMyData(file)
 let name = myData.name
 let returnType = myData.returnType
@@ -37,11 +37,16 @@ let inparr =[]
 let newInput=ref("")
 let newInputR=ref("")
 let newInputOF=ref("")
-let output=ref(0)
+let output=ref("")
 let length =Belt.Array.length(myData.parameters)
 
 let generate =Belt.Array.map(myData.tests, (test =>{
-    output:= test.output
+    output:= Belt.Int.toString(test.output)
+    if (myData.returnType=="string"){
+        output:=`"${Belt.Int.toString(test.output)}"`
+    }else{
+        output:= Belt.Int.toString(test.output)
+    }
     if (length==1){
         //param length == 1 type string
         if (myData.parameters[0].\"type"=="string"){
@@ -80,12 +85,12 @@ let generate =Belt.Array.map(myData.tests, (test =>{
   
 }
 
-    let resultRescript = `test ("${name}(${newInputR.contents})", () => expect(${Belt.Int.toString(output.contents)!="exception"? `${\"module"}.${name}(${newInput.contents})) |> toEqual(${Js.String.includes("Some", Belt.Int.toString(output.contents)) || Js.String.includes("None", Belt.Int.toString(output.contents)) ? `{open Eq\n${Js.String.slice(~from=0, ~to_=6, Belt.Int.toString(returnType))}(${Js.String.replace(">", "" ,Js.String.sliceToEnd(~from=7, Belt.Int.toString(returnType)))})}`: `Eq.${Belt.Int.toString(returnType)}`}, ${Belt.Int.toString(output.contents)}))` : `() => ${\"module"}.${name}(${newInput.contents})) |> toThrow)`} \n`
+    let resultRescript = `test ("${name}(${newInputR.contents})", () => expect(${output.contents!="exception"? `${\"module"}.${name}(${newInput.contents})) |> toEqual(${Js.String.includes("Some", output.contents) || Js.String.includes("None", output.contents) ? `{open Eq\n${Js.String.slice(~from=0, ~to_=6, returnType)}(${Js.String.replace(">", "" ,Js.String.sliceToEnd(~from=7, returnType))})}`: `Eq.${returnType}`}, ${output.contents}))` : `() => ${\"module"}.${name}(${newInput.contents})) |> toThrow)`} \n`
     resultsR->Belt.Array.push(resultRescript)
-    let resultOcaml = `test "${name}(${newInput.contents})" (fun () -> expect (${Belt.Int.toString(output.contents)!="exception"? `${\"module"}.${name} ${newInputOF.contents}) |> toEqual ${Js.String.includes("Some", Belt.Int.toString(output.contents)) || Js.String.includes("None", Belt.Int.toString(output.contents)) ? `(let open Eq in ${Js.String.slice(~from=0, ~to_=6, Belt.Int.toString(returnType))} ${Js.String.replace(">", "" ,Js.String.sliceToEnd(~from=7, Belt.Int.toString(returnType)))})`: `Eq.${Belt.Int.toString(returnType)}`} ${Belt.Int.toString(output.contents) == "exception"? "|> toThrow":Belt.Int.toString(output.contents)}) ; `:`fun () -> ${name} ${newInputOF.contents}) |> toThrow); `}\n`
+    let resultOcaml = `test "${name}(${newInput.contents})" (fun () -> expect (${output.contents!="exception"? `${\"module"}.${name} ${newInputOF.contents}) |> toEqual ${Js.String.includes("Some", output.contents) || Js.String.includes("None", output.contents) ? `(let open Eq in ${Js.String.slice(~from=0, ~to_=6, returnType)} ${Js.String.replace(">", "" ,Js.String.sliceToEnd(~from=7, returnType))})`: `Eq.${returnType}`} ${output.contents == "exception"? "|> toThrow":output.contents}) ; `:`fun () -> ${name} ${newInputOF.contents}) |> toThrow); `}\n`
     resultsO->Belt.Array.push(resultOcaml)
     let resultFSharp =
-    `testCase "${name}(${newInput.contents})" \n<| fun _ -> \n    ${Belt.Int.toString(output.contents)!="exception"? `let expected = ${Belt.Int.toString(output.contents)}\n    Expect.equal expected (${\"module"}.${name} ${newInputOF.contents}) "error"` : `Expect.equal (${\"module"}.${name} ${newInputOF.contents}) |> failwith "error"`}\n`
+    `testCase "${name}(${newInput.contents})" \n<| fun _ -> \n    ${output.contents!="exception"? `let expected = ${output.contents}\n    Expect.equal expected (${\"module"}.${name} ${newInputOF.contents}) "error"` : `Expect.equal (${\"module"}.${name} ${newInputOF.contents}) |> failwith "error"`}\n`
     resultsF->Belt.Array.push(resultFSharp)  
 
 }))
@@ -96,6 +101,6 @@ let generate =Belt.Array.map(myData.tests, (test =>{
     // %raw("Fs.appendFileSync(`../test/rescriptTests/IntTest.res`, finalresultR, 'utf8')")
     // %raw("Fs.appendFileSync(`../test/ocamlTests/IntTest.ml`, finalresultO, 'utf8')")
     // %raw("Fs.appendFileSync(`../test/fsharpTests/IntTest.fs`, finalresultF, 'utf8')")
-    Node.Fs.writeFileSync(`../test/rescriptTests/Bool/${name}Test.res`, finalresultR, #utf8)
-    Node.Fs.writeFileSync(`../test/ocamlTests/Bool/${name}Test.ml`, finalresultO, #utf8)
-    Node.Fs.writeFileSync(`../test/fsharpTests/Bool/${name}Test.fs`, finalresultF, #utf8)
+    Node.Fs.writeFileSync(`../test/rescriptTests/IntTest/${name}Test.res`, finalresultR, #utf8)
+    Node.Fs.writeFileSync(`../test/ocamlTests/IntTest/${name}Test.ml`, finalresultO, #utf8)
+    Node.Fs.writeFileSync(`../test/fsharpTests/IntTest/${name}Test.fs`, finalresultF, #utf8)
