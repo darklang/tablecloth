@@ -1,0 +1,22 @@
+module: Option
+name: toList
+docstring: Convert <param a> to a {!List}
+parameters:
+  - name: a
+    type: option<'a>
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: Some(3004)
+    output: list{3004}
+  - inputs: None
+    output: list{}
+examples:
+  - inputs: Some(3004)
+    output: list{3004}
+  - inputs: None
+    output: list{}
+added: 0.1.0

@@ -1,0 +1,25 @@
+module: Tuple3
+name: make
+docstring: Create a {!Tuple3}
+parameters:
+  - name: a
+    type: >-
+      'a
+  - name: b
+    type: >-
+      'b
+  - name: c
+    type: >-
+      'c
+returnType: ('a, 'b, 'c)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3, 4, 5]
+    output: (3,4,5)
+examples:
+  - inputs: [3, 4, 5]
+    output: (3,4,5)
+added: 0.1.0

@@ -1,0 +1,19 @@
+module: Tuple3
+name: second
+docstring: Extract the second value from a tuple
+parameters:
+  - name: a
+    type: ('a, 'b, 'c)
+returnType: >-
+  'b
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: (3, 4, 5)
+    output: 4
+examples:
+  - inputs: (3, 4, 5)
+    output: 4
+added: 0.1.0

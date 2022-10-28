@@ -1,0 +1,32 @@
+module: Option
+name: both
+docstring: Transform <param a> and <param b> into an option of a {!Tuple2}. Returns None if either of the aguments is None.
+parameters:
+  - name: a
+    type: option<'a>
+  - name: b
+    type: option<'b>
+returnType: option<('a, 'b)>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(3004), Some("Ant")]
+    output: Some(3004, "Ant")
+  - inputs: [None, Some("Ant")]
+    output: None
+  - inputs: [Some(3004), None]
+    output: None
+  - inputs: [None, None]
+    output: None
+examples:
+  - inputs: [Some(3004), Some("Ant")]
+    output: Some(3004, "Ant")
+  - inputs: [None, Some("Ant")]
+    output: None
+  - inputs: [Some(3004), None]
+    output: None
+  - inputs: [None, None]
+    output: None
+added: 0.1.0

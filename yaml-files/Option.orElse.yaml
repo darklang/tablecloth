@@ -1,0 +1,32 @@
+module: Option
+name: orElse
+docstring: Return the <param b> if it {!isSome}, otherwise return <param a>
+parameters:
+  - name: a
+    type: option<'a>
+  - name: b
+    type: option<'a>
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(1), Some(15)]
+    output: Some(15)
+  - inputs: [None, Some(15)]
+    output: Some(15)
+  - inputs: [Some(1), None]
+    output: Some(1)
+  - inputs: [None, None]
+    output: None
+examples:
+  - inputs: [Some(1), Some(15)]
+    output: Some(15)
+  - inputs: [None, Some(15)]
+    output: Some(15)
+  - inputs: [Some(1), None]
+    output: Some(1)
+  - inputs: [None, None]
+    output: None
+added: 0.1.0

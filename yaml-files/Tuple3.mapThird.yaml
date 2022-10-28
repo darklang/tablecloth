@@ -1,0 +1,21 @@
+module: Tuple3
+name: mapThird
+docstring: Transform the {!third} value in a tuple
+parameters:
+  - name: a
+    type: ('a, 'b, 'c)
+  - name: f
+    type: >-
+      'c => 'z
+returnType: ('a, 'b, 'z)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [("stressed", 16, false), not]
+    output: ("stressed", 16, true)
+examples:
+  - inputs: [("stressed", 16, false), not]
+    output: ("stressed", 16, true)
+added: 0.1.0

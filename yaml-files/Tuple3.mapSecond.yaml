@@ -1,0 +1,21 @@
+module: Tuple3
+name: mapSecond
+docstring: Transform the {!second} value in a tuple
+parameters:
+  - name: a
+    type: ('a, 'b, 'c)
+  - name: f
+    type: >-
+      'b => 'y
+returnType: ('a, 'y, 'c)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [("stressed", 16.0, false), Float.squareRoot]
+    output: ("stressed", 4.0, false)
+examples:
+  - inputs: [("stressed", 16.0, false), Float.squareRoot]
+    output: ("stressed", 4.0, false)
+added: 0.1.0

@@ -1,0 +1,24 @@
+module: Option
+name: unwrap
+docstring: Unwrap <param a> returning [default] if called with [None]
+parameters:
+  - name: a
+    type: option<'a>
+  - name: default
+    type: \'a
+returnType: \'a
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(42), 99]
+    output: 42
+  - inputs: [None, 99]
+    output: 99
+examples:
+  - inputs: [Some(42), 99]
+    output: 42
+  - inputs: [None, 99]
+    output: 99
+added: 0.1.0

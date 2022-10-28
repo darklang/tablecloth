@@ -1,0 +1,27 @@
+module: Tuple3
+name: mapEach
+docstring: Transform each value in a tuple by applying [f] to the {!first} value, [g] to the {!second} value and [h] to the {!third} value
+parameters:
+  - name: a
+    type: ('a, 'b, 'c)
+  - name: f
+    type: >-
+      'a => 'x
+  - name: g
+    type: >-
+      'b => 'y
+  - name: h
+    type: >-
+      'c => 'z
+returnType: ('x, 'y, 'z)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [("stressed", 16.0, false), String.reverse, Float.squareRoot, not]
+    output: ("desserts", 4.0, true)
+examples:
+  - inputs: [("stressed", 16.0, false), String.reverse, Float.squareRoot, not]
+    output: ("desserts", 4.0, true)
+added: 0.1.0

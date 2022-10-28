@@ -1,0 +1,21 @@
+module: Tuple2
+name: mapFirst
+docstring: Transform the {!first} value in a tuple
+parameters:
+  - name: a
+    type: ('a, 'b)
+  - name: f
+    type: >-
+      'a => 'x
+returnType: ('x, 'b)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [("stressed", 16), String.reverse]
+    output: ("desserts", 16)
+examples:
+  - inputs: [("stressed", 16), String.reverse]
+    output: ("desserts", 16)
+added: 0.1.0

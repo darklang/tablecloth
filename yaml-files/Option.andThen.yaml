@@ -1,0 +1,25 @@
+module: Option
+name: andThen
+docstring: Chain together many computations that may not return a value
+parameters:
+  - name: a
+    type: option<'a>
+  - name: f
+    type: 'a => option<'b>
+returnType: option<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(list{1, 2, 3}), List.head]
+    output: Some(1)
+  - inputs: [Some(list{}), List.head]
+    output: None
+examples:
+  - inputs: [Some(list{1, 2, 3}), List.head]
+    output: Some(1)
+  - inputs: [Some(list{}), List.head]
+    output: None
+added: 0.1.0
+

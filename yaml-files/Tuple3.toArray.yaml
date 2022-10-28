@@ -1,0 +1,18 @@
+module: Tuple3
+name: toArray
+docstring: Turns a tuple into an {!Array} of length three
+parameters:
+  - name: a
+    type: ('a, 'a, 'a)
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: (3, 4, 5)
+    output: [[3, 4, 5]]
+examples:
+  - inputs: (3, 4, 5)
+    output: [[3, 4, 5]]
+added: 0.1.0
