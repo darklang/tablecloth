@@ -1,0 +1,24 @@
+module: Array
+name: minimum
+docstring: Find the smallest element using the provided [compare] function. Returns [None] if called on an empty array
+parameters:
+  - name: a
+    type: array<'a>
+  - name: compare
+    type: ('a, 'a) => int
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, -2, 3], Int.compare]
+    output: Some(-2)
+  - inputs: [[], Int.compare]
+    output: None
+examples:
+  - inputs: [[1, -2, 3], Int.compare]
+    output: Some(-2)
+  - inputs: [[], Int.compare]
+    output: None
+added: 0.1.0
