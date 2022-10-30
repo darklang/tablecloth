@@ -1,0 +1,28 @@
+module: Array
+name: findIndex
+docstring: Similar to {!Array.find} but [f] is also called with the current index, and the return value will be a tuple of the index the passing value was found at and the passing value
+parameters:
+  - name: a
+    type: array<'a>
+  - name: f
+    type: (int, 'a) => bool
+returnType: option<(int, 'a)>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 3, 4, 8], (index, number) => index > 2 && Int.isEven(number)]
+    output: Some(3, 8)
+  - inputs: [[0, 2, 4, 8], (_, _) => false]
+    output: None
+  - inputs: [[], (index, number) => index > 2 && Int.isEven(number)]
+    output: None
+examples:
+  - inputs: [[1, 3, 4, 8], (index, number) => index > 2 && Int.isEven(number)]
+    output: Some(3, 8)
+  - inputs: [[0, 2, 4, 8], (_, _) => false]
+    output: None
+  - inputs: [[], (index, number) => index > 2 && Int.isEven(number)]
+    output: None
+added: 0.1.0

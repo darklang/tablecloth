@@ -1,0 +1,53 @@
+module: Array
+name: map3
+docstring: Combine three arrays, using [f] to combine each trio of elements
+parameters:
+  - name: a
+    type: array<'a>
+  - name: b
+    type: array<'b>
+  - name: c
+    type: array<'c>
+  - name: f
+    type: ('a, 'b, 'c) => 'd
+returnType: array<'d>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs:
+      [
+        ["alice", "bob", "chuck"],
+        [2, 5, 7, 8],
+        [true, false, true, false],
+        Tuple3.make,
+      ]
+    output: [("alice", 2, true), ("bob", 5, false), ("chuck", 7, true)]
+examples:
+  - inputs:
+      [
+        ["alice", "bob", "chuck"],
+        [2, 5, 7, 8],
+        [true, false, true, false],
+        Tuple3.make,
+      ]
+    output: [("alice", 2, true), ("bob", 5, false), ("chuck", 7, true)]
+added: 0.1.0
+
+
+
+
+  describe("map3", () =>
+  test("maps elements of 3 arrays", () =>
+  expect(
+  map3(~f=Tuple3.make, ["alice", "bob", "chuck"], [2, 5, 7, 8], [true, false, true, false]),
+  ) |> toEqual(
+  {
+  open Eq
+  array(trio(string, int, bool))
+  },
+  [("alice", 2, true), ("bob", 5, false), ("chuck", 7, true)],
+  )
+  )
+  )

@@ -1,0 +1,28 @@
+module: Array
+name: initialize
+docstring: Initialize an array. [Array.initialize n ~f] creates an array of length [n] with the element at index [i] initialized to the result of [(f i)]
+parameters:
+  - name: a
+    type: int
+  - name: f
+    type: int => 'a
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [0, Fun.identity]
+    output: []
+  - inputs: [-1, Fun.identity]
+    output: []
+  - inputs: [3, Fun.identity]
+    output: [0, 1, 2]
+examples:
+  - inputs: [0, Fun.identity]
+    output: []
+  - inputs: [-1, Fun.identity]
+    output: []
+  - inputs: [3, Fun.identity]
+    output: [0, 1, 2]
+added: 0.1.0

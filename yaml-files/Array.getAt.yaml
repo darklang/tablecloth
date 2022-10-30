@@ -1,0 +1,28 @@
+module: Array
+name: getAt
+docstring: Returns, as an {!Option}, the element at index number [n] of array [a]. Returns [None] if [n] is outside the range [0] to [(Array.length(a) - 1)]
+parameters:
+  - name: a
+    type: array<'a>
+  - name: index
+    type: int
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [["cat", "dog", "eel"], 2]
+    output: Some("eel")
+  - inputs: [[0, 1, 2], 5]
+    output: None
+  - inputs: [[], 0]
+    output: None
+examples:
+  - inputs: [["cat", "dog", "eel"], 2]
+    output: Some("eel")
+  - inputs: [[0, 1, 2], 5]
+    output: None
+  - inputs: [[], 0]
+    output: None
+added: 0.1.0

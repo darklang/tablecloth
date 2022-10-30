@@ -1,0 +1,37 @@
+module: Array
+name: get
+docstring: Get the element at the specified index.
+parameters:
+  - name: a
+    type: array<'a>
+  - name: b
+    type: int
+returnType: >-
+  'a
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [["cat", "dog", "eel"], [2]]
+    output: "eel"
+  - inputs: [[0, 1, 2], [-1]]
+    output: exception
+  - inputs: [[0, 1, 2], [3]]
+    output: exception
+  - inputs: [[0, 1, 2], [5]]
+    output: exception
+  - inputs: [[], [0]]
+    output: exception
+examples:
+  - inputs: [["cat", "dog", "eel"], [2]]
+    output: "eel"
+  - inputs: [[0, 1, 2], [-1]]
+    output: exception
+  - inputs: [[0, 1, 2], [3]]
+    output: exception
+  - inputs: [[0, 1, 2], [5]]
+    output: exception
+  - inputs: [[], [0]]
+    output: exception
+added: 0.1.0

@@ -1,0 +1,23 @@
+module: Array
+name: singleton
+docstring: Create an array with only one element <param a>
+parameters:
+  - name: a
+    type: >-
+      'a
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 1234
+    output: [1234]
+  - inputs: 1
+    output: 1
+examples:
+  - inputs: 1234
+    output: [1234]
+  - inputs: 1
+    output: 1
+added: 0.1.0

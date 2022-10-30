@@ -1,0 +1,32 @@
+module: Array
+name: repeat
+docstring: Create an array of length <param length> with the value of <param a> populated at each index.
+parameters:
+  - name: a
+    type: \'a
+  - name: length
+    type: int
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [0, 0]
+    output: []
+  - inputs: [0, -1]
+    output: []
+  - inputs: [0, 3]
+    output: [0, 0, 0]
+  - inputs: ["cat", 3]
+    output: ["cat", "cat", "cat"]
+examples:
+  - inputs: [0, 0]
+    output: []
+  - inputs: [0, -1]
+    output: []
+  - inputs: [0, 3]
+    output: [0, 0, 0]
+  - inputs: ["cat", 3]
+    output: ["cat", "cat", "cat"]
+added: 0.1.0

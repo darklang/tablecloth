@@ -1,0 +1,22 @@
+module: Array
+name: last
+docstring: Get the last element of an array. Returns [None] if the array is empty
+parameters:
+  - name: a
+    type: array<'a>
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, 2, 3]
+    output: Some(3)
+  - inputs: []
+    output: None
+examples:
+  - inputs: [1, 2, 3]
+    output: Some(3)
+  - inputs: []
+    output: None
+added: 0.1.0

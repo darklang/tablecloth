@@ -1,0 +1,26 @@
+module: Array
+name: length
+docstring: Return the length of an array
+parameters:
+  - name: a
+    type: array<'a>
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: 0
+  - inputs: ["a"]
+    output: 1
+  - inputs: ["a", "b"]
+    output: 2
+examples:
+  - inputs: []
+    output: 0
+  - inputs: ["a"]
+    output: 1
+  - inputs: ["a", "b"]
+    output: 2
+added: 0.1.0

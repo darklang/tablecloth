@@ -1,0 +1,21 @@
+module: Array
+name: map
+docstring: Create a new array which is the result of applying a function [f] to every element
+parameters:
+  - name: a
+    type: array<'a>
+  - name: f
+    type: >-
+      'a => 'b
+returnType: array<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1.0, 4.0, 9.0], Float.squareRoot]
+    output: [1.0, 2.0, 3.0]
+examples:
+  - inputs: [[1.0, 4.0, 9.0], Float.squareRoot]
+    output: [1.0, 2.0, 3.0]
+added: 0.1.0

@@ -1,0 +1,33 @@
+module: Array
+name: splitWhen
+docstring: Divides an array at the first element [f] returns [true] for. Returns a {!Tuple2}, the first component contains the elements [f] returned false for, the second component includes the element that [f] retutned [true] for an all the remaining elements
+parameters:
+  - name: a
+    type: array<'a>
+  - name: f
+    type: >-
+      'a => bool
+returnType: (array<'a>, array<'a>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[5, 7, 8, 6, 4], Int.isEven]
+    output: ([5, 7], [8, 6, 4])
+  - inputs: [[5, 7, 8, 7, 4], Int.isEven]
+    output: ([5, 7], [8, 7, 4])
+  - inputs: [["Ant", "Bat", "Cat"], animal => String.length(animal) > 3]
+    output: (["Ant", "Bat", "Cat"], [])
+  - inputs: [[2.0, Float.pi, 1.111], Float.isInteger]
+    output: ([], [2.0, Float.pi, 1.111])
+examples:
+  - inputs: [[5, 7, 8, 6, 4], Int.isEven]
+    output: ([5, 7], [8, 6, 4])
+  - inputs: [[5, 7, 8, 7, 4], Int.isEven]
+    output: ([5, 7], [8, 7, 4])
+  - inputs: [["Ant", "Bat", "Cat"], animal => String.length(animal) > 3]
+    output: (["Ant", "Bat", "Cat"], [])
+  - inputs: [[2.0, Float.pi, 1.111], Float.isInteger]
+    output: ([], [2.0, Float.pi, 1.111])
+added: 0.1.0
