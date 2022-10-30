@@ -1,0 +1,28 @@
+module: Fun
+name: curry3
+docstring: Takes a function [f] which takes a single argument of a tuple3 [('a, 'b, 'c)] and returns a function which takes three arguments that can be partially applied
+parameters:
+  - name: a
+    type: (('a, 'b, 'c)) => 'd
+  - name: b
+    type: >-
+      'a
+  - name: c
+    type: >-
+      'b
+  - name: d
+    type: >-
+      'c
+returnType: >-
+  'd
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [((a, b, c)) => a + b + c, 3, 4, 5]
+    output: 12
+examples:
+  - inputs: [((a, b, c)) => a + b + c, 3, 4, 5]
+    output: 12
+added: 0.1.0

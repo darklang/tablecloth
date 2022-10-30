@@ -1,0 +1,25 @@
+module: Fun
+name: curry
+docstring: Takes a function [f] which takes a single argument of a tuple [('a, 'b)] and returns a function which takes two arguments that can be partially applied
+parameters:
+  - name: a
+    type: (('a, 'b)) => 'c
+  - name: b
+    type: >-
+      'a
+  - name: c
+    type: >-
+      'b
+returnType: >-
+  'c
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [((a, b)) => a / b, 8, 4]
+    output: 2
+examples:
+  - inputs: [((a, b)) => a / b, 8, 4]
+    output: 2
+added: 0.1.0

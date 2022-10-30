@@ -1,0 +1,23 @@
+module: Fun
+name: constant
+docstring: Create a function that {b always} returns the same value
+parameters:
+  - name: a
+    type: >-
+      'a
+  - name: b
+    type: >-
+      'b
+returnType: >-
+  'a
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, 2]
+    output: 1
+examples:
+  - inputs: [1, 2]
+    output: 1
+added: 0.1.0

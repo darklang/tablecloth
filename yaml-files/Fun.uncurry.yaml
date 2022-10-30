@@ -1,0 +1,21 @@
+module: Fun
+name: uncurry
+docstring: Takes a function which takes two arguments and returns a function which takes a single argument of a tuple
+parameters:
+  - name: a
+    type: ('a, 'b) => 'c
+  - name: b
+    type: ('a, 'b)
+returnType: >-
+  'c
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [(a, b) => a / b, (8, 4)]
+    output: 2
+examples:
+  - inputs: [(a, b) => a / b, (8, 4)]
+    output: 2
+added: 0.1.0

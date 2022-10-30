@@ -1,0 +1,20 @@
+module: Fun
+name: identity
+docstring: Given a value, returns exactly the same value
+parameters:
+  - name: a
+    type: >-
+      'a
+returnType: >-
+  'a
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 1
+    output: 1
+examples:
+  - inputs: 1
+    output: 1
+added: 0.1.0

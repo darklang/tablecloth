@@ -1,0 +1,26 @@
+module: Fun
+name: compose
+docstring: Function composition, passing result from left to right
+parameters:
+  - name: a
+    type: >-
+      'a
+  - name: b
+    type: >-
+      'a => 'b
+  - name: c
+    type: >-
+      'b => 'c
+returnType: >-
+  'c
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, x => x + 1, x => x * 2]
+    output: 4
+examples:
+  - inputs: [1, x => x + 1, x => x * 2]
+    output: 4
+added: 0.1.0
