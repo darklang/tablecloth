@@ -1,0 +1,32 @@
+module: Char
+name: isUppercase
+docstring: Detect upper case ASCII characters
+parameters:
+  - name: a
+    type: char
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'A'
+    output: true
+  - inputs: >-
+      '7'
+    output: false
+  - inputs: >-
+      '\237'
+    output: false
+examples:
+  - inputs: >-
+      'A'
+    output: true
+  - inputs: >-
+      '7'
+    output: false
+  - inputs: >-
+      '\237'
+    output: false
+added: 0.1.0

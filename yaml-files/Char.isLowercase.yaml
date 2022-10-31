@@ -1,0 +1,32 @@
+module: Char
+name: isLowercase
+docstring: Detect lower case ASCII characters
+parameters:
+  - name: a
+    type: char
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'a'
+    output: true
+  - inputs: >-
+      '7'
+    output: false
+  - inputs: >-
+      '\236'
+    output: false
+examples:
+  - inputs: >-
+      'a'
+    output: true
+  - inputs: >-
+      '7'
+    output: false
+  - inputs: >-
+      '\236'
+    output: false
+added: 0.1.0

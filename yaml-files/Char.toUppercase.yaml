@@ -1,0 +1,46 @@
+module: Char
+name: toUppercase
+docstring: Converts an ASCII character to upper case, preserving non alphabetic ASCII characters
+parameters:
+  - name: a
+    type: char
+returnType: char
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'a'
+    output: >-
+      'A'
+  - inputs: >-
+      'A'
+    output: >-
+      'A'
+  - inputs: >-
+      '7'
+    output: >-
+      '7'
+  - inputs: >-
+      '\233'
+    output: >-
+      '\233'
+examples:
+  - inputs: >-
+      'a'
+    output: >-
+      'A'
+  - inputs: >-
+      'A'
+    output: >-
+      'A'
+  - inputs: >-
+      '7'
+    output: >-
+      '7'
+  - inputs: >-
+      '\233'
+    output: >-
+      '\233'
+added: 0.1.0

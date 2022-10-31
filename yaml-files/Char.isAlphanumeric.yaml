@@ -1,0 +1,26 @@
+module: Char
+name: isAlphanumeric
+docstring: Detect upper case, lower case and digit ASCII characters
+parameters:
+  - name: a
+    type: char
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'A'
+    output: true
+  - inputs: >-
+      '?'
+    output: false
+examples:
+  - inputs: >-
+      'A'
+    output: true
+  - inputs: >-
+      '?'
+    output: false
+added: 0.1.0
