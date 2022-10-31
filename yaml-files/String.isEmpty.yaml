@@ -1,0 +1,30 @@
+module: String
+name: isEmpty
+docstring: Check if a string is empty
+parameters:
+  - name: a
+    type: string
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ""
+    output: true
+  - inputs: "abc"
+    output: false
+  - inputs: " "
+    output: false
+  - inputs: "\n"
+    output: false
+examples:
+  - inputs: ""
+    output: true
+  - inputs: "abc"
+    output: false
+  - inputs: " "
+    output: false
+  - inputs: "\n"
+    output: false
+added: 0.1.0

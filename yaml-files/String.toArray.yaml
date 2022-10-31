@@ -1,0 +1,20 @@
+module: String
+name: toArray
+docstring: Returns an {!Array} of the individual characters in the given string
+parameters:
+  - name: a
+    type: string
+returnType: array<char>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "Standard"
+    output: >-
+      ['S', 't', 'a', 'n', 'd', 'a', 'r', 'd']
+examples:
+  - inputs: "Standard"
+    output: >-
+      ['S', 't', 'a', 'n', 'd', 'a', 'r', 'd']
+added: 0.1.0

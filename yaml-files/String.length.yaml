@@ -1,0 +1,22 @@
+module: String
+name: length
+docstring: Returns the length of the given string
+parameters:
+  - name: a
+    type: string
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ""
+    output: 0
+  - inputs: "123"
+    output: 3
+examples:
+  - inputs: ""
+    output: 0
+  - inputs: "123"
+    output: 3
+added: 0.1.0

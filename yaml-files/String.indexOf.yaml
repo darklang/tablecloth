@@ -1,0 +1,32 @@
+module: String
+name: indexOf
+docstring: Returns the index of the first occurrence of [string] or None if string has no occurences of [string]
+parameters:
+  - name: a
+    type: string
+  - name: b
+    type: string
+returnType: option<int>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["hello", "h"]
+    output: Some(0)
+  - inputs: ["hellh", "h"]
+    output: Some(0)
+  - inputs: ["hellh", "ell"]
+    output: Some(1)
+  - inputs: ["hello", "xy"]
+    output: None
+examples:
+  - inputs: ["hello", "h"]
+    output: Some(0)
+  - inputs: ["hellh", "h"]
+    output: Some(0)
+  - inputs: ["hellh", "ell"]
+    output: Some(1)
+  - inputs: ["hello", "xy"]
+    output: None
+added: 0.1.0

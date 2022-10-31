@@ -1,0 +1,28 @@
+module: String
+name: initialize
+docstring: Create a string by providing a length and a function to choose characters. Returns an empty string if the length is negative
+parameters:
+  - name: a
+    type: int
+  - name: f
+    type: int => char
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [0, Fun.constant('A')]
+    output: ""
+  - inputs: [-1, Fun.constant('A')]
+    output: exception
+  - inputs: [3, Fun.constant('A')]
+    output: "AAA"
+examples:
+  - inputs: [0, Fun.constant('A')]
+    output: ""
+  - inputs: [-1, Fun.constant('A')]
+    output: exception
+  - inputs: [3, Fun.constant('A')]
+    output: "AAA"
+added: 0.1.0

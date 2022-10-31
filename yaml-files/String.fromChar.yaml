@@ -1,0 +1,38 @@
+module: String
+name: fromChar
+docstring: Converts the <param a> to an equivalent string of length one
+parameters:
+  - name: a
+    type: char
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'a'
+    output: "a"
+  - inputs: >-
+      'z'
+    output: "z"
+  - inputs: >-
+      ' '
+    output: " "
+  - inputs: >-
+      '\n'
+    output: "\n"
+examples:
+  - inputs: >-
+      'a'
+    output: "a"
+  - inputs: >-
+      'z'
+    output: "z"
+  - inputs: >-
+      ' '
+    output: " "
+  - inputs: >-
+      '\n'
+    output: "\n"
+added: 0.1.0
