@@ -1,0 +1,22 @@
+module: Array
+name: values
+docstring: Return all of the [Some] values from an array of options
+parameters:
+  - name: a
+    type: array<option<'a>>
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some("Ant"), None, Some("Cat")]
+    output: ["Ant", "Cat"]
+  - inputs: []
+    output: []
+examples:
+  - inputs: [Some("Ant"), None, Some("Cat")]
+    output: ["Ant", "Cat"]
+  - inputs: []
+    output: []
+added: 0.1.0
