@@ -22,7 +22,7 @@ type data = {
 @scope("JSON") @val
 external parseIntoMyData: string => data = "parse"
 
-let file = readFileSync(~name="../json-files/Tuple3.mapAll.json", #utf8)
+let file = readFileSync(~name="../json-files/Char.toUppercase.json", #utf8)
 let myData = parseIntoMyData(file)
 let name = myData.name
 let returnType = myData.returnType
@@ -44,7 +44,7 @@ let generate = Belt.Array.map(myData.tests, test => {
   } else {
     if Js.String.includes("array", myData.returnType){
         output := `[${Belt.Int.toString(test.output)}]`
-        Js.log(output)
+        //TODO: add a different output for ocaml and f# ([||])
     }
   }
   
@@ -57,6 +57,7 @@ let generate = Belt.Array.map(myData.tests, test => {
     } //param length == 1 type array
     else if Js.Array.isArray(test.inputs) {
       newInput := `[${Js.Array.toString(test.inputs)}]`
+      newInputOF := `[|${Js.Array.toString(test.inputs)}|]`
     } else {
       //param length == 1 type int
 
@@ -65,7 +66,6 @@ let generate = Belt.Array.map(myData.tests, test => {
       newInputOF := Js.Array.toString(test.inputs)
     }
   } else {
-    //param length > 1 type
 
     for i in 0 to length - 1 {
       //param length > 1 type array
@@ -74,8 +74,18 @@ let generate = Belt.Array.map(myData.tests, test => {
         inparr->Belt.Array.push(newInput)
         newInput := Js_array.joinWith(",", inparr)
       }
-      //param length > 1 type int
     }
+
+      //param length > 1 type string
+    for i in 0 to length - 1 {
+      if myData.parameters[i].\"type" == "string" {
+      newInput := `"${Js.Array.toString(test.inputs)}"`
+      inparr->Belt.Array.push(newInput)
+      newInput := Js_array.joinWith(",", inparr)
+    }
+    }
+
+      //param length > 1 type int
     newInput := Js_array.joinWith(",", test.inputs)
     newInputOF := Js_array.joinWith(" ", test.inputs)
     newInputR := Js_array.joinWith(",", test.inputs)
@@ -139,17 +149,17 @@ let finalresultO = Js.Array.joinWith("", resultsO)
 // %raw("Fs.appendFileSync(`../test/ocamlTests/IntTest.ml`, finalresultO, 'utf8')")
 // %raw("Fs.appendFileSync(`../test/fsharpTests/IntTest.fs`, finalresultF, 'utf8')")
 Node.Fs.writeFileSync(
-  `../test/rescriptTests/Tuple2Test/${name}Test.res`,
+  `../test/rescriptTests/CharTest/${name}Test.res`,
   finalresultR,
   #utf8,
 )
 Node.Fs.writeFileSync(
-  `../test/ocamlTests/Tuple2Test/${name}Test.ml`,
+  `../test/ocamlTests/CharTest/${name}Test.ml`,
   finalresultO,
   #utf8,
 )
 Node.Fs.writeFileSync(
-  `../test/fsharpTests/Tuple2Test/${name}Test.fs`,
+  `../test/fsharpTests/CharTest/${name}Test.fs`,
   finalresultF,
   #utf8,
 )

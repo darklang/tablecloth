@@ -1,0 +1,11 @@
+test "isDigit('0')" (fun () -> expect (Char.isDigit '0') |> toEqual Eq.bool true) ; 
+test "isDigit('1')" (fun () -> expect (Char.isDigit '1') |> toEqual Eq.bool true) ; 
+test "isDigit('2')" (fun () -> expect (Char.isDigit '2') |> toEqual Eq.bool true) ; 
+test "isDigit('3')" (fun () -> expect (Char.isDigit '3') |> toEqual Eq.bool true) ; 
+test "isDigit('4')" (fun () -> expect (Char.isDigit '4') |> toEqual Eq.bool true) ; 
+test "isDigit('5')" (fun () -> expect (Char.isDigit '5') |> toEqual Eq.bool true) ; 
+test "isDigit('6')" (fun () -> expect (Char.isDigit '6') |> toEqual Eq.bool true) ; 
+test "isDigit('7')" (fun () -> expect (Char.isDigit '7') |> toEqual Eq.bool true) ; 
+test "isDigit('8')" (fun () -> expect (Char.isDigit '8') |> toEqual Eq.bool true) ; 
+test "isDigit('9')" (fun () -> expect (Char.isDigit '9') |> toEqual Eq.bool true) ; 
+test "isDigit('a')" (fun () -> expect (Char.isDigit 'a') |> toEqual Eq.bool false) ; 

@@ -1,0 +1,12 @@
+test ("isDigit('0')", () => expect(Char.isDigit('0')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('1')", () => expect(Char.isDigit('1')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('2')", () => expect(Char.isDigit('2')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('3')", () => expect(Char.isDigit('3')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('4')", () => expect(Char.isDigit('4')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('5')", () => expect(Char.isDigit('5')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('6')", () => expect(Char.isDigit('6')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('7')", () => expect(Char.isDigit('7')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('8')", () => expect(Char.isDigit('8')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('9')", () => expect(Char.isDigit('9')) |> toEqual(Eq.bool, true)) 
+test ("isDigit('a')", () => expect(Char.isDigit('a')) |> toEqual(Eq.bool, false)) 
+
