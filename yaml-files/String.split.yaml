@@ -1,0 +1,29 @@
+module: String
+name: split
+docstring: Divide a string into a list of strings, splitting whenever [on] is encountered
+parameters:
+  - name: a
+    type: string
+  - name: >-
+      on
+    type: string
+returnType: list<string>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["abc", "b"]
+    output: ["a", "c"]
+  - inputs: ["ab", "a"]
+    output: ["", "b"]
+  - inputs: ["ab", "b"]
+    output: ["a", ""]
+examples:
+  - inputs: ["abc", "b"]
+    output: ["a", "c"]
+  - inputs: ["ab", "a"]
+    output: ["", "b"]
+  - inputs: ["ab", "b"]
+    output: ["a", ""]
+added: 0.1.0
