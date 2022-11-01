@@ -1,0 +1,22 @@
+module: Array
+name: toIndexedList
+docstring: Create an indexed {!List} from an array. Each element of the array will be paired with its index as a {!Tuple2}
+parameters:
+  - name: a
+    type: array<'a>
+returnType: list<(int, 'a)>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: []
+  - inputs: ["cat", "dog"]
+    output: [(0, "cat"), (1, "dog")]
+examples:
+  - inputs: []
+    output: []
+  - inputs: ["cat", "dog"]
+    output: [(0, "cat"), (1, "dog")]
+added: 0.1.0
