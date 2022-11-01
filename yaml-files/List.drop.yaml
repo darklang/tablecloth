@@ -1,0 +1,40 @@
+module: List
+name: drop
+docstring: Drop the first [count] elements from the front of a list. If the list has fewer than [count] elements, returns []. If count is zero or negative, returns the entire list.
+parameters:
+  - name: a
+    type: list<'a>
+  - name: count
+    type: int
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], 1]
+    output: []
+  - inputs: [[1, 2, 3], 0]
+    output: [1, 2, 3]
+  - inputs: [[1, 2, 3], 1]
+    output: [2, 3]
+  - inputs: [[1, 2, 3], 3]
+    output: []
+  - inputs: [[1, 2, 3], 4]
+    output: []
+  - inputs: [[1, 2, 3], -1]
+    output: [1, 2, 3]
+examples:
+  - inputs: [[], 1]
+    output: []
+  - inputs: [[1, 2, 3], 0]
+    output: [1, 2, 3]
+  - inputs: [[1, 2, 3], 1]
+    output: [2, 3]
+  - inputs: [[1, 2, 3], 3]
+    output: []
+  - inputs: [[1, 2, 3], 4]
+    output: []
+  - inputs: [[1, 2, 3], -1]
+    output: [1, 2, 3]
+added: 0.1.0

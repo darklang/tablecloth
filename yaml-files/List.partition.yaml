@@ -1,0 +1,29 @@
+module: List
+name: partition
+docstring: Split a list into a {!Tuple2} of lists. Values which [f] returns true for will end up in {!Tuple2.first}
+parameters:
+  - name: a
+    type: list<'a>
+  - name: f
+    type: >-
+      'a => bool
+returnType: (list<'a>, list<'a>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], Int.isEven]
+    output: ([],[])
+  - inputs: [[1], Int.isEven]
+    output: ([],[1])
+  - inputs: [[1, 2, 3, 4], Int.isEven]
+    output: ([2, 4],[1,3])
+examples:
+  - inputs: [[], Int.isEven]
+    output: ([],[])
+  - inputs: [[1], Int.isEven]
+    output: ([],[1])
+  - inputs: [[1, 2, 3, 4], Int.isEven]
+    output: ([2, 4],[1,3])
+added: 0.1.0

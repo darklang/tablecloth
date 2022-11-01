@@ -1,0 +1,31 @@
+module: List
+name: includes
+docstring: Test if a list contains the specified element using the provided [equal] to test for equality
+parameters:
+  - name: a
+    type: list<'a>
+  - name: b
+    type: >-
+      'a
+  - name: equal
+    type: ('a, 'a) => bool
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 3, 5, 7], 3, Int.equal]
+    output: true
+  - inputs: [[1, 3, 5, 7], 4, Int.equal]
+    output: false
+  - inputs: [[], 5, Int.equal]
+    output: false
+examples:
+  - inputs: [[1, 3, 5, 7], 3, Int.equal]
+    output: true
+  - inputs: [[1, 3, 5, 7], 4, Int.equal]
+    output: false
+  - inputs: [[], 5, Int.equal]
+    output: false
+added: 0.1.0

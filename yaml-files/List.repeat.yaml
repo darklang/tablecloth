@@ -1,0 +1,33 @@
+module: List
+name: repeat
+docstring: Creates a list of length [times] with the value [a] populated at each index
+parameters:
+  - name: a
+    type: >-
+      'a
+  - name: times
+    type: int
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [7, 0]
+    output: []
+  - inputs: [7, -10]
+    output: []
+  - inputs: >-
+      ['a', 5]
+    output: >-
+      ['a', 'a', 'a', 'a', 'a']
+examples:
+  - inputs: [7, 0]
+    output: []
+  - inputs: [7, -10]
+    output: []
+  - inputs: >-
+      ['a', 5]
+    output: >-
+      ['a', 'a', 'a', 'a', 'a']
+added: 0.1.0

@@ -1,0 +1,34 @@
+module: List
+name: mapWithIndex
+docstring: Apply a function [f] to every element and its index
+parameters:
+  - name: a
+    type: list<'a>
+  - name: f
+    type: (int, 'a) => 'b)
+returnType: list<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      [[], (i, _) => i]
+    output: []
+  - inputs: >-
+      [['a'], (i, _) => i]
+    output: [0]
+  - inputs: >-
+      [['a', 'b'], (i, _) => i]
+    output: [0, 1]
+examples:
+  - inputs: >-
+      [[], (i, _) => i]
+    output: []
+  - inputs: >-
+      [['a'], (i, _) => i]
+    output: [0]
+  - inputs: >-
+      [['a', 'b'], (i, _) => i]
+    output: [0, 1]
+added: 0.1.0
