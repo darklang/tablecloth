@@ -1,0 +1,22 @@
+module: Array
+name: clone
+docstring: Create a shallow copy of an array
+parameters:
+  - name: a
+    type: array<'a>
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, 2, 3]
+    output: [1, 2, 3]
+  - inputs: [[1, 2, 3], [4, 9, 6], [7, 8, 9]]
+    output: [[1, 2, 3], [4, 9, 6], [7, 8, 9]]
+examples:
+  - inputs: [1, 2, 3]
+    output: [1, 2, 3]
+  - inputs: [[1, 2, 3], [4, 9, 6], [7, 8, 9]]
+    output: [[1, 2, 3], [4, 9, 6], [7, 8, 9]]
+added: 0.1.0

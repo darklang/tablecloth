@@ -1,0 +1,18 @@
+module: Array
+name: reverse
+docstring: Reverses an array {b in place}, mutating the existing array
+parameters:
+  - name: a
+    type: array<'a>
+returnType: unit
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, 2, 3]
+    output: [3, 2, 1]
+examples:
+  - inputs: [1, 2, 3]
+    output: [3, 2, 1]
+added: 0.1.0

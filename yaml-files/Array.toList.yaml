@@ -1,0 +1,18 @@
+module: Array
+name: toList
+docstring: Create a {!List} of elements from an array
+parameters:
+  - name: a
+    type: array<'a>
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, 2, 3]
+    output: [1, 2, 3]
+examples:
+  - inputs: [1, 2, 3]
+    output: [1, 2, 3]
+added: 0.1.0
