@@ -1,6 +1,7 @@
 module: Float
 name: isNaN
 docstring: Determine whether <param a> is an [undefined] or unrepresentable number.
+parameters:
   - name: a
     type: float
 returnType: bool

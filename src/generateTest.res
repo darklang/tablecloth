@@ -22,7 +22,7 @@ type data = {
 @scope("JSON") @val
 external parseIntoMyData: string => data = "parse"
 
-let file = readFileSync(~name="../json-files/Bool.xor.json", #utf8)
+let file = readFileSync(~name="../json-files/Float.turns.json", #utf8)
 let myData = parseIntoMyData(file)
 let name = myData.name
 let returnType = myData.returnType
@@ -118,9 +118,9 @@ let generate = Belt.Array.map(myData.tests, test => {
 let finalresultR = Js.Array.joinWith("", resultsR)
 let finalresultF = Js.Array.joinWith("", resultsF)
 let finalresultO = Js.Array.joinWith("", resultsO)
-%raw("Fs.appendFileSync(`../test/rescriptTests/BoolTest.res`, finalresultR, 'utf8')")
-%raw("Fs.appendFileSync(`../test/ocamlTests/BoolTest.ml`, finalresultO, 'utf8')")
-%raw("Fs.appendFileSync(`../test/fsharpTests/BoolTest.fs`, finalresultF, 'utf8')")
+%raw("Fs.appendFileSync(`../test/rescriptTests/FloatTest.res`, finalresultR, 'utf8')")
+%raw("Fs.appendFileSync(`../test/ocamlTests/FloatTest.ml`, finalresultO, 'utf8')")
+%raw("Fs.appendFileSync(`../test/fsharpTests/FloatTest.fs`, finalresultF, 'utf8')")
 // Node.Fs.writeFileSync(
 //   `../test/rescriptTests/CharTest/${name}Test.res`,
 //   finalresultR,

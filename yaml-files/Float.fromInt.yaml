@@ -11,16 +11,22 @@ constraints:
   - no-rescript
 tests:
   - inputs: 5
-    output: 5.0
+    output: >-
+      5.0
   - inputs: 0
-    output: 0.0
+    output: >-
+      0.0
   - inputs: -7
-    output: -7.0
+    output: >-
+      -7.0
 examples:
   - inputs: 5
-    output: 5.0
+    output: >-
+      5.0
   - inputs: 0
-    output: 0.0
+    output: >-
+      0.0
   - inputs: -7
-    output: -7.0
+    output: >-
+      -7.0
 added: 0.1.0

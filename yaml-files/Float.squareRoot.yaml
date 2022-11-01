@@ -1,5 +1,4 @@
->-
-      module: Float
+module: Float
 name: squareRoot
 docstring: Takes <param a> and returns its square root or [NaN] when it is negative
 parameters:

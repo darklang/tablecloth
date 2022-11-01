@@ -1,5 +1,4 @@
->-
-      module: Float
+module: Float
 name: truncate
 docstring: Takes <param a > and remove all the positions after the decimal point
 parameters:
