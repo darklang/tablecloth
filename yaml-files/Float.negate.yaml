@@ -10,17 +10,29 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: 8.
-    output: -8.
-  - inputs: -7.
-    output: 7.
-  - inputs: 0.
-    output: -0.
+  - inputs: >-
+      8.
+    output: >-
+      -8.
+  - inputs: >-
+      -7.
+    output: >-
+      7.
+  - inputs: >-
+      0.
+    output: >-
+      -0.
 examples:
-  - inputs: 8.
-    output: -8.
-  - inputs: -7.
-    output: 7.
-  - inputs: 0.
-    output: -0.
+  - inputs: >-
+      8.
+    output: >-
+      -8.
+  - inputs: >-
+      -7.
+    output: >-
+      7.
+  - inputs: >-
+      0.
+    output: >-
+      -0.
 added: 0.1.0

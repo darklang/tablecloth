@@ -12,9 +12,13 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: [2., 7.]
-    output: 14.
+  - inputs: >-
+      [2., 7.]
+    output: >-
+      14.
 examples:
-  - inputs: [2., 7.]
-    output: 14.
+  - inputs: >-
+      [2., 7.]
+    output: >-
+      14.
 added: 0.1.0

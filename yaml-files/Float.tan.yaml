@@ -14,13 +14,17 @@ tests:
     output: 0.9999999999999999
   - inputs: radians(pi /. 4.)
     output: 0.9999999999999999
-  - inputs: 0.
-    output: 0.
+  - inputs: >-
+      0.
+    output: >-
+      0.
 examples:
   - inputs: degrees(45.)
     output: 0.9999999999999999
   - inputs: radians(pi /. 4.)
     output: 0.9999999999999999
-  - inputs: 0.
-    output: 0.
+  - inputs: >-
+      0.
+    output: >-
+      0.
 added: 0.1.0
