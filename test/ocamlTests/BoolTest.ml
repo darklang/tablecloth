@@ -1,4 +1,9 @@
-test "compare(true,true)" (fun () -> expect (Bool.compare true true) |> toEqual Eq.int 0) ; 
+open Tablecloth
+open AlcoJest
+
+let suite =
+ suite "Bool" (fun () ->
+ test "compare(true,true)" (fun () -> expect (Bool.compare true true) |> toEqual Eq.int 0) ; 
 test "compare(true,false)" (fun () -> expect (Bool.compare true false) |> toEqual Eq.int 1) ; 
 test "compare(false,true)" (fun () -> expect (Bool.compare false true) |> toEqual Eq.int -1) ; 
 test "compare(false,false)" (fun () -> expect (Bool.compare false false) |> toEqual Eq.int 0) ; 
@@ -24,3 +29,4 @@ test "xor(true,true)" (fun () -> expect (Bool.xor true true) |> toEqual Eq.bool 
 test "xor(true,false)" (fun () -> expect (Bool.xor true false) |> toEqual Eq.bool true) ; 
 test "xor(false,true)" (fun () -> expect (Bool.xor false true) |> toEqual Eq.bool true) ; 
 test "xor(false,false)" (fun () -> expect (Bool.xor false false) |> toEqual Eq.bool false) ; 
+)

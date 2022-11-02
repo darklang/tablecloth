@@ -1,4 +1,8 @@
-test ("fromCode(97)", () => expect(Char.fromCode(97)) |> toEqual({open Eq
+open Tablecloth
+open AlcoJest
+
+let suite= suite("Char", () => {
+ test ("fromCode(97)", () => expect(Char.fromCode(97)) |> toEqual({open Eq
 option(char)}, Some('a'))) 
 test ("fromCode(-1)", () => expect(Char.fromCode(-1)) |> toEqual({open Eq
 option(char)}, None)) 
@@ -56,3 +60,4 @@ test ("toUppercase('a')", () => expect(Char.toUppercase('a')) |> toEqual(Eq.char
 test ("toUppercase('A')", () => expect(Char.toUppercase('A')) |> toEqual(Eq.char, 'A')) 
 test ("toUppercase('7')", () => expect(Char.toUppercase('7')) |> toEqual(Eq.char, '7')) 
 test ("toUppercase('\233')", () => expect(Char.toUppercase('\233')) |> toEqual(Eq.char, '\233')) 
+})

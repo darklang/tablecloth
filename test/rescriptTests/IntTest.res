@@ -1,4 +1,8 @@
-test ("absolute(8)", () => expect(Int.absolute(8)) |> toEqual(Eq.int, 8)) 
+open Tablecloth
+open AlcoJest
+
+let suite= suite("Int", () => {
+ test ("absolute(8)", () => expect(Int.absolute(8)) |> toEqual(Eq.int, 8)) 
 test ("absolute(-7)", () => expect(Int.absolute(-7)) |> toEqual(Eq.int, 7)) 
 test ("absolute(0)", () => expect(Int.absolute(0)) |> toEqual(Eq.int, 0)) 
 test ("add(1,2)", () => expect(Int.add(1,2)) |> toEqual(Eq.int, 3)) 
@@ -9,14 +13,14 @@ test ("clamp(1,2,8)", () => expect(Int.clamp(1,2,8)) |> toEqual(Eq.int, 2))
 test ("clamp(5,-10,-5)", () => expect(Int.clamp(5,-10,-5)) |> toEqual(Eq.int, -5)) 
 test ("clamp(-15,-10,-5)", () => expect(Int.clamp(-15,-10,-5)) |> toEqual(Eq.int, -10)) 
 test ("clamp(3,7,1)", () => expect(() => Int.clamp(3,7,1)) |> toThrow) 
+test ("divide(3,2)", () => expect(Int.divide(3,2)) |> toEqual(Eq.int, 1)) 
+test ("divide(3,0)", () => expect(() => Int.divide(3,0)) |> toThrow) 
+test ("divide(27,5)", () => expect(Int.divide(27,5)) |> toEqual(Eq.int, 5)) 
 test ("divideFloat(3,2)", () => expect(Int.divideFloat(3,2)) |> toEqual(Eq.float, 1.5)) 
 test ("divideFloat(27,5)", () => expect(Int.divideFloat(27,5)) |> toEqual(Eq.float, 5.4)) 
 test ("divideFloat(8,4)", () => expect(Int.divideFloat(8,4)) |> toEqual(Eq.float, 2)) 
 test ("divideFloat(8,0)", () => expect(Int.divideFloat(8,0)) |> toEqual(Eq.float, Float.infinity)) 
 test ("divideFloat(-8,0)", () => expect(Int.divideFloat(-8,0)) |> toEqual(Eq.float, Float.negativeInfinity)) 
-test ("divide(3,2)", () => expect(Int.divide(3,2)) |> toEqual(Eq.int, 1)) 
-test ("divide(3,0)", () => expect(() => Int.divide(3,0)) |> toThrow) 
-test ("divide(27,5)", () => expect(Int.divide(27,5)) |> toEqual(Eq.int, 5)) 
 test ("fromString(0)", () => expect(Int.fromString("0")) |> toEqual({open Eq
 option(int)}, Some(0))) 
 test ("fromString(-0)", () => expect(Int.fromString("-0")) |> toEqual({open Eq
@@ -91,3 +95,4 @@ test ("toFloat(0)", () => expect(Int.toFloat(0)) |> toEqual(Eq.float, 0.))
 test ("toFloat(-7)", () => expect(Int.toFloat(-7)) |> toEqual(Eq.float, -7.)) 
 test ("toString(1)", () => expect(Int.toString(1)) |> toEqual(Eq.string, "1")) 
 test ("toString(-1)", () => expect(Int.toString(-1)) |> toEqual(Eq.string, "-1")) 
+})

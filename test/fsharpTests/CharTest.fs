@@ -1,4 +1,11 @@
-testCase "fromCode(97)" 
+open Tablecloth
+open Expecto
+
+[<Tests>]
+let tests =
+  testList
+  "Char"
+[ testCase "fromCode(97)" 
 <| fun _ -> 
     let expected = Some('a')
     Expect.equal expected (Char.fromCode 97) "error"
@@ -190,3 +197,4 @@ testCase "toUppercase('\233')"
 <| fun _ -> 
     let expected = '\233'
     Expect.equal expected (Char.toUppercase '\233') "error"
+]

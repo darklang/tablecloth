@@ -1,4 +1,9 @@
-test "absolute(8)" (fun () -> expect (Int.absolute 8) |> toEqual Eq.int 8) ; 
+open Tablecloth
+open AlcoJest
+
+let suite =
+ suite "Int" (fun () ->
+ test "absolute(8)" (fun () -> expect (Int.absolute 8) |> toEqual Eq.int 8) ; 
 test "absolute(-7)" (fun () -> expect (Int.absolute -7) |> toEqual Eq.int 7) ; 
 test "absolute(0)" (fun () -> expect (Int.absolute 0) |> toEqual Eq.int 0) ; 
 test "add(1,2)" (fun () -> expect (Int.add 1 2) |> toEqual Eq.int 3) ; 
@@ -9,14 +14,14 @@ test "clamp(1,2,8)" (fun () -> expect (Int.clamp 1 2 8) |> toEqual Eq.int 2) ;
 test "clamp(5,-10,-5)" (fun () -> expect (Int.clamp 5 -10 -5) |> toEqual Eq.int -5) ; 
 test "clamp(-15,-10,-5)" (fun () -> expect (Int.clamp -15 -10 -5) |> toEqual Eq.int -10) ; 
 test "clamp(3,7,1)" (fun () -> expect (fun () -> clamp 3 7 1) |> toThrow); 
+test "divide(3,2)" (fun () -> expect (Int.divide 3 2) |> toEqual Eq.int 1) ; 
+test "divide(3,0)" (fun () -> expect (fun () -> divide 3 0) |> toThrow); 
+test "divide(27,5)" (fun () -> expect (Int.divide 27 5) |> toEqual Eq.int 5) ; 
 test "divideFloat(3,2)" (fun () -> expect (Int.divideFloat 3 2) |> toEqual Eq.float 1.5) ; 
 test "divideFloat(27,5)" (fun () -> expect (Int.divideFloat 27 5) |> toEqual Eq.float 5.4) ; 
 test "divideFloat(8,4)" (fun () -> expect (Int.divideFloat 8 4) |> toEqual Eq.float 2) ; 
 test "divideFloat(8,0)" (fun () -> expect (Int.divideFloat 8 0) |> toEqual Eq.float Float.infinity) ; 
 test "divideFloat(-8,0)" (fun () -> expect (Int.divideFloat -8 0) |> toEqual Eq.float Float.negativeInfinity) ; 
-test "divide(3,2)" (fun () -> expect (Int.divide 3 2) |> toEqual Eq.int 1) ; 
-test "divide(3,0)" (fun () -> expect (fun () -> divide 3 0) |> toThrow); 
-test "divide(27,5)" (fun () -> expect (Int.divide 27 5) |> toEqual Eq.int 5) ; 
 test "fromString("0")" (fun () -> expect (Int.fromString "0") |> toEqual (let open Eq in option int) Some(0)) ; 
 test "fromString("-0")" (fun () -> expect (Int.fromString "-0") |> toEqual (let open Eq in option int) Some(-0)) ; 
 test "fromString("42")" (fun () -> expect (Int.fromString "42") |> toEqual (let open Eq in option int) Some(42)) ; 
@@ -73,9 +78,9 @@ test "remainder(2,3)" (fun () -> expect (Int.remainder 2 3) |> toEqual Eq.int 2)
 test "remainder(3,3)" (fun () -> expect (Int.remainder 3 3) |> toEqual Eq.int 0) ; 
 test "remainder(4,3)" (fun () -> expect (Int.remainder 4 3) |> toEqual Eq.int 1) ; 
 test "subtract(4,3)" (fun () -> expect (Int.subtract 4 3) |> toEqual Eq.int 1) ; 
-test "toFloat(5)" (fun () -> expect (Int.toFloat 5) |> toEqual Eq.float 5) ; 
 test "toFloat(5)" (fun () -> expect (Int.toFloat 5) |> toEqual Eq.float 5.) ; 
 test "toFloat(0)" (fun () -> expect (Int.toFloat 0) |> toEqual Eq.float 0.) ; 
 test "toFloat(-7)" (fun () -> expect (Int.toFloat -7) |> toEqual Eq.float -7.) ; 
 test "toString(1)" (fun () -> expect (Int.toString 1) |> toEqual Eq.string "1") ; 
 test "toString(-1)" (fun () -> expect (Int.toString -1) |> toEqual Eq.string "-1") ; 
+)

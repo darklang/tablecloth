@@ -1,4 +1,11 @@
-testCase "compare(true,true)" 
+open Tablecloth
+open Expecto
+
+[<Tests>]
+let tests =
+  testList
+  "Bool"
+[ testCase "compare(true,true)" 
 <| fun _ -> 
     let expected = 0
     Expect.equal expected (Bool.compare true true) "error"
@@ -102,3 +109,4 @@ testCase "xor(false,false)"
 <| fun _ -> 
     let expected = false
     Expect.equal expected (Bool.xor false false) "error"
+]
