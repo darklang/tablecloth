@@ -1,0 +1,32 @@
+module: List
+name: getAt
+docstring: Returns the element at position [index] in the list. Returns [None] if [index] is outside of the bounds of the list.
+parameters:
+  - name: a
+    type: list<'a>
+  - name: index
+    type: int
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], 2]
+    output: None
+  - inputs: [[1, 2, 3], 1]
+    output: Some(2)
+  - inputs: [[1, 2, 3], 100]
+    output: None
+  - inputs: [[1, 2, 3], -2]
+    output: None
+examples:
+  - inputs: [[], 2]
+    output: None
+  - inputs: [[1, 2, 3], 1]
+    output: Some(2)
+  - inputs: [[1, 2, 3], 100]
+    output: None
+  - inputs: [[1, 2, 3], -2]
+    output: None
+added: 0.1.0

@@ -1,0 +1,46 @@
+module: List
+name: splitAt
+docstring: Divides a list into a {!Tuple2} of lists. 
+Elements which have index upto (but not including) [index] will be in the first component of the tuple.
+Elements with an index greater than or equal to [index] will be in the second.
+If [index] is zero or negative, all elements will be in the second component of the tuple.
+If [index] is greater than the length of the list, all elements will be in the second component of the tuple.
+parameters:
+  - name: a
+    type: list<'a>
+  - name: index
+    type: int
+returnType: (list<'a>, list<'a>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], 1]
+    output: ([], [])
+  - inputs: [[2, 4, 6], 0]
+    output: ([], [2, 4, 6])
+  - inputs: [[1, 3, 2, 4], 2]
+    output: ([1, 3], [2, 4])
+  - inputs: [[1, 3, 5], 3]
+    output: ([1, 3, 5], [])
+  - inputs: [[1, 3, 5], 6]
+    output: ([1, 3, 5], [])
+  - inputs: [[1, 3, 5], -1]
+    output: ([], [1, 3, 5])
+examples:
+  - inputs: [[], 1]
+    output: ([], [])
+  - inputs: [[2, 4, 6], 0]
+    output: ([], [2, 4, 6])
+  - inputs: [[1, 3, 2, 4], 2]
+    output: ([1, 3], [2, 4])
+  - inputs: [[1, 3, 5], 3]
+    output: ([1, 3, 5], [])
+  - inputs: [[1, 3, 5], 6]
+    output: ([1, 3, 5], [])
+  - inputs: [[1, 3, 5], -1]
+    output: ([], [1, 3, 5])
+added: 0.1.0
+
+

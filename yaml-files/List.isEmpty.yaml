@@ -1,0 +1,26 @@
+module: List
+name: isEmpty
+docstring: Determine if a list is empty
+parameters:
+  - name: a
+    type: list<_>
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: List.empty
+    output: true
+  - inputs: []
+    output: true
+  - inputs: [1, -4, 5, 6]
+    output: false
+examples:
+  - inputs: List.empty
+    output: true
+  - inputs: []
+    output: true
+  - inputs: [1, -4, 5, 6]
+    output: false
+added: 0.1.0

@@ -1,0 +1,17 @@
+module: List
+name: unzip
+docstring: Decompose a list of {!Tuple2} into a {!Tuple2} of lists
+  - name: a
+    type: list<('a,'b)>
+returnType: (list<'a>, list<'b>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [(0, true), (17, false), (1337, true)]
+    output: ([0, 17, 1337], [true, false, true])
+examples:
+  - inputs: [(0, true), (17, false), (1337, true)]
+    output: ([0, 17, 1337], [true, false, true])
+added: 0.1.0

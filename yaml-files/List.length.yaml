@@ -1,0 +1,22 @@
+module: List
+name: length
+docstring: Return the number of elements in a list
+parameters:
+  - name: a
+    type: list<'a>
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: 0
+  - inputs: [1, -4, 5, 6]
+    output: 4
+examples:
+  - inputs: []
+    output: 0
+  - inputs: [1, -4, 5, 6]
+    output: 4
+added: 0.1.0

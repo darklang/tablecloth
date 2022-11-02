@@ -1,0 +1,32 @@
+module: List
+name: append
+docstring: Creates a new list which is the result of appending the second list onto the end of the first
+parameters:
+  - name: a
+    type: list<'a>
+  - name: b
+    type: list<'a>
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], []]
+    output: []
+  - inputs: [[], ["turtles"]]
+    output: ["turtles"]
+  - inputs: [["turtles"], []]
+    output: ["turtles"]
+  - inputs: [["on"], ["turtles"]]
+    output: ["on", "turtles"]
+examples:
+  - inputs: [[], []]
+    output: []
+  - inputs: [[], ["turtles"]]
+    output: ["turtles"]
+  - inputs: [["turtles"], []]
+    output: ["turtles"]
+  - inputs: [["on"], ["turtles"]]
+    output: ["on", "turtles"]
+added: 0.1.0

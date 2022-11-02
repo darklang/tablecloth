@@ -1,0 +1,33 @@
+module: List
+name: all
+docstring: Determine if [f] returns true for [all] values in a list. Stops iteration as soon as [f] returns false
+parameters:
+  - name: a
+    type: list<'a>
+  - name: f
+    type: >-
+      'a => bool
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], Int.isEven]
+    output: true
+  - inputs: [[2, 3], Int.isEven]
+    output: false
+  - inputs: [[2, 4], Int.isEven]
+    output: true
+  - inputs: [[1, 3], Int.isEven]
+    output: false
+examples:
+  - inputs: [[], Int.isEven]
+    output: true
+  - inputs: [[2, 3], Int.isEven]
+    output: false
+  - inputs: [[2, 4], Int.isEven]
+    output: true
+  - inputs: [[1, 3], Int.isEven]
+    output: false
+added: 0.1.0

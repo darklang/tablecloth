@@ -1,0 +1,30 @@
+module: List
+name: initial
+docstring: As an {!Option} get of all of the elements of a list except the last one. Returns [None] if the list is empty
+parameters:
+  - name: a
+    type: list<'a>
+returnType: option<list<'a>>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: None
+  - inputs: >-
+      ['a']
+    output: Some([])
+  - inputs: >-
+      ['a', 'b']
+    output: Some(['a'])
+examples:
+  - inputs: []
+    output: None
+  - inputs: >-
+      ['a']
+    output: Some([])
+  - inputs: >-
+      ['a', 'b']
+    output: Some(['a'])
+added: 0.1.0

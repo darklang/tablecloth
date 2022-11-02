@@ -1,0 +1,24 @@
+module: List
+name: zip
+docstring: Combine two lists by merging each pair of elements into a {!Tuple2}. If one list is longer, the extra elements are dropped
+  - name: a
+    type: list<'a> 
+  - name: b
+    type: list<'b> 
+returnType: list<('a,'b)>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3, 4, 5], ["Dog", "Eagle", "Ferret"]]
+    output: [(1, "Dog"), (2, "Eagle"), (3, "Ferret")]
+  - inputs: [[1, 2, 3, 4, 5], []]
+    output: []
+examples:
+  - inputs: [[1, 2, 3, 4, 5], ["Dog", "Eagle", "Ferret"]]
+    output: [(1, "Dog"), (2, "Eagle"), (3, "Ferret")]
+  - inputs: [[1, 2, 3, 4, 5], []]
+    output: []
+added: 0.1.0
+
