@@ -171,9 +171,9 @@ let generateAllTests = Belt.Array.map(files, file => {
 })
 
 
-let testHeaderR = `open Tablecloth\nopen AlcoJest\n\nlet suite= suite("${\"module".contents}", () => {\n`
+let testHeaderR = `open Tablecloth\nopen AlcoJest\n\nlet suite= suite("${\"module".contents}", () => {\n   open ${\"module".contents}\n`
 let combineTestsR = `${testHeaderR}${Js.Array.joinWith("", testCasesR)}})`
-let testHeaderO = `open Tablecloth\nopen AlcoJest\n\nlet suite =\n suite "${\"module".contents}" (fun () ->\n`
+let testHeaderO = `open Tablecloth\nopen AlcoJest\n\nlet suite =\n suite "${\"module".contents}" (fun () ->\n   let open ${\"module".contents} in\n`
 let combineTestsO = `${testHeaderO}${Js.Array.joinWith("", testCasesO)})`
 let testHeaderF = `open Tablecloth\nopen Expecto\n\n[<Tests>]\nlet tests =\n  testList\n  "${\"module".contents}"\n[`
 let combineTestsF = `${testHeaderF}${Js.Array.joinWith("", testCasesF)}]`
