@@ -5,7 +5,7 @@ open Expecto
 let tests =
   testList
   "Bool"
-[ testCase "compare(true,true)" 
+[testCase "compare(true,true)" 
 <| fun _ -> 
     let expected = 0
     Expect.equal expected (Bool.compare true true) "error"

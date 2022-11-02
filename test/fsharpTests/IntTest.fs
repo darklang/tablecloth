@@ -5,7 +5,7 @@ open Expecto
 let tests =
   testList
   "Int"
-[ testCase "absolute(8)" 
+[testCase "absolute(8)" 
 <| fun _ -> 
     let expected = 8
     Expect.equal expected (Int.absolute 8) "error"

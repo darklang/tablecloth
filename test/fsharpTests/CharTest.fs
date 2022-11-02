@@ -5,7 +5,7 @@ open Expecto
 let tests =
   testList
   "Char"
-[ testCase "fromCode(97)" 
+[testCase "fromCode(97)" 
 <| fun _ -> 
     let expected = Some('a')
     Expect.equal expected (Char.fromCode 97) "error"

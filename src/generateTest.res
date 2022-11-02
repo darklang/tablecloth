@@ -21,16 +21,10 @@ type data = {
 
 @scope("JSON") @val
 external parseIntoMyData: string => data = "parse"
-let finalresultR = ref("")
-let finalresultRR = ref("")
-let finalresultOO = ref("")
-let finalresultFF = ref("")
-let finalresultF = ref("")
-let finalresultO = ref("")
 let \"module" = ref("")
-let resultsRS = []
-let resultsFS = []
-let resultsOR = []
+let testCasesR = []
+let testCasesF = []
+let testCasesO = []
 // let files = [
 //   "Bool.compare.json",
 //   "Bool.equal.json",
@@ -76,7 +70,6 @@ let files = [
   "Int.subtract.json",
   "Int.toFloat.json",
   "Int.toString.json",
-
 ]
 let generateAllTests = Belt.Array.map(files, file => {
   let file = readFileSync(~name="../json-files/" ++ file, #utf8)
@@ -172,35 +165,30 @@ let generateAllTests = Belt.Array.map(files, file => {
     resultsF->Belt.Array.push(resultFSharp)
   })
 
-  finalresultR := Js.Array.joinWith("", resultsR)
-  resultsRS->Belt.Array.push(finalresultR.contents)
-  finalresultF := Js.Array.joinWith("", resultsF)
-  resultsFS->Belt.Array.push(finalresultF.contents)
-  finalresultO := Js.Array.joinWith("", resultsO)
-  resultsOR->Belt.Array.push(finalresultO.contents)
+  testCasesR->Belt.Array.push(Js.Array.joinWith("", resultsR))
+  testCasesF->Belt.Array.push(Js.Array.joinWith("", resultsF))
+  testCasesO->Belt.Array.push(Js.Array.joinWith("", resultsO))
 })
 
-finalresultRR := Js.Array.joinWith("", resultsRS)
+
 let testHeaderR = `open Tablecloth\nopen AlcoJest\n\nlet suite= suite("${\"module".contents}", () => {\n`
-let testCasesR = `${testHeaderR} ${finalresultRR.contents}})`
-finalresultOO := Js.Array.joinWith("", resultsOR)
+let combineTestsR = `${testHeaderR}${Js.Array.joinWith("", testCasesR)}})`
 let testHeaderO = `open Tablecloth\nopen AlcoJest\n\nlet suite =\n suite "${\"module".contents}" (fun () ->\n`
-let testCasesO = `${testHeaderO} ${finalresultOO.contents})`
-finalresultFF := Js.Array.joinWith("", resultsFS)
+let combineTestsO = `${testHeaderO}${Js.Array.joinWith("", testCasesO)})`
 let testHeaderF = `open Tablecloth\nopen Expecto\n\n[<Tests>]\nlet tests =\n  testList\n  "${\"module".contents}"\n[`
-let testCasesF = `${testHeaderF} ${finalresultFF.contents}]`
+let combineTestsF = `${testHeaderF}${Js.Array.joinWith("", testCasesF)}]`
 Node.Fs.writeFileSync(
   `../test/rescriptTests/${\"module".contents}Test.res`,
-  testCasesR,
+  combineTestsR,
   #utf8,
 )
 Node.Fs.writeFileSync(
   `../test/ocamlTests/${\"module".contents}Test.ml`,
-  testCasesO,
+  combineTestsO,
   #utf8,
 )
 Node.Fs.writeFileSync(
   `../test/fsharpTests/${\"module".contents}Test.fs`,
-  testCasesF,
+  combineTestsF,
   #utf8,
 )
