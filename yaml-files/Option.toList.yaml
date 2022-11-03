@@ -11,12 +11,12 @@ constraints:
   - no-rescript
 tests:
   - inputs: Some(3004)
-    output: list{3004}
+    output: [3004]
   - inputs: None
-    output: list{}
+    output: []
 examples:
   - inputs: Some(3004)
-    output: list{3004}
+    output: [3004]
   - inputs: None
-    output: list{}
+    output: []
 added: 0.1.0

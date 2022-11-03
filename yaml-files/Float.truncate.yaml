@@ -11,40 +11,28 @@ constraints:
   - no-rescript
 tests:
   - inputs: 1.2
-    output: >-
-      1.
+    output: "1."
   - inputs: 1.5
-    output: >-
-      1.
+    output: "1."
   - inputs: 1.8
-    output: >-
-      1.
+    output: "1."
   - inputs: -1.2
-    output: >-
-      -1.
+    output: "-1."
   - inputs: -1.5
-    output: >-
-      -1.
+    output: "-1."
   - inputs: -1.8
-    output: >-
-      -1.
+    output: "-1."
 examples:
   - inputs: 1.2
-    output: >-
-      1.
+    output: "1."
   - inputs: 1.5
-    output: >-
-      1.
+    output: "1."
   - inputs: 1.8
-    output: >-
-      1.
+    output: "1."
   - inputs: -1.2
-    output: >-
-      -1.
+    output: "-1."
   - inputs: -1.5
-    output: >-
-      -1.
+    output: "-1."
   - inputs: -1.8
-    output: >-
-      -1.
+    output: "-1."
 added: 0.1.0

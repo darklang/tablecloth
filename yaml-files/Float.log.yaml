@@ -12,27 +12,17 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: >-
-      [100., 10.]
-    output: >-
-      2.
-  - inputs: >-
-      [256., 2.]
-    output: >-
-      8.
-  - inputs: >-
-      [0., 10.]
+  - inputs: ["100.", "10."]
+    output: "2."
+  - inputs: ["256.", "2."]
+    output: "8."
+  - inputs: ["0.", "10."]
     output: negativeInfinity
 examples:
-  - inputs: >-
-      [100., 10.]
-    output: >-
-      2.
-  - inputs: >-
-      [256., 2.]
-    output: >-
-      8.
-  - inputs: >-
-      [0., 10.]
+  - inputs: ["100.", "10."]
+    output: "2."
+  - inputs: ["256.", "2."]
+    output: "8."
+  - inputs: ["0.", "10."]
     output: negativeInfinity
 added: 0.1.0

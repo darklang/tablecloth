@@ -10,11 +10,9 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: >-
-      1.
+  - inputs: "1."
     output: 2. *. pi
 examples:
-  - inputs: >-
-      1.
+  - inputs: "1."
     output: 2. *. pi
 added: 0.1.0

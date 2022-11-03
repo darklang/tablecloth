@@ -5,7 +5,8 @@ parameters:
   - name: a
     type: option<'a>
   - name: f
-    type: 'a => 'b
+    type: >-
+      'a => 'b
 returnType: option<'b>
 # For compatibility
 constraints:
@@ -26,5 +27,3 @@ examples:
   - inputs: [None, x => x * x]
     output: None
 added: 0.1.0
-
-

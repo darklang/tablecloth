@@ -16,13 +16,11 @@ tests:
     output: true
   - inputs: nan
     output: false
-  - inputs: >-
-      -5.
+  - inputs: "-5."
     output: false
   - inputs: -0.314
     output: false
-  - inputs: >-
-      0.
+  - inputs: "0."
     output: false
   - inputs: 3.14
     output: false
@@ -33,13 +31,11 @@ examples:
     output: true
   - inputs: nan
     output: false
-  - inputs: >-
-      -5.
+  - inputs: "-5."
     output: false
   - inputs: -0.314
     output: false
-  - inputs: >-
-      0.
+  - inputs: "0."
     output: false
   - inputs: 3.14
     output: false

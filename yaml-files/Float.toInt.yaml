@@ -10,16 +10,13 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: >-
-      5.
+  - inputs: "5."
     output: Some(5)
   - inputs: 5.3
     output: Some(5)
-  - inputs: >-
-      0.
+  - inputs: "0."
     output: Some(0)
-  - inputs: >-
-      -7.
+  - inputs: "-7."
     output: Some(-7)
   - inputs: nan
     output: None
@@ -28,16 +25,13 @@ tests:
   - inputs: negativeInfinity
     output: None
 examples:
-  - inputs: >-
-      5.
+  - inputs: "5."
     output: Some(5)
   - inputs: 5.3
     output: Some(5)
-  - inputs: >-
-      0.
+  - inputs: "0."
     output: Some(0)
-  - inputs: >-
-      -7.
+  - inputs: "-7."
     output: Some(-7)
   - inputs: nan
     output: None

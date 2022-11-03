@@ -12,37 +12,25 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: >-
-      [0., 0.]
-    output: >-
-      0.
-  - inputs: >-
-      [1., 1.]
+  - inputs: ["0.", "0."]
+    output: "0."
+  - inputs: ["1.", "1."]
     output: 0.7853981633974483
-  - inputs: >-
-      [1., -1.]
+  - inputs: ["1.", "-1."]
     output: 2.3561944901923449
-  - inputs: >-
-      [-1., -1.]
+  - inputs: ["-1.", "-1."]
     output: -2.3561944901923449
-  - inputs: >-
-      [-1., 1.]
+  - inputs: ["-1.", "1."]
     output: -0.7853981633974483
 examples:
-  - inputs: >-
-      [0., 0.]
-    output: >-
-      0.
-  - inputs: >-
-      [1., 1.]
+  - inputs: ["0.", "0."]
+    output: "0."
+  - inputs: ["1.", "1."]
     output: 0.7853981633974483
-  - inputs: >-
-      [1., -1.]
+  - inputs: ["1.", "-1."]
     output: 2.3561944901923449
-  - inputs: >-
-      [-1., -1.]
+  - inputs: ["-1.", "-1."]
     output: -2.3561944901923449
-  - inputs: >-
-      [-1., 1.]
+  - inputs: ["-1.", "1."]
     output: -0.7853981633974483
 added: 0.1.0

@@ -10,14 +10,12 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: >-
-      5.0
+  - inputs: "5.0"
     output: true
   - inputs: pi
     output: false
 examples:
-  - inputs: >-
-      5.0
+  - inputs: "5.0"
     output: true
   - inputs: pi
     output: false

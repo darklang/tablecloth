@@ -12,483 +12,245 @@ constraints:
   - no-ocaml
   - no-rescript
 tests:
-  - inputs: >-
-      [#Zero, 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Zero, 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Zero, 1.8]
-    output: >-
-      1.
-  - inputs: >-
-      [#Zero, -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Zero, -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Zero, -1.8]
-    output: >-
-      -1.
-  - inputs: >-
-      [#AwayFromZero, 1.2]
-    output: >-
-      2.
-  - inputs: >-
-      [#AwayFromZero, 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#AwayFromZero, 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#AwayFromZero, -1.2]
-    output: >-
-      -2.
-  - inputs: >-
-      [#AwayFromZero, -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#AwayFromZero, -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Up, 1.2]
-    output: >-
-      2.
-  - inputs: >-
-      [#Up, 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Up, 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Up, -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Up, -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Up, -1.8]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Down, 1.2]
-    output: 1.
-  - inputs: >-
-      [#Down, 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Down, 1.8]
-    output: >-
-      1.
-  - inputs: >-
-      [#Down, -1.2]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Down, -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Down, -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Zero), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Zero), 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Zero), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Zero), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Zero), -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Zero), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#AwayFromZero), 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#AwayFromZero), -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Up), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Up), 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Up), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Up), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Up), -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Up), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Down), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Down), 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Down), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Down), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Down), -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Down), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#ToEven), 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 2.2]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 2.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 2.8]
-    output: >-
-      3.
-  - inputs: >-
-      [#Closest(#ToEven), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#ToEven), -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -2.2]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -2.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -2.8]
-    output: >-
-      -3.
+  - inputs: ["#Zero", 1.2]
+    output: "1."
+  - inputs: ["#Zero", 1.5]
+    output: "1."
+  - inputs: ["#Zero", 1.8]
+    output: "1."
+  - inputs: ["#Zero", -1.2]
+    output: "-1."
+  - inputs: ["#Zero", -1.5]
+    output: "-1."
+  - inputs: ["#Zero", -1.8]
+    output: "-1."
+  - inputs: ["#AwayFromZero", 1.2]
+    output: "2."
+  - inputs: ["#AwayFromZero", 1.5]
+    output: "2."
+  - inputs: ["#AwayFromZero", 1.8]
+    output: "2."
+  - inputs: ["#AwayFromZero", -1.2]
+    output: "-2."
+  - inputs: ["#AwayFromZero", -1.5]
+    output: "-2."
+  - inputs: ["#AwayFromZero", -1.8]
+    output: "-2."
+  - inputs: ["#Up", 1.2]
+    output: "2."
+  - inputs: ["#Up", 1.5]
+    output: "2."
+  - inputs: ["#Up", 1.8]
+    output: "2."
+  - inputs: ["#Up", -1.2]
+    output: "-1."
+  - inputs: ["#Up", -1.5]
+    output: "-1."
+  - inputs: ["#Up", -1.8]
+    output: "-1."
+  - inputs: ["#Down", 1.2]
+    output: "1."
+  - inputs: ["#Down", 1.5]
+    output: "1."
+  - inputs: ["#Down", 1.8]
+    output: "1."
+  - inputs: ["#Down", -1.2]
+    output: "-2."
+  - inputs: ["#Down", -1.5]
+    output: "-2."
+  - inputs: ["#Down", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#Zero)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#Zero)", 1.5]
+    output: "1."
+  - inputs: ["#Closest(#Zero)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#Zero)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#Zero)", -1.5]
+    output: "-1."
+  - inputs: ["#Closest(#Zero)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#AwayFromZero)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#AwayFromZero)", 1.5]
+    output: "2."
+  - inputs: ["#Closest(#AwayFromZero)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#AwayFromZero)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#AwayFromZero)", -1.5]
+    output: "-2."
+  - inputs: ["#Closest(#AwayFromZero)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#Up)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#Up)", 1.5]
+    output: "2."
+  - inputs: ["#Closest(#Up)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#Up)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#Up)", -1.5]
+    output: "-1."
+  - inputs: ["#Closest(#Up)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#Down)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#Down)", 1.5]
+    output: "1."
+  - inputs: ["#Closest(#Down)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#Down)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#Down)", -1.5]
+    output: "-2."
+  - inputs: ["#Closest(#Down)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#ToEven)", 1.5]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 2.2]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 2.5]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 2.8]
+    output: "3."
+  - inputs: ["#Closest(#ToEven)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#ToEven)", -1.5]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -2.2]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -2.5]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -2.8]
+    output: "-3."
 examples:
-  - inputs: >-
-      [#Zero, 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Zero, 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Zero, 1.8]
-    output: >-
-      1.
-  - inputs: >-
-      [#Zero, -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Zero, -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Zero, -1.8]
-    output: >-
-      -1.
-  - inputs: >-
-      [#AwayFromZero, 1.2]
-    output: >-
-      2.
-  - inputs: >-
-      [#AwayFromZero, 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#AwayFromZero, 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#AwayFromZero, -1.2]
-    output: >-
-      -2.
-  - inputs: >-
-      [#AwayFromZero, -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#AwayFromZero, -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Up, 1.2]
-    output: >-
-      2.
-  - inputs: >-
-      [#Up, 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Up, 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Up, -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Up, -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Up, -1.8]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Down, 1.2]
-    output: 1.
-  - inputs: >-
-      [#Down, 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Down, 1.8]
-    output: >-
-      1.
-  - inputs: >-
-      [#Down, -1.2]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Down, -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Down, -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Zero), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Zero), 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Zero), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Zero), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Zero), -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Zero), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#AwayFromZero), 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#AwayFromZero), -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#AwayFromZero), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Up), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Up), 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Up), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Up), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Up), -1.5]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Up), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Down), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Down), 1.5]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#Down), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#Down), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#Down), -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#Down), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), 1.2]
-    output: >-
-      1.
-  - inputs: >-
-      [#Closest(#ToEven), 1.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 1.8]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 2.2]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 2.5]
-    output: >-
-      2.
-  - inputs: >-
-      [#Closest(#ToEven), 2.8]
-    output: >-
-      3.
-  - inputs: >-
-      [#Closest(#ToEven), -1.2]
-    output: >-
-      -1.
-  - inputs: >-
-      [#Closest(#ToEven), -1.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -1.8]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -2.2]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -2.5]
-    output: >-
-      -2.
-  - inputs: >-
-      [#Closest(#ToEven), -2.8]
-    output: >-
-      -3.
+  - inputs: ["#Zero", 1.2]
+    output: "1."
+  - inputs: ["#Zero", 1.5]
+    output: "1."
+  - inputs: ["#Zero", 1.8]
+    output: "1."
+  - inputs: ["#Zero", -1.2]
+    output: "-1."
+  - inputs: ["#Zero", -1.5]
+    output: "-1."
+  - inputs: ["#Zero", -1.8]
+    output: "-1."
+  - inputs: ["#AwayFromZero", 1.2]
+    output: "2."
+  - inputs: ["#AwayFromZero", 1.5]
+    output: "2."
+  - inputs: ["#AwayFromZero", 1.8]
+    output: "2."
+  - inputs: ["#AwayFromZero", -1.2]
+    output: "-2."
+  - inputs: ["#AwayFromZero", -1.5]
+    output: "-2."
+  - inputs: ["#AwayFromZero", -1.8]
+    output: "-2."
+  - inputs: ["#Up", 1.2]
+    output: "2."
+  - inputs: ["#Up", 1.5]
+    output: "2."
+  - inputs: ["#Up", 1.8]
+    output: "2."
+  - inputs: ["#Up", -1.2]
+    output: "-1."
+  - inputs: ["#Up", -1.5]
+    output: "-1."
+  - inputs: ["#Up", -1.8]
+    output: "-1."
+  - inputs: ["#Down", 1.2]
+    output: "1."
+  - inputs: ["#Down", 1.5]
+    output: "1."
+  - inputs: ["#Down", 1.8]
+    output: "1."
+  - inputs: ["#Down", -1.2]
+    output: "-2."
+  - inputs: ["#Down", -1.5]
+    output: "-2."
+  - inputs: ["#Down", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#Zero)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#Zero)", 1.5]
+    output: "1."
+  - inputs: ["#Closest(#Zero)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#Zero)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#Zero)", -1.5]
+    output: "-1."
+  - inputs: ["#Closest(#Zero)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#AwayFromZero)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#AwayFromZero)", 1.5]
+    output: "2."
+  - inputs: ["#Closest(#AwayFromZero)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#AwayFromZero)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#AwayFromZero)", -1.5]
+    output: "-2."
+  - inputs: ["#Closest(#AwayFromZero)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#Up)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#Up)", 1.5]
+    output: "2."
+  - inputs: ["#Closest(#Up)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#Up)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#Up)", -1.5]
+    output: "-1."
+  - inputs: ["#Closest(#Up)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#Down)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#Down)", 1.5]
+    output: "1."
+  - inputs: ["#Closest(#Down)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#Down)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#Down)", -1.5]
+    output: "-2."
+  - inputs: ["#Closest(#Down)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", 1.2]
+    output: "1."
+  - inputs: ["#Closest(#ToEven)", 1.5]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 1.8]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 2.2]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 2.5]
+    output: "2."
+  - inputs: ["#Closest(#ToEven)", 2.8]
+    output: "3."
+  - inputs: ["#Closest(#ToEven)", -1.2]
+    output: "-1."
+  - inputs: ["#Closest(#ToEven)", -1.5]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -1.8]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -2.2]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -2.5]
+    output: "-2."
+  - inputs: ["#Closest(#ToEven)", -2.8]
+    output: "-3."
 added: 0.1.0
