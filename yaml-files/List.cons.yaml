@@ -4,9 +4,11 @@ docstring: Prepend a value to the front of a list
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: b
     type: >-
       'a
+    label: false
 returnType: list<'a>
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Create a string from a {!List} of characters
 parameters:
   - name: a
     type: list<char>
+    label: false
 returnType: string
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Return the number of elements in a list
 parameters:
   - name: a
     type: list<'a>
+    label: false
 returnType: int
 # For compatibility
 constraints:

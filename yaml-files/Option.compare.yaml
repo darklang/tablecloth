@@ -4,10 +4,13 @@ docstring: Compare <param a> and <param b> using the provided [f] function
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: b
     type: option<'a>
+    label: false
   - name: f
     type: ('a, 'a) => int
+    label: true
 returnType: int
 # For compatibility
 constraints:

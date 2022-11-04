@@ -4,8 +4,10 @@ docstring: Returns, as an option, a tuple of the first element and its index for
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: (int, 'a)=> bool
+    label: true
 returnType: option<(int, 'a)>
 # For compatibility
 constraints:

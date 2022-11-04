@@ -4,9 +4,11 @@ docstring: Transform the {!third} value in a tuple
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
   - name: f
     type: >-
       'c => 'z
+    label: true
 returnType: ('a, 'b, 'z)
 # For compatibility
 constraints:

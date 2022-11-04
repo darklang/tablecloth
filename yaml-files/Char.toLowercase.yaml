@@ -4,6 +4,7 @@ docstring: Converts an ASCII character to lower case, preserving non alphabetic 
 parameters:
   - name: a
     type: char
+    label: false
 returnType: char
 # For compatibility
 constraints:

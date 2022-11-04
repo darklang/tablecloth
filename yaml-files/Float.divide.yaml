@@ -4,8 +4,10 @@ docstring: divide <param a> by <param by>, returning their quotient
 parameters:
   - name: a
     type: float
+    label: false
   - name: by
     type: float
+    label: true
 returnType: float
 # For compatibility
 constraints:

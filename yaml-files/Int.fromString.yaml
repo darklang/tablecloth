@@ -4,6 +4,7 @@ docstring: Attempt to parse <param a> to an int
 parameters:
   - name: a
     type: string
+    label: false
 returnType: option<int>
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Convert an ASCII code point to a character
 parameters:
   - name: a
     type: int
+    label: false
 returnType: option<char>
 # For compatibility
 constraints:

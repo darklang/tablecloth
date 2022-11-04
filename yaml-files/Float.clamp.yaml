@@ -4,10 +4,13 @@ docstring: Clamps <param a> within the inclusive [lower] and [upper] bounds and 
 parameters:
   - name: a
     type: float
+    label: false
   - name: lower
     type: float
+    label: true
   - name: upper
     type: float
+    label: true
 returnType: float
 # For compatibility
 constraints:

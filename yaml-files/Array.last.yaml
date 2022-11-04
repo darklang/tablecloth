@@ -4,6 +4,7 @@ docstring: Get the last element of an array. Returns [None] if the array is empt
 parameters:
   - name: a
     type: array<'a>
+    label: false
 returnType: option<'a>
 # For compatibility
 constraints:

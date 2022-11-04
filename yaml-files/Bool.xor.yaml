@@ -4,8 +4,10 @@ docstring: Perform the exclusive or operator on <param a> and <param b>.Returnin
 parameters:
   - name: a
     type: bool
+    label: false
   - name: b
     type: bool
+    label: false
 returnType: bool
 # For compatibility
 constraints:

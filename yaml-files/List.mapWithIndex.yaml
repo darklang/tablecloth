@@ -4,8 +4,10 @@ docstring: Apply a function [f] to every element and its index
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: (int, 'a) => 'b)
+    label: true
 returnType: list<'b>
 # For compatibility
 constraints:

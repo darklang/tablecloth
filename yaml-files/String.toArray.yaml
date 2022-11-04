@@ -4,6 +4,7 @@ docstring: Returns an {!Array} of the individual characters in the given string
 parameters:
   - name: a
     type: string
+    label: false
 returnType: array<char>
 # For compatibility
 constraints:

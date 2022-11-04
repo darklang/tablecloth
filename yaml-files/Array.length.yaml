@@ -4,6 +4,7 @@ docstring: Return the length of an array
 parameters:
   - name: a
     type: array<'a>
+    label: false
 returnType: int
 # For compatibility
 constraints:

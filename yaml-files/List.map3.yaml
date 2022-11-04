@@ -4,12 +4,16 @@ docstring: Combine three lists, using [f] to combine each trio of elements. If o
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: b
     type: list<'b>
+    label: false
   - name: c
     type: list<'c>
+    label: false
   - name: f
     type: ('a, 'b, 'c) => 'd
+    label: true
 returnType: list<'d>
 # For compatibility
 constraints:

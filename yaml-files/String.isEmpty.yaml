@@ -4,6 +4,7 @@ docstring: Check if a string is empty
 parameters:
   - name: a
     type: string
+    label: false
 returnType: bool
 # For compatibility
 constraints:

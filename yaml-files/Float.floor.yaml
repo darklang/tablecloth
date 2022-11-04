@@ -4,6 +4,7 @@ docstring: Takes param<a>, and returns the greatest number less than or equal to
 parameters:
   - name: a
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

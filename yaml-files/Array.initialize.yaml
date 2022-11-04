@@ -4,8 +4,10 @@ docstring: Initialize an array. [Array.initialize n ~f] creates an array of leng
 parameters:
   - name: a
     type: int
+    label: false
   - name: f
     type: int => 'a
+    label: true
 returnType: array<'a>
 # For compatibility
 constraints:

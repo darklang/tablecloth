@@ -4,6 +4,7 @@ docstring: Attempt to parse <param a> to a float
 parameters:
   - name: a
     type: string
+    label: false
 returnType: option<float>
 # For compatibility
 constraints:

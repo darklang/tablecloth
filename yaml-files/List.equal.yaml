@@ -4,10 +4,13 @@ docstring: Test two lists for equality using the provided function to test eleme
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: b
     type: list<'a>
+    label: false
   - name: c
     type: ('a, 'a) => bool
+    label: false
 returnType: bool
 # For compatibility
 constraints:

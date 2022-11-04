@@ -4,8 +4,10 @@ docstring: Round <param a>, by default to the to the closest [int] with halves r
 parameters:
   - name: direction
     type: Direction
+    label: true
   - name: a
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

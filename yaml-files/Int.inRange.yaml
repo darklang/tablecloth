@@ -4,10 +4,13 @@ docstring: Checks if <param a> is between <param lower> and up to, but not inclu
 parameters:
   - name: a
     type: int
+    label: false
   - name: lower
     type: int
+    label: true
   - name: upper
     type: int
+    label: true
 returnType: bool
 # For compatibility
 constraints:

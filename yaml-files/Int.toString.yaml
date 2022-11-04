@@ -4,6 +4,7 @@ docstring: Convert <param a> into a [string] representation
 parameters:
   - name: a
     type: int
+    label: false
 returnType: string
 # For compatibility
 constraints:

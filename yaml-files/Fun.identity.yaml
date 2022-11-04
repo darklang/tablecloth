@@ -5,6 +5,7 @@ parameters:
   - name: a
     type: >-
       'a
+    label: false
 returnType: >-
   'a
 # For compatibility

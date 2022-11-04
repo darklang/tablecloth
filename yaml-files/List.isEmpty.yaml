@@ -4,6 +4,7 @@ docstring: Determine if a list is empty
 parameters:
   - name: a
     type: list<_>
+    label: false
 returnType: bool
 # For compatibility
 constraints:

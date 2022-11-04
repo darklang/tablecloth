@@ -4,8 +4,10 @@ docstring: Get the element at the specified index.
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: b
     type: int
+    label: false
 returnType: >-
   'a
 # For compatibility

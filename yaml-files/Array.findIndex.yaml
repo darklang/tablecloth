@@ -4,8 +4,10 @@ docstring: Similar to {!Array.find} but [f] is also called with the current inde
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: (int, 'a) => bool
+    label: true
 returnType: option<(int, 'a)>
 # For compatibility
 constraints:

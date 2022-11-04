@@ -4,9 +4,11 @@ docstring: Transform both of the values of a tuple using the same function
 parameters:
   - name: a
     type: ('a, 'a)
+    label: false
   - name: f
     type: >-
       'a => 'b
+    label: true
 returnType: ('b, 'b)
 # For compatibility
 constraints:

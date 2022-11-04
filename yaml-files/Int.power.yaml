@@ -4,8 +4,10 @@ docstring: Raise <param base> to the power of <param exponent>, returning the po
 parameters:
   - name: base
     type: int
+    label: true
   - name: exponent
     type: int
+    label: true
 returnType: int
 # For compatibility
 constraints:

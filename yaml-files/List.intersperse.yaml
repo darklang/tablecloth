@@ -4,9 +4,11 @@ docstring: Places [sep] between all the elements of the given list
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: sep
     type: >-
       'a
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

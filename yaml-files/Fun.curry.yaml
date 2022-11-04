@@ -4,12 +4,15 @@ docstring: Takes a function [f] which takes a single argument of a tuple [('a, '
 parameters:
   - name: a
     type: (('a, 'b)) => 'c
+    label: false
   - name: b
     type: >-
       'a
+    label: false
   - name: c
     type: >-
       'b
+    label: false
 returnType: >-
   'c
 # For compatibility

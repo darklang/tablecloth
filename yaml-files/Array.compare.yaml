@@ -4,10 +4,13 @@ docstring: Compare two arrays using the provided [f] function to compare pairs o
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: b
     type: array<'a>
+    label: false
   - name: f
     type: ('a, 'a) => int
+    label: true
 returnType: int
 # For compatibility
 constraints:

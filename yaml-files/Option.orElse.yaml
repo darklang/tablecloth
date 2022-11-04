@@ -4,8 +4,10 @@ docstring: Return the <param b> if it {!isSome}, otherwise return <param a>
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: b
     type: option<'a>
+    label: false
 returnType: option<'a>
 # For compatibility
 constraints:

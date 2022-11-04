@@ -4,6 +4,7 @@ docstring: Move each value in the tuple one position to the left, moving the val
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
 returnType: ('b, 'c, 'a)
 # For compatibility
 constraints:

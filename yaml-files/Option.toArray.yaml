@@ -4,6 +4,7 @@ docstring: Convert <param a> to an {!Array}
 parameters:
   - name: a
     type: option<'a>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

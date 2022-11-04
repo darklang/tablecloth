@@ -4,8 +4,10 @@ docstring: Divides an array into a {!Tuple2} of arrays.  Elements which have ind
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: index
     type: int
+    label: true
 returnType: (array<'a>, array<'a>)
 # For compatibility
 constraints:

@@ -4,9 +4,11 @@ docstring: Split an array into a {!Tuple2} of arrays. Values which [f] returns t
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: (array<'a>, array<'a>)
 # For compatibility
 constraints:

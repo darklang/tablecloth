@@ -4,6 +4,7 @@ docstring: Takes <param a > and remove all the positions after the decimal point
 parameters:
   - name: a
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

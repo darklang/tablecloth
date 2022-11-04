@@ -4,8 +4,10 @@ docstring: Subtract <param a> from <param b>, returning their difference
 parameters:
   - name: a
     type: float
+    label: false
   - name: b
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

@@ -4,9 +4,11 @@ docstring: Count the number of elements where function [f] returns [true]
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: int
 # For compatibility
 constraints:

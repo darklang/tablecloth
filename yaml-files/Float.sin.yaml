@@ -4,6 +4,7 @@ docstring: Takes <param a> in radians and figure out its sine
 parameters:
   - name: a
     type: radians
+    label: false
 returnType: float
 # For compatibility
 constraints:

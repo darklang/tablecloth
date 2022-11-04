@@ -6,9 +6,11 @@ docstring: >-
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => string
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

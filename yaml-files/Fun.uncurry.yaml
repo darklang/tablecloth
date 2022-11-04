@@ -4,8 +4,10 @@ docstring: Takes a function which takes two arguments and returns a function whi
 parameters:
   - name: a
     type: ('a, 'b) => 'c
+    label: false
   - name: b
     type: ('a, 'b)
+    label: false
 returnType: >-
   'c
 # For compatibility

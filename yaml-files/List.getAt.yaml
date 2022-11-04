@@ -4,8 +4,10 @@ docstring: Returns the element at position [index] in the list. Returns [None] i
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: index
     type: int
+    label: true
 returnType: option<'a>
 # For compatibility
 constraints:

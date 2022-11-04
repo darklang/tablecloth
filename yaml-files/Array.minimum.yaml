@@ -4,8 +4,10 @@ docstring: Find the smallest element using the provided [compare] function. Retu
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: compare
     type: ('a, 'a) => int
+    label: true
 returnType: option<'a>
 # For compatibility
 constraints:

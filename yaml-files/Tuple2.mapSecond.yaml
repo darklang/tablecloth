@@ -4,9 +4,11 @@ docstring: Transform the {!second} value in a tuple
 parameters:
   - name: a
     type: ('a, 'b)
+    label: false
   - name: f
     type: >-
       'b => 'c
+    label: true
 returnType: ('a, 'c)
 # For compatibility
 constraints:

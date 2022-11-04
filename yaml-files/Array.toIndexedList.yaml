@@ -4,6 +4,7 @@ docstring: Create an indexed {!List} from an array. Each element of the array wi
 parameters:
   - name: a
     type: array<'a>
+    label: false
 returnType: list<(int, 'a)>
 # For compatibility
 constraints:

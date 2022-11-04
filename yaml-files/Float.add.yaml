@@ -4,8 +4,10 @@ docstring: Add <param a> to <param b>, returning their sum
 parameters:
   - name: a
     type: float
+    label: false
   - name: b
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

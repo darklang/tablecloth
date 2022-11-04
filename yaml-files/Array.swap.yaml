@@ -4,10 +4,13 @@ docstring: Swaps the values at the provided indicies
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: b
     type: int
+    label: false
   - name: c
     type: int
+    label: false
 returnType: unit
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Takes <param a> and returns its square root or [NaN] when it is negat
 parameters:
   - name: a
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

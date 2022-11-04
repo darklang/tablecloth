@@ -4,6 +4,7 @@ docstring: Create a shallow copy of an array
 parameters:
   - name: a
     type: array<'a>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

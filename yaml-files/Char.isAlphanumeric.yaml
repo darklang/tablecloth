@@ -4,6 +4,7 @@ docstring: Detect upper case, lower case and digit ASCII characters
 parameters:
   - name: a
     type: char
+    label: false
 returnType: bool
 # For compatibility
 constraints:

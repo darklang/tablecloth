@@ -4,8 +4,10 @@ docstring: Calculate the logarithm of <parma a> with a given base
 parameters:
   - name: a
     type: float
+    label: false
   - name: base
     type: float
+    label: true
 returnType: float
 # For compatibility
 constraints:

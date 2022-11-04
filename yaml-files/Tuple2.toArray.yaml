@@ -4,6 +4,7 @@ docstring: Turns a tuple into an {!Array} of length two
 parameters:
   - name: a
     type: ('a, 'a)
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

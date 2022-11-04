@@ -4,9 +4,11 @@ docstring: Divide a string into a list of strings, splitting whenever [on] is en
 parameters:
   - name: a
     type: string
+    label: false
   - name: >-
       on
     type: string
+    label: true
 returnType: list<string>
 # For compatibility
 constraints:

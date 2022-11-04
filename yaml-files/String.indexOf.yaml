@@ -4,8 +4,10 @@ docstring: Returns the index of the first occurrence of [string] or None if stri
 parameters:
   - name: a
     type: string
+    label: false
   - name: b
     type: string
+    label: false
 returnType: option<int>
 # For compatibility
 constraints:

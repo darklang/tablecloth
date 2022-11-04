@@ -4,6 +4,7 @@ docstring: Extract the second value from a tuple
 parameters:
   - name: a
     type: ('a, 'b)
+    label: false
 returnType: >-
   'b
 # For compatibility

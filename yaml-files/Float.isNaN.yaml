@@ -4,6 +4,7 @@ docstring: Determine whether <param a> is an [undefined] or unrepresentable numb
 parameters:
   - name: a
     type: float
+    label: false
 returnType: bool
 # For compatibility
 constraints:

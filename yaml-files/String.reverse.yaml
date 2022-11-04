@@ -4,6 +4,7 @@ docstring: Reverse a string
 parameters:
   - name: a
     type: string
+    label: false
 returnType: string
 # For compatibility
 constraints:

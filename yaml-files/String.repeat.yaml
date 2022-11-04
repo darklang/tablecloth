@@ -4,8 +4,10 @@ docstring: Create a string by repeating a string [count] time
 parameters:
   - name: a
     type: string
+    label: false
   - name: count
     type: int
+    label: true
 returnType: string
 # For compatibility
 constraints:

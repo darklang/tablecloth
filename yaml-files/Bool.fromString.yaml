@@ -4,6 +4,7 @@ docstring: Convert <param a> (String) into a Boolean
 parameters:
   - name: a
     type: string
+    label: false
 returnType: option<bool>
 # For compatibility
 constraints:

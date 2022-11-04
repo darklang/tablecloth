@@ -4,6 +4,7 @@ docstring: Converts a string to character
 parameters:
   - name: a
     type: string
+    label: false
 returnType: option<char>
 # For compatibility
 constraints:

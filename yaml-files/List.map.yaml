@@ -4,9 +4,11 @@ docstring: Create a new list which is the result of applying a function [f] to e
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => 'b
+    label: true
 returnType: list<'b>
 # For compatibility
 constraints:

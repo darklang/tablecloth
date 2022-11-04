@@ -4,8 +4,10 @@ docstring: Converts a list of strings into a {!String}, placing [sep] between ea
 parameters:
   - name: a
     type: list<string>
+    label: false
   - name: sep
     type: string
+    label: true
 returnType: string
 # For compatibility
 constraints:

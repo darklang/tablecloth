@@ -4,10 +4,13 @@ docstring: Provides a sliding 'window' of sub-arrays over an array
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: size
     type: int
+    label: true
   - name: step
     type: int=?
+    label: true
 returnType: array<array<'a>>
 # For compatibility
 constraints:

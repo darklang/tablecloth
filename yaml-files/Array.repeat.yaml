@@ -4,8 +4,10 @@ docstring: Create an array of length <param length> with the value of <param a> 
 parameters:
   - name: a
     type: \'a
+    label: false
   - name: length
     type: int
+    label: true
 returnType: array<'a>
 # For compatibility
 constraints:

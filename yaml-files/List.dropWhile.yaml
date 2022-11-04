@@ -4,9 +4,11 @@ docstring: Drop elements from a list until [f] returns [false]
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

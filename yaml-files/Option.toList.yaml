@@ -4,6 +4,7 @@ docstring: Convert <param a> to a {!List}
 parameters:
   - name: a
     type: option<'a>
+    label: false
 returnType: list<'a>
 # For compatibility
 constraints:

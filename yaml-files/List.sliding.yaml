@@ -4,10 +4,13 @@ docstring: Provides a sliding 'window' of sub-lists over a list
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: size
     type: int
+    label: true
   - name: step
     type: int=?
+    label: true
 returnType: list<list<'a>>
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: As an {!Option} get of all of the elements of a list except the last 
 parameters:
   - name: a
     type: list<'a>
+    label: false
 returnType: option<list<'a>>
 # For compatibility
 constraints:

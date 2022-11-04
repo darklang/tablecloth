@@ -4,6 +4,7 @@ docstring: Determine whether <param a> is finite number. Returning True for any 
 parameters:
   - name: a
     type: float
+    label: false
 returnType: bool
 # For compatibility
 constraints:

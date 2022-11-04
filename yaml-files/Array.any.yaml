@@ -4,9 +4,11 @@ docstring: Determine if [f] returns true for [any] values in an array. Iteration
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: bool
 # For compatibility
 constraints:

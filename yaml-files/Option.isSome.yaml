@@ -4,6 +4,7 @@ docstring: Check if <param a> is a [Some].
 parameters:
   - name: a
     type: option<'a>
+    label: false
 returnType: bool
 # For compatibility
 constraints:

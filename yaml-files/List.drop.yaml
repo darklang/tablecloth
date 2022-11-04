@@ -4,8 +4,10 @@ docstring: Drop the first [count] elements from the front of a list. If the list
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: count
     type: int
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

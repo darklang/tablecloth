@@ -4,6 +4,7 @@ docstring: Turns a tuple into a list of length three
 parameters:
   - name: a
     type: ('a, 'a, 'a)
+    label: false
 returnType: list<'a>
 # For compatibility
 constraints:

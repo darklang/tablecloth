@@ -4,6 +4,7 @@ docstring: Convert <param a> to radians
 parameters:
   - name: a
     type: float
+    label: false
 returnType: radians
 # For compatibility
 constraints:

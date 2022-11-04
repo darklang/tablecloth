@@ -4,8 +4,10 @@ docstring: Sort using the provided [compare] function
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: ('a, 'a) => int
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

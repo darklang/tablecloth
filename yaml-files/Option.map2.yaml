@@ -4,10 +4,13 @@ docstring: Combine <param a> and <param b>. If both options are [Some] returns, 
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: b
     type: option<'b>
+    label: false
   - name: f
     type: ('a, 'b) => 'c
+    label: true
 returnType: option<'c>
 # For compatibility
 constraints:

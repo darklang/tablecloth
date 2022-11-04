@@ -4,6 +4,7 @@ docstring: Determine whether the <param a> is an integer.
 parameters:
   - name: a
     type: float
+    label: false
 returnType: bool
 # For compatibility
 constraints:

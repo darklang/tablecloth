@@ -4,6 +4,7 @@ docstring: Get the absolute value of <param a>
 parameters:
   - name: a
     type: int
+    label: false
 returnType: int
 # For compatibility
 constraints:

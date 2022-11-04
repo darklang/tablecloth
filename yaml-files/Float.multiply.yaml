@@ -4,8 +4,10 @@ docstring: Multiply <param a> by <param b>, returning their product
 parameters:
   - name: a
     type: float
+    label: false
   - name: b
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

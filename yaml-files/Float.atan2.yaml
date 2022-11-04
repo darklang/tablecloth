@@ -4,8 +4,10 @@ docstring: Find the angle (in radians) to an [(x, y)] coordinate
 parameters:
   - name: \y
     type: float
+    label: true
   - name: x
     type: float
+    label: true
 returnType: radians
 # For compatibility
 constraints:

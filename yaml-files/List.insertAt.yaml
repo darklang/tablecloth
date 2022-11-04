@@ -4,11 +4,14 @@ docstring: Insert a new element at the specified index. The element previously o
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: index
     type: int
+    label: true
   - name: value
     type: >-
       'a
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

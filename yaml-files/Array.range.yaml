@@ -4,8 +4,10 @@ docstring: Creates an array containing all of the integers from [from] up to but
 parameters:
   - name: from
     type: int
+    label: true
   - name: to
     type: int
+    label: true
 returnType: array<int>
 # For compatibility
 constraints:

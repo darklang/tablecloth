@@ -4,6 +4,7 @@ docstring: Convert <param a> (Bool) into a String
 parameters:
   - name: a
     type: bool
+    label: false
 returnType: string
 # For compatibility
 constraints:

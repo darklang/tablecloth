@@ -4,8 +4,10 @@ docstring: Converts an array of strings into a {!String}, placing [sep] between 
 parameters:
   - name: a
     type: array<string>
+    label: false
   - name: sep
     type: string
+    label: true
 returnType: string
 # For compatibility
 constraints:

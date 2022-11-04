@@ -4,6 +4,7 @@ docstring: Detect one of the following characters ['\t'] (tab), ['\n'] (newline)
 parameters:
   - name: a
     type: char
+    label: false
 returnType: bool
 # For compatibility
 constraints:

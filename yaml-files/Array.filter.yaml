@@ -4,8 +4,10 @@ docstring: Keep elements where function [f] will return [true]
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: (int, 'a) => 'b
+    label: true
 returnType: array<'b>
 # For compatibility
 constraints:

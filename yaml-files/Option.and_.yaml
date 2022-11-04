@@ -4,8 +4,10 @@ docstring: Returns [None] if <param a> is [None], otherwise return <param b>.
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: b
     type: option<'a>
+    label: false
 returnType: option<'a>
 # For compatibility
 constraints:

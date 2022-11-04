@@ -4,11 +4,14 @@ docstring: Modifies an array in place, replacing the element at [index] with [va
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: index
     type: int
+    label: true
   - name: value
     type: >-
       'a
+    label: true
 returnType: unit
 # For compatibility
 constraints:

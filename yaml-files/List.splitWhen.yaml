@@ -5,9 +5,11 @@ Elements up to (but not including) the first element [f] returns [true] for will
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: (list<'a>, list<'a>)
 # For compatibility
 constraints:

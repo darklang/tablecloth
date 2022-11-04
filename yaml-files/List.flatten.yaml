@@ -2,7 +2,8 @@ module: List
 name: flatten
 docstring: Concatenate a list of lists into a single list
   - name: a
-    type: list<list<'a>> 
+    type: list<list<'a>>
+    label: false
 returnType: list<'a>
 # For compatibility
 constraints:

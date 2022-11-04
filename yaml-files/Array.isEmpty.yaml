@@ -4,6 +4,7 @@ docstring: Check if an array is empty
 parameters:
   - name: a
     type: array<'a>
+    label: false
 returnType: bool
 # For compatibility
 constraints:

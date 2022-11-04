@@ -4,6 +4,7 @@ docstring: Extract the first value from a tuple
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
 returnType: >-
   'a
 # For compatibility

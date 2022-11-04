@@ -4,6 +4,7 @@ docstring: Convert <param a> to a [string]
 parameters:
   - name: a
     type: char
+    label: false
 returnType: string
 # For compatibility
 constraints:

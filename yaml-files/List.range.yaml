@@ -4,8 +4,10 @@ docstring: Creates a list containing all of the integers from [from] if it is pr
 parameters:
   - name: from
     type: int=?
+    label: true
   - name: a
     type: int
+    label: false
 returnType: list<int>
 # For compatibility
 constraints:

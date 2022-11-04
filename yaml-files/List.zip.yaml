@@ -3,8 +3,10 @@ name: zip
 docstring: Combine two lists by merging each pair of elements into a {!Tuple2}. If one list is longer, the extra elements are dropped
   - name: a
     type: list<'a> 
+    label: false
   - name: b
     type: list<'b> 
+    label: false
 returnType: list<('a,'b)>
 # For compatibility
 constraints:

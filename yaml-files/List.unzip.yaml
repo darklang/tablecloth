@@ -3,6 +3,7 @@ name: unzip
 docstring: Decompose a list of {!Tuple2} into a {!Tuple2} of lists
   - name: a
     type: list<('a,'b)>
+    label: false
 returnType: (list<'a>, list<'b>)
 # For compatibility
 constraints:

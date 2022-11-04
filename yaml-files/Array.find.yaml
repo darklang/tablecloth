@@ -4,9 +4,11 @@ docstring: Returns, as an {!Option}, the first element for which [f] evaluates t
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: option<'a>
 # For compatibility
 constraints:

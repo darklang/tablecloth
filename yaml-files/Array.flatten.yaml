@@ -4,6 +4,7 @@ docstring: Flatten an array of arrays into a single array
 parameters:
   - name: a
     type: array<array<'a>>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

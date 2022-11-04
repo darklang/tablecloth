@@ -4,11 +4,14 @@ docstring: Test if a list contains the specified element using the provided [equ
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: b
     type: >-
       'a
+    label: false
   - name: equal
     type: ('a, 'a) => bool
+    label: true
 returnType: bool
 # For compatibility
 constraints:

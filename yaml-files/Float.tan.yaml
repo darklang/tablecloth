@@ -4,6 +4,7 @@ docstring: Takes <param a> and figure out its tangent
 parameters:
   - name: a
     type: radians
+    label: false
 returnType: float
 # For compatibility
 constraints:

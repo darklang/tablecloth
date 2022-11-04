@@ -4,11 +4,14 @@ docstring: Returns a new list with the value at [index] updated to be the result
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: index
     type: int
+    label: true
   - name: f
     type: >-
       'a => 'a
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

@@ -4,10 +4,13 @@ docstring: Compare two lists using the provided [f] function to compare elements
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: b
     type: list<'a>
+    label: false
   - name: c
     type: ('a, 'a) => int
+    label: false
 returnType: int
 # For compatibility
 constraints:

@@ -5,6 +5,7 @@ parameters:
   - name: a
     type: >-
       'a
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

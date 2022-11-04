@@ -4,6 +4,7 @@ docstring: Determine whether <param a > is positive or negative infinity.
 parameters:
   - name: a
     type: float
+    label: false
 returnType: bool
 # For compatibility
 constraints:

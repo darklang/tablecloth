@@ -4,6 +4,7 @@ docstring: Flips the 'sign' of <param a>
 parameters:
   - name: a
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Extract the third value from a tuple
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
 returnType: >-
   'c
 # For compatibility

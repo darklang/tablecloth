@@ -4,6 +4,7 @@ docstring: Converts a list to an {!Array}.
 parameters:
   - name: a
     type: list<'a>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

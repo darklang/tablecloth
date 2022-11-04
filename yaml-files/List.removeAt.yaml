@@ -4,8 +4,10 @@ docstring: Creates a new list without the element at [index]. If [index] is outs
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: index
     type: int
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

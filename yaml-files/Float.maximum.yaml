@@ -4,8 +4,10 @@ docstring: Compare <param a> and <param b>, returning the highest value
 parameters:
   - name: a
     type: float
+    label: false
   - name: b
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

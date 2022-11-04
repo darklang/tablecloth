@@ -4,15 +4,19 @@ docstring: Takes a function [f] which takes a single argument of a tuple3 [('a, 
 parameters:
   - name: a
     type: (('a, 'b, 'c)) => 'd
+    label: false
   - name: b
     type: >-
       'a
+    label: false
   - name: c
     type: >-
       'b
+    label: false
   - name: d
     type: >-
       'c
+    label: false
 returnType: >-
   'd
 # For compatibility

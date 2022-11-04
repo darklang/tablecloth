@@ -4,10 +4,13 @@ docstring: Combine two lists, using [f] to combine each pair of elements. If one
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: b
     type: list<'b>
+    label: false
   - name: f
     type: ('a, 'b) => 'c)
+    label: true
 returnType: list<'c>
 # For compatibility
 constraints:

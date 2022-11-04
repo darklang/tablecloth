@@ -4,8 +4,10 @@ docstring: Creates a new array which is the result of appending the second array
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: b
     type: array<'a>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

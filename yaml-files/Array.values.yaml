@@ -4,6 +4,7 @@ docstring: Return all of the [Some] values from an array of options
 parameters:
   - name: a
     type: array<option<'a>>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

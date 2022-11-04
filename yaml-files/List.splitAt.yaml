@@ -8,8 +8,10 @@ If [index] is greater than the length of the list, all elements will be in the s
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: index
     type: int
+    label: true
 returnType: (list<'a>, list<'a>)
 # For compatibility
 constraints:

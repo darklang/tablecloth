@@ -4,12 +4,16 @@ docstring: Combine three arrays, using [f] to combine each trio of elements
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: b
     type: array<'b>
+    label: false
   - name: c
     type: array<'c>
+    label: false
   - name: f
     type: ('a, 'b, 'c) => 'd
+    label: true
 returnType: array<'d>
 # For compatibility
 constraints:

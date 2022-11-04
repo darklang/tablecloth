@@ -4,6 +4,7 @@ docstring: Returns, as an {!Option}, the first element of a list. If the list is
 parameters:
   - name: a
     type: list<'a>
+    label: false
 returnType: option<'a>
 # For compatibility
 constraints:

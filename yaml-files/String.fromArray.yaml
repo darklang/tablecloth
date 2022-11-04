@@ -4,6 +4,7 @@ docstring: Create a string from an {!Array} of characters
 parameters:
   - name: a
     type: array<char>
+    label: false
 returnType: string
 # For compatibility
 constraints:

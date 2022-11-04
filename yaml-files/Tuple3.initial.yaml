@@ -4,6 +4,7 @@ docstring: Extract the first and second values of a {!Tuple3} as a {!Tuple2}
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
 returnType: ('a, 'b)
 # For compatibility
 constraints:

@@ -4,8 +4,10 @@ docstring: Attempt to take the first [count] elements of a list. If the list has
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: count
     type: int
+    label: true
 returnType: list<'a>
 # For compatibility
 constraints:

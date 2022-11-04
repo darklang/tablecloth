@@ -4,9 +4,11 @@ docstring: Allows you to combine {!map} and {!filter} into a single pass
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => option<'b>
+    label: true
 returnType: list<'b>
 # For compatibility
 constraints:

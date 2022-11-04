@@ -4,6 +4,7 @@ docstring: Create an array from a {!List}
 parameters:
   - name: a
     type: list<'a>
+    label: false
 returnType: array<'a>
 # For compatibility
 constraints:

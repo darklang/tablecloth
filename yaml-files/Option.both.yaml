@@ -4,8 +4,10 @@ docstring: Transform <param a> and <param b> into an option of a {!Tuple2}. Retu
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: b
     type: option<'b>
+    label: false
 returnType: option<('a, 'b)>
 # For compatibility
 constraints:

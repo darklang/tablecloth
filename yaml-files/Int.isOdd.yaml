@@ -4,6 +4,7 @@ docstring: Calculate <param a> mod 2, returning false if the remainder equals to
 parameters:
   - name: a
     type: int
+    label: false
 returnType: bool
 # For compatibility
 constraints:

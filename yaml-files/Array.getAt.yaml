@@ -4,8 +4,10 @@ docstring: Returns, as an {!Option}, the element at index number [n] of array [a
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: index
     type: int
+    label: true
 returnType: option<'a>
 # For compatibility
 constraints:

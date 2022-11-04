@@ -4,8 +4,10 @@ docstring: returns the length of the hypotenuse of a right-angled triangle with 
 parameters:
   - name: a
     type: float
+    label: false
   - name: b
     type: float
+    label: false
 returnType: float
 # For compatibility
 constraints:

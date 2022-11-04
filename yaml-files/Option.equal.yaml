@@ -4,10 +4,13 @@ docstring: Test <param a> and <param b> for equality using the provided function
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: b
     type: option<'a>
+    label: false
   - name: c
     type: ('a, 'a) => bool
+    label: false
 returnType: bool
 # For compatibility
 constraints:

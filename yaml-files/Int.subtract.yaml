@@ -4,8 +4,10 @@ docstring: Subtract <param a> from <param b>, returning their difference
 parameters:
   - name: a
     type: int
+    label: false
   - name: b
     type: int
+    label: false
 returnType: int
 # For compatibility
 constraints:

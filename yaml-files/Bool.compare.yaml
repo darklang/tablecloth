@@ -4,8 +4,10 @@ docstring: Compare two <param a> and <param b>.
 parameters:
   - name: a
     type: bool
-  - name: a
+    label: false
+  - name: b
     type: bool
+    label: false
 returnType: int
 # For compatibility
 constraints:

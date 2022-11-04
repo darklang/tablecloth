@@ -4,8 +4,10 @@ docstring: Divide a list into groups. [f] is called with consecutive elements, w
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: ('a, 'a) => bool
+    label: true
 returnType: list<list<'a>>
 # For compatibility
 constraints:

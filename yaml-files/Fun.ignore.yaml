@@ -4,6 +4,7 @@ docstring: Discards the value it is given and returns [()]
 parameters:
   - name: a
     type: _
+    label: false
 returnType: unit
 # For compatibility
 constraints:

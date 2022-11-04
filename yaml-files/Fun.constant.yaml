@@ -5,9 +5,11 @@ parameters:
   - name: a
     type: >-
       'a
+    label: false
   - name: b
     type: >-
       'b
+    label: false
 returnType: >-
   'a
 # For compatibility

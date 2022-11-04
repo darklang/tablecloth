@@ -4,9 +4,11 @@ docstring: Transform the {!first} value in a tuple
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
   - name: f
     type: >-
       'a => 'x
+    label: true
 returnType: ('x, 'b, 'c)
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Convert <param a> into a Float
 parameters:
   - name: a
     type: int
+    label: false
 returnType: float
 # For compatibility
 constraints:

@@ -4,9 +4,11 @@ docstring: Divides an array at the first element [f] returns [true] for. Returns
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: >-
       'a => bool
+    label: true
 returnType: (array<'a>, array<'a>)
 # For compatibility
 constraints:

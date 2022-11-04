@@ -4,8 +4,10 @@ docstring: Unwrap <param a> returning [default] if called with [None]
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: default
     type: \'a
+    label: true
 returnType: \'a
 # For compatibility
 constraints:

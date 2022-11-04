@@ -4,6 +4,7 @@ docstring: Reverse the elements in a list
 parameters:
   - name: a
     type: list<'a>
+    label: false
 returnType: list<'a>
 # For compatibility
 constraints:

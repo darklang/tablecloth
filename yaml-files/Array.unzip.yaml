@@ -4,6 +4,7 @@ docstring: Decompose an array of {!Tuple2}s into a {!Tuple2} of arrays
 parameters:
   - name: a
     type: array<('a, 'b)>
+    label: false
 returnType: (array<'a>, array<'b>)
 # For compatibility
 constraints:

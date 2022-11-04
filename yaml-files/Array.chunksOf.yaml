@@ -4,8 +4,10 @@ docstring: Split an array into equally sized chunks. If there aren't enough elem
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: size
     type: int
+    label: true
 returnType: array<array<'a>>
 # For compatibility
 constraints:

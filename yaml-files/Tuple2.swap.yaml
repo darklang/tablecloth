@@ -4,6 +4,7 @@ docstring: Switches the first and second values of a tuple
 parameters:
   - name: a
     type: ('a, 'b)
+    label: false
 returnType: ('b, 'a)
 # For compatibility
 constraints:

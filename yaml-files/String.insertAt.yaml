@@ -4,10 +4,13 @@ docstring: Insert a string at [index]
 parameters:
   - name: a
     type: string
+    label: false
   - name: index
     type: int
+    label: true
   - name: value
     type: string
+    label: true
 returnType: string
 # For compatibility
 constraints:

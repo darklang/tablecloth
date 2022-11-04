@@ -4,9 +4,11 @@ docstring: Chain together many computations that may not return a value
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: f
     type: >- 
       'a => option<'b>
+    label: true
 returnType: option<'b>
 # For compatibility
 constraints:

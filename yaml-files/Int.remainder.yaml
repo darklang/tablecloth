@@ -4,8 +4,10 @@ docstring: divide <param a> by <param by>, returning their remainder
 parameters:
   - name: a
     type: int
+    label: false
   - name: by
     type: int
+    label: true
 returnType: int
 # For compatibility
 constraints:

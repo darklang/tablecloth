@@ -4,6 +4,7 @@ docstring: Converts the <param a> to an equivalent string of length one
 parameters:
   - name: a
     type: char
+    label: false
 returnType: string
 # For compatibility
 constraints:

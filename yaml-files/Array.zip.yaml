@@ -4,8 +4,10 @@ docstring: Combine two arrays by merging each pair of elements into a {!Tuple2}
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: b
     type: array<'b>
+    label: false
 returnType: array<('a, 'b)>
 # For compatibility
 constraints:

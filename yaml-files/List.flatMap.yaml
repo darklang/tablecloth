@@ -4,9 +4,11 @@ docstring: Apply a function [f] onto a list and {!flatten} the resulting list of
 parameters:
   - name: a
     type: list<'a>
+    label: false
   - name: f
     type: >-
       'a => list<'b>
+    label: true
 returnType: list<'b>
 # For compatibility
 constraints:

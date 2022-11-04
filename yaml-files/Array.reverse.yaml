@@ -4,6 +4,7 @@ docstring: Reverses an array {b in place}, mutating the existing array
 parameters:
   - name: a
     type: array<'a>
+    label: false
 returnType: unit
 # For compatibility
 constraints:

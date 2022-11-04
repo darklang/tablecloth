@@ -4,12 +4,15 @@ docstring: Transform both values of a tuple, using [f] for the first value and [
 parameters:
   - name: a
     type: ('a, 'b)
+    label: false
   - name: f
     type: >-
       'a => 'x
+    label: true
   - name: g
     type: >-
       'b => 'y
+    label: true
 returnType: ('x, 'y)
 # For compatibility
 constraints:

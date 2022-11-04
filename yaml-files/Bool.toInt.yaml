@@ -4,6 +4,7 @@ docstring: Convert <param a> (Bool) into an Int
 parameters:
   - name: a
     type: bool
+    label: false
 returnType: int
 # For compatibility
 constraints:

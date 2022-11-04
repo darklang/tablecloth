@@ -4,9 +4,11 @@ docstring: Transform the value inside an option. Leaves [None] untouched.
 parameters:
   - name: a
     type: option<'a>
+    label: false
   - name: f
     type: >-
       'a => 'b
+    label: true
 returnType: option<'b>
 # For compatibility
 constraints:

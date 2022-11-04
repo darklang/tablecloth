@@ -4,15 +4,19 @@ docstring: Transform each value in a tuple by applying [f] to the {!first} value
 parameters:
   - name: a
     type: ('a, 'b, 'c)
+    label: false
   - name: f
     type: >-
       'a => 'x
+    label: true
   - name: g
     type: >-
       'b => 'y
+    label: true
   - name: h
     type: >-
       'c => 'z
+    label: true
 returnType: ('x, 'y, 'z)
 # For compatibility
 constraints:

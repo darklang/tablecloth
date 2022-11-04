@@ -5,12 +5,15 @@ parameters:
   - name: a
     type: >-
       'a
+    label: false
   - name: b
     type: >-
       'b => 'c
+    label: false
   - name: c
     type: >-
       'a => 'b
+    label: false
 returnType: >-
   'c
 # For compatibility

@@ -4,9 +4,11 @@ docstring: Create a new array which is the result of applying a function [f] to 
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: f
     type: >-
       'a => 'b
+    label: true
 returnType: array<'b>
 # For compatibility
 constraints:

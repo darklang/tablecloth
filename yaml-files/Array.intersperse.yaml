@@ -4,9 +4,11 @@ docstring: Places [sep] between all the elements of the given array
 parameters:
   - name: a
     type: array<'a>
+    label: false
   - name: sep
     type: >-
       'a
+    label: true
 returnType: array<'a>
 # For compatibility
 constraints:

@@ -4,6 +4,7 @@ docstring: Convert an angle in turns into radians
 parameters:
   - name: a
     type: float
+    label: false
 returnType: radians
 # For compatibility
 constraints:
