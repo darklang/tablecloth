@@ -33,7 +33,6 @@ test "isLowercase('a')" (fun () -> expect (Char.isLowercase 'a') |> toEqual Eq.b
 test "isLowercase('7')" (fun () -> expect (Char.isLowercase '7') |> toEqual Eq.bool false) ; 
 test "isLowercase('\236')" (fun () -> expect (Char.isLowercase '\236') |> toEqual Eq.bool false) ; 
 test "isPrintable('~')" (fun () -> expect (Char.isPrintable '~') |> toEqual Eq.bool true) ; 
-test "isPrintable(fromCode(31) |> Option.map(~f=isPrintable))" (fun () -> expect (Char.isPrintable fromCode(31) |> Option.map(~f=isPrintable)) |> toEqual (let open Eq in bool ) Some(false)) ; 
 test "isUppercase('A')" (fun () -> expect (Char.isUppercase 'A') |> toEqual Eq.bool true) ; 
 test "isUppercase('7')" (fun () -> expect (Char.isUppercase '7') |> toEqual Eq.bool false) ; 
 test "isUppercase('\237')" (fun () -> expect (Char.isUppercase '\237') |> toEqual Eq.bool false) ; 

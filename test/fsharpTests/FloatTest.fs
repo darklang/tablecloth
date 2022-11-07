@@ -21,41 +21,41 @@ testCase "add(3.14,3.14)"
 <| fun _ -> 
     let expected = 6.28
     Expect.equal expected (Float.add 3.14 3.14) "error"
-testCase "clamp(5.,0.,8.)" 
+testCase "clamp(5.,~lower=0.,~upper=8.)" 
 <| fun _ -> 
     let expected = 5.
-    Expect.equal expected (Float.clamp 5. 0. 8.) "error"
-testCase "clamp(9.,0.,8.)" 
+    Expect.equal expected (Float.clamp 5. ~lower:0. ~upper:8.) "error"
+testCase "clamp(9.,~lower=0.,~upper=8.)" 
 <| fun _ -> 
     let expected = 8.
-    Expect.equal expected (Float.clamp 9. 0. 8.) "error"
-testCase "clamp(1.,2.,8.)" 
+    Expect.equal expected (Float.clamp 9. ~lower:0. ~upper:8.) "error"
+testCase "clamp(1.,~lower=2.,~upper=8.)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.clamp 1. 2. 8.) "error"
-testCase "clamp(5.,-10.,-5.)" 
+    Expect.equal expected (Float.clamp 1. ~lower:2. ~upper:8.) "error"
+testCase "clamp(5.,~lower=-10.,~upper=-5.)" 
 <| fun _ -> 
     let expected = -5.
-    Expect.equal expected (Float.clamp 5. -10. -5.) "error"
-testCase "clamp(-15.,-10.,-5.)" 
+    Expect.equal expected (Float.clamp 5. ~lower:-10. ~upper:-5.) "error"
+testCase "clamp(-15.,~lower=-10.,~upper=-5.)" 
 <| fun _ -> 
     let expected = -10.
-    Expect.equal expected (Float.clamp -15. -10. -5.) "error"
-testCase "clamp(-6.6,-7.9,nan)" 
+    Expect.equal expected (Float.clamp -15. ~lower:-10. ~upper:-5.) "error"
+testCase "clamp(-6.6,~lower=-7.9,~upper=nan)" 
 <| fun _ -> 
     let expected = NaN
-    Expect.equal expected (Float.clamp -6.6 -7.9 nan) "error"
-testCase "clamp(-6.6,nan,0.)" 
+    Expect.equal expected (Float.clamp -6.6 ~lower:-7.9 ~upper:nan) "error"
+testCase "clamp(-6.6,~lower=nan,~upper=0.)" 
 <| fun _ -> 
     let expected = NaN
-    Expect.equal expected (Float.clamp -6.6 nan 0.) "error"
-testCase "clamp(nan,2.,8.)" 
+    Expect.equal expected (Float.clamp -6.6 ~lower:nan ~upper:0.) "error"
+testCase "clamp(nan,~lower=2.,~upper=8.)" 
 <| fun _ -> 
     let expected = NaN
-    Expect.equal expected (Float.clamp nan 2. 8.) "error"
-testCase "clamp(3.,7., 1.)" 
+    Expect.equal expected (Float.clamp nan ~lower:2. ~upper:8.) "error"
+testCase "clamp(3.,~lower=7.,~upper= 1.)" 
 <| fun _ -> 
-    Expect.equal (Float.clamp 3. 7.  1.) |> failwith "error"
+    Expect.equal (Float.clamp 3. ~lower:7. ~upper: 1.) |> failwith "error"
 testCase "atan(0.)" 
 <| fun _ -> 
     let expected = 0.
@@ -76,26 +76,26 @@ testCase "atan(-1. /. 1.)"
 <| fun _ -> 
     let expected = -0.7853981633974483
     Expect.equal expected (Float.atan -1. /. 1.) "error"
-testCase "atan2(0.,0.)" 
+testCase "atan2(~y=0.,~x=0.)" 
 <| fun _ -> 
     let expected = 0.
-    Expect.equal expected (Float.atan2 0. 0.) "error"
-testCase "atan2(1.,1.)" 
+    Expect.equal expected (Float.atan2 ~y:0. ~x:0.) "error"
+testCase "atan2(~y=1.,~x=1.)" 
 <| fun _ -> 
     let expected = 0.7853981633974483
-    Expect.equal expected (Float.atan2 1. 1.) "error"
-testCase "atan2(1.,-1.)" 
+    Expect.equal expected (Float.atan2 ~y:1. ~x:1.) "error"
+testCase "atan2(~y=1.,~x=-1.)" 
 <| fun _ -> 
     let expected = 2.356194490192345
-    Expect.equal expected (Float.atan2 1. -1.) "error"
-testCase "atan2(-1.,-1.)" 
+    Expect.equal expected (Float.atan2 ~y:1. ~x:-1.) "error"
+testCase "atan2(~y=-1.,~x=-1.)" 
 <| fun _ -> 
     let expected = -2.356194490192345
-    Expect.equal expected (Float.atan2 -1. -1.) "error"
-testCase "atan2(-1.,1.)" 
+    Expect.equal expected (Float.atan2 ~y:-1. ~x:-1.) "error"
+testCase "atan2(~y=-1.,~x=1.)" 
 <| fun _ -> 
     let expected = -0.7853981633974483
-    Expect.equal expected (Float.atan2 -1. 1.) "error"
+    Expect.equal expected (Float.atan2 ~y:-1. ~x:1.) "error"
 testCase "ceiling(1.2)" 
 <| fun _ -> 
     let expected = 2.
@@ -132,18 +132,18 @@ testCase "degrees(180.)"
 <| fun _ -> 
     let expected = pi
     Expect.equal expected (Float.degrees 180.) "error"
-testCase "divide(3.14,2.)" 
+testCase "divide(3.14,~by=2.)" 
 <| fun _ -> 
     let expected = 1.57
-    Expect.equal expected (Float.divide 3.14 2.) "error"
-testCase "divide(3.14,0.)" 
+    Expect.equal expected (Float.divide 3.14 ~by:2.) "error"
+testCase "divide(3.14,~by=0.)" 
 <| fun _ -> 
     let expected = infinity
-    Expect.equal expected (Float.divide 3.14 0.) "error"
-testCase "divide(3.14,-0.)" 
+    Expect.equal expected (Float.divide 3.14 ~by:0.) "error"
+testCase "divide(3.14,~by=-0.)" 
 <| fun _ -> 
     let expected = negativeInfinity
-    Expect.equal expected (Float.divide 3.14 -0.) "error"
+    Expect.equal expected (Float.divide 3.14 ~by:-0.) "error"
 testCase "floor(1.2)" 
 <| fun _ -> 
     let expected = 1.
@@ -212,41 +212,41 @@ testCase "hypotenuse(3.,4.)"
 <| fun _ -> 
     let expected = 5.
     Expect.equal expected (Float.hypotenuse 3. 4.) "error"
-testCase "inRange(3.,2.,4.)" 
+testCase "inRange(3.,~lower=2.,~upper=4.)" 
 <| fun _ -> 
     let expected = true
-    Expect.equal expected (Float.inRange 3. 2. 4.) "error"
-testCase "inRange(8.,2.,4.)" 
+    Expect.equal expected (Float.inRange 3. ~lower:2. ~upper:4.) "error"
+testCase "inRange(8.,~lower=2.,~upper=4.)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Float.inRange 8. 2. 4.) "error"
-testCase "inRange(1., 2.,4.)" 
+    Expect.equal expected (Float.inRange 8. ~lower:2. ~upper:4.) "error"
+testCase "inRange(1.,~lower= 2.,~upper=4.)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Float.inRange 1.  2. 4.) "error"
-testCase "inRange(2.,1.,2.)" 
+    Expect.equal expected (Float.inRange 1. ~lower: 2. ~upper:4.) "error"
+testCase "inRange(2.,~lower=1.,~upper=2.)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Float.inRange 2. 1. 2.) "error"
-testCase "inRange(-6.6,-7.9,-5.2)" 
+    Expect.equal expected (Float.inRange 2. ~lower:1. ~upper:2.) "error"
+testCase "inRange(-6.6,~lower=-7.9,~upper=-5.2)" 
 <| fun _ -> 
     let expected = true
-    Expect.equal expected (Float.inRange -6.6 -7.9 -5.2) "error"
-testCase "inRange(-6.6,-7.9,nan)" 
+    Expect.equal expected (Float.inRange -6.6 ~lower:-7.9 ~upper:-5.2) "error"
+testCase "inRange(-6.6,~lower=-7.9,~upper=nan)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Float.inRange -6.6 -7.9 nan) "error"
-testCase "inRange(-6.6,nan,0.)" 
+    Expect.equal expected (Float.inRange -6.6 ~lower:-7.9 ~upper:nan) "error"
+testCase "inRange(-6.6,~lower=nan,~upper=0.)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Float.inRange -6.6 nan 0.) "error"
-testCase "inRange(nan,2.,8.)" 
+    Expect.equal expected (Float.inRange -6.6 ~lower:nan ~upper:0.) "error"
+testCase "inRange(nan,~lower=2.,~upper=8.)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Float.inRange nan 2. 8.) "error"
-testCase "inRange(3.,7.,1.)" 
+    Expect.equal expected (Float.inRange nan ~lower:2. ~upper:8.) "error"
+testCase "inRange(3.,~lower=7.,~upper=1.)" 
 <| fun _ -> 
-    Expect.equal (Float.inRange 3. 7. 1.) |> failwith "error"
+    Expect.equal (Float.inRange 3. ~lower:7. ~upper:1.) |> failwith "error"
 testCase "isFinite(infinity)" 
 <| fun _ -> 
     let expected = false
@@ -319,18 +319,18 @@ testCase "isNaN(91.4)"
 <| fun _ -> 
     let expected = false
     Expect.equal expected (Float.isNaN 91.4) "error"
-testCase "log(100.,10.)" 
+testCase "log(100.,~base=10.)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.log 100. 10.) "error"
-testCase "log(256.,2.)" 
+    Expect.equal expected (Float.log 100. ~base:10.) "error"
+testCase "log(256.,~base=2.)" 
 <| fun _ -> 
     let expected = 8.
-    Expect.equal expected (Float.log 256. 2.) "error"
-testCase "log(0.,10.)" 
+    Expect.equal expected (Float.log 256. ~base:2.) "error"
+testCase "log(0.,~base=10.)" 
 <| fun _ -> 
     let expected = negativeInfinity
-    Expect.equal expected (Float.log 0. 10.) "error"
+    Expect.equal expected (Float.log 0. ~base:10.) "error"
 testCase "maximum(7.,9.)" 
 <| fun _ -> 
     let expected = 9.
@@ -387,258 +387,258 @@ testCase "negate(0.)"
 <| fun _ -> 
     let expected = -0.
     Expect.equal expected (Float.negate 0.) "error"
-testCase "power(7.,3.)" 
+testCase "power(~base=7.,~exponent=3.)" 
 <| fun _ -> 
     let expected = 343.
-    Expect.equal expected (Float.power 7. 3.) "error"
-testCase "power(0.,3.)" 
+    Expect.equal expected (Float.power ~base:7. ~exponent:3.) "error"
+testCase "power(~base=0.,~exponent=3.)" 
 <| fun _ -> 
     let expected = 0.
-    Expect.equal expected (Float.power 0. 3.) "error"
-testCase "power(7.,0.)" 
+    Expect.equal expected (Float.power ~base:0. ~exponent:3.) "error"
+testCase "power(~base=7.,~exponent=0.)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.power 7. 0.) "error"
-testCase "round(#Zero,1.2)" 
+    Expect.equal expected (Float.power ~base:7. ~exponent:0.) "error"
+testCase "round(~direction=#Zero,1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Zero 1.2) "error"
-testCase "round(#Zero,1.5)" 
+    Expect.equal expected (Float.round ~direction:#Zero 1.2) "error"
+testCase "round(~direction=#Zero,1.5)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Zero 1.5) "error"
-testCase "round(#Zero,1.8)" 
+    Expect.equal expected (Float.round ~direction:#Zero 1.5) "error"
+testCase "round(~direction=#Zero,1.8)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Zero 1.8) "error"
-testCase "round(#Zero,-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Zero 1.8) "error"
+testCase "round(~direction=#Zero,-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Zero -1.2) "error"
-testCase "round(#Zero,-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Zero -1.2) "error"
+testCase "round(~direction=#Zero,-1.5)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Zero -1.5) "error"
-testCase "round(#Zero,-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Zero -1.5) "error"
+testCase "round(~direction=#Zero,-1.8)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Zero -1.8) "error"
-testCase "round(#AwayFromZero,1.2)" 
+    Expect.equal expected (Float.round ~direction:#Zero -1.8) "error"
+testCase "round(~direction=#AwayFromZero,1.2)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #AwayFromZero 1.2) "error"
-testCase "round(#AwayFromZero,1.5)" 
+    Expect.equal expected (Float.round ~direction:#AwayFromZero 1.2) "error"
+testCase "round(~direction=#AwayFromZero,1.5)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #AwayFromZero 1.5) "error"
-testCase "round(#AwayFromZero,1.8)" 
+    Expect.equal expected (Float.round ~direction:#AwayFromZero 1.5) "error"
+testCase "round(~direction=#AwayFromZero,1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #AwayFromZero 1.8) "error"
-testCase "round(#AwayFromZero,-1.2)" 
+    Expect.equal expected (Float.round ~direction:#AwayFromZero 1.8) "error"
+testCase "round(~direction=#AwayFromZero,-1.2)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #AwayFromZero -1.2) "error"
-testCase "round(#AwayFromZero,-1.5)" 
+    Expect.equal expected (Float.round ~direction:#AwayFromZero -1.2) "error"
+testCase "round(~direction=#AwayFromZero,-1.5)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #AwayFromZero -1.5) "error"
-testCase "round(#AwayFromZero,-1.8)" 
+    Expect.equal expected (Float.round ~direction:#AwayFromZero -1.5) "error"
+testCase "round(~direction=#AwayFromZero,-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #AwayFromZero -1.8) "error"
-testCase "round(#Up,1.2)" 
+    Expect.equal expected (Float.round ~direction:#AwayFromZero -1.8) "error"
+testCase "round(~direction=#Up,1.2)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Up 1.2) "error"
-testCase "round(#Up,1.5)" 
+    Expect.equal expected (Float.round ~direction:#Up 1.2) "error"
+testCase "round(~direction=#Up,1.5)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Up 1.5) "error"
-testCase "round(#Up,1.8)" 
+    Expect.equal expected (Float.round ~direction:#Up 1.5) "error"
+testCase "round(~direction=#Up,1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Up 1.8) "error"
-testCase "round(#Up,-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Up 1.8) "error"
+testCase "round(~direction=#Up,-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Up -1.2) "error"
-testCase "round(#Up,-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Up -1.2) "error"
+testCase "round(~direction=#Up,-1.5)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Up -1.5) "error"
-testCase "round(#Up,-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Up -1.5) "error"
+testCase "round(~direction=#Up,-1.8)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Up -1.8) "error"
-testCase "round(#Down,1.2)" 
+    Expect.equal expected (Float.round ~direction:#Up -1.8) "error"
+testCase "round(~direction=#Down,1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Down 1.2) "error"
-testCase "round(#Down,1.5)" 
+    Expect.equal expected (Float.round ~direction:#Down 1.2) "error"
+testCase "round(~direction=#Down,1.5)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Down 1.5) "error"
-testCase "round(#Down,1.8)" 
+    Expect.equal expected (Float.round ~direction:#Down 1.5) "error"
+testCase "round(~direction=#Down,1.8)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Down 1.8) "error"
-testCase "round(#Down,-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Down 1.8) "error"
+testCase "round(~direction=#Down,-1.2)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Down -1.2) "error"
-testCase "round(#Down,-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Down -1.2) "error"
+testCase "round(~direction=#Down,-1.5)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Down -1.5) "error"
-testCase "round(#Down,-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Down -1.5) "error"
+testCase "round(~direction=#Down,-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Down -1.8) "error"
-testCase "round(#Closest(#Zero),1.2)" 
+    Expect.equal expected (Float.round ~direction:#Down -1.8) "error"
+testCase "round(~direction=#Closest(#Zero),1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#Zero) 1.2) "error"
-testCase "round(#Closest(#Zero),1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Zero) 1.2) "error"
+testCase "round(~direction=#Closest(#Zero),1.5)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#Zero) 1.5) "error"
-testCase "round(#Closest(#Zero),1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Zero) 1.5) "error"
+testCase "round(~direction=#Closest(#Zero),1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#Zero) 1.8) "error"
-testCase "round(#Closest(#Zero),-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Zero) 1.8) "error"
+testCase "round(~direction=#Closest(#Zero),-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#Zero) -1.2) "error"
-testCase "round(#Closest(#Zero),-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Zero) -1.2) "error"
+testCase "round(~direction=#Closest(#Zero),-1.5)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#Zero) -1.5) "error"
-testCase "round(#Closest(#Zero),-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Zero) -1.5) "error"
+testCase "round(~direction=#Closest(#Zero),-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#Zero) -1.8) "error"
-testCase "round(#Closest(#AwayFromZero),1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Zero) -1.8) "error"
+testCase "round(~direction=#Closest(#AwayFromZero),1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#AwayFromZero) 1.2) "error"
-testCase "round(#Closest(#AwayFromZero),1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#AwayFromZero) 1.2) "error"
+testCase "round(~direction=#Closest(#AwayFromZero),1.5)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#AwayFromZero) 1.5) "error"
-testCase "round(#Closest(#AwayFromZero),1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#AwayFromZero) 1.5) "error"
+testCase "round(~direction=#Closest(#AwayFromZero),1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#AwayFromZero) 1.8) "error"
-testCase "round(#Closest(#AwayFromZero),-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#AwayFromZero) 1.8) "error"
+testCase "round(~direction=#Closest(#AwayFromZero),-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#AwayFromZero) -1.2) "error"
-testCase "round(#Closest(#AwayFromZero),-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#AwayFromZero) -1.2) "error"
+testCase "round(~direction=#Closest(#AwayFromZero),-1.5)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#AwayFromZero) -1.5) "error"
-testCase "round(#Closest(#AwayFromZero),-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#AwayFromZero) -1.5) "error"
+testCase "round(~direction=#Closest(#AwayFromZero),-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#AwayFromZero) -1.8) "error"
-testCase "round(#Closest(#Up),1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#AwayFromZero) -1.8) "error"
+testCase "round(~direction=#Closest(#Up),1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#Up) 1.2) "error"
-testCase "round(#Closest(#Up),1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Up) 1.2) "error"
+testCase "round(~direction=#Closest(#Up),1.5)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#Up) 1.5) "error"
-testCase "round(#Closest(#Up),1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Up) 1.5) "error"
+testCase "round(~direction=#Closest(#Up),1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#Up) 1.8) "error"
-testCase "round(#Closest(#Up),-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Up) 1.8) "error"
+testCase "round(~direction=#Closest(#Up),-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#Up) -1.2) "error"
-testCase "round(#Closest(#Up),-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Up) -1.2) "error"
+testCase "round(~direction=#Closest(#Up),-1.5)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#Up) -1.5) "error"
-testCase "round(#Closest(#Up),-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Up) -1.5) "error"
+testCase "round(~direction=#Closest(#Up),-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#Up) -1.8) "error"
-testCase "round(#Closest(#Down),1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Up) -1.8) "error"
+testCase "round(~direction=#Closest(#Down),1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#Down) 1.2) "error"
-testCase "round(#Closest(#Down),1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Down) 1.2) "error"
+testCase "round(~direction=#Closest(#Down),1.5)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#Down) 1.5) "error"
-testCase "round(#Closest(#Down),1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Down) 1.5) "error"
+testCase "round(~direction=#Closest(#Down),1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#Down) 1.8) "error"
-testCase "round(#Closest(#Down),-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Down) 1.8) "error"
+testCase "round(~direction=#Closest(#Down),-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#Down) -1.2) "error"
-testCase "round(#Closest(#Down),-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Down) -1.2) "error"
+testCase "round(~direction=#Closest(#Down),-1.5)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#Down) -1.5) "error"
-testCase "round(#Closest(#Down),-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Down) -1.5) "error"
+testCase "round(~direction=#Closest(#Down),-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#Down) -1.8) "error"
-testCase "round(#Closest(#ToEven),1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#Down) -1.8) "error"
+testCase "round(~direction=#Closest(#ToEven),1.2)" 
 <| fun _ -> 
     let expected = 1.
-    Expect.equal expected (Float.round #Closest(#ToEven) 1.2) "error"
-testCase "round(#Closest(#ToEven),1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) 1.2) "error"
+testCase "round(~direction=#Closest(#ToEven),1.5)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#ToEven) 1.5) "error"
-testCase "round(#Closest(#ToEven),1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) 1.5) "error"
+testCase "round(~direction=#Closest(#ToEven),1.8)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#ToEven) 1.8) "error"
-testCase "round(#Closest(#ToEven),2.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) 1.8) "error"
+testCase "round(~direction=#Closest(#ToEven),2.2)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#ToEven) 2.2) "error"
-testCase "round(#Closest(#ToEven),2.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) 2.2) "error"
+testCase "round(~direction=#Closest(#ToEven),2.5)" 
 <| fun _ -> 
     let expected = 2.
-    Expect.equal expected (Float.round #Closest(#ToEven) 2.5) "error"
-testCase "round(#Closest(#ToEven),2.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) 2.5) "error"
+testCase "round(~direction=#Closest(#ToEven),2.8)" 
 <| fun _ -> 
     let expected = 3.
-    Expect.equal expected (Float.round #Closest(#ToEven) 2.8) "error"
-testCase "round(#Closest(#ToEven),-1.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) 2.8) "error"
+testCase "round(~direction=#Closest(#ToEven),-1.2)" 
 <| fun _ -> 
     let expected = -1.
-    Expect.equal expected (Float.round #Closest(#ToEven) -1.2) "error"
-testCase "round(#Closest(#ToEven),-1.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) -1.2) "error"
+testCase "round(~direction=#Closest(#ToEven),-1.5)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#ToEven) -1.5) "error"
-testCase "round(#Closest(#ToEven),-1.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) -1.5) "error"
+testCase "round(~direction=#Closest(#ToEven),-1.8)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#ToEven) -1.8) "error"
-testCase "round(#Closest(#ToEven),-2.2)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) -1.8) "error"
+testCase "round(~direction=#Closest(#ToEven),-2.2)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#ToEven) -2.2) "error"
-testCase "round(#Closest(#ToEven),-2.5)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) -2.2) "error"
+testCase "round(~direction=#Closest(#ToEven),-2.5)" 
 <| fun _ -> 
     let expected = -2.
-    Expect.equal expected (Float.round #Closest(#ToEven) -2.5) "error"
-testCase "round(#Closest(#ToEven),-2.8)" 
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) -2.5) "error"
+testCase "round(~direction=#Closest(#ToEven),-2.8)" 
 <| fun _ -> 
     let expected = -3.
-    Expect.equal expected (Float.round #Closest(#ToEven) -2.8) "error"
+    Expect.equal expected (Float.round ~direction:#Closest(#ToEven) -2.8) "error"
 testCase "radians(pi)" 
 <| fun _ -> 
     let expected = pi

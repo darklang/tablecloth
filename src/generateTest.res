@@ -9,6 +9,7 @@ type tests = {
 type parameter = {
   name: string,
   \"type": string,
+  label: bool
 }
 
 type data = {
@@ -25,6 +26,44 @@ let \"module" = ref("")
 let testCasesR = []
 let testCasesF = []
 let testCasesO = []
+let labeltest = ref([])
+let labeltestO = ref([])
+
+// let files = [
+//   "Float.absolute.json",
+//   "Float.add.json",
+//   "Float.clamp.json",
+//   "Float.atan.json",
+//   "Float.atan2.json",
+//   "Float.ceiling.json",
+//   "Float.cos.json",
+//   "Float.degrees.json",
+//   "Float.divide.json",
+//   "Float.floor.json",
+//   "Float.fromInt.json",
+//   "Float.fromString.json",
+//   "Float.hypotenuse.json",
+//   "Float.inRange.json",
+//   "Float.isFinite.json",
+//   "Float.isInfinite.json",
+//   "Float.isInteger.json",
+//   "Float.isNaN.json",
+//   "Float.log.json",
+//   "Float.maximum.json",
+//   "Float.minimum.json",
+//   "Float.multiply.json",
+//   "Float.negate.json",
+//   "Float.power.json",
+//   "Float.round.json",
+//   "Float.radians.json",
+//   "Float.sin.json",
+//   "Float.squareRoot.json",
+//   "Float.subtract.json",
+//   "Float.tan.json",
+//   "Float.toInt.json",
+//   "Float.truncate.json",
+//   "Float.turns.json",
+// ]
 // let files = [
 //   "Bool.compare.json",
 //   "Bool.equal.json",
@@ -71,6 +110,7 @@ let files = [
   "Int.toFloat.json",
   "Int.toString.json",
 ]
+
 let generateAllTests = Belt.Array.map(files, file => {
   let file = readFileSync(~name="../json-files/" ++ file, #utf8)
   let myData = parseIntoMyData(file)
@@ -114,9 +154,23 @@ let generateAllTests = Belt.Array.map(files, file => {
       }
     } else {
       //param length > 1 type
-      newInput := Js_array.joinWith(",", test.inputs)
-      newInputOF := Js_array.joinWith(" ", test.inputs)
-      newInputR := Js_array.joinWith(",", test.inputs)
+      for i in 0 to length - 1{
+        let label = myData.parameters[i].label
+        if label{
+        let testOcaml = `~${myData.parameters[i].name}:${Belt.Int.toString(test.inputs[i])}`
+        let test = `~${myData.parameters[i].name}=${Belt.Int.toString(test.inputs[i])}`
+        Belt.Array.push(labeltest.contents,test)
+        Belt.Array.push(labeltestO.contents,testOcaml)
+        }else{
+            Belt.Array.push(labeltest.contents,Belt.Int.toString(test.inputs[i]))
+            Belt.Array.push(labeltestO.contents,Belt.Int.toString(test.inputs[i]))
+        }
+      newInput := Js_array.joinWith(",", labeltest.contents)
+      newInputOF := Js_array.joinWith(" ", labeltestO.contents)
+      newInputR := Js_array.joinWith(",", labeltest.contents)
+      }
+      labeltest.contents=[]
+      labeltestO.contents=[]
     }
 
     let resultRescript = `test ("${name}(${newInputR.contents})", () => expect(${output.contents != "exception"

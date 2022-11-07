@@ -2,7 +2,7 @@ module: Float
 name: atan2
 docstring: Find the angle (in radians) to an [(x, y)] coordinate
 parameters:
-  - name: \y
+  - name: y
     type: float
     label: true
   - name: x

@@ -38,8 +38,6 @@ test ("isLowercase('a')", () => expect(Char.isLowercase('a')) |> toEqual(Eq.bool
 test ("isLowercase('7')", () => expect(Char.isLowercase('7')) |> toEqual(Eq.bool, false)) 
 test ("isLowercase('\236')", () => expect(Char.isLowercase('\236')) |> toEqual(Eq.bool, false)) 
 test ("isPrintable('~')", () => expect(Char.isPrintable('~')) |> toEqual(Eq.bool, true)) 
-test ("isPrintable(fromCode(31) |> Option.map(~f=isPrintable))", () => expect(Char.isPrintable(fromCode(31) |> Option.map(~f=isPrintable))) |> toEqual({open Eq
-bool()}, Some(false))) 
 test ("isUppercase('A')", () => expect(Char.isUppercase('A')) |> toEqual(Eq.bool, true)) 
 test ("isUppercase('7')", () => expect(Char.isUppercase('7')) |> toEqual(Eq.bool, false)) 
 test ("isUppercase('\237')", () => expect(Char.isUppercase('\237')) |> toEqual(Eq.bool, false)) 

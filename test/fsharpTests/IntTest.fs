@@ -25,60 +25,60 @@ testCase "add(1,1)"
 <| fun _ -> 
     let expected = 2
     Expect.equal expected (Int.add 1 1) "error"
-testCase "clamp(5,0,8)" 
+testCase "clamp(5,~lower=0,~upper=8)" 
 <| fun _ -> 
     let expected = 5
-    Expect.equal expected (Int.clamp 5 0 8) "error"
-testCase "clamp(9,0,8)" 
+    Expect.equal expected (Int.clamp 5 ~lower:0 ~upper:8) "error"
+testCase "clamp(9,~lower=0,~upper=8)" 
 <| fun _ -> 
     let expected = 8
-    Expect.equal expected (Int.clamp 9 0 8) "error"
-testCase "clamp(1,2,8)" 
+    Expect.equal expected (Int.clamp 9 ~lower:0 ~upper:8) "error"
+testCase "clamp(1,~lower=2,~upper=8)" 
 <| fun _ -> 
     let expected = 2
-    Expect.equal expected (Int.clamp 1 2 8) "error"
-testCase "clamp(5,-10,-5)" 
+    Expect.equal expected (Int.clamp 1 ~lower:2 ~upper:8) "error"
+testCase "clamp(5,~lower=-10,~upper=-5)" 
 <| fun _ -> 
     let expected = -5
-    Expect.equal expected (Int.clamp 5 -10 -5) "error"
-testCase "clamp(-15,-10,-5)" 
+    Expect.equal expected (Int.clamp 5 ~lower:-10 ~upper:-5) "error"
+testCase "clamp(-15,~lower=-10,~upper=-5)" 
 <| fun _ -> 
     let expected = -10
-    Expect.equal expected (Int.clamp -15 -10 -5) "error"
-testCase "clamp(3,7,1)" 
+    Expect.equal expected (Int.clamp -15 ~lower:-10 ~upper:-5) "error"
+testCase "clamp(3,~lower=7,~upper=1)" 
 <| fun _ -> 
-    Expect.equal (Int.clamp 3 7 1) |> failwith "error"
-testCase "divide(3,2)" 
+    Expect.equal (Int.clamp 3 ~lower:7 ~upper:1) |> failwith "error"
+testCase "divide(3,~by=2)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.divide 3 2) "error"
-testCase "divide(3,0)" 
+    Expect.equal expected (Int.divide 3 ~by:2) "error"
+testCase "divide(3,~by=0)" 
 <| fun _ -> 
-    Expect.equal (Int.divide 3 0) |> failwith "error"
-testCase "divide(27,5)" 
+    Expect.equal (Int.divide 3 ~by:0) |> failwith "error"
+testCase "divide(27,~by=5)" 
 <| fun _ -> 
     let expected = 5
-    Expect.equal expected (Int.divide 27 5) "error"
-testCase "divideFloat(3,2)" 
+    Expect.equal expected (Int.divide 27 ~by:5) "error"
+testCase "divideFloat(3,~by=2)" 
 <| fun _ -> 
     let expected = 1.5
-    Expect.equal expected (Int.divideFloat 3 2) "error"
-testCase "divideFloat(27,5)" 
+    Expect.equal expected (Int.divideFloat 3 ~by:2) "error"
+testCase "divideFloat(27,~by=5)" 
 <| fun _ -> 
     let expected = 5.4
-    Expect.equal expected (Int.divideFloat 27 5) "error"
-testCase "divideFloat(8,4)" 
+    Expect.equal expected (Int.divideFloat 27 ~by:5) "error"
+testCase "divideFloat(8,~by=4)" 
 <| fun _ -> 
     let expected = 2
-    Expect.equal expected (Int.divideFloat 8 4) "error"
-testCase "divideFloat(8,0)" 
+    Expect.equal expected (Int.divideFloat 8 ~by:4) "error"
+testCase "divideFloat(8,~by=0)" 
 <| fun _ -> 
     let expected = Float.infinity
-    Expect.equal expected (Int.divideFloat 8 0) "error"
-testCase "divideFloat(-8,0)" 
+    Expect.equal expected (Int.divideFloat 8 ~by:0) "error"
+testCase "divideFloat(-8,~by=0)" 
 <| fun _ -> 
     let expected = Float.negativeInfinity
-    Expect.equal expected (Int.divideFloat -8 0) "error"
+    Expect.equal expected (Int.divideFloat -8 ~by:0) "error"
 testCase "fromString("0")" 
 <| fun _ -> 
     let expected = Some(0)
@@ -131,29 +131,29 @@ testCase "fromString(" ")"
 <| fun _ -> 
     let expected = None
     Expect.equal expected (Int.fromString " ") "error"
-testCase "inRange(3,2,4)" 
+testCase "inRange(3,~lower=2,~upper=4)" 
 <| fun _ -> 
     let expected = true
-    Expect.equal expected (Int.inRange 3 2 4) "error"
-testCase "inRange(8,2,4)" 
+    Expect.equal expected (Int.inRange 3 ~lower:2 ~upper:4) "error"
+testCase "inRange(8,~lower=2,~upper=4)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Int.inRange 8 2 4) "error"
-testCase "inRange(1,2,4)" 
+    Expect.equal expected (Int.inRange 8 ~lower:2 ~upper:4) "error"
+testCase "inRange(1,~lower=2,~upper=4)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Int.inRange 1 2 4) "error"
-testCase "inRange(2,1,2)" 
+    Expect.equal expected (Int.inRange 1 ~lower:2 ~upper:4) "error"
+testCase "inRange(2,~lower=1,~upper=2)" 
 <| fun _ -> 
     let expected = false
-    Expect.equal expected (Int.inRange 2 1 2) "error"
-testCase "inRange(-6,-7,-5)" 
+    Expect.equal expected (Int.inRange 2 ~lower:1 ~upper:2) "error"
+testCase "inRange(-6,~lower=-7,~upper=-5)" 
 <| fun _ -> 
     let expected = true
-    Expect.equal expected (Int.inRange -6 -7 -5) "error"
-testCase "inRange(3,7,1)" 
+    Expect.equal expected (Int.inRange -6 ~lower:-7 ~upper:-5) "error"
+testCase "inRange(3,~lower=7,~upper=1)" 
 <| fun _ -> 
-    Expect.equal (Int.inRange 3 7 1) |> failwith "error"
+    Expect.equal (Int.inRange 3 ~lower:7 ~upper:1) |> failwith "error"
 testCase "isEven(8)" 
 <| fun _ -> 
     let expected = true
@@ -202,42 +202,42 @@ testCase "minimum(-4,-1)"
 <| fun _ -> 
     let expected = -4
     Expect.equal expected (Int.minimum -4 -1) "error"
-testCase "modulo(-4,3)" 
+testCase "modulo(-4,~by=3)" 
 <| fun _ -> 
     let expected = 2
-    Expect.equal expected (Int.modulo -4 3) "error"
-testCase "modulo(-3,3)" 
+    Expect.equal expected (Int.modulo -4 ~by:3) "error"
+testCase "modulo(-3,~by=3)" 
 <| fun _ -> 
     let expected = 0
-    Expect.equal expected (Int.modulo -3 3) "error"
-testCase "modulo(-2,3)" 
+    Expect.equal expected (Int.modulo -3 ~by:3) "error"
+testCase "modulo(-2,~by=3)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.modulo -2 3) "error"
-testCase "modulo(-1,3)" 
+    Expect.equal expected (Int.modulo -2 ~by:3) "error"
+testCase "modulo(-1,~by=3)" 
 <| fun _ -> 
     let expected = 2
-    Expect.equal expected (Int.modulo -1 3) "error"
-testCase "modulo(0,3)" 
+    Expect.equal expected (Int.modulo -1 ~by:3) "error"
+testCase "modulo(0,~by=3)" 
 <| fun _ -> 
     let expected = 0
-    Expect.equal expected (Int.modulo 0 3) "error"
-testCase "modulo(1,3)" 
+    Expect.equal expected (Int.modulo 0 ~by:3) "error"
+testCase "modulo(1,~by=3)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.modulo 1 3) "error"
-testCase "modulo(2,3)" 
+    Expect.equal expected (Int.modulo 1 ~by:3) "error"
+testCase "modulo(2,~by=3)" 
 <| fun _ -> 
     let expected = 2
-    Expect.equal expected (Int.modulo 2 3) "error"
-testCase "modulo(3,3)" 
+    Expect.equal expected (Int.modulo 2 ~by:3) "error"
+testCase "modulo(3,~by=3)" 
 <| fun _ -> 
     let expected = 0
-    Expect.equal expected (Int.modulo 3 3) "error"
-testCase "modulo(4,3)" 
+    Expect.equal expected (Int.modulo 3 ~by:3) "error"
+testCase "modulo(4,~by=3)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.modulo 4 3) "error"
+    Expect.equal expected (Int.modulo 4 ~by:3) "error"
 testCase "multiply(2,7)" 
 <| fun _ -> 
     let expected = 14
@@ -254,50 +254,50 @@ testCase "negate(0)"
 <| fun _ -> 
     let expected = 0
     Expect.equal expected (Int.negate 0) "error"
-testCase "power(7,3)" 
+testCase "power(~base=7,~exponent=3)" 
 <| fun _ -> 
     let expected = 343
-    Expect.equal expected (Int.power 7 3) "error"
-testCase "power(0,3)" 
+    Expect.equal expected (Int.power ~base:7 ~exponent:3) "error"
+testCase "power(~base=0,~exponent=3)" 
 <| fun _ -> 
     let expected = 0
-    Expect.equal expected (Int.power 0 3) "error"
-testCase "power(7,0)" 
+    Expect.equal expected (Int.power ~base:0 ~exponent:3) "error"
+testCase "power(~base=7,~exponent=0)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.power 7 0) "error"
-testCase "remainder(-4,3)" 
+    Expect.equal expected (Int.power ~base:7 ~exponent:0) "error"
+testCase "remainder(-4,~by=3)" 
 <| fun _ -> 
     let expected = -1
-    Expect.equal expected (Int.remainder -4 3) "error"
-testCase "remainder(-2,3)" 
+    Expect.equal expected (Int.remainder -4 ~by:3) "error"
+testCase "remainder(-2,~by=3)" 
 <| fun _ -> 
     let expected = -2
-    Expect.equal expected (Int.remainder -2 3) "error"
-testCase "remainder(-1,3)" 
+    Expect.equal expected (Int.remainder -2 ~by:3) "error"
+testCase "remainder(-1,~by=3)" 
 <| fun _ -> 
     let expected = -1
-    Expect.equal expected (Int.remainder -1 3) "error"
-testCase "remainder(0,3)" 
+    Expect.equal expected (Int.remainder -1 ~by:3) "error"
+testCase "remainder(0,~by=3)" 
 <| fun _ -> 
     let expected = 0
-    Expect.equal expected (Int.remainder 0 3) "error"
-testCase "remainder(1,3)" 
+    Expect.equal expected (Int.remainder 0 ~by:3) "error"
+testCase "remainder(1,~by=3)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.remainder 1 3) "error"
-testCase "remainder(2,3)" 
+    Expect.equal expected (Int.remainder 1 ~by:3) "error"
+testCase "remainder(2,~by=3)" 
 <| fun _ -> 
     let expected = 2
-    Expect.equal expected (Int.remainder 2 3) "error"
-testCase "remainder(3,3)" 
+    Expect.equal expected (Int.remainder 2 ~by:3) "error"
+testCase "remainder(3,~by=3)" 
 <| fun _ -> 
     let expected = 0
-    Expect.equal expected (Int.remainder 3 3) "error"
-testCase "remainder(4,3)" 
+    Expect.equal expected (Int.remainder 3 ~by:3) "error"
+testCase "remainder(4,~by=3)" 
 <| fun _ -> 
     let expected = 1
-    Expect.equal expected (Int.remainder 4 3) "error"
+    Expect.equal expected (Int.remainder 4 ~by:3) "error"
 testCase "subtract(4,3)" 
 <| fun _ -> 
     let expected = 1
