@@ -1,0 +1,23 @@
+module: Option
+name: isNone
+docstring: Check if <param a> is a [None]
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: Some(3004)
+    output: false
+  - inputs: None
+    output: true
+examples:
+  - inputs: Some(3004)
+    output: false
+  - inputs: None
+    output: true
+added: 0.1.0

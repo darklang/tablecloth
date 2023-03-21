@@ -1,0 +1,34 @@
+module: Bool
+name: compare
+docstring: Compare two <param a> and <param b>.
+parameters:
+  - name: a
+    type: bool
+    label: false
+  - name: b
+    type: bool
+    label: false
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [true, true]
+    output: 0
+  - inputs: [true, false]
+    output: 1
+  - inputs: [false, true]
+    output: -1
+  - inputs: [false, false]
+    output: 0
+examples:
+  - inputs: [true, true]
+    output: 0
+  - inputs: [true, false]
+    output: 1
+  - inputs: [false, true]
+    output: -1
+  - inputs: [false, false]
+    output: 0
+added: 0.1.0

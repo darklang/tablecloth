@@ -1,0 +1,26 @@
+module: Int
+name: add
+docstring: Add <param a> to <param b>, returning their sum
+parameters:
+  - name: a
+    type: int
+    label: false
+  - name: b
+    type: int
+    label: false
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [1, 2]
+    output: 3
+  - inputs: [1, 1]
+    output: 2
+examples:
+  - inputs: [1, 2]
+    output: 3
+  - inputs: [1, 1]
+    output: 2
+added: 0.1.0

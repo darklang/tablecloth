@@ -1,0 +1,51 @@
+module: Char
+name: isLetter
+docstring: Detect upper and lower case ASCII alphabetic characters.
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'A'
+    output: true
+  - inputs: >-
+      '7'
+    output: false
+  - inputs: >-
+      ' '
+    output: false
+  - inputs: >-
+      '\n'
+    output: false
+  - inputs: >-
+      '\001'
+    output: false
+  - inputs: >-
+      '\236'
+    output: false
+examples:
+  - inputs: >-
+      'A'
+    output: true
+  - inputs: >-
+      '7'
+    output: false
+  - inputs: >-
+      ' '
+    output: false
+  - inputs: >-
+      '\n'
+    output: false
+  - inputs: >-
+      '\001'
+    output: false
+  - inputs: >-
+      '\236'
+    output: false
+added: 0.1.0

@@ -1,0 +1,27 @@
+module: Char
+name: fromString
+docstring: Converts a string to character
+parameters:
+  - name: a
+    type: string
+    label: false
+returnType: option<char>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "a"
+    output: Some('a')
+  - inputs: "abc"
+    output: None
+  - inputs: ""
+    output: None
+examples:
+  - inputs: "a"
+    output: Some('a')
+  - inputs: "abc"
+    output: None
+  - inputs: ""
+    output: None
+added: 0.1.0

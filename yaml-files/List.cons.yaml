@@ -1,0 +1,27 @@
+module: List
+name: cons
+docstring: Prepend a value to the front of a list
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: b
+    type: >-
+      'a
+    label: false
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], 1]
+    output: [1]
+  - inputs: [[2, 3, 4], 1]
+    output: [1, 2, 3, 4]
+examples:
+  - inputs: [[], 1]
+    output: [1]
+  - inputs: [[2, 3, 4], 1]
+    output: [1, 2, 3, 4]
+added: 0.1.0

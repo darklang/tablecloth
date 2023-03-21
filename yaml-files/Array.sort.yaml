@@ -1,0 +1,30 @@
+module: Array
+name: sort
+docstring: Sort in place, modifying the existing array, using the provided [compare] function to determine order
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: compare
+    type: ('a, 'a) => int
+    label: true
+returnType: unit
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], Int.compare]
+    output: []
+  - inputs: [[5], Int.compare]
+    output: [5]
+  - inputs: [[5, 6, 8, 3, 6], Int.compare]
+    output: [3, 5, 6, 6, 8]
+examples:
+  - inputs: [[], Int.compare]
+    output: []
+  - inputs: [[5], Int.compare]
+    output: [5]
+  - inputs: [[5, 6, 8, 3, 6], Int.compare]
+    output: [3, 5, 6, 6, 8]
+added: 0.1.0

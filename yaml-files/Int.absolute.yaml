@@ -1,0 +1,27 @@
+module: Int
+name: absolute
+docstring: Get the absolute value of <param a>
+parameters:
+  - name: a
+    type: int
+    label: false
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 8
+    output: 8
+  - inputs: -7
+    output: 7
+  - inputs: 0
+    output: 0
+examples:
+  - inputs: 8
+    output: 8
+  - inputs: -7
+    output: 7
+  - inputs: 0
+    output: 0
+added: 0.1.0

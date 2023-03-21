@@ -1,0 +1,81 @@
+module: Char
+name: isDigit
+docstring: Detect when a character is a number
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      '0'
+    output: true
+  - inputs: >-
+      '1'
+    output: true
+  - inputs: >-
+      '2'
+    output: true
+  - inputs: >-
+      '3'
+    output: true
+  - inputs: >-
+      '4'
+    output: true
+  - inputs: >-
+      '5'
+    output: true
+  - inputs: >-
+      '6'
+    output: true
+  - inputs: >-
+      '7'
+    output: true
+  - inputs: >-
+      '8'
+    output: true
+  - inputs: >-
+      '9'
+    output: true
+  - inputs: >-
+      'a'
+    output: false
+examples:
+  - inputs: >-
+      '0'
+    output: true
+  - inputs: >-
+      '1'
+    output: true
+  - inputs: >-
+      '2'
+    output: true
+  - inputs: >-
+      '3'
+    output: true
+  - inputs: >-
+      '4'
+    output: true
+  - inputs: >-
+      '5'
+    output: true
+  - inputs: >-
+      '6'
+    output: true
+  - inputs: >-
+      '7'
+    output: true
+  - inputs: >-
+      '8'
+    output: true
+  - inputs: >-
+      '9'
+    output: true
+  - inputs: >-
+      'a'
+    output: false
+added: 0.1.0

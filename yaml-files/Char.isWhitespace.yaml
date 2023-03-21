@@ -1,0 +1,27 @@
+module: Char
+name: isWhitespace
+docstring: Detect one of the following characters ['\t'] (tab), ['\n'] (newline), ['\011'] (vertical tab), ['\012'] (form feed), ['\r'] (carriage return), [' '] (space)
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      ' '
+    output: true
+  - inputs: >-
+      'a'
+    output: false
+examples:
+  - inputs: >-
+      ' '
+    output: true
+  - inputs: >-
+      'a'
+    output: false
+added: 0.1.0

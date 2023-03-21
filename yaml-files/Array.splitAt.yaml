@@ -1,0 +1,26 @@
+module: Array
+name: splitAt
+docstring: Divides an array into a {!Tuple2} of arrays.  Elements which have index upto (but not including) [index] will be in the first component of the tuple. Elements with an index greater than or equal to [index] will be in the second.
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: index
+    type: int
+    label: true
+returnType: (array<'a>, array<'a>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3, 4, 5], 2]
+    output: ([1, 2], [3, 4, 5])
+  - inputs: [[1, 2, 3, 4, 5], 0]
+    output: ([], [1, 2, 3, 4, 5])
+examples:
+  - inputs: [[1, 2, 3, 4, 5], 2]
+    output: ([1, 2], [3, 4, 5])
+  - inputs: [[1, 2, 3, 4, 5], 0]
+    output: ([], [1, 2, 3, 4, 5])
+added: 0.1.0

@@ -1,0 +1,33 @@
+module: List
+name: equal
+docstring: Test two lists for equality using the provided function to test elements
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: b
+    type: list<'a>
+    label: false
+  - name: c
+    type: ('a, 'a) => bool
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[2, 5, 6, 11], [2, 5, 6, 11], Int.equal]
+    output: true
+  - inputs: [[2, 5, -6, 11], [2, 5, 6, 11], Int.equal]
+    output: false
+  - inputs: [["hi", "hello", "hey"], ["hi", "hello", "hey"], String.equal]
+    output: true
+examples:
+  - inputs: [[2, 5, 6, 11], [2, 5, 6, 11], Int.equal]
+    output: true
+  - inputs: [[2, 5, -6, 11], [2, 5, 6, 11], Int.equal]
+    output: false
+  - inputs: [["hi", "hello", "hey"], ["hi", "hello", "hey"], String.equal]
+    output: true
+added: 0.1.0

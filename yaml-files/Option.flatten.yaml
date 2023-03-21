@@ -1,0 +1,27 @@
+module: Option
+name: flatten
+docstring: Flatten two optional layers into a single optional layer
+parameters:
+  - name: a
+    type: option<option<'a>>
+    label: false
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: Some(Some(4))
+    output: Some(4)
+  - inputs: Some(None)
+    output: None
+  - inputs: None
+    output: None
+examples:
+  - inputs: Some(Some(4))
+    output: Some(4)
+  - inputs: Some(None)
+    output: None
+  - inputs: None
+    output: None
+added: 0.1.0

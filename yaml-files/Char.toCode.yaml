@@ -1,0 +1,21 @@
+module: Char
+name: toCode
+docstring: Convert <param a> to the corresponding ASCII code point
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'a'
+    output: 97
+examples:
+  - inputs: >-
+      'a'
+    output: 97
+added: 0.1.0

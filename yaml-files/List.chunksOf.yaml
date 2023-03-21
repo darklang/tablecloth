@@ -1,0 +1,26 @@
+module: List
+name: chunksOf
+docstring: Split a list into equally sized chunks. If there aren't enough elements to make the last 'chunk', those elements are ignored
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: size
+    type: int
+    label: true
+returnType: list<list<'a>>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], 2]
+    output: []
+  - inputs: [["#FFBA49", "#9984D4", "#20A39E", "#EF5B5B", "#23001E"], 2]
+    output: [["#FFBA49", "#9984D4"], ["#20A39E", "#EF5B5B"]]
+examples:
+  - inputs: [[], 2]
+    output: []
+  - inputs: [["#FFBA49", "#9984D4", "#20A39E", "#EF5B5B", "#23001E"], 2]
+    output: [["#FFBA49", "#9984D4"], ["#20A39E", "#EF5B5B"]]
+added: 0.1.0

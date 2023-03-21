@@ -1,0 +1,31 @@
+module: Option
+name: map
+docstring: Transform the value inside an option. Leaves [None] untouched.
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => 'b
+    label: true
+returnType: option<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(9), x => x * x]
+    output: Some(81)
+  - inputs: [Some(9), Int.toString]
+    output: Some("9")
+  - inputs: [None, x => x * x]
+    output: None
+examples:
+  - inputs: [Some(9), x => x * x]
+    output: Some(81)
+  - inputs: [Some(9), Int.toString]
+    output: Some("9")
+  - inputs: [None, x => x * x]
+    output: None
+added: 0.1.0

@@ -1,0 +1,26 @@
+module: List
+name: join
+docstring: Converts a list of strings into a {!String}, placing [sep] between each string in the result
+parameters:
+  - name: a
+    type: list<string>
+    label: false
+  - name: sep
+    type: string
+    label: true
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [["Ant", "Bat", "Cat"], ", "]
+    output: "Ant, Bat, Cat"
+  - inputs: [[], ", "]
+    output: ""
+examples:
+  - inputs: [["Ant", "Bat", "Cat"], ", "]
+    output: "Ant, Bat, Cat"
+  - inputs: [[], ", "]
+    output: ""
+added: 0.1.0

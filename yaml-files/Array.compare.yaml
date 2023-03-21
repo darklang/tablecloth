@@ -1,0 +1,33 @@
+module: Array
+name: compare
+docstring: Compare two arrays using the provided [f] function to compare pairs of elements
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: b
+    type: array<'a>
+    label: false
+  - name: f
+    type: ('a, 'a) => int
+    label: true
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3], [1, 2, 3, 4], Int.compare]
+    output: -1
+  - inputs: [[1, 2, 3], [1, 2, 3], Int.compare]
+    output: 0
+  - inputs: [[1, 2, 5], [1, 2, 3], Int.compare]
+    output: 1
+examples:
+  - inputs: [[1, 2, 3], [1, 2, 3, 4], Int.compare]
+    output: -1
+  - inputs: [[1, 2, 3], [1, 2, 3], Int.compare]
+    output: 0
+  - inputs: [[1, 2, 5], [1, 2, 3], Int.compare]
+    output: 1
+added: 0.1.0

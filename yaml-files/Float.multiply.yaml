@@ -1,0 +1,22 @@
+module: Float
+name: multiply
+docstring: Multiply <param a> by <param b>, returning their product
+parameters:
+  - name: a
+    type: float
+    label: false
+  - name: b
+    type: float
+    label: false
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["2.", "7."]
+    output: "14."
+examples:
+  - inputs: ["2.", "7."]
+    output: "14."
+added: 0.1.0

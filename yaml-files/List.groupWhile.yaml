@@ -1,0 +1,32 @@
+module: List
+name: groupWhile
+docstring: Divide a list into groups. [f] is called with consecutive elements, when [f] returns [false] a new group is started
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: ('a, 'a) => bool
+    label: true
+returnType: list<list<'a>>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], String.equal]
+    output: []
+  - inputs: [["a", "b", "b", "a", "a", "a", "b", "a"], \"<>"]
+    output: [["a"], ["b", "b"], ["a", "a", "a"], ["b"], ["a"]]
+  - inputs: >-
+      [[2, 4, 6, 5, 3, 1, 8, 7, 9], (x, y) => mod(x, 2) !== mod(y, 2)]
+    output: [[2, 4, 6], [5, 3, 1], [8], [7, 9]]
+examples:
+  - inputs: [[], String.equal]
+    output: []
+  - inputs: [["a", "b", "b", "a", "a", "a", "b", "a"], \"<>"]
+    output: [["a"], ["b", "b"], ["a", "a", "a"], ["b"], ["a"]]
+  - inputs: >-
+      [[2, 4, 6, 5, 3, 1, 8, 7, 9], (x, y) => mod(x, 2) !== mod(y, 2)]
+    output: [[2, 4, 6], [5, 3, 1], [8], [7, 9]]
+added: 0.1.0

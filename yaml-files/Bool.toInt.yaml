@@ -1,0 +1,23 @@
+module: Bool
+name: toInt
+docstring: Convert <param a> (Bool) into an Int
+parameters:
+  - name: a
+    type: bool
+    label: false
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: true
+    output: 1
+  - inputs: false
+    output: 0
+examples:
+  - inputs: true
+    output: 1
+  - inputs: false
+    output: 0
+added: 0.1.0

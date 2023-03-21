@@ -1,0 +1,33 @@
+module: Char
+name: toDigit
+docstring: Converts a digit character to its corresponding {!Int}
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: option<int>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      '0'
+    output: Some(0)
+  - inputs: >-
+      '8'
+    output: Some(8)
+  - inputs: >-
+      'a'
+    output: None
+examples:
+  - inputs: >-
+      '0'
+    output: Some(0)
+  - inputs: >-
+      '8'
+    output: Some(8)
+  - inputs: >-
+      'a'
+    output: None
+added: 0.1.0

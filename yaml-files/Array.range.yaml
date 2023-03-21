@@ -1,0 +1,38 @@
+module: Array
+name: range
+docstring: Creates an array containing all of the integers from [from] up to but not including [to]. Returns an empty array for invalid arguments.
+parameters:
+  - name: from
+    type: int
+    label: true
+  - name: to
+    type: int
+    label: true
+returnType: array<int>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 5
+    output: [0, 1, 2, 3, 4]
+  - inputs: 0
+    output: []
+  - inputs: [2, 5]
+    output: [2, 3, 4]
+  - inputs: [-2, 3]
+    output: [-2, -1, 0, 1, 2]
+  - inputs: [5, 0]
+    output: []
+examples:
+  - inputs: 5
+    output: [0, 1, 2, 3, 4]
+  - inputs: 0
+    output: []
+  - inputs: [2, 5]
+    output: [2, 3, 4]
+  - inputs: [-2, 3]
+    output: [-2, -1, 0, 1, 2]
+  - inputs: [5, 0]
+    output: []
+added: 0.1.0

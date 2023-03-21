@@ -1,0 +1,25 @@
+module: Char
+name: isPrintable
+docstring: Detect if a character is a printable character
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      '~'
+    output: true
+  - inputs: fromCode(31) |> Option.map(~f=isPrintable)
+    output: Some(false)
+examples:
+  - inputs: >-
+      '~'
+    output: true
+  - inputs: fromCode(31) |> Option.map(~f=isPrintable)
+    output: Some(false)
+added: 0.1.0

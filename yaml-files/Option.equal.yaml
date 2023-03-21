@@ -1,0 +1,37 @@
+module: Option
+name: equal
+docstring: Test <param a> and <param b> for equality using the provided function
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+  - name: b
+    type: option<'a>
+    label: false
+  - name: c
+    type: ('a, 'a) => bool
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(1), Some(1), Int.equal]
+    output: true
+  - inputs: [Some(1), Some(3), Int.equal]
+    output: false
+  - inputs: [Some(1), None, Int.equal]
+    output: false
+  - inputs: [None, None, Int.equal]
+    output: true
+examples:
+  - inputs: [Some(1), Some(1), Int.equal]
+    output: true
+  - inputs: [Some(1), Some(3), Int.equal]
+    output: false
+  - inputs: [Some(1), None, Int.equal]
+    output: false
+  - inputs: [None, None, Int.equal]
+    output: true
+added: 0.1.0

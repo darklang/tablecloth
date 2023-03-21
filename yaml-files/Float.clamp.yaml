@@ -1,0 +1,57 @@
+module: Float
+name: clamp
+docstring: Clamps <param a> within the inclusive [lower] and [upper] bounds and throws a [System.ArgumentOutOfRangeException] exception if <param lower> '>' <param upper>
+parameters:
+  - name: a
+    type: float
+    label: false
+  - name: lower
+    type: float
+    label: true
+  - name: upper
+    type: float
+    label: true
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["5.", "0.", "8."]
+    output: "5."
+  - inputs: ["9.", "0.", "8."]
+    output: "8."
+  - inputs: ["1.", "2.", "8."]
+    output: "2."
+  - inputs: ["5.", "-10.", "-5."]
+    output: "-5."
+  - inputs: ["-15.", "-10.", "-5."]
+    output: "-10."
+  - inputs: [-6.6, -7.9, nan]
+    output: NaN
+  - inputs: [-6.6, nan, "0."]
+    output: NaN
+  - inputs: [nan, "2.", "8."]
+    output: NaN
+  - inputs: ["3.", "7.", " 1."]
+    output: exception
+examples:
+  - inputs: ["5.", "0.", "8."]
+    output: "5."
+  - inputs: ["9.", "0.", "8."]
+    output: "8."
+  - inputs: ["1.", "2.", "8."]
+    output: "2."
+  - inputs: ["5.", "-10.", "-5."]
+    output: "-5."
+  - inputs: ["-15.", "-10.", "-5."]
+    output: "-10."
+  - inputs: [-6.6, -7.9, nan]
+    output: NaN
+  - inputs: [-6.6, nan, "0."]
+    output: NaN
+  - inputs: [nan, "2.", "8."]
+    output: NaN
+  - inputs: ["3.", "7.", " 1."]
+    output: exception
+added: 0.1.0

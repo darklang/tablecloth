@@ -1,0 +1,26 @@
+module: List
+name: maximum
+docstring: Find the largest element using the provided [compare] function. Returns [None] if called on an empty list
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: compare
+    type: ('a, 'a) => int
+    label: true
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[7, 9, 15, 10, 3], Int.compare]
+    output: Some(15)
+  - inputs: [[], Int.compare]
+    output: None
+examples:
+  - inputs: [[7, 9, 15, 10, 3], Int.compare]
+    output: Some(15)
+  - inputs: [[], Int.compare]
+    output: None
+added: 0.1.0

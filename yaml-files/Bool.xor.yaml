@@ -1,0 +1,34 @@
+module: Bool
+name: xor
+docstring: Perform the exclusive or operator on <param a> and <param b>.Returning [true] if exactly one of its operands is [true].
+parameters:
+  - name: a
+    type: bool
+    label: false
+  - name: b
+    type: bool
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [true, true]
+    output: false
+  - inputs: [true, false]
+    output: true
+  - inputs: [false, true]
+    output: true
+  - inputs: [false, false]
+    output: false
+examples:
+  - inputs: [true, true]
+    output: false
+  - inputs: [true, false]
+    output: true
+  - inputs: [false, true]
+    output: true
+  - inputs: [false, false]
+    output: false
+added: 0.1.0

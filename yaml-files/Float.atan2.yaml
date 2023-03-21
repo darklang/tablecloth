@@ -1,0 +1,38 @@
+module: Float
+name: atan2
+docstring: Find the angle (in radians) to an [(x, y)] coordinate
+parameters:
+  - name: y
+    type: float
+    label: true
+  - name: x
+    type: float
+    label: true
+returnType: radians
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["0.", "0."]
+    output: "0."
+  - inputs: ["1.", "1."]
+    output: 0.7853981633974483
+  - inputs: ["1.", "-1."]
+    output: 2.3561944901923449
+  - inputs: ["-1.", "-1."]
+    output: -2.3561944901923449
+  - inputs: ["-1.", "1."]
+    output: -0.7853981633974483
+examples:
+  - inputs: ["0.", "0."]
+    output: "0."
+  - inputs: ["1.", "1."]
+    output: 0.7853981633974483
+  - inputs: ["1.", "-1."]
+    output: 2.3561944901923449
+  - inputs: ["-1.", "-1."]
+    output: -2.3561944901923449
+  - inputs: ["-1.", "1."]
+    output: -0.7853981633974483
+added: 0.1.0

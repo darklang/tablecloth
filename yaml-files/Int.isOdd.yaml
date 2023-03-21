@@ -1,0 +1,27 @@
+module: Int
+name: isOdd
+docstring: Calculate <param a> mod 2, returning false if the remainder equals to 0, and true otherwise
+parameters:
+  - name: a
+    type: int
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 8
+    output: false
+  - inputs: 9
+    output: true
+  - inputs: 0
+    output: false
+examples:
+  - inputs: 8
+    output: false
+  - inputs: 9
+    output: true
+  - inputs: 0
+    output: false
+added: 0.1.0

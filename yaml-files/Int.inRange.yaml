@@ -1,0 +1,45 @@
+module: Int
+name: inRange
+docstring: Checks if <param a> is between <param lower> and up to, but not including, <param upper>
+parameters:
+  - name: a
+    type: int
+    label: false
+  - name: lower
+    type: int
+    label: true
+  - name: upper
+    type: int
+    label: true
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3, 2, 4]
+    output: true
+  - inputs: [8, 2, 4]
+    output: false
+  - inputs: [1, 2, 4]
+    output: false
+  - inputs: [2, 1, 2]
+    output: false
+  - inputs: [-6, -7, -5]
+    output: true
+  - inputs: [3, 7, 1]
+    output: exception
+examples:
+  - inputs: [3, 2, 4]
+    output: true
+  - inputs: [8, 2, 4]
+    output: false
+  - inputs: [1, 2, 4]
+    output: false
+  - inputs: [2, 1, 2]
+    output: false
+  - inputs: [-6, -7, -5]
+    output: true
+  - inputs: [3, 7, 1]
+    output: exception
+added: 0.1.0

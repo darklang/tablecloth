@@ -1,0 +1,30 @@
+module: List
+name: findIndex
+docstring: Returns, as an option, a tuple of the first element and its index for which [f] evaluates to true. If [f] doesnt return [true] for any [(index, element)] pair, returns [None]
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: (int, 'a)=> bool
+    label: true
+returnType: option<(int, 'a)>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 3, 4, 8], (index, number) => index > 2 && Int.isEven(number)]
+    output: Some(3, 8)
+  - inputs: [[0, 2, 4, 8], (_, _) => false]
+    output: None
+  - inputs: [[], (index, number) => index > 2 && Int.isEven(number)]
+    output: None
+examples:
+  - inputs: [[1, 3, 4, 8], (index, number) => index > 2 && Int.isEven(number)]
+    output: Some(3, 8)
+  - inputs: [[0, 2, 4, 8], (_, _) => false]
+    output: None
+  - inputs: [[], (index, number) => index > 2 && Int.isEven(number)]
+    output: None
+added: 0.1.0

@@ -1,0 +1,31 @@
+module: List
+name: filterWithIndex
+docstring: Like {!filter} but [f] is also called with each elements index
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      (int, 'a) => bool
+    label: true
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      [[2, 99, 0, 3], (i, _) => i > 1]
+    output: [0, 3]
+  - inputs: >-
+      [[], (i, _) => i > 1]
+    output: []
+examples:
+  - inputs: >-
+      [[2, 99, 0, 3], (i, _) => i > 1]
+    output: [0, 3]
+  - inputs: >-
+      [[], (i, _) => i > 1]
+    output: []
+added: 0.1.0

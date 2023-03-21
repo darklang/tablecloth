@@ -1,0 +1,24 @@
+module: Tuple2
+name: make
+docstring: Create a two-tuple with the given values
+parameters:
+  - name: a
+    type: >-
+      'a
+    label: false
+  - name: b
+    type: >-
+      'b
+    label: false
+returnType: ('a, 'b)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [3, 4]
+    output: (3,4)
+examples:
+  - inputs: [3, 4]
+    output: (3,4)
+added: 0.1.0

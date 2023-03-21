@@ -1,0 +1,20 @@
+{
+  "name": "tablecloth",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "rescript",
+    "clean": "rescript clean -with-deps",
+    "start": "rescript build -w"
+  },
+  "keywords": [
+    "rescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "rescript": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.3"
+  }
+}

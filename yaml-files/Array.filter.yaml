@@ -1,0 +1,22 @@
+module: Array
+name: filter
+docstring: Keep elements where function [f] will return [true]
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: f
+    type: (int, 'a) => 'b
+    label: true
+returnType: array<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3, 4, 5, 6], Int.isEven]
+    output: [2, 4, 6]
+examples:
+  - inputs: [[1, 2, 3, 4, 5, 6], Int.isEven]
+    output: [2, 4, 6]
+added: 0.1.0

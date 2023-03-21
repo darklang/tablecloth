@@ -1,0 +1,31 @@
+module: List
+name: intersperse
+docstring: Places [sep] between all the elements of the given list
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: sep
+    type: >-
+      'a
+    label: true
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], "on"]
+    output: []
+  - inputs: [["turtles"], "on"]
+    output: ["turtles"]
+  - inputs: [["turtles", "turtles", "turtles"], "on"]
+    output: ["turtles", "on", "turtles", "on", "turtles"]
+examples:
+  - inputs: [[], "on"]
+    output: []
+  - inputs: [["turtles"], "on"]
+    output: ["turtles"]
+  - inputs: [["turtles", "turtles", "turtles"], "on"]
+    output: ["turtles", "on", "turtles", "on", "turtles"]
+added: 0.1.0

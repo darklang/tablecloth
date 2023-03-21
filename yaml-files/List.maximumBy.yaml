@@ -1,0 +1,30 @@
+module: List
+name: maximumBy
+docstring: >-
+  [List.maximumBy ~f:fcn xs], when given a non-empty list, returns the item in the list for which [fcn item] is a maximum. It is returned as [Some item].
+  If given an empty list, [List.maximumBy] returns [None]. If more than one value has a maximum value for [fcn item], the first one is returned.
+  The function provided takes a list item as its parameter and must return a value that can be compared: for example, a [string] or [int]
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => 'comparable
+    label: true
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[7, 9, 15, 10, 3, 22], x => mod(x, 12)]
+    output: Some(10)
+  - inputs: [[], x => mod(x, 12)]
+    output: None
+examples:
+  - inputs: [[7, 9, 15, 10, 3, 22], x => mod(x, 12)]
+    output: Some(10)
+  - inputs: [[], x => mod(x, 12)]
+    output: None
+added: 0.1.0

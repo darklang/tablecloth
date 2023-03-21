@@ -1,0 +1,34 @@
+module: Array
+name: includes
+docstring: Test if an array contains the specified element using the provided [equal] to test for equality
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: b
+    type: >-
+      'a
+    label: false
+  - name: equal
+    type: ('a, 'a) => bool
+    label: true
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3], 2, \"="]
+    output: true
+  - inputs: [[1, 5, 3], 2, \"="]
+    output: false
+  - inputs: [[], 2, \"="]
+    output: false
+examples:
+  - inputs: [[1, 2, 3], 2, \"="]
+    output: true
+  - inputs: [[1, 5, 3], 2, \"="]
+    output: false
+  - inputs: [[], 2, \"="]
+    output: false
+added: 0.1.0

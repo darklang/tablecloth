@@ -1,0 +1,43 @@
+module: Float
+name: fromString
+docstring: Attempt to parse <param a> to a float
+parameters:
+  - name: a
+    type: string
+    label: false
+returnType: option<float>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "NaN"
+    output: Some(Js.Float._NaN),
+  - inputs: "nan"
+    output: Some(Js.Float._NaN)
+  - inputs: "Infinity"
+    output: Some(infinity)
+  - inputs: "infinity"
+    output: None
+  - inputs: "55"
+    output: Some(55.)
+  - inputs: "-100"
+    output: Some(-100.)
+  - inputs: "not number"
+    output: None
+examples:
+  - inputs: "NaN"
+    output: Some(Js.Float._NaN),
+  - inputs: "nan"
+    output: Some(Js.Float._NaN)
+  - inputs: "Infinity"
+    output: Some(infinity)
+  - inputs: "infinity"
+    output: None
+  - inputs: "55"
+    output: Some(55.)
+  - inputs: "-100"
+    output: Some(-100.)
+  - inputs: "not number"
+    output: None
+added: 0.1.0

@@ -1,0 +1,23 @@
+module: List
+name: head
+docstring: Returns, as an {!Option}, the first element of a list. If the list is empty, returns [None].
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: None
+  - inputs: [-3, 2, 3, 4, 6]
+    output: Some(-3)
+examples:
+  - inputs: []
+    output: None
+  - inputs: [-3, 2, 3, 4, 6]
+    output: Some(-3)
+added: 0.1.0

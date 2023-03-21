@@ -1,0 +1,31 @@
+module: List
+name: count
+docstring: Count the number of elements where function [f] returns [true]
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => bool
+    label: true
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], Int.isEven]
+    output: 0
+  - inputs: [[2, 3], Int.isEven]
+    output: 1
+  - inputs: [[2, 4], Int.isEven]
+    output: 2
+examples:
+  - inputs: [[], Int.isEven]
+    output: 0
+  - inputs: [[2, 3], Int.isEven]
+    output: 1
+  - inputs: [[2, 4], Int.isEven]
+    output: 2
+added: 0.1.0

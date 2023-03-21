@@ -1,0 +1,19 @@
+module: Array
+name: zip
+docstring: Decompose an array of {!Tuple2}s into a {!Tuple2} of arrays
+parameters:
+  - name: a
+    type: array<('a, 'b)>
+    label: false
+returnType: (array<'a>, array<'b>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [(0, true), (17, false), (1337, true)]
+    output: ([0, 17, 1337], [true, false, true])
+examples:
+  - inputs: [(0, true), (17, false), (1337, true)]
+    output: ([0, 17, 1337], [true, false, true])
+added: 0.1.0

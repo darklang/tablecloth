@@ -1,0 +1,37 @@
+module: List
+name: compare
+docstring: Compare two lists using the provided [f] function to compare elements
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: b
+    type: list<'a>
+    label: false
+  - name: c
+    type: ('a, 'a) => int
+    label: false
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[2, 5, 6, 11], [2, 5, 6, 11], Int.compare]
+    output: 0
+  - inputs: [[2, 5, -6, 11], [2, 5, 6, 11], Int.compare]
+    output: -1
+  - inputs: [[2, 5, 6, 11], [2, 5, 6], Int.compare]
+    output: 1
+  - inputs: [["hi", "hello", "hey"], ["hi", "hello", "hey"], String.compare]
+    output: 0
+examples:
+  - inputs: [[2, 5, 6, 11], [2, 5, 6, 11], Int.compare]
+    output: 0
+  - inputs: [[2, 5, -6, 11], [2, 5, 6, 11], Int.compare]
+    output: -1
+  - inputs: [[2, 5, 6, 11], [2, 5, 6], Int.compare]
+    output: 1
+  - inputs: [["hi", "hello", "hey"], ["hi", "hello", "hey"], String.compare]
+    output: 0
+added: 0.1.0

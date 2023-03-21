@@ -1,0 +1,33 @@
+module: Option
+name: map2
+docstring: Combine <param a> and <param b>. If both options are [Some] returns, as [Some] the result of running [f] on both values. If either value is [None], returns [None]
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+  - name: b
+    type: option<'b>
+    label: false
+  - name: f
+    type: ('a, 'b) => 'c
+    label: true
+returnType: option<'c>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(3), Some(4), Int.add]
+    output: Some(7)
+  - inputs: [Some(3), None, Int.add]
+    output: None
+  - inputs: [None, Some(4), Int.add]
+    output: None
+examples:
+  - inputs: [Some(3), Some(4), Int.add]
+    output: Some(7)
+  - inputs: [Some(3), None, Int.add]
+    output: None
+  - inputs: [None, Some(4), Int.add]
+    output: None
+added: 0.1.0

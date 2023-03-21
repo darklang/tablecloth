@@ -1,0 +1,27 @@
+module: Tuple2
+name: mapEach
+docstring: Transform both values of a tuple, using [f] for the first value and [g] for the second
+parameters:
+  - name: a
+    type: ('a, 'b)
+    label: false
+  - name: f
+    type: >-
+      'a => 'x
+    label: true
+  - name: g
+    type: >-
+      'b => 'y
+    label: true
+returnType: ('x, 'y)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [("stressed", 16.0), String.reverse, Float.squareRoot]
+    output: ("desserts", 4.0)
+examples:
+  - inputs: [("stressed", 16.0), String.reverse, Float.squareRoot]
+    output: ("desserts", 4.0)
+added: 0.1.0

@@ -1,0 +1,31 @@
+module: Array
+name: all
+docstring: Determine if [f] returns true for [all] values in an array. Iteration is stopped as soon as [f] returns [false].
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => bool
+    label: true
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], Int.isEven]
+    output: true
+  - inputs: [[2, 4], Int.isEven]
+    output: true
+  - inputs: [[2, 3], Int.isEven]
+    output: false
+examples:
+  - inputs: [[], Int.isEven]
+    output: true
+  - inputs: [[2, 4], Int.isEven]
+    output: true
+  - inputs: [[2, 3], Int.isEven]
+    output: false
+added: 0.1.0

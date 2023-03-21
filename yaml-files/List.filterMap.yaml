@@ -1,0 +1,25 @@
+module: List
+name: filterMap
+docstring: Allows you to combine {!map} and {!filter} into a single pass
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => option<'b>
+    label: true
+returnType: list<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[-1, 80, 99], Char.fromCode]
+    output: >-
+      ['P', 'c']
+examples:
+  - inputs: [[-1, 80, 99], Char.fromCode]
+    output: >-
+      ['P', 'c']
+added: 0.1.0

@@ -1,0 +1,25 @@
+module: Fun
+name: apply
+docstring: Calls function [f] with an argument [x]
+parameters:
+  - name: a
+    type: >-
+      'a => 'b
+    label: false
+  - name: b
+    type: >-
+      'a
+    label: false
+returnType: >-
+  'b
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [a => a + 1, 1]
+    output: 2
+examples:
+  - inputs: [a => a + 1, 1]
+    output: 2
+added: 0.1.0

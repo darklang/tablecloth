@@ -1,0 +1,28 @@
+module: Fun
+name: flip
+docstring: Reverses the argument order of a function
+parameters:
+  - name: f
+    type: ('a, 'b) => 'c
+    label: true
+  - name: a
+    type: >-
+      'b
+    label: false
+  - name: b
+    type: >-
+      'a
+    label: false
+returnType: >-
+  'c
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Int.subtract, 2, 4]
+    output: 2
+examples:
+  - inputs: [Int.subtract, 2, 4]
+    output: 2
+added: 0.1.0

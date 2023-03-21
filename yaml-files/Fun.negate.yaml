@@ -1,0 +1,24 @@
+module: Fun
+name: negate
+docstring: Negate a function
+parameters:
+  - name: a
+    type: >-
+      'a => bool
+    label: false
+  - name: b
+    type: >-
+      'a
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [n => n > 4, 5]
+    output: false
+examples:
+  - inputs: [n => n > 4, 5]
+    output: false
+added: 0.1.0

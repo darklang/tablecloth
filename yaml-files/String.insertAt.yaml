@@ -1,0 +1,45 @@
+module: String
+name: insertAt
+docstring: Insert a string at [index]
+parameters:
+  - name: a
+    type: string
+    label: false
+  - name: value
+    type: string
+    label: true
+  - name: index
+    type: int
+    label: true
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["abcde", "**", 2]
+    output: "ab**cde"
+  - inputs: ["abcde", "**", 0]
+    output: "**abcde"
+  - inputs: ["abcde", "**", 5]
+    output: "abcde**"
+  - inputs: ["abcde", "**", -2]
+    output: "abc**de"
+  - inputs: ["abcde", "**", -9]
+    output: "**abcde"
+  - inputs: ["abcde", "**", 9]
+    output: "abcde**"
+examples:
+  - inputs: ["abcde", "**", 2]
+    output: "ab**cde"
+  - inputs: ["abcde", "**", 0]
+    output: "**abcde"
+  - inputs: ["abcde", "**", 5]
+    output: "abcde**"
+  - inputs: ["abcde", "**", -2]
+    output: "abc**de"
+  - inputs: ["abcde", "**", -9]
+    output: "**abcde"
+  - inputs: ["abcde", "**", 9]
+    output: "abcde**"
+added: 0.1.0

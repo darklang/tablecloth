@@ -1,0 +1,34 @@
+module: Option
+name: and_
+docstring: Returns [None] if <param a> is [None], otherwise return <param b>.
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+  - name: b
+    type: option<'a>
+    label: false
+returnType: option<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(1), Some(15)]
+    output: Some(15)
+  - inputs: [None, Some(15)]
+    output: None
+  - inputs: [Some(1), None]
+    output: None
+  - inputs: [None, None]
+    output: None
+examples:
+  - inputs: [Some(1), Some(15)]
+    output: Some(15)
+  - inputs: [None, Some(15)]
+    output: None
+  - inputs: [Some(1), None]
+    output: None
+  - inputs: [None, None]
+    output: None
+added: 0.1.0

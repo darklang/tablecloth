@@ -1,0 +1,27 @@
+module: Float
+name: squareRoot
+docstring: Takes <param a> and returns its square root or [NaN] when it is negative
+parameters:
+  - name: a
+    type: float
+    label: false
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "4."
+    output: "2."
+  - inputs: 20.25
+    output: 4.5
+  - inputs: "-1."
+    output: NaN
+examples:
+  - inputs: "4."
+    output: "2."
+  - inputs: 20.25
+    output: 4.5
+  - inputs: "-1."
+    output: NaN
+added: 0.1.0

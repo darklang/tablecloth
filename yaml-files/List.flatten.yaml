@@ -1,0 +1,31 @@
+module: List
+name: flatten
+docstring: Concatenate a list of lists into a single list
+  - name: a
+    type: list<list<'a>>
+    label: false
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], []]
+    output: []
+  - inputs: [[1], []]
+    output: [1]
+  - inputs: [[1], [2], [3]]
+    output: [1, 2, 3]
+  - inputs: [[1], [], [2], [], [3]]
+    output: [1, 2, 3]
+examples:
+  - inputs: [[], []]
+    output: []
+  - inputs: [[1], []]
+    output: [1]
+  - inputs: [[1], [2], [3]]
+    output: [1, 2, 3]
+  - inputs: [[1], [], [2], [], [3]]
+    output: [1, 2, 3]
+added: 0.1.0
+

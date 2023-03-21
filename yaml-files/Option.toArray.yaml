@@ -1,0 +1,23 @@
+module: Option
+name: toArray
+docstring: Convert <param a> to an {!Array}
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: Some(3004)
+    output: [[3004]]
+  - inputs: None
+    output: [[]]
+examples:
+  - inputs: Some(3004)
+    output: [[3004]]
+  - inputs: None
+    output: [[]]
+added: 0.1.0

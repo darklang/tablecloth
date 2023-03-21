@@ -1,0 +1,43 @@
+module: Float
+name: isFinite
+docstring: Determine whether <param a> is finite number. Returning True for any float except [Infinity], [-Infinity] or [NaN]
+parameters:
+  - name: a
+    type: float
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: infinity
+    output: false
+  - inputs: negativeInfinity
+    output: false
+  - inputs: nan
+    output: false
+  - inputs: "-5."
+    output: true
+  - inputs: -0.314
+    output: true
+  - inputs: "0."
+    output: true
+  - inputs: 3.14
+    output: true
+examples:
+  - inputs: infinity
+    output: false
+  - inputs: negativeInfinity
+    output: false
+  - inputs: nan
+    output: false
+  - inputs: "-5."
+    output: true
+  - inputs: -0.314
+    output: true
+  - inputs: "0."
+    output: true
+  - inputs: 3.14
+    output: true
+added: 0.1.0

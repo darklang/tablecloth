@@ -1,0 +1,22 @@
+module: Array
+name: append
+docstring: Creates a new array which is the result of appending the second array onto the end of the first
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: b
+    type: array<'a>
+    label: false
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [repeat(~length=2, 42), repeat(~length=3, 81)]
+    output: [42, 42, 81, 81, 81]
+examples:
+  - inputs: [repeat(~length=2, 42), repeat(~length=3, 81)]
+    output: [42, 42, 81, 81, 81]
+added: 0.1.0

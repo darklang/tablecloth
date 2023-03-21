@@ -1,0 +1,26 @@
+module: Array
+name: zip
+docstring: Combine two arrays by merging each pair of elements into a {!Tuple2}
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: b
+    type: array<'b>
+    label: false
+returnType: array<('a, 'b)>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3, 4, 5], ["Dog", "Eagle", "Ferret"]]
+    output: [(1, "Dog"), (2, "Eagle"), (3, "Ferret")]
+  - inputs: [[], ["Dog", "Eagle", "Ferret"]]
+    output: []
+examples:
+  - inputs: [[1, 2, 3, 4, 5], ["Dog", "Eagle", "Ferret"]]
+    output: [(1, "Dog"), (2, "Eagle"), (3, "Ferret")]
+  - inputs: [[], ["Dog", "Eagle", "Ferret"]]
+    output: []
+added: 0.1.0

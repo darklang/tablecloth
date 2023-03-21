@@ -1,0 +1,27 @@
+module: List
+name: reverse
+docstring: Reverse the elements in a list
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: []
+  - inputs: [0]
+    output: [0]
+  - inputs: [0, 1]
+    output: [1, 0]
+examples:
+  - inputs: []
+    output: []
+  - inputs: [0]
+    output: [0]
+  - inputs: [0, 1]
+    output: [1, 0]
+added: 0.1.0

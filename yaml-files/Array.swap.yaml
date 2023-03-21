@@ -1,0 +1,25 @@
+module: Array
+name: swap
+docstring: Swaps the values at the provided indicies
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: b
+    type: int
+    label: false
+  - name: c
+    type: int
+    label: false
+returnType: unit
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3], 1, 2]
+    output: [1, 3, 2]
+examples:
+  - inputs: [[1, 2, 3], 1, 2]
+    output: [1, 3, 2]
+added: 0.1.0

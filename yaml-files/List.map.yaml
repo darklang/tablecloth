@@ -1,0 +1,39 @@
+module: List
+name: map
+docstring: Create a new list which is the result of applying a function [f] to every element
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => 'b
+    label: true
+returnType: list<'b>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      [[1.0, 4.0, 9.0], Float.squareRoot]
+    output: >-
+      [1.0, 2.0, 3.0]
+  - inputs: >-
+      [[['i'], ['a'], ['o', 'p']], element => cons(element, 'h')]
+    output: >-
+      [['h', 'i'], ['h', 'a'], ['h', 'o', 'p']]
+  - inputs: [[], Float.squareRoot]
+    output: []
+examples:
+  - inputs: >-
+      [[1.0, 4.0, 9.0], Float.squareRoot]
+    output: >-
+      [1.0, 2.0, 3.0]
+  - inputs: >-
+      [[['i'], ['a'], ['o', 'p']], element => cons(element, 'h')]
+    output: >-
+      [['h', 'i'], ['h', 'a'], ['h', 'o', 'p']]
+  - inputs: [[], Float.squareRoot]
+    output: []
+added: 0.1.0

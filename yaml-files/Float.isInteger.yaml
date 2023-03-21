@@ -1,0 +1,23 @@
+module: Float
+name: isInteger
+docstring: Determine whether the <param a> is an integer.
+parameters:
+  - name: a
+    type: float
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "5.0"
+    output: true
+  - inputs: pi
+    output: false
+examples:
+  - inputs: "5.0"
+    output: true
+  - inputs: pi
+    output: false
+added: 0.1.0

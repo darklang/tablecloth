@@ -1,0 +1,21 @@
+module: Char
+name: toString
+docstring: Convert <param a> to a [string]
+parameters:
+  - name: a
+    type: char
+    label: false
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      'a'
+    output: "a"
+examples:
+  - inputs: >-
+      'a'
+    output: "a"
+added: 0.1.0

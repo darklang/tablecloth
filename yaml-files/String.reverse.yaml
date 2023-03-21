@@ -1,0 +1,23 @@
+module: String
+name: reverse
+docstring: Reverse a string
+parameters:
+  - name: a
+    type: string
+    label: false
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ""
+    output: ""
+  - inputs: "stressed"
+    output: "desserts"
+examples:
+  - inputs: ""
+    output: ""
+  - inputs: "stressed"
+    output: "desserts"
+added: 0.1.0

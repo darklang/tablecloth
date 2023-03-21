@@ -1,0 +1,34 @@
+module: List
+name: take
+docstring: Attempt to take the first [count] elements of a list. If the list has fewer than [count] elements, returns the entire list. If count is zero or negative, returns [list{}]
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: count
+    type: int
+    label: true
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3], 2]
+    output: [1, 2]
+  - inputs: [[], 2]
+    output: []
+  - inputs: [[1, 2, 3, 4], 8]
+    output: [1, 2, 3, 4]
+  - inputs: [[1, 2, 3, 4], -1]
+    output: []
+examples:
+  - inputs: [[1, 2, 3], 2]
+    output: [1, 2]
+  - inputs: [[], 2]
+    output: []
+  - inputs: [[1, 2, 3, 4], 8]
+    output: [1, 2, 3, 4]
+  - inputs: [[1, 2, 3, 4], -1]
+    output: []
+added: 0.1.0

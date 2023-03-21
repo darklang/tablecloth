@@ -1,0 +1,27 @@
+module: Char
+name: fromCode
+docstring: Convert an ASCII code point to a character
+parameters:
+  - name: a
+    type: int
+    label: false
+returnType: option<char>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 97
+    output: Some('a')
+  - inputs: -1
+    output: None
+  - inputs: 256
+    output: None
+examples:
+  - inputs: 97
+    output: Some('a')
+  - inputs: -1
+    output: None
+  - inputs: 256
+    output: None
+added: 0.1.0

@@ -1,0 +1,38 @@
+module: List
+name: range
+docstring: Creates a list containing all of the integers from [from] if it is provided or [0] if not, up to but not including [to]
+parameters:
+  - name: from
+    type: int=?
+    label: true
+  - name: a
+    type: int
+    label: false
+returnType: list<int>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 0
+    output: []
+  - inputs: 5
+    output: [0, 1, 2, 3, 4]
+  - inputs: [2, 5]
+    output: [2, 3, 4]
+  - inputs: [-2, 2]
+    output: [-2, -1, 0, 1]
+  - inputs: [5, 2]
+    output: []
+examples:
+  - inputs: 0
+    output: []
+  - inputs: 5
+    output: [0, 1, 2, 3, 4]
+  - inputs: [2, 5]
+    output: [2, 3, 4]
+  - inputs: [-2, 2]
+    output: [-2, -1, 0, 1]
+  - inputs: [5, 2]
+    output: []
+added: 0.1.0

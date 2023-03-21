@@ -1,0 +1,36 @@
+module: List
+name: splitWhen
+docstring: Divides a list into a {!Tuple2} at the first element where function [f] will return [true].
+Elements up to (but not including) the first element [f] returns [true] for will be in the first component of the tuple, the remaining elements will be in the second.
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => bool
+    label: true
+returnType: (list<'a>, list<'a>)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], Int.isEven]
+    output: ([], [])
+  - inputs: [[2, 4, 6], Int.isEven]
+    output: ([], [2, 4, 6])
+  - inputs: [[1, 3, 2, 4], Int.isEven]
+    output: ([1, 3], [2, 4])
+  - inputs: [[1, 3, 5], Int.isEven]
+    output: ([1, 3, 5], [])
+examples:
+  - inputs: [[], Int.isEven]
+    output: ([], [])
+  - inputs: [[2, 4, 6], Int.isEven]
+    output: ([], [2, 4, 6])
+  - inputs: [[1, 3, 2, 4], Int.isEven]
+    output: ([1, 3], [2, 4])
+  - inputs: [[1, 3, 5], Int.isEven]
+    output: ([1, 3, 5], [])
+added: 0.1.0

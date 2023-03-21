@@ -1,0 +1,31 @@
+module: String
+name: fromList
+docstring: Create a string from a {!List} of characters
+parameters:
+  - name: a
+    type: list<char>
+    label: false
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: []
+    output: ""
+  - inputs: >-
+      ['K', 'u', 'b', 'o']
+    output: "Kubo"
+  - inputs: >-
+      [' ', '\n', '\t']
+    output: " \n\t"
+examples:
+  - inputs: []
+    output: ""
+  - inputs: >-
+      ['K', 'u', 'b', 'o']
+    output: "Kubo"
+  - inputs: >-
+      [' ', '\n', '\t']
+    output: " \n\t"
+added: 0.1.0

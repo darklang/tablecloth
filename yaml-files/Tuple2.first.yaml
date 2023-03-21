@@ -1,0 +1,20 @@
+module: Tuple2
+name: first
+docstring: Extract the first value from a tuple
+parameters:
+  - name: a
+    type: ('a, 'b)
+    label: false
+returnType: >-
+  'a
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: (3, 4)
+    output: 3
+examples:
+  - inputs: (3, 4)
+    output: 3
+added: 0.1.0

@@ -1,0 +1,67 @@
+module: Int
+name: fromString
+docstring: Attempt to parse <param a> to an int
+parameters:
+  - name: a
+    type: string
+    label: false
+returnType: option<int>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "0"
+    output: Some(0)
+  - inputs: "-0"
+    output: Some(-0)
+  - inputs: "42"
+    output: Some(42)
+  - inputs: "123_456"
+    output: Some(123_456)
+  - inputs: "-42"
+    output: Some(-42)
+  - inputs: "0XFF"
+    output: Some(255)
+  - inputs: "0X000A"
+    output: Some(10)
+  - inputs: "Infinity"
+    output: None
+  - inputs: "-Infinity"
+    output: None
+  - inputs: "NaN"
+    output: None
+  - inputs: "abc"
+    output: None
+  - inputs: "--4"
+    output: None
+  - inputs: " "
+    output: None
+examples:
+  - inputs: "0"
+    output: Some(0)
+  - inputs: "-0"
+    output: Some(-0)
+  - inputs: "42"
+    output: Some(42)
+  - inputs: "123_456"
+    output: Some(123_456)
+  - inputs: "-42"
+    output: Some(-42)
+  - inputs: "0XFF"
+    output: Some(255)
+  - inputs: "0X000A"
+    output: Some(10)
+  - inputs: "Infinity"
+    output: None
+  - inputs: "-Infinity"
+    output: None
+  - inputs: "NaN"
+    output: None
+  - inputs: "abc"
+    output: None
+  - inputs: "--4"
+    output: None
+  - inputs: " "
+    output: None
+added: 0.1.0

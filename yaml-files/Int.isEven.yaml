@@ -1,0 +1,27 @@
+module: Int
+name: isEven
+docstring: Calculate <param a> mod 2, returning true if the remainder equals to 0, and false otherwise
+parameters:
+  - name: a
+    type: int
+    label: false
+returnType: bool
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: 8
+    output: true
+  - inputs: 9
+    output: false
+  - inputs: 0
+    output: true
+examples:
+  - inputs: 8
+    output: true
+  - inputs: 9
+    output: false
+  - inputs: 0
+    output: true
+added: 0.1.0

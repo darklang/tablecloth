@@ -1,0 +1,38 @@
+module: Float
+name: minimum
+docstring: Compare <param a> and <param b>, returning the lowest value
+parameters:
+  - name: a
+    type: float
+    label: false
+  - name: b
+    type: float
+    label: false
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["7.", "9."]
+    output: "7."
+  - inputs: ["-4.", "-1."]
+    output: "-4."
+  - inputs: ["7.", nan]
+    output: NaN
+  - inputs: ["7.", infinity]
+    output: "7."
+  - inputs: ["7.", negativeInfinity]
+    output: negativeInfinity
+examples:
+  - inputs: ["7.", "9."]
+    output: "7."
+  - inputs: ["-4.", "-1."]
+    output: "-4."
+  - inputs: ["7.", nan]
+    output: NaN
+  - inputs: ["7.", infinity]
+    output: "7."
+  - inputs: ["7.", negativeInfinity]
+    output: negativeInfinity
+added: 0.1.0

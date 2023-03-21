@@ -1,0 +1,54 @@
+module: Int
+name: modulo
+docstring: Perform modular arithmetic
+parameters:
+  - name: a
+    type: int
+    label: false
+  - name: by
+    type: int
+    label: true
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [-4, 3]
+    output: 2
+  - inputs: [-3, 3]
+    output: 0
+  - inputs: [-2, 3]
+    output: 1
+  - inputs: [-1, 3]
+    output: 2
+  - inputs: [0, 3]
+    output: 0
+  - inputs: [1, 3]
+    output: 1
+  - inputs: [2, 3]
+    output: 2
+  - inputs: [3, 3]
+    output: 0
+  - inputs: [4, 3]
+    output: 1
+examples:
+  - inputs: [-4, 3]
+    output: 2
+  - inputs: [-3, 3]
+    output: 0
+  - inputs: [-2, 3]
+    output: 1
+  - inputs: [-1, 3]
+    output: 2
+  - inputs: [0, 3]
+    output: 0
+  - inputs: [1, 3]
+    output: 1
+  - inputs: [2, 3]
+    output: 2
+  - inputs: [3, 3]
+    output: 0
+  - inputs: [4, 3]
+    output: 1
+added: 0.1.0

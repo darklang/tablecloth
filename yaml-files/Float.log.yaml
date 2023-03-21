@@ -1,0 +1,30 @@
+module: Float
+name: log
+docstring: Calculate the logarithm of <parma a> with a given base
+parameters:
+  - name: a
+    type: float
+    label: false
+  - name: base
+    type: float
+    label: true
+returnType: float
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["100.", "10."]
+    output: "2."
+  - inputs: ["256.", "2."]
+    output: "8."
+  - inputs: ["0.", "10."]
+    output: negativeInfinity
+examples:
+  - inputs: ["100.", "10."]
+    output: "2."
+  - inputs: ["256.", "2."]
+    output: "8."
+  - inputs: ["0.", "10."]
+    output: negativeInfinity
+added: 0.1.0

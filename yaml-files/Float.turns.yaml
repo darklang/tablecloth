@@ -1,0 +1,19 @@
+module: Float
+name: turns
+docstring: Convert an angle in turns into radians
+parameters:
+  - name: a
+    type: float
+    label: false
+returnType: radians
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "1."
+    output: 2. *. pi
+examples:
+  - inputs: "1."
+    output: 2. *. pi
+added: 0.1.0

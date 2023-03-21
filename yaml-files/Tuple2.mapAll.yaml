@@ -1,0 +1,23 @@
+module: Tuple2
+name: mapAll
+docstring: Transform both of the values of a tuple using the same function
+parameters:
+  - name: a
+    type: ('a, 'a)
+    label: false
+  - name: f
+    type: >-
+      'a => 'b
+    label: true
+returnType: ('b, 'b)
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [("was", \"stressed"), String.reverse]
+    output: ("saw", "desserts")
+examples:
+  - inputs: [("was", \"stressed"), String.reverse]
+    output: ("saw", "desserts")
+added: 0.1.0

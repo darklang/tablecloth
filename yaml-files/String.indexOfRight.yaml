@@ -1,0 +1,30 @@
+module: String
+name: indexOfRight
+docstring: Returns the index of the last occurrence of [string] or None if string has no occurences of [string]
+parameters:
+  - name: a
+    type: string
+    label: false
+  - name: b
+    type: string
+    label: false
+returnType: option<int>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["helloh", "oh"]
+    output: Some(4)
+  - inputs: ["ohelloh", "oh"]
+    output: Some(5)
+  - inputs: ["hello", "x"]
+    output: None
+examples:
+  - inputs: ["helloh", "oh"]
+    output: Some(4)
+  - inputs: ["ohelloh", "oh"]
+    output: Some(5)
+  - inputs: ["hello", "x"]
+    output: None
+added: 0.1.0

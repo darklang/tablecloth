@@ -1,0 +1,30 @@
+module: String
+name: repeat
+docstring: Create a string by repeating a string [count] time
+parameters:
+  - name: a
+    type: string
+    label: false
+  - name: count
+    type: int
+    label: true
+returnType: string
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ["bun", 0]
+    output: ""
+  - inputs: ["bun", -1]
+    output: exception
+  - inputs: ["bun", 3]
+    output: "bunbunbun"
+examples:
+  - inputs: ["bun", 0]
+    output: ""
+  - inputs: ["bun", -1]
+    output: exception
+  - inputs: ["bun", 3]
+    output: "bunbunbun"
+added: 0.1.0

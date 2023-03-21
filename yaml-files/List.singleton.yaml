@@ -1,0 +1,28 @@
+module: List
+name: singleton
+docstring: Create a list with only one element
+parameters:
+  - name: a
+    type: >-
+      'a
+    label: false
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: ""
+    output: [""]
+  - inputs: 1234
+    output: [1234]
+  - inputs: "hello"
+    output: ["hello"]
+examples:
+  - inputs: ""
+    output: [""]
+  - inputs: 1234
+    output: [1234]
+  - inputs: "hello"
+    output: ["hello"]
+added: 0.1.0

@@ -1,0 +1,19 @@
+module: Float
+name: degrees
+docstring: Converts an angle in degrees to radians
+parameters:
+  - name: a
+    type: float
+    label: false
+returnType: radians
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: "180."
+    output: pi
+examples:
+  - inputs: "180."
+    output: pi
+added: 0.1.0

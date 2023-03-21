@@ -1,0 +1,31 @@
+module: List
+name: filter
+docstring: Keep elements that [f] returns [true] for
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: f
+    type: >-
+      'a => bool
+    label: true
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[2, 4, 6, 7, 8, 9], Int.isEven]
+    output: [2, 4, 6, 8]
+  - inputs: [[5, 7, 9], Int.isEven]
+    output: []
+  - inputs: [[2, 4, 6], Int.isEven]
+    output: [2, 4, 6]
+examples:
+  - inputs: [[2, 4, 6, 7, 8, 9], Int.isEven]
+    output: [2, 4, 6, 8]
+  - inputs: [[5, 7, 9], Int.isEven]
+    output: []
+  - inputs: [[2, 4, 6], Int.isEven]
+    output: [2, 4, 6]
+added: 0.1.0

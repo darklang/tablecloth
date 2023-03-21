@@ -25,7 +25,5 @@ _esy
 /ocamldoc-json-generator/dune
 _opam/
 
-fsharp/src/obj
-fsharp/src/bin
-.paket/
 paket-files/
+/json-files

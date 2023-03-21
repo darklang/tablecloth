@@ -1,0 +1,48 @@
+module: List
+name: map3
+docstring: Combine three lists, using [f] to combine each trio of elements. If one list is longer, the extra elements are dropped
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: b
+    type: list<'b>
+    label: false
+  - name: c
+    type: list<'c>
+    label: false
+  - name: f
+    type: ('a, 'b, 'c) => 'd
+    label: true
+returnType: list<'d>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: >-
+      [[], [], [], (x, y, z) => x + y + z]
+    output: []
+  - inputs: >-
+      [[1], [1], [1],(x, y, z) => x + y + z]
+    output: [3]
+  - inputs: >-
+      [[1, 2], [1, 2], [1, 2], (x, y, z) => x + y + z]
+    output: [3, 6]
+  - inputs: >-
+      [[1, 2, 3],[1, 2, 3], [1, 2], (x, y, z) => x + y + z]
+    output: [3, 6]
+examples:
+  - inputs: >-
+      [[], [],[], (x, y, z) => x + y + z]
+    output: []
+  - inputs: >-
+      [[1], [1], [1],(x, y, z) => x + y + z]
+    output: [3]
+  - inputs: >-
+      [[1, 2], [1, 2], [1, 2], (x, y, z) => x + y + z]
+    output: [3, 6]
+  - inputs: >-
+      [[1, 2, 3],[1, 2, 3], [1, 2], (x, y, z) => x + y + z]
+    output: [3, 6]
+added: 0.1.0

@@ -1,0 +1,19 @@
+module: Tuple2
+name: toList
+docstring: Turns a tuple into a list of length two
+parameters:
+  - name: a
+    type: ('a, 'a)
+    label: false
+returnType: list<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: (3, 4)
+    output: [3, 4]
+examples:
+  - inputs: (3, 4)
+    output: [3, 4]
+added: 0.1.0

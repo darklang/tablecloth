@@ -1,0 +1,37 @@
+module: List
+name: map2
+docstring: Combine two lists, using [f] to combine each pair of elements. If one list is longer, the extra elements are dropped.
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+  - name: b
+    type: list<'b>
+    label: false
+  - name: f
+    type: ('a, 'b) => 'c)
+    label: true
+returnType: list<'c>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[], [], \"+"]
+    output: []
+  - inputs: [[1], [1], \"+"]
+    output: [2]
+  - inputs: [[1, 2], [1, 2], \"+"]
+    output: [2, 4]
+  - inputs: [[1, 2, 3], [1, 2], \"+"]
+    output: [2, 4]
+examples:
+  - inputs: [[], [], \"+"]
+    output: []
+  - inputs: [[1], [1], \"+"]
+    output: [2]
+  - inputs: [[1, 2], [1, 2], \"+"]
+    output: [2, 4]
+  - inputs: [[1, 2, 3], [1, 2], \"+"]
+    output: [2, 4]
+added: 0.1.0

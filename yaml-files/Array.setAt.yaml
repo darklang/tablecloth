@@ -1,0 +1,30 @@
+module: Array
+name: setAt
+docstring: Modifies an array in place, replacing the element at [index] with [value]
+parameters:
+  - name: a
+    type: array<'a>
+    label: false
+  - name: index
+    type: int
+    label: true
+  - name: value
+    type: >-
+      'a
+    label: true
+returnType: unit
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [[1, 2, 3], 1, 0]
+    output: [1, 0, 3]
+  - inputs: [["ant", "bat", "cat"], 0, "antelope"]
+    output: ["antelope", "bat", "cat"]
+examples:
+  - inputs: [[1, 2, 3], 1, 0]
+    output: [1, 0, 3]
+  - inputs: [["ant", "bat", "cat"], 0, "antelope"]
+    output: ["antelope", "bat", "cat"]
+added: 0.1.0

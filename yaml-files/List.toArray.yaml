@@ -1,0 +1,31 @@
+module: List
+name: toArray
+docstring: Converts a list to an {!Array}.
+parameters:
+  - name: a
+    type: list<'a>
+    label: false
+returnType: array<'a>
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [2, 4, 6, 8]
+    output: [2, 4, 6, 8]
+  - inputs: []
+    output: []
+  - inputs: >-
+      ['h', 'i']
+    output: >-
+      ['h', 'i']
+examples:
+  - inputs: [2, 4, 6, 8]
+    output: [2, 4, 6, 8]
+  - inputs: []
+    output: []
+  - inputs: >-
+      ['h', 'i']
+    output: >-
+      ['h', 'i']
+added: 0.1.0

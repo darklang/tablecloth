@@ -1,0 +1,33 @@
+module: Option
+name: compare
+docstring: Compare <param a> and <param b> using the provided [f] function
+parameters:
+  - name: a
+    type: option<'a>
+    label: false
+  - name: b
+    type: option<'a>
+    label: false
+  - name: f
+    type: ('a, 'a) => int
+    label: true
+returnType: int
+# For compatibility
+constraints:
+  - no-ocaml
+  - no-rescript
+tests:
+  - inputs: [Some(1), Some(3), Int.compare]
+    output: -1
+  - inputs: [Some(1), None, Int.compare]
+    output: 1
+  - inputs: [None, None, Int.compare]
+    output: 0
+examples:
+  - inputs: [Some(1), Some(3), Int.compare]
+    output: -1
+  - inputs: [Some(1), None, Int.compare]
+    output: 1
+  - inputs: [None, None, Int.compare]
+    output: 0
+added: 0.1.0
